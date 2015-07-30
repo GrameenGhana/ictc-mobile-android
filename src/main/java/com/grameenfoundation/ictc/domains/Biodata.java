@@ -53,6 +53,7 @@ public class Biodata extends Status implements GeneralInterface {
             return (String) underlyingNode.getProperty(FIRST_NAME);
 
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }

@@ -45,6 +45,9 @@ public class ICTCKonstants {
     public static final String PROPERTIES_FILE = "/config/ictc.conf";
     public static final String POST_HARVEST = "post_harvest";
     
+    //r
+    public static final int ROOT_NODE_INDEX = 0;
+    
     //u
     public static final String UPDATED_BY = "updatedBy";
     
@@ -53,4 +56,6 @@ public class ICTCKonstants {
      
      //t
      public static final String TECHNICAL_NEED = "technicalneed";
+     
+     
 }
