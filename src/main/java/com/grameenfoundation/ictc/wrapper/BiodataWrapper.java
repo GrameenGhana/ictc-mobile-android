@@ -28,7 +28,47 @@ public class BiodataWrapper {
     private String numberOfChildren;
     private String numberOfDependants;
     private String education;
+    private String cluster;
+    private String farmID;
 
+    public BiodataWrapper(String firstName, String lastName, String nickname, String community, String village, String district, String region, String age, String gender, String maritalStatus, String numberOfChildren, String numberOfDependants, String education) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.nickname = nickname;
+        this.community = community;
+        this.village = village;
+        this.district = district;
+        this.region = region;
+        this.age = age;
+        this.gender = gender;
+        this.maritalStatus = maritalStatus;
+        this.numberOfChildren = numberOfChildren;
+        this.numberOfDependants = numberOfDependants;
+        this.education = education;
+    }
+
+    public BiodataWrapper(String firstName, String lastName, String nickname, String community, String village, String district, String region, String age, String gender, String maritalStatus, String numberOfChildren, String numberOfDependants, String education, String cluster, String farmID) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.nickname = nickname;
+        this.community = community;
+        this.village = village;
+        this.district = district;
+        this.region = region;
+        this.age = age;
+        this.gender = gender;
+        this.maritalStatus = maritalStatus;
+        this.numberOfChildren = numberOfChildren;
+        this.numberOfDependants = numberOfDependants;
+        this.education = education;
+        this.cluster = cluster;
+        this.farmID = farmID;
+    }
+    
+    
+
+    
+    
     public String getFirstName() {
         return firstName;
     }
@@ -131,6 +171,34 @@ public class BiodataWrapper {
 
     public void setEducation(String education) {
         this.education = education;
+    }
+
+    /**
+     * @return the cluster
+     */
+    public String getCluster() {
+        return cluster;
+    }
+
+    /**
+     * @param cluster the cluster to set
+     */
+    public void setCluster(String cluster) {
+        this.cluster = cluster;
+    }
+
+    /**
+     * @return the farmID
+     */
+    public String getFarmID() {
+        return farmID;
+    }
+
+    /**
+     * @param farmID the farmID to set
+     */
+    public void setFarmID(String farmID) {
+        this.farmID = farmID;
     }
     
     
