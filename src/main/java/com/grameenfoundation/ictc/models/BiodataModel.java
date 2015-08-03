@@ -288,7 +288,11 @@ public class BiodataModel {
 
         return created;
     }
-
+    
+    
+public boolean BiodataToTechNeeds(String biodata, Node techNeeds) {
+    
+     boolean created = false;
         try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
           
             Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
@@ -307,6 +311,9 @@ public class BiodataModel {
             //created = false;
 
         }
+        
+        
+
 
         return created;
     }
