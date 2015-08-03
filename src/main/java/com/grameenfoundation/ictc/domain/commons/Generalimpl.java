@@ -92,20 +92,20 @@ public class Generalimpl implements GeneralInterface {
     }
 
     @Override
-    public void setId(long id) {
+    public void setId(String id) {
         underlyingNode.setProperty(ID, id);
 
     }
 
     @Override
-    public long getId() {
+    public String getId() {
 
         try {
-            return (Long) underlyingNode.getProperty(ID);
+            return (String) underlyingNode.getProperty(ID);
         } catch (Exception e) {
         }
 
-        return 0l;
+        return null;
     }
 
     

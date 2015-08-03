@@ -19,9 +19,9 @@ import org.neo4j.graphdb.Node;
  */
 public interface GeneralInterface {
     
-     public void setId(long id);
+     public void setId(String id);
 
-    public long getId();
+    public String getId();
 
     public Date getCreatedOn();
 

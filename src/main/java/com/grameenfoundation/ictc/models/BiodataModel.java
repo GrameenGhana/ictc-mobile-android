@@ -89,6 +89,43 @@ public class BiodataModel{
         return created;
     }
     
+    
+  public boolean createBiodata(Node node)
+  {
+      boolean created = true;
+           
+        try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+           
+            
+            if(null == node)
+            {
+                log.info("Biodata is invalid");
+                created = false;
+            }
+            else
+            {
+              FarmerParent  = ParentNode.FarmerParentNode();      
+              FarmerParent.createRelationshipTo(node,ICTCRelationshipTypes.FARMER);
+              
+              log.log(Level.INFO, "new node created {0}",node.getId());
+              trx.success();
+              
+              
+            }
+           
+        
+            
+            
+        } catch (Exception e) {
+            
+            created = false;
+            log.severe("Creation of Farmer Failed");
+            e.printStackTrace();
+        }
+        
+        return created;  
+  }
+    
  public Biodata getBiodata(String field, String value) {
         String q = "Start root=node(0) "
                 + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER+ "]->p"
@@ -116,7 +153,7 @@ public class BiodataModel{
 
         try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
           
-            Biodata b = new BiodataModel().getBiodata(Biodata.LAST_NAME, biodata);
+            Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
            
 
             System.out.println("biodata" + b.getUnderlyingNode().getId());
@@ -143,7 +180,7 @@ public class BiodataModel{
 
         try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
           
-            Biodata b = new BiodataModel().getBiodata(Biodata.LAST_NAME, biodata);
+            Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
            
 
             System.out.println("biodata" + b.getUnderlyingNode().getId());
@@ -170,7 +207,7 @@ public class BiodataModel{
 
         try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
           
-            Biodata b = new BiodataModel().getBiodata(Biodata.LAST_NAME, biodata);
+            Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
            
 
             System.out.println("biodata" + b.getUnderlyingNode().getId());
@@ -198,7 +235,7 @@ public class BiodataModel{
 
         try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
           
-            Biodata b = new BiodataModel().getBiodata(Biodata.LAST_NAME, biodata);
+            Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
            
 
             System.out.println("biodata" + b.getUnderlyingNode().getId());
@@ -226,7 +263,7 @@ public class BiodataModel{
 
         try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
           
-            Biodata b = new BiodataModel().getBiodata(Biodata.LAST_NAME, biodata);
+            Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
            
 
             System.out.println("biodata" + b.getUnderlyingNode().getId());
@@ -253,7 +290,7 @@ public class BiodataModel{
 
         try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
           
-            Biodata b = new BiodataModel().getBiodata(Biodata.LAST_NAME, biodata);
+            Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
            
 
             System.out.println("biodata" + b.getUnderlyingNode().getId());
