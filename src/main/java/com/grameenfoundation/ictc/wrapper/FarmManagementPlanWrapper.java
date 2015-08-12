@@ -130,7 +130,504 @@ String quantitycassavaharvestedprocessed="quantitycassavaharvestedprocessed";
 String peelingstartofdryingdate="peelingstartofdryingdate";
 String methodofprocessingdehuskingpeeling="methodofprocessingdehuskingpeeling";
 String numberoflabordehuskinpeeling="numberoflabordehuskinpeeling";
+String timecompletiondehuskingpeeling="timecompletiondehuskingpeeling";
+String numberfamilylabordehuskingpeeling="numberfamilylabordehuskingpeeling";
+String numberhiredlabordehuskingpeeling="numberhiredlabordehuskingpeeling";
+String costhiredlabordehuskingpeeling="costhiredlabordehuskingpeeling";
+String methodofdrying="methodofdrying";
+String numberoflabordrying="numberoflabordrying";
+String timecompletiondrying="timecompletiondrying";
+String numberhiredlabordrying="numberhiredlabordrying";
+String costofhiredlabordrying="costofhiredlabordrying";
+String methodofthreshing="methodofthreshing";
+String numberoflabortthreshing="numberoflabortthreshing";
+String timecompletionthreshing="timecompletionthreshing";
+String numberfamilylaborthreshing="numberfamilylaborthreshing";
+String numberofhiredlaborthreshing="numberofhiredlaborthreshing";
+String costofhiredlaborthreshing="costofhiredlaborthreshing";
+String methodofwinnowing="methodofwinnowing";
+String numberoflaborwinnowing="numberoflaborwinnowing";
+String timecompletionwinnowing="timecompletionwinnowing";
+String numberfamilylaborwinnowing="numberfamilylaborwinnowing";
+String numberhiredlaborwinnowing="numberhiredlaborwinnowing";
+String methodofdryinggrain="methodofdryinggrain";
+String numberlabordryinggrain="numberlabordryinggrain";
+String timecompletiondryinggrain="timecompletiondryinggrain";
+String numberfamilylabordryinggrain="numberfamilylabordryinggrain";
+String numberhiredlabordryinggrain="numberhiredlabordryinggrain";
+String costofhiredlabordryinggrain="costofhiredlabordryinggrain";
+String typeofbagsstoringgrain="typeofbagsstoringgrain";
+String numberstoragebagspurchasedused="numberstoragebagspurchasedused";
+String costperunitstoragebags="costperunitstoragebags";
+String typeofchemicalstorage="typeofchemicalstorage";
+String costperunitstoragechemical="costperunitstoragechemical";
+String numberofunitsstoragechemical="numberofunitsstoragechemical";
+String applicationratestoragechemical="applicationratestoragechemical";
+String numberlaborbagging="numberlaborbagging";
+String timecompletionbagging="timecompletionbagging";
+String numberfamilylaborbagging="numberfamilylaborbagging";
+String numberhiredlaborbagging="numberhiredlaborbagging";
+String costhiredlaborbagging="costhiredlaborbagging";
+String typeofstoragestructure="typeofstoragestructure";
+String Ownershipconditionsforstorage="ownershipconditionsforstorage";
+String amountchargedperunittimeofstorage="amountchargedperunittimeofstorage";
+String typeofstoragechemicalusedstoragestructure="typestoragechemicalusedstoragestructure";
+String quantityusedperunitofproduce="quantityusedperunitofproduce";
+String priceperunitstoragechemicalusedinstorage="priceperunitstoragechemicalusedinstorage";
+String Mainpointofsaleorcontact="mainpointofsaleorcontact";
+String Monthsellingbegins="monthsellingbegins";
+String pricefirstharvestproducesold="pricefirstharvestproducesold";
+String monthcassavafreshrootharvestsold="monthcassavafreshrootharvestsold";
+String priceharvestproducesold="priceharvestproducesold";
+String Monthfinalproductsold="monthfinalproductsold";
+String pricefinalbatchproducesold="pricefinalbatchproducesold";
 
+
+
+ public  void setPricefinalbatchproducesold(String pricefinalbatchproducesold) {
+      this.pricefinalbatchproducesold=pricefinalbatchproducesold;
+    }
+ public  String getPricefinalbatchproducesold() {
+        return pricefinalbatchproducesold;
+
+    }
+
+ public  void setMonthfinalproductsold(String Monthfinalproductsold) {
+      this.Monthfinalproductsold=Monthfinalproductsold;
+    }
+ public  String getMonthfinalproductsold() {
+        return Monthfinalproductsold;
+
+    }
+
+
+ public  void setPriceharvestproducesold(String priceharvestproducesold) {
+      this.priceharvestproducesold=priceharvestproducesold;
+    }
+ public  String getPriceharvestproducesold() {
+        return priceharvestproducesold;
+
+    }
+
+
+
+
+
+ public  void setMonthcassavafreshrootharvestsold(String monthcassavafreshrootharvestsold) {
+      this.monthcassavafreshrootharvestsold=monthcassavafreshrootharvestsold;
+    }
+ public  String getMonthcassavafreshrootharvestsold() {
+        return monthcassavafreshrootharvestsold;
+
+    }
+
+
+ public  void setPricefirstharvestproducesold(String pricefirstharvestproducesold) {
+      this.pricefirstharvestproducesold=pricefirstharvestproducesold;
+    }
+ public  String getPricefirstharvestproducesold() {
+        return pricefirstharvestproducesold;
+
+    }
+
+ public  void setMonthsellingbegins(String Monthsellingbegins) {
+      this.Monthsellingbegins=Monthsellingbegins;
+    }
+ public  String getMonthsellingbegins() {
+        return Monthsellingbegins;
+
+    }
+
+ public  void setMainpointofsaleorcontact(String Mainpointofsaleorcontact) {
+      this.Mainpointofsaleorcontact=Mainpointofsaleorcontact;
+    }
+ public  String getMainpointofsaleorcontact() {
+        return Mainpointofsaleorcontact;
+
+    }
+
+ public  void setPriceperunitstoragechemicalusedinstorage(String priceperunitstoragechemicalusedinstorage) {
+      this.priceperunitstoragechemicalusedinstorage=priceperunitstoragechemicalusedinstorage;
+    }
+ public  String getPriceperunitstoragechemicalusedinstorage() {
+        return priceperunitstoragechemicalusedinstorage;
+
+    }
+
+
+ public  void setQuantityusedperunitofproduce(String quantityusedperunitofproduce) {
+      this.quantityusedperunitofproduce=quantityusedperunitofproduce;
+    }
+ public  String getQuantityusedperunitofproduce() {
+        return quantityusedperunitofproduce;
+
+    }
+
+ public  void setTypeofstoragechemicalusedstoragestructure(String typeofstoragechemicalusedstoragestructure) {
+      this.typeofstoragechemicalusedstoragestructure=typeofstoragechemicalusedstoragestructure;
+    }
+ public  String getTypeofstoragechemicalusedstoragestructure() {
+        return typeofstoragechemicalusedstoragestructure;
+
+    }
+
+
+ public  void setAmountchargedperunittimeofstorage(String amountchargedperunittimeofstorage) {
+      this.amountchargedperunittimeofstorage=amountchargedperunittimeofstorage;
+    }
+ public  String getAmountchargedperunittimeofstorage() {
+        return amountchargedperunittimeofstorage;
+
+    }
+
+
+ public  void setOwnershipconditionsforstorage(String Ownershipconditionsforstorage) {
+      this.Ownershipconditionsforstorage=Ownershipconditionsforstorage;
+    }
+ public  String getOwnershipconditionsforstorage() {
+        return Ownershipconditionsforstorage;
+
+    }
+
+
+ public  void setTypeofstoragestructure(String typeofstoragestructure) {
+      this.typeofstoragestructure=typeofstoragestructure;
+    }
+ public  String getTypeofstoragestructure() {
+        return typeofstoragestructure;
+
+    }
+
+
+
+public  void setCosthiredlaborbagging(String costhiredlaborbagging) {
+      this.costhiredlaborbagging=costhiredlaborbagging;
+    }
+ public  String getCosthiredlaborbagging() {
+        return costhiredlaborbagging;
+
+    }
+
+ public  void setNumberhiredlaborbagging(String numberhiredlaborbagging) {
+      this.numberhiredlaborbagging=numberhiredlaborbagging;
+    }
+ public  String getNumberhiredlaborbagging() {
+        return numberhiredlaborbagging;
+
+    }
+
+
+
+
+
+ public  void setNumberfamilylaborbagging(String numberfamilylaborbagging) {
+      this.numberfamilylaborbagging=numberfamilylaborbagging;
+    }
+ public  String getNumberfamilylaborbagging() {
+        return numberfamilylaborbagging;
+
+    }
+ public  void setTimecompletionbagging(String timecompletionbagging) {
+      this.timecompletionbagging=timecompletionbagging;
+    }
+ public  String getTimecompletionbagging() {
+        return timecompletionbagging;
+
+    }
+
+ public  void setNumberlaborbagging(String numberlaborbagging) {
+      this.numberlaborbagging=numberlaborbagging;
+    }
+ public  String getNumberlaborbagging() {
+        return numberlaborbagging;
+
+    }
+
+ public  void setApplicationratestoragechemical(String applicationratestoragechemical) {
+      this.applicationratestoragechemical=applicationratestoragechemical;
+    }
+ public  String getApplicationratestoragechemical() {
+        return applicationratestoragechemical;
+
+    }
+
+ public  void setNumberofunitsstoragechemical(String numberofunitsstoragechemical) {
+      this.numberofunitsstoragechemical=numberofunitsstoragechemical;
+    }
+ public  String getNumberofunitsstoragechemical() {
+        return numberofunitsstoragechemical;
+
+    }
+
+
+ public  void setCostperunitstoragechemical(String costperunitstoragechemical) {
+      this.costperunitstoragechemical=costperunitstoragechemical;
+    }
+ public  String getCostperunitstoragechemical() {
+        return costperunitstoragechemical;
+
+    }
+
+ public  void setTypeofchemicalstorage(String typeofchemicalstorage) {
+      this.typeofchemicalstorage=typeofchemicalstorage;
+    }
+ public  String getTypeofchemicalstorage() {
+        return typeofchemicalstorage;
+
+    }
+
+
+ public  void setCostperunitstoragebags(String costperunitstoragebags) {
+      this.costperunitstoragebags=costperunitstoragebags;
+    }
+ public  String getCostperunitstoragebags() {
+        return costperunitstoragebags;
+
+    }
+
+ public  void setNumberstoragebagspurchasedused(String numberstoragebagspurchasedused) {
+      this.numberstoragebagspurchasedused=numberstoragebagspurchasedused;
+    }
+ public  String getNumberstoragebagspurchasedused() {
+        return numberstoragebagspurchasedused;
+
+    }
+
+
+ public  void setTypeofbagsstoringgrain(String typeofbagsstoringgrain) {
+      this.typeofbagsstoringgrain=typeofbagsstoringgrain;
+    }
+ public  String getTypeofbagsstoringgrain() {
+        return typeofbagsstoringgrain;
+
+    }
+
+
+ public  void setCostofhiredlabordryinggrain(String costofhiredlabordryinggrain) {
+      this.costofhiredlabordryinggrain=costofhiredlabordryinggrain;
+    }
+ public  String getCostofhiredlabordryinggrain() {
+        return costofhiredlabordryinggrain;
+
+    }
+ public  void setNumberhiredlabordryinggrain(String numberhiredlabordryinggrain) {
+      this.numberhiredlabordryinggrain=numberhiredlabordryinggrain;
+    }
+ public  String getNumberhiredlabordryinggrain() {
+        return numberhiredlabordryinggrain;
+
+    }
+
+
+ public  void setNumberfamilylabordryinggrain(String numberfamilylabordryinggrain) {
+      this.numberfamilylabordryinggrain=numberfamilylabordryinggrain;
+    }
+ public  String getNumberfamilylabordryinggrain() {
+        return numberfamilylabordryinggrain;
+
+    }
+
+ public  void setTimecompletiondryinggrain(String timecompletiondryinggrain) {
+      this.timecompletiondryinggrain=timecompletiondryinggrain;
+    }
+ public  String getTimecompletiondryinggrain() {
+        return timecompletiondryinggrain;
+
+    }
+
+ public  void setNumberlabordryinggrain(String numberlabordryinggrain) {
+      this.numberlabordryinggrain=numberlabordryinggrain;
+    }
+ public  String getNumberlabordryinggrain() {
+        return numberlabordryinggrain;
+
+    }
+
+
+ public  void setMethodofdryinggrain(String methodofdryinggrain) {
+      this.methodofdryinggrain=methodofdryinggrain;
+    }
+ public  String getMethodofdryinggrain() {
+        return methodofdryinggrain;
+
+    }
+
+
+ public  void setNumberhiredlaborwinnowing(String numberhiredlaborwinnowing) {
+      this.numberhiredlaborwinnowing=numberhiredlaborwinnowing;
+    }
+ public  String getNumberhiredlaborwinnowing() {
+        return numberhiredlaborwinnowing;
+
+    }
+
+
+ public  void setNumberfamilylaborwinnowing(String numberfamilylaborwinnowing) {
+      this.numberfamilylaborwinnowing=numberfamilylaborwinnowing;
+    }
+ public  String getNumberfamilylaborwinnowing() {
+        return numberfamilylaborwinnowing;
+
+    }
+ public  void setTimecompletionwinnowing(String timecompletionwinnowing) {
+      this.timecompletionwinnowing=timecompletionwinnowing;
+    }
+ public  String getTimecompletionwinnowing() {
+        return timecompletionwinnowing;
+
+    }
+
+ 
+
+ public  void setNumberoflaborwinnowing(String numberoflaborwinnowing) {
+      this.numberoflaborwinnowing=numberoflaborwinnowing;
+    }
+ public  String getNumberoflaborwinnowing() {
+        return numberoflaborwinnowing;
+
+    }
+
+ public  void setMethodofwinnowing(String methodofwinnowing) {
+      this.methodofwinnowing=methodofwinnowing;
+    }
+ public  String getMethodofwinnowing() {
+        return methodofwinnowing;
+
+    }
+
+
+ public  void setCostofhiredlaborthreshing(String costofhiredlaborthreshing) {
+      this.costofhiredlaborthreshing=costofhiredlaborthreshing;
+    }
+ public  String getCostofhiredlaborthreshing() {
+        return costofhiredlaborthreshing;
+
+    }
+
+ public  void setNumberofhiredlaborthreshing(String numberofhiredlaborthreshing) {
+      this.numberofhiredlaborthreshing=numberofhiredlaborthreshing;
+    }
+ public  String getNumberofhiredlaborthreshing() {
+        return numberofhiredlaborthreshing;
+
+    }
+
+ public  void setNumberfamilylaborthreshing(String numberfamilylaborthreshing) {
+      this.numberfamilylaborthreshing=numberfamilylaborthreshing;
+    }
+ public  String getNumberfamilylaborthreshing() {
+        return numberfamilylaborthreshing;
+
+    }
+
+ public  void setTimecompletionthreshing(String timecompletionthreshing) {
+      this.timecompletionthreshing=timecompletionthreshing;
+    }
+ public  String getTimecompletionthreshing() {
+        return timecompletionthreshing;
+
+    }
+
+ public  void setNumberoflabortthreshing(String numberoflabortthreshing) {
+      this.numberoflabortthreshing=numberoflabortthreshing;
+    }
+ public  String getNumberoflabortthreshing() {
+        return numberoflabortthreshing;
+
+    }
+
+
+ public  void setMethodofthreshing(String methodofthreshing) {
+      this.methodofthreshing=methodofthreshing;
+    }
+ public  String getMethodofthreshing() {
+        return methodofthreshing;
+
+    }
+
+
+ public  void setCostofhiredlabordrying(String costofhiredlabordrying) {
+      this.costofhiredlabordrying=costofhiredlabordrying;
+    }
+ public  String getCostofhiredlabordrying() {
+        return costofhiredlabordrying;
+
+    }
+
+
+ public  void setNumberhiredlabordrying(String numberhiredlabordrying) {
+      this.numberhiredlabordrying=numberhiredlabordrying;
+    }
+ public  String getNumberhiredlabordrying() {
+        return numberhiredlabordrying;
+
+    }
+
+String numberfamilylabordrying="numberfamilylabordrying";
+ public  void setNumberfamilylabordrying(String numberfamilylabordrying) {
+      this.numberfamilylabordrying=numberfamilylabordrying;
+    }
+ public  String getNumberfamilylabordrying() {
+        return numberfamilylabordrying;
+
+    }
+
+ public  void setTimecompletiondrying(String timecompletiondrying) {
+      this.timecompletiondrying=timecompletiondrying;
+    }
+ public  String getTimecompletiondrying() {
+        return timecompletiondrying;
+
+    }
+
+ public  void setNumberoflabordrying(String numberoflabordrying) {
+      this.numberoflabordrying=numberoflabordrying;
+    }
+ public  String getNumberoflabordrying() {
+        return numberoflabordrying;
+
+    }
+
+ public  void setMethodofdrying(String methodofdrying) {
+      this.methodofdrying=methodofdrying;
+    }
+ public  String getMethodofdrying() {
+        return methodofdrying;
+
+    }
+
+ public  void setCosthiredlabordehuskingpeeling(String costhiredlabordehuskingpeeling) {
+      this.costhiredlabordehuskingpeeling=costhiredlabordehuskingpeeling;
+    }
+ public  String getCosthiredlabordehuskingpeeling() {
+        return costhiredlabordehuskingpeeling;
+
+    }
+
+ public  void setNumberhiredlabordehuskingpeeling(String numberhiredlabordehuskingpeeling) {
+      this.numberhiredlabordehuskingpeeling=numberhiredlabordehuskingpeeling;
+    }
+ public  String getNumberhiredlabordehuskingpeeling() {
+        return numberhiredlabordehuskingpeeling;
+
+    }
+
+ public  void setNumberfamilylabordehuskingpeeling(String numberfamilylabordehuskingpeeling) {
+      this.numberfamilylabordehuskingpeeling=numberfamilylabordehuskingpeeling;
+    }
+ public  String getNumberfamilylabordehuskingpeeling() {
+        return numberfamilylabordehuskingpeeling;
+
+    }
+
+
+ public  void setTimecompletiondehuskingpeeling(String timecompletiondehuskingpeeling) {
+      this.timecompletiondehuskingpeeling=timecompletiondehuskingpeeling;
+    }
+ public  String getTimecompletiondehuskingpeeling() {
+        return timecompletiondehuskingpeeling;
+
+    }
 
  public  void setNumberoflabordehuskinpeeling(String numberoflabordehuskinpeeling) {
       this.numberoflabordehuskinpeeling=numberoflabordehuskinpeeling;

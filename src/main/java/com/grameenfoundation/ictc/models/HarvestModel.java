@@ -10,6 +10,7 @@ import com.grameenfoundation.ictc.domains.Harvest;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
 import com.grameenfoundation.ictc.utils.Labels;
+import com.grameenfoundation.ictc.utils.Neo4jServices;
 import com.grameenfoundation.ictc.utils.ParentNode;
 import com.grameenfoundation.ictc.wrapper.HarvestWrapper;
 import java.util.Date;
@@ -78,6 +79,28 @@ public class HarvestModel {
             e.printStackTrace();
         }
         
+        return null;
+    }
+    
+    
+    
+    
+    public Harvest getHarvest(String field, String value) {
+        String q = "Start root=node(0) "
+                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.HARVEST + "]->p"
+                + " where p." + field + "='" + value + "'"
+                + " return p";
+
+        System.out.println("Query " + q);
+        try {
+            Node node = Neo4jServices.executeCypherQuerySingleResult(q, "p");
+            if (null != node) {
+                return new Harvest(node);
+            }
+        } catch (Exception e) {
+            System.out.println("Unable to Find geofence");
+        }
+
         return null;
     }
 }

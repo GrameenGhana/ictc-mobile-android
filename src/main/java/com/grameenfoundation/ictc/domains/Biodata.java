@@ -35,6 +35,7 @@ public class Biodata extends Status implements GeneralInterface {
     public static String NUMBER_OF_CHILDREN = "numberofchildren";
     public static String NUMBER_OF_DEPENDANTS ="numberofdependants";
     public static String EDUCATION ="education";
+    public static String MAJOR_CROP ="majorcrop";
     //public static String ID ="id";
     
     Node underlyingNode;
@@ -205,6 +206,19 @@ public class Biodata extends Status implements GeneralInterface {
     public void setNumberofdependants(String numberofdependants) {
         underlyingNode.setProperty(NUMBER_OF_DEPENDANTS,numberofdependants);
     }
+    
+     public String getMajorCrop() {
+        try {
+            return (String) underlyingNode.getProperty(MAJOR_CROP);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public void setMajorCrop(String majorcrop) {
+        underlyingNode.setProperty(MAJOR_CROP,majorcrop);
+    }
 
     public String getEducation() {
         try {
@@ -288,5 +302,6 @@ public class Biodata extends Status implements GeneralInterface {
    {
        return new Marketing(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_TECHNEEDS));
    }
+    
     
 }

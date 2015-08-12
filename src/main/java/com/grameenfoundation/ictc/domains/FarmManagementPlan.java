@@ -140,6 +140,806 @@ public static String QUANTITYCASSAVAHARVESTEDPROCESSED="quantitycassavaharvested
 public static String PEELINGSTARTOFDRYINGDATE="peelingstartofdryingdate";
 public static String METHODOFPROCESSINGDEHUSKINGPEELING="methodofprocessingdehuskingpeeling";
 public static String NUMBEROFLABORDEHUSKINPEELING="numberoflabordehuskinpeeling";
+public static String TIMECOMPLETIONDEHUSKINGPEELING="timecompletiondehuskingpeeling";
+public static String NUMBERFAMILYLABORDEHUSKINGPEELING="numberfamilylabordehuskingpeeling";
+public static String NUMBERHIREDLABORDEHUSKINGPEELING="numberhiredlabordehuskingpeeling";
+public static String COSTHIREDLABORDEHUSKINGPEELING="costhiredlabordehuskingpeeling";
+public static String METHODOFDRYING="methodofdrying";
+public static String NUMBEROFLABORDRYING="numberoflabordrying";
+public static String TIMECOMPLETIONDRYING="timecompletiondrying";
+public static String NUMBERFAMILYLABORDRYING="numberfamilylabordrying";
+public static String NUMBERHIREDLABORDRYING="numberhiredlabordrying";
+public static String COSTOFHIREDLABORDRYING="costofhiredlabordrying";
+public static String METHODOFTHRESHING="methodofthreshing";
+public static String NUMBEROFLABORTTHRESHING="numberoflabortthreshing";
+public static String TIMECOMPLETIONTHRESHING="timecompletionthreshing";
+public static String NUMBERFAMILYLABORTHRESHING="numberfamilylaborthreshing";
+public static String NUMBEROFHIREDLABORTHRESHING="numberofhiredlaborthreshing";
+public static String COSTOFHIREDLABORTHRESHING="costofhiredlaborthreshing";
+public static String METHODOFWINNOWING="methodofwinnowing";
+public static String NUMBEROFLABORWINNOWING="numberoflaborwinnowing";
+public static String TIMECOMPLETIONWINNOWING="timecompletionwinnowing";
+public static String NUMBERFAMILYLABORWINNOWING="numberfamilylaborwinnowing";
+public static String NUMBERHIREDLABORWINNOWING="numberhiredlaborwinnowing";
+public static String METHODOFDRYINGGRAIN="methodofdryinggrain";
+public static String NUMBERLABORDRYINGGRAIN="numberlabordryinggrain";
+public static String TIMECOMPLETIONDRYINGGRAIN="timecompletiondryinggrain";
+public static String NUMBERFAMILYLABORDRYINGGRAIN="numberfamilylabordryinggrain";
+public static String NUMBERHIREDLABORDRYINGGRAIN="numberhiredlabordryinggrain";
+public static String COSTOFHIREDLABORDRYINGGRAIN="costofhiredlabordryinggrain";
+public static String TYPEOFBAGSSTORINGGRAIN="typeofbagsstoringgrain";
+public static String NUMBERSTORAGEBAGSPURCHASEDUSED="numberstoragebagspurchasedused";
+public static String COSTPERUNITSTORAGEBAGS="costperunitstoragebags";
+public static String TYPEOFCHEMICALSTORAGE="typeofchemicalstorage";
+public static String COSTPERUNITSTORAGECHEMICAL="costperunitstoragechemical";
+public static String NUMBEROFUNITSSTORAGECHEMICAL="numberofunitsstoragechemical";
+public static String APPLICATIONRATESTORAGECHEMICAL="applicationratestoragechemical";
+public static String NUMBERLABORBAGGING="numberlaborbagging";
+public static String TIMECOMPLETIONBAGGING="timecompletionbagging";
+public static String NUMBERFAMILYLABORBAGGING="numberfamilylaborbagging";
+public static String NUMBERHIREDLABORBAGGING="numberhiredlaborbagging";
+public static String COSTHIREDLABORBAGGING="costhiredlaborbagging";
+public static String TYPEOFSTORAGESTRUCTURE="typeofstoragestructure";
+public static String OWNERSHIPCONDITIONSFORSTORAGE="ownershipconditionsforstorage";
+public static String AMOUNTCHARGEDPERUNITTIMEOFSTORAGE="amountchargedperunittimeofstorage";
+public static String TYPEOFSTORAGECHEMICALUSEDSTORAGESTRUCTURE="typestoragechemicalusedstoragestructure";
+public static String QUANTITYUSEDPERUNITOFPRODUCE="quantityusedperunitofproduce";
+public static String PRICEPERUNITSTORAGECHEMICALUSEDINSTORAGE="priceperunitstoragechemicalusedinstorage";
+public static String MAINPOINTOFSALEORCONTACT="mainpointofsaleorcontact";
+public static String MONTHSELLINGBEGINS="monthsellingbegins";
+public static String PRICEFIRSTHARVESTPRODUCESOLD="pricefirstharvestproducesold";
+public static String MONTHCASSAVAFRESHROOTHARVESTSOLD="monthcassavafreshrootharvestsold";
+public static String PRICEHARVESTPRODUCESOLD="priceharvestproducesold";
+public static String MONTHFINALPRODUCTSOLD="monthfinalproductsold";
+public static String PRICEFINALBATCHPRODUCESOLD="pricefinalbatchproducesold";
+
+
+public void setPricefinalbatchproducesold(String pricefinalbatchproducesold) {
+underlyingNode.setProperty(PRICEFINALBATCHPRODUCESOLD,pricefinalbatchproducesold);
+}
+
+public String getPricefinalbatchproducesold(){
+          try {
+          return (String) underlyingNode.getProperty(PRICEFINALBATCHPRODUCESOLD);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setMonthfinalproductsold(String monthfinalproductsold) {
+underlyingNode.setProperty(MONTHFINALPRODUCTSOLD,monthfinalproductsold);
+}
+
+public String getMonthfinalproductsold(){
+          try {
+          return (String) underlyingNode.getProperty(MONTHFINALPRODUCTSOLD);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+
+public void setPriceharvestproducesold(String priceharvestproducesold) {
+underlyingNode.setProperty(PRICEHARVESTPRODUCESOLD,priceharvestproducesold);
+}
+
+public String getPriceharvestproducesold(){
+          try {
+          return (String) underlyingNode.getProperty(PRICEHARVESTPRODUCESOLD);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setMonthcassavafreshrootharvestsold(String monthcassavafreshrootharvestsold) {
+underlyingNode.setProperty(MONTHCASSAVAFRESHROOTHARVESTSOLD,monthcassavafreshrootharvestsold);
+}
+
+public String getMonthcassavafreshrootharvestsold(){
+          try {
+          return (String) underlyingNode.getProperty(MONTHCASSAVAFRESHROOTHARVESTSOLD);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setPricefirstharvestproducesold(String pricefirstharvestproducesold) {
+underlyingNode.setProperty(PRICEFIRSTHARVESTPRODUCESOLD,pricefirstharvestproducesold);
+}
+
+public String getPricefirstharvestproducesold(){
+          try {
+          return (String) underlyingNode.getProperty(PRICEFIRSTHARVESTPRODUCESOLD);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setMonthsellingbegins(String monthsellingbegins) {
+underlyingNode.setProperty(MONTHSELLINGBEGINS,monthsellingbegins);
+}
+
+public String getMonthsellingbegins(){
+          try {
+          return (String) underlyingNode.getProperty(MONTHSELLINGBEGINS);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setMainpointofsaleorcontact(String mainpointofsaleorcontact) {
+underlyingNode.setProperty(MAINPOINTOFSALEORCONTACT,mainpointofsaleorcontact);
+}
+
+public String getMainpointofsaleorcontact(){
+          try {
+          return (String) underlyingNode.getProperty(MAINPOINTOFSALEORCONTACT);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setPriceperunitstoragechemicalusedinstorage(String priceperunitstoragechemicalusedinstorage) {
+underlyingNode.setProperty(PRICEPERUNITSTORAGECHEMICALUSEDINSTORAGE,priceperunitstoragechemicalusedinstorage);
+}
+
+public String getPriceperunitstoragechemicalusedinstorage(){
+          try {
+          return (String) underlyingNode.getProperty(PRICEPERUNITSTORAGECHEMICALUSEDINSTORAGE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setQuantityusedperunitofproduce(String quantityusedperunitofproduce) {
+underlyingNode.setProperty(QUANTITYUSEDPERUNITOFPRODUCE,quantityusedperunitofproduce);
+}
+
+public String getQuantityusedperunitofproduce(){
+          try {
+          return (String) underlyingNode.getProperty(QUANTITYUSEDPERUNITOFPRODUCE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+
+public void setTypeofstoragechemicalusedstoragestructure(String typeofstoragechemicalusedstoragestructure) {
+underlyingNode.setProperty(TYPEOFSTORAGECHEMICALUSEDSTORAGESTRUCTURE,typeofstoragechemicalusedstoragestructure);
+}
+
+public String getTypeofstoragechemicalusedstoragestructure(){
+          try {
+          return (String) underlyingNode.getProperty(TYPEOFSTORAGECHEMICALUSEDSTORAGESTRUCTURE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setAmountchargedperunittimeofstorage(String amountchargedperunittimeofstorage) {
+underlyingNode.setProperty(AMOUNTCHARGEDPERUNITTIMEOFSTORAGE,amountchargedperunittimeofstorage);
+}
+
+public String getAmountchargedperunittimeofstorage(){
+          try {
+          return (String) underlyingNode.getProperty(AMOUNTCHARGEDPERUNITTIMEOFSTORAGE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setOwnershipconditionsforstorage(String ownershipconditionsforstorage) {
+underlyingNode.setProperty(OWNERSHIPCONDITIONSFORSTORAGE,ownershipconditionsforstorage);
+}
+
+public String getOwnershipconditionsforstorage(){
+          try {
+          return (String) underlyingNode.getProperty(OWNERSHIPCONDITIONSFORSTORAGE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setTypeofstoragestructure(String typeofstoragestructure) {
+underlyingNode.setProperty(TYPEOFSTORAGESTRUCTURE,typeofstoragestructure);
+}
+
+public String getTypeofstoragestructure(){
+          try {
+          return (String) underlyingNode.getProperty(TYPEOFSTORAGESTRUCTURE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setCosthiredlaborbagging(String costhiredlaborbagging) {
+underlyingNode.setProperty(COSTHIREDLABORBAGGING,costhiredlaborbagging);
+}
+
+public String getCosthiredlaborbagging(){
+          try {
+          return (String) underlyingNode.getProperty(COSTHIREDLABORBAGGING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setNumberhiredlaborbagging(String numberhiredlaborbagging) {
+underlyingNode.setProperty(NUMBERHIREDLABORBAGGING,numberhiredlaborbagging);
+}
+
+public String getNumberhiredlaborbagging(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBERHIREDLABORBAGGING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setNumberfamilylaborbagging(String numberfamilylaborbagging) {
+underlyingNode.setProperty(NUMBERFAMILYLABORBAGGING,numberfamilylaborbagging);
+}
+
+public String getNumberfamilylaborbagging(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBERFAMILYLABORBAGGING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setTimecompletionbagging(String timecompletionbagging) {
+underlyingNode.setProperty(TIMECOMPLETIONBAGGING,timecompletionbagging);
+}
+
+public String getTimecompletionbagging(){
+          try {
+          return (String) underlyingNode.getProperty(TIMECOMPLETIONBAGGING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+
+public void setNumberlaborbagging(String numberlaborbagging) {
+underlyingNode.setProperty(NUMBERLABORBAGGING,numberlaborbagging);
+}
+
+public String getNumberlaborbagging(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBERLABORBAGGING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setApplicationratestoragechemical(String applicationratestoragechemical) {
+underlyingNode.setProperty(APPLICATIONRATESTORAGECHEMICAL,applicationratestoragechemical);
+}
+
+public String getApplicationratestoragechemical(){
+          try {
+          return (String) underlyingNode.getProperty(APPLICATIONRATESTORAGECHEMICAL);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setNumberofunitsstoragechemical(String numberofunitsstoragechemical) {
+underlyingNode.setProperty(NUMBEROFUNITSSTORAGECHEMICAL,numberofunitsstoragechemical);
+}
+
+public String getNumberofunitsstoragechemical(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBEROFUNITSSTORAGECHEMICAL);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setCostperunitstoragechemical(String costperunitstoragechemical) {
+underlyingNode.setProperty(COSTPERUNITSTORAGECHEMICAL,costperunitstoragechemical);
+}
+
+public String getCostperunitstoragechemical(){
+          try {
+          return (String) underlyingNode.getProperty(COSTPERUNITSTORAGECHEMICAL);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setTypeofchemicalstorage(String typeofchemicalstorage) {
+underlyingNode.setProperty(TYPEOFCHEMICALSTORAGE,typeofchemicalstorage);
+}
+
+public String getTypeofchemicalstorage(){
+          try {
+          return (String) underlyingNode.getProperty(TYPEOFCHEMICALSTORAGE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setCostperunitstoragebags(String costperunitstoragebags) {
+underlyingNode.setProperty(COSTPERUNITSTORAGEBAGS,costperunitstoragebags);
+}
+
+public String getCostperunitstoragebags(){
+          try {
+          return (String) underlyingNode.getProperty(COSTPERUNITSTORAGEBAGS);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setNumberstoragebagspurchasedused(String numberstoragebagspurchasedused) {
+underlyingNode.setProperty(NUMBERSTORAGEBAGSPURCHASEDUSED,numberstoragebagspurchasedused);
+}
+
+public String getNumberstoragebagspurchasedused(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBERSTORAGEBAGSPURCHASEDUSED);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setTypeofbagsstoringgrain(String typeofbagsstoringgrain) {
+underlyingNode.setProperty(TYPEOFBAGSSTORINGGRAIN,typeofbagsstoringgrain);
+}
+
+public String getTypeofbagsstoringgrain(){
+          try {
+          return (String) underlyingNode.getProperty(TYPEOFBAGSSTORINGGRAIN);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setCostofhiredlabordryinggrain(String costofhiredlabordryinggrain) {
+underlyingNode.setProperty(COSTOFHIREDLABORDRYINGGRAIN,costofhiredlabordryinggrain);
+}
+
+public String getCostofhiredlabordryinggrain(){
+          try {
+          return (String) underlyingNode.getProperty(COSTOFHIREDLABORDRYINGGRAIN);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setNumberhiredlabordryinggrain(String numberhiredlabordryinggrain) {
+underlyingNode.setProperty(NUMBERHIREDLABORDRYINGGRAIN,numberhiredlabordryinggrain);
+}
+
+public String getNumberhiredlabordryinggrain(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBERHIREDLABORDRYINGGRAIN);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+
+public void setNumberfamilylabordryinggrain(String numberfamilylabordryinggrain) {
+underlyingNode.setProperty(NUMBERFAMILYLABORDRYINGGRAIN,numberfamilylabordryinggrain);
+}
+
+public String getNumberfamilylabordryinggrain(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBERFAMILYLABORDRYINGGRAIN);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setTimecompletiondryinggrain(String timecompletiondryinggrain) {
+underlyingNode.setProperty(TIMECOMPLETIONDRYINGGRAIN,timecompletiondryinggrain);
+}
+
+public String getTimecompletiondryinggrain(){
+          try {
+          return (String) underlyingNode.getProperty(TIMECOMPLETIONDRYINGGRAIN);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setNumberlabordryinggrain(String numberlabordryinggrain) {
+underlyingNode.setProperty(NUMBERLABORDRYINGGRAIN,numberlabordryinggrain);
+}
+
+public String getNumberlabordryinggrain(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBERLABORDRYINGGRAIN);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setMethodofdryinggrain(String methodofdryinggrain) {
+underlyingNode.setProperty(METHODOFDRYINGGRAIN,methodofdryinggrain);
+}
+
+public String getMethodofdryinggrain(){
+          try {
+          return (String) underlyingNode.getProperty(METHODOFDRYINGGRAIN);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setNumberhiredlaborwinnowing(String numberhiredlaborwinnowing) {
+underlyingNode.setProperty(NUMBERHIREDLABORWINNOWING,numberhiredlaborwinnowing);
+}
+
+public String getNumberhiredlaborwinnowing(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBERHIREDLABORWINNOWING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setNumberfamilylaborwinnowing(String numberfamilylaborwinnowing) {
+underlyingNode.setProperty(NUMBERFAMILYLABORWINNOWING,numberfamilylaborwinnowing);
+}
+
+public String getNumberfamilylaborwinnowing(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBERFAMILYLABORWINNOWING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setTimecompletionwinnowing(String timecompletionwinnowing) {
+underlyingNode.setProperty(TIMECOMPLETIONWINNOWING,timecompletionwinnowing);
+}
+
+public String getTimecompletionwinnowing(){
+          try {
+          return (String) underlyingNode.getProperty(TIMECOMPLETIONWINNOWING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setNumberoflaborwinnowing(String numberoflaborwinnowing) {
+underlyingNode.setProperty(NUMBEROFLABORWINNOWING,numberoflaborwinnowing);
+}
+
+public String getNumberoflaborwinnowing(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBEROFLABORWINNOWING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setMethodofwinnowing(String methodofwinnowing) {
+underlyingNode.setProperty(METHODOFWINNOWING,methodofwinnowing);
+}
+
+public String getMethodofwinnowing(){
+          try {
+          return (String) underlyingNode.getProperty(METHODOFWINNOWING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setCostofhiredlaborthreshing(String costofhiredlaborthreshing) {
+underlyingNode.setProperty(COSTOFHIREDLABORTHRESHING,costofhiredlaborthreshing);
+}
+
+public String getCostofhiredlaborthreshing(){
+          try {
+          return (String) underlyingNode.getProperty(COSTOFHIREDLABORTHRESHING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setNumberofhiredlaborthreshing(String numberofhiredlaborthreshing) {
+underlyingNode.setProperty(NUMBEROFHIREDLABORTHRESHING,numberofhiredlaborthreshing);
+}
+
+public String getNumberofhiredlaborthreshing(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBEROFHIREDLABORTHRESHING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setNumberfamilylaborthreshing(String numberfamilylaborthreshing) {
+underlyingNode.setProperty(NUMBERFAMILYLABORTHRESHING,numberfamilylaborthreshing);
+}
+
+public String getNumberfamilylaborthreshing(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBERFAMILYLABORTHRESHING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+
+public void setTimecompletionthreshing(String timecompletionthreshing) {
+underlyingNode.setProperty(TIMECOMPLETIONTHRESHING,timecompletionthreshing);
+}
+
+public String getTimecompletionthreshing(){
+          try {
+          return (String) underlyingNode.getProperty(TIMECOMPLETIONTHRESHING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setNumberoflabortthreshing(String numberoflabortthreshing) {
+underlyingNode.setProperty(NUMBEROFLABORTTHRESHING,numberoflabortthreshing);
+}
+
+public String getNumberoflabortthreshing(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBEROFLABORTTHRESHING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setMethodofthreshing(String methodofthreshing) {
+underlyingNode.setProperty(METHODOFTHRESHING,methodofthreshing);
+}
+
+public String getMethodofthreshing(){
+          try {
+          return (String) underlyingNode.getProperty(METHODOFTHRESHING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setCostofhiredlabordrying(String costofhiredlabordrying) {
+underlyingNode.setProperty(COSTOFHIREDLABORDRYING,costofhiredlabordrying);
+}
+
+public String getCostofhiredlabordrying(){
+          try {
+          return (String) underlyingNode.getProperty(COSTOFHIREDLABORDRYING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setNumberhiredlabordrying(String numberhiredlabordrying) {
+underlyingNode.setProperty(NUMBERHIREDLABORDRYING,numberhiredlabordrying);
+}
+
+public String getNumberhiredlabordrying(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBERHIREDLABORDRYING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setNumberfamilylabordrying(String numberfamilylabordrying) {
+underlyingNode.setProperty(NUMBERFAMILYLABORDRYING,numberfamilylabordrying);
+}
+
+public String getNumberfamilylabordrying(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBERFAMILYLABORDRYING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setTimecompletiondrying(String timecompletiondrying) {
+underlyingNode.setProperty(TIMECOMPLETIONDRYING,timecompletiondrying);
+}
+
+public String getTimecompletiondrying(){
+          try {
+          return (String) underlyingNode.getProperty(TIMECOMPLETIONDRYING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setNumberoflabordrying(String numberoflabordrying) {
+underlyingNode.setProperty(NUMBEROFLABORDRYING,numberoflabordrying);
+}
+
+public String getNumberoflabordrying(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBEROFLABORDRYING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setMethodofdrying(String methodofdrying) {
+underlyingNode.setProperty(METHODOFDRYING,methodofdrying);
+}
+
+public String getMethodofdrying(){
+          try {
+          return (String) underlyingNode.getProperty(METHODOFDRYING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setCosthiredlabordehuskingpeeling(String costhiredlabordehuskingpeeling) {
+underlyingNode.setProperty(COSTHIREDLABORDEHUSKINGPEELING,costhiredlabordehuskingpeeling);
+}
+
+public String getCosthiredlabordehuskingpeeling(){
+          try {
+          return (String) underlyingNode.getProperty(COSTHIREDLABORDEHUSKINGPEELING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+
+public void setNumberhiredlabordehuskingpeeling(String numberhiredlabordehuskingpeeling) {
+underlyingNode.setProperty(NUMBERHIREDLABORDEHUSKINGPEELING,numberhiredlabordehuskingpeeling);
+}
+
+public String getNumberhiredlabordehuskingpeeling(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBERHIREDLABORDEHUSKINGPEELING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setNumberfamilylabordehuskingpeeling(String numberfamilylabordehuskingpeeling) {
+underlyingNode.setProperty(NUMBERFAMILYLABORDEHUSKINGPEELING,numberfamilylabordehuskingpeeling);
+}
+
+public String getNumberfamilylabordehuskingpeeling(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBERFAMILYLABORDEHUSKINGPEELING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setTimecompletiondehuskingpeeling(String timecompletiondehuskingpeeling) {
+underlyingNode.setProperty(TIMECOMPLETIONDEHUSKINGPEELING,timecompletiondehuskingpeeling);
+}
+
+public String getTimecompletiondehuskingpeeling(){
+          try {
+          return (String) underlyingNode.getProperty(TIMECOMPLETIONDEHUSKINGPEELING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
 
 

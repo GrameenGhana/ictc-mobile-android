@@ -174,7 +174,7 @@ public class BiodataModel {
 
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
-            Biodata b = new BiodataModel().getBiodata(Biodata.LAST_NAME, biodata);
+            Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
 
             System.out.println("biodata" + b.getUnderlyingNode().getId());
             if (null != biodata) {
@@ -198,7 +198,7 @@ public class BiodataModel {
 
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
-            Biodata b = new BiodataModel().getBiodata(Biodata.LAST_NAME, biodata);
+            Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
 
             System.out.println("biodata" + b.getUnderlyingNode().getId());
             if (null != biodata) {
@@ -222,9 +222,9 @@ public class BiodataModel {
 
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
-            Biodata b = new BiodataModel().getBiodata(Biodata.LAST_NAME, biodata);
+            Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
 
-            System.out.println("biodata" + b.getUnderlyingNode().getId());
+            System.out.println("biodata :" + b.getUnderlyingNode().getId());
             if (null != biodata) {
 
                 b.setPostHarvest(postHarvest);
@@ -246,9 +246,9 @@ public class BiodataModel {
 
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
-            Biodata b = new BiodataModel().getBiodata(Biodata.LAST_NAME, biodata);
+            Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
 
-            System.out.println("biodata" + b.getUnderlyingNode().getId());
+            System.out.println("biodata :" + b.getUnderlyingNode().getId());
             if (null != biodata) {
 
                 b.setStorage(storage);
@@ -270,9 +270,9 @@ public class BiodataModel {
 
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
-            Biodata b = new BiodataModel().getBiodata(Biodata.LAST_NAME, biodata);
+            Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
 
-            System.out.println("biodata" + b.getUnderlyingNode().getId());
+            System.out.println("biodata :" + b.getUnderlyingNode().getId());
             if (null != biodata) {
 
                 b.setMarketing(marketing);
@@ -298,7 +298,7 @@ public boolean BiodataToTechNeeds(String biodata, Node techNeeds) {
             Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
            
 
-            System.out.println("biodata" + b.getUnderlyingNode().getId());
+            System.out.println("biodata :" + b.getUnderlyingNode().getId());
             if (null != biodata) {
 
                 b.setTechNeeds(techNeeds);
@@ -317,5 +317,35 @@ public boolean BiodataToTechNeeds(String biodata, Node techNeeds) {
 
         return created;
     }
+
+
+public boolean BiodataToOperations(String biodata, Node operations) {
+    
+     boolean created = false;
+        try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+          
+            Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
+           
+
+            System.out.println("biodata :" + b.getUnderlyingNode().getId());
+            if (null != biodata) {
+
+                b.setFarmOperation(operations);
+                created = true;
+                trx.success();
+
+            }
+        } catch (Exception e) {
+            System.out.println("error");
+            //created = false;
+
+        }
+        
+        
+
+
+        return created;
+    }
+
 
 }
