@@ -36,6 +36,8 @@ public class Biodata extends Status implements GeneralInterface {
     public static String NUMBER_OF_DEPENDANTS ="numberofdependants";
     public static String EDUCATION ="education";
     public static String MAJOR_CROP ="majorcrop";
+    public static String CLUSTER = "cluster";
+    public static String FARMERID = "farmerid";
     //public static String ID ="id";
     
     Node underlyingNode;
@@ -48,6 +50,8 @@ public class Biodata extends Status implements GeneralInterface {
         super(underlyingNode);
         this.underlyingNode = underlyingNode;
     }
+    
+    
 
     public String getFirstname() {
         try {
@@ -229,9 +233,36 @@ public class Biodata extends Status implements GeneralInterface {
         return null;
     }
 
-    public void setEducation(String education) {
+    public void setCluster(String cluster) {
+         underlyingNode.setProperty(CLUSTER,cluster);
+    }
+    
+     public void setEducation(String education) {
          underlyingNode.setProperty(EDUCATION,education);
     }
+    
+     public String getCluster() {
+        try {
+            return (String) underlyingNode.getProperty(CLUSTER);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+     
+      public void setFarmerID(String farmerID) {
+         underlyingNode.setProperty(FARMERID,farmerID);
+    }
+     
+     public String getFarmerID() {
+        try {
+            return (String) underlyingNode.getProperty(FARMERID);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+     
     
     public void setFarmManagement(Node farmManagement)
    {
@@ -303,5 +334,14 @@ public class Biodata extends Status implements GeneralInterface {
        return new Marketing(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_TECHNEEDS));
    }
     
+    public void setFMP(Node fmp)
+   {
+       underlyingNode.createRelationshipTo(fmp, ICTCRelationshipTypes.HAS_FARM_MANAGEMENT_PLAN);
+   } 
+    
+     public FarmManagementPlan getFMP()
+   {
+       return new FarmManagementPlan(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_FARM_MANAGEMENT_PLAN));
+   }
     
 }

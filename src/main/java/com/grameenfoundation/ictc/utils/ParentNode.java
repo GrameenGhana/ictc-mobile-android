@@ -51,4 +51,8 @@ public class ParentNode {
       public static Node TechNeedParentNode() {
         return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.TECHNICAL_NEED);
     }  
+      
+       public static Node  FMPlanParentNode() {
+        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.FMP);
+    }  
 }

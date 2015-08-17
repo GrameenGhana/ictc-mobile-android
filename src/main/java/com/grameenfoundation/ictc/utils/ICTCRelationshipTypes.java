@@ -27,7 +27,9 @@ public enum ICTCRelationshipTypes implements RelationshipType{
     FARMER,
     FARM_MANAGEMENT,
     FARM_OPERATION,
+    
     //H
+    HAS_FARM_MANAGEMENT_PLAN,
     HAS_FARM_MANAGEMENT,
     HAS_FARM_OPERATION,
     HAS_HARVEST,

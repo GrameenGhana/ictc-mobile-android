@@ -171,8 +171,9 @@ public class Neo4jServices {
                 bdata.add(b);
                 System.out.println("Node  n : " + n.getId());
 //                 String maritalStatus, String numberOfChildren, String numberOfDependants, String education/
+                
                 bdatac.add(new BiodataWrapper(b.getFirstname(), b.getLastname(), b.getNickname(), b.getCommunity(), b.getVillage(), b.getDistrict(), b.getRegion(), b.getAge(), b.getGender(),
-                        b.getMaritalstatus(), b.getNumberofchildren(), b.getNumberofdependants(), b.getEducation(), String.valueOf((n.getId() % 2)), String.valueOf(n.getId())));
+                        b.getMaritalstatus(), b.getNumberofchildren(), b.getNumberofdependants(), b.getEducation(), String.valueOf((n.getId() % 2)), String.valueOf(n.getId()),b.getMajorCrop()));
             }
             tx.success();
         } catch (Exception e) {
@@ -181,7 +182,7 @@ public class Neo4jServices {
         }
 
         return bdatac;
-    }
+    } 
 
     /**
      * Returns a node this is the result of a given query

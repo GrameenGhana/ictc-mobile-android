@@ -15,21 +15,22 @@ package com.grameenfoundation.ictc.wrapper;
 public class BiodataWrapper {
     
     
-    private String firstName;
-    private String lastName;
-    private String nickname;
-    private String community;
-    private String village;
-    private String district;
-    private String region;
-    private String age;
-    private String gender;
-    private String maritalStatus;
-    private String numberOfChildren;
-    private String numberOfDependants;
-    private String education;
-    private String cluster;
-    private String farmID;
+    private String firstName = "firstname";
+    private String lastName = "lastname";
+    private String nickname = "nickname";
+    private String community = "community";
+    private String village = "village";
+    private String district ="district";
+    private String region = "region";
+    private String age="age";
+    private String gender = "gender";
+    private String maritalStatus = "maritalstatus";
+    private String numberOfChildren = "numberofchildren";
+    private String numberOfDependants = "numberofdependants";
+    private String education = "education";
+    private String cluster = "cluster";
+    private String farmID = "farmerid";
+    private String majorCrop = "majorcrop";
 
     public BiodataWrapper(String firstName, String lastName, String nickname, String community, String village, String district, String region, String age, String gender, String maritalStatus, String numberOfChildren, String numberOfDependants, String education) {
         this.firstName = firstName;
@@ -47,7 +48,7 @@ public class BiodataWrapper {
         this.education = education;
     }
 
-    public BiodataWrapper(String firstName, String lastName, String nickname, String community, String village, String district, String region, String age, String gender, String maritalStatus, String numberOfChildren, String numberOfDependants, String education, String cluster, String farmID) {
+    public BiodataWrapper(String firstName, String lastName, String nickname, String community, String village, String district, String region, String age, String gender, String maritalStatus, String numberOfChildren, String numberOfDependants, String education, String cluster, String farmID,String majorCrop) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nickname = nickname;
@@ -63,6 +64,7 @@ public class BiodataWrapper {
         this.education = education;
         this.cluster = cluster;
         this.farmID = farmID;
+        this.majorCrop = majorCrop;
     }
     
     
@@ -199,6 +201,14 @@ public class BiodataWrapper {
      */
     public void setFarmID(String farmID) {
         this.farmID = farmID;
+    }
+
+    public String getMajorCrop() {
+        return majorCrop;
+    }
+
+    public void setMajorCrop(String majorCrop) {
+        this.majorCrop = majorCrop;
     }
     
     
