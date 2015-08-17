@@ -82,6 +82,7 @@ public class FarmManagementPlanController extends HttpServlet {
                 //get fields from objects
                 NodeList sObject = doc.getElementsByTagName("sObject");
                 
+                
                  for (int j = 0; j < sObject.getLength(); j++) {
 
                     Node rowNode = sObject.item(j);
@@ -109,12 +110,12 @@ public class FarmManagementPlanController extends HttpServlet {
                         }
 
                         farmManagementPlanParent = ParentNode.FMPlanParentNode();
-                        farmManagementPlanParent.createRelationshipTo(FMPNode, ICTCRelationshipTypes.HAS_FARM_MANAGEMENT_PLAN);
+                        farmManagementPlanParent.createRelationshipTo(FMPNode, ICTCRelationshipTypes.FARM_MANAGEMENT_PLAN);
 
                         log.log(Level.INFO, "new node created {0}", FMPNode.getId());
                         Biodata b = biodataModel.getBiodata("Id",farmerID);
                         
-                        biodataModel.BiodataToHarvest(b.getId(),FMPNode);
+                        biodataModel.BiodataToFMP(b.getId(),FMPNode);
                         
                         tx.success();
 
@@ -127,8 +128,14 @@ public class FarmManagementPlanController extends HttpServlet {
             
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(FarmManagementPlanController.class.getName()).log(Level.SEVERE, null, ex);
+            tx.failure();
         } catch (SAXException ex) {
+            tx.failure();
             Logger.getLogger(FarmManagementPlanController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            
+            tx.finish();
         }
     }
 
