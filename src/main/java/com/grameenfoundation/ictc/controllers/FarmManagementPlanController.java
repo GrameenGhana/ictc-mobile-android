@@ -81,21 +81,23 @@ public class FarmManagementPlanController extends HttpServlet {
 
                 //get fields from objects
                 NodeList sObject = doc.getElementsByTagName("sObject");
+                // String farmerID = getXmlNodeValue("sf:Farmer_name__c",ele);
+               
                 
-                
+                  
                  for (int j = 0; j < sObject.getLength(); j++) {
 
                     Node rowNode = sObject.item(j);
                     //  Map<String,String> m = (Map<String,String>) rowNode.getAttributes();
                     String salesforceObj = rowNode.getAttributes().getNamedItem("xsi:type").getNodeValue();
                     System.out.println(salesforceObj);
-                    String farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
+                    String farmerID = getXmlNodeValue("sf:Farmer_name__c",ele);
                     System.out.println("farmerid " + farmerID);
                      org.neo4j.graphdb.Node FMPNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARM_MANAGEMENT_PLAN);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
                             
                             
-                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                            //System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
                                 System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
                                 FMPNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
@@ -119,7 +121,7 @@ public class FarmManagementPlanController extends HttpServlet {
                         
                         tx.success();
 
-                        out.println(sendAck());
+                       out.println(sendAck());
                     
                     
                  }
