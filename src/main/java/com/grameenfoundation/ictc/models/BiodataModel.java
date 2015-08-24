@@ -341,11 +341,32 @@ public boolean BiodataToOperations(String biodata, Node operations) {
 
         }
         
-        
-
-
         return created;
     }
 
+ public boolean BiodataToFMP(String biodata, Node fmp) {
+    
+     boolean created = false;
+        try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+          
+            Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
+           
+
+            System.out.println("biodata :" + b.getUnderlyingNode().getId());
+            if (null != biodata) {
+
+                b.setFMP(fmp);
+                created = true;
+                trx.success();
+
+            }
+        } catch (Exception e) {
+            System.out.println("error");
+            //created = false;
+
+        }
+        
+        return created;
+    }
 
 }

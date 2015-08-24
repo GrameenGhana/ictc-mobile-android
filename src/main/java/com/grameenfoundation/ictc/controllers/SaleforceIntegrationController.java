@@ -107,7 +107,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                         org.neo4j.graphdb.Node biodataNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARMER);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
 
-                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                           // System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
                                 System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
                                 biodataNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
@@ -138,7 +138,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                         System.out.println("farmerid " + farmerID);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
 
-                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                            //System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
                                 System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
                                harvestNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
@@ -175,7 +175,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                         System.out.println("farmerid " + farmerID);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
 
-                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                            //System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
                                 System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
                                FarmManagementNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
@@ -212,7 +212,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                         System.out.println("farmerid " + farmerID);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
 
-                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                            //System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
                                 System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
                                FarmOperationNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
@@ -249,7 +249,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                         System.out.println("farmerid " + farmerID);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
 
-                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                            //System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
                                 System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
                               MarketingNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
@@ -286,7 +286,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                         System.out.println("farmerid " + farmerID);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
 
-                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                           // System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
                                 System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
                               PostHarvestNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
