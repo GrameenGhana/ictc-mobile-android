@@ -103,4 +103,26 @@ public class HarvestModel {
 
         return null;
     }
+    
+    
+    public Harvest getUserOperations(String userId) {
+        String q = "Start root=node(0) "
+                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+
+                ICTCRelationshipTypes.HAS_HARVEST+"]->p"
+                + " where f.Id="+ "'" + userId + "'"
+                + " return p";
+
+        System.out.println("Query " + q);
+        try {
+            Node node = Neo4jServices.executeCypherQuerySingleResult(q, "p");
+            if (null != node) {
+                return new Harvest(node);
+            }
+        } catch (Exception e) {
+            System.out.println("Unable to Find Farm managent");
+        }
+
+        return null;
+    }
+    
 }

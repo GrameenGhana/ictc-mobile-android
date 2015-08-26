@@ -6,10 +6,12 @@
 
 package com.grameenfoundation.ictc.models;
 
+
 import com.grameenfoundation.ictc.domains.FarmManagement;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
 import com.grameenfoundation.ictc.utils.Labels;
+import com.grameenfoundation.ictc.utils.Neo4jServices;
 import com.grameenfoundation.ictc.utils.ParentNode;
 import com.grameenfoundation.ictc.wrapper.FarmManagementWrapper;
 import java.util.Date;
@@ -84,6 +86,30 @@ public class FarmManagementModel {
         
         return null;
     }
+    
+    
+    public FarmManagement getUserFarmManagent(String userId) {
+        String q = "Start root=node(0) "
+                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+
+                ICTCRelationshipTypes.HAS_FARM_MANAGEMENT+"]->p"
+                + " where f.Id="+ "'" + userId + "'"
+                + " return p";
+
+        System.out.println("Query " + q);
+        try {
+            Node node = Neo4jServices.executeCypherQuerySingleResult(q, "p");
+            if (null != node) {
+                return new FarmManagement(node);
+            }
+        } catch (Exception e) {
+            System.out.println("Unable to Find Farm managent");
+        }
+
+        return null;
+    }
+
+    
+    
     
     
     
