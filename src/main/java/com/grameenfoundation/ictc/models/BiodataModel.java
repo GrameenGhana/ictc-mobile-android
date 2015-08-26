@@ -81,45 +81,35 @@ public class BiodataModel {
 
         return created;
     }
-    
-    
-  public boolean createBiodata(Node node)
-  {
-      boolean created = true;
-           
-        try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
-           
-            
-            if(null == node)
-            {
+
+    public boolean createBiodata(Node node) {
+        boolean created = true;
+
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+
+            if (null == node) {
                 log.info("Biodata is invalid");
                 created = false;
+            } else {
+                FarmerParent = ParentNode.FarmerParentNode();
+                FarmerParent.createRelationshipTo(node, ICTCRelationshipTypes.FARMER);
+
+                log.log(Level.INFO, "new node created {0}", node.getId());
+                trx.success();
+
             }
-            else
-            {
-              FarmerParent  = ParentNode.FarmerParentNode();      
-              FarmerParent.createRelationshipTo(node,ICTCRelationshipTypes.FARMER);
-              
-              log.log(Level.INFO, "new node created {0}",node.getId());
-              trx.success();
-              
-              
-            }
-           
-        
-            
-            
+
         } catch (Exception e) {
-            
+
             created = false;
             log.severe("Creation of Farmer Failed");
             e.printStackTrace();
         }
-        
-        return created;  
-  }
-    
- public Biodata getBiodata(String field, String value) {
+
+        return created;
+    }
+
+    public Biodata getBiodata(String field, String value) {
         String q = "Start root=node(0) "
                 + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->p"
                 + " where p." + field + "='" + value + "'"
@@ -141,9 +131,8 @@ public class BiodataModel {
     public List<BiodataWrapper> getBioData(String field, String value) {
         List<Biodata> bioData = new ArrayList<>();
         try {
-  
 
-            return Neo4jServices.findByLabel(ICTCRelationshipTypes.FARMER, "","");
+            return Neo4jServices.findByLabel(ICTCRelationshipTypes.FARMER, "", "");
 //            Iterator<Node> n_column = Neo4jServices.findAllByPrimaryRelation(ICTCRelationshipTypes.FARMER, null);
 //            while (n_column.hasNext()) {
 //                Node node = n_column.next();
@@ -162,7 +151,37 @@ public class BiodataModel {
 //            }
 
         } catch (Exception e) {
-            System.out.println("Unable to Find Bio Data List  : "+e.getLocalizedMessage());
+            System.out.println("Unable to Find Bio Data List  : " + e.getLocalizedMessage());
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public List<BiodataWrapper> getBioDataSearch(String field, String value) {
+        List<Biodata> bioData = new ArrayList<>();
+        try {
+
+            return Neo4jServices.findByLabel(ICTCRelationshipTypes.FARMER, field, value);
+//            Iterator<Node> n_column = Neo4jServices.findAllByPrimaryRelation(ICTCRelationshipTypes.FARMER, null);
+//            while (n_column.hasNext()) {
+//                Node node = n_column.next();
+//                try {
+//                    System.out.println("Node I : "+node.getId());
+//                    System.out.println("Node I I: "+(String)node.getProperty(Biodata.FIRST_NAME));
+//                } catch (Exception e) {
+//                    System.out.println("Exception e : "+e.getLocalizedMessage());
+//                }
+//                Biodata bd = new Biodata(node);
+//                try {
+//                    System.out.println("NDII : "+bd.getFirstname());
+//                } catch (Exception e) {
+//                }
+//                bioData.add(bd);
+//            }
+
+        } catch (Exception e) {
+            System.out.println("Unable to Find Bio Data List  : " + e.getLocalizedMessage());
             e.printStackTrace();
         }
 
@@ -288,15 +307,13 @@ public class BiodataModel {
 
         return created;
     }
-    
-    
-public boolean BiodataToTechNeeds(String biodata, Node techNeeds) {
-    
-     boolean created = false;
-        try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
-          
+
+    public boolean BiodataToTechNeeds(String biodata, Node techNeeds) {
+
+        boolean created = false;
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+
             Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
-           
 
             System.out.println("biodata :" + b.getUnderlyingNode().getId());
             if (null != biodata) {
@@ -311,21 +328,16 @@ public boolean BiodataToTechNeeds(String biodata, Node techNeeds) {
             //created = false;
 
         }
-        
-        
-
 
         return created;
     }
 
+    public boolean BiodataToOperations(String biodata, Node operations) {
 
-public boolean BiodataToOperations(String biodata, Node operations) {
-    
-     boolean created = false;
-        try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
-          
+        boolean created = false;
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+
             Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
-           
 
             System.out.println("biodata :" + b.getUnderlyingNode().getId());
             if (null != biodata) {
@@ -340,17 +352,16 @@ public boolean BiodataToOperations(String biodata, Node operations) {
             //created = false;
 
         }
-        
+
         return created;
     }
 
- public boolean BiodataToFMP(String biodata, Node fmp) {
-    
-     boolean created = false;
-        try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
-          
+    public boolean BiodataToFMP(String biodata, Node fmp) {
+
+        boolean created = false;
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+
             Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
-           
 
             System.out.println("biodata :" + b.getUnderlyingNode().getId());
             if (null != biodata) {
@@ -365,8 +376,60 @@ public boolean BiodataToOperations(String biodata, Node operations) {
             //created = false;
 
         }
-        
+
         return created;
     }
 
+    public BiodataWrapper getBiodataByFieldValue(String field, String value) {
+//        String q = "Start root=node(0) "
+//                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->p"
+//                + " where p." + field + "='" + value + "'"
+//                + " return p";
+        String q = "match (l:FARMER) WHERE l."+field+"='"+value+"' return  l ";
+        System.out.println("Query " + q);
+        try {
+
+            List<BiodataWrapper> wrappers = Neo4jServices.getIterativeNode(q);
+            return wrappers.get(0);
+
+        } catch (Exception e) {
+            System.out.println("Unable to Find geofence");
+        }
+
+        return null;
+    }
+
+    public List<String> getCommunitiesList() {
+     
+        try {
+            return Neo4jServices.getIterativeString("match (n:FARMER) RETURN DISTINCT n.community as l");
+        } catch (Exception e) {
+            System.out.println("Unable to Find Bio Data List  : " + e.getLocalizedMessage());
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public List<String> getVillageList() {
+     
+        try {
+            return Neo4jServices.getIterativeString("match (n:FARMER) RETURN DISTINCT n.village as l");
+        } catch (Exception e) {
+            System.out.println("Unable to Find Bio Data List  : " + e.getLocalizedMessage());
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public Long getFarmerCount() {
+
+        return Neo4jServices.getAggregatedValue(" match (n:FARMER) RETURN count(n) as l");
+    }
+
+    public Long getCommunityCount() {
+
+        return Neo4jServices.getAggregatedValue(" match (n:FARMER) RETURN count(DISTINCT n.community) as l");
+    }
 }

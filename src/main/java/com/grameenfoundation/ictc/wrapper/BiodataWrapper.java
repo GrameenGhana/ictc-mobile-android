@@ -3,26 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.grameenfoundation.ictc.wrapper;
+
+import com.grameenfoundation.ictc.domains.FarmManagementPlan;
 
 /**
  *
  * @author Joseph George Davis
- * @date Jul 16, 2015 1:58:44 PM
- * description:
+ * @date Jul 16, 2015 1:58:44 PM description:
  */
 public class BiodataWrapper {
-    
-    
+
     private String firstName = "firstname";
     private String lastName = "lastname";
     private String nickname = "nickname";
     private String community = "community";
     private String village = "village";
-    private String district ="district";
+    private String district = "district";
     private String region = "region";
-    private String age="age";
+    private String age = "age";
     private String gender = "gender";
     private String maritalStatus = "maritalstatus";
     private String numberOfChildren = "numberofchildren";
@@ -32,6 +31,21 @@ public class BiodataWrapper {
     private String farmID = "farmerid";
     private String majorCrop = "majorcrop";
 
+    private TechnicalNeedsWrapper techNeeds;
+    private MarketingWrapper marketing;
+    private HarvestWrapper harvest;
+    private OperationsWrapper operation;
+    private PostHarvestWrapper postHarvest;
+    private StorageWrapper storage;
+    FarmManagementPlanWrapper fmp ;
+private FarmManagementWrapper farmManagement;
+    public FarmManagementPlanWrapper getFmp() {
+        return fmp;
+    }
+
+    public void setFmp(FarmManagementPlanWrapper fmp) {
+        this.fmp = fmp;
+    }
     public BiodataWrapper(String firstName, String lastName, String nickname, String community, String village, String district, String region, String age, String gender, String maritalStatus, String numberOfChildren, String numberOfDependants, String education) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -48,7 +62,7 @@ public class BiodataWrapper {
         this.education = education;
     }
 
-    public BiodataWrapper(String firstName, String lastName, String nickname, String community, String village, String district, String region, String age, String gender, String maritalStatus, String numberOfChildren, String numberOfDependants, String education, String cluster, String farmID,String majorCrop) {
+    public BiodataWrapper(String firstName, String lastName, String nickname, String community, String village, String district, String region, String age, String gender, String maritalStatus, String numberOfChildren, String numberOfDependants, String education, String cluster, String farmID, String majorCrop) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nickname = nickname;
@@ -65,12 +79,15 @@ public class BiodataWrapper {
         this.cluster = cluster;
         this.farmID = farmID;
         this.majorCrop = majorCrop;
+        
+        this.marketing =  new MarketingWrapper();
+        this.operation = new OperationsWrapper();
+        this.farmManagement = new FarmManagementWrapper();
+        this.marketing = new MarketingWrapper();
+        this.storage = new StorageWrapper();
+        this.fmp = new FarmManagementPlanWrapper();
     }
-    
-    
 
-    
-    
     public String getFirstName() {
         return firstName;
     }
@@ -210,8 +227,103 @@ public class BiodataWrapper {
     public void setMajorCrop(String majorCrop) {
         this.majorCrop = majorCrop;
     }
-    
-    
-    
+
+    /**
+     * @return the techNeeds
+     */
+    public TechnicalNeedsWrapper getTechNeeds() {
+        return techNeeds;
+    }
+
+    /**
+     * @param techNeeds the techNeeds to set
+     */
+    public void setTechNeeds(TechnicalNeedsWrapper techNeeds) {
+        this.techNeeds = techNeeds;
+    }
+
+    /**
+     * @return the marketing
+     */
+    public MarketingWrapper getMarketing() {
+        return marketing;
+    }
+
+    /**
+     * @param marketing the marketing to set
+     */
+    public void setMarketing(MarketingWrapper marketing) {
+        this.marketing = marketing;
+    }
+
+    /**
+     * @return the harvest
+     */
+    public HarvestWrapper getHarvest() {
+        return harvest;
+    }
+
+    /**
+     * @param harvest the harvest to set
+     */
+    public void setHarvest(HarvestWrapper harvest) {
+        this.harvest = harvest;
+    }
+
+    /**
+     * @return the operation
+     */
+    public OperationsWrapper getOperation() {
+        return operation;
+    }
+
+    /**
+     * @param operation the operation to set
+     */
+    public void setOperation(OperationsWrapper operation) {
+        this.operation = operation;
+    }
+
+    /**
+     * @return the postHarvest
+     */
+    public PostHarvestWrapper getPostHarvest() {
+        return postHarvest;
+    }
+
+    /**
+     * @param postHarvest the postHarvest to set
+     */
+    public void setPostHarvest(PostHarvestWrapper postHarvest) {
+        this.postHarvest = postHarvest;
+    }
+
+    /**
+     * @return the storage
+     */
+    public StorageWrapper getStorage() {
+        return storage;
+    }
+
+    /**
+     * @param storage the storage to set
+     */
+    public void setStorage(StorageWrapper storage) {
+        this.storage = storage;
+    }
+
+    /**
+     * @return the farmManagement
+     */
+    public FarmManagementWrapper getFarmManagement() {
+        return farmManagement;
+    }
+
+    /**
+     * @param farmManagement the farmManagement to set
+     */
+    public void setFarmManagement(FarmManagementWrapper farmManagement) {
+        this.farmManagement = farmManagement;
+    }
 
 }

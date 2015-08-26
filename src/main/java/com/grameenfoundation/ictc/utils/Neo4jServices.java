@@ -6,7 +6,23 @@
 package com.grameenfoundation.ictc.utils;
 
 import com.grameenfoundation.ictc.domains.Biodata;
+import com.grameenfoundation.ictc.domains.FarmManagement;
+import com.grameenfoundation.ictc.domains.FarmManagementPlan;
+import com.grameenfoundation.ictc.domains.Harvest;
+import com.grameenfoundation.ictc.domains.Marketing;
+import com.grameenfoundation.ictc.domains.Operations;
+import com.grameenfoundation.ictc.domains.PostHarvest;
+import com.grameenfoundation.ictc.domains.Storage;
+import com.grameenfoundation.ictc.domains.TechnicalNeed;
 import com.grameenfoundation.ictc.wrapper.BiodataWrapper;
+import com.grameenfoundation.ictc.wrapper.FarmManagementPlanWrapper;
+import com.grameenfoundation.ictc.wrapper.FarmManagementWrapper;
+import com.grameenfoundation.ictc.wrapper.HarvestWrapper;
+import com.grameenfoundation.ictc.wrapper.MarketingWrapper;
+import com.grameenfoundation.ictc.wrapper.OperationsWrapper;
+import com.grameenfoundation.ictc.wrapper.PostHarvestWrapper;
+import com.grameenfoundation.ictc.wrapper.StorageWrapper;
+import com.grameenfoundation.ictc.wrapper.TechnicalNeedsWrapper;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -159,22 +175,79 @@ public class Neo4jServices {
             ExecutionEngine engine = new ExecutionEngine(
                     ICTCDBUtil.getInstance().getGraphDB(), StringLogger.SYSTEM);
             result = engine.execute(q);
-           
+
             n_column = result.columnAs("l");
 
-      
-
             while (n_column.hasNext()) {
-              
+ try {
+                 
                 Node n = n_column.next();
                 Biodata b = new Biodata(n);
                 bdata.add(b);
                 System.out.println("Node  n : " + n.getId());
 //                 String maritalStatus, String numberOfChildren, String numberOfDependants, String education/
+
+               
+                BiodataWrapper bw = (new BiodataWrapper(b.getFirstname(), b.getLastname(), b.getNickname(), b.getCommunity(), b.getVillage(), b.getDistrict(), b.getRegion(), b.getAge(), b.getGender(),
+                        b.getMaritalstatus(), b.getNumberofchildren(), b.getNumberofdependants(), b.getEducation(), String.valueOf((n.getId() % 2)), String.valueOf(b.getId()), b.getMajorCrop()));
+
+                TechnicalNeed technicalNeed = b.getTechNeeds();
+                if(null!=technicalNeed)
+               bw.setTechNeeds(new TechnicalNeedsWrapper(technicalNeed.getFarmPlanning(),technicalNeed.getCropVarietyAndSeed(),technicalNeed.getWeedControl(),technicalNeed.getCropEstablishment(),technicalNeed.getIntegratedSoilFertilityManagement(),technicalNeed.getHarvestAndPostHarvest()));
+                Marketing market = b.getMarketing();
+             if(null!=market)
+                bw.setMarketing(new MarketingWrapper(market.getMainPointOfContact(),market.getMonthSellingBegins(),market.getPriceOfFirstHarvestProduce(),market.getMonthMostHarvestProduceSold(),market.getPriceMostHarvestProduceSold(),market.getMonthFinalBatchSold(),market.getPriceFinalBatchSold(),market.getMonthSellingDriedChipChicks(),market.getPriceFirstDriedChipChunk(),market.getMonthMostDriedChipsChunksSold(),market.getPriceMostDriedChipsChunksSold(),market.getMonthLastBatchDriedChipChunksSold(),market.getPriceFinalBatchDriedChipsChunksSold()));
+         
+                Operations opt = b.getFarmOperation();
+               
+                OperationsWrapper wr = new OperationsWrapper();
+                //wr.set
+               
+               if(opt!=null){
+                wr.setLandSize(opt.getLandSize());
+              wr.setLandClearance(opt.getLandClearance());
+               }
+                bw.setOperation(wr);
                 
-                bdatac.add(new BiodataWrapper(b.getFirstname(), b.getLastname(), b.getNickname(), b.getCommunity(), b.getVillage(), b.getDistrict(), b.getRegion(), b.getAge(), b.getGender(),
-                        b.getMaritalstatus(), b.getNumberofchildren(), b.getNumberofdependants(), b.getEducation(), String.valueOf((n.getId() % 2)), String.valueOf(n.getId()),b.getMajorCrop()));
-            }
+                
+                Harvest harvest = b.getHavest();
+                HarvestWrapper  hWrapper = new HarvestWrapper();
+                if(null!=hWrapper){
+                hWrapper.setYieldPerAcre(harvest.getYieldPerAcre());
+                }
+                bw.setHarvest(hWrapper);
+                
+                PostHarvest postHarvest =b.getPostHavest();
+                PostHarvestWrapper  phWrapper = new PostHarvestWrapper();
+              if(null!=phWrapper)
+                bw.setPostHarvest(phWrapper);
+                
+                Storage storeage = b.getStorage();
+                
+                FarmManagement fm = b.getFarmManagement();
+                FarmManagementWrapper fmWrapper = new FarmManagementWrapper();
+               if(null!=fm){
+                fmWrapper.setLabourUse(fm.getLabourUse());
+                fmWrapper.setFboName(fm.getFboName());
+               } StorageWrapper  stWrapper = new StorageWrapper();
+                bw.setStorage(stWrapper);
+                FarmManagementPlan fmp =  b.getFMP();
+                FarmManagementPlanWrapper fmpWrapper = new FarmManagementPlanWrapper();
+                if(null!=fmp){
+                fmpWrapper.setTargetareaofland(fmp.getTargetareaofland());
+                fmpWrapper.setTargetproduction(fmp.getTargetproduction());
+                fmpWrapper.setTargetyieldperacre(fmp.getTargetyieldperacre());
+                fmpWrapper.setNameofvariety(fmp.getNameofvariety());
+                fmpWrapper.setDateoflandidentification(fmp.getDateoflandidentification());
+                fmpWrapper.setLocationofland(fmp.getLocationofland());
+                fmpWrapper.setExpectedpriceperton(fmp.getExpectedpriceperton());
+                fmpWrapper.setPlantingdate(fmp.getPlantingdate());
+                }bw.setFmp(fmpWrapper);
+               
+                bdatac.add(bw);
+              
+                } catch (Exception e) {
+                } }
             tx.success();
         } catch (Exception e) {
             System.out.println("Error creatingfindByLabel Executing Query : " + e.getLocalizedMessage());
@@ -182,7 +255,7 @@ public class Neo4jServices {
         }
 
         return bdatac;
-    } 
+    }
 
     /**
      * Returns a node this is the result of a given query
@@ -378,5 +451,51 @@ public class Neo4jServices {
         }
         return null;
     }
+    
+    public static long getAggregatedValue(String q) {
+        Iterator<Long> n_column = null;
+        ExecutionResult result = null;
+        // let's execute a query now
+        try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            ExecutionEngine engine = new ExecutionEngine(
+                    ICTCDBUtil.getInstance().getGraphDB(), StringLogger.SYSTEM);
+            result = engine.execute(q);
+
+            n_column = result.columnAs("l");
+            while (n_column.hasNext()) {
+                return n_column.next();
+            }
+        }
+
+        return 0l;
+    }
+    
+     public static List<String> getIterativeString(String q) {
+        Iterator<String> n_column = null;
+        List<String> bdata = new ArrayList<>();
+        List<BiodataWrapper> bdatac = new ArrayList<>();
+        ExecutionResult result = null;
+      
+        try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            ExecutionEngine engine = new ExecutionEngine(
+                    ICTCDBUtil.getInstance().getGraphDB(), StringLogger.SYSTEM);
+            result = engine.execute(q);
+
+            n_column = result.columnAs("l");
+
+            while (n_column.hasNext()) {
+
+                String n = n_column.next();
+                bdata.add(n);
+            }
+            tx.success();
+        } catch (Exception e) {
+            System.out.println("Error getIterativeString Executing Query : " + e.getLocalizedMessage());
+            e.printStackTrace();
+        }
+
+        return bdata;
+    }
+
 
 }

@@ -60,7 +60,7 @@ public class Biodata extends Status implements GeneralInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return "";
     }
 
     public void setFirstname(String firstname) {
@@ -73,7 +73,7 @@ public class Biodata extends Status implements GeneralInterface {
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
 
     public void setLastname(String lastname) {
@@ -86,7 +86,7 @@ public class Biodata extends Status implements GeneralInterface {
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
 
     public void setNickname(String nickname) {
@@ -99,7 +99,7 @@ public class Biodata extends Status implements GeneralInterface {
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
     
 
@@ -114,7 +114,7 @@ public class Biodata extends Status implements GeneralInterface {
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
 
     public void setDistrict(String district) {
@@ -126,7 +126,7 @@ public class Biodata extends Status implements GeneralInterface {
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
 
     public void setVillage(String village) {
@@ -139,7 +139,7 @@ public class Biodata extends Status implements GeneralInterface {
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
 
     public void setRegion(String region) {
@@ -152,7 +152,7 @@ public class Biodata extends Status implements GeneralInterface {
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
 
     public void setAge(String age) {
@@ -165,7 +165,7 @@ public class Biodata extends Status implements GeneralInterface {
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
 
     public void setGender(String gender) {
@@ -178,7 +178,7 @@ public class Biodata extends Status implements GeneralInterface {
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
 
     public void setMaritalstatus(String maritalstatus) {
@@ -191,7 +191,7 @@ public class Biodata extends Status implements GeneralInterface {
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
  
     public void setNumberofchildren(String numberofchildren) {
@@ -204,7 +204,7 @@ public class Biodata extends Status implements GeneralInterface {
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
 
     public void setNumberofdependants(String numberofdependants) {
@@ -217,7 +217,7 @@ public class Biodata extends Status implements GeneralInterface {
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
 
     public void setMajorCrop(String majorcrop) {
@@ -230,7 +230,7 @@ public class Biodata extends Status implements GeneralInterface {
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
 
     public void setCluster(String cluster) {
@@ -247,7 +247,7 @@ public class Biodata extends Status implements GeneralInterface {
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
      
       public void setFarmerID(String farmerID) {
@@ -260,7 +260,7 @@ public class Biodata extends Status implements GeneralInterface {
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
      
     
@@ -289,9 +289,9 @@ public class Biodata extends Status implements GeneralInterface {
        underlyingNode.createRelationshipTo(harvest, ICTCRelationshipTypes.HAS_HARVEST);
    }
    
-    public Operations getHavest()
+    public Harvest getHavest()
    {
-       return new Operations(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_HARVEST));
+       return new Harvest(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_HARVEST));
    }
     
     public void setPostHarvest(Node postHarvest)
@@ -329,9 +329,9 @@ public class Biodata extends Status implements GeneralInterface {
        underlyingNode.createRelationshipTo(techNeeds, ICTCRelationshipTypes.HAS_TECHNEEDS);
    } 
    
-    public Marketing getTechNeeds()
+    public TechnicalNeed getTechNeeds()
    {
-       return new Marketing(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_TECHNEEDS));
+       return new TechnicalNeed(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_TECHNEEDS));
    }
     
     public void setFMP(Node fmp)
