@@ -47,6 +47,7 @@ public class ictc {
             genGraphCode(input);
        }
 
+        System.out.println("3.josss".charAt(0));
                 
                 
 //                File xmlFile = new File("/home/grameen/test.xml");

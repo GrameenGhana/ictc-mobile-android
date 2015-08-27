@@ -432,4 +432,46 @@ public class BiodataModel {
 
         return Neo4jServices.getAggregatedValue(" match (n:FARMER) RETURN count(DISTINCT n.community) as l");
     }
+    
+    
+   public boolean BiodataUpdate(String id, Map<String, String> data) {
+           Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
+           Biodata bio =  getBiodata(Biodata.ID, id);
+        boolean updated =false;
+        try {
+            //If the setting is not null
+            if (null != bio) {
+
+                for (Map.Entry<String, String> dataEntry : data.entrySet()) {
+
+                    // get the field name
+                    String fieldName = dataEntry.getKey();
+                    // get the field value
+                    String fieldValue = dataEntry.getValue();
+                     // Assigning the alias
+                    if (fieldName.equalsIgnoreCase(Biodata.CLUSTER)) {
+                        if (null!=fieldValue) {
+                            bio.setCluster(fieldValue);
+                        }
+                    }
+
+                    }
+                
+               
+                trx.success();
+                log.info("Bio Data Successfully Updated");
+                updated =  true;
+            }     
+            else {
+                trx.success();
+                log.info("Unable to update Bio Data");
+            }
+        } catch (Exception e) {
+            log.info("Unable to find Bio Data");
+
+        } finally {
+            trx.finish();
+        }
+        return updated;
+    }
 }

@@ -105,7 +105,7 @@ public class HarvestModel {
     }
     
     
-    public Harvest getUserOperations(String userId) {
+    public Harvest getUserHarvest(String userId) {
         String q = "Start root=node(0) "
                 + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+
                 ICTCRelationshipTypes.HAS_HARVEST+"]->p"

@@ -87,7 +87,7 @@ public class StorageModel {
      public Storage getUserStorage(String userId) {
         String q = "Start root=node(0) "
                 + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+
-                ICTCRelationshipTypes.HAS_HARVEST+"]->p"
+                ICTCRelationshipTypes.HAS_STORAGE+"]->p"
                 + " where f.Id="+ "'" + userId + "'"
                 + " return p";
 

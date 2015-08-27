@@ -8,11 +8,20 @@ package com.grameenfoundation.ictc.controllers;
 import static com.grameenfoundation.ictc.controllers.ictc.getObjectFieldId;
 import static com.grameenfoundation.ictc.controllers.ictc.getObjectFieldName;
 import com.grameenfoundation.ictc.domains.Biodata;
+import com.grameenfoundation.ictc.domains.FarmManagement;
+import com.grameenfoundation.ictc.domains.Harvest;
+import com.grameenfoundation.ictc.domains.Operations;
+import com.grameenfoundation.ictc.domains.Storage;
 import com.grameenfoundation.ictc.models.BiodataModel;
+import com.grameenfoundation.ictc.models.FarmManagementModel;
+import com.grameenfoundation.ictc.models.HarvestModel;
+import com.grameenfoundation.ictc.models.OperationsModel;
+import com.grameenfoundation.ictc.models.StorageModel;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
 import com.grameenfoundation.ictc.utils.Labels;
 import com.grameenfoundation.ictc.utils.ParentNode;
+import com.sun.org.omg.CORBA.OperationMode;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -576,5 +585,51 @@ public class SaleforceIntegrationController extends HttpServlet {
 
         return ack;
     }
+    
+    public int getUserCluster(String user)
+    {
+        int score = 0;
+        FarmManagement fm = new FarmManagementModel().getUserFarmManagent(user);
+        Operations op = new OperationsModel().getUserOperations(user);
+        Harvest ha = new HarvestModel().getUserHarvest(user);
+        Storage st = new StorageModel().getUserStorage(user);
+        
+        if(null!=fm)
+           score = Integer.valueOf(fm.getProductionObjective().charAt(0))+
+                   Integer.valueOf(fm.getEntrepreneurship().charAt(0))+
+                   Integer.valueOf(fm.getLabourUse().charAt(0))+
+                   Integer.valueOf(op.getTypeOfVariety().charAt(0))+
+                   Integer.valueOf(op.getHerbicideUse().charAt(0))+
+                   Integer.valueOf(op.getPlantarrangement().charAt(0))+
+                   Integer.valueOf(op.getMaintenanceofsoilfertility().charAt(0))+
+                   Integer.valueOf(op.getRegularappinorganicfertilizer().charAt(0))+
+                   Integer.valueOf(ha.getYieldPerAcre().charAt(0));
+                   
+        
+        return score;
+        
+    }
+    
+    
+    public String getCluster(int score)
+    {
+        if(score < 10)
+            System.out.println("Score is less than 10");;
+         if(score>=10 && score<=12)
+           {
+             return "1";
+           }
+            else if(score>=13 && score<=22)
+            {
+               return "2";
+            }
+            else
+            {
+                return "3";
+            }
+           
+        } 
+        
+    }
 
-}
+
