@@ -179,75 +179,83 @@ public class Neo4jServices {
             n_column = result.columnAs("l");
 
             while (n_column.hasNext()) {
- try {
-                 
-                Node n = n_column.next();
-                Biodata b = new Biodata(n);
-                bdata.add(b);
-                System.out.println("Node  n : " + n.getId());
+                try {
+
+                    Node n = n_column.next();
+                    Biodata b = new Biodata(n);
+                    bdata.add(b);
+                    System.out.println("Node  ni : " + n.getId());
 //                 String maritalStatus, String numberOfChildren, String numberOfDependants, String education/
 
-               
-                BiodataWrapper bw = (new BiodataWrapper(b.getFirstname(), b.getLastname(), b.getNickname(), b.getCommunity(), b.getVillage(), b.getDistrict(), b.getRegion(), b.getAge(), b.getGender(),
-                        b.getMaritalstatus(), b.getNumberofchildren(), b.getNumberofdependants(), b.getEducation(), String.valueOf((n.getId() % 2)), String.valueOf(b.getId()), b.getMajorCrop()));
+                    BiodataWrapper bw = (new BiodataWrapper(b.getFirstname(), b.getLastname(), b.getNickname(), b.getCommunity(), b.getVillage(), b.getDistrict(), b.getRegion(), b.getAge(), b.getGender(),
+                            b.getMaritalstatus(), b.getNumberofchildren(), b.getNumberofdependants(), b.getEducation(), "1", (b.getId()), b.getMajorCrop()));
+                    System.out.println("After Here");
+                    TechnicalNeed technicalNeed = b.getTechNeeds();
+                    if (null != technicalNeed) {
+                        bw.setTechNeeds(new TechnicalNeedsWrapper(technicalNeed.getFarmPlanning(), technicalNeed.getCropVarietyAndSeed(), technicalNeed.getWeedControl(), technicalNeed.getCropEstablishment(), technicalNeed.getIntegratedSoilFertilityManagement(), technicalNeed.getHarvestAndPostHarvest()));
+                    }
+                    System.out.println("bef");
+                    Marketing market = b.getMarketing();
+                    if (null != market) {
+                        bw.setMarketing(new MarketingWrapper(market.getMainPointOfContact(), market.getMonthSellingBegins(), market.getPriceOfFirstHarvestProduce(), market.getMonthMostHarvestProduceSold(), market.getPriceMostHarvestProduceSold(), market.getMonthFinalBatchSold(), market.getPriceFinalBatchSold(), market.getMonthSellingDriedChipChicks(), market.getPriceFirstDriedChipChunk(), market.getMonthMostDriedChipsChunksSold(), market.getPriceMostDriedChipsChunksSold(), market.getMonthLastBatchDriedChipChunksSold(), market.getPriceFinalBatchDriedChipsChunksSold()));
+                    }
 
-                TechnicalNeed technicalNeed = b.getTechNeeds();
-                if(null!=technicalNeed)
-               bw.setTechNeeds(new TechnicalNeedsWrapper(technicalNeed.getFarmPlanning(),technicalNeed.getCropVarietyAndSeed(),technicalNeed.getWeedControl(),technicalNeed.getCropEstablishment(),technicalNeed.getIntegratedSoilFertilityManagement(),technicalNeed.getHarvestAndPostHarvest()));
-                Marketing market = b.getMarketing();
-             if(null!=market)
-                bw.setMarketing(new MarketingWrapper(market.getMainPointOfContact(),market.getMonthSellingBegins(),market.getPriceOfFirstHarvestProduce(),market.getMonthMostHarvestProduceSold(),market.getPriceMostHarvestProduceSold(),market.getMonthFinalBatchSold(),market.getPriceFinalBatchSold(),market.getMonthSellingDriedChipChicks(),market.getPriceFirstDriedChipChunk(),market.getMonthMostDriedChipsChunksSold(),market.getPriceMostDriedChipsChunksSold(),market.getMonthLastBatchDriedChipChunksSold(),market.getPriceFinalBatchDriedChipsChunksSold()));
-         
-                Operations opt = b.getFarmOperation();
-               
-                OperationsWrapper wr = new OperationsWrapper();
+                    Operations opt = b.getFarmOperation();
+
+                    OperationsWrapper wr = new OperationsWrapper();
                 //wr.set
-               
-               if(opt!=null){
-                wr.setLandSize(opt.getLandSize());
-              wr.setLandClearance(opt.getLandClearance());
-               }
-                bw.setOperation(wr);
-                
-                
-                Harvest harvest = b.getHavest();
-                HarvestWrapper  hWrapper = new HarvestWrapper();
-                if(null!=hWrapper){
-                hWrapper.setYieldPerAcre(harvest.getYieldPerAcre());
-                }
-                bw.setHarvest(hWrapper);
-                
-                PostHarvest postHarvest =b.getPostHavest();
-                PostHarvestWrapper  phWrapper = new PostHarvestWrapper();
-              if(null!=phWrapper)
-                bw.setPostHarvest(phWrapper);
-                
-                Storage storeage = b.getStorage();
-                
-                FarmManagement fm = b.getFarmManagement();
-                FarmManagementWrapper fmWrapper = new FarmManagementWrapper();
-               if(null!=fm){
-                fmWrapper.setLabourUse(fm.getLabourUse());
-                fmWrapper.setFboName(fm.getFboName());
-               } StorageWrapper  stWrapper = new StorageWrapper();
-                bw.setStorage(stWrapper);
-                FarmManagementPlan fmp =  b.getFMP();
-                FarmManagementPlanWrapper fmpWrapper = new FarmManagementPlanWrapper();
-                if(null!=fmp){
-                fmpWrapper.setTargetareaofland(fmp.getTargetareaofland());
-                fmpWrapper.setTargetproduction(fmp.getTargetproduction());
-                fmpWrapper.setTargetyieldperacre(fmp.getTargetyieldperacre());
-                fmpWrapper.setNameofvariety(fmp.getNameofvariety());
-                fmpWrapper.setDateoflandidentification(fmp.getDateoflandidentification());
-                fmpWrapper.setLocationofland(fmp.getLocationofland());
-                fmpWrapper.setExpectedpriceperton(fmp.getExpectedpriceperton());
-                fmpWrapper.setPlantingdate(fmp.getPlantingdate());
-                }bw.setFmp(fmpWrapper);
-               
-                bdatac.add(bw);
-              
+  System.out.println("bef2");
+                    if (opt != null) {
+                        wr.setLandSize(opt.getLandSize());
+                        wr.setLandClearance(opt.getLandClearance());
+                    }
+                    bw.setOperation(wr);
+
+                    Harvest harvest = b.getHavest();
+                    HarvestWrapper hWrapper = new HarvestWrapper();
+                    if (null != hWrapper) {
+                        hWrapper.setYieldPerAcre(harvest.getYieldPerAcre());
+                    }
+                    bw.setHarvest(hWrapper);
+  System.out.println("bef4");
+                    PostHarvest postHarvest = b.getPostHavest();
+                    PostHarvestWrapper phWrapper = new PostHarvestWrapper();
+                    if (null != phWrapper) {
+                        bw.setPostHarvest(phWrapper);
+                    }
+
+                    Storage storeage = b.getStorage();
+
+                    FarmManagement fm = b.getFarmManagement();
+                    FarmManagementWrapper fmWrapper = new FarmManagementWrapper();
+                    if (null != fm) {
+                        fmWrapper.setLabourUse(fm.getLabourUse());
+                        fmWrapper.setFboName(fm.getFboName());
+                    }
+                      System.out.println("bef5");
+                    StorageWrapper stWrapper = new StorageWrapper();
+                    bw.setStorage(stWrapper);
+                    FarmManagementPlan fmp = b.getFMP();
+                      System.out.println("bef6");
+                    FarmManagementPlanWrapper fmpWrapper = new FarmManagementPlanWrapper();
+                    if (null != fmp) {
+                        fmpWrapper.setTargetareaofland(fmp.getTargetareaofland());
+                        fmpWrapper.setTargetproduction(fmp.getTargetproduction());
+                        fmpWrapper.setTargetyieldperacre(fmp.getTargetyieldperacre());
+                        fmpWrapper.setNameofvariety(fmp.getNameofvariety());
+                        fmpWrapper.setDateoflandidentification(fmp.getDateoflandidentification());
+                        fmpWrapper.setLocationofland(fmp.getLocationofland());
+                        fmpWrapper.setExpectedpriceperton(fmp.getExpectedpriceperton());
+                        fmpWrapper.setPlantingdate(fmp.getPlantingdate());
+                    }
+                      System.out.println("bef7");
+                    bw.setFmp(fmpWrapper);
+  System.out.println("bef8 : "+bw.getFirstName());
+                    bdatac.add(bw);
+  System.out.println("bef9");
                 } catch (Exception e) {
-                } }
+                }
+            }
             tx.success();
         } catch (Exception e) {
             System.out.println("Error creatingfindByLabel Executing Query : " + e.getLocalizedMessage());
@@ -451,7 +459,7 @@ public class Neo4jServices {
         }
         return null;
     }
-    
+
     public static long getAggregatedValue(String q) {
         Iterator<Long> n_column = null;
         ExecutionResult result = null;
@@ -469,13 +477,13 @@ public class Neo4jServices {
 
         return 0l;
     }
-    
-     public static List<String> getIterativeString(String q) {
+
+    public static List<String> getIterativeString(String q) {
         Iterator<String> n_column = null;
         List<String> bdata = new ArrayList<>();
         List<BiodataWrapper> bdatac = new ArrayList<>();
         ExecutionResult result = null;
-      
+
         try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             ExecutionEngine engine = new ExecutionEngine(
                     ICTCDBUtil.getInstance().getGraphDB(), StringLogger.SYSTEM);
@@ -497,7 +505,7 @@ public class Neo4jServices {
         return bdata;
     }
 
- public static Iterator<Node> executeIteratorQuery(String query, String returnItem) {
+    public static Iterator<Node> executeIteratorQuery(String query, String returnItem) {
 
         try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             ExecutionEngine engine = new ExecutionEngine(
@@ -505,9 +513,8 @@ public class Neo4jServices {
             ExecutionResult result = executeCypherQuery(query);
             return result.columnAs(returnItem);
         }
-   
-    }
 
+    }
 
     public static List<BiodataWrapper> findByLabel(Labels primaryRel, ICTCRelationshipTypes secondaryRel, String searchField, String searchValue) {
         String searchParam = (searchField.isEmpty()) ? "" : " where l." + searchField + "= '" + searchValue + "' ";

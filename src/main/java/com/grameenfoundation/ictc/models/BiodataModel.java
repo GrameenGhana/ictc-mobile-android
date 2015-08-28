@@ -388,10 +388,16 @@ public class BiodataModel {
         String q = "match (l:FARMER) WHERE l."+field+"='"+value+"' return  l ";
         System.out.println("Query " + q);
         try {
-
             List<BiodataWrapper> wrappers = Neo4jServices.getIterativeNode(q);
-            return wrappers.get(0);
-
+            System.out.println("Received : wrapp "+wrappers.size());
+            if(wrappers.isEmpty())
+            {     
+                return null;
+            }else
+            {
+                System.out.println("Returned 111");
+                return wrappers.get(0);
+            }
         } catch (Exception e) {
             System.out.println("Unable to Find geofence");
         }

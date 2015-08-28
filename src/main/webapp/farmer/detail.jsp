@@ -19,9 +19,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Farmer Details - <%=wrapper.getFirstName() + " " + wrapper.getLastName()%></title>
+        <title>Farmer Details -    <% if(wrapper != null) {%><%=wrapper.getFirstName() + " " + wrapper.getLastName()%> <% } %></title>
     </head>
     <body>
+        <% if(wrapper != null) {%>
         <div class="col-sm-6 col-md-6 span5">
             <h2>Farmer Details #<%=wrapper.getFarmID()%></h2>
             <h3>Bio Data</h3>
@@ -136,13 +137,14 @@
                     <div role="tabpanel" class="tab-pane active" id="home">Farm Management Plan
                         <table>
                             <% List<FieldObject> objs = wrapper.getFmpValues(); 
+                            if(null != objs){
                             for(FieldObject obj: objs)
                             {%>
                             <tr>
                                 <td><%=ICTCUtil.replaceKeyInObject(obj.getKey()) %></td>
                                 <td><%=obj.getValue() %></td>
                             </tr>
-                            <% } %>
+                            <% } } %>
                         </table>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="profile">Visits by Agent</div>
@@ -155,12 +157,13 @@
             </div>
 
         </div>
+                        <% } %>
     </body>
     <script type="text/javascript">
         //    alert('mapping')
          
     </script>
-    
+     <% if(wrapper != null) {%>
     <content tag="scripts">
         <%
         String location ="";
@@ -168,4 +171,5 @@
         %>
         loadGoogleMap("mmapview", '<%= location %>', "<%=wrapper.getFirstName() + " " + wrapper.getLastName()%>'s Farm")
 </content>
+        <% } %>
 </html>
