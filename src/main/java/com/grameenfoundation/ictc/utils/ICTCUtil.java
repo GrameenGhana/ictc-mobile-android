@@ -38,6 +38,14 @@ public class ICTCUtil {
             t.setTime(str);
             return t;
         }
-
+  }
+          public static String  replaceKeyInObject(String toBeReplace){
+      String []  keys={"production","identification","expected","renting","number","target","renting","application","fertilizer","herbicide","renting","applied","quantity","yield","acre","number","land","price","ton","of"};
+      for (String key : keys) {
+        toBeReplace =  toBeReplace.replace(key, " "+key.substring(0, 1).toUpperCase()+key.substring(1));
+          System.out.println("Rreplcea : "+toBeReplace);
+      }
+      return  toBeReplace;  
+  
     }
 }

@@ -113,9 +113,9 @@
                         </li>
 
                         <li>					
-                            <a href="<%=request.getContextPath()%>/users">
+                            <a href="<%=request.getContextPath()%>/farmer">
                                 <i class="icon-facetime-video"></i>
-                                <span>Users</span>
+                                <span>Farmers</span>
                             </a>  									
                         </li>
 
@@ -123,9 +123,9 @@
 
 
                         <li class="">					
-                            <a href="<%=request.getContextPath()%>/messages">
+                            <a href="<%=request.getContextPath()%>/agent">
                                 <i class="icon-code"></i>
-                                <span>Messages</span>
+                                <span>Agents</span>
                             </a>  									
                         </li>
 
@@ -204,46 +204,30 @@
 
                     <div class="row">
                         <div class="span3">
-                            <h4>
-                                About Free Admin Template</h4>
+                            <h4></h4>
                             <ul>
-                                <li><a href="javascript:;">EGrappler.com</a></li>
-                                <li><a href="javascript:;">Web Development Resources</a></li>
-                                <li><a href="javascript:;">Responsive HTML5 Portfolio Templates</a></li>
-                                <li><a href="javascript:;">Free Resources and Scripts</a></li>
+                                     </ul>
+                        </div>
+                        <!-- /span3 -->
+                        <div class="span3">
+                            <h4>
+                                </h4>
+                            <ul>
+                                                </ul>
+                        </div>
+                        <!-- /span3 -->
+                        <div class="span3">
+                            <h4></h4>
+                            <ul>
+                              
                             </ul>
                         </div>
                         <!-- /span3 -->
                         <div class="span3">
                             <h4>
-                                Support</h4>
+                               </h4>
                             <ul>
-                                <li><a href="javascript:;">Frequently Asked Questions</a></li>
-                                <li><a href="javascript:;">Ask a Question</a></li>
-                                <li><a href="javascript:;">Video Tutorial</a></li>
-                                <li><a href="javascript:;">Feedback</a></li>
-                            </ul>
-                        </div>
-                        <!-- /span3 -->
-                        <div class="span3">
-                            <h4>
-                                Something Legal</h4>
-                            <ul>
-                                <li><a href="javascript:;">Read License</a></li>
-                                <li><a href="javascript:;">Terms of Use</a></li>
-                                <li><a href="javascript:;">Privacy Policy</a></li>
-                            </ul>
-                        </div>
-                        <!-- /span3 -->
-                        <div class="span3">
-                            <h4>
-                                Open Source jQuery Plugins</h4>
-                            <ul>
-                                <li><a href="http://www.egrappler.com">Open Source jQuery Plugins</a></li>
-                                <li><a href="http://www.egrappler.com;">HTML5 Responsive Tempaltes</a></li>
-                                <li><a href="http://www.egrappler.com;">Free Contact Form Plugin</a></li>
-                                <li><a href="http://www.egrappler.com;">Flat UI PSD</a></li>
-                            </ul>
+                               </ul>
                         </div>
                         <!-- /span3 -->
                     </div> <!-- /row -->
@@ -266,7 +250,7 @@
                     <div class="row">
 
                         <div class="span12">
-                            &copy; 2013 <a href="http://www.egrappler.com/">Bootstrap Responsive Admin Template</a>.
+                            &copy; 2015 <a href="http://www.egrappler.com/">ICTC - Powered by Grameen Foundation</a>.
                         </div> <!-- /span12 -->
 
                     </div> <!-- /row -->
@@ -283,8 +267,14 @@
 
         <script src="<%= request.getContextPath()%>/theme/egrap/js/bootstrap.js"></script>
         <script src="<%= request.getContextPath()%>/theme/egrap/js/base.js"></script>
+    </script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
-
-    </body>
+    <script src="<%= request.getContextPath()%>/theme/egrap/js/map.js"></script>
+</script>
+<script type="text/javascript">
+   <decorator:getProperty property="page.scripts"/>
+</script>
+</body>
 
 </html>
