@@ -25,6 +25,8 @@ public class User extends Status implements GeneralInterface{
     public static String AGENT_TYPE = "usertype";
     public static String ORGANISATION ="organisation";
     public static String AGENT_CODE = "usercode";
+      public static String USERNAME = "username";
+    public static String PASSWORD = "password";
    
     
     Node underlyingNode;
@@ -112,6 +114,34 @@ public class User extends Status implements GeneralInterface{
       public String getOrganisation() {
           try {
             return (String) underlyingNode.getProperty(ORGANISATION);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+      
+      
+       public void setUsername(String username) {
+        underlyingNode.setProperty(USERNAME,username);
+    }
+
+      public String getUsername() {
+          try {
+            return (String) underlyingNode.getProperty(USERNAME);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+      
+      public void getPassword(String pwd) {
+        underlyingNode.setProperty(PASSWORD,pwd);
+    }
+      
+      
+      public String getPassword() {
+          try {
+            return (String) underlyingNode.getProperty(PASSWORD);
 
         } catch (Exception e) {
         }
