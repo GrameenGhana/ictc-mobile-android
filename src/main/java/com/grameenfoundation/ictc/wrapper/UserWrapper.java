@@ -6,6 +6,9 @@
 
 package com.grameenfoundation.ictc.wrapper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Joseph George Davis
@@ -24,6 +27,7 @@ public class UserWrapper {
      String organisation = "organisation";
      String agentCode = "usercode";
 
+     private List<BiodataWrapper> myFarmers = new ArrayList<>() ;
     public String getID() {
         return ID;
     }
@@ -70,6 +74,20 @@ public class UserWrapper {
 
     public void setAgentCode(String agentCode) {
         this.agentCode = agentCode;
+    }
+
+    /**
+     * @return the myFarmers
+     */
+    public List<BiodataWrapper> getMyFarmers() {
+        return myFarmers;
+    }
+
+    /**
+     * @param myFarmers the myFarmers to set
+     */
+    public void setMyFarmers(List<BiodataWrapper> myFarmers) {
+        this.myFarmers = myFarmers;
     }
      
      

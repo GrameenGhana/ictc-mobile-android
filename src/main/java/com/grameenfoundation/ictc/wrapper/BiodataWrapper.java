@@ -6,6 +6,7 @@
 package com.grameenfoundation.ictc.wrapper;
 
 import com.grameenfoundation.ictc.domains.FarmManagementPlan;
+import java.util.List;
 
 /**
  *
@@ -39,6 +40,8 @@ public class BiodataWrapper {
     private StorageWrapper storage;
     FarmManagementPlanWrapper fmp ;
 private FarmManagementWrapper farmManagement;
+private List<FieldObject> fmpValues;
+
     public FarmManagementPlanWrapper getFmp() {
         return fmp;
     }
@@ -324,6 +327,20 @@ private FarmManagementWrapper farmManagement;
      */
     public void setFarmManagement(FarmManagementWrapper farmManagement) {
         this.farmManagement = farmManagement;
+    }
+
+    /**
+     * @return the fmpValues
+     */
+    public List<FieldObject> getFmpValues() {
+        return fmpValues;
+    }
+
+    /**
+     * @param fmpValues the fmpValues to set
+     */
+    public void setFmpValues(List<FieldObject> fmpValues) {
+        this.fmpValues = fmpValues;
     }
 
 }

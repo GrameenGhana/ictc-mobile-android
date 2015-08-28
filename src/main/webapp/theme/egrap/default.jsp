@@ -113,9 +113,9 @@
                         </li>
 
                         <li>					
-                            <a href="<%=request.getContextPath()%>/users">
+                            <a href="<%=request.getContextPath()%>/farmer">
                                 <i class="icon-facetime-video"></i>
-                                <span>Users</span>
+                                <span>Farmers</span>
                             </a>  									
                         </li>
 
@@ -123,9 +123,9 @@
 
 
                         <li class="">					
-                            <a href="<%=request.getContextPath()%>/messages">
+                            <a href="<%=request.getContextPath()%>/agent">
                                 <i class="icon-code"></i>
-                                <span>Messages</span>
+                                <span>Agents</span>
                             </a>  									
                         </li>
 
@@ -283,8 +283,14 @@
 
         <script src="<%= request.getContextPath()%>/theme/egrap/js/bootstrap.js"></script>
         <script src="<%= request.getContextPath()%>/theme/egrap/js/base.js"></script>
+    </script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
-
-    </body>
+    <script src="<%= request.getContextPath()%>/theme/egrap/js/map.js"></script>
+</script>
+<script type="text/javascript">
+   <decorator:getProperty property="page.scripts"/>
+</script>
+</body>
 
 </html>

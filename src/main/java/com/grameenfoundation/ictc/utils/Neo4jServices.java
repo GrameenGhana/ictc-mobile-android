@@ -497,5 +497,25 @@ public class Neo4jServices {
         return bdata;
     }
 
+ public static Iterator<Node> executeIteratorQuery(String query, String returnItem) {
+
+        try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            ExecutionEngine engine = new ExecutionEngine(
+                    ICTCDBUtil.getInstance().getGraphDB(), StringLogger.SYSTEM);
+            ExecutionResult result = executeCypherQuery(query);
+            return result.columnAs(returnItem);
+        }
+   
+    }
+
+
+    public static List<BiodataWrapper> findByLabel(Labels primaryRel, ICTCRelationshipTypes secondaryRel, String searchField, String searchValue) {
+        String searchParam = (searchField.isEmpty()) ? "" : " where l." + searchField + "= '" + searchValue + "' ";
+
+        String query = " match (k:" + primaryRel + ")-[:" + secondaryRel + "]->l" + searchParam + " return l ";
+        System.out.println("Query : " + query);
+        return getIterativeNode(query);
+
+    }
 
 }
