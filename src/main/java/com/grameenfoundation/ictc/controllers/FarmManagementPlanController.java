@@ -91,7 +91,7 @@ public class FarmManagementPlanController extends HttpServlet {
                     //  Map<String,String> m = (Map<String,String>) rowNode.getAttributes();
                     String salesforceObj = rowNode.getAttributes().getNamedItem("xsi:type").getNodeValue();
                     System.out.println(salesforceObj);
-                    String farmerID = getXmlNodeValue("sf:Farmer_name__c",ele);
+                    String farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
                     System.out.println("farmerid " + farmerID);
                      org.neo4j.graphdb.Node FMPNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARM_MANAGEMENT_PLAN);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
