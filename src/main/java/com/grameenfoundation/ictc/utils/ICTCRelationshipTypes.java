@@ -16,7 +16,8 @@ import org.neo4j.graphdb.RelationshipType;
  */
 public enum ICTCRelationshipTypes implements RelationshipType{
 
-    
+    //A
+     AGENT,
      //C
     CREATED_BY,
     
@@ -53,7 +54,7 @@ public enum ICTCRelationshipTypes implements RelationshipType{
     //R
      ROLE,
     
-     //
+    //
      TECHNICAL_NEED,
     //U
     USER

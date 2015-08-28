@@ -12,6 +12,7 @@ import com.grameenfoundation.ictc.domains.FarmManagement;
 import com.grameenfoundation.ictc.domains.Harvest;
 import com.grameenfoundation.ictc.domains.Operations;
 import com.grameenfoundation.ictc.domains.Storage;
+import com.grameenfoundation.ictc.domains.User;
 import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.models.FarmManagementModel;
 import com.grameenfoundation.ictc.models.HarvestModel;
@@ -21,8 +22,7 @@ import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
 import com.grameenfoundation.ictc.utils.Labels;
 import com.grameenfoundation.ictc.utils.ParentNode;
-import com.sun.org.omg.CORBA.OperationMode;
-import java.io.File;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -30,7 +30,9 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
-import java.util.logging.Level;
+import java.util.HashMap;
+import java.util.Map;
+
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -72,6 +74,7 @@ public class SaleforceIntegrationController extends HttpServlet {
         Logger log = Logger.getLogger(SaleforceIntegrationController.class.getName());
         response.setContentType("text/xml;charset=UTF-8");
         BiodataModel biodataModel = new BiodataModel();
+         String farmerID = null ;
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
 
@@ -90,6 +93,7 @@ public class SaleforceIntegrationController extends HttpServlet {
 
                 DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                 InputSource is = new InputSource();
+                Map<String,String> update = new HashMap<>();
                 is.setCharacterStream(new StringReader(theString));
                 System.out.println("After parsing XML");
                 Document doc = db.parse(is);       
@@ -138,12 +142,48 @@ public class SaleforceIntegrationController extends HttpServlet {
 
                         out.println(sendAck());
                     }
+                    else if(salesforceObj.equals("sf:Agent__c"))
+                    {
+                        org.neo4j.graphdb.Node AgentParent;
+                        org.neo4j.graphdb.Node userNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.AGENT);
+                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
+
+                           // System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
+                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                userNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                            }
+                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:agenttype")) {
+                                System.out.println("agent type : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                userNode.setProperty(User.AGENT_TYPE, rowNode.getChildNodes().item(k).getTextContent());
+                            }
+                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:agentcode")) {
+                                System.out.println("agent code : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                userNode.setProperty(User.USERNAME, rowNode.getChildNodes().item(k).getTextContent());
+                                userNode.setProperty(User.PASSWORD, rowNode.getChildNodes().item(k).getTextContent());
+                            }
+                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:agenttype")) {
+
+                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                userNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+
+                            }
+                        }
+
+                        AgentParent = ParentNode.AgentParentNode();
+                        AgentParent.createRelationshipTo(userNode, ICTCRelationshipTypes.AGENT);
+
+                        log.log(Level.INFO, "new node created {0}", userNode.getId());
+                        tx.success();
+
+                        out.println(sendAck());
+                    }
                     else if(salesforceObj.equals("sf:Harvest__c"))
                     {
                          org.neo4j.graphdb.Node HarvestParent;
                         org.neo4j.graphdb.Node harvestNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.HARVEST);
                         
-                        String farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
+                       farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
                         System.out.println("farmerid " + farmerID);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
 
@@ -180,7 +220,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                         org.neo4j.graphdb.Node FarmManagementParent;
                         org.neo4j.graphdb.Node FarmManagementNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARM_MANAGEMENT);
                         
-                        String farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
+                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
                         System.out.println("farmerid " + farmerID);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
 
@@ -217,7 +257,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                         org.neo4j.graphdb.Node FarmOperationParent;
                         org.neo4j.graphdb.Node FarmOperationNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARM_OPERATION);
                         
-                        String farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
+                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
                         System.out.println("farmerid " + farmerID);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
 
@@ -254,7 +294,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                         org.neo4j.graphdb.Node MarketingParent;
                         org.neo4j.graphdb.Node MarketingNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.MARKETING);
                         
-                        String farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
+                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
                         System.out.println("farmerid " + farmerID);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
 
@@ -291,7 +331,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                         org.neo4j.graphdb.Node PostHarvestParent;
                         org.neo4j.graphdb.Node PostHarvestNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.POSTHARVEST);
                         
-                        String farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
+                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
                         System.out.println("farmerid " + farmerID);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
 
@@ -328,7 +368,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                         org.neo4j.graphdb.Node StorageParent;
                         org.neo4j.graphdb.Node StorageNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.STORAGE);
                         
-                        String farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
+                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
                         System.out.println("farmerid " + farmerID);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
 
@@ -357,7 +397,8 @@ public class SaleforceIntegrationController extends HttpServlet {
                         
                         
                         tx.success();
-
+                        update.put(Biodata.CLUSTER, getCluster(getUserScore(farmerID)));
+                       biodataModel.BiodataUpdate(farmerID, update);
                         out.println(sendAck());
                     }
                     
@@ -366,7 +407,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                         org.neo4j.graphdb.Node TNParent;
                         org.neo4j.graphdb.Node TNNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.TECHNICAL_NEEDS);
                         
-                        String farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
+                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
                         System.out.println("farmerid " + farmerID);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
 
@@ -396,10 +437,11 @@ public class SaleforceIntegrationController extends HttpServlet {
                         
                         tx.success();
 
+                        
+                     
                         out.println(sendAck());
                     }
-                    
-                    
+                  
                 }
                 
                 
@@ -586,7 +628,7 @@ public class SaleforceIntegrationController extends HttpServlet {
         return ack;
     }
     
-    public int getUserCluster(String user)
+    public int getUserScore(String user)
     {
         int score = 0;
         FarmManagement fm = new FarmManagementModel().getUserFarmManagent(user);
@@ -594,7 +636,8 @@ public class SaleforceIntegrationController extends HttpServlet {
         Harvest ha = new HarvestModel().getUserHarvest(user);
         Storage st = new StorageModel().getUserStorage(user);
         
-        if(null!=fm)
+        if(null!=fm && null!=op && null!=ha&& null!=st)
+        {
            score = Integer.valueOf(fm.getProductionObjective().charAt(0))+
                    Integer.valueOf(fm.getEntrepreneurship().charAt(0))+
                    Integer.valueOf(fm.getLabourUse().charAt(0))+
@@ -603,7 +646,12 @@ public class SaleforceIntegrationController extends HttpServlet {
                    Integer.valueOf(op.getPlantarrangement().charAt(0))+
                    Integer.valueOf(op.getMaintenanceofsoilfertility().charAt(0))+
                    Integer.valueOf(op.getRegularappinorganicfertilizer().charAt(0))+
-                   Integer.valueOf(ha.getYieldPerAcre().charAt(0));
+                   Integer.valueOf(ha.getYieldPerAcre().charAt(0))+
+                   Integer.valueOf(st.getPostHarvestLosses().charAt(0));
+            System.out.println("Score is " + score);
+        }
+        else
+            System.out.println("score not done");
                    
         
         return score;

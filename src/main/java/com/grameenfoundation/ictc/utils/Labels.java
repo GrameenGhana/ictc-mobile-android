@@ -15,7 +15,7 @@ import org.neo4j.graphdb.Label;
  * @description-
  */
 public enum Labels implements Label {
-    
+    AGENT,
     PARENT,
     FARMER,
     FARM_MANAGEMENT,

@@ -14,6 +14,9 @@ package com.grameenfoundation.ictc.utils;
  */
 public class ICTCKonstants {
     
+    //a
+     public static final String AGENT = "agent";
+    
     //c
     public static final String CREATED_ON = "creationDate";
     public static final String CREATED_BY = "createdBy";

@@ -459,8 +459,9 @@ public class BiodataModel {
                 
                
                 trx.success();
-                log.info("Bio Data Successfully Updated");
+               
                 updated =  true;
+                 log.info("Bio Data Successfully Updated");
             }     
             else {
                 trx.success();

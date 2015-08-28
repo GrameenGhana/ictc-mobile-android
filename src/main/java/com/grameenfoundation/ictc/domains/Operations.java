@@ -123,8 +123,8 @@ public class Operations extends Status implements GeneralInterface {
     public static String FAMLABOURFIFTHWEEDCONTROL = "famlabourfifthweedcontrol";
     public static String NOHIREDLABOURFIFTHWEEDCONTROL = "nohiredlabourfifthweedcontrol";
     public static String COSTHIREDLABOURFIFTHWEEDCONTROL = "costhiredlabourfifthweedcontrol";
-    public static String MAINTENANCEOFSOILFERTILITY="maintenanceofsoilfertility";
-    public static String REGULARAPPINORGANICFERTILIZER="regularappinorganicfertilizer";
+    public static String MAINTENANCEOFSOILFERTILITY="landsfertileandproductive";
+    public static String REGULARAPPINORGANICFERTILIZER="regularapplicationinorganicfert";
     
     
     public void setRegularappinorganicfertilizer(String regularappinorganicfertilizer) {

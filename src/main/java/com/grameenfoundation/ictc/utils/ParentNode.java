@@ -55,4 +55,8 @@ public class ParentNode {
        public static Node  FMPlanParentNode() {
         return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.FMP);
     }  
+       
+           public static Node  AgentParentNode() {
+        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.AGENT);
+    }  
 }
