@@ -39,6 +39,7 @@ public class ICTCKonstants {
      //m
      
      public static final String MARKETING ="marketing";
+      public static final String MEETING ="meeting";
     //n
     public static final String NAME ="name";
     
@@ -61,5 +62,7 @@ public class ICTCKonstants {
      //t
      public static final String TECHNICAL_NEED = "technicalneed";
      
+     //u
+     public static final String USER = "user";
      
 }
