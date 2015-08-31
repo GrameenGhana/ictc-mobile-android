@@ -77,24 +77,26 @@ public class UserModel {
 
     public List<UserWrapper> findAll() {
 
-        return userQuery("match (l:USER) return  l", "l");
+        return userQuery("match (l:AGENT) return  l", "l");
     }
 
     public List<UserWrapper> findByType(String userType) {
 
-        return userQuery("match (l:USER) where l." + User.AGENT_TYPE + "='" + userType + "' return  l", "l");
+        return userQuery("match (l:AGENT) where l." + User.AGENT_TYPE + "='" + userType + "' return  l", "l");
     }
 
     public List<UserWrapper> findByTypeStatus(String userType, String status) {
 
-        return userQuery("match (l:USER) where l." + User.AGENT_TYPE + "='" + userType + "' and l." + User.AGENT_TYPE + "='" + status + "' return  l", "l");
+        return userQuery("match (l:AGENT) where l." + User.AGENT_TYPE + "='" + userType + "' and l." + User.AGENT_TYPE + "='" + status + "' return  l", "l");
     }
 
     public UserWrapper findUser(String username, String password) {
         CryptoLibrary crypt = new CryptoLibrary();
-        String q = "match (l:USER) WERE l." + User.USERNAME + "= '" + username + "'  and  l." + User.PASSWORD + "='" + crypt.encrypt(password) + "'  return l";
+        String q = "match (l:AGENT) WHERE l." + User.USERNAME + "= '" + username + "'  "
+                //+ "and  l." + User.PASSWORD + "='" + (password) + "'"
+                + "  return l";
         List<UserWrapper> usr = userQuery(q, "l");
-        if (null != usr) {
+        if (null != usr && !usr.isEmpty()) {
             return usr.get(0);
         }
         return null;

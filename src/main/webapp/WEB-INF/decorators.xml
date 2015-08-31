@@ -10,7 +10,7 @@
         <pattern>/approveEmail*</pattern>
         <pattern>/servicemanager*</pattern>
         <pattern>/recoverpassword*</pattern>
-        <pattern>/reset*</pattern>
+        <pattern>/login*</pattern>
         <pattern>/register*</pattern>
         <pattern>/account*</pattern> 
         <pattern>/lister*</pattern> 

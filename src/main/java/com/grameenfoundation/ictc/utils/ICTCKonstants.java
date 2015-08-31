@@ -51,6 +51,7 @@ public class ICTCKonstants {
     
     //r
     public static final int ROOT_NODE_INDEX = 0;
+    public static final String RESPONSE = "response";
     
     //u
     public static final String UPDATED_BY = "updatedBy";
