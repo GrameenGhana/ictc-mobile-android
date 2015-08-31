@@ -30,7 +30,7 @@ import scala.collection.Iterator;
  */
 public class UserModel {
 
-    Logger log = Logger.getLogger(StorageModel.class.getName());
+    Logger log = Logger.getLogger(UserModel.class.getName());
     Node userParent;
 
     public User create(UserWrapper st) {
@@ -46,7 +46,7 @@ public class UserModel {
                 log.info("storage is invalid");
                 created = false;
             } else {
-                userParent = ParentNode.StorageParentNode();
+                userParent = ParentNode.AgentParentNode();
 
                 stg.setAgentCode(st.getAgentCode());
                 stg.setAgentID(st.getID());
@@ -102,7 +102,7 @@ public class UserModel {
         return null;
     }
 
-    private List<UserWrapper> userQuery(String q, String returnedItem) {
+private List<UserWrapper> userQuery(String q, String returnedItem) {
 List<UserWrapper> usrs = new ArrayList<>();
         System.out.println("Query : "+q);
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
