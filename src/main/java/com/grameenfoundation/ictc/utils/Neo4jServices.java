@@ -515,6 +515,23 @@ public class Neo4jServices {
         }
 
     }
+    
+     public static Node executeSingleQuery(String query, String returnItem) {
+
+        try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            
+            ExecutionResult result = executeCypherQuery(query);
+            Iterator<Node>  n = result.columnAs(returnItem);
+            while(n.hasNext()){
+                return n.next();
+            }
+            
+            return null;
+        }
+
+    }
+    
+    
 
     public static List<BiodataWrapper> findByLabel(Labels primaryRel, ICTCRelationshipTypes secondaryRel, String searchField, String searchValue) {
         String searchParam = (searchField.isEmpty()) ? "" : " where l." + searchField + "= '" + searchValue + "' ";

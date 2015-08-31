@@ -15,6 +15,19 @@ public class CropCalendarSettingWrapper {
     private int endWeek;
     private String activity;
 
+    public CropCalendarSettingWrapper() {
+    }
+
+    
+    
+    public CropCalendarSettingWrapper(String crop, int startWeek, int endWeek, String activity) {
+        this.crop = crop;
+        this.startWeek = startWeek;
+        this.endWeek = endWeek;
+        this.activity = activity;
+    }
+
+    
     /**
      * @return the crop
      */

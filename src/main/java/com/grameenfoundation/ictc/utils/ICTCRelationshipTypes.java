@@ -21,6 +21,7 @@ public enum ICTCRelationshipTypes implements RelationshipType{
      //C
     CREATED_BY,
     CROP_CALENDAR_SETTING,
+    CROP_CALENDAR,
     
     //E
     ENTITY,
@@ -40,6 +41,7 @@ public enum ICTCRelationshipTypes implements RelationshipType{
     HAS_MARKETING,
     HAS_TECHNEEDS,
     HARVEST,
+    HAS_CROP_CALENDAR,
     //L
     LAST_MODIFIED_BY,
     

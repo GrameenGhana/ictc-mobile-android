@@ -27,6 +27,8 @@ public enum Labels implements Label {
     TECHNICAL_NEEDS,
     FARM_MANAGEMENT_PLAN,
     USER,
-    MEETING
+    MEETING,
+    CROP_CALENDAR_SETTING,
+    CROP_CALENDAR
 
 }
