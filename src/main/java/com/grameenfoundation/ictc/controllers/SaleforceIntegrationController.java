@@ -16,12 +16,15 @@ import com.grameenfoundation.ictc.domains.User;
 import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.models.FarmManagementModel;
 import com.grameenfoundation.ictc.models.HarvestModel;
+import com.grameenfoundation.ictc.models.MeetingModel;
 import com.grameenfoundation.ictc.models.OperationsModel;
 import com.grameenfoundation.ictc.models.StorageModel;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
 import com.grameenfoundation.ictc.utils.Labels;
+import com.grameenfoundation.ictc.utils.MeetingSchedule;
 import com.grameenfoundation.ictc.utils.ParentNode;
+import com.grameenfoundation.ictc.wrapper.MeetingWrapper;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -74,7 +77,11 @@ public class SaleforceIntegrationController extends HttpServlet {
         Logger log = Logger.getLogger(SaleforceIntegrationController.class.getName());
         response.setContentType("text/xml;charset=UTF-8");
         BiodataModel biodataModel = new BiodataModel();
-         String farmerID = null ;
+        MeetingSchedule meetingSchedule = new MeetingSchedule();
+        MeetingModel  meetingModel = new MeetingModel();
+        Map<String,MeetingWrapper> meetingMap = new HashMap<>();
+        
+        String farmerID = null ;
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
 
@@ -99,7 +106,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                 Document doc = db.parse(is);       
                 System.out.println("Should be normalised now");
                 doc.getDocumentElement().normalize();
-
+          
                  Element ele = doc.getDocumentElement();
                 //System.out.println("Root element :" + doc.getDocumentElement());
                 Node node = doc.getDocumentElement();
@@ -138,9 +145,70 @@ public class SaleforceIntegrationController extends HttpServlet {
                         FarmerParent.createRelationshipTo(biodataNode, ICTCRelationshipTypes.FARMER);
 
                         log.log(Level.INFO, "new node created {0}", biodataNode.getId());
-                        tx.success();
+                      
+                        
+                       
+                         out.println(sendAck());
+                         
+                        String majorcrop = getXmlNodeValue("sf:majorcrop__c", ele);
+                        Biodata farmer = new Biodata(biodataNode);
+                        //create farmer meeting schedule
+                        if(majorcrop.equalsIgnoreCase("Maize"))
+                        {
+                         
+                            meetingMap = meetingSchedule.maizeFarmerMeeting("1");
+                            for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
+                                String key = entrySet.getKey();
+                                MeetingWrapper value = entrySet.getValue();
+                                
+                                biodataModel.BiodataToMeeting(farmer.getId(),meetingModel.create(value).getUnderlyingNode());
+                            }
+                           
+                            
+                        }
+                        if(majorcrop.equalsIgnoreCase("Yam"))
+                        {
+                         
+                            meetingMap = meetingSchedule.yamFarmerMeeting("1");
+                            for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
+                                String key = entrySet.getKey();
+                                MeetingWrapper value = entrySet.getValue();
+                                
+                                biodataModel.BiodataToMeeting(farmer.getId(),meetingModel.create(value).getUnderlyingNode());
+                            }
+                           
+                            
+                        }
+                         if(majorcrop.equalsIgnoreCase("Rice"))
+                        {
+                         
+                            meetingMap = meetingSchedule.riceFarmerMeeting("1");
+                            for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
+                                String key = entrySet.getKey();
+                                MeetingWrapper value = entrySet.getValue();
+                                
+                                biodataModel.BiodataToMeeting(farmer.getId(),meetingModel.create(value).getUnderlyingNode());
+                            }
+                           
+                            
+                        }
+                         
+                          if(majorcrop.equalsIgnoreCase("Cassava"))
+                        {
+                         
+                            meetingMap = meetingSchedule.cassavaFarmerMeeting("1");
+                            for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
+                                String key = entrySet.getKey();
+                                MeetingWrapper value = entrySet.getValue();
+                                
+                                biodataModel.BiodataToMeeting(farmer.getId(),meetingModel.create(value).getUnderlyingNode());
+                            }
+                           
+                            
+                        }
 
-                        out.println(sendAck());
+
+                        tx.success();
                     }
                     else if(salesforceObj.equals("sf:Agent__c"))
                     {

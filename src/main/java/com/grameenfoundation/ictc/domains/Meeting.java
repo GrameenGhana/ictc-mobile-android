@@ -20,7 +20,7 @@ public class Meeting extends Status implements  GeneralInterface
 {
 
     public static String TYPE = "type";
-    public static String GROUP = "group";
+    public static String MEETING_INDEX = "index";
     public static String SEASON ="season";
     public static String START_DATE ="startdate";
     public static String END_DATE = "enddate";
@@ -47,13 +47,13 @@ public String getType(){
         return null;
 }
 
-public void setGroup(String group) {
-underlyingNode.setProperty(GROUP,group);
+public void setMeetingIndex(String index) {
+underlyingNode.setProperty(MEETING_INDEX,index);
 }
 
-public String getGroup(){
+public String getMeetingIndex(){
           try {
-          return (String) underlyingNode.getProperty(GROUP);
+          return (String) underlyingNode.getProperty(MEETING_INDEX);
 
         } catch (Exception e) {
         }

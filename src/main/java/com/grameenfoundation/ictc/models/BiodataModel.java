@@ -379,6 +379,30 @@ public class BiodataModel {
 
         return created;
     }
+    
+     public boolean BiodataToMeeting(String biodata, Node meeting) {
+
+        boolean created = false;
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+
+            Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
+
+            System.out.println("biodata :" + b.getUnderlyingNode().getId());
+            if (null != biodata) {
+
+                b.setFarmerMeeting(meeting);
+                created = true;
+                trx.success();
+
+            }
+        } catch (Exception e) {
+            System.out.println("error");
+            //created = false;
+
+        }
+
+        return created;
+    }
 
     public BiodataWrapper getBiodataByFieldValue(String field, String value) {
 //        String q = "Start root=node(0) "

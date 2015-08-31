@@ -49,7 +49,7 @@ public class MeetingModel {
             } else {
                 meetingParent = ParentNode.MeetingParentNode();
                  meet.setType(mw.getType());
-                 meet.setGroup(mw.getGroup());
+                 meet.setMeetingIndex(mw.getMeetingIndex());
                  meet.setSeason(mw.getSeason());
                  meet.setStartdate(mw.getStartDate());
                  meet.setEnddate(mw.getEndDate());
@@ -89,7 +89,7 @@ public class MeetingModel {
                 Meeting m = new Meeting(n_column.next());
                 MeetingWrapper mr = new MeetingWrapper();
                 mr.setType(m.getType());
-                mr.setGroup(m.getGroup());
+                mr.setMeetingIndex(m.getMeetingIndex());
                 mr.setSeason(m.getSeason());
                 mr.setStartDate(m.getStartdate());
                 mr.setEndDate(m.getEnddate());
