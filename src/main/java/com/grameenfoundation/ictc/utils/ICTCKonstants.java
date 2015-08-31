@@ -20,6 +20,7 @@ public class ICTCKonstants {
     //c
     public static final String CREATED_ON = "creationDate";
     public static final String CREATED_BY = "createdBy";
+    public static final String CROP_CALENDAR_SETTINGS = "cropCalSettings";
     
     
     //f

@@ -20,6 +20,7 @@ public enum ICTCRelationshipTypes implements RelationshipType{
      AGENT,
      //C
     CREATED_BY,
+    CROP_CALENDAR_SETTING,
     
     //E
     ENTITY,
