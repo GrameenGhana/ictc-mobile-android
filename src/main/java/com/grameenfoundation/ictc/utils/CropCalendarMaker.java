@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class CropCalendarMaker {
 
-    public List<CropCalendarWrapper> generateCropCalendar(String farmerId, String crop, Date referenceDate) {
+    public  List<CropCalendarWrapper> generateCropCalendar(String farmerId, String crop, Date referenceDate) {
         List<CropCalendarWrapper> myCropCalendar = new ArrayList<>();
         List<CropCalendarSettingWrapper> cropCal = new CropCalendarSettingModel().getSettingByCrop(crop);
         int cnt = 0;
@@ -61,7 +61,7 @@ public class CropCalendarMaker {
         int daysToSunday = (cal.get(Calendar.DAY_OF_WEEK)) - 1;
         cal.add(Calendar.DATE, (weeksBack * 7) + daysToSunday);
         dates.add(cal.getTime());//Sunday earliest start date
-        cal.add(Calendar.DATE, 6 + (weeksBack - endWeek));
+        cal.add(Calendar.DATE, 7 + (weeksBack - endWeek)); //6 for 
         dates.add(cal.getTime());//Saturday
         return dates;
     }
