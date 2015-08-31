@@ -153,60 +153,51 @@ public class SaleforceIntegrationController extends HttpServlet {
                         String majorcrop = getXmlNodeValue("sf:majorcrop__c", ele);
                         Biodata farmer = new Biodata(biodataNode);
                         //create farmer meeting schedule
-                        if(majorcrop.equalsIgnoreCase("Maize"))
-                        {
-                         
+                        if (majorcrop.equalsIgnoreCase("Maize")) {
+
                             meetingMap = meetingSchedule.maizeFarmerMeeting("1");
                             for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
-                                String key = entrySet.getKey();
+
                                 MeetingWrapper value = entrySet.getValue();
-                                
-                                biodataModel.BiodataToMeeting(farmer.getId(),meetingModel.create(value).getUnderlyingNode());
+
+                                biodataModel.BiodataToMeeting(farmer.getId(), meetingModel.create(value).getUnderlyingNode());
                             }
-                           
-                            
+
                         }
-                        if(majorcrop.equalsIgnoreCase("Yam"))
-                        {
-                         
+                        if (majorcrop.equalsIgnoreCase("Yam")) {
+
                             meetingMap = meetingSchedule.yamFarmerMeeting("1");
                             for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
-                                String key = entrySet.getKey();
+
                                 MeetingWrapper value = entrySet.getValue();
-                                
-                                biodataModel.BiodataToMeeting(farmer.getId(),meetingModel.create(value).getUnderlyingNode());
+
+                                biodataModel.BiodataToMeeting(farmer.getId(), meetingModel.create(value).getUnderlyingNode());
                             }
-                           
-                            
+
                         }
-                         if(majorcrop.equalsIgnoreCase("Rice"))
-                        {
-                         
+                        if (majorcrop.equalsIgnoreCase("Rice")) {
+
                             meetingMap = meetingSchedule.riceFarmerMeeting("1");
                             for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
-                                String key = entrySet.getKey();
+
                                 MeetingWrapper value = entrySet.getValue();
-                                
-                                biodataModel.BiodataToMeeting(farmer.getId(),meetingModel.create(value).getUnderlyingNode());
+
+                                biodataModel.BiodataToMeeting(farmer.getId(), meetingModel.create(value).getUnderlyingNode());
                             }
-                           
-                            
-                        }
-                         
-                          if(majorcrop.equalsIgnoreCase("Cassava"))
-                        {
-                         
-                            meetingMap = meetingSchedule.cassavaFarmerMeeting("1");
-                            for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
-                                String key = entrySet.getKey();
-                                MeetingWrapper value = entrySet.getValue();
-                                
-                                biodataModel.BiodataToMeeting(farmer.getId(),meetingModel.create(value).getUnderlyingNode());
-                            }
-                           
-                            
+
                         }
 
+                        if (majorcrop.equalsIgnoreCase("Cassava")) {
+
+                            meetingMap = meetingSchedule.cassavaFarmerMeeting("1");
+                            for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
+
+                                MeetingWrapper value = entrySet.getValue();
+
+                                biodataModel.BiodataToMeeting(farmer.getId(), meetingModel.create(value).getUnderlyingNode());
+                            }
+
+                        }
 
                         tx.success();
                     }
