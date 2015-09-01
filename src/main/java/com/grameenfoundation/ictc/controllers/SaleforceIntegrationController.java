@@ -19,6 +19,7 @@ import com.grameenfoundation.ictc.models.HarvestModel;
 import com.grameenfoundation.ictc.models.MeetingModel;
 import com.grameenfoundation.ictc.models.OperationsModel;
 import com.grameenfoundation.ictc.models.StorageModel;
+import com.grameenfoundation.ictc.models.UserModel;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
 import com.grameenfoundation.ictc.utils.Labels;
@@ -79,6 +80,7 @@ public class SaleforceIntegrationController extends HttpServlet {
         BiodataModel biodataModel = new BiodataModel();
         MeetingSchedule meetingSchedule = new MeetingSchedule();
         MeetingModel  meetingModel = new MeetingModel();
+        UserModel user = new UserModel();
         Map<String,MeetingWrapper> meetingMap = new HashMap<>();
         
         String farmerID = null ;
@@ -115,18 +117,18 @@ public class SaleforceIntegrationController extends HttpServlet {
 
                 //get fields from objects
                 NodeList sObject = doc.getElementsByTagName("sObject");
-
+                
                 for (int j = 0; j < sObject.getLength(); j++) {
 
                     Node rowNode = sObject.item(j);
                     //  Map<String,String> m = (Map<String,String>) rowNode.getAttributes();
                     String salesforceObj = rowNode.getAttributes().getNamedItem("xsi:type").getNodeValue();
                     System.out.println(salesforceObj);
-
+                    String agentID = getXmlNodeValue("sf:Agent__c", ele);
                     if (salesforceObj.equalsIgnoreCase("sf:Farmer_Biodata__c")) {
                         org.neo4j.graphdb.Node biodataNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARMER);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
-
+                            
                            // System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
                                 System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
@@ -140,7 +142,8 @@ public class SaleforceIntegrationController extends HttpServlet {
 
                             }
                         }
-
+                        
+                        
                         FarmerParent = ParentNode.FarmerParentNode();
                         FarmerParent.createRelationshipTo(biodataNode, ICTCRelationshipTypes.FARMER);
 
@@ -148,10 +151,16 @@ public class SaleforceIntegrationController extends HttpServlet {
                       
                         
                        
-                         out.println(sendAck());
-                         
+                        out.println(sendAck());
+                        
+                        user.AgentToPostFarmer(agentID,biodataNode);
+                        
+                        
                         String majorcrop = getXmlNodeValue("sf:majorcrop__c", ele);
                         Biodata farmer = new Biodata(biodataNode);
+                        
+                        
+                        
                         //create farmer meeting schedule
                         if (majorcrop.equalsIgnoreCase("Maize")) {
 

@@ -8,6 +8,9 @@ package com.grameenfoundation.ictc.domains;
 
 import com.grameenfoundation.ictc.domain.commons.GeneralInterface;
 import com.grameenfoundation.ictc.domain.commons.Status;
+import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
+import com.grameenfoundation.ictc.utils.Neo4jServices;
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
 
 /**
@@ -19,7 +22,7 @@ import org.neo4j.graphdb.Node;
 public class User extends Status implements GeneralInterface{
     
     
-    public static String ID = "userID";
+    public static String ID = "Id";
     public static String LAST_NAME = "lastname";
     public static String FIRST_NAME = "firstname";
     public static String AGENT_TYPE = "usertype";
@@ -147,4 +150,16 @@ public class User extends Status implements GeneralInterface{
         }
         return null;
     }
+      
+      
+      
+      public void setFarmer(Node farmer)
+   {
+       underlyingNode.createRelationshipTo(farmer, ICTCRelationshipTypes.HAS_FARMER);
+   } 
+    
+     public Biodata getFarmer()
+   {
+       return new Biodata(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_FARMER));
+   }
 }

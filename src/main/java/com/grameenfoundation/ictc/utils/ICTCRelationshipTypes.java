@@ -43,6 +43,7 @@ public enum ICTCRelationshipTypes implements RelationshipType{
     HARVEST,
     HAS_CROP_CALENDAR,
     HAS_MEETING,
+    HAS_FARMER,
     //L
     LAST_MODIFIED_BY,
     

@@ -74,6 +74,28 @@ public class UserModel {
 
         return null;
     }
+    
+      public User getAgent(String field, String value) {
+        String q = "Start root=node(0) "
+                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.AGENT + "]->p"
+                + " where p." + field + "='" + value + "'"
+                + " return p";
+
+        System.out.println("Query " + q);
+        try {
+            Node node = Neo4jServices.executeCypherQuerySingleResult(q, "p");
+            if (null != node) {
+                return new User(node);
+            }
+        } catch (Exception e) {
+            System.out.println("Unable to Find geofence");
+        }
+
+        return null;
+    }
+    
+    
+    
 
     public List<UserWrapper> findAll() {
 
@@ -124,5 +146,30 @@ List<UserWrapper> usrs = new ArrayList<>();
            
         }
         return usrs;
+    }
+
+
+ public boolean AgentToPostFarmer(String agent, Node farmer) {
+        boolean created = false;
+
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+
+             User user = new UserModel().getAgent(User.ID,agent);
+
+            System.out.println("biodata :" + user.getUnderlyingNode().getId());
+            if (null != user) {
+
+               user.setFarmer(farmer);
+                created = true;
+                trx.success();
+
+            }
+        } catch (Exception e) {
+            System.out.println("error");
+            //created = false;
+
+        }
+
+        return created;
     }
 }
