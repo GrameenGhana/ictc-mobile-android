@@ -61,7 +61,7 @@ import org.w3c.dom.Element;
  *
  * @author grameen
  */
-@WebServlet(name = "SaleforceIntegrationController", urlPatterns = {"/SaleforceIntegrationController"})
+@WebServlet(name = "SaleforceIntegrationController", urlPatterns = {"/sf/SaleforceIntegrationController"})
 public class SaleforceIntegrationController extends HttpServlet {
 
     /**
@@ -124,8 +124,9 @@ public class SaleforceIntegrationController extends HttpServlet {
                     //  Map<String,String> m = (Map<String,String>) rowNode.getAttributes();
                     String salesforceObj = rowNode.getAttributes().getNamedItem("xsi:type").getNodeValue();
                     System.out.println(salesforceObj);
-                    String agentID = getXmlNodeValue("sf:Agent__c", ele);
+                    
                     if (salesforceObj.equalsIgnoreCase("sf:Farmer_Biodata__c")) {
+                        String agentID = getXmlNodeValue("sf:Agent__c", ele);
                         org.neo4j.graphdb.Node biodataNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARMER);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
                             
