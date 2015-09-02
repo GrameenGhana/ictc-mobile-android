@@ -15,7 +15,7 @@ package com.grameenfoundation.ictc.wrapper;
 public class MeetingWrapper {
     
     String type = "type";
-    String group ="group";
+    String meetingIndex ="index";
     String season ="season";
     String startDate = "startdate";
     String endDate ="enddate";
@@ -28,12 +28,12 @@ public class MeetingWrapper {
         this.type = type;
     }
 
-    public String getGroup() {
-        return group;
+    public String getMeetingIndex() {
+        return meetingIndex;
     }
 
-    public void setGroup(String group) {
-        this.group = group;
+    public void setMeetingIndex(String meeting) {
+        this.meetingIndex = meeting;
     }
 
     public String getSeason() {

@@ -2,7 +2,8 @@
 <decorators defaultdir="/">  
     <excludes> 
         <pattern>/auth/*</pattern>
-        <pattern>/SaleforceIntegrationController/*</pattern>
+        <pattern>/SaleforceIntegrationController*</pattern>
+        <pattern>/FarmManagementPlanController*</pattern>
         <pattern>/theme/*</pattern>
         <pattern>/security/*</pattern>
         <pattern>/mobile/*</pattern>
