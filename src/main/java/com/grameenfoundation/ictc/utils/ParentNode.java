@@ -62,7 +62,7 @@ public class ParentNode {
            
            
    public static Node  MeetingParentNode() {
-        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.USER);
+        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.MEETING);
     }  public static Node  CropCalendarSettingsNode() {
         return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.CROP_CALENDAR_SETTINGS);
     }  

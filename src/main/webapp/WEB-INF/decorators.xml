@@ -16,7 +16,7 @@
         <pattern>/lister*</pattern> 
         <pattern>/pages/in*</pattern> 
         <pattern>/Mobile*</pattern>  
-        
+        <pattern>/sf/*</pattern>  
          <!--  <pattern>/super/systemsetup/policytype/*</pattern>  -->
       
     </excludes>
