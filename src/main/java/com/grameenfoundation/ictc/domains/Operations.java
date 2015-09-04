@@ -31,7 +31,7 @@ public class Operations extends Status implements GeneralInterface {
     public static String WEIGHTOFSEED = "weightofseed";
     public static String QUANTITYOFPLANTINGMATERIAL = "quantityofplantingmaterial";
     public static String LANDCLEARANCE = "landclearance";
-    public static String HERBICIDEUSE = "herbicideuse";
+    public static String HERBICIDEUSE = "herbicideueslandpreparationandplanting";
     public static String LANDCLEARANCEHERBICIDE = "landclearanceherbicide";
     public static String QUANTITYOFHERBICIDE = "quantityofherbicide";
     public static String PRICEOFHERBICIDE = "priceofherbicide";
@@ -124,7 +124,7 @@ public class Operations extends Status implements GeneralInterface {
     public static String NOHIREDLABOURFIFTHWEEDCONTROL = "nohiredlabourfifthweedcontrol";
     public static String COSTHIREDLABOURFIFTHWEEDCONTROL = "costhiredlabourfifthweedcontrol";
     public static String MAINTENANCEOFSOILFERTILITY="landsfertileandproductive";
-    public static String REGULARAPPINORGANICFERTILIZER="regularapplicationinorganicfert";
+    public static String REGULARAPPINORGANICFERTILIZER="regularapplicationofinorganicfert";
     
     
     public void setRegularappinorganicfertilizer(String regularappinorganicfertilizer) {

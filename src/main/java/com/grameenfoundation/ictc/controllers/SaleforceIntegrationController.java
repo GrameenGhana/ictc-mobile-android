@@ -455,7 +455,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                             }
                         }
 
-                     StorageParent = ParentNode.StorageParentNode();
+                       StorageParent = ParentNode.StorageParentNode();
                        StorageParent.createRelationshipTo( StorageNode, ICTCRelationshipTypes.STORAGE);
 
                         log.log(Level.INFO, "new node created {0}", StorageNode.getId());
@@ -466,9 +466,9 @@ public class SaleforceIntegrationController extends HttpServlet {
                         
                         
                         tx.success();
-                        update.put(Biodata.CLUSTER, getCluster(getUserScore(farmerID)));
-                       biodataModel.BiodataUpdate(farmerID, update);
                         out.println(sendAck());
+                       
+                        
                     }
                     
                       else if(salesforceObj.equals("sf:TechnicalNeeds__c"))
@@ -494,13 +494,13 @@ public class SaleforceIntegrationController extends HttpServlet {
                             }
                         }
 
-                     TNParent = ParentNode.TechNeedParentNode();
-                      TNParent.createRelationshipTo( TNNode, ICTCRelationshipTypes.TECHNICAL_NEED);
+                        TNParent = ParentNode.TechNeedParentNode();
+                        TNParent.createRelationshipTo(TNNode, ICTCRelationshipTypes.TECHNICAL_NEED);
 
                         log.log(Level.INFO, "new node created {0}", TNNode.getId());
-                        
-                        Biodata b = biodataModel.getBiodata("Id",farmerID);
-                        
+
+                        Biodata b = biodataModel.getBiodata("Id", farmerID);
+
                         biodataModel.BiodataToTechNeeds(b.getId(), TNNode);
                         
                         
@@ -509,6 +509,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                         
                      
                         out.println(sendAck());
+                       update.put(Biodata.CLUSTER, getCluster(getUserScore(farmerID)));
                     }
                   
                 }
@@ -704,25 +705,38 @@ public class SaleforceIntegrationController extends HttpServlet {
         Operations op = new OperationsModel().getUserOperations(user);
         Harvest ha = new HarvestModel().getUserHarvest(user);
         Storage st = new StorageModel().getUserStorage(user);
+        System.out.println("In score method");
+        System.out.println("user  " + user);
+            //System.out.println("variety " + op.getTypeOfVariety());
+            System.out.println("product objective " +fm.getProductionObjective().trim().charAt(0));
+            System.out.println("Entrepreneurship "+fm.getEntrepreneurship().trim().charAt(0));
+            System.out.println("Labour Use " + fm.getLabourUse().trim().charAt(0));
+            System.out.println("Variety " + op.getTypeOfVariety().charAt(0));
+            System.out.println("HerbicideUse " +op.getHerbicideUse().trim().charAt(0));
+            System.out.println("Plantarrangement "+op.getPlantarrangement().trim().charAt(0));
+            System.out.println("Maintenance of Fertility " +op.getMaintenanceofsoilfertility().trim().charAt(0));
+            System.out.println("Regular application inorganic fertilizer " +op.getRegularappinorganicfertilizer().trim().charAt(0));
+            System.out.println("Harvest " +ha.getYieldPerAcre().trim().charAt(0));
+            //System.out.println("Storage "+st.getPostHarvestLosses().trim().charAt(0));
         
-        if(null!=fm && null!=op && null!=ha&& null!=st)
-        {
-           score = Integer.valueOf(fm.getProductionObjective().charAt(0))+
-                   Integer.valueOf(fm.getEntrepreneurship().charAt(0))+
-                   Integer.valueOf(fm.getLabourUse().charAt(0))+
-                   Integer.valueOf(op.getTypeOfVariety().charAt(0))+
-                   Integer.valueOf(op.getHerbicideUse().charAt(0))+
-                   Integer.valueOf(op.getPlantarrangement().charAt(0))+
-                   Integer.valueOf(op.getMaintenanceofsoilfertility().charAt(0))+
-                   Integer.valueOf(op.getRegularappinorganicfertilizer().charAt(0))+
-                   Integer.valueOf(ha.getYieldPerAcre().charAt(0))+
-                   Integer.valueOf(st.getPostHarvestLosses().charAt(0));
-            System.out.println("Score is " + score);
-        }
-        else
-            System.out.println("score not done");
-                   
-        
+//        if(null!=fm && null!=op && null!=ha&& null!=st)
+//        {
+//            
+//
+//            score = Integer.valueOf(fm.getProductionObjective().charAt(0))
+//                    + Integer.valueOf(fm.getEntrepreneurship().charAt(0))
+//                    + Integer.valueOf(fm.getLabourUse().charAt(0))
+//                   // + Integer.valueOf(op.getTypeOfVariety().charAt(0))
+//                    + Integer.valueOf(op.getHerbicideUse().charAt(0))
+//                    + Integer.valueOf(op.getPlantarrangement().charAt(0))
+//                    + Integer.valueOf(op.getMaintenanceofsoilfertility().charAt(0))
+//                    + Integer.valueOf(op.getRegularappinorganicfertilizer().charAt(0))
+//                    + Integer.valueOf(ha.getYieldPerAcre().charAt(0))
+//                    + Integer.valueOf(st.getPostHarvestLosses().charAt(0));
+//            System.out.println("Score is " + score);
+//        } else
+//            System.out.println("score not done");
+
         return score;
         
     }
@@ -730,22 +744,18 @@ public class SaleforceIntegrationController extends HttpServlet {
     
     public String getCluster(int score)
     {
-        if(score < 10)
-            System.out.println("Score is less than 10");;
-         if(score>=10 && score<=12)
-           {
-             return "1";
-           }
-            else if(score>=13 && score<=22)
-            {
-               return "2";
-            }
-            else
-            {
-                return "3";
-            }
-           
-        } 
+        if (score < 10) {
+            System.out.println("Score is less than 10");
+        };
+        if (score >= 10 && score <= 12) {
+            return "1";
+        } else if (score >= 13 && score <= 22) {
+            return "2";
+        } else {
+            return "3";
+        }
+
+    }
         
     }
 
