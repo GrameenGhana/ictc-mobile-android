@@ -39,7 +39,7 @@ import org.xml.sax.SAXException;
  *
  * @author grameen
  */
-@WebServlet(name = "FarmManagementPlanController", urlPatterns = {"/FarmManagementPlanController"})
+@WebServlet(name = "FarmManagementPlanController", urlPatterns = {"/sf/FarmManagementPlanController"})
 public class FarmManagementPlanController extends HttpServlet {
 
     /**

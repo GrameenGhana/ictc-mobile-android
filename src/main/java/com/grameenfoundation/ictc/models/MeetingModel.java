@@ -45,11 +45,12 @@ public class MeetingModel {
                 created = false;
             } else {
                 meetingParent = ParentNode.MeetingParentNode();
-                meet.setType(mw.getType());
-                meet.setMeetingIndex(mw.getMeetingIndex());
-                meet.setSeason(mw.getSeason());
-                meet.setStartdate(mw.getStartDate());
-                meet.setEnddate(mw.getEndDate());
+                 meet.setType(mw.getType());
+                 meet.setMeetingIndex(mw.getMeetingIndex());
+                 meet.setSeason(mw.getSeason());
+                 meet.setStartdate(mw.getStartDate());
+                 meet.setEnddate(mw.getEndDate());
+               
 
                 meetingParent.createRelationshipTo(stNode, ICTCRelationshipTypes.MEETING);
 

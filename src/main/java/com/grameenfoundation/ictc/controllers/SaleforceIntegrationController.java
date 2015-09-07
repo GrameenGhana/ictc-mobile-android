@@ -19,6 +19,7 @@ import com.grameenfoundation.ictc.models.HarvestModel;
 import com.grameenfoundation.ictc.models.MeetingModel;
 import com.grameenfoundation.ictc.models.OperationsModel;
 import com.grameenfoundation.ictc.models.StorageModel;
+import com.grameenfoundation.ictc.models.UserModel;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
 import com.grameenfoundation.ictc.utils.Labels;
@@ -60,7 +61,7 @@ import org.w3c.dom.Element;
  *
  * @author grameen
  */
-@WebServlet(name = "SaleforceIntegrationController", urlPatterns = {"/SaleforceIntegrationController"})
+@WebServlet(name = "SaleforceIntegrationController", urlPatterns = {"/sf/SaleforceIntegrationController"})
 public class SaleforceIntegrationController extends HttpServlet {
 
     /**
@@ -79,6 +80,7 @@ public class SaleforceIntegrationController extends HttpServlet {
         BiodataModel biodataModel = new BiodataModel();
         MeetingSchedule meetingSchedule = new MeetingSchedule();
         MeetingModel  meetingModel = new MeetingModel();
+        UserModel user = new UserModel();
         Map<String,MeetingWrapper> meetingMap = new HashMap<>();
         
         String farmerID = null ;
@@ -115,18 +117,19 @@ public class SaleforceIntegrationController extends HttpServlet {
 
                 //get fields from objects
                 NodeList sObject = doc.getElementsByTagName("sObject");
-
+                
                 for (int j = 0; j < sObject.getLength(); j++) {
 
                     Node rowNode = sObject.item(j);
                     //  Map<String,String> m = (Map<String,String>) rowNode.getAttributes();
                     String salesforceObj = rowNode.getAttributes().getNamedItem("xsi:type").getNodeValue();
                     System.out.println(salesforceObj);
-
+                    
                     if (salesforceObj.equalsIgnoreCase("sf:Farmer_Biodata__c")) {
+                        String agentID = getXmlNodeValue("sf:Agent__c", ele);
                         org.neo4j.graphdb.Node biodataNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARMER);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
-
+                            
                            // System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
                                 System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
@@ -140,7 +143,8 @@ public class SaleforceIntegrationController extends HttpServlet {
 
                             }
                         }
-
+                        
+                        
                         FarmerParent = ParentNode.FarmerParentNode();
                         FarmerParent.createRelationshipTo(biodataNode, ICTCRelationshipTypes.FARMER);
 
@@ -148,65 +152,62 @@ public class SaleforceIntegrationController extends HttpServlet {
                       
                         
                        
-                         out.println(sendAck());
-                         
+                        out.println(sendAck());
+                        
+                        user.AgentToPostFarmer(agentID,biodataNode);
+                        
+                        
                         String majorcrop = getXmlNodeValue("sf:majorcrop__c", ele);
                         Biodata farmer = new Biodata(biodataNode);
+                        
+                        
+                        
                         //create farmer meeting schedule
-                        if(majorcrop.equalsIgnoreCase("Maize"))
-                        {
-                         
+                        if (majorcrop.equalsIgnoreCase("Maize")) {
+
                             meetingMap = meetingSchedule.maizeFarmerMeeting("1");
                             for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
-                                String key = entrySet.getKey();
+
                                 MeetingWrapper value = entrySet.getValue();
-                                
-                                biodataModel.BiodataToMeeting(farmer.getId(),meetingModel.create(value).getUnderlyingNode());
+
+                                biodataModel.BiodataToMeeting(farmer.getId(), meetingModel.create(value).getUnderlyingNode());
                             }
-                           
-                            
+
                         }
-                        if(majorcrop.equalsIgnoreCase("Yam"))
-                        {
-                         
+                        if (majorcrop.equalsIgnoreCase("Yam")) {
+
                             meetingMap = meetingSchedule.yamFarmerMeeting("1");
                             for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
-                                String key = entrySet.getKey();
+
                                 MeetingWrapper value = entrySet.getValue();
-                                
-                                biodataModel.BiodataToMeeting(farmer.getId(),meetingModel.create(value).getUnderlyingNode());
+
+                                biodataModel.BiodataToMeeting(farmer.getId(), meetingModel.create(value).getUnderlyingNode());
                             }
-                           
-                            
+
                         }
-                         if(majorcrop.equalsIgnoreCase("Rice"))
-                        {
-                         
+                        if (majorcrop.equalsIgnoreCase("Rice")) {
+
                             meetingMap = meetingSchedule.riceFarmerMeeting("1");
                             for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
-                                String key = entrySet.getKey();
+
                                 MeetingWrapper value = entrySet.getValue();
-                                
-                                biodataModel.BiodataToMeeting(farmer.getId(),meetingModel.create(value).getUnderlyingNode());
+
+                                biodataModel.BiodataToMeeting(farmer.getId(), meetingModel.create(value).getUnderlyingNode());
                             }
-                           
-                            
-                        }
-                         
-                          if(majorcrop.equalsIgnoreCase("Cassava"))
-                        {
-                         
-                            meetingMap = meetingSchedule.cassavaFarmerMeeting("1");
-                            for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
-                                String key = entrySet.getKey();
-                                MeetingWrapper value = entrySet.getValue();
-                                
-                                biodataModel.BiodataToMeeting(farmer.getId(),meetingModel.create(value).getUnderlyingNode());
-                            }
-                           
-                            
+
                         }
 
+                        if (majorcrop.equalsIgnoreCase("Cassava")) {
+
+                            meetingMap = meetingSchedule.cassavaFarmerMeeting("1");
+                            for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
+
+                                MeetingWrapper value = entrySet.getValue();
+
+                                biodataModel.BiodataToMeeting(farmer.getId(), meetingModel.create(value).getUnderlyingNode());
+                            }
+
+                        }
 
                         tx.success();
                     }
@@ -454,7 +455,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                             }
                         }
 
-                     StorageParent = ParentNode.StorageParentNode();
+                       StorageParent = ParentNode.StorageParentNode();
                        StorageParent.createRelationshipTo( StorageNode, ICTCRelationshipTypes.STORAGE);
 
                         log.log(Level.INFO, "new node created {0}", StorageNode.getId());
@@ -465,9 +466,9 @@ public class SaleforceIntegrationController extends HttpServlet {
                         
                         
                         tx.success();
-                        update.put(Biodata.CLUSTER, getCluster(getUserScore(farmerID)));
-                       biodataModel.BiodataUpdate(farmerID, update);
                         out.println(sendAck());
+                       
+                        
                     }
                     
                       else if(salesforceObj.equals("sf:TechnicalNeeds__c"))
@@ -493,13 +494,13 @@ public class SaleforceIntegrationController extends HttpServlet {
                             }
                         }
 
-                     TNParent = ParentNode.TechNeedParentNode();
-                      TNParent.createRelationshipTo( TNNode, ICTCRelationshipTypes.TECHNICAL_NEED);
+                        TNParent = ParentNode.TechNeedParentNode();
+                        TNParent.createRelationshipTo(TNNode, ICTCRelationshipTypes.TECHNICAL_NEED);
 
                         log.log(Level.INFO, "new node created {0}", TNNode.getId());
-                        
-                        Biodata b = biodataModel.getBiodata("Id",farmerID);
-                        
+
+                        Biodata b = biodataModel.getBiodata("Id", farmerID);
+
                         biodataModel.BiodataToTechNeeds(b.getId(), TNNode);
                         
                         
@@ -508,6 +509,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                         
                      
                         out.println(sendAck());
+                       update.put(Biodata.CLUSTER, getCluster(getUserScore(farmerID)));
                     }
                   
                 }
@@ -703,25 +705,38 @@ public class SaleforceIntegrationController extends HttpServlet {
         Operations op = new OperationsModel().getUserOperations(user);
         Harvest ha = new HarvestModel().getUserHarvest(user);
         Storage st = new StorageModel().getUserStorage(user);
+        System.out.println("In score method");
+        System.out.println("user  " + user);
+            //System.out.println("variety " + op.getTypeOfVariety());
+            System.out.println("product objective " +fm.getProductionObjective().trim().charAt(0));
+            System.out.println("Entrepreneurship "+fm.getEntrepreneurship().trim().charAt(0));
+            System.out.println("Labour Use " + fm.getLabourUse().trim().charAt(0));
+            System.out.println("Variety " + op.getTypeOfVariety().charAt(0));
+            System.out.println("HerbicideUse " +op.getHerbicideUse().trim().charAt(0));
+            System.out.println("Plantarrangement "+op.getPlantarrangement().trim().charAt(0));
+            System.out.println("Maintenance of Fertility " +op.getMaintenanceofsoilfertility().trim().charAt(0));
+            System.out.println("Regular application inorganic fertilizer " +op.getRegularappinorganicfertilizer().trim().charAt(0));
+            System.out.println("Harvest " +ha.getYieldPerAcre().trim().charAt(0));
+            //System.out.println("Storage "+st.getPostHarvestLosses().trim().charAt(0));
         
-        if(null!=fm && null!=op && null!=ha&& null!=st)
-        {
-           score = Integer.valueOf(fm.getProductionObjective().charAt(0))+
-                   Integer.valueOf(fm.getEntrepreneurship().charAt(0))+
-                   Integer.valueOf(fm.getLabourUse().charAt(0))+
-                   Integer.valueOf(op.getTypeOfVariety().charAt(0))+
-                   Integer.valueOf(op.getHerbicideUse().charAt(0))+
-                   Integer.valueOf(op.getPlantarrangement().charAt(0))+
-                   Integer.valueOf(op.getMaintenanceofsoilfertility().charAt(0))+
-                   Integer.valueOf(op.getRegularappinorganicfertilizer().charAt(0))+
-                   Integer.valueOf(ha.getYieldPerAcre().charAt(0))+
-                   Integer.valueOf(st.getPostHarvestLosses().charAt(0));
-            System.out.println("Score is " + score);
-        }
-        else
-            System.out.println("score not done");
-                   
-        
+//        if(null!=fm && null!=op && null!=ha&& null!=st)
+//        {
+//            
+//
+//            score = Integer.valueOf(fm.getProductionObjective().charAt(0))
+//                    + Integer.valueOf(fm.getEntrepreneurship().charAt(0))
+//                    + Integer.valueOf(fm.getLabourUse().charAt(0))
+//                   // + Integer.valueOf(op.getTypeOfVariety().charAt(0))
+//                    + Integer.valueOf(op.getHerbicideUse().charAt(0))
+//                    + Integer.valueOf(op.getPlantarrangement().charAt(0))
+//                    + Integer.valueOf(op.getMaintenanceofsoilfertility().charAt(0))
+//                    + Integer.valueOf(op.getRegularappinorganicfertilizer().charAt(0))
+//                    + Integer.valueOf(ha.getYieldPerAcre().charAt(0))
+//                    + Integer.valueOf(st.getPostHarvestLosses().charAt(0));
+//            System.out.println("Score is " + score);
+//        } else
+//            System.out.println("score not done");
+
         return score;
         
     }
@@ -729,22 +744,18 @@ public class SaleforceIntegrationController extends HttpServlet {
     
     public String getCluster(int score)
     {
-        if(score < 10)
-            System.out.println("Score is less than 10");;
-         if(score>=10 && score<=12)
-           {
-             return "1";
-           }
-            else if(score>=13 && score<=22)
-            {
-               return "2";
-            }
-            else
-            {
-                return "3";
-            }
-           
-        } 
+        if (score < 10) {
+            System.out.println("Score is less than 10");
+        };
+        if (score >= 10 && score <= 12) {
+            return "1";
+        } else if (score >= 13 && score <= 22) {
+            return "2";
+        } else {
+            return "3";
+        }
+
+    }
         
     }
 
