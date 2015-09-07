@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.grameenfoundation.ictc.models;
 
 import com.grameenfoundation.ictc.domains.Meeting;
@@ -24,18 +23,16 @@ import scala.collection.Iterator;
 /**
  *
  * @author Joseph George Davis
- * @date Aug 30, 2015 5:44:44 PM
- * description:
+ * @date Aug 30, 2015 5:44:44 PM description:
  */
 public class MeetingModel {
-    
-     Logger log = Logger.getLogger(UserModel.class.getName());
-     Node meetingParent;
-    
-    public Meeting create(MeetingWrapper mw)
-    {
-        
-         boolean created = true;
+
+    Logger log = Logger.getLogger(UserModel.class.getName());
+    Node meetingParent;
+
+    public Meeting create(MeetingWrapper mw) {
+
+        boolean created = true;
 
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
@@ -48,12 +45,11 @@ public class MeetingModel {
                 created = false;
             } else {
                 meetingParent = ParentNode.MeetingParentNode();
-                 meet.setType(mw.getType());
-                 meet.setMeetingIndex(mw.getMeetingIndex());
-                 meet.setSeason(mw.getSeason());
-                 meet.setStartdate(mw.getStartDate());
-                 meet.setEnddate(mw.getEndDate());
-               
+                meet.setType(mw.getType());
+                meet.setMeetingIndex(mw.getMeetingIndex());
+                meet.setSeason(mw.getSeason());
+                meet.setStartdate(mw.getStartDate());
+                meet.setEnddate(mw.getEndDate());
 
                 meetingParent.createRelationshipTo(stNode, ICTCRelationshipTypes.MEETING);
 
@@ -73,16 +69,19 @@ public class MeetingModel {
         return null;
     }
 
-     public List<MeetingWrapper> findAll() {
+    public List<MeetingWrapper> findAll() {
 
-        return meetingQuery("match (l:USER) return  l", "l");
+        return meetingQuery("match (l:MEETING) return  l", "l");
     }
-    
-   
-     
-     private List<MeetingWrapper> meetingQuery(String q, String returnedItem) {
-      List<MeetingWrapper> mtg = new ArrayList<>();
-        System.out.println("Query : "+q);
+
+    public List<MeetingWrapper> findFarmerMeeting(String farmerId) {
+
+        return meetingQuery("match (l:MEETING)<-[:HAS_MEETING]-f where f.Id ='"+farmerId+"' return  l", "l");
+    }
+
+    private List<MeetingWrapper> meetingQuery(String q, String returnedItem) {
+        List<MeetingWrapper> mtg = new ArrayList<>();
+        System.out.println("Query : " + q);
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             Iterator<Node> n_column = Neo4jServices.executeIteratorQuery(q, returnedItem);
             while (n_column.hasNext()) {
@@ -94,16 +93,13 @@ public class MeetingModel {
                 mr.setStartDate(m.getStartdate());
                 mr.setEndDate(m.getEnddate());
 
-                
                 mtg.add(mr);
                //todo Find relationship to farmer to replace
-                
+
 //               wr.(u.getFirstname());
             }
-           
+
         }
         return mtg;
     }
 }
-
-
