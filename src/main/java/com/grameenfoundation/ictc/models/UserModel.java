@@ -114,9 +114,10 @@ public class UserModel {
 
     public UserWrapper findUser(String username, String password) {
         CryptoLibrary crypt = new CryptoLibrary();
-        String q = "match (l:AGENT) WHERE l." + User.USERNAME + "=~ '(?i)" + username + "'  "
+        String q = "match (l:AGENT) WHERE l." + User.USERNAME + "= '" + username + "'  "
                 //+ "and  l." + User.PASSWORD + "='" + (password) + "'"
                 + "  return l";
+        System.out.println("login : "+q);
         List<UserWrapper> usr = userQuery(q, "l");
         if (null != usr && !usr.isEmpty()) {
             return usr.get(0);
