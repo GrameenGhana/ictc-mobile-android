@@ -27,6 +27,7 @@ public class ICTCKonstants {
     public static final String FARMER = "farmer";
      public static final String FM = "farm_management";
      public static final String FMP = "farm_management_plan";
+    public static final String FARMER_INPUT_RECEIVED= "farmer_input_received";
     
      //h
       public static final String HARVEST = "harvest";

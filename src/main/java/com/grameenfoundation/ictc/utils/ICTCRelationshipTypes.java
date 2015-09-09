@@ -31,6 +31,7 @@ public enum ICTCRelationshipTypes implements RelationshipType{
     FARM_MANAGEMENT,
     FARM_OPERATION,
     FARM_MANAGEMENT_PLAN,
+    FARM_INPUT_RECEIVED,
     //H
     HAS_FARM_MANAGEMENT_PLAN,
     HAS_FARM_MANAGEMENT,
@@ -44,6 +45,7 @@ public enum ICTCRelationshipTypes implements RelationshipType{
     HAS_CROP_CALENDAR,
     HAS_MEETING,
     HAS_FARMER,
+    HAS_FARM_INPUT,
     //L
     LAST_MODIFIED_BY,
     

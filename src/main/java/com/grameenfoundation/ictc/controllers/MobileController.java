@@ -7,9 +7,11 @@ package com.grameenfoundation.ictc.controllers;
 
 import com.grameenfoundation.ictc.domains.Biodata;
 import com.grameenfoundation.ictc.models.BiodataModel;
+import com.grameenfoundation.ictc.models.FarmerInputModel;
 import com.grameenfoundation.ictc.models.MeetingModel;
 import com.grameenfoundation.ictc.models.UserModel;
 import com.grameenfoundation.ictc.wrapper.BiodataWrapper;
+import com.grameenfoundation.ictc.wrapper.FarmerInputReceivedWrapper;
 import com.grameenfoundation.ictc.wrapper.MeetingWrapper;
 import com.grameenfoundation.ictc.wrapper.UserWrapper;
 import java.io.IOException;
@@ -78,7 +80,7 @@ public class MobileController extends HttpServlet {
                     jSONObject.put("lname", user.getLastName());
                     jSONObject.put("fname", user.getFirstName());
                     jSONObject.put("type", user.getAgentType());
-                    
+
                     out.print(jSONObject);
                 }
 
@@ -91,7 +93,39 @@ public class MobileController extends HttpServlet {
                 jSONObject.put("farmer", farmerArray);
                 jSONObject.put("rc", "00");
                 out.print(jSONObject);
-                
+
+            } //Farm Inputs
+            else if ("fi".equals(serviceCode)) {
+
+                String farmer = request.getParameter("fid");
+                String seeds = request.getParameter("s");
+                String fertiliser = request.getParameter("f");
+                String plough = request.getParameter("p");
+                FarmerInputModel fim = new FarmerInputModel();
+                List<FarmerInputReceivedWrapper> farmers = fim.getFarmerInputs(farmer);
+
+                FarmerInputReceivedWrapper seedsReceived = searchNeeds(farmers, "seeds");
+                FarmerInputReceivedWrapper fertReceived = searchNeeds(farmers, "fertiliser");
+                FarmerInputReceivedWrapper ploughReceived = searchNeeds(farmers, "plough");
+
+                if (null == fertReceived && !fertiliser.isEmpty()) {
+                    fertReceived = new FarmerInputReceivedWrapper("fertiliser", null, "N", Double.parseDouble(fertiliser));
+                    fim.create(fertReceived);
+                }
+
+                if (null == seedsReceived && !seeds.isEmpty()) {
+                    seedsReceived = new FarmerInputReceivedWrapper("seeds", null, "N", Double.parseDouble(fertiliser));
+                    fim.create(seedsReceived);
+                }
+
+                if (null == ploughReceived && !plough.isEmpty()) {
+                    ploughReceived = new FarmerInputReceivedWrapper("plough", null, "N", 1);
+                    fim.create(ploughReceived);
+                }
+                JSONObject obj = new JSONObject();
+                obj.put("rc", "00");
+                out.print(obj);
+
             } else if ("fp".equalsIgnoreCase(serviceCode)) {
                 System.out.println("ServiceCode  :" + serviceCode);
                 JSONObject obj = new JSONObject();
@@ -128,15 +162,13 @@ public class MobileController extends HttpServlet {
                         }
                         ct++;
                     }
-                   
-                    
-                    
+
                 }
 
                 out.print(obj);
             } else if ("fp".equalsIgnoreCase(serviceCode)) {
-            
-            }else {
+
+            } else {
 
                 JSONObject obj = new JSONObject();
                 obj.put("rc", "05");
@@ -237,21 +269,21 @@ public class MobileController extends HttpServlet {
                     }
                     ct++;
                 }
-                
-                 JSONArray meetingArray = new JSONArray();
-                    List<MeetingWrapper> meetings = new MeetingModel().findFarmerMeeting(bd.getFarmID());
-                    for (MeetingWrapper meeting : meetings) {
-                        JSONObject meetingObj = new JSONObject();
-                        meetingObj.put("midx",meeting.getMeetingIndex());
-                        meetingObj.put("ty",meeting.getType());
-                        meetingObj.put("sea",meeting.getSeason());
-                        meetingObj.put("sd",meeting.getStartDate());
-                        meetingObj.put("ed",meeting.getEndDate());
-                        meetingArray.put(meetingObj);
-                    }
-                    if(meetingArray.length()>0){
-                       obj.put("meeting", meetingArray);
-                    }
+
+                JSONArray meetingArray = new JSONArray();
+                List<MeetingWrapper> meetings = new MeetingModel().findFarmerMeeting(bd.getFarmID());
+                for (MeetingWrapper meeting : meetings) {
+                    JSONObject meetingObj = new JSONObject();
+                    meetingObj.put("midx", meeting.getMeetingIndex());
+                    meetingObj.put("ty", meeting.getType());
+                    meetingObj.put("sea", meeting.getSeason());
+                    meetingObj.put("sd", meeting.getStartDate());
+                    meetingObj.put("ed", meeting.getEndDate());
+                    meetingArray.put(meetingObj);
+                }
+                if (meetingArray.length() > 0) {
+                    obj.put("meeting", meetingArray);
+                }
                 farmerArray.put(obj);
             } catch (Exception e) {
             }
@@ -259,5 +291,16 @@ public class MobileController extends HttpServlet {
         }
         return farmerArray;
 
+    }
+
+    public FarmerInputReceivedWrapper searchNeeds(List<FarmerInputReceivedWrapper> farmers, String search) {
+
+        for (FarmerInputReceivedWrapper farmer : farmers) {
+            if (farmer.getName().equalsIgnoreCase(search)) {
+                return farmer;
+            }
+        }
+
+        return null;
     }
 }

@@ -29,6 +29,7 @@ public enum Labels implements Label {
     USER,
     MEETING,
     CROP_CALENDAR_SETTING,
-    CROP_CALENDAR
+    CROP_CALENDAR,
+    FARM_INPUT
 
 }

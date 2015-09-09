@@ -66,4 +66,7 @@ public class ParentNode {
     }  public static Node  CropCalendarSettingsNode() {
         return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.CROP_CALENDAR_SETTINGS);
     }  
+    public static Node  FarmInputReceivedNode() {
+        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.FARMER_INPUT_RECEIVED);
+    }  
 }
