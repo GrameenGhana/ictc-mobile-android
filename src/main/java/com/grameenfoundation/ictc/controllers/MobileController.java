@@ -10,6 +10,7 @@ import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.models.FarmerInputModel;
 import com.grameenfoundation.ictc.models.MeetingModel;
 import com.grameenfoundation.ictc.models.UserModel;
+import com.grameenfoundation.ictc.utils.HTTPCommunicator;
 import com.grameenfoundation.ictc.wrapper.BiodataWrapper;
 import com.grameenfoundation.ictc.wrapper.FarmerInputReceivedWrapper;
 import com.grameenfoundation.ictc.wrapper.MeetingWrapper;
@@ -32,6 +33,8 @@ import org.json.JSONObject;
  */
 @WebServlet(name = "MobileController", urlPatterns = {"/MobileController"})
 public class MobileController extends HttpServlet {
+
+    public String IVR_URL = "http://41.191.245.72/nymess/ictc.php?action=";
 
     private final static Logger log = Logger.getRootLogger();
 
@@ -109,21 +112,22 @@ public class MobileController extends HttpServlet {
                 FarmerInputReceivedWrapper ploughReceived = searchNeeds(farmers, "plough");
 
                 if (null == fertReceived && !fertiliser.isEmpty()) {
-                    fertReceived = new FarmerInputReceivedWrapper("fertiliser", null, "N", Double.parseDouble(fertiliser));
+                    fertReceived = new FarmerInputReceivedWrapper("fertiliser", null, "N", Double.parseDouble(fertiliser), farmer);
                     fim.create(fertReceived);
                 }
 
                 if (null == seedsReceived && !seeds.isEmpty()) {
-                    seedsReceived = new FarmerInputReceivedWrapper("seeds", null, "N", Double.parseDouble(fertiliser));
+                    seedsReceived = new FarmerInputReceivedWrapper("seeds", null, "N", Double.parseDouble(fertiliser), farmer);
                     fim.create(seedsReceived);
                 }
 
                 if (null == ploughReceived && !plough.isEmpty()) {
-                    ploughReceived = new FarmerInputReceivedWrapper("plough", null, "N", 1);
+                    ploughReceived = new FarmerInputReceivedWrapper("plough", null, "N", 1, farmer);
                     fim.create(ploughReceived);
                 }
                 JSONObject obj = new JSONObject();
                 obj.put("rc", "00");
+                HTTPCommunicator.doGet(IVR_URL + "reg&fid=" + farmer + "&s=" + seeds + "&f=" + fertiliser + "&p=" + plough + "&msisdn=246005828");
                 out.print(obj);
 
             } else if ("fp".equalsIgnoreCase(serviceCode)) {
