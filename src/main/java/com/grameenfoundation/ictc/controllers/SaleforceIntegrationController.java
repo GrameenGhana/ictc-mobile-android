@@ -169,6 +169,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                             for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
 
                                 MeetingWrapper value = entrySet.getValue();
+                                value.setAttended("0");
 
                                 biodataModel.BiodataToMeeting(farmer.getId(), meetingModel.create(value).getUnderlyingNode());
                             }
@@ -180,7 +181,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                             for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
 
                                 MeetingWrapper value = entrySet.getValue();
-
+                                value.setAttended("0");
                                 biodataModel.BiodataToMeeting(farmer.getId(), meetingModel.create(value).getUnderlyingNode());
                             }
 
@@ -191,7 +192,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                             for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
 
                                 MeetingWrapper value = entrySet.getValue();
-
+                                value.setAttended("0");
                                 biodataModel.BiodataToMeeting(farmer.getId(), meetingModel.create(value).getUnderlyingNode());
                             }
 
@@ -203,7 +204,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                             for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
 
                                 MeetingWrapper value = entrySet.getValue();
-
+                                  value.setAttended("0");
                                 biodataModel.BiodataToMeeting(farmer.getId(), meetingModel.create(value).getUnderlyingNode());
                             }
 
@@ -502,14 +503,12 @@ public class SaleforceIntegrationController extends HttpServlet {
                         Biodata b = biodataModel.getBiodata("Id", farmerID);
 
                         biodataModel.BiodataToTechNeeds(b.getId(), TNNode);
-                        
-                        
-                        tx.success();
-
-                        
+                       
                      
                         out.println(sendAck());
                        update.put(Biodata.CLUSTER, getCluster(getUserScore(farmerID)));
+                       biodataModel.BiodataUpdate(farmerID, update);
+                       tx.success();
                     }
                   
                 }
@@ -717,25 +716,25 @@ public class SaleforceIntegrationController extends HttpServlet {
             System.out.println("Maintenance of Fertility " +op.getMaintenanceofsoilfertility().trim().charAt(0));
             System.out.println("Regular application inorganic fertilizer " +op.getRegularappinorganicfertilizer().trim().charAt(0));
             System.out.println("Harvest " +ha.getYieldPerAcre().trim().charAt(0));
-            //System.out.println("Storage "+st.getPostHarvestLosses().trim().charAt(0));
+            System.out.println("Storage "+st.getPostHarvestLosses().trim().charAt(0));
         
-//        if(null!=fm && null!=op && null!=ha&& null!=st)
-//        {
-//            
-//
-//            score = Integer.valueOf(fm.getProductionObjective().charAt(0))
-//                    + Integer.valueOf(fm.getEntrepreneurship().charAt(0))
-//                    + Integer.valueOf(fm.getLabourUse().charAt(0))
-//                   // + Integer.valueOf(op.getTypeOfVariety().charAt(0))
-//                    + Integer.valueOf(op.getHerbicideUse().charAt(0))
-//                    + Integer.valueOf(op.getPlantarrangement().charAt(0))
-//                    + Integer.valueOf(op.getMaintenanceofsoilfertility().charAt(0))
-//                    + Integer.valueOf(op.getRegularappinorganicfertilizer().charAt(0))
-//                    + Integer.valueOf(ha.getYieldPerAcre().charAt(0))
-//                    + Integer.valueOf(st.getPostHarvestLosses().charAt(0));
-//            System.out.println("Score is " + score);
-//        } else
-//            System.out.println("score not done");
+        if(null!=fm && null!=op && null!=ha&& null!=st)
+        {
+            
+
+            score =   Integer.parseInt(fm.getEntrepreneurship().substring(0,1))
+                    + Integer.parseInt(fm.getProductionObjective().substring(0,1))
+                    + Integer.parseInt(fm.getLabourUse().substring(0,1))
+                    + Integer.parseInt(op.getTypeOfVariety().substring(0,1))
+                    + Integer.parseInt(op.getHerbicideUse().substring(0,1))
+                    + Integer.parseInt(op.getPlantarrangement().substring(0,1))
+                    + Integer.parseInt(op.getMaintenanceofsoilfertility().substring(0,1))
+                    + Integer.parseInt(op.getRegularappinorganicfertilizer().substring(0,1))
+                    + Integer.parseInt(ha.getYieldPerAcre().substring(0,1))
+                    + Integer.parseInt(st.getPostHarvestLosses().substring(0,1));
+            System.out.println("Score is " + score);
+        } else
+            System.out.println("score not done");
 
         return score;
         

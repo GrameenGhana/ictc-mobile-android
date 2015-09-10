@@ -6,6 +6,7 @@
 package com.grameenfoundation.ictc.controllers;
 
 import com.grameenfoundation.ictc.domains.Biodata;
+import com.grameenfoundation.ictc.domains.Meeting;
 import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.models.FarmerInputModel;
 import com.grameenfoundation.ictc.models.MeetingModel;
@@ -17,7 +18,9 @@ import com.grameenfoundation.ictc.wrapper.MeetingWrapper;
 import com.grameenfoundation.ictc.wrapper.UserWrapper;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -170,7 +173,19 @@ public class MobileController extends HttpServlet {
                 }
 
                 out.print(obj);
-            } else if ("fp".equalsIgnoreCase(serviceCode)) {
+            } else if ("markattendance".equalsIgnoreCase(serviceCode)) {
+                Map<String,String> update = new HashMap<>();
+                MeetingModel meetingModel = new MeetingModel();
+                Meeting m = null;
+                String[] farmer_id = request.getParameterValues("fid");
+                String meetingIndex = request.getParameter("mtg");
+                String crop = request.getParameter("cr");
+                update.put(Meeting.ATTENDED,"1");
+                for(String id : farmer_id)
+                {
+                   m= meetingModel.findMeetingByFarmerCrop(id,meetingIndex, crop).get(0);
+                   meetingModel.MeetingUpdate(m.getId(), update);
+                }
 
             } else {
 
@@ -283,7 +298,7 @@ public class MobileController extends HttpServlet {
                     meetingObj.put("sea", meeting.getSeason());
                     meetingObj.put("sd", meeting.getStartDate());
                     meetingObj.put("ed", meeting.getEndDate());
-                    meetingArray.put(meetingObj);
+                    meetingObj.put("at",meeting.getAttended());
                 }
                 if (meetingArray.length() > 0) {
                     obj.put("meeting", meetingArray);

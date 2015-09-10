@@ -55,7 +55,7 @@ public class MeetingSchedule {
            thirdGroupMeeting.setStartDate("01/07/2015");
            thirdGroupMeeting.setEndDate("31/07/2015");
            thirdGroupMeeting.setSeason("1");
-           meetings.put("thirdgroup", initialGroupMeeting);
+           meetings.put("thirdgroup", thirdGroupMeeting);
            
            //Fourth Group Meeting
            fourthGroupMeeting.setType("group");
@@ -112,7 +112,7 @@ public class MeetingSchedule {
            thirdGroupMeeting.setStartDate("01/11/2015");
            thirdGroupMeeting.setEndDate("30/11/2015");
            thirdGroupMeeting.setSeason("2");
-           meetings.put("thirdgroup", initialGroupMeeting);
+           meetings.put("thirdgroup", thirdGroupMeeting);
            
            //Fourth Group Meeting
            fourthGroupMeeting.setType("group");
@@ -179,7 +179,7 @@ public class MeetingSchedule {
            thirdGroupMeeting.setStartDate("01/11/2015");
            thirdGroupMeeting.setEndDate("31/11/2015");
            thirdGroupMeeting.setSeason(season);
-           meetings.put("thirdgroup", initialGroupMeeting);
+           meetings.put("thirdgroup", thirdGroupMeeting);
            
            //Fourth Group Meeting
            fourthGroupMeeting.setType("group");
@@ -243,7 +243,7 @@ public class MeetingSchedule {
            thirdGroupMeeting.setStartDate("01/09/2015");
            thirdGroupMeeting.setEndDate("31/09/2015");
            thirdGroupMeeting.setSeason(season);
-           meetings.put("thirdgroup", initialGroupMeeting);
+           meetings.put("thirdgroup", thirdGroupMeeting);
            
            //Fourth Group Meeting
            fourthGroupMeeting.setType("group");

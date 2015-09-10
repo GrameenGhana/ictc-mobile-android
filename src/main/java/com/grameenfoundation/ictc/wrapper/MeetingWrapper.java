@@ -19,6 +19,15 @@ public class MeetingWrapper {
     String season ="season";
     String startDate = "startdate";
     String endDate ="enddate";
+    String attended="attended";
+
+    public String getAttended() {
+        return attended;
+    }
+
+    public void setAttended(String attended) {
+        this.attended = attended;
+    }
 
     public String getType() {
         return type;

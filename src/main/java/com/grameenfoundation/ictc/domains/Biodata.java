@@ -349,9 +349,9 @@ public class Biodata extends Status implements GeneralInterface {
          underlyingNode.createRelationshipTo(Meeting, ICTCRelationshipTypes.HAS_MEETING); 
      }
      
-       public FarmManagementPlan getFarmerMeeting()
+       public Meeting getFarmerMeeting()
    {
-       return new FarmManagementPlan(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_MEETING));
+       return new Meeting(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_MEETING));
    }
     
 }
