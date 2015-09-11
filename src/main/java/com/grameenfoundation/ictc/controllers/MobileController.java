@@ -306,6 +306,23 @@ public class MobileController extends HttpServlet {
                     obj.put("meeting", meetingArray);
                 }
                 farmerArray.put(obj);
+                JSONArray inputArray = new JSONArray();
+                List<FarmerInputReceivedWrapper> fi = new FarmerInputModel().getFarmerInputs(bd.getFarmID());
+                for(FarmerInputReceivedWrapper f :fi)
+                {
+                    JSONObject inputObj = new JSONObject();
+                    inputObj.put("nm",f.getName());
+                    inputObj.put("qty",f.getQty());
+                    inputObj.put("st", f.getStatus());
+                    inputArray.put(inputObj);
+                }
+                 
+                  if (inputArray.length() > 0) {
+                    obj.put("input", inputArray);
+                }
+                
+                farmerArray.put(obj);
+                
             } catch (Exception e) {
             }
 
