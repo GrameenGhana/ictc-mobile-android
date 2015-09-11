@@ -110,18 +110,19 @@ public class MeetingModel {
 
     private List<MeetingWrapper> meetingQuery(String q, String returnedItem) {
         List<MeetingWrapper> mtg = new ArrayList<>();
-        System.out.println("Query : " + q);
+        System.out.println("Query Meeting : " + q);
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             Iterator<Node> n_column = Neo4jServices.executeIteratorQuery(q, returnedItem);
             while (n_column.hasNext()) {
                 Meeting m = new Meeting(n_column.next());
                 MeetingWrapper mr = new MeetingWrapper();
+                
                 mr.setType(m.getType());
                 mr.setMeetingIndex(m.getMeetingIndex());
                 mr.setSeason(m.getSeason());
                 mr.setStartDate(m.getStartdate());
                 mr.setEndDate(m.getEnddate());
-                mr.setAttended(returnedItem);
+                mr.setAttended(m.getAttended());
 
                 mtg.add(mr);
                //todo Find relationship to farmer to replace

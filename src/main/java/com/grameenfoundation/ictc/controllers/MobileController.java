@@ -100,7 +100,8 @@ public class MobileController extends HttpServlet {
                 jSONObject.put("rc", "00");
                 out.print(jSONObject);
 
-            } //Farm Inputs
+            } 
+                //Farm Inputs
             else if ("fi".equals(serviceCode)) {
 
                 String farmer = request.getParameter("fid");
@@ -299,6 +300,7 @@ public class MobileController extends HttpServlet {
                     meetingObj.put("sd", meeting.getStartDate());
                     meetingObj.put("ed", meeting.getEndDate());
                     meetingObj.put("at",meeting.getAttended());
+                    meetingArray.put(meetingObj);
                 }
                 if (meetingArray.length() > 0) {
                     obj.put("meeting", meetingArray);
