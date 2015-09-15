@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
+import org.jboss.netty.handler.codec.http.HttpResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -192,11 +193,21 @@ public class MobileController extends HttpServlet {
             }else if("fmap".equalsIgnoreCase(serviceCode.trim()))
             {
                 System.out.println("points "+ request.getParameter("l")) ; 
-                System.out.println("points "+ request.getParameter("action")) ; 
+               
+                String res = request.getParameter("l");
+
+                JSONObject j = new JSONObject(res);
+
+               
+                double area = (double) j.get("area");
+                
                 
                 JSONObject obj = new JSONObject();
                 obj.put("rc", "00");
                 out.print(obj);
+                System.out.println("redirecting to jsp");
+                System.out.println("Area " + area);
+                response.sendRedirect(request.getContextPath() + "gmap/area_calculation.jsp?p=" + res);
             }
             else
             {
