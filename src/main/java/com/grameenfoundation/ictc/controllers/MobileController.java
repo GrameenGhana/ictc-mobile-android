@@ -64,7 +64,7 @@ public class MobileController extends HttpServlet {
 
             String serviceCode = request.getParameter("action");
             JSONObject jSONObject = new JSONObject();
-
+            System.out.println("action " + serviceCode);
             BiodataModel bModel = new BiodataModel();
             if ("login".equals(serviceCode)) {
 
@@ -184,11 +184,22 @@ public class MobileController extends HttpServlet {
                 update.put(Meeting.ATTENDED,"1");
                 for(String id : farmer_id)
                 {
-                   m= meetingModel.findMeetingByFarmerCrop(id,meetingIndex, crop).get(0);
+                   m=meetingModel.findMeetingByFarmerCrop(id,meetingIndex, crop).get(0);
                    meetingModel.MeetingUpdate(m.getId(), update);
                 }
+                
 
-            } else {
+            }else if("fmap".equalsIgnoreCase(serviceCode.trim()))
+            {
+                System.out.println("points "+ request.getParameter("l")) ; 
+                System.out.println("points "+ request.getParameter("action")) ; 
+                
+                JSONObject obj = new JSONObject();
+                obj.put("rc", "00");
+                out.print(obj);
+            }
+            else
+            {
 
                 JSONObject obj = new JSONObject();
                 obj.put("rc", "05");
