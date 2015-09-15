@@ -4,8 +4,24 @@
     Author     : Joseph George Davis
 --%>
 
+<%@page import="org.json.JSONObject"%>
+<%@page import="org.json.JSONArray"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<% 
+   
+    String points = request.getParameter("p");
+    String pp = "{\"area\":0,\"points\":[{\"lng\":-0.173862,\"lat\":5.5706267},{\"lng\":-0.173862,\"lat\":5.5706267},{\"lng\":-0.173862,\"lat\":5.5706267},{\"lng\":-0.173862,\"lat\":5.5706267},{\"lng\":-0.173862,\"lat\":5.5706267}]}";
+      JSONObject j = new JSONObject(pp);
+      
+      System.out.print(j);
+       
+       JSONArray ja = (JSONArray) j.get("points");
+       
+       
+
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -51,12 +67,17 @@
                 });
                    var bermudaTriangle = new google.maps.Polygon({
                  paths: [
-                 new google.maps.LatLng(25.774, -80.190),
-                 new google.maps.LatLng(18.466, -66.118),
-                 new google.maps.LatLng(32.321, -64.757)
-                 ]
-                 });  
-
+                      <%for(int i =0;i<ja.length();i++){
+                          JSONObject obj = ja.getJSONObject(i);
+                      %>
+                      new google.maps.LatLng(<%=obj.getDouble("lat")%>,<%=obj.getDouble("lng")%>),
+                  
+                <%}%> ]
+                 });
+                 
+                   //new google.maps.LatLng(25.774, -80.190)
+                 // new google.maps.LatLng(18.466, -66.118),
+                   //new google.maps.LatLng(32.321, -64.757
                 // Add a listener for the click event
                 //google.maps.event.addListener(map, 'click', function (event) {
                     addLatLngToPoly(bermudaTriangle);
@@ -75,6 +96,7 @@
 
                 z = google.maps.geometry.spherical.computeArea(path);
                 console.log(z);
+               
                 // Update the text field to display the polyline encodings
                 //var encodeString = google.maps.geometry.encoding.encodePath(path);
                 //if (encodeString) {
