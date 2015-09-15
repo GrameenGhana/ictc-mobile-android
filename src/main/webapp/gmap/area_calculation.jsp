@@ -12,13 +12,13 @@
 <% 
    
     String points = request.getParameter("p");
-    String pp = "{\"area\":0,\"points\":[{\"lng\":-0.173862,\"lat\":5.5706267},{\"lng\":-0.173862,\"lat\":5.5706267},{\"lng\":-0.173862,\"lat\":5.5706267},{\"lng\":-0.173862,\"lat\":5.5706267},{\"lng\":-0.173862,\"lat\":5.5706267}]}";
-      JSONObject j = new JSONObject(pp);
+    String pp = "{\"area\":0.00100769241714143,\"points\":[{\"lng\":-0.1715416,\"lat\":5.5683899},{\"lng\":-0.1716476,\"lat\":5.5684594},{\"lng\":-0.1717273,\"lat\":5.5684636},{\"lng\":-0.1719507,\"lat\":5.5684822}]}";
+    JSONObject j = new JSONObject(pp);
       
-      System.out.print(j);
+     System.out.print(j);
        
-       JSONArray ja = (JSONArray) j.get("points");
-       
+     JSONArray ja = (JSONArray) j.get("points");
+    // String farmer =   
        
 
 %>
@@ -42,9 +42,10 @@
         </style>
     </head>
     <body>
-
+    <label>Area</label>
+        
         <div id="lmap" ></div>
-
+         
         <!-- <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry&callback=initMap"
                async defer></script>-->
     </body>
@@ -97,11 +98,7 @@
                 z = google.maps.geometry.spherical.computeArea(path);
                 console.log(z);
                
-                // Update the text field to display the polyline encodings
-                //var encodeString = google.maps.geometry.encoding.encodePath(path);
-                //if (encodeString) {
-                //document.getElementById('encoded-polyline').value = encodeString;
-                // }
+                window.location = "<%=request.getContextPath()%>/gmap/farm_area.jsp?area="+z;
             }
         </script>
     </content>

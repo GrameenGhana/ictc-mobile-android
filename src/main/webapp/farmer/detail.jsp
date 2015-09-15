@@ -164,12 +164,15 @@
          
     </script>
      <% if(wrapper != null) {%>
+    
     <content tag="scripts">
-        <%
+       <script type="text/javascript">  <%
         String location ="";
         if(location.isEmpty()) location="5.569313, -0.171332";
         %>
         loadGoogleMap("mmapview", '<%= location %>', "<%=wrapper.getFirstName() + " " + wrapper.getLastName()%>'s Farm")
-</content>
-        <% } %>
+                </script>
+        </content>
+
+        <% }%>
 </html>

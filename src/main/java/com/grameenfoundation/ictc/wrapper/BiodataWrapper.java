@@ -31,6 +31,15 @@ public class BiodataWrapper {
     private String cluster = "cluster";
     private String farmID = "farmerid";
     private String majorCrop = "majorcrop";
+    private String farmarea = "farmarea";
+
+    public String getFarmarea() {
+        return farmarea;
+    }
+
+    public void setFarmarea(String farmarea) {
+        this.farmarea = farmarea;
+    }
 
     private TechnicalNeedsWrapper techNeeds;
     private MarketingWrapper marketing;

@@ -195,6 +195,7 @@ public class MobileController extends HttpServlet {
                 System.out.println("points "+ request.getParameter("l")) ; 
                
                 String res = request.getParameter("l");
+                String farmer = request.getParameter("fid");
 
                 JSONObject j = new JSONObject(res);
 

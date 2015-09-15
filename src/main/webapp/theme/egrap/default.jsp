@@ -269,14 +269,13 @@
 
         <script src="<%= request.getContextPath()%>/theme/egrap/js/bootstrap.js"></script>
         <script src="<%= request.getContextPath()%>/theme/egrap/js/base.js"></script>
-    </script>
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry"></script>
 
     <script src="<%= request.getContextPath()%>/theme/egrap/js/map.js"></script>
-</script>
-<script type="text/javascript">
+
    <decorator:getProperty property="page.scripts"/>
-</script>
+
 </body>
 
 </html>
