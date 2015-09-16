@@ -13,12 +13,12 @@
    
     String points = request.getParameter("p");
     String pp = "{\"area\":0.00100769241714143,\"points\":[{\"lng\":-0.1715416,\"lat\":5.5683899},{\"lng\":-0.1716476,\"lat\":5.5684594},{\"lng\":-0.1717273,\"lat\":5.5684636},{\"lng\":-0.1719507,\"lat\":5.5684822}]}";
-    JSONObject j = new JSONObject(pp);
+    JSONObject j = new JSONObject(points);
       
      System.out.print(j);
        
      JSONArray ja = (JSONArray) j.get("points");
-     String farmer = "12233"; //  request.getParameter("f");
+     String farmer = request.getParameter("farmer"); //  request.getParameter("f");
        
 
 %>
