@@ -484,7 +484,11 @@ public class BiodataModel {
                             bio.setCluster(fieldValue);
                         }
                     }
-
+                    if(fieldName.equalsIgnoreCase(Biodata.FARM_AREA))
+                    {
+                        if (null != fieldValue) {
+                            bio.setFarmarea(fieldValue);
+                        }
                     }
                 
                
@@ -492,7 +496,8 @@ public class BiodataModel {
                
                 updated =  true;
                  log.info("Bio Data Successfully Updated");
-            }     
+            }   
+            }
             else {
                 trx.success();
                 log.info("Unable to update Bio Data");

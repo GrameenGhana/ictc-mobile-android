@@ -18,7 +18,7 @@
      System.out.print(j);
        
      JSONArray ja = (JSONArray) j.get("points");
-    // String farmer =   
+     String farmer = "12233"; //  request.getParameter("f");
        
 
 %>
@@ -98,7 +98,8 @@
                 z = google.maps.geometry.spherical.computeArea(path);
                 console.log(z);
                
-                window.location = "<%=request.getContextPath()%>/gmap/farm_area.jsp?area="+z;
+                window.location = "<%=request.getContextPath()%>/gmap/farm_area.jsp?area="+z+"&farmer="+<%=farmer%>;
+                
             }
         </script>
     </content>

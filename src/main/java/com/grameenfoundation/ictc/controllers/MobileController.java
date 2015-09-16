@@ -208,7 +208,7 @@ public class MobileController extends HttpServlet {
                 out.print(obj);
                 System.out.println("redirecting to jsp");
                 System.out.println("Area " + area);
-                response.sendRedirect(request.getContextPath() + "gmap/area_calculation.jsp?p=" + res);
+                response.sendRedirect(request.getContextPath() + "gmap/area_calculation.jsp?p=" + res+"&f="+farmer);
             }
             else
             {
@@ -328,7 +328,7 @@ public class MobileController extends HttpServlet {
                 if (meetingArray.length() > 0) {
                     obj.put("meeting", meetingArray);
                 }
-                farmerArray.put(obj);
+//                farmerArray.put(obj);
                 JSONArray inputArray = new JSONArray();
                 List<FarmerInputReceivedWrapper> fi = new FarmerInputModel().getFarmerInputs(bd.getFarmID());
                 for(FarmerInputReceivedWrapper f :fi)
