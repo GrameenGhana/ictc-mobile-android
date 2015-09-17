@@ -18,6 +18,7 @@ import com.grameenfoundation.ictc.wrapper.MeetingWrapper;
 import com.grameenfoundation.ictc.wrapper.UserWrapper;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -192,23 +193,47 @@ public class MobileController extends HttpServlet {
 
             }else if("fmap".equalsIgnoreCase(serviceCode.trim()))
             {
-                System.out.println("points "+ request.getParameter("l")) ; 
+                
                
                 String res = request.getParameter("l");
                 String farmer = request.getParameter("fid");
+                
+                System.out.println("points " + res);
+                System.out.println("Farmer " + farmer);
 
                 JSONObject j = new JSONObject(res);
 
                
                 double area = (double) j.get("area");
+                double perimeter = j.getDouble("perimeter");
                 
                 
-                JSONObject obj = new JSONObject();
-                obj.put("rc", "00");
-                out.print(obj);
-                System.out.println("redirecting to jsp");
                 System.out.println("Area " + area);
-                response.sendRedirect(request.getContextPath() + "gmap/area_calculation.jsp?p=" + res+"&f="+farmer);
+                System.out.println("Perimeter " + perimeter);
+                
+                JSONArray ja = new JSONArray();
+                ja = (JSONArray) j.get("points");
+                
+                BiodataModel bdata = new BiodataModel();
+                Map<String, String> m = new HashMap<String, String>();
+
+                m.put(Biodata.FARM_AREA, String.valueOf(area));
+                m.put(Biodata.FARM_PERIMETER, String.valueOf(perimeter));
+                boolean updated = bdata.BiodataUpdate(farmer, m);
+                
+                if(updated)
+                {
+                    System.out.println("Farmer update done " + updated);
+
+                    JSONObject obj = new JSONObject();
+                    obj.put("rc", "00");
+                    out.print(obj);
+                 
+                }
+                else
+                {
+                    System.out.println("Update not done");
+                }
             }
             else
             {

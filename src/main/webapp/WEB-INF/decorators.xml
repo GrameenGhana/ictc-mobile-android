@@ -18,7 +18,8 @@
         <pattern>/pages/in*</pattern> 
         <pattern>/Mobile*</pattern>  
         <pattern>/sf/*</pattern>  
-         <!--  <pattern>/super/systemsetup/policytype/*</pattern>  -->
+         <!-- <pattern>/gmap/*</pattern> 
+         <pattern>/super/systemsetup/policytype/*</pattern>  -->
       
     </excludes>
     <decorator name="default" page="theme/egrap/default.jsp">  

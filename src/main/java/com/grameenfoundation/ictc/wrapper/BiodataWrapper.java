@@ -32,6 +32,7 @@ public class BiodataWrapper {
     private String farmID = "farmerid";
     private String majorCrop = "majorcrop";
     private String farmarea = "farmarea";
+    private String farmperimeter = "farmperimeter";
 
     public String getFarmarea() {
         return farmarea;
@@ -40,6 +41,17 @@ public class BiodataWrapper {
     public void setFarmarea(String farmarea) {
         this.farmarea = farmarea;
     }
+
+    public String getFarmperimeter() {
+        return farmperimeter;
+    }
+
+    public void setFarmperimeter(String farmperimeter) {
+        this.farmperimeter = farmperimeter;
+    }
+    
+    
+    
 
     private TechnicalNeedsWrapper techNeeds;
     private MarketingWrapper marketing;

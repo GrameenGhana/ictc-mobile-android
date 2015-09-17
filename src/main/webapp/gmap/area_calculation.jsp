@@ -4,21 +4,33 @@
     Author     : Joseph George Davis
 --%>
 
+<%@page import="java.util.HashMap"%>
+<%@page import="com.grameenfoundation.ictc.domains.Biodata"%>
+<%@page import="java.util.Map"%>
+<%@page import="com.grameenfoundation.ictc.models.BiodataModel"%>
+<%@page import="javax.script.ScriptEngineManager"%>
+<%@page import="javax.script.ScriptEngine"%>
 <%@page import="org.json.JSONObject"%>
 <%@page import="org.json.JSONArray"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <% 
+   String farmer = "1";
+    JSONArray ja = new JSONArray();
    
-    String points = request.getParameter("p");
-    String pp = "{\"area\":0.00100769241714143,\"points\":[{\"lng\":-0.1715416,\"lat\":5.5683899},{\"lng\":-0.1716476,\"lat\":5.5684594},{\"lng\":-0.1717273,\"lat\":5.5684636},{\"lng\":-0.1719507,\"lat\":5.5684822}]}";
-    JSONObject j = new JSONObject(points);
+      //String points = request.getParameter("p");
+    String pp = "{\"area\":9.252764755276283E-5,\"points\":[{\"lng\":-0.1721708,\"lat\":5.5686133},{\"lng\":-0.1721612,\"lat\":5.5686134},{\"lng\":-0.1722498,\"lat\":5.5685807},{\"lng\":-0.1722384,\"lat\":5.5685605}]}";
+    JSONObject j = new JSONObject(pp);
       
-     System.out.print(j);
+     System.out.print("In jsp page " +j);
        
-     JSONArray ja = (JSONArray) j.get("points");
-     String farmer = request.getParameter("farmer"); //  request.getParameter("f");
+     ja = (JSONArray) j.get("points");
+    farmer = request.getParameter("f"); 
+    
+   
+       
+//  request.getParameter("f");
        
 
 %>
@@ -43,6 +55,7 @@
     </head>
     <body>
     <label>Area</label>
+    <input type="text" id="area" />
         
         <div id="lmap" ></div>
          
@@ -68,12 +81,17 @@
                 });
                    var bermudaTriangle = new google.maps.Polygon({
                  paths: [
-                      <%for(int i =0;i<ja.length();i++){
+                     
+                     
+                      <%
+                         if(ja.length()>0)
+                         {
+                        for(int i =0;i<ja.length();i++){
                           JSONObject obj = ja.getJSONObject(i);
                       %>
                       new google.maps.LatLng(<%=obj.getDouble("lat")%>,<%=obj.getDouble("lng")%>),
                   
-                <%}%> ]
+                <%}}%> ]
                  });
                  
                    //new google.maps.LatLng(25.774, -80.190)
@@ -96,11 +114,47 @@
                // path.push(latLng);
 
                 z = google.maps.geometry.spherical.computeArea(path);
-                console.log(z);
-               
-                window.location = "<%=request.getContextPath()%>/gmap/farm_area.jsp?area="+z+"&farmer="+<%=farmer%>;
+                document.getElementById("area").value = z;
                 
-            }
+                
+                console.log(z);
+               //response.sendRedirect("request.getContextPath()/gmap/farm_area.jsp?area=";
+               
+//    $.post("<%=request.getContextPath()%>/gmap/area_calculator.jsp",
+//    {
+//        area: z,
+//        farmer: <%%>
+//    },
+//    function(data, status){
+//        console.log("Data: " + data + "\nStatus: " + status);
+//    });
+//      window.location = "<%=request.getContextPath()%>/gmap/farm_area.jsp?area="+z+"&farmer="+<%=farmer%>;  
+     <%System.out.print("redirect done");
+//      if(null!=request.getParameter("area")&& null!=farmer)
+//      {
+//             System.out.print(request.getParameter(" In farm area"));
+//
+//                 BiodataModel bdata = new BiodataModel();
+//                 Map<String, String> m = new HashMap<String,String>();
+//
+//                 m.put(Biodata.FARM_AREA, request.getParameter("area"));
+//                 boolean updated = bdata.BiodataUpdate(farmer, m);
+//
+//                 System.out.println("Farmer update done " + updated);
+//      }
+//       else
+//      {
+//          System.out.print("data no recieved");
+//      }
+     
+     %>
+     
+       
+             
+     }
+     
+     
+     
         </script>
     </content>
 

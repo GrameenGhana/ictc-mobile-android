@@ -39,6 +39,7 @@ public class Biodata extends Status implements GeneralInterface {
     public static String CLUSTER = "cluster";
     public static String FARMERID = "farmerid";
     public static String FARM_AREA ="farmarea";
+    public static String FARM_PERIMETER = "farmperimeter";
     //public static String ID ="id";
     
     Node underlyingNode;
@@ -51,6 +52,21 @@ public class Biodata extends Status implements GeneralInterface {
         super(underlyingNode);
         this.underlyingNode = underlyingNode;
     }
+    
+      public String getFarmperimeter() {
+       try {
+            return (String) underlyingNode.getProperty(FARM_PERIMETER);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public void setFarmperimeter(String farmperimeter) {
+        underlyingNode.setProperty(FARM_PERIMETER,farmperimeter);
+    }
+    
     
     public String getFarmarea() {
          try {
