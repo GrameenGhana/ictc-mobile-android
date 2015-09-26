@@ -37,18 +37,18 @@ public class ictc {
                 
                 //genCode("firstName");
                  //genWrapperCode("firstName");
-//        Scanner sc = new Scanner(System.in);
-//        String input = "";
-//        while (!sc.next().equals("exit")) {
-//            System.out.println("Enter Variabe name");
-//
-//            input = sc.next();
-//            genWrapperCode(input);
-//            genGraphCode(input);
-      // }
+        Scanner sc = new Scanner(System.in);
+        String input = "";
+        while (!sc.next().equals("exit")) {
+            System.out.println("Enter Variabe name");
+
+            input = sc.next();
+            genWrapperCode(input);
+            genGraphCode(input);
+       }
 
        
-          System.out.println("3.josss".substring(0,1));       
+          //System.out.println("3.josss".substring(0,1));       
                 
 //                File xmlFile = new File("/home/grameen/test.xml");
 //                DocumentBuilderFactory db = DocumentBuilderFactory.newInstance();
