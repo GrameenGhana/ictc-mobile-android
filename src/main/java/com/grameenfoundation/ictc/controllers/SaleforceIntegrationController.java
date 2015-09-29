@@ -250,7 +250,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                     }
                     else if(salesforceObj.equals("sf:Harvest__c"))
                     {
-                         org.neo4j.graphdb.Node HarvestParent;
+                        org.neo4j.graphdb.Node HarvestParent;
                         org.neo4j.graphdb.Node harvestNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.HARVEST);
                         
                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);

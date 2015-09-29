@@ -7,9 +7,11 @@
 package com.grameenfoundation.ictc.models;
 
 import com.grameenfoundation.ictc.domains.PostHarvest;
+import com.grameenfoundation.ictc.domains.PostHarvest2;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
 import com.grameenfoundation.ictc.utils.Labels;
+import com.grameenfoundation.ictc.utils.Neo4jServices;
 import com.grameenfoundation.ictc.utils.ParentNode;
 import com.grameenfoundation.ictc.wrapper.PostHarvestWrapper;
 import java.util.Date;
@@ -119,5 +121,47 @@ public class PostHarvestModel {
         return null;
     }
     
+    
+       public PostHarvest2 getPostHarvest(String field, String value) {
+        String q = "Start root=node(0) "
+                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+ICTCRelationshipTypes.HAS_POSTHARVEST+
+                "]->p"
+                + " where f." + field + "='" + value + "'"
+                + " return p";
+
+        System.out.println("Query " + q);
+        try {
+            Node node = Neo4jServices.executeCypherQuerySingleResult(q, "p");
+            if (null != node) {
+                return new PostHarvest2(node);
+            }
+        } catch (Exception e) {
+            System.out.println("Unable to Find geofence");
+        }
+
+        return null;
+    }
+    
+         public boolean PostHarvestToUpdate(PostHarvest2 p, Node update) {
+        boolean created = false;
+
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+
+            System.out.println("biodata :" + p.getUnderlyingNode().getId());
+            if (null != p) {
+
+               p.setUpdate(update);
+                created = true;
+                trx.success();
+
+            }
+        } catch (Exception e) {
+            System.out.println("error");
+            //created = false;
+
+        }
+
+        return created;
+    }
 
 }

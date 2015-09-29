@@ -51,6 +51,7 @@ public class ICTCKonstants {
     //p
     public static final String PROPERTIES_FILE = "/config/ictc.conf";
     public static final String POST_HARVEST = "post_harvest";
+    public static final String PRODUCTION = "production";
     
     //r
     public static final int ROOT_NODE_INDEX = 0;

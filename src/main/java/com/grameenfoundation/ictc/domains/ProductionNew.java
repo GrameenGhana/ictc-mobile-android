@@ -8,6 +8,9 @@ package com.grameenfoundation.ictc.domains;
 
 import com.grameenfoundation.ictc.domain.commons.GeneralInterface;
 import com.grameenfoundation.ictc.domain.commons.Status;
+import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
+import com.grameenfoundation.ictc.utils.Neo4jServices;
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
 
 /**
@@ -744,7 +747,13 @@ public String getAcresofland(){
         this.underlyingNode = underlyingNode;
     }
 
-   
+     public void setUpdate(Node production) {
+        underlyingNode.createRelationshipTo(production, ICTCRelationshipTypes.UPDATE);
+    }
+
+    public ProductionUpdate getUpdate() {
+        return new ProductionUpdate(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.UPDATE));
+    }
 
 }
 

@@ -8,6 +8,9 @@ package com.grameenfoundation.ictc.domains;
 
 import com.grameenfoundation.ictc.domain.commons.GeneralInterface;
 import com.grameenfoundation.ictc.domain.commons.Status;
+import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
+import com.grameenfoundation.ictc.utils.Neo4jServices;
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
 
 /**
@@ -559,4 +562,16 @@ public String getApplicationrateofstoragechemical(){
         }
         return null;
     }
+
+ public void setUpdate(Node postharvest) {
+        underlyingNode.createRelationshipTo(postharvest, ICTCRelationshipTypes.UPDATE);
+    }
+
+    public PostHarvestUpdate getUpdate() {
+        return new PostHarvestUpdate(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.UPDATE));
+    }
+
+
+
+
 }

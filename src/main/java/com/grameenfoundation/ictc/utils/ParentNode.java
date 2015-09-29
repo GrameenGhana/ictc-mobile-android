@@ -69,4 +69,8 @@ public class ParentNode {
     public static Node  FarmInputReceivedNode() {
         return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.FARMER_INPUT_RECEIVED);
     }  
+    
+     public static Node  ProductionParentNode() {
+        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.PRODUCTION);
+    }  
 }

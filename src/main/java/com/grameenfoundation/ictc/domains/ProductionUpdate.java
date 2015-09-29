@@ -68,6 +68,8 @@ public class ProductionUpdate extends Status implements GeneralInterface {
     public static String TYPEOFHERBICIDEFORPOSTPLANTWEEDCONTROL="typeofherbicideforpostplantweedcontrol";
     public static String TYPEOFTOPDRESSFERTILIZER="typeoftopdressfertilizer";
     public static String WHENDIDYOUFININSHPALNTINGYOURCROP="whendidyoufininshpalntingyourcrop";
+    public static String UPDATED="updated";
+
     
     
     
@@ -659,6 +661,17 @@ public String getApplicationofbasalfertilizer(){
         return null;
     }
     
-    
+   public void setUpdated(long date) {
+   underlyingNode.setProperty(UPDATED,date);
+}
+
+public long getUpdated(){
+          try {
+          return (Long) underlyingNode.getProperty(UPDATED);
+
+        } catch (Exception e) {
+        }
+        return 0l;
+    } 
 
 }
