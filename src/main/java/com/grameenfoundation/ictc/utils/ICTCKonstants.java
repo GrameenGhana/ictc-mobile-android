@@ -36,7 +36,7 @@ public class ICTCKonstants {
       public static final String ID = "Id";
       
    //l
-     public static final String LAST_MODIFIED_DATE = "lastModifiedBy";
+     public static final String LAST_MODIFIED_DATE = "lastModifieddate";
      
      //m
      

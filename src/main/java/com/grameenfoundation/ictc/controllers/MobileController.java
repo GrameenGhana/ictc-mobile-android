@@ -7,11 +7,17 @@ package com.grameenfoundation.ictc.controllers;
 
 import com.grameenfoundation.ictc.domains.Biodata;
 import com.grameenfoundation.ictc.domains.Meeting;
+import com.grameenfoundation.ictc.domains.PostHarvest;
+import com.grameenfoundation.ictc.domains.PostHarvest2;
+import com.grameenfoundation.ictc.domains.ProductionNew;
 import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.models.FarmerInputModel;
 import com.grameenfoundation.ictc.models.MeetingModel;
+import com.grameenfoundation.ictc.models.PostHarvestModel;
+import com.grameenfoundation.ictc.models.ProductionModel;
 import com.grameenfoundation.ictc.models.UserModel;
 import com.grameenfoundation.ictc.utils.HTTPCommunicator;
+import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.wrapper.BiodataWrapper;
 import com.grameenfoundation.ictc.wrapper.FarmerInputReceivedWrapper;
 import com.grameenfoundation.ictc.wrapper.MeetingWrapper;
@@ -31,6 +37,7 @@ import org.apache.log4j.Logger;
 import org.jboss.netty.handler.codec.http.HttpResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.neo4j.graphdb.Transaction;
 
 /**
  *
@@ -235,6 +242,120 @@ public class MobileController extends HttpServlet {
                     System.out.println("Update not done");
                 }
             }
+             else if ("fdetails".equalsIgnoreCase(serviceCode)) {
+                
+                 Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
+                
+                 JSONArray jay= new JSONArray();
+                 
+                 
+                 List<BiodataWrapper> bw = new BiodataModel().getBioData("","");
+                 System.out.println("Farmer count " + bw.size());
+                 
+                 
+             if(null!=bw)
+               {
+               
+                for(BiodataWrapper bb :bw)
+                {
+                    
+               
+                 JSONObject root = new JSONObject();
+                 JSONObject details = new JSONObject();
+                 JSONObject production = new JSONObject();
+                 JSONObject postHarvest = new JSONObject();
+                 JSONObject farmer = new JSONObject();
+                 JSONArray fa = new JSONArray();
+                 JSONArray pa = new JSONArray();
+                 JSONArray pha = new JSONArray();
+                
+                 
+                 
+                Biodata b = new BiodataModel().getBiodata("Id", bb.getFarmID());
+                
+                if(null!=b)
+                {
+              
+                farmer.put(Biodata.FIRST_NAME,b.getFirstname());
+                farmer.put(Biodata.LAST_NAME, b.getLastname());
+                farmer.put(Biodata.AGE,b.getAge());
+                farmer.put(Biodata.COMMUNITY,b.getCommunity());
+                farmer.put(Biodata.GENDER, b.getGender());
+                farmer.put(Biodata.EDUCATION,b.getEducation());
+                farmer.put(Biodata.FARMERID, b.getFarmerID());
+               // farmer.put(Biodata.FARM_AREA, b.getFarmarea());
+                }
+                
+                
+                //farmer.put
+                
+                 
+                ProductionNew  p =  new ProductionModel().getProduction("Id", bb.getFarmID());
+                
+                if(null!=p)
+                {
+                    
+                 System.out.println("Production " + p.getAcresofland() + "farmer " + b.getFirstname());
+                 production.put( ProductionNew.ACRESOFLAND,p.getAcresofland());
+                 production.put( ProductionNew.APPLICATIONMONTHOFHERBICIDEDATE,p.getApplicationmonthofherbicidedate());
+                 production.put(ProductionNew.APPLICATIONOFBASALFERTILIZER, p.getApplicationofbasalfertilizer());
+                 production.put(ProductionNew.APPLICATIONOFBASALFERTILIZERDATE,p.getApplicationofbasalfertilizerdate());
+                 production.put(ProductionNew.APPLICATIONOFTOPDRESSFERTILIZER, p.getApplicationoftopdressfertilizer());
+                 production.put(ProductionNew.DATEFIFTHPOSTGEMWEEDCONTROL, p.getDatefifthpostgemweedcontrol());
+                 production.put(ProductionNew.DATEFIRSTMANUALWEEDCONTROL,p.getDatefirstmanualweedcontrol());
+                 production.put(ProductionNew.DATEFOURTHPOSTGEMWEEDCONTROL,p.getDatefourthpostgemweedcontrol());
+                 production.put(ProductionNew.DATEOFSECONDMANUALWEEDCONTROL,p.getDateofsecondmanualweedcontrol());
+                 production.put(ProductionNew.DATETHIRDMANUALWEEDCONTROL,p.getDatethirdmanualweedcontrol());
+                 production.put(ProductionNew.LANDCLEARINGDATE,p.getLandclearingdate());
+                 production.put(ProductionNew.METHODOFBASALFERTILIZERAPPLICATION,p.getMethodofbasalfertilizerapplication());
+                 production.put(ProductionNew.METHODOFBASALFERTILIZERAPPLICATIONOTHER,p.getMethodofbasalfertilizerapplicationother());
+                 
+                }
+                 
+                
+                 PostHarvest2 ph = new PostHarvestModel().getPostHarvest("Id", bb.getFarmID());
+                 if(null!=ph)
+                {
+                 System.out.println("Post Harvest " + ph.getApplicationrateofstoragechemical() + "farmer " + b.getFirstname());
+                 postHarvest.put(PostHarvest2.APPLICATIONRATEOFSTORAGECHEMICAL,ph.getApplicationrateofstoragechemical());
+                 postHarvest.put(PostHarvest2.COMPLETIONOFPRODUCEMARKETING,ph.getCompletionofproducemarketing());
+                 
+                 
+                } 
+                 
+                 
+                 //farmer.put("production",production);
+                 //farmer.put("postharvest",postHarvest);
+                 fa.put(farmer);
+                 pa.put(production);
+                 pha.put(postHarvest);
+                 
+                 
+                
+                //details.put("farmer",fa);
+                 details.put("production", pa);
+                 details.put("postharvest", pha);
+                 details.put("biodata",fa);
+                 
+                 root.put("farmer", details);
+                 
+                 jay.put(root);
+                 
+                }
+                 
+                 tx.success();
+                    
+                out.print(jay);
+                 }
+                 else
+                 {
+                     JSONObject obj = new JSONObject();
+                     obj.put("rc", "05");
+                     obj.put("msg", "Invalid Action");
+                     out.print(obj);
+                 }
+                 
+            }
             else
             {
 
@@ -243,8 +364,9 @@ public class MobileController extends HttpServlet {
                 obj.put("msg", "Invalid Action");
                 out.print(obj);
             }
+           
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
