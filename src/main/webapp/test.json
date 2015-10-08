@@ -1,0 +1,298 @@
+{
+    "crops": [
+        [
+            {
+                "index": "1",
+                "startdate": "02-10",
+                "type": "Group",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 1,
+                        "name": ""
+                    }],
+                "crop": "Maize"
+            }, {
+                "index": "1",
+                "startdate": "02-10",
+                "type": "Individual",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 2,
+                        "name": "Land preparation (ploughing)"
+                    }, {
+                        "idx": 1,
+                        "name": "Land Clearing"
+                    }],
+                "crop": "Maize"
+            }, {
+                "index": "1",
+                "startdate": "02-10",
+                "type": "Group",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 3,
+                        "name": "Basal Fertilizer application"
+                    }, {
+                        "idx": 2,
+                        "name": "First weed control (if no herbicide applied)"
+                    }, {
+                        "idx": 1,
+                        "name": "Planting"
+                    }],
+                "crop": "Maize"
+            }, {
+                "index": "2",
+                "startdate": "02-10",
+                "type": "Individual",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 2,
+                        "name": "Top-dress fertilizer application"
+                    }, {
+                        "idx": 1,
+                        "name": " First/Second Weeding"
+                    }],
+                "crop": "Maize"
+            }, {
+                "index": "1",
+                "startdate": "02-10",
+                "type": "Group",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 1,
+                        "name": "Harvesting"
+                    }],
+                "crop": "Maize"
+            }, 
+            {
+                "index": "1",
+                "startdate": "02-10",
+                "type": "Group",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 1,
+                        "name": "Post-harvest processing"
+                    }],
+                "crop": "Maize"
+            }], [{
+                "index": "1",
+                "startdate": "02-10",
+                "type": "Group",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 1,
+                        "name": ""
+                    }],
+                "crop": "Cassava"
+            }, {
+                "index": "1",
+                "startdate": "02-10",
+                "type": "Individual",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 2,
+                        "name": "Land preparation (ploughing)"
+                    }, {
+                        "idx": 1,
+                        "name": "Land Clearing"
+                    }],
+                "crop": "Cassava"
+            }, {
+                "index": "1",
+                "startdate": "02-10",
+                "type": "Group",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 3,
+                        "name": "Basal Fertilizer application"
+                    }, {
+                        "idx": 2,
+                        "name": "First weed control (if no herbicide applied)"
+                    }, {
+                        "idx": 1,
+                        "name": "Planting"
+                    }],
+                "crop": "Cassava"
+            }, {
+                "index": "2",
+                "startdate": "02-10",
+                "type": "Individual",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 2,
+                        "name": "Third Weeding"
+                    }, {
+                        "idx": 1,
+                        "name": " First/Second Weeding"
+                    }],
+                "crop": "Cassava"
+            }, {
+                "index": "1",
+                "startdate": "02-10",
+                "type": "Group",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 1,
+                        "name": "Harvesting"
+                    }],
+                "crop": "Cassava"
+            }, {
+                "index": "1",
+                "startdate": "02-10",
+                "type": "Group",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 1,
+                        "name": "Post-harvest processing"
+                    }],
+                "crop": "Cassava"
+            }], [{
+                "index": "1",
+                "startdate": "02-10",
+                "type": "Group",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 1,
+                        "name": ""
+                    }],
+                "crop": "Yam"
+            }, {
+                "index": "1",
+                "startdate": "02-10",
+                "type": "Individual",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 2,
+                        "name": "Land preparation (ploughing)"
+                    }, {
+                        "idx": 1,
+                        "name": "Land Clearing"
+                    }],
+                "crop": "Yam"
+            }, {
+                "index": "1",
+                "startdate": "02-10",
+                "type": "Group",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 3,
+                        "name": "Basal Fertilizer application"
+                    }, {
+                        "idx": 2,
+                        "name": "First weed control (if no herbicide applied)"
+                    }, {
+                        "idx": 1,
+                        "name": "Planting"
+                    }],
+                "crop": "Yam"
+            }, {
+                "index": "2",
+                "startdate": "02-10",
+                "type": "Individual",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 1,
+                        "name": " First/Second Weeding"
+                    }],
+                "crop": "Yam"
+            }, {
+                "index": "1",
+                "startdate": "02-10",
+                "type": "Group",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 2,
+                        "name": "Harvesting"
+                    }, {
+                        "idx": 1,
+                        "name": "Second/Third weeding"
+                    }],
+                "crop": "Yam"
+            }, {
+                "index": "1",
+                "startdate": "02-10",
+                "type": "Group",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 2,
+                        "name": "Second HarvestingPost-harvest processing"
+                    }, {
+                        "idx": 1,
+                        "name": "Third/fourth weeding"
+                    }],
+                "crop": "Yam"
+            }], [{
+                "index": "1",
+                "startdate": "02-10",
+                "type": "Group",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 1,
+                        "name": ""
+                    }],
+                "crop": "Rice"
+            }, {
+                "index": "1",
+                "startdate": "02-10",
+                "type": "Individual",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 2,
+                        "name": "Land preparation (ploughing)"
+                    }, {
+                        "idx": 1,
+                        "name": "Land Clearing"
+                    }],
+                "crop": "Rice"
+            }, {
+                "index": "1",
+                "startdate": "02-10",
+                "type": "Group",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 3,
+                        "name": "Basal Fertilizer application"
+                    }, {
+                        "idx": 2,
+                        "name": "First weed control (if no herbicide applied)"
+                    }, {
+                        "idx": 1,
+                        "name": "Planting"
+                    }],
+                "crop": "Rice"
+            }, {
+                "index": "2",
+                "startdate": "02-10",
+                "type": "Individual",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 2,
+                        "name": "Top-dress fertilizer application"
+                    }, {
+                        "idx": 1,
+                        "name": " First/Second Weeding"
+                    }],
+                "crop": "Rice"
+            }, {
+                "index": "1",
+                "startdate": "02-10",
+                "type": "Group",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 1,
+                        "name": "Harvesting"
+                    }],
+                "crop": "Rice"
+            }, {
+                "index": "1",
+                "startdate": "02-10",
+                "type": "Group",
+                "enddate": "02-01",
+                "activity": [{
+                        "idx": 1,
+                        "name": "Post-harvest processing"
+                    }],
+                "crop": "Rice"
+            }]],
+    "rc": "00"
+}

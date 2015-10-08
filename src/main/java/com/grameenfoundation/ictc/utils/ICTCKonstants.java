@@ -42,6 +42,8 @@ public class ICTCKonstants {
      
      public static final String MARKETING ="marketing";
       public static final String MEETING ="meeting";
+      public static final String MEETING_SETTING="meeting_setting";
+      public static final String MEETING_ACTIVITY ="meeting_activity";
     //n
     public static final String NAME ="name";
     

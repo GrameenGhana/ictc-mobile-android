@@ -5,8 +5,11 @@
  */
 package com.grameenfoundation.ictc.controllers;
 
+import com.grameenfoundation.ictc.domains.MeetingSetting;
 import com.grameenfoundation.ictc.models.CropCalendarSettingModel;
+import com.grameenfoundation.ictc.models.MeetingSettingModel;
 import com.grameenfoundation.ictc.wrapper.CropCalendarSettingWrapper;
+import com.grameenfoundation.ictc.wrapper.MeetingSettingWrapper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -162,9 +165,92 @@ public class TmpServlet extends HttpServlet {
             setting = new CropCalendarSettingWrapper("Cassava", 56, 56, "Final Harvest");
             settings.add(setting);
 
-            
             for (CropCalendarSettingWrapper set : settings) {
-             cropCalendarModel.create(set);
+//                cropCalendarModel.create(set);
+            }
+
+            /**
+             *
+             * public MeetingSettingWrapper(String type, String meetingIndex,
+             * String season, String startDate, String endDate, String acts) {
+             * this.type = type;
+             *
+             *
+             */
+            List<MeetingSettingWrapper> meetings = new ArrayList<MeetingSettingWrapper>();
+            MeetingSettingWrapper meeting = new MeetingSettingWrapper("Maize", "Group", "1", "1", "02", "02", "Land Clearing,Land preparation (ploughing)");
+            meetings.add(meeting);
+
+            meeting = new MeetingSettingWrapper("Maize", "Individual", "1", "1", "03", "03", "Planting,First weed control (if no herbicide applied),Basal Fertilizer application");
+            meetings.add(meeting);
+
+            meeting = new MeetingSettingWrapper("Maize", "Group", "1", "2", "05", "05", "First/Second Weeding,Top-dress fertilizer application");
+            meetings.add(meeting);
+
+            meeting = new MeetingSettingWrapper("Maize", "Individual", "2", "1", "06", "06", "Harvesting ");
+            meetings.add(meeting);
+
+            meeting = new MeetingSettingWrapper("Maize", "Group", "1", "3", "07", "07", "Post-harvest processing");
+            meetings.add(meeting);
+            meeting = new MeetingSettingWrapper("Maize", "Group", "1", "4", "09", "09", "");
+            meetings.add(meeting);
+
+            meeting = new MeetingSettingWrapper("Cassava", "Group", "1", "1", "02-10", "02-01", "Land Clearing,Land preparation (ploughing)");
+            meetings.add(meeting);
+
+            meeting = new MeetingSettingWrapper("Cassava", "Individual", "1", "1", "02-10", "02-01", "Planting,First weed control (if no herbicide applied),Basal Fertilizer application");
+            meetings.add(meeting);
+
+            meeting = new MeetingSettingWrapper("Cassava", "Group", "1", "2", "02-10", "02-01", "First/Second Weeding,Third Weeding");
+            meetings.add(meeting);
+
+            meeting = new MeetingSettingWrapper("Cassava", "Individual", "2", "1", "02-10", "02-01", "Harvesting ");
+            meetings.add(meeting);
+
+            meeting = new MeetingSettingWrapper("Cassava", "Group", "1", "3", "02-10", "02-01", "Post-harvest processing");
+            meetings.add(meeting);
+            meeting = new MeetingSettingWrapper("Cassava", "Group", "1", "4", "02-10", "02-01", "");
+            meetings.add(meeting);
+
+            meeting = new MeetingSettingWrapper("Rice", "Group", "1", "1", "02-10", "02-01", "Land Clearing,Land preparation (ploughing)");
+            meetings.add(meeting);
+
+            meeting = new MeetingSettingWrapper("Rice", "Individual", "1", "1", "02-10", "02-01", "Planting,First weed control (if no herbicide applied),Basal Fertilizer application");
+            meetings.add(meeting);
+
+            meeting = new MeetingSettingWrapper("Rice", "Group", "1", "2", "02-10", "02-01", " First/Second Weeding,Top-dress fertilizer application");
+            meetings.add(meeting);
+
+            meeting = new MeetingSettingWrapper("Rice", "Individual", "2", "1", "02-10", "02-01", "Harvesting");
+            meetings.add(meeting);
+
+            meeting = new MeetingSettingWrapper("Rice", "Group", "1", "3", "02-10", "02-01", "Post-harvest processing");
+            meetings.add(meeting);
+            meeting = new MeetingSettingWrapper("Rice", "Group", "1", "4", "02-10", "02-01", "");
+            meetings.add(meeting);
+
+            meeting = new MeetingSettingWrapper("Yam", "Group", "1", "1", "02-10", "02-01", "Land Clearing,Land preparation (ploughing)");
+            meetings.add(meeting);
+
+            meeting = new MeetingSettingWrapper("Yam", "Individual", "1", "1", "02-10", "02-01", "Planting,First weed control (if no herbicide applied),Basal Fertilizer application");
+            meetings.add(meeting);
+
+            meeting = new MeetingSettingWrapper("Yam", "Group", "1", "2", "02-10", "02-01", "First/Second Weeding");
+            meetings.add(meeting);
+
+            meeting = new MeetingSettingWrapper("Yam", "Individual", "2", "1", "02-10", "02-01", "Second/Third weeding,Harvesting");
+            meetings.add(meeting);
+
+            meeting = new MeetingSettingWrapper("Yam", "Group", "1", "3", "02-10", "02-01", "Third/fourth weeding,Second HarvestingPost-harvest processing");
+            meetings.add(meeting);
+            
+            meeting = new MeetingSettingWrapper("Yam", "Group", "1", "4", "02-10", "02-01", "");
+            meetings.add(meeting);
+
+            MeetingSettingModel msModel = new MeetingSettingModel();
+            msModel.deleteAll();
+            for (MeetingSettingWrapper meeting1 : meetings) {
+                msModel.create(meeting1);
             }
         }
     }
