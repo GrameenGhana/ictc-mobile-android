@@ -18,45 +18,44 @@ import org.neo4j.graphdb.Node;
  */
 public class Profiling extends Status implements GeneralInterface {
 
-    public Profiling(Node underlyingNode) {
+   
+    Node underlyingNode = null;
+
+    public static String FARMRECORDKEEPINGSTATUS = "farmrecordkeepingstatus";
+    public static String FBOMEMBERSHIP = "fbomembership";
+    public static String FBONAME = "fboname";
+    public static String INNOVATIVENESSBYTRYING = "innovativenessbytrying";
+    public static String NAMETRUSTEDMENTOR = "nametrustedmentor";
+    public static String OPERATEBANKACCOUNT = "operatebankaccount";
+    public static String POSTHARVESTLOSSES = "postharvestlosses";
+    public static String PRODUCESOLDPROPORTION = "producesoldproportion";
+    public static String REGFAMILYLABOR_NO = "regfamilylabor_no";
+    public static String RISKDISPOSITIONBORROW = "riskdispositionborrow";
+    public static String SOILFERTILITYPRACTICES = "soilfertilitypractices";
+    
+    
+     public Profiling(Node underlyingNode) {
         super(underlyingNode);
+        this.underlyingNode = underlyingNode;
     }
 
-    Node underlyingNode = null;
-    
- public static String FARMRECORDKEEPINGSTATUS="farmrecordkeepingstatus";
- public static String FBOMEMBERSHIP="fbomembership";
- public static String FBONAME="fboname";
- public static String INNOVATIVENESSBYTRYING="innovativenessbytrying";
- public static String NAMETRUSTEDMENTOR="nametrustedmentor";
- public static String OPERATEBANKACCOUNT="operatebankaccount";
- public static String POSTHARVESTLOSSES="postharvestlosses";
- public static String PRODUCESOLDPROPORTION="producesoldproportion";
- public static String REGFAMILYLABOR_NO="regfamilylabor_no";
- public static String RISKDISPOSITIONBORROW="riskdispositionborrow";
- public static String SOILFERTILITYPRACTICES="soilfertilitypractices";
- 
- 
- 
- 
-public void setSoilfertilitypractices(String soilfertilitypractices) {
-underlyingNode.setProperty(SOILFERTILITYPRACTICES,soilfertilitypractices);
-}
 
-public String getSoilfertilitypractices(){
-          try {
-          return (String) underlyingNode.getProperty(SOILFERTILITYPRACTICES);
+    public void setSoilfertilitypractices(String soilfertilitypractices) {
+        underlyingNode.setProperty(SOILFERTILITYPRACTICES, soilfertilitypractices);
+    }
+
+    public String getSoilfertilitypractices() {
+        try {
+            return (String) underlyingNode.getProperty(SOILFERTILITYPRACTICES);
 
         } catch (Exception e) {
         }
         return null;
     }
- 
- 
- 
-public void setRiskdispositionborrow(String riskdispositionborrow) {
-underlyingNode.setProperty(RISKDISPOSITIONBORROW,riskdispositionborrow);
-}
+
+    public void setRiskdispositionborrow(String riskdispositionborrow) {
+        underlyingNode.setProperty(RISKDISPOSITIONBORROW, riskdispositionborrow);
+    }
 
 public String getRiskdispositionborrow(){
           try {

@@ -392,4 +392,14 @@ public class Biodata extends Status implements GeneralInterface {
         return new ProductionNew(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_PRODUCTION));
     }
     
+    
+    public void setProfiling(Node profiling) {
+        underlyingNode.createRelationshipTo(profiling, ICTCRelationshipTypes.HAS_PROFILING);
+    }
+
+    public Profiling getProfiling() {
+        return new Profiling(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_PROFILING));
+    }
+    
+    
 }

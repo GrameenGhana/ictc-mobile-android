@@ -24,6 +24,7 @@ public enum Labels implements Label {
     MARKETING,
     POSTHARVEST,
     PRODUCTION,
+    PROFILE,
     STORAGE,
     TECHNICAL_NEEDS,
     FARM_MANAGEMENT_PLAN,
@@ -32,6 +33,7 @@ public enum Labels implements Label {
     CROP_CALENDAR_SETTING,
     CROP_CALENDAR,
     FARM_INPUT,
-    UPDATE
+    UPDATE,
+    QUESTION
 
 }

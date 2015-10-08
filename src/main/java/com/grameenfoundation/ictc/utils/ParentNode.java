@@ -73,4 +73,8 @@ public class ParentNode {
      public static Node  ProductionParentNode() {
         return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.PRODUCTION);
     }  
+     
+     public static Node  QuestionParentNode() {
+        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.PROFILING);
+    }  
 }

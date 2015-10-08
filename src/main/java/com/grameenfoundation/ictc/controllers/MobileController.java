@@ -270,7 +270,7 @@ public class MobileController extends HttpServlet {
                  JSONArray pha = new JSONArray();
                 
                  
-                 
+                 //biodata
                 Biodata b = new BiodataModel().getBiodata("Id", bb.getFarmID());
                 
                 if(null!=b)
@@ -282,14 +282,22 @@ public class MobileController extends HttpServlet {
                 farmer.put(Biodata.COMMUNITY,b.getCommunity());
                 farmer.put(Biodata.GENDER, b.getGender());
                 farmer.put(Biodata.EDUCATION,b.getEducation());
-                farmer.put(Biodata.FARMERID, b.getFarmerID());
+                farmer.put(Biodata.FARMERID, b.getId());
                // farmer.put(Biodata.FARM_AREA, b.getFarmarea());
+                farmer.put(Biodata.MAJOR_CROP,b.getMajorCrop());
+                farmer.put(Biodata.MARITAL_STATUS,b.getMaritalstatus());
+                farmer.put(Biodata.NICKNAME, b.getNickname());
+                farmer.put(Biodata.NUMBER_OF_CHILDREN,b.getNumberofchildren());
+                farmer.put(Biodata.NUMBER_OF_DEPENDANTS,b.getNumberofdependants());
+                farmer.put(Biodata.REGION,b.getRegion());
+                farmer.put(Biodata.VILLAGE,b.getVillage());
+                
                 }
                 
                 
                 //farmer.put
                 
-                 
+                 //Production
                 ProductionNew  p =  new ProductionModel().getProduction("Id", bb.getFarmID());
                 
                 if(null!=p)
@@ -309,18 +317,82 @@ public class MobileController extends HttpServlet {
                  production.put(ProductionNew.LANDCLEARINGDATE,p.getLandclearingdate());
                  production.put(ProductionNew.METHODOFBASALFERTILIZERAPPLICATION,p.getMethodofbasalfertilizerapplication());
                  production.put(ProductionNew.METHODOFBASALFERTILIZERAPPLICATIONOTHER,p.getMethodofbasalfertilizerapplicationother());
+                 production.put(ProductionNew.METHODOFLANDCLEARING,p.getMethodoflandclearing());
+                 production.put(ProductionNew.METHODOFLANDPREPARATION,p.getMethodoflandpreparation());
+                 production.put(ProductionNew.METHODTOPDRESSFERTILIZERAPP,p.getMethodtopdressfertilizerapp());
+                 production.put(ProductionNew.NAMEOFCROPVARIETY,p.getNameofcropvariety());
+                 production.put(ProductionNew.NAMEOFCROPVARIETYCASSAVA,p.getNameofcropvarietycassava());
+                 production.put(ProductionNew.NAMEOFCROPVARIETYRICE,p.getNameofcropvarietyrice());
+                 production.put(ProductionNew.NAMEOFCROPVARIETYYAM,p.getNameofcropvarietyyam());
+                 production.put(ProductionNew.OTHERFERTILIZER,p.getOtherfertilizer());
+                 production.put(ProductionNew.PLANTINGDATE,p.getPlantingdate());
+                 production.put(ProductionNew.PLANTINGDISTANCEBETWEENPLANTSMAIZE,p.getPlantingdate());
+                 production.put(ProductionNew.PLANTINGDISTANCEBETWEENPLANTSMAIZEYC,p.getPlantingdistancebetweenplantsmaizeyc());
+                 production.put(ProductionNew.PLANTINGDISTANCEBETWEENPLANTSRICE,p.getPlantingdistancebetweenplantsrice());
+                 production.put(ProductionNew.PLANTINGDISTANCEBETWEENROWSMAIZE,p.getPlantingdistancebetweenrowsmaize());
+                 production.put(ProductionNew.PLANTINGDISTANCEBETWEENROWSYC,p.getPlantingdistancebetweenrowsyc());
+                 production.put(ProductionNew.PLOUGHINGDATE,p.getPloughingdate());
+                 production.put(ProductionNew.POSTPLANTHERBICIDEUSE,p.getPostplantherbicideuse());
+                 production.put(ProductionNew.QUANTITYOFBASALFERTILIZERPURCHASEDAPPLY,p.getQuantityofbasalfertilizerpurchasedapply());
+                 production.put(ProductionNew.QUANTITYOFTOPDRESSERFERTILIZERPURCHASED,p.getQuantityoftopdresserfertilizerpurchased());
+                 production.put(ProductionNew.QUANTITYPOSTPLANTHERBICIDE,p.getQuantitypostplantherbicide());
+                 production.put(ProductionNew.REFILLINGGAPSOCCURENCE,p.getRefillinggapsoccurence());
+                 production.put(ProductionNew.REFILLINGGAPSPROPORTION,p.getRefillinggapsproportion());
+                 production.put(ProductionNew.SEEDBEDFORMTYPE,p.getSeedbedformtype());
+                 production.put(ProductionNew.SEEDBEDPREPARATIONDATE,p.getSeedbedformtype());
+                 production.put(ProductionNew.SOURCEOFSEEDORPLANTINGMATERIAL,p.getSourceofseedorplantingmaterial());
+                 production.put(ProductionNew.SOURCEOFSEEDORPLANTINGMATERIALOTHER,p.getSourceofseedorplantingmaterialother());
+                 production.put(ProductionNew.TARGETYIELDPERACRE,p.getTargetyieldperacre());
+                 production.put(ProductionNew.TIMEOFAPPLICATIONTOPDRESSING,p.getTimeofapplicationtopdressing());
+                 production.put(ProductionNew.TIMEOFHARVEST,p.getTimeofharvest());
+                 production.put(ProductionNew.TOPDRESSFERTILIZEROTHER,p.getTopdressfertilizerother());
+                 production.put(ProductionNew.TYPEOFBASALFERTILIZER,p.getTypeofbasalfertilizer());
+                 production.put(ProductionNew.TYPEOFFERTILIZERTOPDRESSING,p.getTypeoffertilizertopdressing());
+                 production.put(ProductionNew.TYPEOFHERBICIDEPOSTPLANTWEED,p.getTypeofherbicidepostplantweed());
+                 
                  
                 }
                  
                 
+                //Post Harvest
                  PostHarvest2 ph = new PostHarvestModel().getPostHarvest("Id", bb.getFarmID());
                  if(null!=ph)
                 {
                  System.out.println("Post Harvest " + ph.getApplicationrateofstoragechemical() + "farmer " + b.getFirstname());
                  postHarvest.put(PostHarvest2.APPLICATIONRATEOFSTORAGECHEMICAL,ph.getApplicationrateofstoragechemical());
                  postHarvest.put(PostHarvest2.COMPLETIONOFPRODUCEMARKETING,ph.getCompletionofproducemarketing());
-                 
-                 
+                 postHarvest.put(PostHarvest2.COMPLETIONOFTHRESHING,ph.getCompletionofthreshing());
+                 postHarvest.put(PostHarvest2.DATEOFCOMPLETINGDRYING,ph.getDateofcompletingdrying());
+                 postHarvest.put(PostHarvest2.DATETOCOMPLETEDRYING,ph.getDatetocompletedrying());
+                 postHarvest.put(PostHarvest2.DEHUSKINGDATE,ph.getDehuskingdate());
+                 postHarvest.put(PostHarvest2.FIRSTSALEDATE,ph.getFirstsaledate());
+                 postHarvest.put(PostHarvest2.MAINPOINTOFSALEORCONTACT,ph.getMainpointofsaleorcontact());
+                 postHarvest.put(PostHarvest2.MANUALTHRESHING,ph.getManualthreshing());
+                 postHarvest.put(PostHarvest2.MANUALWINNOWING,ph.getManualwinnowing());
+                 postHarvest.put(PostHarvest2.MARKETINGOCCASIONS,ph.getMarketingoccasions());
+                 postHarvest.put(PostHarvest2.METHODOFDRYINGCOBSPANICLESCHIPSCHU,ph.getMethodofdryingcobspanicleschipschu());
+                 postHarvest.put(PostHarvest2.METHODOFDRYINGGRAIN,ph.getMethodofdryinggrain());
+                 postHarvest.put(PostHarvest2.METHODOFTHRESHING,ph.getMethodofthreshing());
+                 postHarvest.put(PostHarvest2.METHODOFWINNOWING,ph.getMethodofwinnowing());
+                 postHarvest.put(PostHarvest2.MOSTPRODUCESALEDATE,ph.getMostproducesaledate());
+                 postHarvest.put(PostHarvest2.OTHERAPPLICATIONRATE,ph.getOtherapplicationrate());
+                 postHarvest.put(PostHarvest2.OTHERMETHODFORDRYING,ph.getOthermethodfordrying());
+                 postHarvest.put(PostHarvest2.OTHERMETHODOFDRYINGGRAIN,ph.getOthermethodofdryinggrain());
+                 postHarvest.put(PostHarvest2.OTHERMETHODSOFDEHUSKING,ph.getOthermethodsofdehusking());
+                 postHarvest.put(PostHarvest2.OTHERSALECONTACT,ph.getOthersalecontact());
+                 postHarvest.put(PostHarvest2.OTHERSTORAGECHEMICAL,ph.getOtherstoragechemical());
+                 postHarvest.put(PostHarvest2.POSTHARVESTLOSSES,ph.getPostharvestlosses());
+                 postHarvest.put(PostHarvest2.PRICEATFIRSTSALEDATE,ph.getPriceatfirstsaledate());
+                 postHarvest.put(PostHarvest2.PRICEATMOSTSALEDATE,ph.getPriceatmostsaledate());
+                 postHarvest.put(PostHarvest2.PROCESSINGOFCASSAVA,ph.getProcessingofcassava());
+                 postHarvest.put(PostHarvest2.PROPORTIONFORMARKET,ph.getProportionformarket());
+                 postHarvest.put(PostHarvest2.PROPORTIONOFCASSAVAPROCESSEDINTOCHIPS,ph.getProportionofcassavaprocessedintochips());
+                 postHarvest.put(PostHarvest2.THERAPPLICATIONRATEOFSTORAGECHEMIC,ph.getTherapplicationrateofstoragechemic());
+                 postHarvest.put(PostHarvest2.TYPEOFBAGUSEDINBULKINGPRODUCT,ph.getTypeofbagusedinbulkingproduct());
+                 postHarvest.put(PostHarvest2.TYPEOFMACHINE,ph.getTypeofmachine());
+                 postHarvest.put(PostHarvest2.TYPEOFMACHINEWINOWING,ph.getTypeofmachinewinowing());
+                 postHarvest.put(PostHarvest2.TYPEOFSTORAGECHEMICAL,ph.getTypeofstoragechemical());
+                 postHarvest.put(PostHarvest2.TYPEOFSTORAGESTRUCTURE,ph.getTypeofstoragestructure());
                 } 
                  
                  

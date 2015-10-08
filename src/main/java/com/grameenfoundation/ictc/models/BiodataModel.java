@@ -122,7 +122,7 @@ public class BiodataModel {
                 return new Biodata(node);
             }
         } catch (Exception e) {
-            System.out.println("Unable to Find geofence");
+            System.out.println("Unable to Find Biodata");
         }
 
         return null;
@@ -428,6 +428,32 @@ public class BiodataModel {
         return created;
     }
      
+    public boolean BiodataToProfiling(String biodata, Node profile) {
+
+        Biodata b = null;
+        boolean created = false;
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+
+            b = new BiodataModel().getBiodata(Biodata.ID, biodata);
+
+            System.out.println("biodata :" + b.getUnderlyingNode().getId());
+            if (null != biodata) {
+
+                b.setProfiling(profile);
+                created = true;
+                trx.success();
+
+            }
+        } catch (Exception e) {
+            System.out.println("error");
+            //created = false;
+
+        }
+
+        return created;
+    } 
+     
+     
 
     public BiodataWrapper getBiodataByFieldValue(String field, String value) {
 //        String q = "Start root=node(0) "
@@ -490,10 +516,10 @@ public class BiodataModel {
     
     
    public boolean BiodataUpdate(String id, Map<String, String> data) {
-           Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
+           
            Biodata bio =  getBiodata(Biodata.ID, id);
         boolean updated =false;
-        try {
+        try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             //If the setting is not null
             if (null != bio) {
 
@@ -524,15 +550,10 @@ public class BiodataModel {
             }   
             }
             else {
-                trx.success();
+              
                 log.info("Unable to update Bio Data");
             }
-        } catch (Exception e) {
-            log.info("Unable to find Bio Data");
-
-        } finally {
-            trx.finish();
-        }
+        } 
         return updated;
     }
 }

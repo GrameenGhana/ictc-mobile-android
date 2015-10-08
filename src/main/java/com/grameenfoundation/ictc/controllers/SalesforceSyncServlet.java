@@ -8,13 +8,16 @@ package com.grameenfoundation.ictc.controllers;
 import static com.grameenfoundation.ictc.controllers.SaleforceIntegrationController.getObjectFieldId;
 import static com.grameenfoundation.ictc.controllers.SaleforceIntegrationController.getObjectFieldName;
 import com.grameenfoundation.ictc.domains.Biodata;
+import com.grameenfoundation.ictc.domains.Ouestion;
 import com.grameenfoundation.ictc.domains.PostHarvest2;
 import com.grameenfoundation.ictc.domains.ProductionNew;
 import com.grameenfoundation.ictc.domains.ProductionUpdate;
+import com.grameenfoundation.ictc.domains.Profiling;
 import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.models.MeetingModel;
 import com.grameenfoundation.ictc.models.PostHarvestModel;
 import com.grameenfoundation.ictc.models.ProductionModel;
+import com.grameenfoundation.ictc.models.ProfilingModel;
 import com.grameenfoundation.ictc.models.UserModel;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
@@ -22,6 +25,7 @@ import com.grameenfoundation.ictc.utils.Labels;
 import com.grameenfoundation.ictc.utils.MeetingSchedule;
 import com.grameenfoundation.ictc.utils.ParentNode;
 import com.grameenfoundation.ictc.wrapper.MeetingWrapper;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -77,26 +81,27 @@ public class SalesforceSyncServlet extends HttpServlet {
         
          try (PrintWriter out = response.getWriter()) {
              
-            String theString = IOUtils.toString(request.getInputStream(), "UTF-8");
-            System.out.println("Salesforce data/n " + theString);
+           // String theString = IOUtils.toString(request.getInputStream(), "UTF-8");
+           // System.out.println("Salesforce data/n " + theString);
             //gets request input stream
             InputStream in = request.getInputStream();
             InputSource input = null;
-            Transaction tx;
-            tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
+             
+           // tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
             org.neo4j.graphdb.Node FarmerParent;
             
             
-             try {
+             try(Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
                 System.out.println(" " + request.getContentType());
-
+                File xmlFile = new File("/home/grameen/test.xml");
                 DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                 InputSource is = new InputSource();
                 Map<String,String> update = new HashMap<>();
-                is.setCharacterStream(new StringReader(theString));
+                //is.setCharacterStream(new StringReader(theString));
                 System.out.println("After parsing XML");
-                Document doc = db.parse(is);       
+                //Document doc = db.parse(is);
+                Document doc = db.parse(xmlFile);   
                 System.out.println("Should be normalised now");
                 doc.getDocumentElement().normalize();
           
@@ -333,7 +338,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                       }
                   else if(salesforceObj.equalsIgnoreCase("sf:FMP_PostHarvest_update__c"))
                       {
-                          PostHarvestModel ph = new PostHarvestModel();
+                         PostHarvestModel ph = new PostHarvestModel();
                           
                         org.neo4j.graphdb.Node postHarvestUpdateNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.UPDATE);
                         
@@ -371,6 +376,79 @@ public class SalesforceSyncServlet extends HttpServlet {
                         out.println(sendAck());
                          
                       }
+                     else if(salesforceObj.equalsIgnoreCase("sf:Profiling__c"))
+                      {
+                         
+                          ProfilingModel pm = new ProfilingModel();
+                          
+                          org.neo4j.graphdb.Node profilingNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.PROFILE);
+                          
+                          farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
+                          System.out.println("farmerid " + farmerID);
+                           
+                            for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
+
+                            //System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
+                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                 profilingNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                            }
+
+                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
+
+                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                profilingNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+
+                            }
+                        }
+                           
+                          profilingNode.setProperty(Profiling.LAST_MODIFIED, new Date().getTime());
+
+                          log.log(Level.INFO, "new node created {0}", profilingNode.getId());
+
+                          Biodata b = biodataModel.getBiodata("Id", farmerID);
+
+                          boolean created = biodataModel.BiodataToProfiling(b.getId(), profilingNode);
+
+                          System.out.println("link created " + created);
+
+                          
+
+                          out.println(sendAck());
+
+                          
+                         
+                          Profiling p =  pm.getProfile("Id", farmerID);
+                          
+                          System.out.println("Profile " + p.getFarmrecordkeepingstatus());
+                          String q2 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getFbomembership().toLowerCase()).getScore();
+                          String q6 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getFarmrecordkeepingstatus().toLowerCase()).getScore();
+                          String q5 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getOperatebankaccount().toLowerCase()).getScore();
+                          String q7 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getProducesoldproportion()).getScore();
+                          String q8 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getRiskdispositionborrow()).getScore();
+                          String q9 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getInnovativenessbytrying()).getScore();
+                          String q10 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getSoilfertilitypractices()).getScore();
+                          String q11 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getPostharvestlosses()).getScore();
+
+                          
+                          System.out.println("results"+ q2+" "+" "+q6+" "+q5+" "+q7+" "+q8+" "+q9+" "+q10+" "+q11);
+                          
+                         
+                          int score = Integer.valueOf(q2)+Integer.valueOf(q5)+Integer.valueOf(q6)+Integer.valueOf(q7)+
+                                  Integer.valueOf(q8)+Integer.valueOf(q9)+Integer.valueOf(q10)+Integer.valueOf(q11);
+                          
+                          System.out.println("score" + score);
+                          
+                          
+                          System.out.println("Cluster " + getCluster(score));
+                        
+                         
+                          
+                          update.put(Biodata.CLUSTER, getCluster(score));
+                          biodataModel.BiodataUpdate(farmerID, update);
+                          
+                           tx.success();
+                      } 
                      
                     
                  }
@@ -382,10 +460,7 @@ public class SalesforceSyncServlet extends HttpServlet {
              }
              catch (Exception ex) {
                 Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, ex);
-                tx.failure();
-            } finally {
-                tx.finish();
-            }
+            } 
          
          }
         
@@ -452,5 +527,23 @@ public class SalesforceSyncServlet extends HttpServlet {
             return "";
         }
        }
+      
+      
+       public String getCluster(int score)
+    {
+        System.out.println("score is " + score);
+        if (score >= 45 && score <= 60) {
+            return "1";
+        } 
+        else if (score >=30 && score <=45) {
+            return "2";
+        } else if (score >=16 && score <=29) {
+            return "3";
+        }
+        else {
+            return "4";
+        }
+
+    }
 
 }

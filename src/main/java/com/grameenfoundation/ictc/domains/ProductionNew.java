@@ -411,7 +411,7 @@ public String getPlantingdistancebetweenplantsmaize(){
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
 
 
@@ -425,7 +425,7 @@ public String getPlantingdate(){
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
 
 
@@ -440,7 +440,7 @@ public String getOtherfertilizer(){
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
 
 
@@ -455,7 +455,7 @@ public String getNameofvarietynotinlist(){
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
 
 
@@ -469,7 +469,7 @@ public String getNameofcropvarietyyam(){
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
 
 
@@ -484,7 +484,7 @@ public String getNameofcropvarietyrice(){
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
 
 public void setNameofcropvarietycassava(String nameofcropvarietycassava) {
@@ -497,7 +497,7 @@ public String getNameofcropvarietycassava(){
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
 
 
@@ -512,7 +512,7 @@ public String getNameofcropvariety(){
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
 
 
