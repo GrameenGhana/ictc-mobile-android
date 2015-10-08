@@ -382,6 +382,17 @@ public class Neo4jServices {
             }
         }
         return null;
+    }  public static List<Node> findNodeFromRelations(Node underlyingNode, Direction direction, ICTCRelationshipTypes relationType) {
+        Iterable<Relationship> relationships = underlyingNode.getRelationships(direction, relationType);
+        List<Node> n = new ArrayList<Node>();
+        for (Relationship relationshp : relationships) {
+            if (direction.equals(Direction.OUTGOING)) {
+              n.add(relationshp.getEndNode());
+            } else {
+                n.add(relationshp.getStartNode());
+            }
+        }
+        return n;
     }
 
     public static List<BiodataWrapper> findByLabel(ICTCRelationshipTypes primaryRel, String searchField, String searchValue) {
@@ -516,6 +527,16 @@ public class Neo4jServices {
 
     }
     
+    public static void executeVoidQuery(String query) {
+
+        try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            ExecutionEngine engine = new ExecutionEngine(
+                    ICTCDBUtil.getInstance().getGraphDB(), StringLogger.SYSTEM);
+            ExecutionResult result = executeCypherQuery(query);
+            
+        }
+
+    }
      public static Node executeSingleQuery(String query, String returnItem) {
 
         try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
