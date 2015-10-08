@@ -81,8 +81,8 @@ public class SalesforceSyncServlet extends HttpServlet {
         
          try (PrintWriter out = response.getWriter()) {
              
-           // String theString = IOUtils.toString(request.getInputStream(), "UTF-8");
-           // System.out.println("Salesforce data/n " + theString);
+            String theString = IOUtils.toString(request.getInputStream(), "UTF-8");
+            System.out.println("Salesforce data/n " + theString);
             //gets request input stream
             InputStream in = request.getInputStream();
             InputSource input = null;
@@ -90,18 +90,18 @@ public class SalesforceSyncServlet extends HttpServlet {
            // tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
             org.neo4j.graphdb.Node FarmerParent;
             
-            
-             try(Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
+             try {
 
                 System.out.println(" " + request.getContentType());
-                File xmlFile = new File("/home/grameen/test.xml");
+                //File xmlFile = new File("/home/grameen/test.xml");
                 DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                 InputSource is = new InputSource();
                 Map<String,String> update = new HashMap<>();
-                //is.setCharacterStream(new StringReader(theString));
+                is.setCharacterStream(new StringReader(theString));
                 System.out.println("After parsing XML");
-                //Document doc = db.parse(is);
-                Document doc = db.parse(xmlFile);   
+                Document doc = db.parse(is);
+               // Document doc = db.parse(xmlFile);   
                 System.out.println("Should be normalised now");
                 doc.getDocumentElement().normalize();
           
@@ -379,7 +379,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                      else if(salesforceObj.equalsIgnoreCase("sf:Profiling__c"))
                       {
                          
-                          ProfilingModel pm = new ProfilingModel();
+                        
                           
                           org.neo4j.graphdb.Node profilingNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.PROFILE);
                           
@@ -414,37 +414,9 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                           
 
-                          out.println(sendAck());
-
+                          out.println(sendAck());        
                           
-                         
-                          Profiling p =  pm.getProfile("Id", farmerID);
-                          
-                          System.out.println("Profile " + p.getFarmrecordkeepingstatus());
-                          String q2 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getFbomembership().toLowerCase()).getScore();
-                          String q6 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getFarmrecordkeepingstatus().toLowerCase()).getScore();
-                          String q5 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getOperatebankaccount().toLowerCase()).getScore();
-                          String q7 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getProducesoldproportion()).getScore();
-                          String q8 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getRiskdispositionborrow()).getScore();
-                          String q9 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getInnovativenessbytrying()).getScore();
-                          String q10 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getSoilfertilitypractices()).getScore();
-                          String q11 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getPostharvestlosses()).getScore();
-
-                          
-                          System.out.println("results"+ q2+" "+" "+q6+" "+q5+" "+q7+" "+q8+" "+q9+" "+q10+" "+q11);
-                          
-                         
-                          int score = Integer.valueOf(q2)+Integer.valueOf(q5)+Integer.valueOf(q6)+Integer.valueOf(q7)+
-                                  Integer.valueOf(q8)+Integer.valueOf(q9)+Integer.valueOf(q10)+Integer.valueOf(q11);
-                          
-                          System.out.println("score" + score);
-                          
-                          
-                          System.out.println("Cluster " + getCluster(score));
-                        
-                         
-                          
-                          update.put(Biodata.CLUSTER, getCluster(score));
+                          update.put(Biodata.CLUSTER, getCluster(getUserScore(farmerID)));
                           biodataModel.BiodataUpdate(farmerID, update);
                           
                            tx.success();
@@ -460,7 +432,12 @@ public class SalesforceSyncServlet extends HttpServlet {
              }
              catch (Exception ex) {
                 Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } 
+                ex.printStackTrace();
+                tx.failure();
+            }
+             finally{
+                 tx.finish();
+             }
          
          }
         
@@ -517,6 +494,36 @@ public class SalesforceSyncServlet extends HttpServlet {
         return ack;
     }
      
+     
+     
+     public int getUserScore(String user) {
+        ProfilingModel pm = new ProfilingModel();
+        int score = 0;
+
+        Profiling p = pm.getProfile("Id", user);
+
+        System.out.println("Profile " + p.getFarmrecordkeepingstatus());
+        String q2 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getFbomembership().toLowerCase()).getScore();
+        String q6 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getFarmrecordkeepingstatus().toLowerCase()).getScore();
+        String q5 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getOperatebankaccount().toLowerCase()).getScore();
+        String q7 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getProducesoldproportion()).getScore();
+        String q8 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getRiskdispositionborrow()).getScore();
+        String q9 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getInnovativenessbytrying()).getScore();
+        String q10 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getSoilfertilitypractices()).getScore();
+        String q11 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getPostharvestlosses()).getScore();
+
+        System.out.println("results" + q2 + " " + " " + q6 + " " + q5 + " " + q7 + " " + q8 + " " + q9 + " " + q10 + " " + q11);
+
+        score = Integer.valueOf(q2) + Integer.valueOf(q5) + Integer.valueOf(q6) + Integer.valueOf(q7)
+                + Integer.valueOf(q8) + Integer.valueOf(q9) + Integer.valueOf(q10) + Integer.valueOf(q11);
+
+        System.out.println("score" + score);
+
+        System.out.println("Cluster " + getCluster(score));
+
+        return score;
+    }
+
      
       public String getXmlNodeValue(String node, Element element) {
         NodeList nlist = element.getElementsByTagName(node).item(0).getChildNodes();
