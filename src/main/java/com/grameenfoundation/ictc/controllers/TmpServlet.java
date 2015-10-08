@@ -252,8 +252,8 @@ public class TmpServlet extends HttpServlet {
             for (MeetingSettingWrapper meeting1 : meetings) {
                 msModel.create(meeting1);
             }
-            
-            
+
+          
             
         }
     }
