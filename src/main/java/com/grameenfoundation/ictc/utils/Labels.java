@@ -36,6 +36,7 @@ public enum Labels implements Label {
     CROP_CALENDAR,
     FARM_INPUT,
     UPDATE,
-    QUESTION
-
+    QUESTION,
+    BASELINE_PRODUCTION,
+    BASELINE_PRODUCTION_BUDGET
 }

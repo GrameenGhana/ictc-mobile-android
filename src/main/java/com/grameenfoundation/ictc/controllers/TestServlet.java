@@ -351,8 +351,8 @@ public class TestServlet extends HttpServlet {
             JSONObject j = new JSONObject();
             j.put("agentcode", "ICTC234");
             j.put("organisation", "MOFA");
-            j.put("firstname", "Cecil");
-            j.put("lastname","Osei");
+            j.put("firstname", "Edward");
+            j.put("lastname","Pie");
             j.put("agenttype","MOFA");
             
 

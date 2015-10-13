@@ -24,7 +24,36 @@ public class TechnicalNeed extends Status implements GeneralInterface {
     public static String CROPESTABLISHMENT="cropestablishment";
     public static String INTEGRATEDSOILFERTILITYMANAGEMENT="integratedsoilfertilitymanagement";
     public static String HARVESTANDPOSTHARVEST="harvestandpostharvest";
+    public static String CROPVARIETYANDSEEDCASSAVA="cropvarietyandseedcassava";
+    public static String CROVARIETYANDSEEDSYAM="crovarietyandseedsyam";
     
+    
+    
+public void setCrovarietyandseedsyam(String crovarietyandseedsyam) {
+underlyingNode.setProperty(CROVARIETYANDSEEDSYAM,crovarietyandseedsyam);
+}
+
+public String getCrovarietyandseedsyam(){
+          try {
+          return (String) underlyingNode.getProperty(CROVARIETYANDSEEDSYAM);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setCropvarietyandseedcassava(String cropvarietyandseedcassava) {
+underlyingNode.setProperty(CROPVARIETYANDSEEDCASSAVA,cropvarietyandseedcassava);
+}
+
+public String getCropvarietyandseedcassava(){
+          try {
+          return (String) underlyingNode.getProperty(CROPVARIETYANDSEEDCASSAVA);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
     
 public void setHarvestAndPostHarvest(String harvestandpostharvest) {
 underlyingNode.setProperty(HARVESTANDPOSTHARVEST,harvestandpostharvest);

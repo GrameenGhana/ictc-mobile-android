@@ -30,8 +30,8 @@ public class ProfilingModel {
        public Profiling getProfile(String field, String value) {
            
         Profiling pp = null;
-       try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx())
-       {
+       //try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx())
+       //{
         String q = "Start root=node(0) "
                 + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+ICTCRelationshipTypes.HAS_PROFILING+
                 "]->p"
@@ -49,8 +49,8 @@ public class ProfilingModel {
         } catch (Exception e) {
             System.out.println("Unable to Profile " + e.getMessage());
             e.printStackTrace();
-        }
-        
+       // }
+       // trx.success();
        }
 
         return pp;
@@ -61,8 +61,8 @@ public class ProfilingModel {
         
         List<Ouestion> actList = new ArrayList<Ouestion>();
         
-        try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx())
-       { 
+       // try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx())
+      // { 
         String q = "Start root=node(0) "
                 + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.QUESTION + "]->f"
                 + " where f." + field + "='" + value + "'"
@@ -85,7 +85,10 @@ public class ProfilingModel {
             
         } catch (Exception e) {
             System.out.println("Unable to get score");
-        }
+      //  }
+        
+        
+        //trx.success();
        }
            
        

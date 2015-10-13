@@ -21,6 +21,28 @@ public class TechnicalNeedsWrapper {
     private String cropEstablishment = "cropestablishment";
     private String integratedSoilFertilityManagement = "integratedsoilfertilitymanagement";
     private String HarvestAndPostHarvest = "harvestandpostharvest";
+    String cropvarietyandseedcassava="cropvarietyandseedcassava";
+    String crovarietyandseedsyam="crovarietyandseedsyam";
+    
+    
+    
+ public  void setCrovarietyandseedsyam(String crovarietyandseedsyam) {
+      this.crovarietyandseedsyam=crovarietyandseedsyam;
+    }
+ public  String getCrovarietyandseedsyam() {
+        return crovarietyandseedsyam;
+
+    }
+    
+    
+    
+ public  void setCropvarietyandseedcassava(String cropvarietyandseedcassava) {
+      this.cropvarietyandseedcassava=cropvarietyandseedcassava;
+    }
+ public  String getCropvarietyandseedcassava() {
+        return cropvarietyandseedcassava;
+
+    }
 
     public TechnicalNeedsWrapper(String fm, String variety, String weedControl, String cropEst, String intsol, String harvesAnsPst) {
         this.farmPlanning = fm;

@@ -16,7 +16,10 @@ public class ICTCKonstants {
     
     //a
      public static final String AGENT = "agent";
-    
+     
+     //B
+      public static final String BASELINE_PRODUCTION_BUDGET = "baselineproductionbudget";
+      public static final String BASELINE_PRODUCTION = "baselineproduction";
     //c
     public static final String CREATED_ON = "creationDate";
     public static final String CREATED_BY = "createdBy";

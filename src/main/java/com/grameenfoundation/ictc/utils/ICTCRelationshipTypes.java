@@ -18,6 +18,10 @@ public enum ICTCRelationshipTypes implements RelationshipType{
 
     //A
      AGENT,
+     
+     //
+     BASELINE_PRODUCTION_BUDGET,
+     BASELINE_PRODUCTION,
      //C
     CREATED_BY,
     CROP_CALENDAR_SETTING,
@@ -49,6 +53,7 @@ public enum ICTCRelationshipTypes implements RelationshipType{
     HAS_MEETING,
     HAS_FARMER,
     HAS_FARM_INPUT,
+    HAS_BASELINE_PRODUCTION_BUDGET,
     
     
     //L

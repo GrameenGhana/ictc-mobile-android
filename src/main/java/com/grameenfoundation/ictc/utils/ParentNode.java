@@ -83,4 +83,12 @@ public class ParentNode {
      public static Node  QuestionParentNode() {
         return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.PROFILING);
     }  
+     
+     public static Node  BPBParentNode() {
+        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.BASELINE_PRODUCTION_BUDGET);
+    }  
+     
+   public static Node  BPParentNode() {
+        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.BASELINE_PRODUCTION_BUDGET);
+    }  
 }
