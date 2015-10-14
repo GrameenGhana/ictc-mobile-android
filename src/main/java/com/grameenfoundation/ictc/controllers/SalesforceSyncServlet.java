@@ -7,13 +7,17 @@ package com.grameenfoundation.ictc.controllers;
 
 import static com.grameenfoundation.ictc.controllers.SaleforceIntegrationController.getObjectFieldId;
 import static com.grameenfoundation.ictc.controllers.SaleforceIntegrationController.getObjectFieldName;
+import com.grameenfoundation.ictc.domain.commons.Generalimpl;
 import com.grameenfoundation.ictc.domains.Biodata;
+import com.grameenfoundation.ictc.domains.FmpProductionBudget;
+import com.grameenfoundation.ictc.domains.FmpProductionBudgetUpdate;
 import com.grameenfoundation.ictc.domains.Ouestion;
 import com.grameenfoundation.ictc.domains.PostHarvest2;
 import com.grameenfoundation.ictc.domains.ProductionNew;
 import com.grameenfoundation.ictc.domains.ProductionUpdate;
 import com.grameenfoundation.ictc.domains.Profiling;
 import com.grameenfoundation.ictc.models.BiodataModel;
+import com.grameenfoundation.ictc.models.FmpProductionBudgetModel;
 import com.grameenfoundation.ictc.models.MeetingModel;
 import com.grameenfoundation.ictc.models.PostHarvestModel;
 import com.grameenfoundation.ictc.models.ProductionModel;
@@ -329,7 +333,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                          ProductionNew p  = product.getProduction("Id",farmerID);
                          
                          product.ProductionToUpdate(p,productionUpdateNode);
-                            
+                           
                         
                        tx.success();
 
@@ -533,7 +537,154 @@ public class SalesforceSyncServlet extends HttpServlet {
                        tx.success();
                     }
                      
-                     
+                    else if(salesforceObj.equals("sf:BASELINE_POST_HARVEST_BUDGET__c"))
+                    {
+                        org.neo4j.graphdb.Node BPHBParent;
+                        org.neo4j.graphdb.Node BPHBNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.BASELINE_POST_HARVEST_BUDGET);
+
+                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c", ele);
+                        System.out.println("farmerid " + farmerID);
+                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
+
+                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
+                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                BPHBNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                            }
+
+                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
+
+                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                BPHBNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+
+                            }
+                        }
+
+                        BPHBParent = ParentNode.BPHBParentNode();
+                        BPHBParent.createRelationshipTo(BPHBNode, ICTCRelationshipTypes.BASELINE_POSTHARVEST_BUDGET);
+
+                        log.log(Level.INFO, "new node created {0}", BPHBNode.getId());
+
+                        Biodata b = biodataModel.getBiodata("Id", farmerID);
+
+                        biodataModel.BiodataToBPHB(b.getId(), BPHBNode);
+
+                        out.println(sendAck());
+
+                        tx.success();
+                    }  else if(salesforceObj.equals("sf:BASELINE_POST_HARVEST__c"))
+                    {
+                        org.neo4j.graphdb.Node BPHParent;
+                        org.neo4j.graphdb.Node BPHNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.BASELINE_POST_HARVEST);
+
+                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c", ele);
+                        System.out.println("farmerid " + farmerID);
+                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
+
+                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
+                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                BPHNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                            }
+
+                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
+
+                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                BPHNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+
+                            }
+                        }
+
+                        BPHParent = ParentNode.BPHParentNode();
+                        BPHParent.createRelationshipTo(BPHNode, ICTCRelationshipTypes.BASELINE_POSTHARVEST);
+
+                        log.log(Level.INFO, "new node created {0}", BPHNode.getId());
+
+                        Biodata b = biodataModel.getBiodata("Id", farmerID);
+
+                        biodataModel.BiodataToBPH(b.getId(), BPHNode);
+
+                        out.println(sendAck());
+
+                        tx.success();
+                    }
+               else if(salesforceObj.equals("sf:FMP_PRODUCTION_BUDGET__c"))
+                    {
+                        org.neo4j.graphdb.Node FMPPBParent;
+                        org.neo4j.graphdb.Node FMPPBNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FMP_PRODUCTION_BUDGET);
+
+                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c", ele);
+                        System.out.println("farmerid " + farmerID);
+                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
+
+                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
+                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                FMPPBNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                            }
+
+                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
+
+                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                FMPPBNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+
+                            }
+                        }
+
+                        FMPPBParent = ParentNode.FMPPBparentNode();
+                        FMPPBParent.createRelationshipTo(FMPPBNode, ICTCRelationshipTypes.FMP_PRODUCTION_BUDGET);
+
+                        log.log(Level.INFO, "new node created {0}", FMPPBNode.getId());
+
+                        Biodata b = biodataModel.getBiodata("Id", farmerID);
+
+                        biodataModel.BiodataToFMPPB(b.getId(), FMPPBNode);
+
+                        out.println(sendAck());
+
+                        tx.success();
+                    }
+                      else if(salesforceObj.equals("sf:FMP_PRODUCTION_BUDGET_UPDATE__c"))
+                    {
+                        org.neo4j.graphdb.Node FMPPBUParent;
+                        org.neo4j.graphdb.Node FMPPBUNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.UPDATE);
+                        
+                        FmpProductionBudgetModel fmp = new FmpProductionBudgetModel();
+                        
+                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c", ele);
+                        System.out.println("farmerid " + farmerID);
+                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
+
+                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
+                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                               FMPPBUNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                            }
+
+                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
+
+                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                FMPPBUNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+
+                            }
+                        }
+                        
+                        FMPPBUNode.setProperty(FmpProductionBudgetUpdate.LAST_MODIFIED,new Date().getTime());
+
+                       // FMPPBUParent = ParentNode.FMPPBUparentNode();
+                       // FMPPBUParent.createRelationshipTo(FMPPBUNode, ICTCRelationshipTypes.FMP_PRODUCTION_BUDGET_UPDATE);
+
+                        log.log(Level.INFO, "new node created {0}",FMPPBUNode.getId());
+
+                        FmpProductionBudget  p  = fmp.getFmpProductionBudget("Id", farmerID);
+                         
+                        System.out.println("updated" + fmp.FmpProductionBudgetToUpdate(p, FMPPBUNode) ); 
+
+                        out.println(sendAck());
+
+                        tx.success();
+                    }
+                      
                      
                     
                  }

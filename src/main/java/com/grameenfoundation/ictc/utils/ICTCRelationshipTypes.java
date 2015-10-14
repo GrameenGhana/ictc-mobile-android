@@ -22,6 +22,8 @@ public enum ICTCRelationshipTypes implements RelationshipType{
      //
      BASELINE_PRODUCTION_BUDGET,
      BASELINE_PRODUCTION,
+     BASELINE_POSTHARVEST_BUDGET,
+     BASELINE_POSTHARVEST,
      //C
     CREATED_BY,
     CROP_CALENDAR_SETTING,
@@ -36,6 +38,8 @@ public enum ICTCRelationshipTypes implements RelationshipType{
     FARM_OPERATION,
     FARM_MANAGEMENT_PLAN,
     FARM_INPUT_RECEIVED,
+    FMP_PRODUCTION_BUDGET,
+    FMP_PRODUCTION_BUDGET_UPDATE,
     
     //H
     HAS_FARM_MANAGEMENT_PLAN,
@@ -54,7 +58,10 @@ public enum ICTCRelationshipTypes implements RelationshipType{
     HAS_FARMER,
     HAS_FARM_INPUT,
     HAS_BASELINE_PRODUCTION_BUDGET,
-    
+    HAS_BASELINE_POSTHARVEST_BUDGET,
+    HAS_BASELINE_POSTHARVEST,
+    HAS_PRODUCTION_BUDGET_UPDATE, 
+    HAS_PRODUCTION_BUDGET,
     
     //L
     LAST_MODIFIED_BY,
@@ -82,5 +89,5 @@ public enum ICTCRelationshipTypes implements RelationshipType{
      TECHNICAL_NEED,
     //U
     USER,
-    UPDATE
+    UPDATE,  
 }

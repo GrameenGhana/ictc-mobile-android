@@ -410,4 +410,36 @@ public class Biodata extends Status implements GeneralInterface {
     }
     
     
+    public void setBPHB(Node BPB) {
+        underlyingNode.createRelationshipTo(BPB, ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST_BUDGET);
+    }
+
+    public BaselinePostHarvestBudget getBPHB() {
+        return new BaselinePostHarvestBudget(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST_BUDGET));
+    }
+    
+      public void setBPH(Node BPB) {
+        underlyingNode.createRelationshipTo(BPB, ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST);
+    }
+
+    public BaselinePostHarvestBudget getBPH() {
+        return new BaselinePostHarvestBudget(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST));
+    }
+    
+    
+      public void setFMPPB(Node BPB) {
+        underlyingNode.createRelationshipTo(BPB, ICTCRelationshipTypes.HAS_PRODUCTION_BUDGET);
+    }
+
+    public FmpProductionBudget getFMPPB() {
+        return new FmpProductionBudget(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_PRODUCTION_BUDGET));
+    }
+
+    public void setFMPPBU(Node BPBNode) {
+        underlyingNode.createRelationshipTo(BPBNode, ICTCRelationshipTypes.HAS_PRODUCTION_BUDGET_UPDATE);
+    }
+    
+    public FmpProductionBudgetUpdate getFMPPBU() {
+        return new FmpProductionBudgetUpdate(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_PRODUCTION_BUDGET_UPDATE));
+    }
 }

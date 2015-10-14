@@ -89,6 +89,21 @@ public class ParentNode {
     }  
      
    public static Node  BPParentNode() {
-        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.BASELINE_PRODUCTION_BUDGET);
+        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.BASELINE_PRODUCTION);
+    }  
+    public static Node  BPHParentNode() {
+        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.BASELINE_POST_HARVEST);
+    }  
+   
+   public static Node  BPHBParentNode() {
+        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.BASELINE_POST_HARVEST_BUDGET);
+    } 
+   
+   public static Node  FMPPBparentNode() {
+        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.FMP_PRODUCTION_BUDGET);
+    }  
+   
+    public static Node   FMPPBUparentNode() {
+        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.FMP_PRODUCTION_BUDGET_UPDATE);
     }  
 }
