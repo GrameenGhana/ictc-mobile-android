@@ -64,7 +64,7 @@ public class APIController extends HttpServlet {
                         object.put("name", crop1);
                         meetingSettings = msm.findPerCrop(crop1);
                         JSONArray meetSet = new JSONArray();
-                        System.out.println("Crops :"+crop1);
+                        System.out.println("Crops :" + crop1);
                         for (MeetingSettingWrapper meetingSetting : meetingSettings) {
                             JSONObject obj = new JSONObject();
 //                            obj.put(MeetingSetting.CROP, meetingSetting.getCrop());
@@ -81,17 +81,13 @@ public class APIController extends HttpServlet {
                             }
                             obj.put("activity", jarray);
                             meetSet.put(obj);
-
                         }
-                        object.put("meeting",meetSet);
+                        object.put("meeting", meetSet);
                         cropArray.put(object);
-                       
                     }
-
                     jSONObject.put("rc", "00");
-                    jSONObject.put("crops", cropArray); 
+                    jSONObject.put("crops", cropArray);
                     out.print(jSONObject);
-//                    meetingSettings = msm.findAll();
                 } else {
                     meetingSettings = msm.findPerCrop(crop);
 
@@ -111,10 +107,8 @@ public class APIController extends HttpServlet {
                             jarray.put(job);
                         }
                         obj.put("activity", jarray);
-
                         meetSet.put(obj);
                     }
-
                     jSONObject.put("rc", "00");
                     jSONObject.put("meeting", meetSet);
                     out.print(jSONObject);
