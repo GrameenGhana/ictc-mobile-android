@@ -1,298 +1,182 @@
-{
-    "crops": [
-        [
-            {
-                "index": "1",
-                "startdate": "02-10",
-                "type": "Group",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 1,
-                        "name": ""
-                    }],
-                "crop": "Maize"
-            }, {
-                "index": "1",
-                "startdate": "02-10",
-                "type": "Individual",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 2,
-                        "name": "Land preparation (ploughing)"
-                    }, {
-                        "idx": 1,
-                        "name": "Land Clearing"
-                    }],
-                "crop": "Maize"
-            }, {
-                "index": "1",
-                "startdate": "02-10",
-                "type": "Group",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 3,
-                        "name": "Basal Fertilizer application"
-                    }, {
-                        "idx": 2,
-                        "name": "First weed control (if no herbicide applied)"
-                    }, {
-                        "idx": 1,
-                        "name": "Planting"
-                    }],
-                "crop": "Maize"
-            }, {
-                "index": "2",
-                "startdate": "02-10",
-                "type": "Individual",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 2,
-                        "name": "Top-dress fertilizer application"
-                    }, {
-                        "idx": 1,
-                        "name": " First/Second Weeding"
-                    }],
-                "crop": "Maize"
-            }, {
-                "index": "1",
-                "startdate": "02-10",
-                "type": "Group",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 1,
-                        "name": "Harvesting"
-                    }],
-                "crop": "Maize"
-            }, 
-            {
-                "index": "1",
-                "startdate": "02-10",
-                "type": "Group",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 1,
-                        "name": "Post-harvest processing"
-                    }],
-                "crop": "Maize"
-            }], [{
-                "index": "1",
-                "startdate": "02-10",
-                "type": "Group",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 1,
-                        "name": ""
-                    }],
-                "crop": "Cassava"
-            }, {
-                "index": "1",
-                "startdate": "02-10",
-                "type": "Individual",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 2,
-                        "name": "Land preparation (ploughing)"
-                    }, {
-                        "idx": 1,
-                        "name": "Land Clearing"
-                    }],
-                "crop": "Cassava"
-            }, {
-                "index": "1",
-                "startdate": "02-10",
-                "type": "Group",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 3,
-                        "name": "Basal Fertilizer application"
-                    }, {
-                        "idx": 2,
-                        "name": "First weed control (if no herbicide applied)"
-                    }, {
-                        "idx": 1,
-                        "name": "Planting"
-                    }],
-                "crop": "Cassava"
-            }, {
-                "index": "2",
-                "startdate": "02-10",
-                "type": "Individual",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 2,
-                        "name": "Third Weeding"
-                    }, {
-                        "idx": 1,
-                        "name": " First/Second Weeding"
-                    }],
-                "crop": "Cassava"
-            }, {
-                "index": "1",
-                "startdate": "02-10",
-                "type": "Group",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 1,
-                        "name": "Harvesting"
-                    }],
-                "crop": "Cassava"
-            }, {
-                "index": "1",
-                "startdate": "02-10",
-                "type": "Group",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 1,
-                        "name": "Post-harvest processing"
-                    }],
-                "crop": "Cassava"
-            }], [{
-                "index": "1",
-                "startdate": "02-10",
-                "type": "Group",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 1,
-                        "name": ""
-                    }],
-                "crop": "Yam"
-            }, {
-                "index": "1",
-                "startdate": "02-10",
-                "type": "Individual",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 2,
-                        "name": "Land preparation (ploughing)"
-                    }, {
-                        "idx": 1,
-                        "name": "Land Clearing"
-                    }],
-                "crop": "Yam"
-            }, {
-                "index": "1",
-                "startdate": "02-10",
-                "type": "Group",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 3,
-                        "name": "Basal Fertilizer application"
-                    }, {
-                        "idx": 2,
-                        "name": "First weed control (if no herbicide applied)"
-                    }, {
-                        "idx": 1,
-                        "name": "Planting"
-                    }],
-                "crop": "Yam"
-            }, {
-                "index": "2",
-                "startdate": "02-10",
-                "type": "Individual",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 1,
-                        "name": " First/Second Weeding"
-                    }],
-                "crop": "Yam"
-            }, {
-                "index": "1",
-                "startdate": "02-10",
-                "type": "Group",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 2,
-                        "name": "Harvesting"
-                    }, {
-                        "idx": 1,
-                        "name": "Second/Third weeding"
-                    }],
-                "crop": "Yam"
-            }, {
-                "index": "1",
-                "startdate": "02-10",
-                "type": "Group",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 2,
-                        "name": "Second HarvestingPost-harvest processing"
-                    }, {
-                        "idx": 1,
-                        "name": "Third/fourth weeding"
-                    }],
-                "crop": "Yam"
-            }], [{
-                "index": "1",
-                "startdate": "02-10",
-                "type": "Group",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 1,
-                        "name": ""
-                    }],
-                "crop": "Rice"
-            }, {
-                "index": "1",
-                "startdate": "02-10",
-                "type": "Individual",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 2,
-                        "name": "Land preparation (ploughing)"
-                    }, {
-                        "idx": 1,
-                        "name": "Land Clearing"
-                    }],
-                "crop": "Rice"
-            }, {
-                "index": "1",
-                "startdate": "02-10",
-                "type": "Group",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 3,
-                        "name": "Basal Fertilizer application"
-                    }, {
-                        "idx": 2,
-                        "name": "First weed control (if no herbicide applied)"
-                    }, {
-                        "idx": 1,
-                        "name": "Planting"
-                    }],
-                "crop": "Rice"
-            }, {
-                "index": "2",
-                "startdate": "02-10",
-                "type": "Individual",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 2,
-                        "name": "Top-dress fertilizer application"
-                    }, {
-                        "idx": 1,
-                        "name": " First/Second Weeding"
-                    }],
-                "crop": "Rice"
-            }, {
-                "index": "1",
-                "startdate": "02-10",
-                "type": "Group",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 1,
-                        "name": "Harvesting"
-                    }],
-                "crop": "Rice"
-            }, {
-                "index": "1",
-                "startdate": "02-10",
-                "type": "Group",
-                "enddate": "02-01",
-                "activity": [{
-                        "idx": 1,
-                        "name": "Post-harvest processing"
-                    }],
-                "crop": "Rice"
-            }]],
-    "rc": "00"
-}
+[{
+        "farmer": {
+            "biodata": [{
+                    "region": "1. Ashanti",
+                    "maritalstatus": "1. Single",
+                    "village": "Bhuji",
+                    "nickname": "Yuunj",
+                    "numberofchildren": "36",
+                    "majorcrop": "Maize",
+                    "age": "52",
+                    "community": "Hunhij",
+                    "gender": "1. Female",
+                    "lastname": "Yuhjj",
+                    "numberofdependants": "66",
+                    "firstname": "Yuuy",
+                    "education": "1. No formal schooling",
+                    "farmerid": "a0m24000004ipsgAAA"
+                }],
+            "postharvest": [{}],
+            "production": [{}]
+        }
+    }, {
+        "farmer": {
+            "biodata": [{
+                    "region": "2. Brong-Ahafo",
+                    "maritalstatus": "2. Married",
+                    "village": "Nkoranza",
+                    "nickname": "Kwesi",
+                    "numberofchildren": "5",
+                    "majorcrop": "Rice",
+                    "age": "58",
+                    "community": "Nkoranza",
+                    "gender": "2. Male",
+                    "lastname": "Atta",
+                    "numberofdependants": "6",
+                    "firstname": "Kwesi",
+                    "education": "4. Secondary School",
+                    "farmerid": "a0m24000004iqGiAAI"
+                }],
+            "postharvest": [{}],
+            "production": [{}]
+        }
+    }, {
+        "farmer": {
+            "biodata": [{
+                    "region": "2. Brong-Ahafo",
+                    "maritalstatus": "2. Married",
+                    "village": "Nkoranza",
+                    "nickname": "Koo",
+                    "numberofchildren": "5",
+                    "majorcrop": "Maize",
+                    "age": "52",
+                    "community": "Nkoranza",
+                    "gender": "2. Male",
+                    "lastname": "Manu",
+                    "numberofdependants": "6",
+                    "firstname": "Koi",
+                    "education": "4. Secondary School",
+                    "farmerid": "a0m24000004ie0YAAQ"
+                }],
+            "postharvest": [{
+                    "typeofstoragechemical": "Phostoxin",
+                    "completionofproducemarketing": "2015-09-29",
+                    "applicationrateofstoragechemical": "2",
+                    "mostproducesaledate": "2015-09-29",
+                    "typeofmachinewinowing": "Small mechanical blower (service)",
+                    "typeofmachine": "Combine harvester (as service)",
+                    "mainpointofsaleorcontact": "Local aggregator",
+                    "typeofbagusedinbulkingproduct": "Jute sacs lined with double polyethelene bags",
+                    "datetocompletedrying": "2015-09-29",
+                    "postharvestlosses": "5-10%",
+                    "methodofdryinggrain": "On tarpaulin/plastic sheet on the farm",
+                    "completionofthreshing": "2015-09-29",
+                    "methodofwinnowing": "Machine",
+                    "dehuskingdate": "2015-09-29",
+                    "priceatfirstsaledate": "5",
+                    "methodofdryingcobspanicleschipschu": "On tarpaulin/plastic sheet on the farm",
+                    "typeofstoragestructure": "3. Other barns",
+                    "priceatmostsaledate": "5",
+                    "dateofcompletingdrying": "2015-09-29",
+                    "proportionformarket": "90",
+                    "marketingoccasions": "Several occasions",
+                    "otherapplicationrate": "Hshheeh",
+                    "firstsaledate": "2015-09-29",
+                    "otherstoragechemical": "Hhhhh",
+                    "methodofthreshing": "Machine",
+                    "othersalecontact": "Hdhdhe"
+                }],
+            "production": [{
+                    "nameofcropvarietyyam": "",
+                    "refillinggapsoccurence": "YES",
+                    "applicationofbasalfertilizer": "2 weeks after planting",
+                    "applicationofbasalfertilizerdate": "YES",
+                    "datefirstmanualweedcontrol": "At 1 month after planting",
+                    "nameofcropvarietyrice": "",
+                    "nameofcropvarietycassava": "",
+                    "quantityofbasalfertilizerpurchasedapply": "50",
+                    "methodoflandclearing": "Slashing only",
+                    "quantitypostplantherbicide": "2",
+                    "typeofherbicidepostplantweed": "3. Altrazine",
+                    "methodtopdressfertilizerapp": "Side dressing",
+                    "applicationoftopdressfertilizer": "YES",
+                    "applicationmonthofherbicidedate": "2015-09-29",
+                    "refillinggapsproportion": "20%",
+                    "seedbedformtype": "Ridges",
+                    "seedbedpreparationdate": "Ridges",
+                    "dateofsecondmanualweedcontrol": "At 2 months after planting",
+                    "landclearingdate": "2015-09-29",
+                    "otherfertilizer": "",
+                    "acresofland": "5.0",
+                    "plantingdistancebetweenplantsmaize": "2015-09-29",
+                    "targetyieldperacre": "50",
+                    "ploughingdate": "2015-09-29",
+                    "timeofharvest": "2015-09-29",
+                    "nameofcropvariety": "Abontem",
+                    "timeofapplicationtopdressing": "6 weeks after planting",
+                    "methodoflandpreparation": "Double tractor/power tiller ploughing only",
+                    "plantingdistancebetweenrowsmaize": "75 cm",
+                    "postplantherbicideuse": "YES",
+                    "typeofbasalfertilizer": "Sulphate of Ammonia",
+                    "sourceofseedorplantingmaterial": "Certified seed dealer",
+                    "methodofbasalfertilizerapplication": "Spot (surface)",
+                    "plantingdate": "2015-09-29"
+                }]
+        }
+    }, {
+        "farmer": {
+            "biodata": [{
+                    "region": "1. Ashanti",
+                    "maritalstatus": "3. Divorced/Separated",
+                    "village": "Vill",
+                    "nickname": "Nick",
+                    "numberofchildren": "8",
+                    "majorcrop": "Maize",
+                    "age": "54",
+                    "community": "Sekyere",
+                    "gender": "1. Female",
+                    "lastname": "Last",
+                    "numberofdependants": "3",
+                    "firstname": "Amuesiwa",
+                    "education": "3. Middle/JHS",
+                    "farmerid": "a0m24000004ith5AAA"
+                }],
+            "postharvest": [{}],
+            "production": [{
+                    "nameofcropvarietyyam": "",
+                    "refillinggapsoccurence": "YES",
+                    "applicationofbasalfertilizer": "2 weeks after planting",
+                    "applicationofbasalfertilizerdate": "YES",
+                    "datefirstmanualweedcontrol": "At 1 month after planting",
+                    "nameofcropvarietyrice": "",
+                    "nameofcropvarietycassava": "",
+                    "quantityofbasalfertilizerpurchasedapply": "50",
+                    "methodoflandclearing": "Slashing only",
+                    "quantitypostplantherbicide": "2",
+                    "typeofherbicidepostplantweed": "3. Altrazine",
+                    "methodtopdressfertilizerapp": "Spot (surface)",
+                    "applicationoftopdressfertilizer": "YES",
+                    "applicationmonthofherbicidedate": "2015-09-30",
+                    "refillinggapsproportion": "10%",
+                    "seedbedformtype": "Mounds",
+                    "seedbedpreparationdate": "Mounds",
+                    "dateofsecondmanualweedcontrol": "At 3 months after planting",
+                    "landclearingdate": "2015-09-30",
+                    "otherfertilizer": "",
+                    "acresofland": "5.0",
+                    "plantingdistancebetweenplantsmaize": "2015-09-30",
+                    "targetyieldperacre": "5",
+                    "ploughingdate": "2015-09-30",
+                    "timeofharvest": "2015-09-30",
+                    "nameofcropvariety": "Abontem",
+                    "timeofapplicationtopdressing": "6 weeks after planting",
+                    "methodoflandpreparation": "Double Harrowing only",
+                    "plantingdistancebetweenrowsmaize": "75 cm",
+                    "postplantherbicideuse": "YES",
+                    "typeofbasalfertilizer": "N-P-K 25-15-5",
+                    "sourceofseedorplantingmaterial": "A fellow farmer",
+                    "methodofbasalfertilizerapplication": "Spot (surface)",
+                    "plantingdate": "2015-09-30"
+                }]
+        }
+    }]

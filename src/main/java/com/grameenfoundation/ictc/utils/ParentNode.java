@@ -64,6 +64,11 @@ public class ParentNode {
         return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.MEETING_SETTING);
     }
 
+    public static Node TrackerParentNode() {
+        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.MOBILE_TRACKER);
+    }
+
+    
     public static Node MeetingActivityParentNode() {
         return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.MEETING_ACTIVITY);
     }
