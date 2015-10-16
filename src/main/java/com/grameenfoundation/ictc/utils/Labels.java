@@ -31,6 +31,7 @@ public enum Labels implements Label {
     USER,
     MEETING,
     MEETING_SETTING,
+    MOBILE_TRACKER,
     MEETING_ACTIVITY,
     CROP_CALENDAR_SETTING,
     CROP_CALENDAR,

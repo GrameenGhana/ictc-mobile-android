@@ -7,8 +7,10 @@ package com.grameenfoundation.ictc.controllers;
 
 import com.grameenfoundation.ictc.domains.MeetingSetting;
 import com.grameenfoundation.ictc.models.MeetingSettingModel;
+import com.grameenfoundation.ictc.models.MobileTrackerModel;
 import com.grameenfoundation.ictc.wrapper.MeetingActivityWrapper;
 import com.grameenfoundation.ictc.wrapper.MeetingSettingWrapper;
+import com.grameenfoundation.ictc.wrapper.MobileTrackerWrapper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -52,6 +54,7 @@ public class APIController extends HttpServlet {
             String serviceCode = request.getParameter("action");
             JSONObject jSONObject = new JSONObject();
             System.out.println("action " + serviceCode);
+            //<editor-fold desc="Meetings API">
             if (serviceCode.equalsIgnoreCase("cmeeting")) {
                 MeetingSettingModel msm = new MeetingSettingModel();
                 String crop = request.getParameter("crop");
@@ -113,6 +116,38 @@ public class APIController extends HttpServlet {
                     jSONObject.put("meeting", meetSet);
                     out.print(jSONObject);
                 }
+            } //</editor-fold>
+            else if (serviceCode.equalsIgnoreCase("sync")) {
+                String data = request.getParameter("data");
+                JSONArray jsonArray = new JSONArray(data);
+                int length = jsonArray.length();
+
+                String validIds = "";
+                MobileTrackerModel trackerModel = new MobileTrackerModel();
+                for (int i = 0; i < length; i++) {
+                    JSONObject j = jsonArray.getJSONObject(i);
+                    String userId = j.getString("user_id");
+                    String id = j.getString("id");
+                    long startTime = j.getLong("start_time");
+                    long endTime = j.getLong("end_time");
+                    String module = j.getString("module");
+                    String dt = j.getString("data");
+
+                    MobileTrackerWrapper mobileTracker = new MobileTrackerWrapper(id, userId, module, dt, startTime, endTime);
+
+                    if (trackerModel.create(mobileTracker) != null) {
+                        validIds += id + ",";
+                    }
+                }
+                if (!validIds.isEmpty()) {
+                    validIds = validIds.substring(0, validIds.length() - 2);
+                }
+                JSONObject js = new JSONObject();
+                js.put("rc", "00");
+                js.put("ids", validIds);
+                
+                out.print(js);
+
             }
 
         }

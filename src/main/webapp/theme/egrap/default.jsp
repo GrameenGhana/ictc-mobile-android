@@ -130,6 +130,12 @@
                                 <span>Agents</span>
                             </a>  									
                         </li>
+                        <li class="">					
+                            <a href="<%=request.getContextPath()%>/logs">
+                                <i class="icon-code"></i>
+                                <span>Logs</span>
+                            </a>  									
+                        </li>
 
                         <li class="dropdown">					
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
