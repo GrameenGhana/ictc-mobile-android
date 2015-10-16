@@ -657,7 +657,7 @@ public class BiodataModel {
 
         return created;
     }
-    public boolean BiodataToFMPPBU(String biodata, Node BPBNode) {
+    public boolean BiodataToFMPPHB(String biodata, Node BPBNode) {
        
          Biodata b = null;
         boolean created = false;
@@ -668,7 +668,7 @@ public class BiodataModel {
             System.out.println("biodata :" + b.getUnderlyingNode().getId());
             if (null != biodata) {
 
-                b.setFMPPBU(BPBNode);
+                b.setFMPPHB(BPBNode);
                 created = true;
                 trx.success();
 
@@ -681,5 +681,8 @@ public class BiodataModel {
 
         return created;
     }
+    
+    
+     
      
 }

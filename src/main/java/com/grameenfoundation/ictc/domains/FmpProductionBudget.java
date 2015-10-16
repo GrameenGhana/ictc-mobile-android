@@ -909,8 +909,8 @@ public String getBasal_fert_labor_period(){
         underlyingNode.createRelationshipTo(FMPPBU, ICTCRelationshipTypes.UPDATE);
     }
 
-    public PostHarvestUpdate getUpdate() {
-        return new PostHarvestUpdate(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.UPDATE));
+    public FmpProductionBudgetUpdate getUpdate() {
+        return new FmpProductionBudgetUpdate(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.UPDATE));
     }
 
 }

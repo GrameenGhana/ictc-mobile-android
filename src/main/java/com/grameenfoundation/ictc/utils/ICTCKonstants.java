@@ -17,7 +17,7 @@ public class ICTCKonstants {
     //a
      public static final String AGENT = "agent";
      
-     //B
+     //b
       public static final String BASELINE_PRODUCTION_BUDGET = "baselineproductionbudget";
       public static final String BASELINE_PRODUCTION = "baselineproduction";
        public static final String BASELINE_POST_HARVEST_BUDGET = "baselinepostharvestbudget";
@@ -34,6 +34,7 @@ public class ICTCKonstants {
      public static final String FMP = "farm_management_plan";
      public static final String FMP_PRODUCTION_BUDGET = "fmpproductionbudget";
      public static final String FMP_PRODUCTION_BUDGET_UPDATE = "fmpproductionbudgetupdate";
+     public static final String FMP_POSTHARVEST_BUDGET = "fmppostharvestbudget";
     public static final String FARMER_INPUT_RECEIVED= "farmer_input_received";
     
      //h

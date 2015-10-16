@@ -8,6 +8,9 @@ package com.grameenfoundation.ictc.domains;
 
 import com.grameenfoundation.ictc.domain.commons.GeneralInterface;
 import com.grameenfoundation.ictc.domain.commons.Status;
+import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
+import com.grameenfoundation.ictc.utils.Neo4jServices;
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
 
 /**
@@ -25,319 +28,411 @@ public class FmpPostHarvestBudget extends Status implements GeneralInterface {
         this.underlyingNode = underlyingNode;
     }
     
-    public static String BASALFERTILIZERAPPLICATIONLABOR="basalfertilizerapplicationlabor";
-    public static String BASALFERTILIZERAPPLICATIONLABORCOST="basalfertilizerapplicationlaborcost";
-    public static String BASALFERTLABORPERIOD="basalfertlaborperiod";
-    public static String FAMILYLABORBASALFERTILIZERAPPLICATION="familylaborbasalfertilizerapplication";
-    public static String HARROWINGCOST="harrowingcost";
-    public static String HERBICIDEAPPLICATIONCOST="herbicideapplicationcost";
-    public static String HERBICIDEAPPLICATIONLABORPERIOD="herbicideapplicationlaborperiod";
-    public static String HOEPLOUGHINGLABORPERIOD="hoeploughinglaborperiod";
-    public static String HOEPLOUGHINGLABOUR="hoeploughinglabour";
-    public static String HOEPLOUGHINGLABOURFAMILY="hoeploughinglabourfamily";
-    public static String ABORFORPLANTINGFAMILY="aborforplantingfamily";
-    public static String LABORFORPLANTINGNUMBER="laborforplantingnumber";
-    public static String LANDRENT="landrent";
-    public static String REFILLINGLABORFAMILY="refillinglaborfamily";
-    public static String REFILLINGLABORPERIOD="refillinglaborperiod";
-    public static String REFILLINGLABOURCOST="refillinglabourcost";
-    public static String SEEDBEDLABORCOST="seedbedlaborcost";
-    public static String SEEDBEDLABORFAMILY="seedbedlaborfamily";
-    public static String SEEDBEDPREPARATIONPERIOD="seedbedpreparationperiod";
-    public static String SEEDPLANTINGMATERIALCOST="seedplantingmaterialcost";
-    public static String UNITCOSTHOEPLOUGHING="unitcosthoeploughing";
-    
-    
-public void setUnitcosthoeploughing(String unitcosthoeploughing) {
-underlyingNode.setProperty(UNITCOSTHOEPLOUGHING,unitcosthoeploughing);
+ public static String BAGS_FOR_STORAGE_="bags_for_storage_";
+ public static String COST_OF_STORAGE_CHEMICAL="cost_of_storage_chemical";
+ public static String COST_OF_WAREHOUSE="cost_of_warehouse";
+ public static String DEHUSKINGPEELING_FAMILY_LABOR="dehuskingpeeling_family_labor";
+ public static String DEHUSKINGPEELING_LABOR="dehuskingpeeling_labor";
+ public static String FAMILY_LABOR_BAGGING="family_labor_bagging";
+ public static String FAMILY_LABOR_DRYING_GRAIN="family_labor_drying_grain";
+ public static String FAMILY_LABOR_DRYINGCOBS_="family_labor_dryingcobs_";
+ public static String FAMILY_LABOR_MANUAL_THRESHING="family_labor_manual_threshing";
+ public static String FAMILY_LABOR_ENGAGED_WINNOWING="family_labor_engaged_winnowing";
+ public static String GRAIN_DRYING_COST="grain_drying_cost";
+ public static String LABOR_COST_DEHUSKINGPEELING="labor_cost_dehuskingpeeling";
+ public static String LABOR_COST_DRYING_OF_COBS="labor_cost_drying_of_cobs";
+ public static String LABOR_DRYING_GRAIN="labor_drying_grain";
+ public static String LABOR_HANDS_DRYINGCOBS="labor_hands_dryingcobs";
+ public static String LABOR_MANUAL_THRESHING="labor_manual_threshing";
+ public static String LABOR_PERIOD_DRYING_COBS="labor_period_drying_cobs";
+ public static String LABOR_PERIOD_MANUAL_THRESHING="labor_period_manual_threshing";
+ public static String LABOUR_FOR_BAGGING="labour_for_bagging";
+ public static String LABOUR_WINNOWING="labour_winnowing";
+ public static String TIME_INTERVAL_FOR_COMPLETION_OF_BAGGING="time_interval_for_completion_of_bagging";
+ public static String TIME_INTERVAL_FOR_WINNOWING="time_interval_for_winnowing";
+ public static String TIME_PERIOD_LABOR_DRYING_GRAIN="time_period_labor_drying_grain";
+ public static String UNIT_COST_MACHINE_THRESHING="unit_cost_machine_threshing";
+ public static String UNIT_COST_MANUAL_THRESHING="unit_cost_manual_threshing";
+ public static String UNIT_COST_OF_STORAGE_BAGS="unit_cost_of_storage_bags";
+ public static String UNIT_LABOR_COST_BAGGING="unit_labor_cost_bagging";
+ 
+ 
+public void setUnit_labor_cost_bagging(String unit_labor_cost_bagging) {
+underlyingNode.setProperty(UNIT_LABOR_COST_BAGGING,unit_labor_cost_bagging);
 }
 
-public String getUnitcosthoeploughing(){
+public String getUnit_labor_cost_bagging(){
           try {
-          return (String) underlyingNode.getProperty(UNITCOSTHOEPLOUGHING);
+          return (String) underlyingNode.getProperty(UNIT_LABOR_COST_BAGGING);
 
         } catch (Exception e) {
         }
         return null;
     }
 
-    
-public void setSeedplantingmaterialcost(String seedplantingmaterialcost) {
-underlyingNode.setProperty(SEEDPLANTINGMATERIALCOST,seedplantingmaterialcost);
+ 
+public void setUnit_cost_of_storage_bags(String unit_cost_of_storage_bags) {
+underlyingNode.setProperty(UNIT_COST_OF_STORAGE_BAGS,unit_cost_of_storage_bags);
 }
 
-public String getSeedplantingmaterialcost(){
+public String getUnit_cost_of_storage_bags(){
           try {
-          return (String) underlyingNode.getProperty(SEEDPLANTINGMATERIALCOST);
+          return (String) underlyingNode.getProperty(UNIT_COST_OF_STORAGE_BAGS);
 
         } catch (Exception e) {
         }
         return null;
     }
-    
-public void setSeedbedpreparationperiod(String seedbedpreparationperiod) {
-underlyingNode.setProperty(SEEDBEDPREPARATIONPERIOD,seedbedpreparationperiod);
+ 
+ 
+public void setUnit_cost_manual_threshing(String unit_cost_manual_threshing) {
+underlyingNode.setProperty(UNIT_COST_MANUAL_THRESHING,unit_cost_manual_threshing);
 }
 
-public String getSeedbedpreparationperiod(){
+public String getUnit_cost_manual_threshing(){
           try {
-          return (String) underlyingNode.getProperty(SEEDBEDPREPARATIONPERIOD);
+          return (String) underlyingNode.getProperty(UNIT_COST_MANUAL_THRESHING);
 
         } catch (Exception e) {
         }
         return null;
     }
-
-    
-public void setSeedbedlaborfamily(String seedbedlaborfamily) {
-underlyingNode.setProperty(SEEDBEDLABORFAMILY,seedbedlaborfamily);
+ 
+ 
+public void setUnit_cost_machine_threshing(String unit_cost_machine_threshing) {
+underlyingNode.setProperty(UNIT_COST_MACHINE_THRESHING,unit_cost_machine_threshing);
 }
 
-public String getSeedbedlaborfamily(){
+public String getUnit_cost_machine_threshing(){
           try {
-          return (String) underlyingNode.getProperty(SEEDBEDLABORFAMILY);
+          return (String) underlyingNode.getProperty(UNIT_COST_MACHINE_THRESHING);
 
         } catch (Exception e) {
         }
         return null;
     }
-
-    
-public void setSeedbedlaborcost(String seedbedlaborcost) {
-underlyingNode.setProperty(SEEDBEDLABORCOST,seedbedlaborcost);
+ 
+public void setTime_period_labor_drying_grain(String time_period_labor_drying_grain) {
+underlyingNode.setProperty(TIME_PERIOD_LABOR_DRYING_GRAIN,time_period_labor_drying_grain);
 }
 
-public String getSeedbedlaborcost(){
+public String getTime_period_labor_drying_grain(){
           try {
-          return (String) underlyingNode.getProperty(SEEDBEDLABORCOST);
+          return (String) underlyingNode.getProperty(TIME_PERIOD_LABOR_DRYING_GRAIN);
 
         } catch (Exception e) {
         }
         return null;
     }
-    
-public void setRefillinglabourcost(String refillinglabourcost) {
-underlyingNode.setProperty(REFILLINGLABOURCOST,refillinglabourcost);
+ 
+ 
+public void setTime_interval_for_winnowing(String time_interval_for_winnowing) {
+underlyingNode.setProperty(TIME_INTERVAL_FOR_WINNOWING,time_interval_for_winnowing);
 }
 
-public String getRefillinglabourcost(){
+public String getTime_interval_for_winnowing(){
           try {
-          return (String) underlyingNode.getProperty(REFILLINGLABOURCOST);
+          return (String) underlyingNode.getProperty(TIME_INTERVAL_FOR_WINNOWING);
 
         } catch (Exception e) {
         }
         return null;
     }
-
-    
-    
-public void setRefillinglaborperiod(String refillinglaborperiod) {
-underlyingNode.setProperty(REFILLINGLABORPERIOD,refillinglaborperiod);
+ 
+public void setTime_interval_for_completion_of_bagging(String time_interval_for_completion_of_bagging) {
+underlyingNode.setProperty(TIME_INTERVAL_FOR_COMPLETION_OF_BAGGING,time_interval_for_completion_of_bagging);
 }
 
-public String getRefillinglaborperiod(){
+public String getTime_interval_for_completion_of_bagging(){
           try {
-          return (String) underlyingNode.getProperty(REFILLINGLABORPERIOD);
+          return (String) underlyingNode.getProperty(TIME_INTERVAL_FOR_COMPLETION_OF_BAGGING);
 
         } catch (Exception e) {
         }
         return null;
     }
-    
-    
-public void setRefillinglaborfamily(String refillinglaborfamily) {
-underlyingNode.setProperty(REFILLINGLABORFAMILY,refillinglaborfamily);
+ 
+ 
+public void setLabour_winnowing(String labour_winnowing) {
+underlyingNode.setProperty(LABOUR_WINNOWING,labour_winnowing);
 }
 
-public String getRefillinglaborfamily(){
+public String getLabour_winnowing(){
           try {
-          return (String) underlyingNode.getProperty(REFILLINGLABORFAMILY);
+          return (String) underlyingNode.getProperty(LABOUR_WINNOWING);
 
         } catch (Exception e) {
         }
         return null;
     }
-public void setLandrent(String landrent) {
-underlyingNode.setProperty(LANDRENT,landrent);
+ 
+public void setLabour_for_bagging(String labour_for_bagging) {
+underlyingNode.setProperty(LABOUR_FOR_BAGGING,labour_for_bagging);
 }
 
-public String getLandrent(){
+public String getLabour_for_bagging(){
           try {
-          return (String) underlyingNode.getProperty(LANDRENT);
+          return (String) underlyingNode.getProperty(LABOUR_FOR_BAGGING);
 
         } catch (Exception e) {
         }
         return null;
     }
-    
-    
-public void setLaborforplantingnumber(String laborforplantingnumber) {
-underlyingNode.setProperty(LABORFORPLANTINGNUMBER,laborforplantingnumber);
+ 
+public void setLabor_period_manual_threshing(String labor_period_manual_threshing) {
+underlyingNode.setProperty(LABOR_PERIOD_MANUAL_THRESHING,labor_period_manual_threshing);
 }
 
-public String getLaborforplantingnumber(){
+public String getLabor_period_manual_threshing(){
           try {
-          return (String) underlyingNode.getProperty(LABORFORPLANTINGNUMBER);
+          return (String) underlyingNode.getProperty(LABOR_PERIOD_MANUAL_THRESHING);
 
         } catch (Exception e) {
         }
         return null;
     }
-    
-    
-public void setAborforplantingfamily(String aborforplantingfamily) {
-underlyingNode.setProperty(ABORFORPLANTINGFAMILY,aborforplantingfamily);
+ 
+ 
+public void setLabor_period_drying_cobs(String labor_period_drying_cobs) {
+underlyingNode.setProperty(LABOR_PERIOD_DRYING_COBS,labor_period_drying_cobs);
 }
 
-public String getAborforplantingfamily(){
+public String getLabor_period_drying_cobs(){
           try {
-          return (String) underlyingNode.getProperty(ABORFORPLANTINGFAMILY);
-
-        } catch (Exception e) {
-        }
-        return null;
-    }
-    
-    
-public void setHoeploughinglabourfamily(String hoeploughinglabourfamily) {
-underlyingNode.setProperty(HOEPLOUGHINGLABOURFAMILY,hoeploughinglabourfamily);
-}
-
-public String getHoeploughinglabourfamily(){
-          try {
-          return (String) underlyingNode.getProperty(HOEPLOUGHINGLABOURFAMILY);
-
-        } catch (Exception e) {
-        }
-        return null;
-    }
-    
-    
-public void setHoeploughinglabour(String hoeploughinglabour) {
-underlyingNode.setProperty(HOEPLOUGHINGLABOUR,hoeploughinglabour);
-}
-
-public String getHoeploughinglabour(){
-          try {
-          return (String) underlyingNode.getProperty(HOEPLOUGHINGLABOUR);
+          return (String) underlyingNode.getProperty(LABOR_PERIOD_DRYING_COBS);
 
         } catch (Exception e) {
         }
         return null;
     }
 
-    
-    
-public void setHoeploughinglaborperiod(String hoeploughinglaborperiod) {
-underlyingNode.setProperty(HOEPLOUGHINGLABORPERIOD,hoeploughinglaborperiod);
+ 
+public void setLabor_manual_threshing(String labor_manual_threshing) {
+underlyingNode.setProperty(LABOR_MANUAL_THRESHING,labor_manual_threshing);
 }
 
-public String getHoeploughinglaborperiod(){
+public String getLabor_manual_threshing(){
           try {
-          return (String) underlyingNode.getProperty(HOEPLOUGHINGLABORPERIOD);
+          return (String) underlyingNode.getProperty(LABOR_MANUAL_THRESHING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+public void setLabor_hands_dryingcobs(String labor_hands_dryingcobs) {
+underlyingNode.setProperty(LABOR_HANDS_DRYINGCOBS,labor_hands_dryingcobs);
+}
+
+public String getLabor_hands_dryingcobs(){
+          try {
+          return (String) underlyingNode.getProperty(LABOR_HANDS_DRYINGCOBS);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+public void setLabor_drying_grain(String labor_drying_grain) {
+underlyingNode.setProperty(LABOR_DRYING_GRAIN,labor_drying_grain);
+}
+
+public String getLabor_drying_grain(){
+          try {
+          return (String) underlyingNode.getProperty(LABOR_DRYING_GRAIN);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+ 
+public void setLabor_cost_drying_of_cobs(String labor_cost_drying_of_cobs) {
+underlyingNode.setProperty(LABOR_COST_DRYING_OF_COBS,labor_cost_drying_of_cobs);
+}
+
+public String getLabor_cost_drying_of_cobs(){
+          try {
+          return (String) underlyingNode.getProperty(LABOR_COST_DRYING_OF_COBS);
 
         } catch (Exception e) {
         }
         return null;
     }
 
-    
-    
-    
-public void setHerbicideapplicationlaborperiod(String herbicideapplicationlaborperiod) {
-underlyingNode.setProperty(HERBICIDEAPPLICATIONLABORPERIOD,herbicideapplicationlaborperiod);
+ 
+public void setLabor_cost_dehuskingpeeling(String labor_cost_dehuskingpeeling) {
+underlyingNode.setProperty(LABOR_COST_DEHUSKINGPEELING,labor_cost_dehuskingpeeling);
 }
 
-public String getHerbicideapplicationlaborperiod(){
+public String getLabor_cost_dehuskingpeeling(){
           try {
-          return (String) underlyingNode.getProperty(HERBICIDEAPPLICATIONLABORPERIOD);
+          return (String) underlyingNode.getProperty(LABOR_COST_DEHUSKINGPEELING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+ 
+public void setGrain_drying_cost(String grain_drying_cost) {
+underlyingNode.setProperty(GRAIN_DRYING_COST,grain_drying_cost);
+}
+
+public String getGrain_drying_cost(){
+          try {
+          return (String) underlyingNode.getProperty(GRAIN_DRYING_COST);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+ 
+public void setFamily_labor_engaged_winnowing(String family_labor_engaged_winnowing) {
+underlyingNode.setProperty(FAMILY_LABOR_ENGAGED_WINNOWING,family_labor_engaged_winnowing);
+}
+
+public String getFamily_labor_engaged_winnowing(){
+          try {
+          return (String) underlyingNode.getProperty(FAMILY_LABOR_ENGAGED_WINNOWING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+ 
+public void setFamily_labor_manual_threshing(String family_labor_manual_threshing) {
+underlyingNode.setProperty(FAMILY_LABOR_MANUAL_THRESHING,family_labor_manual_threshing);
+}
+
+public String getFamily_labor_manual_threshing(){
+          try {
+          return (String) underlyingNode.getProperty(FAMILY_LABOR_MANUAL_THRESHING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+public void setFamily_labor_dryingcobs_(String family_labor_dryingcobs_) {
+underlyingNode.setProperty(FAMILY_LABOR_DRYINGCOBS_,family_labor_dryingcobs_);
+}
+
+public String getFamily_labor_dryingcobs_(){
+          try {
+          return (String) underlyingNode.getProperty(FAMILY_LABOR_DRYINGCOBS_);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+ 
+public void setFamily_labor_drying_grain(String family_labor_drying_grain) {
+underlyingNode.setProperty(FAMILY_LABOR_DRYING_GRAIN,family_labor_drying_grain);
+}
+
+public String getFamily_labor_drying_grain(){
+          try {
+          return (String) underlyingNode.getProperty(FAMILY_LABOR_DRYING_GRAIN);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+public void setFamily_labor_bagging(String family_labor_bagging) {
+underlyingNode.setProperty(FAMILY_LABOR_BAGGING,family_labor_bagging);
+}
+
+public String getFamily_labor_bagging(){
+          try {
+          return (String) underlyingNode.getProperty(FAMILY_LABOR_BAGGING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+ 
+public void setDehuskingpeeling_labor(String dehuskingpeeling_labor) {
+underlyingNode.setProperty(DEHUSKINGPEELING_LABOR,dehuskingpeeling_labor);
+}
+
+public String getDehuskingpeeling_labor(){
+          try {
+          return (String) underlyingNode.getProperty(DEHUSKINGPEELING_LABOR);
 
         } catch (Exception e) {
         }
         return null;
     }
 
-    
-public void setHerbicideapplicationcost(String herbicideapplicationcost) {
-underlyingNode.setProperty(HERBICIDEAPPLICATIONCOST,herbicideapplicationcost);
+ 
+public void setDehuskingpeeling_family_labor(String dehuskingpeeling_family_labor) {
+underlyingNode.setProperty(DEHUSKINGPEELING_FAMILY_LABOR,dehuskingpeeling_family_labor);
 }
 
-public String getHerbicideapplicationcost(){
+public String getDehuskingpeeling_family_labor(){
           try {
-          return (String) underlyingNode.getProperty(HERBICIDEAPPLICATIONCOST);
+          return (String) underlyingNode.getProperty(DEHUSKINGPEELING_FAMILY_LABOR);
 
         } catch (Exception e) {
         }
         return null;
     }
-    
-    
-public void setHarrowingcost(String harrowingcost) {
-underlyingNode.setProperty(HARROWINGCOST,harrowingcost);
+ 
+ 
+public void setCost_of_warehouse(String cost_of_warehouse) {
+underlyingNode.setProperty(COST_OF_WAREHOUSE,cost_of_warehouse);
 }
 
-public String getHarrowingcost(){
+public String getCost_of_warehouse(){
           try {
-          return (String) underlyingNode.getProperty(HARROWINGCOST);
+          return (String) underlyingNode.getProperty(COST_OF_WAREHOUSE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+ 
+public void setCost_of_storage_chemical(String cost_of_storage_chemical) {
+underlyingNode.setProperty(COST_OF_STORAGE_CHEMICAL,cost_of_storage_chemical);
+}
+
+public String getCost_of_storage_chemical(){
+          try {
+          return (String) underlyingNode.getProperty(COST_OF_STORAGE_CHEMICAL);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+ 
+public void setBags_for_storage_(String bags_for_storage_) {
+underlyingNode.setProperty(BAGS_FOR_STORAGE_,bags_for_storage_);
+}
+
+public String getBags_for_storage_(){
+          try {
+          return (String) underlyingNode.getProperty(BAGS_FOR_STORAGE_);
 
         } catch (Exception e) {
         }
         return null;
     }
 
-    
-    
-public void setFamilylaborbasalfertilizerapplication(String familylaborbasalfertilizerapplication) {
-underlyingNode.setProperty(FAMILYLABORBASALFERTILIZERAPPLICATION,familylaborbasalfertilizerapplication);
-}
 
-public String getFamilylaborbasalfertilizerapplication(){
-          try {
-          return (String) underlyingNode.getProperty(FAMILYLABORBASALFERTILIZERAPPLICATION);
-
-        } catch (Exception e) {
-        }
-        return null;
+public void setUpdate(Node FMPPHBU) {
+        underlyingNode.createRelationshipTo(FMPPHBU, ICTCRelationshipTypes.UPDATE);
     }
-    
-    
-public void setBasalfertlaborperiod(String basalfertlaborperiod) {
-underlyingNode.setProperty(BASALFERTLABORPERIOD,basalfertlaborperiod);
-}
 
-public String getBasalfertlaborperiod(){
-          try {
-          return (String) underlyingNode.getProperty(BASALFERTLABORPERIOD);
-
-        } catch (Exception e) {
-        }
-        return null;
+    public FmpPostHarvestBudgetUpdate getUpdate() {
+        return new FmpPostHarvestBudgetUpdate(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.UPDATE));
     }
-    
-public void setBasalfertilizerapplicationlaborcost(String basalfertilizerapplicationlaborcost) {
-underlyingNode.setProperty(BASALFERTILIZERAPPLICATIONLABORCOST,basalfertilizerapplicationlaborcost);
-}
-
-public String getBasalfertilizerapplicationlaborcost(){
-          try {
-          return (String) underlyingNode.getProperty(BASALFERTILIZERAPPLICATIONLABORCOST);
-
-        } catch (Exception e) {
-        }
-        return null;
-    }
-public void setBasalfertilizerapplicationlabor(String basalfertilizerapplicationlabor) {
-underlyingNode.setProperty(BASALFERTILIZERAPPLICATIONLABOR,basalfertilizerapplicationlabor);
-}
-
-public String getBasalfertilizerapplicationlabor(){
-          try {
-          return (String) underlyingNode.getProperty(BASALFERTILIZERAPPLICATIONLABOR);
-
-        } catch (Exception e) {
-        }
-        return null;
-    }
-    
 
 }

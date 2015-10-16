@@ -103,7 +103,7 @@ public class ParentNode {
         return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.FMP_PRODUCTION_BUDGET);
     }  
    
-    public static Node   FMPPBUparentNode() {
-        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.FMP_PRODUCTION_BUDGET_UPDATE);
+    public static Node   FMPPHBparentNode() {
+        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.FMP_POSTHARVEST_BUDGET);
     }  
 }

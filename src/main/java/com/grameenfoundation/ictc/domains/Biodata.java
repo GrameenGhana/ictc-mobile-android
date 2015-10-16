@@ -435,11 +435,11 @@ public class Biodata extends Status implements GeneralInterface {
         return new FmpProductionBudget(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_PRODUCTION_BUDGET));
     }
 
-    public void setFMPPBU(Node BPBNode) {
-        underlyingNode.createRelationshipTo(BPBNode, ICTCRelationshipTypes.HAS_PRODUCTION_BUDGET_UPDATE);
+    public void setFMPPHB(Node BPBNode) {
+        underlyingNode.createRelationshipTo(BPBNode, ICTCRelationshipTypes.HAS_POSTHARVEST_BUDGET);
     }
     
-    public FmpProductionBudgetUpdate getFMPPBU() {
-        return new FmpProductionBudgetUpdate(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_PRODUCTION_BUDGET_UPDATE));
+    public FmpPostHarvestBudget getFMPPHB() {
+        return new FmpPostHarvestBudget(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_POSTHARVEST_BUDGET));
     }
 }
