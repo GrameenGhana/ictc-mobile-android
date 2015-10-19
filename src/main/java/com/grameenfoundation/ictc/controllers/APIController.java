@@ -6,10 +6,12 @@
 package com.grameenfoundation.ictc.controllers;
 
 import com.grameenfoundation.ictc.domains.BaselineProduction;
+import com.grameenfoundation.ictc.domains.BaselineProductionBudget;
 import com.grameenfoundation.ictc.domains.Biodata;
 import com.grameenfoundation.ictc.domains.MeetingSetting;
 import com.grameenfoundation.ictc.domains.PostHarvest2;
 import com.grameenfoundation.ictc.domains.ProductionNew;
+import com.grameenfoundation.ictc.models.BaselineProductionBudgetModel;
 import com.grameenfoundation.ictc.models.BaselineProductionModel;
 import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.models.MeetingSettingModel;
@@ -168,6 +170,7 @@ public class APIController extends HttpServlet {
                  ProductionModel productionModel = new ProductionModel();
                  PostHarvestModel postHarvestModel = new PostHarvestModel();
                  BaselineProductionModel baselineProductionModel = new BaselineProductionModel();
+                 BaselineProductionBudgetModel  baselineProductionBudgetModel = new BaselineProductionBudgetModel();
                  
                  JSONArray fa = new JSONArray();
                  
@@ -181,6 +184,7 @@ public class APIController extends HttpServlet {
                     JSONObject farmer = new JSONObject();
                     JSONObject details = new JSONObject();
                     JSONObject baselineproduction = new JSONObject();
+                    JSONObject baselineproductionbudget = new JSONObject();
 
                      //biodata
                 Biodata b = biodataModel.getBiodata("Id", bb.getFarmID());
@@ -329,7 +333,67 @@ public class APIController extends HttpServlet {
                      baselineproduction.put(BaselineProduction.NAME_OF_VARIETY_CASS_BASE,bp.getName_of_variety_cass_base());
                      baselineproduction.put(BaselineProduction.NAME_OF_VARIETY_RICE_BASE,bp.getName_of_variety_rice_base());
                      baselineproduction.put(BaselineProduction.NAME_OF_VARIETY_YAM,bp.getName_of_variety_yam());
+                     baselineproduction.put(BaselineProduction.NO_OCCASIONS_MANUAL_WEED_BASE,bp.getNo_occasions_manual_weed_base());
+                     baselineproduction.put(BaselineProduction.OTHER_BASAL_FERT_BASE,bp.getOther_basal_fert_base());
+                     baselineproduction.put(BaselineProduction.OTHER_METHOD_BFERT_APPLIC_BASE,bp.getOther_basal_fert_base());
+                     baselineproduction.put(BaselineProduction.OTHER_SOURCES_SEED_BASE,bp.getOther_sources_seed_base());
+                     baselineproduction.put(BaselineProduction.OTHER_TOPDRESS_FERTILIZER_TYPE_BASE,bp.getOther_topdress_fertilizer_type_base());
+                     baselineproduction.put(BaselineProduction.PLANTING_DATE_BASE,bp.getPlanting_date_base());
+                     baselineproduction.put(BaselineProduction.PLOUGHING_DATE_BASE,bp.getPloughing_date_base());
+                     baselineproduction.put(BaselineProduction.POSTPLANT_HERBICIDE_USE_BASE,bp.getPostplant_herbicide_use_base());
+                     baselineproduction.put(BaselineProduction.QTY_OF_BFERT_APPLIED_BASE,bp.getQuantity_postplant_herbicide_base());
+                     baselineproduction.put(BaselineProduction.QUANTITY_POSTPLANT_HERBICIDE_BASE,bp.getQuantity_postplant_herbicide_base());
+                     baselineproduction.put(BaselineProduction.QUANTITY_TOPDRESS_FERTILIZER_BASE,bp.getQuantity_topdress_fertilizer_base());
+                     baselineproduction.put(BaselineProduction.REFILLING_GAPS_OCCURRENCE_BASE,bp.getRefilling_gaps_occurrence_base());
+                     baselineproduction.put(BaselineProduction.REFILLING_PROPORTION_BASE,bp.getRefilling_proportion_base());
+                     baselineproduction.put(BaselineProduction.SEEDBED_TYPE_BASE,bp.getSeed_bed_preparation_date_base());
+                     baselineproduction.put(BaselineProduction.SEED_BED_PREPARATION_DATE_BASE,bp.getSeed_bed_preparation_date_base());
+                     baselineproduction.put(BaselineProduction.SOURCE_OF_SEED_BASE,bp.getSource_of_seed_base());
+                     baselineproduction.put(BaselineProduction.TARGETED_YIELD_BASE,bp.getTargeted_yield_base());
+                     baselineproduction.put(BaselineProduction.TIME_BASAL_FERT_APPL_BASE,bp.getTime_basal_fert_appl_base());
+                     baselineproduction.put(BaselineProduction.TIME_TOPDRESS_APPL_BASE,bp.getTime_topdress_appl_base());
+                     baselineproduction.put(BaselineProduction.TYPE_BASAL_FERT_BASE,bp.getType_basal_fert_base());
+                     baselineproduction.put(BaselineProduction.TYPE_FERTILIZER_TOPDRESS_BASE,bp.getType_fertilizer_topdress_base());
+                     baselineproduction.put(BaselineProduction.TYPE_OF_HERBICIDE_POSTPLANT_BASE,bp.getType_of_herbicide_postplant_base());
+                     baselineproduction.put(BaselineProduction.TYPE_OF_VARIETY_CULTIVATED_BASE,bp.getType_of_variety_cultivated_base());
                      
+                     
+                     
+                     
+                 }
+                 
+                 
+                 BaselineProductionBudget bpb =  baselineProductionBudgetModel.getBaselineProductionBudget("Id",bb.getFarmID());
+                 
+                 
+                 if(bpb!=null)
+                 {
+                     baselineproductionbudget.put(BaselineProductionBudget.BASAL_FERTILIZER_APPL_LAB_BASE, bpb.getBasal_fertilizer_appl_lab_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.BASAL_FERT_LABOR_PERIOD_BASE, bpb.getBasal_fert_labor_period_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.COST_OF_APPLICATIONTOPDRESS_BASE, bpb.getCost_of_applicationtopdress_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.FAMILY_LABOR_BASAL_FERT_BASE,bpb.getFamily_labor_basal_fert_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.FAMILY_LABOR_FIFTH_WEED_CONTROL_BASE,bpb.getFamily_labor_fifth_weed_control_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.FAMILY_LABOR_FIRST_MANUAL_WEED_BASE,bpb.getFamily_labor_first_manual_weed_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.FAMILY_LABOR_THIRD_WEED_BASE,bpb.getFamily_labor_third_weed_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.FAMILY_LABOR_SECOND_WEED_BASE,bpb.getFamily_labor_second_weed_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.FAMILY_LABOR_TOPDRESS_BASE,bpb.getFamily_labor_topdress_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.FERTILIZER_APP_LABOUR_COST_BASE,bpb.getFertilizer_app_labour_cost_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.FIFTH_WEEDING_LABOR_PERIOD_BASE,bpb.getFifth_weeding_labor_period_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.FINAL_HARVEST_FAMILY_LABOR_BASE,bpb.getFinal_harvest_family_labor_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.FINAL_HARVEST_LABOR_NO_BASE,bpb.getFinal_harvest_labor_no_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.FIRST_WEEDING_PERIOD_BASE,bpb.getFirst_weeding_period_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.FOURTH_WEEDING_LABOR_PERIOD_BASE,bpb.getFourth_weeding_labor_period_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.FOURTH_WEEDING_FAMILY_LAB,bpb.getFourth_weeding_family_lab());
+                     baselineproductionbudget.put(BaselineProductionBudget.HARROWING_COST_PER_ACRE_BASE,bpb.getHarrowing_cost_per_acre_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.HARVEST_LABOR_COSTS_PER_ACRE_BASE,bpb.getHarvest_labor_costs_per_acre_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.HERBICIDE_APPLICATION_COST_BASE,bpb.getHerbicide_application_cost_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.HERBICIDE_APP_LABOR_PERIOD_BASE,bpb.getHerbicide_app_labor_period_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.HOE_PLOUGHING_LABOUR_FAMILY_BASE,bpb.getHoe_ploughing_labour_family_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.HOE_PLOUGHING_LABOUR_HOW_MANY_BASE,bpb.getHoe_ploughing_labour_how_many_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.HOE_PLOUGHING_LABOUR_PERIOD_BASE,bpb.getHoe_ploughing_labour_period_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.LABOR_FIFTH_WEED_CONTROL_BASE ,bpb.getLabor_fifth_weed_control_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.LABOR_FOR_PLANTINGFAMILY_BASE, bpb.getLabor_for_plantingfamily_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.LABOR_FOR_PLANTING_NUMBER_BASE  ,bpb.getLabor_for_planting_number_base());                      baselineproductionbudget.put(BaselineProductionBudget.LABOR_FOR_PLANTINGFAMILY_BASE, bpb.getLabor_for_plantingfamily_base());
                      
                  }
                  
@@ -338,6 +402,7 @@ public class APIController extends HttpServlet {
                   
                  farmer.put("production",production);
                  farmer.put("postharvest",postHarvest);
+                 farmer.put("baselineproduction",baselineproduction);
                  
                  
                  
