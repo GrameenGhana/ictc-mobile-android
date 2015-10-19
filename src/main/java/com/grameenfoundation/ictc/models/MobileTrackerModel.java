@@ -31,6 +31,7 @@ import scala.collection.Iterator;
  * @author skwakwa
  */
 public class MobileTrackerModel {
+
     Logger log = Logger.getLogger(MobileTrackerModel.class.getName());
     Node trackerParent;
 
@@ -61,10 +62,9 @@ public class MobileTrackerModel {
                 meet.setUserId(mw.getUserId());
                 meet.setVersion(mw.getVersion());
                 meet.setTimeSpent(mw.getTimeSpent());
-                meet.setId(String.valueOf(stNode.getId())+new Date().getTime());
+                meet.setId(String.valueOf(stNode.getId()) + new Date().getTime());
 
-                trackerParent.createRelationshipTo(stNode, ICTCRelationshipTypes.MOBILE_TACKER);
-
+                trackerParent.createRelationshipTo(stNode, ICTCRelationshipTypes.MOBILE_TRACKER);
 
                 log.log(Level.INFO, "new node created. {0}", meet.getUnderlyingNode().getId());
                 trx.success();
@@ -84,16 +84,16 @@ public class MobileTrackerModel {
 
     public List<MobileTrackerWrapper> findAll() {
 
-        return meetingQuery("match (l:" + ICTCRelationshipTypes.MOBILE_TACKER + ") return  l", "l");
+        return meetingQuery("match (l:" + ICTCRelationshipTypes.MOBILE_TRACKER + ") return  l", "l");
     }
 
     public List<MobileTrackerWrapper> findPerUser(String user) {
 
-        return meetingQuery("match (l:" + ICTCRelationshipTypes.MOBILE_TACKER + ") where l." + MobileTracker.USER_ID + "='" + user + "'"
+        return meetingQuery("match (l:" + ICTCRelationshipTypes.MOBILE_TRACKER + ") where l." + MobileTracker.USER_ID + "='" + user + "'"
                 + " return  l", "l");
     }
-    
-      private List<MobileTrackerWrapper> meetingQuery(String q, String returnedItem) {
+
+    private List<MobileTrackerWrapper> meetingQuery(String q, String returnedItem) {
         List<MobileTrackerWrapper> mtg = new ArrayList<>();
         System.out.println("Query Meeting : " + q);
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
@@ -106,19 +106,19 @@ public class MobileTrackerModel {
                 mr.setBattery(m.getBattery());
                 mr.setData(m.getData());
                 mr.setEndTime(m.getEndDate());
+                mr.setStartTime(m.getStartDate());
                 mr.setImei(m.getImei());
                 mr.setModule(m.getModule());
                 mr.setPage(m.getPage());
                 mr.setSection(m.getSection());
                 mr.setUserId(m.getUserId());
                 mr.setVersion(m.getVersion());
-                
-                    mtg.add(mr);
+
+                mtg.add(mr);
             }
 
         }
         return mtg;
     }
 
-    
 }

@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.grameenfoundation.ictc.wrapper.MobileTrackerWrapper"%>
 <%@page import="com.grameenfoundation.ictc.models.MobileTrackerModel"%>
 <%@page import="java.util.List"%>
@@ -14,6 +16,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%  MobileTrackerModel biodataModel = new MobileTrackerModel();
     List<MobileTrackerWrapper> trackItems = biodataModel.findAll();
+       String format = "EEE, MMM d, ''yy  HH:mm";
+      
+        SimpleDateFormat simpleDate = new SimpleDateFormat(format);
 %>
 <!DOCTYPE html>
 <html>
@@ -32,7 +37,9 @@
                 <th>Module</th>
                 <th>Page</th>
                 <th>Section</th>
-                <th>Data</th>
+               
+                <th>Start</th>
+                <th>End</th>
                 <th>Version</th>
                 <th>Battery</th>
                 <th>IMEI</th>
@@ -45,7 +52,11 @@
                 <td><%= mobileTracker.getPage()%></td>
                 <td><%= mobileTracker.getSection()%></td>
 
-                <td><%= mobileTracker.getData()%></td>
+               
+                <td><%=
+                simpleDate.format(new Date(mobileTracker.getStartTime()))
+               %></td>
+                <td><%= simpleDate.format(new Date(mobileTracker.getEndTime()))%></td>
                 <td><%= mobileTracker.getVersion()%></td>
                 <td><%= mobileTracker.getBattery()%></td>
                 <td><%= mobileTracker.getImei()%></td>

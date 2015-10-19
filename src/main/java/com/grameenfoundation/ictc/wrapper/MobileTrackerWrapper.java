@@ -5,6 +5,8 @@
  */
 package com.grameenfoundation.ictc.wrapper;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.json.JSONObject;
 
 /**
@@ -29,7 +31,6 @@ public class MobileTrackerWrapper {
     public MobileTrackerWrapper() {
     }
 
-    
     public MobileTrackerWrapper(String id, String userId, String module, String data, String page, String section, long startTime, long endTime, long timeSpent, String imei, String version, long battery) {
         this.id = id;
         this.userId = userId;
@@ -60,12 +61,12 @@ public class MobileTrackerWrapper {
             this.section = obj.getString("section");
             this.imei = obj.getString("imei");
             this.version = obj.getString("version");
-            this.battery = Integer.parseInt(obj.getString("battery"));
-        }else{
-            this.page=data;
-            this.section="";
-            this.battery=0;
-            this.version="";
+            this.battery = Math.round(Float.parseFloat(obj.getString("battery")));
+        } else {
+            this.page = data;
+            this.section = "";
+            this.battery = 0;
+            this.version = "";
         }
     }
 
@@ -235,6 +236,21 @@ public class MobileTrackerWrapper {
      */
     public void setBattery(long battery) {
         this.battery = battery;
+    }
+
+    public String getFormatedStartDate() {
+        return formatDate(startTime);
+    } 
+    
+    public String getFormatedEndDate() {
+        return formatDate(endTime);
+    }
+
+    public String formatDate(long date) {
+        String format = "EEE, MMM d, ''yy  HH:mm";
+        Date d = new Date(date);
+        SimpleDateFormat simpleDate = new SimpleDateFormat(format);
+        return simpleDate.format(d);
     }
 
 }
