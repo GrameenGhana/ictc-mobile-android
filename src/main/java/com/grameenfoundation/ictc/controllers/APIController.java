@@ -393,7 +393,44 @@ public class APIController extends HttpServlet {
                      baselineproductionbudget.put(BaselineProductionBudget.HOE_PLOUGHING_LABOUR_PERIOD_BASE,bpb.getHoe_ploughing_labour_period_base());
                      baselineproductionbudget.put(BaselineProductionBudget.LABOR_FIFTH_WEED_CONTROL_BASE ,bpb.getLabor_fifth_weed_control_base());
                      baselineproductionbudget.put(BaselineProductionBudget.LABOR_FOR_PLANTINGFAMILY_BASE, bpb.getLabor_for_plantingfamily_base());
-                     baselineproductionbudget.put(BaselineProductionBudget.LABOR_FOR_PLANTING_NUMBER_BASE  ,bpb.getLabor_for_planting_number_base());                      baselineproductionbudget.put(BaselineProductionBudget.LABOR_FOR_PLANTINGFAMILY_BASE, bpb.getLabor_for_plantingfamily_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.LABOR_FOR_PLANTING_NUMBER_BASE  ,bpb.getLabor_for_planting_number_base());                      
+                     baselineproductionbudget.put(BaselineProductionBudget.LABOR_FOURTH_WEED_CONTROL_BASE, bpb.getLabor_fourth_weed_control_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.LABOR_NO_FIRST_MANUAL_WEED_BASE, bpb.getLabor_no_first_manual_weed_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.LABOR_FOR_PLANTINGFAMILY_BASE, bpb.getLabor_for_plantingfamily_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.LABOR_THIRD_WEED_CONTROL_BASE, bpb.getLabor_third_weed_control_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.LAND_RENT_BASE, bpb.getLand_rent_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.LABOR_FOR_PLANTINGFAMILY_BASE, bpb.getLabor_for_plantingfamily_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.PERIOD_FOR_COMPLETION_OF_HARVEST_BASE, bpb.getPeriod_for_completion_of_harvest_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.PLANTING_PERIOD2_BASE, bpb.getPlanting_period2_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.PLOUGHING_COST_PER_ACRE_BASE, bpb.getPloughing_cost_per_acre_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.POST_HERBICIDE_APPLICATION_COST_BASE, bpb.getPost_herbicide_application_cost_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.POST_PLANT_HERBICIDE_COST_BASE, bpb.getPost_plant_herbicide_cost_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.PRICE_OF_BASAL_FERTILIZER_BASE, bpb.getPrice_of_basal_fertilizer_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.PRICE_OF_HERBICIDE_BASE, bpb.getPrice_of_herbicide_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.PRICE_OF_TOPDRESS_FERTILIZER_BASE, bpb.getPrice_of_topdress_fertilizer_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.QUANTITY_OF_PREPLANT_HERBICIDE_BASE, bpb.getQuantity_of_preplant_herbicide_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.REFILLING_LABOR_FAMILY_BASE, bpb.getRefilling_labor_family_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.REFILLING_LABOR_PERIOD_BASE, bpb.getRefilling_labor_period_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.REFILLING_LABOUR_COST_BASE, bpb.getRefilling_labour_cost_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.REFILLING_LABOUR_NO_BASE, bpb.getRefilling_labour_no_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.SECOND_WEED_LABOR_BASE, bpb.getSecond_weed_labor_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.SECOND_WEED_PERIOD_BASE, bpb.getSecond_weed_period_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.SEEDBED_LABOR_COST_BASE, bpb.getSeedbed_labor_cost_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.SEEDBED_LABOR_NUMBER_BASE, bpb.getSeedbed_labor_number_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.SEEDBED_LABOUR_FAMILY_BASE, bpb.getSeedbed_labour_family_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.SEEDPLANTING_MATERIAL_COST_BASE, bpb.getSeedplanting_material_cost_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.SEED_BED_PREPARATION_PERIOD_BASE, bpb.getSeed_bed_preparation_period_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.THIRD_WEEDING_PERIOD_BASE, bpb.getThird_weeding_period_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.TOPDRESS_FERT_LABOR_PERIOD_BASE, bpb.getTopdress_fert_labor_period_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.TOTAL_COST_FIFTH_WEED_BASE, bpb.getTotal_cost_fifth_weed_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.TOTAL_COST_FIRST_MANUAL_WEED_BASE, bpb.getTotal_cost_first_manual_weed_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.TOTAL_COST_SECOND_WEED_BASE, bpb.getTotal_cost_second_weed_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.TOTAL_COST_THIRD_WEED_BASE, bpb.getTotal_cost_third_weed_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.TOTAL_NUMBER_OF_LABOR_TOPDRESS_BASE, bpb.getTotal_number_of_labor_topdress_base());
+                     baselineproductionbudget.put(BaselineProductionBudget.UNIT_COST_HOE_PLOUGHING_BASE, bpb.getUnit_cost_hoe_ploughing_base());
+                     
+                     
+                     
                      
                  }
                  
@@ -403,7 +440,7 @@ public class APIController extends HttpServlet {
                  farmer.put("production",production);
                  farmer.put("postharvest",postHarvest);
                  farmer.put("baselineproduction",baselineproduction);
-                 
+                 farmer.put("baselineproductionbudget",baselineproductionbudget);
                  
                  
                  details.put("farmer",farmer);
