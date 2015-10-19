@@ -531,7 +531,7 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                         Biodata b = biodataModel.getBiodata("Id", farmerID);
 
-                        biodataModel.BiodataToBPB(b.getId(), BPNode);
+                        biodataModel.BiodataToBP(b.getId(), BPNode);
                        
                      
                         out.println(sendAck());
@@ -714,7 +714,7 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                         Biodata b = biodataModel.getBiodata("Id", farmerID);
 
-                        biodataModel.BiodataToFMPPB(b.getId(), FMPPBHNode);
+                        biodataModel.BiodataToFMPPHB(b.getId(), FMPPBHNode);
 
                         out.println(sendAck());
 

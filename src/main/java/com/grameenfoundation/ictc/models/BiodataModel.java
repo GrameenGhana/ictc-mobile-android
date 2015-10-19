@@ -557,6 +557,33 @@ public class BiodataModel {
         return updated;
     }
 
+   
+   public boolean BiodataToBP(String biodata, Node BPBNode) {
+       
+         Biodata b = null;
+        boolean created = false;
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+
+            b = new BiodataModel().getBiodata(Biodata.ID, biodata);
+
+            System.out.println("biodata :" + b.getUnderlyingNode().getId());
+            if (null != biodata) {
+
+                b.setBP(BPBNode);
+                created = true;
+                trx.success();
+
+            }
+        } catch (Exception e) {
+            System.out.println("error");
+            //created = false;
+
+        }
+
+        return created;
+    }
+    
+   
     public boolean BiodataToBPB(String biodata, Node BPBNode) {
        
          Biodata b = null;
