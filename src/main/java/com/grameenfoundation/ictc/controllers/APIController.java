@@ -5,12 +5,14 @@
  */
 package com.grameenfoundation.ictc.controllers;
 
+import com.grameenfoundation.ictc.domains.BaselinePostHarvest;
 import com.grameenfoundation.ictc.domains.BaselineProduction;
 import com.grameenfoundation.ictc.domains.BaselineProductionBudget;
 import com.grameenfoundation.ictc.domains.Biodata;
 import com.grameenfoundation.ictc.domains.MeetingSetting;
 import com.grameenfoundation.ictc.domains.PostHarvest2;
 import com.grameenfoundation.ictc.domains.ProductionNew;
+import com.grameenfoundation.ictc.models.BaselinePostHarvestModel;
 import com.grameenfoundation.ictc.models.BaselineProductionBudgetModel;
 import com.grameenfoundation.ictc.models.BaselineProductionModel;
 import com.grameenfoundation.ictc.models.BiodataModel;
@@ -171,6 +173,8 @@ public class APIController extends HttpServlet {
                  PostHarvestModel postHarvestModel = new PostHarvestModel();
                  BaselineProductionModel baselineProductionModel = new BaselineProductionModel();
                  BaselineProductionBudgetModel  baselineProductionBudgetModel = new BaselineProductionBudgetModel();
+                 BaselinePostHarvestModel baselinePostHarvestModel = new BaselinePostHarvestModel();
+                 
                  
                  JSONArray fa = new JSONArray();
                  
@@ -185,7 +189,7 @@ public class APIController extends HttpServlet {
                     JSONObject details = new JSONObject();
                     JSONObject baselineproduction = new JSONObject();
                     JSONObject baselineproductionbudget = new JSONObject();
-
+                    JSONObject baselinepostharvest = new JSONObject();
                      //biodata
                 Biodata b = biodataModel.getBiodata("Id", bb.getFarmID());
                 
@@ -435,12 +439,60 @@ public class APIController extends HttpServlet {
                  }
                  
                  
+                 BaselinePostHarvest bph = baselinePostHarvestModel.getBaselinePostHarvest("Id",bb.getFarmID());
+                 
+                 if(null!=bph)
+                 {
+                   baselinepostharvest.put(BaselinePostHarvest.APPLICATIONRATEOFSTORAGECHEMICAL,bph.getApplicationrateofstoragechemical());
+                   baselinepostharvest.put(BaselinePostHarvest.COMPLETIONOFPRODUCEMARKETING,bph.getCompletionofproducemarketing());
+                   baselinepostharvest.put(BaselinePostHarvest.COMPLETIONOFTHRESHING,bph.getCompletionofthreshing());
+                   baselinepostharvest.put(BaselinePostHarvest.DATEOFCOMPLETINGDRYING,bph.getDateofcompletingdrying());
+                   baselinepostharvest.put(BaselinePostHarvest.DATETOCOMPLETEDRYING,bph.getDatetocompletedrying());
+                   baselinepostharvest.put(BaselinePostHarvest.DEHUSKINGDATE,bph.getDehuskingdate());
+                   baselinepostharvest.put(BaselinePostHarvest.FIRSTSALEDATE,bph.getFirstsaledate());
+                   baselinepostharvest.put(BaselinePostHarvest.MAINPOINTOFSALEORCONTACT,bph.getMainpointofsaleorcontact());
+                   baselinepostharvest.put(BaselinePostHarvest.MANUALTHRESHING,bph.getManualthreshing());
+                   baselinepostharvest.put(BaselinePostHarvest.MANUALWINNOWING,bph.getManualwinnowing());
+                   baselinepostharvest.put(BaselinePostHarvest.MARKETINGOCCASIONS,bph.getMarketingoccasions());
+                   baselinepostharvest.put(BaselinePostHarvest.METHODOFDRYINGCOBSPANICLESCHIPSCHU,bph.getMethodofdryingcobspanicleschipschu());
+                   baselinepostharvest.put(BaselinePostHarvest.METHODOFDRYINGGRAIN,bph.getMethodofdryinggrain());
+                   baselinepostharvest.put(BaselinePostHarvest.METHODOFPROCESSINGDEHUSKING,bph.getMethodofprocessingdehusking());
+                   baselinepostharvest.put(BaselinePostHarvest.METHODOFTHRESHING,bph.getMethodofthreshing());
+                   baselinepostharvest.put(BaselinePostHarvest.METHODOFWINNOWING,bph.getMethodofwinnowing());
+                   baselinepostharvest.put(BaselinePostHarvest.MOSTPRODUCESALEDATE,bph.getMostproducesaledate());
+                   baselinepostharvest.put(BaselinePostHarvest.OTHERAPPLICATIONRATEOFSTORAGECHEMICA,bph.getOtherapplicationrateofstoragechemica());
+                   baselinepostharvest.put(BaselinePostHarvest.OTHERMETHODFORDRYING,bph.getOthermethodfordrying());
+                   baselinepostharvest.put(BaselinePostHarvest.OTHERMETHODOFDRYINGGRAIN,bph.getOthermethodofdryinggrain());
+                   baselinepostharvest.put(BaselinePostHarvest.OTHERMETHODSOFDEHUSKING,bph.getOthermethodsofdehusking());
+                   baselinepostharvest.put(BaselinePostHarvest.OTHERSALECONTACT,bph.getOthersalecontact());
+                   baselinepostharvest.put(BaselinePostHarvest.OTHERSTORAGECHEMICAL,bph.getOtherstoragechemical());
+                   baselinepostharvest.put(BaselinePostHarvest.OWNERSHIPORCONDITIONSFORSTORAGE,bph.getOwnershiporconditionsforstorage());
+                   baselinepostharvest.put(BaselinePostHarvest.POSTHARVESTLOSSES,bph.getPostharvestlosses());
+                   baselinepostharvest.put(BaselinePostHarvest.PRICEATFIRSTSALEDATE,bph.getPriceatfirstsaledate());
+                   baselinepostharvest.put(BaselinePostHarvest.PRICEATMOSTSALEDATE,bph.getPriceatmostsaledate());
+                   baselinepostharvest.put(BaselinePostHarvest.PROCESSINGOFCASSAVA,bph.getProcessingofcassava());
+                   baselinepostharvest.put(BaselinePostHarvest.PROPORTIONOFCASSAVA,bph.getProportionofcassava());
+                   baselinepostharvest.put(BaselinePostHarvest.PROPORTIONOFPRODUCESOLD,bph.getProportionofproducesold());
+                   baselinepostharvest.put(BaselinePostHarvest.TYPEOFBAGCONTAINERUSED,bph.getTypeofbagcontainerused());
+                   baselinepostharvest.put(BaselinePostHarvest.TYPEOFMACHINE,bph.getTypeofmachine());
+                   baselinepostharvest.put(BaselinePostHarvest.TYPEOFMACHINEWINONOWING,bph.getTypeofmachinewinonowing());
+                   baselinepostharvest.put(BaselinePostHarvest.TYPEOFSTORAGECHEMICAL,bph.getTypeofstoragechemical());
+                   baselinepostharvest.put(BaselinePostHarvest.TYPEOFSTORAGESTRUCTURE,bph.getTypeofstoragestructure());
+                   baselinepostharvest.put(BaselinePostHarvest.WHATCROPAREYOUPLANNINGTOCULTIVATE,bph.getWhatcropareyouplanningtocultivate());
+                   
+           
+                   
+                 }
+                 
+                 
                  
                   
                  farmer.put("production",production);
                  farmer.put("postharvest",postHarvest);
                  farmer.put("baselineproduction",baselineproduction);
                  farmer.put("baselineproductionbudget",baselineproductionbudget);
+                 farmer.put("baselinepostharvest",baselinepostharvest);
+                 
                  
                  
                  details.put("farmer",farmer);

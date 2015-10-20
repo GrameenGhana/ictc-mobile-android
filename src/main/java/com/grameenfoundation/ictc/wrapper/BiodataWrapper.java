@@ -33,6 +33,25 @@ public class BiodataWrapper {
     private String majorCrop = "majorcrop";
     private String farmarea = "farmarea";
     private String farmperimeter = "farmperimeter";
+    String farmerimage="farmerimage";
+    String telephonenumber="telephonenumber";
+    
+ public  void setFarmerimage(String farmerimage) {
+      this.farmerimage=farmerimage;
+    }
+ public  String getFarmerimage() {
+        return farmerimage;
+
+    }
+    
+    
+ public  void setTelephonenumber(String telephonenumber) {
+      this.telephonenumber=telephonenumber;
+    }
+ public  String getTelephonenumber() {
+        return telephonenumber;
+
+    }
 
     public String getFarmarea() {
         return farmarea;

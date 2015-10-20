@@ -40,6 +40,22 @@ public class Biodata extends Status implements GeneralInterface {
     public static String FARMERID = "farmerid";
     public static String FARM_AREA ="farmarea";
     public static String FARM_PERIMETER = "farmperimeter";
+    public static String TELEPHONENUMBER ="telephonenumber";
+    public static String FARMERIMAGE ="farmerimage";
+   
+public void setFarmerimage(String farmerimage) {
+underlyingNode.setProperty(FARMERIMAGE,farmerimage);
+}
+
+public String getFarmerimage(){
+          try {
+          return (String) underlyingNode.getProperty(FARMERIMAGE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
     //public static String ID ="id";
     
     Node underlyingNode;
@@ -52,6 +68,19 @@ public class Biodata extends Status implements GeneralInterface {
         super(underlyingNode);
         this.underlyingNode = underlyingNode;
     }
+    
+    public void setTelephonenumber(String telephonenumber) {
+underlyingNode.setProperty(TELEPHONENUMBER,telephonenumber);
+}
+
+public String getTelephonenumber(){
+          try {
+          return (String) underlyingNode.getProperty(TELEPHONENUMBER);
+
+        } catch (Exception e) {
+        }
+        return null;
+}
     
       public String getFarmperimeter() {
        try {
