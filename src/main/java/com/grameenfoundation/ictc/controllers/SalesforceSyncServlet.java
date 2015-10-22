@@ -758,7 +758,42 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                         tx.success();
                     }
-                      
+                        else if(salesforceObj.equals("sf:FIELD_CROP_ASSESSMENT__c"))
+                    {
+                        org.neo4j.graphdb.Node FCAParent;
+                        org.neo4j.graphdb.Node FCANode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FIELD_CROP_ASSESSMENT);
+
+                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c", ele);
+                        System.out.println("farmerid " + farmerID);
+                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
+
+                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
+                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                FCANode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                            }
+
+                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
+
+                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                               FCANode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+
+                            }
+                        }
+
+                        FCAParent = ParentNode.FMPPHBparentNode();
+                        FCAParent.createRelationshipTo(FCANode, ICTCRelationshipTypes.FIELD_CROP_ASSESSMENT);
+
+                        log.log(Level.INFO, "new node created {0}", FCANode.getId());
+
+                        Biodata b = biodataModel.getBiodata("Id", farmerID);
+
+                        biodataModel.BiodataToFMPPHB(b.getId(), FCANode);
+
+                        out.println(sendAck());
+
+                        tx.success();
+                    }  
                      
                     
                  }

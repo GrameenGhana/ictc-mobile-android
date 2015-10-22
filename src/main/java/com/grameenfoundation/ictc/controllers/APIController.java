@@ -16,14 +16,18 @@ import com.grameenfoundation.ictc.models.BaselinePostHarvestModel;
 import com.grameenfoundation.ictc.models.BaselineProductionBudgetModel;
 import com.grameenfoundation.ictc.models.BaselineProductionModel;
 import com.grameenfoundation.ictc.models.BiodataModel;
+import com.grameenfoundation.ictc.models.FarmerInputModel;
+import com.grameenfoundation.ictc.models.MeetingModel;
 import com.grameenfoundation.ictc.models.MeetingSettingModel;
 import com.grameenfoundation.ictc.models.MobileTrackerModel;
 import com.grameenfoundation.ictc.models.PostHarvestModel;
 import com.grameenfoundation.ictc.models.ProductionModel;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.wrapper.BiodataWrapper;
+import com.grameenfoundation.ictc.wrapper.FarmerInputReceivedWrapper;
 import com.grameenfoundation.ictc.wrapper.MeetingActivityWrapper;
 import com.grameenfoundation.ictc.wrapper.MeetingSettingWrapper;
+import com.grameenfoundation.ictc.wrapper.MeetingWrapper;
 import com.grameenfoundation.ictc.wrapper.MobileTrackerWrapper;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -187,9 +191,40 @@ public class APIController extends HttpServlet {
                     JSONObject postHarvest = new JSONObject();
                     JSONObject farmer = new JSONObject();
                     JSONObject details = new JSONObject();
+                    JSONObject meetng = new JSONObject();
                     JSONObject baselineproduction = new JSONObject();
                     JSONObject baselineproductionbudget = new JSONObject();
                     JSONObject baselinepostharvest = new JSONObject();
+                    
+                    
+                    
+                    
+                JSONArray meetingArray = new JSONArray();
+                List<MeetingWrapper> meetings = new MeetingModel().findFarmerMeeting(bb.getFarmID());
+                for (MeetingWrapper meeting : meetings) {
+                    JSONObject meetingObj = new JSONObject();
+                    meetingObj.put("midx", meeting.getMeetingIndex());
+                    meetingObj.put("ty", meeting.getType());
+                    meetingObj.put("sea", meeting.getSeason());
+                    meetingObj.put("sd", meeting.getStartDate());
+                    meetingObj.put("ed", meeting.getEndDate());
+                    meetingObj.put("at",meeting.getAttended());
+                    meetingArray.put(meetingObj);
+                }
+                
+                
+                  JSONArray inputArray = new JSONArray();
+                List<FarmerInputReceivedWrapper> fi = new FarmerInputModel().getFarmerInputs(bb.getFarmID());
+                for(FarmerInputReceivedWrapper f :fi)
+                {
+                    JSONObject inputObj = new JSONObject();
+                    inputObj.put("nm",f.getName());
+                    inputObj.put("qty",f.getQty());
+                    inputObj.put("st", f.getStatus());
+                    inputArray.put(inputObj);
+                }
+                 
+                
                      //biodata
                 Biodata b = biodataModel.getBiodata("Id", bb.getFarmID());
                 
@@ -492,6 +527,13 @@ public class APIController extends HttpServlet {
                  farmer.put("baselineproduction",baselineproduction);
                  farmer.put("baselineproductionbudget",baselineproductionbudget);
                  farmer.put("baselinepostharvest",baselinepostharvest);
+                  if (meetingArray.length() > 0) {
+                    farmer.put("meeting", meetingArray);
+                }
+                  if (inputArray.length() > 0) {
+                    farmer.put("inputs", inputArray);
+                }
+                 
                  
                  
                  
