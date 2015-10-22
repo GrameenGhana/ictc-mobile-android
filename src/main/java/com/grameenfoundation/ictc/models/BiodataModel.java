@@ -709,7 +709,30 @@ public class BiodataModel {
         return created;
     }
     
-    
+      public boolean BiodataToFCA(String biodata, Node BPBNode) {
+       
+         Biodata b = null;
+        boolean created = false;
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+
+            b = new BiodataModel().getBiodata(Biodata.ID, biodata);
+
+            System.out.println("biodata :" + b.getUnderlyingNode().getId());
+            if (null != biodata) {
+
+                b.setFCA(BPBNode);
+                created = true;
+                trx.success();
+
+            }
+        } catch (Exception e) {
+            System.out.println("error");
+            //created = false;
+
+        }
+
+        return created;
+    }
      
      
 }

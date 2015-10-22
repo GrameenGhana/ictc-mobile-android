@@ -480,4 +480,14 @@ public String getTelephonenumber(){
     public FmpPostHarvestBudget getFMPPHB() {
         return new FmpPostHarvestBudget(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_POSTHARVEST_BUDGET));
     }
+    
+    
+     public void setFCA(Node FCANode) {
+        underlyingNode.createRelationshipTo(FCANode, ICTCRelationshipTypes.HAS_FIELD_CROP_ASSESSMENT);
+    }
+     
+     
+      public FieldCropAssessment getFCA() {
+        return new FieldCropAssessment(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_FIELD_CROP_ASSESSMENT));
+    }
 }

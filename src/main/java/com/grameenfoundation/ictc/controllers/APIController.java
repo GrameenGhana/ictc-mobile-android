@@ -238,7 +238,7 @@ public class APIController extends HttpServlet {
                 farmer.put(Biodata.GENDER, b.getGender());
                 farmer.put(Biodata.EDUCATION,b.getEducation());
                 farmer.put(Biodata.FARMERID, b.getId());
-               // farmer.put(Biodata.FARM_AREA, b.getFarmarea());
+                farmer.put(Biodata.FARMERIMAGE ,b.getFarmerimage());
                 farmer.put(Biodata.MAJOR_CROP,b.getMajorCrop());
                 farmer.put(Biodata.MARITAL_STATUS,b.getMaritalstatus());
                 farmer.put(Biodata.NICKNAME, b.getNickname());
@@ -246,6 +246,22 @@ public class APIController extends HttpServlet {
                 farmer.put(Biodata.NUMBER_OF_DEPENDANTS,b.getNumberofdependants());
                 farmer.put(Biodata.REGION,b.getRegion());
                 farmer.put(Biodata.VILLAGE,b.getVillage());
+                
+                
+                if(null!=b.getCluster())
+                farmer.put(Biodata.CLUSTER,b.getCluster());
+                else
+                {
+                  farmer.put(Biodata.CLUSTER,"");
+                }
+                
+                if(null!=b.getFarmarea())
+                farmer.put(Biodata.FARM_AREA,b.getCluster());
+                else
+                {
+                  farmer.put(Biodata.FARM_AREA,"0");
+                }
+                
                 
                 }
                  

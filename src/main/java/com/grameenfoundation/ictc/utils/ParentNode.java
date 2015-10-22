@@ -111,4 +111,8 @@ public class ParentNode {
     public static Node   FMPPHBparentNode() {
         return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.FMP_POSTHARVEST_BUDGET);
     }  
+    
+    public static Node   FCAparentNode() {
+        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.FIELD_CROP_ASSESSMENT);
+    }  
 }

@@ -781,14 +781,14 @@ public class SalesforceSyncServlet extends HttpServlet {
                             }
                         }
 
-                        FCAParent = ParentNode.FMPPHBparentNode();
+                        FCAParent = ParentNode.FCAparentNode();
                         FCAParent.createRelationshipTo(FCANode, ICTCRelationshipTypes.FIELD_CROP_ASSESSMENT);
 
                         log.log(Level.INFO, "new node created {0}", FCANode.getId());
 
                         Biodata b = biodataModel.getBiodata("Id", farmerID);
 
-                        biodataModel.BiodataToFMPPHB(b.getId(), FCANode);
+                        biodataModel.BiodataToFCA(b.getId(), FCANode);
 
                         out.println(sendAck());
 
@@ -798,9 +798,6 @@ public class SalesforceSyncServlet extends HttpServlet {
                     
                  }
                  
-                
-                
-                
 
                 System.out.println("Root element " + doc.getDocumentElement());
              }
