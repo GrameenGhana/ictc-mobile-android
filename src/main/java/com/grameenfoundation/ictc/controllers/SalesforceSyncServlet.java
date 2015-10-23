@@ -758,13 +758,13 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                         tx.success();
                     }
-                        else if(salesforceObj.equals("sf:FIELD_CROP_ASSESSMENT__c"))
+                     else if(salesforceObj.equals("sf:FIELD_CROP_ASSESSMENT__c"))
                     {
                         org.neo4j.graphdb.Node FCAParent;
                         org.neo4j.graphdb.Node FCANode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FIELD_CROP_ASSESSMENT);
 
                         farmerID = getXmlNodeValue("sf:Farmer_Biodata__c", ele);
-                        System.out.println("farmerid " + farmerID);
+                        System.out.println("farmerid " + farmerID + " " + FCANode.getId());
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
 
                             System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());

@@ -66,7 +66,7 @@ public class MobileTrackerModel {
 
                 trackerParent.createRelationshipTo(stNode, ICTCRelationshipTypes.MOBILE_TRACKER);
 
-                log.log(Level.INFO, "new node created. {0}", meet.getUnderlyingNode().getId());
+                log.log(Level.INFO, "new node created tracker. {0}", meet.getUnderlyingNode().getId());
                 trx.success();
                 return meet;
 

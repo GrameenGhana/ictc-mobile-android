@@ -91,5 +91,5 @@ public enum ICTCRelationshipTypes implements RelationshipType{
      TECHNICAL_NEED,
     //U
     USER,
-    UPDATE, HAS_BASELINE_PRODUCTION,  
+    UPDATE, HAS_BASELINE_PRODUCTION, HAS_FIELD_CROP_ASSESSMENT,  
 }

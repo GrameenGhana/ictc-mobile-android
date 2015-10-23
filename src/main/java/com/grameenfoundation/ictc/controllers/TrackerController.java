@@ -78,9 +78,9 @@ public class TrackerController extends HttpServlet {
 
                 MobileTrackerWrapper mobileTracker = new MobileTrackerWrapper(id, userId, module, dt, startTime, endTime);
 
-                if (trackerModel.create(mobileTracker) != null) {
+               // if (trackerModel.create(mobileTracker) != null) {
                     validIds += id + ",";
-                }
+//                }
             }
             if (!validIds.isEmpty()) {
                 validIds = validIds.substring(0, validIds.length() - 2);

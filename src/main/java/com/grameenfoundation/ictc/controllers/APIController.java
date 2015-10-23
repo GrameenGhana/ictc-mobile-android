@@ -12,6 +12,8 @@ import com.grameenfoundation.ictc.domains.Biodata;
 import com.grameenfoundation.ictc.domains.MeetingSetting;
 import com.grameenfoundation.ictc.domains.PostHarvest2;
 import com.grameenfoundation.ictc.domains.ProductionNew;
+import com.grameenfoundation.ictc.domains.Profiling;
+import com.grameenfoundation.ictc.domains.TechnicalNeed;
 import com.grameenfoundation.ictc.models.BaselinePostHarvestModel;
 import com.grameenfoundation.ictc.models.BaselineProductionBudgetModel;
 import com.grameenfoundation.ictc.models.BaselineProductionModel;
@@ -22,6 +24,8 @@ import com.grameenfoundation.ictc.models.MeetingSettingModel;
 import com.grameenfoundation.ictc.models.MobileTrackerModel;
 import com.grameenfoundation.ictc.models.PostHarvestModel;
 import com.grameenfoundation.ictc.models.ProductionModel;
+import com.grameenfoundation.ictc.models.ProfilingModel;
+import com.grameenfoundation.ictc.models.TechnicalNeedsModel;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.wrapper.BiodataWrapper;
 import com.grameenfoundation.ictc.wrapper.FarmerInputReceivedWrapper;
@@ -178,6 +182,8 @@ public class APIController extends HttpServlet {
                  BaselineProductionModel baselineProductionModel = new BaselineProductionModel();
                  BaselineProductionBudgetModel  baselineProductionBudgetModel = new BaselineProductionBudgetModel();
                  BaselinePostHarvestModel baselinePostHarvestModel = new BaselinePostHarvestModel();
+                 TechnicalNeedsModel technicalNeedsModel = new TechnicalNeedsModel();
+                 ProfilingModel profilingModel = new ProfilingModel();
                  
                  
                  JSONArray fa = new JSONArray();
@@ -195,6 +201,8 @@ public class APIController extends HttpServlet {
                     JSONObject baselineproduction = new JSONObject();
                     JSONObject baselineproductionbudget = new JSONObject();
                     JSONObject baselinepostharvest = new JSONObject();
+                    JSONObject technicalNeeds = new JSONObject();
+                    JSONObject profiling = new JSONObject();
                     
                     
                     
@@ -535,6 +543,39 @@ public class APIController extends HttpServlet {
                    
                  }
                  
+                  TechnicalNeed techNeed = technicalNeedsModel.getTechnicalNeed("Id", bb.getFarmID());
+                    
+                 if(null!=techNeed)
+                 {
+                     technicalNeeds.put(TechnicalNeed.CROPESTABLISHMENT,techNeed.getCropEstablishment());
+                     technicalNeeds.put(TechnicalNeed.CROPVARIETYANDSEED,techNeed.getCropVarietyAndSeed());
+                     technicalNeeds.put(TechnicalNeed.CROPVARIETYANDSEEDCASSAVA,techNeed.getCropvarietyandseedcassava());
+                     technicalNeeds.put(TechnicalNeed.CROVARIETYANDSEEDSYAM,techNeed.getCrovarietyandseedsyam());
+                     technicalNeeds.put(TechnicalNeed.FARMPLANNING,techNeed.getFarmPlanning());
+                     technicalNeeds.put(TechnicalNeed.HARVESTANDPOSTHARVEST,techNeed.getHarvestAndPostHarvest());
+                     technicalNeeds.put(TechnicalNeed.INTEGRATEDSOILFERTILITYMANAGEMENT,techNeed.getIntegratedSoilFertilityManagement());
+                     technicalNeeds.put(TechnicalNeed.WEEDCONTROL,techNeed.getWeedControl());     
+                 }
+                 
+                 Profiling pr = profilingModel.getProfile("Id", bb.getFarmID());
+                 
+                 if(null!=pr)
+                 {
+                     profiling.put(Profiling.FARMRECORDKEEPINGSTATUS,pr.getFarmrecordkeepingstatus());
+                     profiling.put(Profiling.FBOMEMBERSHIP,pr.getFbomembership());
+                     profiling.put(Profiling.FBONAME,pr.getFboname());
+                     profiling.put(Profiling.INNOVATIVENESSBYTRYING,pr.getInnovativenessbytrying());
+                     profiling.put(Profiling.NAMETRUSTEDMENTOR,pr.getNametrustedmentor());
+                     profiling.put(Profiling.OPERATEBANKACCOUNT,pr.getOperatebankaccount());
+                     profiling.put(Profiling.POSTHARVESTLOSSES,pr.getPostharvestlosses());
+                     profiling.put(Profiling.PRODUCESOLDPROPORTION,pr.getProducesoldproportion());
+                     profiling.put(Profiling.REGFAMILYLABOR_NO,pr.getRegfamilylabor_No());
+                     profiling.put(Profiling.RISKDISPOSITIONBORROW,pr.getRiskdispositionborrow());
+                     profiling.put(Profiling.SOILFERTILITYPRACTICES,pr.getSoilfertilitypractices());
+                 }
+                 
+                 
+                   
                  
                  
                   
@@ -543,6 +584,11 @@ public class APIController extends HttpServlet {
                  farmer.put("baselineproduction",baselineproduction);
                  farmer.put("baselineproductionbudget",baselineproductionbudget);
                  farmer.put("baselinepostharvest",baselinepostharvest);
+                 farmer.put("technicalneeds",technicalNeeds);
+                 farmer.put("profiling",profiling);
+                 
+                 
+                 
                   if (meetingArray.length() > 0) {
                     farmer.put("meeting", meetingArray);
                 }

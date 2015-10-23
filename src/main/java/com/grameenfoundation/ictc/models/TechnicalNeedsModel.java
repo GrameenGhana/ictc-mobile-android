@@ -10,6 +10,7 @@ import com.grameenfoundation.ictc.domains.TechnicalNeed;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
 import com.grameenfoundation.ictc.utils.Labels;
+import com.grameenfoundation.ictc.utils.Neo4jServices;
 import com.grameenfoundation.ictc.utils.ParentNode;
 import com.grameenfoundation.ictc.wrapper.TechnicalNeedsWrapper;
 import java.util.logging.Level;
@@ -76,6 +77,27 @@ public class TechnicalNeedsModel {
             e.printStackTrace();
         }
         
+        return null;
+    }
+    
+    
+       public TechnicalNeed getTechnicalNeed(String field, String value) {
+        String q = "Start root=node(0) "
+                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+ICTCRelationshipTypes.HAS_TECHNEEDS+
+                "]->p"
+                + " where f." + field + "='" + value + "'"
+                + " return p";
+
+        System.out.println("Query " + q);
+        try {
+            Node node = Neo4jServices.executeCypherQuerySingleResult(q, "p");
+            if (null != node) {
+                return new TechnicalNeed(node);
+            }
+        } catch (Exception e) {
+            System.out.println("Unable to Find Technical Need");
+        }
+
         return null;
     }
     
