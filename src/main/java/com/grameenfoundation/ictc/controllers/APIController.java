@@ -6,19 +6,27 @@
 package com.grameenfoundation.ictc.controllers;
 
 import com.grameenfoundation.ictc.domains.BaselinePostHarvest;
+import com.grameenfoundation.ictc.domains.BaselinePostHarvestBudget;
 import com.grameenfoundation.ictc.domains.BaselineProduction;
 import com.grameenfoundation.ictc.domains.BaselineProductionBudget;
 import com.grameenfoundation.ictc.domains.Biodata;
+import com.grameenfoundation.ictc.domains.FieldCropAssessment;
+import com.grameenfoundation.ictc.domains.FmpPostHarvestBudget;
+import com.grameenfoundation.ictc.domains.FmpProductionBudget;
 import com.grameenfoundation.ictc.domains.MeetingSetting;
 import com.grameenfoundation.ictc.domains.PostHarvest2;
 import com.grameenfoundation.ictc.domains.ProductionNew;
 import com.grameenfoundation.ictc.domains.Profiling;
 import com.grameenfoundation.ictc.domains.TechnicalNeed;
+import com.grameenfoundation.ictc.models.BaselinePostHarvestBudgetModel;
 import com.grameenfoundation.ictc.models.BaselinePostHarvestModel;
 import com.grameenfoundation.ictc.models.BaselineProductionBudgetModel;
 import com.grameenfoundation.ictc.models.BaselineProductionModel;
 import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.models.FarmerInputModel;
+import com.grameenfoundation.ictc.models.FieldCropAssessmentModel;
+import com.grameenfoundation.ictc.models.FmpPostHarvestBudgetModel;
+import com.grameenfoundation.ictc.models.FmpProductionBudgetModel;
 import com.grameenfoundation.ictc.models.MeetingModel;
 import com.grameenfoundation.ictc.models.MeetingSettingModel;
 import com.grameenfoundation.ictc.models.MobileTrackerModel;
@@ -182,9 +190,15 @@ public class APIController extends HttpServlet {
                  BaselineProductionModel baselineProductionModel = new BaselineProductionModel();
                  BaselineProductionBudgetModel  baselineProductionBudgetModel = new BaselineProductionBudgetModel();
                  BaselinePostHarvestModel baselinePostHarvestModel = new BaselinePostHarvestModel();
+                 BaselinePostHarvestBudgetModel baselinePostHarvestBudgetModel = new BaselinePostHarvestBudgetModel();
+                 FmpProductionBudgetModel fmpProductionBudgetModel = new FmpProductionBudgetModel();
                  TechnicalNeedsModel technicalNeedsModel = new TechnicalNeedsModel();
                  ProfilingModel profilingModel = new ProfilingModel();
+                 FieldCropAssessmentModel fieldCropAssessmentModel = new FieldCropAssessmentModel();
+                 FmpPostHarvestBudgetModel fmpPostHarvestBudgetModel = new FmpPostHarvestBudgetModel();
                  
+                 
+               
                  
                  JSONArray fa = new JSONArray();
                  
@@ -203,6 +217,10 @@ public class APIController extends HttpServlet {
                     JSONObject baselinepostharvest = new JSONObject();
                     JSONObject technicalNeeds = new JSONObject();
                     JSONObject profiling = new JSONObject();
+                    JSONObject baselinepostharvestbudget = new JSONObject();
+                    JSONObject fmpproductionbudget = new JSONObject();
+                    JSONObject fieldcropassessment = new JSONObject();
+                    JSONObject fmppostharvestbudget = new JSONObject();
                     
                     
                     
@@ -574,8 +592,155 @@ public class APIController extends HttpServlet {
                      profiling.put(Profiling.SOILFERTILITYPRACTICES,pr.getSoilfertilitypractices());
                  }
                  
-                 
+                 BaselinePostHarvestBudget bphb = baselinePostHarvestBudgetModel.getBaselinePostHarvestBudget("Id",bb.getFarmID());
                    
+                 if(null!=bphb)
+                 {
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.BAGS_FOR_STORAGE_BASE,bphb.getBags_for_storage_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.COST_OF_STORAGE_CHEMICAL_BASE,bphb.getCost_of_storage_chemical_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.DEHUSKINGPEELING_FAMILY_LABOR_BASE,bphb.getDehuskingpeeling_family_labor_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.DEHUSKINGPEELING_LABOR_BASE,bphb.getDehuskingpeeling_family_labor_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.DEHUSKINGPEELING_LABOR_BASE,bphb.getDehuskingpeeling_labor_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.FAMILY_LABOR_BAGGING_BASE,bphb.getFamily_labor_bagging_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.FAMILY_LABOR_DRYING_COBS_BASE,bphb.getFamily_labor_drying_cobs_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.FAMILY_LABOR_DRYING_GRAIN_BASE,bphb.getFamily_labor_drying_grain_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.FAMILY_LABOR_ENGAGED_WINNOWING_BASE,bphb.getFamily_labor_engaged_winnowing_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.FAMILY_LABOR_MANUAL_THRESHING_BASE,bphb.getFamily_labor_manual_threshing_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.GRAIN_DRYING_COST_BASE,bphb.getGrain_drying_cost_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.LABOR_COST_DEHUSKINGPEELING_BASE,bphb.getLabor_cost_dehuskingpeeling_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.LABOR_COST_DRYING_OF_COBS_BASE,bphb.getLabor_cost_drying_of_cobs_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.LABOR_HANDS_DRYINGCOBS_BASE,bphb.getLabor_hands_dryingcobs_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.LABOR_MANUAL_THRESHING_BASE,bphb.getLabor_manual_threshing_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.LABOR_PERIOD_DRYING_COBS_BASE,bphb.getLabor_period_drying_cobs_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.LABOR_PERIOD_MANUAL_THRESHING_BASE,bphb.getLabor_period_manual_threshing_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.LABOUR_FOR_BAGGING_BASE,bphb.getFamily_labor_bagging_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.LABOUR_WINNOWING_BASE,bphb.getLabour_winnowing_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.PERIOD_TO_COMPLETE_DEHUSKING_BASE,bphb.getPeriod_to_complete_dehusking_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.TIME_COMPLETION_OF_BAGGING_BASE,bphb.getTime_completion_of_bagging_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.TIME_INTERVAL_WINNOWING_BASE,bphb.getTime_interval_winnowing_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.UNIT_COST_MACHINE_THRESHING_BASE,bphb.getUnit_cost_machine_threshing_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.UNIT_COST_MANUAL_THRESHING_BASE,bphb.getUnit_cost_manual_threshing_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.UNIT_COST_OF_STORAGE_BAGS_BASE,bphb.getUnit_cost_of_storage_bags_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.UNIT_COST_OF_WAREHOUSE_BASE,bphb.getUnit_cost_of_warehouse_base());
+                     baselinepostharvestbudget.put(BaselinePostHarvestBudget.UNIT_LABOR_COST_BAGGING_BASE,bphb.getUnit_labor_cost_bagging_base());
+                     
+                     
+                 }
+                 
+                 FmpProductionBudget fmppb = fmpProductionBudgetModel.getFmpProductionBudget("Id",bb.getFarmID());
+                 
+                 if(fmppb!=null)
+                 {
+                     fmpproductionbudget.put(FmpProductionBudget.BASAL_FERTILIZER_APPLICATION_TOTAL_LABOU,fmppb.getBasal_fert_labor_period());
+                     fmpproductionbudget.put(FmpProductionBudget.BASAL_FERTILIZER_APPL_LABOUR_COST,fmppb.getBasal_fertilizer_appl_labour_cost());
+                     fmpproductionbudget.put(FmpProductionBudget.BASAL_FERT_LABOR_PERIOD,fmppb.getBasal_fert_labor_period());
+                     fmpproductionbudget.put(FmpProductionBudget.COST_OF_APPLICATIONTOPDRESS,fmppb.getCost_of_applicationtopdress());
+                     fmpproductionbudget.put(FmpProductionBudget.FAMILY_LABOR_BASAL_FERTILIZER_APPLICATIO,fmppb.getFamily_labor_basal_fertilizer_applicatio());
+                     fmpproductionbudget.put(FmpProductionBudget.FAMILY_LABOR_FIFTH_WEED_CONTROL,fmppb.getFamily_labor_fifth_weed_control());
+                     fmpproductionbudget.put(FmpProductionBudget.FAMILY_LABOR_FIRST_MANUAL_WEED_CONTROL,fmppb.getFamily_labor_first_manual_weed_control());
+                     fmpproductionbudget.put(FmpProductionBudget.FAMILY_LABOR_FOURTH_WEEDING,fmppb.getFamily_labor_fourth_weeding());
+                     fmpproductionbudget.put(FmpProductionBudget.FAMILY_LABOR_SECOND_MANUAL_WEED_CONTROL,fmppb.getFamily_labor_second_manual_weed_control());
+                     fmpproductionbudget.put(FmpProductionBudget.FAMILY_LABOR_THIRD_WEED_CONTROL,fmppb.getFamily_labor_third_weed_control());
+                     fmpproductionbudget.put(FmpProductionBudget.FAMILY_LABOR_TOPDRESS_FERTILIZER_APPLICA,fmppb.getFamily_labor_topdress_fertilizer_applica());
+                     fmpproductionbudget.put(FmpProductionBudget.FIFTH_MANUAL_WEEDING_LABOR_PERIOD,fmppb.getFifth_manual_weeding_labor_period());
+                     fmpproductionbudget.put(FmpProductionBudget.FINAL_HARVEST_FAMILY_LABOR,fmppb.getFinal_harvest_family_labor());
+                     fmpproductionbudget.put(FmpProductionBudget.FINAL_HARVEST_LABOR_HOW_MANY_LABOR_HANDS,fmppb.getFinal_harvest_labor_how_many_labor_hands());
+                     fmpproductionbudget.put(FmpProductionBudget.FIRST_MANUAL_WEEDING_LABOR_PERIOD,fmppb.getFirst_manual_weeding_labor_period());
+                     fmpproductionbudget.put(FmpProductionBudget.FOURTH_MANUAL_WEEDING_LABOR_PERIOD,fmppb.getFourth_manual_weeding_labor_period());
+                     fmpproductionbudget.put(FmpProductionBudget.HARROWING_COST_PER_ACRE,fmppb.getHarrowing_cost_per_acre());
+                     fmpproductionbudget.put(FmpProductionBudget.HARVEST_LABOR_COSTSPER_ACRE,fmppb.getHarvest_labor_costsper_acre());
+                     fmpproductionbudget.put(FmpProductionBudget.HERBICIDE_APPLICATION_COST,fmppb.getHerbicide_application_cost());
+                     fmpproductionbudget.put(FmpProductionBudget.HERBICIDE_APPLICATION_COST_POST_PLANT,fmppb.getHerbicide_application_cost_post_plant());
+                     fmpproductionbudget.put(FmpProductionBudget.HERBICIDE_APPLICATION_LABOR_PERIOD_HOW_L,fmppb.getHerbicide_application_labor_period_how_l());
+                     fmpproductionbudget.put(FmpProductionBudget.HOE_PLOUGHING_LABOUR_FAMILY_HOW_MANY_FAM,fmppb.getHoe_ploughing_labour_family_how_many_fam());
+                     fmpproductionbudget.put(FmpProductionBudget.HOE_PLOUGHING_LABOUR_HOW_MANY_PEOPLE,fmppb.getHoe_ploughing_labour_how_many_people());
+                     fmpproductionbudget.put(FmpProductionBudget.HOE_PLOUGHING_LABOUR_PERIOD,fmppb.getHoe_ploughing_labour_period());
+                     fmpproductionbudget.put(FmpProductionBudget.LABOR_FIFTH_WEED_CONTROL,fmppb.getLabor_fifth_weed_control());
+                     fmpproductionbudget.put(FmpProductionBudget.LABOR_FOR_PLANTINGFAMILY,fmppb.getLabor_for_plantingfamily());
+                     fmpproductionbudget.put(FmpProductionBudget.LABOR_FOR_PLANTING_NUMBER,fmppb.getLabor_for_planting_number());
+                     fmpproductionbudget.put(FmpProductionBudget.LABOR_FOURTH_WEED_CONTROL,fmppb.getLabor_fourth_weed_control());
+                     fmpproductionbudget.put(FmpProductionBudget.LABOR_THIRD_WEED_CONTROL,fmppb.getLabor_third_weed_control());
+                     fmpproductionbudget.put(FmpProductionBudget.LAND_RENT,fmppb.getLand_rent());
+                     fmpproductionbudget.put(FmpProductionBudget.PERIOD_FOR_COMPLETION_OF_HARVEST,fmppb.getPeriod_for_completion_of_harvest());
+                     fmpproductionbudget.put(FmpProductionBudget.PLANTING_LABOR_COST,fmppb.getPlanting_labor_cost());
+                     fmpproductionbudget.put(FmpProductionBudget.PLANTING_PERIOD2,fmppb.getPlanting_period2());
+                     fmpproductionbudget.put(FmpProductionBudget.PLOUGHING_COST_PER_ACRE,fmppb.getPloughing_cost_per_acre());
+                     fmpproductionbudget.put(FmpProductionBudget.POST_PLANT_HERBICIDE_COST,fmppb.getPost_plant_herbicide_cost());
+                     fmpproductionbudget.put(FmpProductionBudget.PRICE_OF_BASAL_FERTILIZER,fmppb.getPrice_of_basal_fertilizer());
+                     fmpproductionbudget.put(FmpProductionBudget.PRICE_OF_HERBICIDE_GHC,fmppb.getPrice_of_herbicide_ghc());
+                     fmpproductionbudget.put(FmpProductionBudget.PRICE_OF_TOPDRESS_FERTILIZER,fmppb.getPrice_of_topdress_fertilizer());
+                     fmpproductionbudget.put(FmpProductionBudget.QUANTITY_OF_PREPLANT_HERBICIDE_LITERS,fmppb.getQuantity_of_preplant_herbicide_liters());
+                     fmpproductionbudget.put(FmpProductionBudget.REFILLING_LABOR_PERIOD,fmppb.getRefilling_labor_period());
+                     fmpproductionbudget.put(FmpProductionBudget.REFILLING_LABOUR_COST,fmppb.getRefilling_labour_cost());
+                     fmpproductionbudget.put(FmpProductionBudget.REFILLING_LABOUR_NO,fmppb.getRefilling_labour_no());
+                     fmpproductionbudget.put(FmpProductionBudget.SECOND_MANUAL_WEEDING_LABOR_PERIOD,fmppb.getSecond_manual_weeding_labor_period());
+                     fmpproductionbudget.put(FmpProductionBudget.SECOND_WEED_CONTROL_LABOR,fmppb.getSecond_weed_control_labor());
+                     fmpproductionbudget.put(FmpProductionBudget.SEEDBED_LABOR_COST,fmppb.getSeedbed_labor_cost());
+                     fmpproductionbudget.put(FmpProductionBudget.SEEDBED_LABOR_NUMBER,fmppb.getSeedbed_labor_number());
+                     fmpproductionbudget.put(FmpProductionBudget.SEEDBED_LABOUR_FAMILY,fmppb.getSeedbed_labour_family());
+                     fmpproductionbudget.put(FmpProductionBudget.SEEDPLANTING_MATERIAL_COST,fmppb.getSeedplanting_material_cost());
+                     fmpproductionbudget.put(FmpProductionBudget.SEEDPLANTING_MATERIAL_COST,fmppb.getSeedplanting_material_cost());
+                     fmpproductionbudget.put(FmpProductionBudget.SEED_BED_PREPARATION_PERIOD,fmppb.getSeed_bed_preparation_period());
+                     fmpproductionbudget.put(FmpProductionBudget.TOPDRESS_FERT_LABOR_PERIOD,fmppb.getTopdress_fert_labor_period());
+                     fmpproductionbudget.put(FmpProductionBudget.TOTAL_COST_OF_LABOR_FIFTH_MANUAL_WEED,fmppb.getTotal_cost_of_labor_fifth_manual_weed());
+                     fmpproductionbudget.put(FmpProductionBudget.TOTAL_COST_OF_LABOR_FIRST_MANUAL_WEED,fmppb.getTotal_cost_of_labor_fifth_manual_weed());
+                     fmpproductionbudget.put(FmpProductionBudget.TOTAL_COST_OF_LABOR_FOURTH_MANUAL_WEED,fmppb.getTotal_cost_of_labor_fourth_manual_weed());
+                     fmpproductionbudget.put(FmpProductionBudget.TOTAL_COST_OF_LABOR_SECOND_MANUAL_WEED,fmppb.getTotal_cost_of_labor_second_manual_weed());
+                     fmpproductionbudget.put(FmpProductionBudget.TOTAL_COST_OF_LABOR_THIRD_MANUAL_WEED_CO,fmppb.getTotal_cost_of_labor_third_manual_weed_co());
+                     fmpproductionbudget.put(FmpProductionBudget.TOTAL_NUMBER_OF_LABOR_TOPDRESS,fmppb.getTotal_number_of_labor_topdress());
+                     fmpproductionbudget.put(FmpProductionBudget.UNIT_COST_HOE_PLOUGHING,fmppb.getUnit_cost_hoe_ploughing());
+                         
+                 }
+                 
+                 
+                 FieldCropAssessment fca = fieldCropAssessmentModel.getFieldCropAssessment("Id",bb.getFarmID());
+                 
+                 if(null!=fca)
+                 {
+                     fieldcropassessment.put(FieldCropAssessment.CROP_ESTABLISHMENT_SCORE, fca.getCrop_establishment_score());
+                     fieldcropassessment.put(FieldCropAssessment.DISEASE_MANAGEMENT_SCORES, fca.getDisease_management_scores());
+                     fieldcropassessment.put(FieldCropAssessment.GPS_LOCATION, fca.getGPS_Location());
+                     fieldcropassessment.put(FieldCropAssessment.PEST_MANAGEMENT_SCORE, fca.getPest_management_score());
+                     fieldcropassessment.put(FieldCropAssessment.PHOTO_CROP_ESTABLISHMENT_STATUS, fca.getCrop_establishment_score());
+                     fieldcropassessment.put(FieldCropAssessment.PHOTO_DISEASE_MANGEMENT_STATUS, fca.getPhoto_disease_mangement_status());
+                     fieldcropassessment.put(FieldCropAssessment.PHOTO_PEST_MANAGEMENT_STATUS, fca.getPhoto_pest_management_status());
+                     fieldcropassessment.put(FieldCropAssessment.PHOTO_SOIL_FERTILITY_STATUS, fca.getPhoto_soil_fertility_status());
+                     fieldcropassessment.put(FieldCropAssessment.PHOTO_WEED_MANAGEMENT_STATUS, fca.getPhoto_weed_management_status());
+                     fieldcropassessment.put(FieldCropAssessment.SOIL_FERTILITY_SCORE, fca.getSoil_fertility_score());
+                     fieldcropassessment.put(FieldCropAssessment.WEED_MANAGEMENT_SCORE_, fca.getWeed_management_score_());
+                     
+                     
+                 }
+                 
+                 FmpPostHarvestBudget fmpphb = fmpPostHarvestBudgetModel.getFmpPostHarvestBudget("Id",bb.getFarmID());
+                 
+                 
+                 if(null!=fmpphb)
+                 {
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.BAGS_FOR_STORAGE_, fmpphb.getBags_for_storage_());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.COST_OF_STORAGE_CHEMICAL, fmpphb.getCost_of_storage_chemical());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.COST_OF_WAREHOUSE, fmpphb.getCost_of_warehouse());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.DEHUSKINGPEELING_FAMILY_LABOR, fmpphb.getDehuskingpeeling_family_labor());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.DEHUSKINGPEELING_LABOR, fmpphb.getDehuskingpeeling_labor());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.FAMILY_LABOR_BAGGING, fmpphb.getFamily_labor_bagging());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.FAMILY_LABOR_DRYINGCOBS_, fmpphb.getFamily_labor_dryingcobs_());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.FAMILY_LABOR_DRYING_GRAIN, fmpphb.getFamily_labor_drying_grain());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.FAMILY_LABOR_ENGAGED_WINNOWING, fmpphb.getFamily_labor_engaged_winnowing());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.FAMILY_LABOR_MANUAL_THRESHING, fmpphb.getFamily_labor_manual_threshing());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.GRAIN_DRYING_COST, fmpphb.getGrain_drying_cost());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.LABOR_COST_DEHUSKINGPEELING, fmpphb.getLabor_cost_dehuskingpeeling());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.LABOR_COST_DRYING_OF_COBS, fmpphb.getLabor_cost_drying_of_cobs());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.LABOR_DRYING_GRAIN, fmpphb.getLabor_drying_grain());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.LABOR_MANUAL_THRESHING, fmpphb.getLabor_manual_threshing());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.LABOUR_FOR_BAGGING, fmpphb.getLabour_for_bagging());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.LABOUR_WINNOWING, fmpphb.getLabour_winnowing());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.TIME_INTERVAL_FOR_COMPLETION_OF_BAGGING, fmpphb.getTime_interval_for_completion_of_bagging());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.TIME_INTERVAL_FOR_WINNOWING, fmpphb.getTime_interval_for_winnowing());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.TIME_PERIOD_LABOR_DRYING_GRAIN, fmpphb.getTime_period_labor_drying_grain());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.UNIT_COST_MACHINE_THRESHING, fmpphb.getUnit_cost_machine_threshing());
+                     
+                     
+                 }
                  
                  
                   
@@ -584,6 +749,12 @@ public class APIController extends HttpServlet {
                  farmer.put("baselineproduction",baselineproduction);
                  farmer.put("baselineproductionbudget",baselineproductionbudget);
                  farmer.put("baselinepostharvest",baselinepostharvest);
+                 farmer.put("baselinepostharvestbudget",baselinepostharvestbudget);
+                 farmer.put("baselinepostharvestbudget",baselinepostharvestbudget);
+                 farmer.put("fmpproductionbudget",fmpproductionbudget);
+                 farmer.put("fieldcropassessment",fieldcropassessment);
+                 farmer.put("fmppostharvestbudget",fmppostharvestbudget);
+                 
                  farmer.put("technicalneeds",technicalNeeds);
                  farmer.put("profiling",profiling);
                  
