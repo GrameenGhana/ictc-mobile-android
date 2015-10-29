@@ -29,7 +29,7 @@ import org.json.JSONObject;
  *
  * @author grameen
  */
-@WebServlet(name = "AgentController", urlPatterns = {"/AgentController"})
+@WebServlet(name = "AgentController", urlPatterns = {"/agent/add"})
 public class AgentController extends HttpServlet {
 
     /**
@@ -47,24 +47,30 @@ public class AgentController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
           
-            String firstname = request.getParameter("firstname");
-            String lastname = request.getParameter("lastname");
-            String agentcode = request.getParameter("agentcode");
-            String agenttype = request.getParameter("agenttype");
-            String organisation = request.getParameter("organisation");
+            String firstname = request.getParameter("fn");
+            String lastname = request.getParameter("ln");
+            String email = request.getParameter("email");
+            String username = request.getParameter("un");
+            String agenttype= request.getParameter("at");
+            String phonenumber = request.getParameter("pn");
             
-             String serverResponse = "";
+            
+            
+      String serverResponse = "";
 
      String url = "http://sandbox-ictchallenge.cs80.force.com/AgentRequest";
      
      
      
             JSONObject j = new JSONObject();
-            j.put("agentcode", agentcode);
-            j.put("organisation", organisation);
+            j.put("agenttype", agenttype);
             j.put("firstname", firstname);
             j.put("lastname",lastname);
             j.put("agenttype",agenttype);
+            j.put("email", email);
+            j.put("username",username+"@ictc.org");
+            j.put("phonenumber",phonenumber);
+            
             
 
             HttpClient client = new DefaultHttpClient();
