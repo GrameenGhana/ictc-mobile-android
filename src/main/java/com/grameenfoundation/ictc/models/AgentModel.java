@@ -6,9 +6,14 @@
 
 package com.grameenfoundation.ictc.models;
 
+import com.grameenfoundation.ictc.domains.Agent;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
+import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
 import com.grameenfoundation.ictc.utils.Labels;
+import com.grameenfoundation.ictc.utils.ParentNode;
 import com.grameenfoundation.ictc.wrapper.AgentWrapper;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
 /**
@@ -19,40 +24,35 @@ import org.neo4j.graphdb.Transaction;
  */
 public class AgentModel {
     
+     Logger log = Logger.getLogger(AgentModel.class.getName());
     
-    
-     public boolean createBiodata(AgentWrapper agent) {
+     public boolean createAgent(AgentWrapper agent) {
         boolean created = true;
+        
+     Node AgentParent;
 
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
-            Node farmerNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.AGENT);
+            Node agentNode= ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.AGENT);
 
-            Agent ag = new Agent(farmerNode);
+            Agent ag = new Agent(agentNode);
 
-            if (null == biodataWrapper) {
-                log.info("Biodata is invalid");
+            if (null == agent) {
+                log.info("Agent is invalid");
                 created = false;
             } else {
-                FarmerParent = ParentNode.FarmerParentNode();
+               AgentParent = ParentNode.AgentParentNode();
 
-                biodata.setFirstname(biodataWrapper.getFirstName());
-                biodata.setLastname(biodataWrapper.getLastName());
-                biodata.setAge(biodataWrapper.getAge());
-                biodata.setVillage(biodataWrapper.getVillage());
-                biodata.setDistrict(biodataWrapper.getDistrict());
-                biodata.setCommunity(biodataWrapper.getCommunity());
-                biodata.setGender(biodataWrapper.getGender());
-                biodata.setMaritalstatus(biodataWrapper.getMaritalStatus());
-                biodata.setNickname(biodataWrapper.getNickname());
-                biodata.setNumberofchildren(biodataWrapper.getNumberOfChildren());
-                biodata.setNumberofdependants(biodataWrapper.getNumberOfDependants());
-                biodata.setEducation(biodataWrapper.getEducation());
-                biodata.setLastModifiedDate(new Date());
+               ag.setAgentcode(agent.getAgentcode());
+               ag.setAgenttype(agent.getAgenttype());
+               ag.setEmail(agent.getEmail());
+               ag.setFirstname(agent.getFirstname());
+               ag.setLastname(agent.getLastname());
+               ag.setUsername(agent.getUsername());
+ 
+                AgentParent.createRelationshipTo(agentNode, ICTCRelationshipTypes.AGENT);
 
-                FarmerParent.createRelationshipTo(farmerNode, ICTCRelationshipTypes.FARMER);
-
-                log.log(Level.INFO, "new node created {0}", biodata.getUnderlyingNode().getId());
+                log.log(Level.INFO, "new node created {0}",ag.getUnderlyingNode().getId());
                 trx.success();
 
             }
@@ -60,8 +60,11 @@ public class AgentModel {
         } catch (Exception e) {
 
             created = false;
-            log.severe("Creation of Farmer Failed");
+            log.severe("Creation of Agent Failed");
             e.printStackTrace();
         }
+        
+        return created;
+     }
 
 }
