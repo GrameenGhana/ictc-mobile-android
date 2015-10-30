@@ -5,11 +5,16 @@
  */
 package com.grameenfoundation.ictc.controllers;
 
+import com.grameenfoundation.ictc.models.FarmerInputModel;
+import com.grameenfoundation.ictc.models.MeetingModel;
 import com.grameenfoundation.ictc.models.MobileTrackerModel;
+import com.grameenfoundation.ictc.wrapper.FarmManagementWrapper;
+import com.grameenfoundation.ictc.wrapper.FarmerInputReceivedWrapper;
 import com.grameenfoundation.ictc.wrapper.MobileTrackerWrapper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,23 +53,23 @@ public class TrackerController extends HttpServlet {
             System.out.println("In datdatdatdataaaa Area");
             
             for (Enumeration e = request.getParameterNames();
-                e.hasMoreElements();) {
-            String param = (String) e.nextElement();
-            System.out.println(param + ": " + request.getParameter(param));
-        }
+                    e.hasMoreElements();) {
+                String param = (String) e.nextElement();
+                System.out.println(param + ": " + request.getParameter(param));
+            }
 //            String serviceCode = request.getParameter("action");
 //            JSONObject jSONObject = new JSONObject();
 //            System.out.println("action " + serviceCode);
 
             String data = request.getParameter("data");
             
-            System.out.println("Data Received : "+data);
+            System.out.println("Data Received : " + data);
             
             JSONObject jobj = new JSONObject(data);
             JSONArray jsonArray = jobj.getJSONArray("logs");
             
             int length = jsonArray.length();
-
+            
             String validIds = "";
             MobileTrackerModel trackerModel = new MobileTrackerModel();
             for (int i = 0; i < length; i++) {
@@ -75,12 +80,86 @@ public class TrackerController extends HttpServlet {
                 long endTime = j.getLong("end_time");
                 String module = j.getString("module");
                 String dt = j.getString("data");
-
+                
                 MobileTrackerWrapper mobileTracker = new MobileTrackerWrapper(id, userId, module, dt, startTime, endTime);
-
-               // if (trackerModel.create(mobileTracker) != null) {
+                
+                if (module != "") {
+                    if (mobileTracker.getPage().equalsIgnoreCase("Mark Group Attendance")) {
+                        
+                        JSONObject jObject = mobileTracker.getDataJSON();
+                        String inAttendance = jObject.getString("attendees");
+                        int mIndex = jObject.getInt("index");
+                        String type = jObject.getString("type");
+                        new MeetingModel().updateMeetings(String.valueOf(mIndex), type, inAttendance);
+                        
+                    } else if (mobileTracker.getPage().equalsIgnoreCase("Farmer Input")) {
+                        if (data.contains("farm_inputs")) {
+                            
+                            JSONObject jObject = mobileTracker.getDataJSON();
+                            JSONArray ja = jObject.getJSONArray("farm_inputs");
+                            
+                            String farmer = jObject.getString("user_id");
+                            FarmerInputModel fim = new FarmerInputModel();
+                            List<FarmerInputReceivedWrapper> farmers = fim.getFarmerInputs(farmer);
+                            
+                            FarmerInputReceivedWrapper seedsReceived = MobileController.searchNeeds(farmers, "seeds");
+                            FarmerInputReceivedWrapper fertReceived = MobileController.searchNeeds(farmers, "fertiliser");
+                            FarmerInputReceivedWrapper ploughReceived = MobileController.searchNeeds(farmers, "plough");
+                            JSONObject seedObject;
+                            JSONObject fertObj;
+                            JSONObject ploughObj;
+                            int l = ja.length();
+                            for (i = 0; i < l; i++) {
+                                JSONObject ji = ja.getJSONObject(i);
+                                if (ji.getString("name").equals("seeds")) {
+                                    seedObject = ji;
+                                    if (null == seedsReceived) {
+                                        seedsReceived = new FarmerInputReceivedWrapper();
+                                        seedsReceived.setFarmer(farmer);
+                                        seedsReceived.setName("seeds");
+                                        seedsReceived.setQty(seedObject.getDouble("qty"));
+                                        seedsReceived.setStatus("1");
+                                        fim.create(seedsReceived);
+                                    }else{
+                                        boolean update = fim.update(farmer, "seeds", seedObject.getDouble("qty"));
+//|
+                                    }
+                                } else if (ji.getString("name").equals("fertiliser")) {
+                                    fertObj = ji;
+                                     if (null == fertReceived) {
+                                        fertReceived = new FarmerInputReceivedWrapper();
+                                        fertReceived.setFarmer(farmer);
+                                        fertReceived.setName("seeds");
+                                        fertReceived.setQty(fertObj.getDouble("qty"));
+                                        fertReceived.setStatus("1");
+                                        fim.create(seedsReceived);
+                                    }else{
+                                        boolean update = fim.update(farmer, "fertiliser", fertObj.getDouble("qty"));
+//|
+                                    }
+                                } else if (ji.getString("name").equals("plough")) {
+                                    ploughObj = ji;
+                                    if (null == fertReceived) {
+                                        fertReceived = new FarmerInputReceivedWrapper();
+                                        fertReceived.setFarmer(farmer);
+                                        fertReceived.setName("seeds");
+                                        fertReceived.setQty(ploughObj.getDouble("qty"));
+                                        fertReceived.setStatus("1");
+                                        fim.create(seedsReceived);
+                                    }else{
+                                        boolean update = fim.update(farmer, "plough", ploughObj.getDouble("qty"));
+//|
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+                
+                if (trackerModel.create(mobileTracker)) {
                     validIds += id + ",";
-//                }
+                }
             }
             if (!validIds.isEmpty()) {
                 validIds = validIds.substring(0, validIds.length() - 2);
@@ -88,7 +167,7 @@ public class TrackerController extends HttpServlet {
             JSONObject js = new JSONObject();
             js.put("rc", "00");
             js.put("ids", validIds);
-
+            
             out.print(js);
         }
     }

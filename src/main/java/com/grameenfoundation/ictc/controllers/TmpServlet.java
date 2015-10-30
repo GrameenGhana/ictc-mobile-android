@@ -184,15 +184,15 @@ public class TmpServlet extends HttpServlet {
             meeting = new MeetingSettingWrapper("Maize", "Individual", "1", "1", "03", "03", "Planting,First weed control (if no herbicide applied),Basal Fertilizer application");
             meetings.add(meeting);
 
-            meeting = new MeetingSettingWrapper("Maize", "Group", "1", "2", "05", "05", "First/Second Weeding,Top-dress fertilizer application");
+            meeting = new MeetingSettingWrapper("Maize", "Group", "2", "2", "05", "05", "First/Second Weeding,Top-dress fertilizer application");
             meetings.add(meeting);
 
             meeting = new MeetingSettingWrapper("Maize", "Individual", "2", "1", "06", "06", "Harvesting ");
             meetings.add(meeting);
 
-            meeting = new MeetingSettingWrapper("Maize", "Group", "1", "3", "07", "07", "Post-harvest processing");
+            meeting = new MeetingSettingWrapper("Maize", "Group", "3", "3", "07", "07", "Post-harvest processing");
             meetings.add(meeting);
-            meeting = new MeetingSettingWrapper("Maize", "Group", "1", "4", "09", "09", "");
+            meeting = new MeetingSettingWrapper("Maize", "Group", "4", "4", "09", "09", "");
             meetings.add(meeting);
 
             meeting = new MeetingSettingWrapper("Cassava", "Group", "1", "1", "02-10", "02-01", "Land Clearing,Land preparation (ploughing)");
@@ -201,15 +201,15 @@ public class TmpServlet extends HttpServlet {
             meeting = new MeetingSettingWrapper("Cassava", "Individual", "1", "1", "02-10", "02-01", "Planting,First weed control (if no herbicide applied),Basal Fertilizer application");
             meetings.add(meeting);
 
-            meeting = new MeetingSettingWrapper("Cassava", "Group", "1", "2", "02-10", "02-01", "First/Second Weeding,Third Weeding");
+            meeting = new MeetingSettingWrapper("Cassava", "Group", "2", "2", "02-10", "02-01", "First/Second Weeding,Third Weeding");
             meetings.add(meeting);
 
             meeting = new MeetingSettingWrapper("Cassava", "Individual", "2", "1", "02-10", "02-01", "Harvesting ");
             meetings.add(meeting);
 
-            meeting = new MeetingSettingWrapper("Cassava", "Group", "1", "3", "02-10", "02-01", "Post-harvest processing");
+            meeting = new MeetingSettingWrapper("Cassava", "Group", "3", "3", "02-10", "02-01", "Post-harvest processing");
             meetings.add(meeting);
-            meeting = new MeetingSettingWrapper("Cassava", "Group", "1", "4", "02-10", "02-01", "");
+            meeting = new MeetingSettingWrapper("Cassava", "Group", "4", "4", "02-10", "02-01", "");
             meetings.add(meeting);
 
             meeting = new MeetingSettingWrapper("Rice", "Group", "1", "1", "02-10", "02-01", "Land Clearing,Land preparation (ploughing)");
@@ -218,15 +218,15 @@ public class TmpServlet extends HttpServlet {
             meeting = new MeetingSettingWrapper("Rice", "Individual", "1", "1", "02-10", "02-01", "Planting,First weed control (if no herbicide applied),Basal Fertilizer application");
             meetings.add(meeting);
 
-            meeting = new MeetingSettingWrapper("Rice", "Group", "1", "2", "02-10", "02-01", " First/Second Weeding,Top-dress fertilizer application");
+            meeting = new MeetingSettingWrapper("Rice", "Group", "2", "2", "02-10", "02-01", " First/Second Weeding,Top-dress fertilizer application");
             meetings.add(meeting);
 
             meeting = new MeetingSettingWrapper("Rice", "Individual", "2", "1", "02-10", "02-01", "Harvesting");
             meetings.add(meeting);
 
-            meeting = new MeetingSettingWrapper("Rice", "Group", "1", "3", "02-10", "02-01", "Post-harvest processing");
+            meeting = new MeetingSettingWrapper("Rice", "Group", "3", "3", "02-10", "02-01", "Post-harvest processing");
             meetings.add(meeting);
-            meeting = new MeetingSettingWrapper("Rice", "Group", "1", "4", "02-10", "02-01", "");
+            meeting = new MeetingSettingWrapper("Rice", "Group", "4", "4", "02-10", "02-01", "");
             meetings.add(meeting);
 
             meeting = new MeetingSettingWrapper("Yam", "Group", "1", "1", "02-10", "02-01", "Land Clearing,Land preparation (ploughing)");
@@ -235,16 +235,16 @@ public class TmpServlet extends HttpServlet {
             meeting = new MeetingSettingWrapper("Yam", "Individual", "1", "1", "02-10", "02-01", "Planting,First weed control (if no herbicide applied),Basal Fertilizer application");
             meetings.add(meeting);
 
-            meeting = new MeetingSettingWrapper("Yam", "Group", "1", "2", "02-10", "02-01", "First/Second Weeding");
+            meeting = new MeetingSettingWrapper("Yam", "Group", "2", "2", "02-10", "02-01", "First/Second Weeding");
             meetings.add(meeting);
 
             meeting = new MeetingSettingWrapper("Yam", "Individual", "2", "1", "02-10", "02-01", "Second/Third weeding,Harvesting");
             meetings.add(meeting);
 
-            meeting = new MeetingSettingWrapper("Yam", "Group", "1", "3", "02-10", "02-01", "Third/fourth weeding,Second HarvestingPost-harvest processing");
+            meeting = new MeetingSettingWrapper("Yam", "Group", "3", "3", "02-10", "02-01", "Third/fourth weeding,Second HarvestingPost-harvest processing");
             meetings.add(meeting);
             
-            meeting = new MeetingSettingWrapper("Yam", "Group", "1", "4", "02-10", "02-01", "");
+            meeting = new MeetingSettingWrapper("Yam", "Group", "4", "4", "02-10", "02-01", "");
             meetings.add(meeting);
 
             MeetingSettingModel msModel = new MeetingSettingModel();

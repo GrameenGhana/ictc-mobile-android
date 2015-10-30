@@ -166,7 +166,7 @@ public class APIController extends HttpServlet {
 
                     MobileTrackerWrapper mobileTracker = new MobileTrackerWrapper(id, userId, module, dt, startTime, endTime);
 
-                    if (trackerModel.create(mobileTracker) != null) {
+                    if (trackerModel.create(mobileTracker)) {
                         validIds += id + ",";
                     }
                 }
