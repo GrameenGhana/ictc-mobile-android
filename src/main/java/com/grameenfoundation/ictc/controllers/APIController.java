@@ -738,6 +738,9 @@ public class APIController extends HttpServlet {
                      fmppostharvestbudget.put(FmpPostHarvestBudget.TIME_INTERVAL_FOR_WINNOWING, fmpphb.getTime_interval_for_winnowing());
                      fmppostharvestbudget.put(FmpPostHarvestBudget.TIME_PERIOD_LABOR_DRYING_GRAIN, fmpphb.getTime_period_labor_drying_grain());
                      fmppostharvestbudget.put(FmpPostHarvestBudget.UNIT_COST_MACHINE_THRESHING, fmpphb.getUnit_cost_machine_threshing());
+                     fmppostharvestbudget.put(FmpPostHarvestBudget.UNIT_LABOR_COST_BAGGING, fmpphb.getUnit_labor_cost_bagging());
+                     
+                     
                      
                      
                  }
@@ -754,7 +757,6 @@ public class APIController extends HttpServlet {
                  farmer.put("fmpproductionbudget",fmpproductionbudget);
                  farmer.put("fieldcropassessment",fieldcropassessment);
                  farmer.put("fmppostharvestbudget",fmppostharvestbudget);
-                 
                  farmer.put("technicalneeds",technicalNeeds);
                  farmer.put("profiling",profiling);
                  

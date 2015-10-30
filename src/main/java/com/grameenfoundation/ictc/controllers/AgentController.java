@@ -53,10 +53,11 @@ public class AgentController extends HttpServlet {
             String username = request.getParameter("un");
             String agenttype= request.getParameter("at");
             String phonenumber = request.getParameter("pn");
+            String agentcode = request.getParameter("ac");
             
             
             
-      String serverResponse = "";
+     String serverResponse = "";
 
      String url = "http://sandbox-ictchallenge.cs80.force.com/AgentRequest";
      
@@ -66,7 +67,6 @@ public class AgentController extends HttpServlet {
             j.put("agenttype", agenttype);
             j.put("firstname", firstname);
             j.put("lastname",lastname);
-            j.put("agenttype",agenttype);
             j.put("email", email);
             j.put("username",username+"@ictc.org");
             j.put("phonenumber",phonenumber);
