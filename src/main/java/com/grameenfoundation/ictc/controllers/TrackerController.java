@@ -5,6 +5,8 @@
  */
 package com.grameenfoundation.ictc.controllers;
 
+import com.grameenfoundation.ictc.domains.Biodata;
+import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.models.FarmerGPSModel;
 import com.grameenfoundation.ictc.models.FarmerInputModel;
 import com.grameenfoundation.ictc.models.MeetingModel;
@@ -16,6 +18,9 @@ import com.grameenfoundation.ictc.wrapper.MobileTrackerWrapper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
+import java.util.HashMap;
+
+import java.util.Map;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -173,6 +178,11 @@ public class TrackerController extends HttpServlet {
                             String farmerId=jObject.getString("user_id");
                             String perimeter=jObject.getString("perimeter");
                             JSONArray coordinates = jObject.getJSONArray("coordinates");
+                            
+                            Map<String,String> mhap = new HashMap<String, String>();
+                            mhap.put(Biodata.FARM_AREA, area);
+                            mhap.put(Biodata.FARM_PERIMETER, perimeter);
+                            new BiodataModel().BiodataUpdate(farmerId, mhap);
                             
                             FarmerGPSModel gpsModel = new FarmerGPSModel();
                             int l = coordinates.length();

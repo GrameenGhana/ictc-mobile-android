@@ -46,19 +46,24 @@ public class FarmerGPSModel {
                 log.info("FarmGPSLocation is invalid");
                 created = false;
             } else {
-                gpsParent = ParentNode.FarmerGPSParentNode();
-                gps.setFarmerId(mw.getFarmerId());
                 
+                gpsParent = ParentNode.FarmerGPSParentNode();
+                gps.setFarmerId(mw.getFarmerId());            
                 gps.setLongitude(mw.getLongitude());
                 gps.setLatitude(mw.getLatitude());
               
-               
                 Node farmerNode = Neo4jServices.getFarmerNode(mw.getFarmerId());
+                
+                //FARM_GPS
                 gpsParent.createRelationshipTo(stNode, ICTCRelationshipTypes.FARM_GPS);
-
+                
+                //HAS_FARM_GPS
                 farmerNode.createRelationshipTo(stNode, ICTCRelationshipTypes.HAS_FARM_GPS);
-                log.log(Level.INFO, "new node created gps. {0}", gps.getUnderlyingNode().getId());
+                
+                log.log(Level.INFO, "new node created gps.loc {0}", gps.getUnderlyingNode().getId());
+                
                 trx.success();
+                
                 return true;
 
             }

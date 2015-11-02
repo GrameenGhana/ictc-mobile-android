@@ -23,6 +23,7 @@ import com.grameenfoundation.ictc.models.BaselinePostHarvestModel;
 import com.grameenfoundation.ictc.models.BaselineProductionBudgetModel;
 import com.grameenfoundation.ictc.models.BaselineProductionModel;
 import com.grameenfoundation.ictc.models.BiodataModel;
+import com.grameenfoundation.ictc.models.FarmerGPSModel;
 import com.grameenfoundation.ictc.models.FarmerInputModel;
 import com.grameenfoundation.ictc.models.FieldCropAssessmentModel;
 import com.grameenfoundation.ictc.models.FmpPostHarvestBudgetModel;
@@ -36,6 +37,7 @@ import com.grameenfoundation.ictc.models.ProfilingModel;
 import com.grameenfoundation.ictc.models.TechnicalNeedsModel;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.wrapper.BiodataWrapper;
+import com.grameenfoundation.ictc.wrapper.FarmGPSLocationWrapper;
 import com.grameenfoundation.ictc.wrapper.FarmerInputReceivedWrapper;
 import com.grameenfoundation.ictc.wrapper.MeetingActivityWrapper;
 import com.grameenfoundation.ictc.wrapper.MeetingSettingWrapper;
@@ -746,6 +748,16 @@ public class APIController extends HttpServlet {
                  }
                  
                  
+                 JSONArray farmGps = new JSONArray();
+                 List<FarmGPSLocationWrapper> wr = new FarmerGPSModel().findPerUser(bb.getFarmID());
+                    for (FarmGPSLocationWrapper gps : wr) {
+                        JSONObject jsob = new JSONObject();
+                        jsob.put("x", gps.getLatitude());
+                        jsob.put("y", gps.getLongitude());
+                        farmGps.put(jsob);
+                 }
+                 
+                 
                   
                  farmer.put("production",production);
                  farmer.put("postharvest",postHarvest);
@@ -759,6 +771,7 @@ public class APIController extends HttpServlet {
                  farmer.put("fmppostharvestbudget",fmppostharvestbudget);
                  farmer.put("technicalneeds",technicalNeeds);
                  farmer.put("profiling",profiling);
+                 farmer.put("farmgps",farmGps);
                  
                  
                  
