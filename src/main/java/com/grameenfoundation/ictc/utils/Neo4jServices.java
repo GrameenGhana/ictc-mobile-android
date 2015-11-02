@@ -537,8 +537,31 @@ public class Neo4jServices {
         }
 
     }
+    
+    
      public static Node executeSingleQuery(String query, String returnItem) {
 
+        try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            
+            ExecutionResult result = executeCypherQuery(query);
+            Iterator<Node>  n = result.columnAs(returnItem);
+            while(n.hasNext()){
+                return n.next();
+            }
+            
+            return null;
+        }
+
+    }
+     public static Node getFarmerNode(String farmerId) {
+        return findByLabelID(ICTCRelationshipTypes.FARMER, farmerId);
+    }
+     
+     
+     public static Node findByLabelID(ICTCRelationshipTypes relType,String id) {
+
+         String query="match (n:"+relType+")  where n."+Biodata.ID+" ='"+id+"' return n ";
+         String returnItem="n";
         try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             
             ExecutionResult result = executeCypherQuery(query);

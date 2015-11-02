@@ -5,9 +5,11 @@
  */
 package com.grameenfoundation.ictc.controllers;
 
+import com.grameenfoundation.ictc.models.FarmerGPSModel;
 import com.grameenfoundation.ictc.models.FarmerInputModel;
 import com.grameenfoundation.ictc.models.MeetingModel;
 import com.grameenfoundation.ictc.models.MobileTrackerModel;
+import com.grameenfoundation.ictc.wrapper.FarmGPSLocationWrapper;
 import com.grameenfoundation.ictc.wrapper.FarmManagementWrapper;
 import com.grameenfoundation.ictc.wrapper.FarmerInputReceivedWrapper;
 import com.grameenfoundation.ictc.wrapper.MobileTrackerWrapper;
@@ -152,6 +154,32 @@ public class TrackerController extends HttpServlet {
                                     }
                                 }
                                 
+                            }
+                        }
+                    }else if (mobileTracker.getPage().equalsIgnoreCase("Farm Map Input")) {
+                        if(data.contains("perimeter")){
+                            JSONObject jObject = mobileTracker.getDataJSON();
+                            /**
+                             *             objs.put("page","Farm Map Input");
+            objs.put("area",String.valueOf(area));
+            objs.put("perimeter",String.valueOf(perimeter));
+            objs.put("section",farmer.getFullname());
+            objs.put("coordinates",jsonCoordinate);
+            objs.put("imei",IctcCKwUtil.getImei(getBaseContext()));
+            objs.put("version",IctcCKwUtil.getAppVersion());
+            objs.put("battery",IctcCKwUtil.getBatteryLevel(getBaseContext()));
+                             */
+                            String area=jObject.getString("area");
+                            String farmerId=jObject.getString("user_id");
+                            String perimeter=jObject.getString("perimeter");
+                            JSONArray coordinates = jObject.getJSONArray("coordinates");
+                            
+                            FarmerGPSModel gpsModel = new FarmerGPSModel();
+                            int l = coordinates.length();
+                            for(i=0;i<l;i++){
+                                JSONObject cord = coordinates.getJSONObject(i);
+                                gpsModel.create(new FarmGPSLocationWrapper(cord.getString("x"), cord.getString("y"), farmerId));
+                            
                             }
                         }
                     }

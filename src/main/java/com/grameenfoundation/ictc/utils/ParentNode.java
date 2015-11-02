@@ -67,6 +67,9 @@ public class ParentNode {
     public static Node TrackerParentNode() {
         return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.MOBILE_TRACKER);
     }
+public static Node FarmerGPSParentNode() {
+        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.FARM_GPS);
+    }
 
     
     public static Node MeetingActivityParentNode() {

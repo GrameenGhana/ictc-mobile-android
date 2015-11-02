@@ -42,6 +42,7 @@ public enum ICTCRelationshipTypes implements RelationshipType{
     FMP_PRODUCTION_BUDGET_UPDATE,
     FMP_POSTHARVEST_BUDGET,
     FIELD_CROP_ASSESSMENT,
+    FARM_GPS,
     //H
     HAS_FARM_MANAGEMENT_PLAN,
     HAS_FARM_MANAGEMENT,
@@ -64,6 +65,7 @@ public enum ICTCRelationshipTypes implements RelationshipType{
     HAS_PRODUCTION_BUDGET_UPDATE, 
     HAS_PRODUCTION_BUDGET,
     HAS_POSTHARVEST_BUDGET,
+    HAS_FARM_GPS,
     //L
     LAST_MODIFIED_BY,
     
