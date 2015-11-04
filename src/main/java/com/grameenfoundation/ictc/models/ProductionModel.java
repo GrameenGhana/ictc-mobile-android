@@ -61,7 +61,7 @@ public class ProductionModel {
                 return new ProductionNew(node);
             }
         } catch (Exception e) {
-            System.out.println("Unable to Find geofence");
+            System.out.println("Unable to Find Product");
         }
 
         return null;
