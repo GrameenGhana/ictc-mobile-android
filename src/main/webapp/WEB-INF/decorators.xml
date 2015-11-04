@@ -18,6 +18,7 @@
         <pattern>/pages/in*</pattern> 
         <pattern>/Mobile*</pattern>  
         <pattern>/sf/*</pattern>  
+        <pattern>//api/v1/*</pattern>  
          <!-- <pattern>/gmap/*</pattern> 
          <pattern>/super/systemsetup/policytype/*</pattern>  -->
       

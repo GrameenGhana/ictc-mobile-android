@@ -27,6 +27,7 @@ public class MobileTrackerWrapper {
     private String imei;
     private String version;
     private long battery;
+    private JSONObject dataJSON;
 
     public MobileTrackerWrapper() {
     }
@@ -55,13 +56,18 @@ public class MobileTrackerWrapper {
         this.startTime = startTime;
         this.endTime = endTime;
         this.timeSpent = endTime - startTime;
-        JSONObject obj = new JSONObject(data);
-        if (obj != null) {
-            this.page = obj.getString("page");
-            this.section = obj.getString("section");
-            this.imei = obj.getString("imei");
-            this.version = obj.getString("version");
-            this.battery = Math.round(Float.parseFloat(obj.getString("battery")));
+        dataJSON = new JSONObject(data);
+        if (dataJSON != null) {
+            this.page = dataJSON.getString("page");
+            this.section = dataJSON.getString("section");
+            this.imei = dataJSON.getString("imei");
+            this.version = dataJSON.getString("version");
+            try {
+                this.battery = Math.round(Float.parseFloat(dataJSON.getString("battery")));
+            } catch (Exception e) {
+                this.battery = Math.round((dataJSON.getDouble("battery")));
+            }
+            
         } else {
             this.page = data;
             this.section = "";
@@ -251,6 +257,20 @@ public class MobileTrackerWrapper {
         Date d = new Date(date);
         SimpleDateFormat simpleDate = new SimpleDateFormat(format);
         return simpleDate.format(d);
+    }
+
+    /**
+     * @return the dataJSON
+     */
+    public JSONObject getDataJSON() {
+        return dataJSON;
+    }
+
+    /**
+     * @param dataJSON the dataJSON to set
+     */
+    public void setDataJSON(JSONObject dataJSON) {
+        this.dataJSON = dataJSON;
     }
 
 }

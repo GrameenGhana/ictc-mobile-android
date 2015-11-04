@@ -35,13 +35,14 @@ public class MobileTrackerModel {
     Logger log = Logger.getLogger(MobileTrackerModel.class.getName());
     Node trackerParent;
 
-    public MobileTracker create(MobileTrackerWrapper mw) {
+    public boolean create(MobileTrackerWrapper mw) {
 
         boolean created = true;
 
+//        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
-            Node stNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.MOBILE_TRACKER);
+                 Node stNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.MOBILE_TRACKER);
 
             MobileTracker meet = new MobileTracker(stNode);
 
@@ -68,7 +69,7 @@ public class MobileTrackerModel {
 
                 log.log(Level.INFO, "new node created tracker. {0}", meet.getUnderlyingNode().getId());
                 trx.success();
-                return meet;
+                return true;
 
             }
 
@@ -79,7 +80,7 @@ public class MobileTrackerModel {
             e.printStackTrace();
         }
 
-        return null;
+        return false;
     }
 
     public List<MobileTrackerWrapper> findAll() {

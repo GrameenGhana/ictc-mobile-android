@@ -46,4 +46,5 @@ public enum Labels implements Label {
     FMP_PRODUCTION_BUDGET_UPDATE, 
     FMP_POSTHARVEST_BUDGET, 
     FIELD_CROP_ASSESSMENT,
+    FARM_GPS
 }

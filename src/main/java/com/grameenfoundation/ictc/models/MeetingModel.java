@@ -5,6 +5,7 @@
  */
 package com.grameenfoundation.ictc.models;
 
+import com.grameenfoundation.ictc.domains.Biodata;
 import com.grameenfoundation.ictc.domains.Meeting;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
@@ -108,6 +109,12 @@ public class MeetingModel {
         return meetingQuery("match (l:MEETING) where l.Id ='"+meetingId+"' return  l", "l").get(0);
     }
 
+    
+    public void updateMeetings(String meetingIndex,String meetingType , String inAttendance){
+        
+        meetingQuery("match (l:MEETING)<-[:HAS_MEETING]-f  where l."+Meeting.MEETING_INDEX+" ='"+meetingIndex+"'  and l."+Meeting.TYPE+"= '"+meetingType.toLowerCase()+"'  and f."+Biodata.ID+" IN ["+inAttendance+"] set l."+Meeting.ATTENDED+"=1 return  l", "l");
+        
+    }
     private List<MeetingWrapper> meetingQuery(String q, String returnedItem) {
         List<MeetingWrapper> mtg = new ArrayList<>();
         System.out.println("Query Meeting : " + q);

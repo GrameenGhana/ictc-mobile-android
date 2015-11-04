@@ -184,17 +184,17 @@ public class Neo4jServices {
                     Node n = n_column.next();
                     Biodata b = new Biodata(n);
                     bdata.add(b);
-                    System.out.println("Node  ni : " + n.getId());
+//                    System.out.println("Node  ni : " + n.getId());
 //                 String maritalStatus, String numberOfChildren, String numberOfDependants, String education/
 
                     BiodataWrapper bw = (new BiodataWrapper(b.getFirstname(), b.getLastname(), b.getNickname(), b.getCommunity(), b.getVillage(), b.getDistrict(), b.getRegion(), b.getAge(), b.getGender(),
                             b.getMaritalstatus(), b.getNumberofchildren(), b.getNumberofdependants(), b.getEducation(), "1", (b.getId()), b.getMajorCrop()));
-                    System.out.println("After Here");
+//                    System.out.println("After Here");
                     TechnicalNeed technicalNeed = b.getTechNeeds();
                     if (null != technicalNeed) {
                         bw.setTechNeeds(new TechnicalNeedsWrapper(technicalNeed.getFarmPlanning(), technicalNeed.getCropVarietyAndSeed(), technicalNeed.getWeedControl(), technicalNeed.getCropEstablishment(), technicalNeed.getIntegratedSoilFertilityManagement(), technicalNeed.getHarvestAndPostHarvest()));
                     }
-                    System.out.println("bef");
+//                    System.out.println("bef");
                     Marketing market = b.getMarketing();
                     if (null != market) {
                         bw.setMarketing(new MarketingWrapper(market.getMainPointOfContact(), market.getMonthSellingBegins(), market.getPriceOfFirstHarvestProduce(), market.getMonthMostHarvestProduceSold(), market.getPriceMostHarvestProduceSold(), market.getMonthFinalBatchSold(), market.getPriceFinalBatchSold(), market.getMonthSellingDriedChipChicks(), market.getPriceFirstDriedChipChunk(), market.getMonthMostDriedChipsChunksSold(), market.getPriceMostDriedChipsChunksSold(), market.getMonthLastBatchDriedChipChunksSold(), market.getPriceFinalBatchDriedChipsChunksSold()));
@@ -204,7 +204,7 @@ public class Neo4jServices {
 
                     OperationsWrapper wr = new OperationsWrapper();
                 //wr.set
-  System.out.println("bef2");
+//  System.out.println("bef2");
                     if (opt != null) {
                         wr.setLandSize(opt.getLandSize());
                         wr.setLandClearance(opt.getLandClearance());
@@ -217,7 +217,7 @@ public class Neo4jServices {
                         hWrapper.setYieldPerAcre(harvest.getYieldPerAcre());
                     }
                     bw.setHarvest(hWrapper);
-  System.out.println("bef4");
+//  System.out.println("bef4");
                     PostHarvest postHarvest = b.getPostHavest();
                     PostHarvestWrapper phWrapper = new PostHarvestWrapper();
                     if (null != phWrapper) {
@@ -232,11 +232,11 @@ public class Neo4jServices {
                         fmWrapper.setLabourUse(fm.getLabourUse());
                         fmWrapper.setFboName(fm.getFboName());
                     }
-                      System.out.println("bef5");
+//                      System.out.println("bef5");
                     StorageWrapper stWrapper = new StorageWrapper();
                     bw.setStorage(stWrapper);
                     FarmManagementPlan fmp = b.getFMP();
-                      System.out.println("bef6");
+//                      System.out.println("bef6");
                     FarmManagementPlanWrapper fmpWrapper = new FarmManagementPlanWrapper();
                     if (null != fmp) {
                         fmpWrapper.setTargetareaofland(fmp.getTargetareaofland());
@@ -248,11 +248,11 @@ public class Neo4jServices {
                         fmpWrapper.setExpectedpriceperton(fmp.getExpectedpriceperton());
                         fmpWrapper.setPlantingdate(fmp.getPlantingdate());
                     }
-                      System.out.println("bef7");
+//                      System.out.println("bef7");
                     bw.setFmp(fmpWrapper);
-  System.out.println("bef8 : "+bw.getFirstName());
+//  System.out.println("bef8 : "+bw.getFirstName());
                     bdatac.add(bw);
-  System.out.println("bef9");
+//  System.out.println("bef9");
                 } catch (Exception e) {
                 }
             }
@@ -537,8 +537,31 @@ public class Neo4jServices {
         }
 
     }
+    
+    
      public static Node executeSingleQuery(String query, String returnItem) {
 
+        try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            
+            ExecutionResult result = executeCypherQuery(query);
+            Iterator<Node>  n = result.columnAs(returnItem);
+            while(n.hasNext()){
+                return n.next();
+            }
+            
+            return null;
+        }
+
+    }
+     public static Node getFarmerNode(String farmerId) {
+        return findByLabelID(ICTCRelationshipTypes.FARMER, farmerId);
+    }
+     
+     
+     public static Node findByLabelID(ICTCRelationshipTypes relType,String id) {
+
+         String query="match (n:"+relType+")  where n."+Biodata.ID+" ='"+id+"' return n ";
+         String returnItem="n";
         try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             
             ExecutionResult result = executeCypherQuery(query);

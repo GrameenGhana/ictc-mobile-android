@@ -541,6 +541,12 @@ public class BiodataModel {
                             bio.setFarmarea(fieldValue);
                         }
                     }
+                    if(fieldName.equalsIgnoreCase(Biodata.FARM_PERIMETER))
+                    {
+                        if (null != fieldValue) {
+                            bio.setFarmperimeter(fieldValue);
+                        }
+                    }
                 
                
                 trx.success();

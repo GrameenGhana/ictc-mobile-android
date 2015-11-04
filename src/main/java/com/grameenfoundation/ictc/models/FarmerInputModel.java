@@ -45,10 +45,10 @@ public class FarmerInputModel {
                 fic.setStatus(setting.getStatus());
                 fic.setName(setting.getName());
                 fic.setQty(setting.getQty());
-                if(setting.getDateReceived() !=null){
+                if (setting.getDateReceived() != null) {
                     fic.setDateReceived(setting.getDateReceived());
                 }
-                
+
                 Node farmerNode = Neo4jServices.executeSingleQuery(" match (n:" + Labels.FARMER + ") where n." + Biodata.ID + "='" + setting.getFarmer() + "'",
                         "n");
 
@@ -69,10 +69,31 @@ public class FarmerInputModel {
 
     }
 
+    public boolean update(String id, String name, double qty) {
+        boolean created = true;
+
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+
+            String q = "MATCH (l:" + Labels.FARM_INPUT + ")<-[:" + ICTCRelationshipTypes.HAS_FARMER + "]-f where f." + Biodata.ID + "= '" + id + "' and  l." + FarmerInputReceived.NAME + "='" + name + "' "
+                    + " set l." + FarmerInputReceived.QTY + "=" + qty + " return  l order by l." + CropCalendar.RELATIVE_WEEK + " asc";
+            getFarmInput(q, "l");
+            return true;
+        }
+
+        
+
+    }
+
     public List<FarmerInputReceivedWrapper> getFarmerInputs(String farmer) {
 
-        String q = "MATCH (l:" + Labels.FARM_INPUT + ")<-[:" + ICTCRelationshipTypes.HAS_FARMER + "]-f where l." + Biodata.ID + "= '" + farmer + "' return  l order by l." + CropCalendar.RELATIVE_WEEK + " asc";
+        String q = "MATCH (l:" + Labels.FARM_INPUT + ")<-[:" + ICTCRelationshipTypes.HAS_FARMER + "]-f where f." + Biodata.ID + "= '" + farmer + "' return  l order by l." + CropCalendar.RELATIVE_WEEK + " asc";
         return getFarmInput(q, "l");
+    }
+
+    public FarmerInputReceivedWrapper getFarmerInputs(String farmer, String type) {
+
+        String q = "MATCH (l:" + Labels.FARM_INPUT + ")<-[:" + ICTCRelationshipTypes.HAS_FARMER + "]-f where f." + Biodata.ID + "= '" + farmer + "' and  l." + FarmerInputReceived.NAME + "='" + type + "' return  l order by l." + CropCalendar.RELATIVE_WEEK + " asc";
+        return getFarmInput(q, "l").get(0);
     }
 
     public List<FarmerInputReceivedWrapper> getFarmInput(String q, String returnItem) {

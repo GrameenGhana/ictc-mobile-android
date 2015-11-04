@@ -87,7 +87,7 @@ public String getTelephonenumber(){
             return (String) underlyingNode.getProperty(FARM_PERIMETER);
 
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return "";
     }
@@ -100,9 +100,8 @@ public String getTelephonenumber(){
     public String getFarmarea() {
          try {
             return (String) underlyingNode.getProperty(FARM_AREA);
-
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return "";
     }

@@ -1,182 +1,713 @@
 [{
         "farmer": {
-            "biodata": [{
-                    "region": "1. Ashanti",
-                    "maritalstatus": "1. Single",
-                    "village": "Bhuji",
-                    "nickname": "Yuunj",
-                    "numberofchildren": "36",
-                    "majorcrop": "Maize",
-                    "age": "52",
-                    "community": "Hunhij",
-                    "gender": "1. Female",
-                    "lastname": "Yuhjj",
-                    "numberofdependants": "66",
-                    "firstname": "Yuuy",
-                    "education": "1. No formal schooling",
-                    "farmerid": "a0m24000004ipsgAAA"
-                }],
-            "postharvest": [{}],
-            "production": [{}]
+            "region": "1. Ashanti",
+            "nickname": "Yuunj",
+            "baselineproductionbudget": {},
+            "numberofchildren": "36",
+            "community": "Hunhij",
+            "lastname": "Yuhjj",
+            "numberofdependants": "66",
+            "firstname": "Yuuy",
+            "baselineproduction": {},
+            "education": "1. No formal schooling",
+            "production": {},
+            "farmerid": "a0m24000004ipsgAAA",
+            "maritalstatus": "1. Single",
+            "village": "Bhuji",
+            "baselinepostharvest": {},
+            "majorcrop": "Maize",
+            "age": "52",
+            "gender": "1. Female",
+            "postharvest": {}
         }
     }, {
         "farmer": {
-            "biodata": [{
-                    "region": "2. Brong-Ahafo",
-                    "maritalstatus": "2. Married",
-                    "village": "Nkoranza",
-                    "nickname": "Kwesi",
-                    "numberofchildren": "5",
-                    "majorcrop": "Rice",
-                    "age": "58",
-                    "community": "Nkoranza",
-                    "gender": "2. Male",
-                    "lastname": "Atta",
-                    "numberofdependants": "6",
-                    "firstname": "Kwesi",
-                    "education": "4. Secondary School",
-                    "farmerid": "a0m24000004iqGiAAI"
-                }],
-            "postharvest": [{}],
-            "production": [{}]
+            "region": "2. Brong-Ahafo",
+            "nickname": "Kwesi",
+            "baselineproductionbudget": {},
+            "numberofchildren": "5",
+            "community": "Nkoranza",
+            "lastname": "Atta",
+            "numberofdependants": "6",
+            "firstname": "Kwesi",
+            "baselineproduction": {},
+            "education": "4. Secondary School",
+            "production": {},
+            "farmerid": "a0m24000004iqGiAAI",
+            "maritalstatus": "2. Married",
+            "village": "Nkoranza",
+            "baselinepostharvest": {},
+            "majorcrop": "Rice",
+            "age": "58",
+            "gender": "2. Male",
+            "postharvest": {}
         }
     }, {
         "farmer": {
-            "biodata": [{
-                    "region": "2. Brong-Ahafo",
-                    "maritalstatus": "2. Married",
-                    "village": "Nkoranza",
-                    "nickname": "Koo",
-                    "numberofchildren": "5",
-                    "majorcrop": "Maize",
-                    "age": "52",
-                    "community": "Nkoranza",
-                    "gender": "2. Male",
-                    "lastname": "Manu",
-                    "numberofdependants": "6",
-                    "firstname": "Koi",
-                    "education": "4. Secondary School",
-                    "farmerid": "a0m24000004ie0YAAQ"
-                }],
-            "postharvest": [{
-                    "typeofstoragechemical": "Phostoxin",
-                    "completionofproducemarketing": "2015-09-29",
-                    "applicationrateofstoragechemical": "2",
-                    "mostproducesaledate": "2015-09-29",
-                    "typeofmachinewinowing": "Small mechanical blower (service)",
-                    "typeofmachine": "Combine harvester (as service)",
-                    "mainpointofsaleorcontact": "Local aggregator",
-                    "typeofbagusedinbulkingproduct": "Jute sacs lined with double polyethelene bags",
-                    "datetocompletedrying": "2015-09-29",
-                    "postharvestlosses": "5-10%",
-                    "methodofdryinggrain": "On tarpaulin/plastic sheet on the farm",
-                    "completionofthreshing": "2015-09-29",
-                    "methodofwinnowing": "Machine",
-                    "dehuskingdate": "2015-09-29",
-                    "priceatfirstsaledate": "5",
-                    "methodofdryingcobspanicleschipschu": "On tarpaulin/plastic sheet on the farm",
-                    "typeofstoragestructure": "3. Other barns",
-                    "priceatmostsaledate": "5",
-                    "dateofcompletingdrying": "2015-09-29",
-                    "proportionformarket": "90",
-                    "marketingoccasions": "Several occasions",
-                    "otherapplicationrate": "Hshheeh",
-                    "firstsaledate": "2015-09-29",
-                    "otherstoragechemical": "Hhhhh",
-                    "methodofthreshing": "Machine",
-                    "othersalecontact": "Hdhdhe"
-                }],
-            "production": [{
-                    "nameofcropvarietyyam": "",
-                    "refillinggapsoccurence": "YES",
-                    "applicationofbasalfertilizer": "2 weeks after planting",
-                    "applicationofbasalfertilizerdate": "YES",
-                    "datefirstmanualweedcontrol": "At 1 month after planting",
-                    "nameofcropvarietyrice": "",
-                    "nameofcropvarietycassava": "",
-                    "quantityofbasalfertilizerpurchasedapply": "50",
-                    "methodoflandclearing": "Slashing only",
-                    "quantitypostplantherbicide": "2",
-                    "typeofherbicidepostplantweed": "3. Altrazine",
-                    "methodtopdressfertilizerapp": "Side dressing",
-                    "applicationoftopdressfertilizer": "YES",
-                    "applicationmonthofherbicidedate": "2015-09-29",
-                    "refillinggapsproportion": "20%",
-                    "seedbedformtype": "Ridges",
-                    "seedbedpreparationdate": "Ridges",
-                    "dateofsecondmanualweedcontrol": "At 2 months after planting",
-                    "landclearingdate": "2015-09-29",
-                    "otherfertilizer": "",
-                    "acresofland": "5.0",
-                    "plantingdistancebetweenplantsmaize": "2015-09-29",
-                    "targetyieldperacre": "50",
-                    "ploughingdate": "2015-09-29",
-                    "timeofharvest": "2015-09-29",
-                    "nameofcropvariety": "Abontem",
-                    "timeofapplicationtopdressing": "6 weeks after planting",
-                    "methodoflandpreparation": "Double tractor/power tiller ploughing only",
-                    "plantingdistancebetweenrowsmaize": "75 cm",
-                    "postplantherbicideuse": "YES",
-                    "typeofbasalfertilizer": "Sulphate of Ammonia",
-                    "sourceofseedorplantingmaterial": "Certified seed dealer",
-                    "methodofbasalfertilizerapplication": "Spot (surface)",
-                    "plantingdate": "2015-09-29"
-                }]
+            "region": "2. Brong-Ahafo",
+            "nickname": "Koo",
+            "baselineproductionbudget": {},
+            "numberofchildren": "5",
+            "community": "Nkoranza",
+            "lastname": "Manu",
+            "numberofdependants": "6",
+            "firstname": "Koi",
+            "baselineproduction": {},
+            "education": "4. Secondary School",
+            "production": {
+                "nameofcropvarietyyam": "",
+                "refillinggapsoccurence": "YES",
+                "applicationofbasalfertilizer": "2 weeks after planting",
+                "applicationofbasalfertilizerdate": "YES",
+                "datefirstmanualweedcontrol": "At 1 month after planting",
+                "nameofcropvarietyrice": "",
+                "nameofcropvarietycassava": "",
+                "quantityofbasalfertilizerpurchasedapply": "50",
+                "methodoflandclearing": "Slashing only",
+                "quantitypostplantherbicide": "2",
+                "typeofherbicidepostplantweed": "3. Altrazine",
+                "methodtopdressfertilizerapp": "Side dressing",
+                "applicationoftopdressfertilizer": "YES",
+                "applicationmonthofherbicidedate": "2015-09-29",
+                "refillinggapsproportion": "20%",
+                "seedbedformtype": "Ridges",
+                "seedbedpreparationdate": "Ridges",
+                "dateofsecondmanualweedcontrol": "At 2 months after planting",
+                "landclearingdate": "2015-09-29",
+                "otherfertilizer": "",
+                "acresofland": "5.0",
+                "plantingdistancebetweenplantsmaize": "2015-09-29",
+                "targetyieldperacre": "50",
+                "ploughingdate": "2015-09-29",
+                "timeofharvest": "2015-09-29",
+                "nameofcropvariety": "Abontem",
+                "timeofapplicationtopdressing": "6 weeks after planting",
+                "methodoflandpreparation": "Double tractor/power tiller ploughing only",
+                "plantingdistancebetweenrowsmaize": "75 cm",
+                "postplantherbicideuse": "YES",
+                "typeofbasalfertilizer": "Sulphate of Ammonia",
+                "sourceofseedorplantingmaterial": "Certified seed dealer",
+                "methodofbasalfertilizerapplication": "Spot (surface)",
+                "plantingdate": "2015-09-29"
+            },
+            "farmerid": "a0m24000004ie0YAAQ",
+            "maritalstatus": "2. Married",
+            "village": "Nkoranza",
+            "baselinepostharvest": {},
+            "majorcrop": "Maize",
+            "age": "52",
+            "gender": "2. Male",
+            "postharvest": {
+                "typeofstoragechemical": "Phostoxin",
+                "completionofproducemarketing": "2015-09-29",
+                "applicationrateofstoragechemical": "2",
+                "mostproducesaledate": "2015-09-29",
+                "typeofmachinewinowing": "Small mechanical blower (service)",
+                "typeofmachine": "Combine harvester (as service)",
+                "mainpointofsaleorcontact": "Local aggregator",
+                "typeofbagusedinbulkingproduct": "Jute sacs lined with double polyethelene bags",
+                "datetocompletedrying": "2015-09-29",
+                "postharvestlosses": "5-10%",
+                "methodofdryinggrain": "On tarpaulin/plastic sheet on the farm",
+                "completionofthreshing": "2015-09-29",
+                "methodofwinnowing": "Machine",
+                "dehuskingdate": "2015-09-29",
+                "priceatfirstsaledate": "5",
+                "methodofdryingcobspanicleschipschu": "On tarpaulin/plastic sheet on the farm",
+                "typeofstoragestructure": "3. Other barns",
+                "priceatmostsaledate": "5",
+                "dateofcompletingdrying": "2015-09-29",
+                "proportionformarket": "90",
+                "marketingoccasions": "Several occasions",
+                "otherapplicationrate": "Hshheeh",
+                "firstsaledate": "2015-09-29",
+                "otherstoragechemical": "Hhhhh",
+                "methodofthreshing": "Machine",
+                "othersalecontact": "Hdhdhe"
+            }
         }
     }, {
         "farmer": {
-            "biodata": [{
-                    "region": "1. Ashanti",
-                    "maritalstatus": "3. Divorced/Separated",
-                    "village": "Vill",
-                    "nickname": "Nick",
-                    "numberofchildren": "8",
-                    "majorcrop": "Maize",
-                    "age": "54",
-                    "community": "Sekyere",
-                    "gender": "1. Female",
-                    "lastname": "Last",
-                    "numberofdependants": "3",
-                    "firstname": "Amuesiwa",
-                    "education": "3. Middle/JHS",
-                    "farmerid": "a0m24000004ith5AAA"
-                }],
-            "postharvest": [{}],
-            "production": [{
-                    "nameofcropvarietyyam": "",
-                    "refillinggapsoccurence": "YES",
-                    "applicationofbasalfertilizer": "2 weeks after planting",
-                    "applicationofbasalfertilizerdate": "YES",
-                    "datefirstmanualweedcontrol": "At 1 month after planting",
-                    "nameofcropvarietyrice": "",
-                    "nameofcropvarietycassava": "",
-                    "quantityofbasalfertilizerpurchasedapply": "50",
-                    "methodoflandclearing": "Slashing only",
-                    "quantitypostplantherbicide": "2",
-                    "typeofherbicidepostplantweed": "3. Altrazine",
-                    "methodtopdressfertilizerapp": "Spot (surface)",
-                    "applicationoftopdressfertilizer": "YES",
-                    "applicationmonthofherbicidedate": "2015-09-30",
-                    "refillinggapsproportion": "10%",
-                    "seedbedformtype": "Mounds",
-                    "seedbedpreparationdate": "Mounds",
-                    "dateofsecondmanualweedcontrol": "At 3 months after planting",
-                    "landclearingdate": "2015-09-30",
-                    "otherfertilizer": "",
-                    "acresofland": "5.0",
-                    "plantingdistancebetweenplantsmaize": "2015-09-30",
-                    "targetyieldperacre": "5",
-                    "ploughingdate": "2015-09-30",
-                    "timeofharvest": "2015-09-30",
-                    "nameofcropvariety": "Abontem",
-                    "timeofapplicationtopdressing": "6 weeks after planting",
-                    "methodoflandpreparation": "Double Harrowing only",
-                    "plantingdistancebetweenrowsmaize": "75 cm",
-                    "postplantherbicideuse": "YES",
-                    "typeofbasalfertilizer": "N-P-K 25-15-5",
-                    "sourceofseedorplantingmaterial": "A fellow farmer",
-                    "methodofbasalfertilizerapplication": "Spot (surface)",
-                    "plantingdate": "2015-09-30"
-                }]
+            "region": "1. Ashanti",
+            "nickname": "Nick",
+            "baselineproductionbudget": {},
+            "numberofchildren": "8",
+            "community": "Sekyere",
+            "lastname": "Last",
+            "numberofdependants": "3",
+            "firstname": "Amuesiwa",
+            "baselineproduction": {},
+            "education": "3. Middle/JHS",
+            "production": {
+                "nameofcropvarietyyam": "",
+                "refillinggapsoccurence": "YES",
+                "applicationofbasalfertilizer": "2 weeks after planting",
+                "applicationofbasalfertilizerdate": "YES",
+                "datefirstmanualweedcontrol": "At 1 month after planting",
+                "nameofcropvarietyrice": "",
+                "nameofcropvarietycassava": "",
+                "quantityofbasalfertilizerpurchasedapply": "50",
+                "methodoflandclearing": "Slashing only",
+                "quantitypostplantherbicide": "2",
+                "typeofherbicidepostplantweed": "3. Altrazine",
+                "methodtopdressfertilizerapp": "Spot (surface)",
+                "applicationoftopdressfertilizer": "YES",
+                "applicationmonthofherbicidedate": "2015-09-30",
+                "refillinggapsproportion": "10%",
+                "seedbedformtype": "Mounds",
+                "seedbedpreparationdate": "Mounds",
+                "dateofsecondmanualweedcontrol": "At 3 months after planting",
+                "landclearingdate": "2015-09-30",
+                "otherfertilizer": "",
+                "acresofland": "5.0",
+                "plantingdistancebetweenplantsmaize": "2015-09-30",
+                "targetyieldperacre": "5",
+                "ploughingdate": "2015-09-30",
+                "timeofharvest": "2015-09-30",
+                "nameofcropvariety": "Abontem",
+                "timeofapplicationtopdressing": "6 weeks after planting",
+                "methodoflandpreparation": "Double Harrowing only",
+                "plantingdistancebetweenrowsmaize": "75 cm",
+                "postplantherbicideuse": "YES",
+                "typeofbasalfertilizer": "N-P-K 25-15-5",
+                "sourceofseedorplantingmaterial": "A fellow farmer",
+                "methodofbasalfertilizerapplication": "Spot (surface)",
+                "plantingdate": "2015-09-30"
+            },
+            "farmerid": "a0m24000004ith5AAA",
+            "maritalstatus": "3. Divorced/Separated",
+            "village": "Vill",
+            "baselinepostharvest": {},
+            "majorcrop": "Maize",
+            "age": "54",
+            "gender": "1. Female",
+            "postharvest": {}
         }
-    }]
+    }, {
+        "farmer": {
+            "region": "1. Ashanti",
+            "nickname": "Cj",
+            "baselineproductionbudget": {},
+            "numberofchildren": "1",
+            "community": "Addaeso",
+            "lastname": "Osei",
+            "numberofdependants": "5",
+            "firstname": "Cecik",
+            "baselineproduction": {},
+            "education": "5. Polytechnic/Training college",
+            "production": {},
+            "farmerid": "a0m24000004wWGBAA2",
+            "maritalstatus": "2. Married",
+            "village": "Adiddwan",
+            "baselinepostharvest": {},
+            "majorcrop": "Cassava",
+            "age": "53",
+            "gender": "2. Male",
+            "postharvest": {}
+        }
+    }, {
+        "farmer": {
+            "region": "1. Ashanti",
+            "nickname": "Charley",
+            "baselineproductionbudget": {},
+            "numberofchildren": "5",
+            "community": "Adaeso",
+            "lastname": "Quansah",
+            "numberofdependants": "6",
+            "firstname": "Charles",
+            "baselineproduction": {},
+            "education": "4. Secondary School",
+            "production": {},
+            "farmerid": "a0m24000004wWGGAA2",
+            "maritalstatus": "2. Married",
+            "village": "Anum",
+            "baselinepostharvest": {},
+            "majorcrop": "Maize",
+            "age": "45",
+            "gender": "2. Male",
+            "postharvest": {
+                "typeofstoragechemical": "Phostoxin",
+                "typeofstoragestructure": "2. Wooden barn",
+                "priceatmostsaledate": "160",
+                "completionofproducemarketing": "2015-10-15",
+                "proportionformarket": "90",
+                "applicationrateofstoragechemical": "Other",
+                "marketingoccasions": "Several occasions",
+                "otherapplicationrate": "2",
+                "mostproducesaledate": "2015-10-15",
+                "firstsaledate": "2015-10-15",
+                "otherstoragechemical": "Mumu",
+                "mainpointofsaleorcontact": "Wholesalers/buyers",
+                "postharvestlosses": "5-10%",
+                "othersalecontact": "Mumu",
+                "priceatfirstsaledate": "150"
+            }
+        }
+    }, {
+        "farmer": {
+            "region": "1. Ashanti",
+            "nickname": "Koo",
+            "baselineproductionbudget": {},
+            "numberofchildren": "5",
+            "community": "Ejura",
+            "lastname": "Boateng",
+            "numberofdependants": "9",
+            "firstname": "Kwaku",
+            "baselineproduction": {},
+            "education": "4. Secondary School",
+            "production": {},
+            "farmerid": "a0m24000004wWGLAA2",
+            "maritalstatus": "2. Married",
+            "village": "Odumase",
+            "baselinepostharvest": {},
+            "majorcrop": "Rice",
+            "age": "48",
+            "gender": "2. Male",
+            "postharvest": {}
+        }
+    }, {
+        "farmer": {
+            "region": "1. Ashanti",
+            "nickname": "Cj",
+            "baselineproductionbudget": {},
+            "numberofchildren": "0",
+            "community": "Xxxx",
+            "lastname": "Osei",
+            "numberofdependants": "0",
+            "firstname": "cecil",
+            "baselineproduction": {},
+            "education": "1. No formal schooling",
+            "production": {
+                "nameofcropvarietyyam": "",
+                "refillinggapsoccurence": "YES",
+                "applicationofbasalfertilizer": "At planting",
+                "applicationofbasalfertilizerdate": "YES",
+                "datefirstmanualweedcontrol": "At 2 months after planting",
+                "nameofcropvarietyrice": "Jasmine 85 (aromatic)",
+                "nameofcropvarietycassava": "",
+                "quantityofbasalfertilizerpurchasedapply": "23",
+                "methodoflandclearing": "Slash and burn vegetation",
+                "quantitypostplantherbicide": "5",
+                "typeofherbicidepostplantweed": "6. Champion",
+                "methodtopdressfertilizerapp": "Side dressing",
+                "applicationoftopdressfertilizer": "YES",
+                "applicationmonthofherbicidedate": "2015-10-15",
+                "refillinggapsproportion": "10%",
+                "seedbedformtype": "Small ridges",
+                "plantingdistancebetweenplantsrice": "5 cm. (drilled)",
+                "seedbedpreparationdate": "Small ridges",
+                "landclearingdate": "2014-08-15",
+                "otherfertilizer": "",
+                "acresofland": "10.0",
+                "plantingdistancebetweenplantsmaize": "2015-10-15",
+                "targetyieldperacre": "5",
+                "ploughingdate": "2015-08-30",
+                "timeofharvest": "2015-10-15",
+                "nameofcropvariety": "",
+                "timeofapplicationtopdressing": "6 weeks after planting",
+                "methodoflandpreparation": "Double Harrowing only",
+                "postplantherbicideuse": "YES",
+                "sourceofseedorplantingmaterial": "My own farm",
+                "methodofbasalfertilizerapplication": "Side dressing",
+                "plantingdate": "2015-10-15"
+            },
+            "farmerid": "a0m24000004wWGQAA2",
+            "maritalstatus": "1. Single",
+            "village": "Wwww",
+            "baselinepostharvest": {},
+            "majorcrop": "Rice",
+            "age": "25",
+            "gender": "2. Male",
+            "postharvest": {
+                "typeofstoragechemical": "Phostoxin",
+                "completionofproducemarketing": "2015-10-15",
+                "othermethodofdryinggrain": "Mumu",
+                "applicationrateofstoragechemical": "2",
+                "mostproducesaledate": "2015-10-15",
+                "typeofmachinewinowing": "Other",
+                "othermethodfordrying": "Roof",
+                "manualthreshing": "Smashing cobs/panicles in a bag on ground",
+                "mainpointofsaleorcontact": "Local food vendors",
+                "typeofbagusedinbulkingproduct": "Jute sacs",
+                "datetocompletedrying": "2015-10-15",
+                "postharvestlosses": "5-10%",
+                "methodofdryinggrain": "Other",
+                "completionofthreshing": "2015-10-15",
+                "methodofwinnowing": "Machine",
+                "priceatfirstsaledate": "130",
+                "methodofdryingcobspanicleschipschu": "Other",
+                "typeofstoragestructure": "1. straw barn",
+                "priceatmostsaledate": "170",
+                "dateofcompletingdrying": "2015-10-15",
+                "proportionformarket": "90",
+                "marketingoccasions": "Several occasions",
+                "otherapplicationrate": "5",
+                "firstsaledate": "2015-10-15",
+                "methodofthreshing": "Manual",
+                "othersalecontact": "Mimu"
+            }
+        }
+    }, {
+        "farmer": {
+            "region": "1. Ashanti",
+            "nickname": "Cj2",
+            "baselineproductionbudget": {},
+            "numberofchildren": "5",
+            "community": "Ayawaso",
+            "lastname": "Agyemang",
+            "numberofdependants": "10",
+            "firstname": "Kofi",
+            "baselineproduction": {},
+            "education": "5. Polytechnic/Training college",
+            "production": {},
+            "farmerid": "a0m24000004wgqhAAA",
+            "maritalstatus": "2. Married",
+            "village": "Obenemase",
+            "baselinepostharvest": {},
+            "majorcrop": "Cassava",
+            "age": "26",
+            "gender": "2. Male",
+            "postharvest": {}
+        }
+    }, {
+        "farmer": {
+            "region": "1. Ashanti",
+            "nickname": "Spomega",
+            "baselineproductionbudget": {},
+            "numberofchildren": "3",
+            "community": "Kumawu",
+            "lastname": "Davis",
+            "numberofdependants": "5",
+            "firstname": "Kojo",
+            "baselineproduction": {},
+            "education": "3. Middle/JHS",
+            "production": {},
+            "farmerid": "a0m24000004xT31AAE",
+            "maritalstatus": "2. Married",
+            "village": "Kumawu",
+            "baselinepostharvest": {},
+            "majorcrop": "Maize",
+            "age": "58",
+            "gender": "2. Male",
+            "postharvest": {}
+        }
+    }, {
+        "farmer": {
+            "region": "2. Brong-Ahafo",
+            "nickname": "Spomega",
+            "baselineproductionbudget": {},
+            "numberofchildren": "3",
+            "community": "Kumawu",
+            "lastname": "Davis",
+            "numberofdependants": "5",
+            "firstname": "Joe",
+            "baselineproduction": {},
+            "education": "3. Middle/JHS",
+            "production": {
+                "nameofcropvarietyyam": "",
+                "refillinggapsoccurence": "YES",
+                "applicationofbasalfertilizer": "2 weeks after planting",
+                "applicationofbasalfertilizerdate": "YES",
+                "datefirstmanualweedcontrol": "At 1 month after planting",
+                "nameofcropvarietyrice": "Sikamo",
+                "nameofcropvarietycassava": "",
+                "quantityofbasalfertilizerpurchasedapply": "2",
+                "methodoflandclearing": "Slashineg only",
+                "quantitypostplantherbicide": "2",
+                "typeofherbicidepostplantweed": "3. Altrazine",
+                "methodtopdressfertilizerapp": "Spot (surface)",
+                "applicationoftopdressfertilizer": "YES",
+                "applicationmonthofherbicidedate": "2015-10-20",
+                "refillinggapsproportion": "20%",
+                "seedbedformtype": "Small ridges",
+                "plantingdistancebetweenplantsrice": "10 cm (drilled)",
+                "seedbedpreparationdate": "Small ridges",
+                "dateofsecondmanualweedcontrol": "At 2 months after planting",
+                "landclearingdate": "2015-10-20",
+                "otherfertilizer": "",
+                "acresofland": "5.0",
+                "plantingdistancebetweenplantsmaize": "2015-10-20",
+                "targetyieldperacre": "5",
+                "ploughingdate": "2015-10-20",
+                "timeofharvest": "2015-10-20",
+                "nameofcropvariety": "",
+                "timeofapplicationtopdressing": "6 weeks after planting",
+                "methodoflandpreparation": "Double tractor/power tiller ploughing only",
+                "postplantherbicideuse": "YES",
+                "typeofbasalfertilizer": "Sulphate of Ammonia",
+                "sourceofseedorplantingmaterial": "A fellow farmer",
+                "methodofbasalfertilizerapplication": "Spot (surface)",
+                "plantingdate": "2015-10-20"
+            },
+            "farmerid": "a0m24000004xT82AAE",
+            "maritalstatus": "2. Married",
+            "village": "Kumawu",
+            "baselinepostharvest": {
+                "typeofstoragechemical": "Phostoxin",
+                "completionofproducemarketing": "2015-10-20",
+                "otherapplicationrateofstoragechemica": "Fgyy",
+                "applicationrateofstoragechemical": "2",
+                "mostproducesaledate": "2015-10-20",
+                "manualthreshing": "Small hand implement.",
+                "mainpointofsaleorcontact": "Local aggregator",
+                "ownershiporconditionsforstorage": "Farmer group",
+                "datetocompletedrying": "2015-10-20",
+                "postharvestlosses": "5-10%",
+                "methodofdryinggrain": "On tarpaulin/plastic sheet on the farm",
+                "completionofthreshing": "2015-10-20",
+                "methodofwinnowing": "Manual",
+                "priceatfirstsaledate": "55.0",
+                "methodofdryingcobspanicleschipschu": "On tarpaulin/plastic sheet in the house",
+                "proportionofproducesold": "90",
+                "typeofstoragestructure": "3. Other barns",
+                "priceatmostsaledate": "2.0",
+                "dateofcompletingdrying": "2015-10-20",
+                "marketingoccasions": "Several occasions",
+                "manualwinnowing": "Manual winnowing with grain on plastic sheets/tarpaulin.",
+                "firstsaledate": "2015-10-20",
+                "otherstoragechemical": "Gghh",
+                "typeofbagcontainerused": "Jute sacs lined with double polyethelene bags",
+                "methodofthreshing": "Manual",
+                "othersalecontact": "Hhh"
+            },
+            "majorcrop": "Rice",
+            "age": "58",
+            "gender": "2. Male",
+            "postharvest": {
+                "methodofdryingcobspanicleschipschu": "On tarpaulin/plastic sheet in the house",
+                "typeofstoragechemical": "Phostoxin",
+                "typeofstoragestructure": "2. Wooden barn",
+                "dateofcompletingdrying": "2015-10-21",
+                "proportionformarket": "80",
+                "applicationrateofstoragechemical": "2",
+                "marketingoccasions": "At once",
+                "manualwinnowing": "Manual winnowing with grain on plastic sheets/tarpaulin.",
+                "otherapplicationrate": "ghhhh",
+                "firstsaledate": "2015-10-21",
+                "typeofmachine": "Combine harvester (as service)",
+                "otherstoragechemical": "Gghh",
+                "mainpointofsaleorcontact": "Other aggregators",
+                "methodofthreshing": "Machine",
+                "typeofbagusedinbulkingproduct": "Jute sacs lined with double polyethelene bags",
+                "postharvestlosses": "5-10%",
+                "datetocompletedrying": "2015-10-21",
+                "completionofthreshing": "2015-10-21",
+                "methodofdryinggrain": "On tarpaulin/plastic sheet on the farm",
+                "methodofwinnowing": "Manual",
+                "othersalecontact": "dffgg",
+                "priceatfirstsaledate": "5"
+            }
+        }
+    }, {
+        "farmer": {
+            "region": "3. Volta",
+            "nickname": "Regee",
+            "baselineproductionbudget": {},
+            "numberofchildren": "8",
+            "community": "Bibikrom",
+            "lastname": "Famma",
+            "numberofdependants": "3",
+            "firstname": "Reggie",
+            "baselineproduction": {},
+            "education": "5. Polytechnic/Training college",
+            "production": {},
+            "farmerid": "a0m24000004ulu7AAA",
+            "maritalstatus": "4. Widowed",
+            "village": "Haneho",
+            "baselinepostharvest": {},
+            "majorcrop": "Rice",
+            "age": "80",
+            "gender": "2. Male",
+            "postharvest": {}
+        }
+    }, {
+        "farmer": {
+            "region": "2. Brong-Ahafo",
+            "nickname": "Mobee",
+            "baselineproductionbudget": {},
+            "numberofchildren": "32",
+            "community": "Somewhere",
+            "lastname": "Surname",
+            "numberofdependants": "8",
+            "firstname": "Firstname",
+            "baselineproduction": {},
+            "education": "1. No formal schooling",
+            "farmerid": "a0m24000004ulplAAA",
+            "maritalstatus": "3. Divorced/Separated",
+            "village": "Somewhere else",
+            "majorcrop": "Maize",
+            "age": "40",
+            "gender": "1. Female",
+            "postharvest": {},
+            "baselinepostharvest": {},
+            "production": {}
+        }  
+    }]10-26 17:04:52.584    1182-1318/? I/InputReader﹕ Touch event's action is 0x0 (deviceType=0) [pCnt=1, s=0.376 ] when=25249131602000
+10-26 17:04:52.584    1182-1317/? I/InputDispatcher﹕ Delivering touch to: action: 0x4, toolType: 1
+10-26 17:04:52.584    1182-1317/? I/InputDispatcher﹕ Delivering touch to: action: 0x4, toolType: 1
+10-26 17:04:52.584    1182-1317/? I/InputDispatcher﹕ Delivering touch to: action: 0x0, toolType: 1
+10-26 17:04:52.695    1182-1318/? I/InputReader﹕ Touch event's action is 0x1 (deviceType=0) [pCnt=1, s=] when=25249240245000
+10-26 17:04:52.695    1182-1317/? I/InputDispatcher﹕ Delivering touch to: action: 0x1, toolType: 1
+10-26 17:04:52.755      148-407/? I/audio_hw_mrvl﹕ out_standby/748:out 0x424bb6a8
+10-26 17:04:52.755      148-407/? I/audio_hw_mrvl﹕ hardware output set_standby
+10-26 17:04:52.755      148-407/? I/MarvellAmixer﹕ get_amixer_value, device 2, left volume 0, right volume 0, codec info 0, mic mode 0
+10-26 17:04:52.755      148-407/? I/AudioHIFIPath﹕ default_disable: Disable hifi output device speaker
+10-26 17:04:52.755      148-407/? I/acm_aph﹕ ACM_APHPathHandling: path=HiFiPlayToSPKR operation=DISABLE ref_path=(null) amixer value=0x0
+10-26 17:04:52.755      148-407/? I/acm_aph﹕ ACM_APHPathHandling: Current active path count=0
+10-26 17:04:52.765   1182-16303/? E/DatabaseUtils﹕ Writing exception to parcel
+    java.lang.SecurityException: Permission Denial: get/set setting for user asks to run as user -2 but is calling from user 0; this requires android.permission.INTERACT_ACROSS_USERS_FULL
+            at com.android.server.am.ActivityManagerService.handleIncomingUser(ActivityManagerService.java:15031)
+            at android.app.ActivityManager.handleIncomingUser(ActivityManager.java:2492)
+            at com.android.providers.settings.SettingsProvider.call(SettingsProvider.java:688)
+            at android.content.ContentProvider$Transport.call(ContentProvider.java:325)
+            at android.content.ContentProviderNative.onTransact(ContentProviderNative.java:275)
+            at android.os.Binder.execTransact(Binder.java:404)
+            at dalvik.system.NativeStart.run(Native Method)
+10-26 17:04:52.765      148-407/? I/acm_ach_elba﹕ Elba_Disable: disable elba component
+10-26 17:04:52.765  17719-17719/? I/applab.client.search.activity.FarmersCrop$1﹕ List Position 1
+10-26 17:04:52.765      148-148/? E/AudioPolicyService﹕ getParamFromPolicy : enter , keys = situation=1;device=0
+10-26 17:04:52.765      148-148/? E/audio_policy_mrvl﹕ mrvl_ap_getParamFromPolicy: situation=1;device=0
+10-26 17:04:52.765      148-148/? I/audio_policy_mrvl﹕ mrvl_ap_getParamFromPolicy:  situation value => 1
+10-26 17:04:52.765   1182-16303/? W/ActivityManager﹕ Permission Denial: get/set setting for user asks to run as user -2 but is calling from user 0; this requires android.permission.INTERACT_ACROSS_USERS_FULL
+10-26 17:04:52.775      148-148/? I/audio_policy_mrvl﹕ getSituationVolume: isBTConnected:0 isHeadConnected:0
+10-26 17:04:52.775      148-148/? I/audio_policy_mrvl﹕ mrvl_ap_getParamFromPolicy:  situation str => 0.40
+10-26 17:04:52.775      148-148/? I/audio_policy_mrvl﹕ mrvl_ap_getParamFromPolicy:  situation ret_val => 0.40
+10-26 17:04:52.775      148-554/? I/audio_policy_mrvl﹕ get_device_for_strategy: From cache strategy 0, device 2
+10-26 17:04:52.775      148-554/? I/audio_policy_mrvl﹕ mrvl_ap_dev_get_output: using hardware output 2 for device 2, stream 1
+10-26 17:04:52.775      148-410/? I/audio_policy_mrvl﹕ get_device_for_strategy: From cache strategy 0, device 2
+10-26 17:04:52.775      148-410/? I/audio_policy_mrvl﹕ mrvl_ap_dev_get_output: using hardware output 2 for device 2, stream 1
+10-26 17:04:52.775     148-8696/? I/audio_policy_mrvl﹕ get_device_for_strategy: From cache strategy 0, device 2
+10-26 17:04:52.775     148-8696/? I/audio_policy_mrvl﹕ mrvl_ap_dev_get_output: using hardware output 2 for device 2, stream 1
+10-26 17:04:52.775      148-407/? I/acm_ach_pianosa﹕ PMIC_Disable: disable pianosa component
+10-26 17:04:52.775      148-407/? I/audio_hw_mrvl﹕ set voip standby if it's normal state, and not voip stream
+10-26 17:04:52.775      148-407/? I/audio_hw_mrvl﹕ set vt standby if it's normal state, and not vt stream
+10-26 17:04:52.775      148-554/? I/audio_policy_mrvl﹕ mrvl_ap_dev_start_output: output 2, stream 1 (hardware output)
+10-26 17:04:52.775      148-554/? I/audio_policy_mrvl﹕ get_device_for_strategy: From cache strategy 0, device 2
+10-26 17:04:52.775      148-554/? I/audio_policy_mrvl﹕ set_output_device: output 2 device 2 force 0 delayMs 0, path_handler 0
+10-26 17:04:52.775      148-554/? W/audio_policy_mrvl﹕ set_output_device: Setting same device 2 or null device for output 2
+10-26 17:04:52.775      148-351/? I/audio_policy_mrvl﹕ mrvl_ap_dev_release_output: 2 (hardware output)
+10-26 17:04:52.775      148-407/? I/MarvellAmixer﹕ get_amixer_value, device 2, left volume 230, right volume 230, codec info 0, mic mode 0
+10-26 17:04:52.775      148-407/? I/AudioHIFIPath﹕ default_enable: Enable hifi output device speaker, left 230, right 230
+10-26 17:04:52.775      148-407/? I/acm_aph﹕ ACM_APHPathHandling: path=HiFiPlayToSPKR operation=ENABLE ref_path=(null) amixer value=0x25005a
+10-26 17:04:52.775      148-407/? I/acm_aph﹕ ACM_APHPathHandling: Current active path count=1
+10-26 17:04:52.775      148-407/? I/acm_ach_elba﹕ Elba_Enable: enable elba component
+10-26 17:04:52.795      148-407/? I/acm_ach_pianosa﹕ PMIC_Enable: enable pianosa component
+10-26 17:04:52.815      148-407/? E/audio_hw_mrvl﹕ ---------------write error is Device or resource busy---------------
+10-26 17:04:52.815      148-407/? E/audio_hw_mrvl﹕ ---------------write error is Broken pipe---------------
+10-26 17:04:52.885   1182-16304/? W/ActivityManager﹕ mDVFSHelper.acquire()
+10-26 17:04:52.905    1398-1411/? I/KeyguardUpdateMonitor﹕ visibility is same
+10-26 17:04:52.925   1182-16303/? W/ActivityManager﹕ Permission Denial: getCurrentUser() from pid=17719, uid=10155 requires android.permission.INTERACT_ACROSS_USERS
+10-26 17:04:53.025  17719-17719/? I/System.out﹕ Query : select * from ictc_farmer  where  farmer_id= 'a0m24000004xT31AAE'
+10-26 17:04:53.035  17719-17719/? I/System.out﹕ MM : Maize
+10-26 17:04:53.035  17719-17719/? I/System.out﹕ Main crop  : Kojo 	:	Maize
+10-26 17:04:53.035  17719-17719/? I/System.out﹕ Query  : select * from ictc_farm_inputs  WHERE farmer_id= 'a0m24000004xT31AAE' order by name ASC
+10-26 17:04:53.035  17719-17719/? I/System.out﹕ Query : select * from ictc_farm_inputs  WHERE farmer_id= 'a0m24000004xT31AAE' order by name ASC
+10-26 17:04:53.045    1182-1193/? W/ActivityManager﹕ Bad activity token: android.os.BinderProxy@4323d7f0
+    java.lang.ClassCastException: android.os.BinderProxy cannot be cast to com.android.server.am.ActivityRecord$Token
+            at com.android.server.am.ActivityRecord.forToken(ActivityRecord.java:380)
+            at com.android.server.am.ActivityRecord.isInStackLocked(ActivityRecord.java:1200)
+            at com.android.server.am.MultiWindowFacadeService.getMultiWindowStyle(MultiWindowFacadeService.java:102)
+            at com.samsung.android.multiwindow.IMultiWindowFacade$Stub.onTransact(IMultiWindowFacade.java:107)
+            at android.os.Binder.execTransact(Binder.java:404)
+            at dalvik.system.NativeStart.run(Native Method)
+10-26 17:04:53.045    1182-1588/? W/ActivityManager﹕ Permission Denial: getCurrentUser() from pid=17719, uid=10155 requires android.permission.INTERACT_ACROSS_USERS
+10-26 17:04:53.065  17719-17719/? I/System.out﹕ Query : select * from ictc_farmer  where  farmer_id= 'a0m24000004xT31AAE'
+10-26 17:04:53.075  17719-17719/? I/System.out﹕ MM : Maize
+10-26 17:04:53.075  17719-17719/? I/System.out﹕ Main crop  : Kojo 	:	Maize
+10-26 17:04:53.075  17719-17719/? W/dalvikvm﹕ threadid=1: thread exiting with uncaught exception (group=0x41721c08)
+10-26 17:04:53.085  17719-17719/? E/AndroidRuntime﹕ FATAL EXCEPTION: main
+    Process: applab.client.search, PID: 17719
+    java.lang.RuntimeException: Unable to start activity ComponentInfo{applab.client.search/applab.client.search.activity.FarmerDetailActivity}: java.lang.RuntimeException: Unable to start activity ComponentInfo{applab.client.search/applab.client.search.activity.FarmerProfileActivity}: java.lang.ClassCastException: android.widget.TextView cannot be cast to android.widget.ExpandableListView
+            at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2413)
+            at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2471)
+            at android.app.ActivityThread.access$900(ActivityThread.java:175)
+            at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1308)
+            at android.os.Handler.dispatchMessage(Handler.java:102)
+            at android.os.Looper.loop(Looper.java:146)
+            at android.app.ActivityThread.main(ActivityThread.java:5602)
+            at java.lang.reflect.Method.invokeNative(Native Method)
+            at java.lang.reflect.Method.invoke(Method.java:515)
+            at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1283)
+            at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1099)
+            at dalvik.system.NativeStart.main(Native Method)
+     Caused by: java.lang.RuntimeException: Unable to start activity ComponentInfo{applab.client.search/applab.client.search.activity.FarmerProfileActivity}: java.lang.ClassCastException: android.widget.TextView cannot be cast to android.widget.ExpandableListView
+            at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2413)
+            at android.app.ActivityThread.startActivityNow(ActivityThread.java:2201)
+            at android.app.LocalActivityManager.moveToState(LocalActivityManager.java:135)
+            at android.app.LocalActivityManager.startActivity(LocalActivityManager.java:347)
+            at android.widget.TabHost$IntentContentStrategy.getContentView(TabHost.java:761)
+            at android.widget.TabHost.setCurrentTab(TabHost.java:425)
+            at android.widget.TabHost.addTab(TabHost.java:242)
+            at applab.client.search.activity.FarmerDetailActivity.onCreate(FarmerDetailActivity.java:148)
+            at android.app.Activity.performCreate(Activity.java:5451)
+            at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1093)
+            at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2377)
+            at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2471)
+            at android.app.ActivityThread.access$900(ActivityThread.java:175)
+            at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1308)
+            at android.os.Handler.dispatchMessage(Handler.java:102)
+            at android.os.Looper.loop(Looper.java:146)
+            at android.app.ActivityThread.main(ActivityThread.java:5602)
+            at java.lang.reflect.Method.invokeNative(Native Method)
+            at java.lang.reflect.Method.invoke(Method.java:515)
+            at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1283)
+            at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1099)
+            at dalvik.system.NativeStart.main(Native Method)
+     Caused by: java.lang.ClassCastException: android.widget.TextView cannot be cast to android.widget.ExpandableListView
+            at applab.client.search.activity.FarmerProfileActivity.onCreate(FarmerProfileActivity.java:55)
+            at android.app.Activity.performCreate(Activity.java:5451)
+            at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1093)
+            at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2377)
+            at android.app.ActivityThread.startActivityNow(ActivityThread.java:2201)
+            at android.app.LocalActivityManager.moveToState(LocalActivityManager.java:135)
+            at android.app.LocalActivityManager.startActivity(LocalActivityManager.java:347)
+            at android.widget.TabHost$IntentContentStrategy.getContentView(TabHost.java:761)
+            at android.widget.TabHost.setCurrentTab(TabHost.java:425)
+            at android.widget.TabHost.addTab(TabHost.java:242)
+            at applab.client.search.activity.FarmerDetailActivity.onCreate(FarmerDetailActivity.java:148)
+            at android.app.Activity.performCreate(Activity.java:5451)
+            at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1093)
+            at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2377)
+            at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2471)
+            at android.app.ActivityThread.access$900(ActivityThread.java:175)
+            at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1308)
+            at android.os.Handler.dispatchMessage(Handler.java:102)
+            at android.os.Looper.loop(Looper.java:146)
+            at android.app.ActivityThread.main(ActivityThread.java:5602)
+            at java.lang.reflect.Method.invokeNative(Native Method)
+            at java.lang.reflect.Method.invoke(Method.java:515)
+            at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:1283)
+            at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1099)
+            at dalvik.system.NativeStart.main(Native Method)
+10-26 17:04:53.085    1182-4150/? W/ActivityManager﹕ Force finishing activity applab.client.search/.activity.FarmerDetailActivity
+10-26 17:04:53.085    1182-4150/? W/ActivityManager﹕ Force finishing activity applab.client.search/.activity.FarmerByCrop
+10-26 17:04:53.095  17794-17794/? I/dumpstate﹕ begin
+10-26 17:04:53.115    1182-1301/? I/SpenGestureManager﹕ setFocusWindow0
+10-26 17:04:53.115    1182-1182/? W/ContextImpl﹕ Calling a method in the system process without a qualified user: android.app.ContextImpl.sendBroadcast:1523 com.android.server.analytics.data.collection.application.CrashAnrDetector.broadcastEvent:296 com.android.server.analytics.data.collection.application.CrashAnrDetector.processDropBoxEntry:254 com.android.server.analytics.data.collection.application.CrashAnrDetector.access$100:60 com.android.server.analytics.data.collection.application.CrashAnrDetector$1.onReceive:102
+10-26 17:04:53.125      144-144/? I/SurfaceFlinger﹕ id=376 createSurf (1x1),1 flag=4, tearch
+10-26 17:04:53.135    1398-3727/? I/KeyguardUpdateMonitor﹕ visibility is same
+10-26 17:04:53.145    1398-1412/? I/KeyguardUpdateMonitor﹕ visibility is same
+10-26 17:04:53.155   1398-12814/? I/KeyguardUpdateMonitor﹕ visibility is same
+10-26 17:04:53.165    1398-1634/? I/KeyguardUpdateMonitor﹕ visibility is same
+10-26 17:04:53.395   1182-17793/? E/android.os.Debug﹕ !@Dumpstate > sdumpstate -k -t -z -d -o /data/log/dumpstate_app_error
+10-26 17:04:53.415    1398-1411/? I/KeyguardUpdateMonitor﹕ visibility is same
+10-26 17:04:53.595    1398-1634/? I/KeyguardUpdateMonitor﹕ visibility is same
+10-26 17:04:53.876      148-351/? I/audio_policy_mrvl﹕ mrvl_ap_dev_stop_output: output 2, stream 1 (hardware output)
+10-26 17:04:53.876      148-351/? I/audio_policy_mrvl﹕ set_output_device: output 2 device 0 force 0 delayMs 0, path_handler 0
+10-26 17:04:53.876      148-351/? W/audio_policy_mrvl﹕ set_output_device: Setting same device 0 or null device for output 2
+10-26 17:04:54.757    1182-1493/? E/Watchdog﹕ !@Sync 841
+10-26 17:04:54.857    1182-1301/? W/ProcessCpuTracker﹕ Skipping unknown process pid 17799
+10-26 17:04:55.878    1182-1301/? W/ActivityManager﹕ mDVFSHelper.release()
+10-26 17:04:56.769      148-407/? I/audio_hw_mrvl﹕ out_standby/748:out 0x424bb6a8
+10-26 17:04:56.769      148-407/? I/audio_hw_mrvl﹕ hardware output set_standby
+10-26 17:04:56.779      148-407/? I/MarvellAmixer﹕ get_amixer_value, device 2, left volume 0, right volume 0, codec info 0, mic mode 0
+10-26 17:04:56.779      148-407/? I/AudioHIFIPath﹕ default_disable: Disable hifi output device speaker
+10-26 17:04:56.779      148-407/? I/acm_aph﹕ ACM_APHPathHandling: path=HiFiPlayToSPKR operation=DISABLE ref_path=(null) amixer value=0x0
+10-26 17:04:56.779      148-407/? I/acm_aph﹕ ACM_APHPathHandling: Current active path count=0
+10-26 17:04:56.799      148-407/? I/acm_ach_elba﹕ Elba_Disable: disable elba component
+10-26 17:04:56.799      148-407/? I/acm_ach_pianosa﹕ PMIC_Disable: disable pianosa component
+10-26 17:04:56.799      148-407/? I/audio_hw_mrvl﹕ set voip standby if it's normal state, and not voip stream
+10-26 17:04:56.799      148-407/? I/audio_hw_mrvl﹕ set vt standby if it's normal state, and not vt stream
+10-26 17:04:58.590    1398-1412/? I/KeyguardUpdateMonitor﹕ visibility is same
+10-26 17:04:58.600    1398-1634/? I/KeyguardUpdateMonitor﹕ visibility is same
+10-26 17:04:58.630    1398-2599/? I/KeyguardUpdateMonitor﹕ visibility is same

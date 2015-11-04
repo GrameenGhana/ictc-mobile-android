@@ -573,7 +573,7 @@ public class MobileController extends HttpServlet {
 
     }
 
-    public FarmerInputReceivedWrapper searchNeeds(List<FarmerInputReceivedWrapper> farmers, String search) {
+    public static FarmerInputReceivedWrapper searchNeeds(List<FarmerInputReceivedWrapper> farmers, String search) {
 
         for (FarmerInputReceivedWrapper farmer : farmers) {
             if (farmer.getName().equalsIgnoreCase(search)) {

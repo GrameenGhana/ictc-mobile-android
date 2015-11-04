@@ -30,7 +30,7 @@
     <body>
 
 
-        <table class="table table-striped table-bordered">
+        <table class="table table-striped table-bordered my-table">
             <tr>
                 <th>ID</th>
                 <th>User</th>

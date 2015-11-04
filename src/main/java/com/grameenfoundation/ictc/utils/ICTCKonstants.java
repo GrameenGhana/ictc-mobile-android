@@ -37,6 +37,8 @@ public class ICTCKonstants {
      public static final String FMP_POSTHARVEST_BUDGET = "fmppostharvestbudget";
      public static final String FARMER_INPUT_RECEIVED= "farmer_input_received";
      public static final String FIELD_CROP_ASSESSMENT ="fieldcropassessment";
+     
+    public static final String FARM_GPS= "farm_gps";
     
      //h
       public static final String HARVEST = "harvest";
