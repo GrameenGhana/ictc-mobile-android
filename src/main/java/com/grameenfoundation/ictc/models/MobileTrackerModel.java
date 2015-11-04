@@ -39,9 +39,10 @@ public class MobileTrackerModel {
 
         boolean created = true;
 
+//        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
-       
-            Node stNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.MOBILE_TRACKER);
+
+                 Node stNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.MOBILE_TRACKER);
 
             MobileTracker meet = new MobileTracker(stNode);
 

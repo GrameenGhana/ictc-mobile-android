@@ -275,7 +275,8 @@ public class APIController extends HttpServlet {
                 farmer.put(Biodata.REGION,b.getRegion());
                 farmer.put(Biodata.VILLAGE,b.getVillage());
                 
-                
+                farmer.put(Biodata.FARM_PERIMETER,b.getFarmperimeter());
+                             
                 if(null!=b.getCluster())
                 farmer.put(Biodata.CLUSTER,b.getCluster());
                 else
@@ -784,7 +785,7 @@ public class APIController extends HttpServlet {
                  
                  
                  
-                 
+  
                  details.put("farmer",farmer);
                  
                  fa.put(details);
