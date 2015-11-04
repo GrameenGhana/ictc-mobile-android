@@ -17,6 +17,7 @@ import com.grameenfoundation.ictc.wrapper.FarmerInputReceivedWrapper;
 import com.grameenfoundation.ictc.wrapper.MobileTrackerWrapper;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -77,6 +78,7 @@ public class TrackerController extends HttpServlet {
             JSONArray jsonArray = jobj.getJSONArray("logs");
 
             int length = jsonArray.length();
+            String rId = Calendar.getInstance().toString();
             System.out.println("TrackerLog Count : " + length);
             String validIds = "";
             MobileTrackerModel trackerModel = new MobileTrackerModel();
@@ -88,7 +90,7 @@ public class TrackerController extends HttpServlet {
                 long endTime = j.getLong("end_time");
                 String module = j.getString("module");
                 String dt = j.getString("data");
-                System.out.println("Data Item " + module + " DT [[[" + dt + "]]]");
+                System.out.println(rId+"-"+i+"/"+length+"):::Data Item " + module + " DT [[[" + dt + "]]]");
 
                 MobileTrackerWrapper mobileTracker = new MobileTrackerWrapper(id, userId, module, dt, startTime, endTime);
 
@@ -102,7 +104,7 @@ public class TrackerController extends HttpServlet {
                                 System.out.println("TrackerLog Group Attendees");
                                 JSONObject jObject = mobileTracker.getDataJSON();
                                 String inAttendance = jObject.getString("attendees");
-                                int mIndex = jObject.getInt("index");
+                                int mIndex = jObject.getInt("meeting_index");
                                 String type = jObject.getString("type");
                                 new MeetingModel().updateMeetings(String.valueOf(mIndex), type, inAttendance);
                             } catch (Exception e) {
@@ -216,6 +218,8 @@ public class TrackerController extends HttpServlet {
                 if (tkr) {
                     validIds += id + ",";
                 }
+                
+                 System.out.println(rId+"-"+i+"/"+length+"):::Done");
             }
             if (!validIds.isEmpty()) {
                 validIds = validIds.substring(0, validIds.length() - 2);

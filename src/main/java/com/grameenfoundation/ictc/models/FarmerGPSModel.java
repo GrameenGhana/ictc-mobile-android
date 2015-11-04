@@ -62,7 +62,7 @@ public class FarmerGPSModel {
                 
                 log.log(Level.INFO, "new node created gps.loc {0}", gps.getUnderlyingNode().getId());
                 
-                trx.success();
+//                trx.success();
                 
                 return true;
 
