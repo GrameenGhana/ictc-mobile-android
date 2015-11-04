@@ -47,13 +47,12 @@ public class MeetingModel {
                 created = false;
             } else {
                 meetingParent = ParentNode.MeetingParentNode();
-                 meet.setType(mw.getType());
-                 meet.setMeetingIndex(mw.getMeetingIndex());
-                 meet.setSeason(mw.getSeason());
-                 meet.setStartdate(mw.getStartDate());
-                 meet.setEnddate(mw.getEndDate());
-                 meet.setAttended(mw.getAttended());
-               
+                meet.setType(mw.getType());
+                meet.setMeetingIndex(mw.getMeetingIndex());
+                meet.setSeason(mw.getSeason());
+                meet.setStartdate(mw.getStartDate());
+                meet.setEnddate(mw.getEndDate());
+                meet.setAttended(mw.getAttended());
 
                 meetingParent.createRelationshipTo(stNode, ICTCRelationshipTypes.MEETING);
 
@@ -78,43 +77,65 @@ public class MeetingModel {
         return meetingQuery("match (l:MEETING) return  l", "l");
     }
 
-    public List<Meeting>  findMeetingByFarmerCrop(String farmerId,String index, String crop)
-    {
+    public List<Meeting> findMeetingByFarmerCrop(String farmerId, String index, String crop) {
         List<Meeting> mtg = new ArrayList<>();
-        
-        String query = "match (l:MEETING)<-[:HAS_MEETING]-f where f.majorcrop='"+crop+"' AND l.index='"+index+"' AND l.type='group' return l";
-        
+
+        String query = "match (l:MEETING)<-[:HAS_MEETING]-f where f.majorcrop='" + crop + "' AND l.index='" + index + "' AND l.type='group' return l";
+
         System.out.println("Query : " + query);
-        
-         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
-             Iterator<Node> n_column = Neo4jServices.executeIteratorQuery(query,"l");
-               while (n_column.hasNext()) {
-               
+
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            Iterator<Node> n_column = Neo4jServices.executeIteratorQuery(query, "l");
+            while (n_column.hasNext()) {
+
                 mtg.add(new Meeting(n_column.next()));
-               }
-           trx.success();
-         }  
-         
-        
-       return mtg;
+            }
+            trx.success();
+        }
+
+        return mtg;
     }
-    
+
     public List<MeetingWrapper> findFarmerMeeting(String farmerId) {
 
-        return meetingQuery("match (l:MEETING)<-[:HAS_MEETING]-f where f.Id ='"+farmerId+"' return  l", "l");
-    }
-    
-    public MeetingWrapper findMeetingById(String meetingId)
-    {
-        return meetingQuery("match (l:MEETING) where l.Id ='"+meetingId+"' return  l", "l").get(0);
+        return meetingQuery("match (l:MEETING)<-[:HAS_MEETING]-f where f.Id ='" + farmerId + "' return  l", "l");
     }
 
-    
-    public void updateMeetings(String meetingIndex,String meetingType , String inAttendance){
-        
-        meetingQuery("match (l:MEETING)<-[:HAS_MEETING]-f  where l."+Meeting.MEETING_INDEX+" ='"+meetingIndex+"'  and l."+Meeting.TYPE+"= '"+meetingType.toLowerCase()+"'  and f."+Biodata.ID+" IN ["+inAttendance+"] set l."+Meeting.ATTENDED+"=1 return  l", "l");
-        
+    public MeetingWrapper findMeetingById(String meetingId) {
+        return meetingQuery("match (l:MEETING) where l.Id ='" + meetingId + "' return  l", "l").get(0);
     }
+
+    public void updateMeetings(String meetingIndex, String meetingType, String inAttendance) {
+        int mt = getMeetingPosition(Integer.parseInt(meetingIndex), meetingType);
+
+        meetingQuery("match (l:MEETING)<-[:HAS_MEETING]-f  where l." + Meeting.MEETING_INDEX + " ='" + mt + "'  and l." + Meeting.TYPE + "= '" + meetingType.toLowerCase() + "'  and f." + Biodata.ID + " IN [" + inAttendance + "] set l." + Meeting.ATTENDED + "=1 return  l", "l");
+
+    }
+
+    public static int getMeetingPosition(int index, String type) {
+    
+        int item=1;
+        switch (index) {
+            case 1: item=1; //1 group
+
+                break;
+            case 2:item=1;//1st individua;
+                break;
+            case 3:item=2;//2nd group
+                break;
+            case 4:item=2;//2nd individual
+                break;
+            case 5:item=3;//3rd group
+                break;
+            case 6:item=4;//4th group
+                break;
+
+        }
+    
+        return item;
+
+    }
+
     private List<MeetingWrapper> meetingQuery(String q, String returnedItem) {
         List<MeetingWrapper> mtg = new ArrayList<>();
         System.out.println("Query Meeting : " + q);
@@ -123,7 +144,7 @@ public class MeetingModel {
             while (n_column.hasNext()) {
                 Meeting m = new Meeting(n_column.next());
                 MeetingWrapper mr = new MeetingWrapper();
-                
+
                 mr.setType(m.getType());
                 mr.setMeetingIndex(m.getMeetingIndex());
                 mr.setSeason(m.getSeason());
@@ -132,7 +153,7 @@ public class MeetingModel {
                 mr.setAttended(m.getAttended());
 
                 mtg.add(mr);
-               //todo Find relationship to farmer to replace
+                //todo Find relationship to farmer to replace
 
 //               wr.(u.getFirstname());
             }
@@ -140,10 +161,10 @@ public class MeetingModel {
         }
         return mtg;
     }
-    
-      public Meeting getMeeting(String field, String value) {
+
+    public Meeting getMeeting(String field, String value) {
         String q = "Start root=node(0) "
-                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.MEETING+ "]->p"
+                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.MEETING + "]->p"
                 + " where p." + field + "='" + value + "'"
                 + " return p";
 
@@ -159,13 +180,12 @@ public class MeetingModel {
 
         return null;
     }
-      
- 
-  public boolean MeetingUpdate(String id, Map<String, String> data) {
-           Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
-            Meeting  mtg =  getMeeting(Meeting.ID, id);
-            
-        boolean updated =false;
+
+    public boolean MeetingUpdate(String id, Map<String, String> data) {
+        Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
+        Meeting mtg = getMeeting(Meeting.ID, id);
+
+        boolean updated = false;
         try {
             //If the setting is not null
             if (null != mtg) {
@@ -176,22 +196,20 @@ public class MeetingModel {
                     String fieldName = dataEntry.getKey();
                     // get the field value
                     String fieldValue = dataEntry.getValue();
-                     // Assigning the alias
+                    // Assigning the alias
                     if (fieldName.equalsIgnoreCase(Meeting.ATTENDED)) {
-                        if (null!=fieldValue) {
-                           mtg.setAttended(fieldValue);
+                        if (null != fieldValue) {
+                            mtg.setAttended(fieldValue);
                         }
                     }
 
-                    }
-                
-               
+                }
+
                 trx.success();
-               
-                updated =  true;
-                 log.info("Bio Data Successfully Updated");
-            }     
-            else {
+
+                updated = true;
+                log.info("Bio Data Successfully Updated");
+            } else {
                 trx.success();
                 log.info("Unable to update Bio Data");
             }
