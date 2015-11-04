@@ -56,7 +56,7 @@ public class ICTCUtil {
   
     }
           
-            public static void redirect(HttpServletRequest request, HttpServletResponse response, String redirectTo, Map<String, String> errors) throws ServletException, IOException {
+    public static void redirect(HttpServletRequest request, HttpServletResponse response, String redirectTo, Map<String, String> errors) throws ServletException, IOException {
         String tmp = request.getHeader("referer").trim();
 
         //System.out.println("Tmp : " + tmp);

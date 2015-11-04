@@ -12,10 +12,14 @@ import com.grameenfoundation.ictc.domains.BaselineProductionBudget;
 import com.grameenfoundation.ictc.domains.Biodata;
 import com.grameenfoundation.ictc.domains.FieldCropAssessment;
 import com.grameenfoundation.ictc.domains.FmpPostHarvestBudget;
+import com.grameenfoundation.ictc.domains.FmpPostHarvestBudgetUpdate;
 import com.grameenfoundation.ictc.domains.FmpProductionBudget;
+import com.grameenfoundation.ictc.domains.FmpProductionBudgetUpdate;
 import com.grameenfoundation.ictc.domains.MeetingSetting;
 import com.grameenfoundation.ictc.domains.PostHarvest2;
+import com.grameenfoundation.ictc.domains.PostHarvestUpdate;
 import com.grameenfoundation.ictc.domains.ProductionNew;
+import com.grameenfoundation.ictc.domains.ProductionUpdate;
 import com.grameenfoundation.ictc.domains.Profiling;
 import com.grameenfoundation.ictc.domains.TechnicalNeed;
 import com.grameenfoundation.ictc.models.BaselinePostHarvestBudgetModel;
@@ -26,12 +30,16 @@ import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.models.FarmerInputModel;
 import com.grameenfoundation.ictc.models.FieldCropAssessmentModel;
 import com.grameenfoundation.ictc.models.FmpPostHarvestBudgetModel;
+import com.grameenfoundation.ictc.models.FmpPostHarvestBudgetUpdateModel;
 import com.grameenfoundation.ictc.models.FmpProductionBudgetModel;
+import com.grameenfoundation.ictc.models.FmpProductionBudgetUpdateModel;
 import com.grameenfoundation.ictc.models.MeetingModel;
 import com.grameenfoundation.ictc.models.MeetingSettingModel;
 import com.grameenfoundation.ictc.models.MobileTrackerModel;
 import com.grameenfoundation.ictc.models.PostHarvestModel;
+import com.grameenfoundation.ictc.models.PostHarvestUpdateModel;
 import com.grameenfoundation.ictc.models.ProductionModel;
+import com.grameenfoundation.ictc.models.ProductionUpdateModel;
 import com.grameenfoundation.ictc.models.ProfilingModel;
 import com.grameenfoundation.ictc.models.TechnicalNeedsModel;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
@@ -789,8 +797,248 @@ public class APIController extends HttpServlet {
                     out.print(obj);
                 }
             }
+            else if("fupdate".equalsIgnoreCase(serviceCode))
+            {
+                Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx(); 
+                List<BiodataWrapper> bw = new BiodataModel().getBioData("", "");
+                BiodataModel biodataModel = new BiodataModel();
+                ProductionUpdateModel productionUpdateModel = new ProductionUpdateModel();
+                PostHarvestUpdateModel postHarvestUpdateModel = new PostHarvestUpdateModel();
+                FmpProductionBudgetUpdateModel fmpProductionBudgetUpdateModel = new FmpProductionBudgetUpdateModel();
+                FmpPostHarvestBudgetUpdateModel fmpPostHarvestBudgetUpdateModel = new FmpPostHarvestBudgetUpdateModel();
+                        
+                
+                
+                 JSONArray fa = new JSONArray();
 
+                if (null != bw) {
+
+                    for (BiodataWrapper bb : bw) {
+                        JSONObject farmer = new JSONObject();
+                        JSONObject productionupdate = new JSONObject();
+                        JSONObject details = new JSONObject();
+                        JSONObject postharvestupdate = new JSONObject();
+                        JSONObject productionbudgetupdate = new JSONObject();
+                        JSONObject postharvestbudgetupdate = new JSONObject();
+                        
+                        //biodata
+                        Biodata b = biodataModel.getBiodata("Id", bb.getFarmID());
+
+                        if (null != b) {
+
+                            farmer.put(Biodata.FIRST_NAME, b.getFirstname());
+                            farmer.put(Biodata.LAST_NAME, b.getLastname());
+                            farmer.put(Biodata.FARMERID, b.getId());
+                        }
+                        
+                        ProductionUpdate pu = productionUpdateModel.getProductionUpdate("Id", bb.getFarmID());
+                        
+                        
+                        if(null!=pu)
+                        {
+                            productionupdate.put(ProductionUpdate.APPLICATIONOFBASALFERTILIZER,pu.getApplicationofbasalfertilizer());
+                            productionupdate.put(ProductionUpdate.APPLICATIONOFHERBICIDEDATE,pu.getApplicationofherbicidedate());
+                            productionupdate.put(ProductionUpdate.APPLICATIONOFTOPDRESSFERTILIZER,pu.getApplicationoftopdressfertilizer());
+                            productionupdate.put(ProductionUpdate.CROPYIELD,pu.getCropyield());
+                            productionupdate.put(ProductionUpdate.DATEFIRSTMANUALWEEDCONTROL,pu.getDatefirstmanualweedcontrol());
+                            productionupdate.put(ProductionUpdate.DATEOFSECONDMANUALWEEDCONTROL,pu.getDateofsecondmanualweedcontrol());
+                            productionupdate.put(ProductionUpdate.DATETOPDRESSINGWASCOMPLETED,pu.getDatetopdressingwascompleted());
+                            productionupdate.put(ProductionUpdate.FIRSTMANUALWEEDCONTROLDATE,pu.getFirstmanualweedcontroldate());
+                            productionupdate.put(ProductionUpdate.FOURTHWEEDCONTROLDATE,pu.getFourthweedcontroldate());
+                            productionupdate.put(ProductionUpdate.HAVEYOUPLANTEDYOURCROP,pu.getHaveyouplantedyourcrop());
+                            productionupdate.put(ProductionUpdate.LANDCLEARINGDATE,pu.getLandclearingdate());
+                            productionupdate.put(ProductionUpdate.METHODOFBASALFERTILIZERAPPLICATION,pu.getMethodofbasalfertilizerapplication());
+                            productionupdate.put(ProductionUpdate.METHODOFBASALFERTILIZERAPPLICATIONOTHER,pu.getMethodofbasalfertilizerapplicationother());
+                            productionupdate.put(ProductionUpdate.METHODOFLANDCLEARING,pu.getMethodoflandclearing());
+                            productionupdate.put(ProductionUpdate.METHODOFLANDPREPARATION,pu.getMethodoflandpreparation());
+                            productionupdate.put(ProductionUpdate.METHODOFTOPDRESSERFERTILIZERAPPLICATION,pu.getMethodoftopdresserfertilizerapplication());
+                            productionupdate.put(ProductionUpdate.NUMBERMANUALWEEDCONTROLOCCASIONS,pu.getNumbermanualweedcontroloccasions());
+                            productionupdate.put(ProductionUpdate.OTHERFERTILIZER,pu.getOtherfertilizer());
+                            productionupdate.put(ProductionUpdate.OTHERTOPDRESSERFERTILIZERTYPE,pu.getOthertopdresserfertilizertype());
+                            productionupdate.put(ProductionUpdate.PLANTINGDATE,pu.getPlantingdate());
+                            productionupdate.put(ProductionUpdate.PLANTINGDISTANCEANDPOPULATION,pu.getPlantingdistanceandpopulation());
+                            productionupdate.put(ProductionUpdate.PLOUGHINGDATE,pu.getPloughingdate());
+                            productionupdate.put(ProductionUpdate.POSTPLANTHERBICIDEUSE,pu.getPostplantherbicideuse());
+                            productionupdate.put(ProductionUpdate.QUANTITYOFBASALFERTILIZERAPPLIED,pu.getQuantityofbasalfertilizerapplied());
+                            productionupdate.put(ProductionUpdate.QUANTITYOFTOPDRESSERFERTILIZERAPPLIED,pu.getQuantityoftopdresserfertilizerapplied());
+                            productionupdate.put(ProductionUpdate.QUANTITYPOSTPLANTHERBICIDE,pu.getQuantitypostplantherbicide());
+                            productionupdate.put(ProductionUpdate.REASONFORCHANGEOFLANDCLEARING,pu.getReasonforchangeoflandclearing());
+                            productionupdate.put(ProductionUpdate.REASONFORCHANGEOFLANDPREPARATION,pu.getReasonforchangeoflandpreparation());
+                            productionupdate.put(ProductionUpdate.REASONFORCHANGEOFVARIETY,pu.getReasonforchangeofvariety());
+                            productionupdate.put(ProductionUpdate.REASONFORDEVIATION,pu.getReasonfordeviation());
+                            productionupdate.put(ProductionUpdate.REASONFORNOTPLANTING,pu.getReasonfornotplanting());
+                            productionupdate.put(ProductionUpdate.REFILLINGGAPSOCCURENCE,pu.getRefillinggapsoccurence());
+                            productionupdate.put(ProductionUpdate.SOURCEOFPLANTING,pu.getSourceofplanting());
+                            productionupdate.put(ProductionUpdate.THIRDMANUALWEEDCONTROLDATE,pu.getThirdmanualweedcontroldate());
+                            productionupdate.put(ProductionUpdate.TIMEOFHARVEST,pu.getTimeofharvest());
+                            productionupdate.put(ProductionUpdate.TYPEOFBASALFERTILIZER,pu.getTypeofbasalfertilizer());
+                            productionupdate.put(ProductionUpdate.TYPEOFCROPVARIETYCULTIVATED,pu.getTypeofcropvarietycultivated());
+                            productionupdate.put(ProductionUpdate.TYPEOFHERBICIDEFORPOSTPLANTWEEDCONTROL,pu.getTypeofherbicideforpostplantweedcontrol());
+                            productionupdate.put(ProductionUpdate.TYPEOFTOPDRESSFERTILIZER,pu.getTypeoftopdressfertilizer());
+                            productionupdate.put(ProductionUpdate.LAST_MODIFIED,pu.getLastModifiedDate());
+                            productionupdate.put(ProductionUpdate.WHENDIDYOUFININSHPALNTINGYOURCROP,pu.getWhendidyoufininshpalntingyourcrop());
+                    
+                        }
+                        
+                        
+                        PostHarvestUpdate phu = postHarvestUpdateModel.getPostHarvestUpdate("Id",bb.getFarmID());
+                        
+                        if(null!=phu)
+                        {
+                            postharvestupdate.put(PostHarvestUpdate.APPLICATIONRATEOFSTORAGECHEMICAL,phu.getApplicationrateofstoragechemical());
+                            postharvestupdate.put(PostHarvestUpdate.COMPLETIONOFPRODUCEMARKETING,phu.getCompletionofproducemarketing());
+                            postharvestupdate.put(PostHarvestUpdate.COMPLETIONOFTHRESHING,phu.getCompletionofthreshing());
+                            postharvestupdate.put(PostHarvestUpdate.DATEOFCOMPLETINGDRYING,phu.getDateofcompletingdrying());
+                            postharvestupdate.put(PostHarvestUpdate.DATETOCOMPLETEDRYING,phu.getDatetocompletedrying());
+                            postharvestupdate.put(PostHarvestUpdate.DRYINGOFCOBSCHUNKSPANICLES,phu.getDryingofcobschunkspanicles());
+                            postharvestupdate.put(PostHarvestUpdate.FIRSTSALEDATE,phu.getFirstsaledate());
+                            postharvestupdate.put(PostHarvestUpdate.MAINPOINTOFSALEORCONTACT,phu.getMainpointofsaleorcontact());
+                            postharvestupdate.put(PostHarvestUpdate.METHODOFDRYINGCOBSPANICLESCHIPSCHUNKS,phu.getMethodofdryingcobspanicleschipschunks());
+                            postharvestupdate.put(PostHarvestUpdate.METHODOFDRYINGGRAIN,phu.getMethodofdryinggrain());
+                            postharvestupdate.put(PostHarvestUpdate.MOSTPRODUCESALEDATE,phu.getMostproducesaledate());
+                            postharvestupdate.put(PostHarvestUpdate.OTHERAPPLICATIONRATEOFSTORAGECHEMIC,phu.getOtherapplicationrateofstoragechemic());
+                            postharvestupdate.put(PostHarvestUpdate.OTHERMETHODFORDRYING,phu.getOthermethodfordrying());
+                            postharvestupdate.put(PostHarvestUpdate.OTHERMETHODOFDRYINGGRAIN,phu.getOthermethodofdryinggrain());
+                            postharvestupdate.put(PostHarvestUpdate.OTHERSALECONTACT,phu.getOthersalecontact());
+                            postharvestupdate.put(PostHarvestUpdate.OTHERSTORAGECHEMICAL,phu.getOtherstoragechemical());
+                            postharvestupdate.put(PostHarvestUpdate.OWNERSHIPCONDITIONSFORSTORAGE,phu.getOwnershipconditionsforstorage());
+                            postharvestupdate.put(PostHarvestUpdate.POSTHARVESTLOSSES,phu.getPostharvestlosses());
+                            postharvestupdate.put(PostHarvestUpdate.PRICEATFIRSTSALEDATE,phu.getPriceatfirstsaledate());
+                            postharvestupdate.put(PostHarvestUpdate.PRICEATMOSTSALEDATE,phu.getPriceatmostsaledate());
+                            postharvestupdate.put(PostHarvestUpdate.PROPORTIONFORMARKET,phu.getProportionformarket());
+                            postharvestupdate.put(PostHarvestUpdate.THRESHING,phu.getThreshing());
+                            postharvestupdate.put(PostHarvestUpdate.TYPEOFBAGUSEDINBULKINGPRODUCE,phu.getTypeofbagusedinbulkingproduce());
+                            postharvestupdate.put(PostHarvestUpdate.TYPEOFSTORAGECHEMICAL,phu.getTypeofstoragechemical());
+                            postharvestupdate.put(PostHarvestUpdate.TYPEOFSTORAGESTRUCTURE,phu.getTypeofstoragestructure());
+                            postharvestupdate.put(PostHarvestUpdate.WINNOWING,phu.getWinnowing());
+                        }
+                        
+                        
+                        FmpProductionBudgetUpdate pbu = fmpProductionBudgetUpdateModel.getFmpProductionBudgetUpdate("Id",bb.getFarmID());
+                        
+                        
+                        if(null!=pbu)
+                        {
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.BASAL_FERTILIZER_APPL_LAB_UPDATE, pbu.getBasal_fert_labor_period_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.BASAL_FERT_LABOR_PERIOD_UPDATE, pbu.getBasal_fert_labor_period_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.COST_OF_APPLICATIONTOPDRESS_UPDATE, pbu.getCost_of_applicationtopdress_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.FAMILY_LABOR_BASAL_FERT_UPDATE, pbu.getFamily_labor_basal_fert_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.FAMILY_LABOR_FIFTH_WEED_CONTROL_UPDATE, pbu.getFamily_labor_fifth_weed_control_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.FAMILY_LABOR_FIRST_MANUAL_WEED_UPDATE, pbu.getFamily_labor_first_manual_weed_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.FAMILY_LABOR_SECOND_WEED_UPDATE, pbu.getFamily_labor_second_weed_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.FAMILY_LABOR_THIRD_WEED_UPDATE, pbu.getFamily_labor_third_weed_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.FAMILY_LABOR_TOPDRESS_FERTILIZER_APPLICA, pbu.getFamily_labor_topdress_fertilizer_applica());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.FERTILIZER_APP_LABOUR_COST_UPDATE, pbu.getFertilizer_app_labour_cost_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.FIFTH_WEEDING_LABOR_PERIOD_UPDATE, pbu.getFifth_weeding_labor_period_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.FINAL_HARVEST_LABOR_NO_UPDATE, pbu.getFinal_harvest_labor_no_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.FIRST_WEEDING_PERIOD_UPDATE, pbu.getFirst_weeding_period_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.FOURTH_WEEDING_LABOR_PERIOD_UPDATE, pbu.getFourth_weeding_labor_period_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.FOURTH_WEED_CONTROL_LABOR_UPDATE, pbu.getBasal_fert_labor_period_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.HARROWING_COST_PER_ACRE_UPDATE, pbu.getHarrowing_cost_per_acre_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.HARVEST_LABOR_COSTS_PER_ACRE_UPDATE, pbu.getHarrowing_cost_per_acre_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.HERBICIDE_APP_LABOR_PERIOD_UPDATE, pbu.getHerbicide_app_labor_period_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.HOE_PLOUGHING_LABOUR_FAMILY_UPDATE, pbu.getHoe_ploughing_labour_family_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.HOE_PLOUGHING_LABOUR_HOW_MANY_UPDATE,pbu.getHoe_ploughing_labour_family_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.HOE_PLOUGHING_LABOUR_PERIOD_UPDATE, pbu.getHoe_ploughing_labour_period_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.LABOR_FIFTH_WEED_CONTROL_UPDATE, pbu.getLabor_fifth_weed_control_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.LABOR_FOR_PLANTINGFAMILY_UPDATE, pbu.getLabor_for_plantingfamily_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.LABOR_FOURTH_WEED_CONTROL_UPDATE, pbu.getLabor_fourth_weed_control_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.LABOR_NO_FIRST_MANUAL_WEED_UPDATE,pbu.getLabor_no_first_manual_weed_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.LABOR_FOR_PLANTING_NUMBER_UPDATE,pbu.getLabor_for_planting_number_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.LABOR_THIRD_WEED_CONTROL_UPDATE,pbu.getLabor_third_weed_control_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.LAND_RENT_UPDATE,pbu.getLand_rent_update()); 
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.PERIOD_FOR_COMPLETION_OF_HARVEST_UPDATE,pbu.getPeriod_for_completion_of_harvest_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.PLANTING_LABOR_COST_UPDATE,pbu.getPlanting_labor_cost_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.PLANTING_PERIOD2_UPDATE,pbu.getPlanting_period2_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.PLOUGHING_COST_PER_ACRE_UPDATE,pbu.getPloughing_cost_per_acre_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.POST_HERBICIDE_APPLICATION_COST_UPDATE,pbu.getPost_herbicide_application_cost_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.POST_PLANT_HERBICIDE_COST_UPDATE, pbu.getPost_plant_herbicide_cost_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.PRICE_OF_BASAL_FERTILIZER_UPDATE, pbu.getPrice_of_basal_fertilizer_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.PRICE_OF_HERBICIDE_UPDATE, pbu.getPrice_of_herbicide_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.PRICE_OF_BASAL_FERTILIZER_UPDATE,pbu.getPrice_of_basal_fertilizer_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.PRICE_OF_TOPDRESS_FERTILIZER_UPDATE,pbu.getPrice_of_topdress_fertilizer_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.QUANTITY_OF_PREPLANT_HERBICIDE_UPDATE,pbu.getQuantity_of_preplant_herbicide_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.REFILLING_LABOR_FAMILY_UPDATE,pbu.getRefilling_labor_family_update());  
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.REFILLING_LABOR_PERIOD_UPDATE, pbu.getRefilling_labor_period_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.REFILLING_LABOUR_COST, pbu.getRefilling_labour_cost());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.REFILLING_LABOUR_NO_UPDATE, pbu.getRefilling_labour_no_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.SECOND_WEED_LABOR_UPDATE, pbu.getSecond_weed_labor_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.SECOND_WEED_PERIOD_UPDATE,pbu.getSecond_weed_period_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.SEEDBED_LABOR_COST_UPDATE,pbu.getSeedbed_labor_cost_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.SEEDBED_LABOR_NUMBER_UPDATE,pbu.getSeedbed_labor_number_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.SEEDBED_LABOUR_FAMILY_UPDATE,pbu.getSeedbed_labour_family_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.SEEDPLANTING_MATERIAL_COST_UPDATE,pbu.getSeedplanting_material_cost_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.SEED_BED_PREPARATION_PERIOD_UPDATE,pbu.getSeed_bed_preparation_period_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.THIRD_WEEDING_PERIOD_UPDATE,pbu.getThird_weeding_period_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.TOPDRESS_FERT_LABOR_PERIOD_UPDATE,pbu.getTopdress_fert_labor_period_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.TOTAL_COST_FIFTH_WEED_UPDATE,pbu.getTotal_cost_fifth_weed_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.TOTAL_COST_FIRST_MANUAL_WEED_UPDATE,pbu.getTotal_cost_first_manual_weed_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.TOTAL_COST_FOURTH_WEED_UPDATE,pbu.getTotal_cost_fourth_weed_update()); 
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.TOTAL_COST_SECOND_WEED_UPDATE,pbu.getTotal_cost_second_weed_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.TOTAL_COST_THIRD_WEED_UPDATE,pbu.getTotal_cost_third_weed_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.TOTAL_NUMBER_OF_LABOR_TOPDRESS_UPDATE,pbu.getTotal_number_of_labor_topdress_update());
+                            productionbudgetupdate.put(FmpProductionBudgetUpdate.LAST_MODIFIED,pbu.getLastModifiedDate()); 
+                    
+                              
+                        }
+                        
+                        FmpPostHarvestBudgetUpdate phbu  = fmpPostHarvestBudgetUpdateModel.getFmpProductionBudgetUpdate("Id",bb.getFarmID());
+                        
+                        
+                        if(null!=phbu)
+                        {
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.BAGS_FOR_STORAGE_UPDATE, phbu.getBags_for_storage_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.COST_OF_STORAGE_CHEMICAL_UPDATE, phbu.getCost_of_storage_chemical_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.DEHUSKING_FAMILY_LABOR_UPDATE, phbu.getDehusking_family_labor_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.FAMILY_LABOR_BAGGING_UPDATE, phbu.getFamily_labor_bagging_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.FAMILY_LABOR_DRYING_COBS_UPDATE, phbu.getFamily_labor_drying_cobs_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.FAMILY_LABOR_DRYING_GRAIN_UPDATE, phbu.getFamily_labor_drying_grain_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.FAMILY_LABOR_ENGAGED_WINNOWING_UPDATE, phbu.getFamily_labor_engaged_winnowing_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.FAMILY_LABOR_MANUAL_THRESHING_UPDATE, phbu.getFamily_labor_manual_threshing_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.GRAIN_DRYING_COST_UPDATE, phbu.getGrain_drying_cost_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.LABOR_COST_DEHUSK_UPDATE,phbu.getLabor_cost_dehusk_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.LABOR_COST_DRYING_OF_COBS_UPDATE,phbu.getLabor_cost_drying_of_cobs_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.LABOR_HANDS_DRYINGCOBS_UPDATE,phbu.getLabor_hands_dryingcobs_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.LABOR_MANUAL_THRESHING_UPDATE,phbu.getLabor_manual_threshing_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.LABOR_PERIOD_DRYING_COBS_UPDATE,phbu.getLabor_period_drying_cobs_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.LABOR_PERIOD_MANUAL_THRESH,phbu.getLabor_period_manual_thresh());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.LABOUR_WINNOWING_UPDATE,phbu.getLabour_winnowing_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.LABOUR_FOR_BAGGING_UPDATE,phbu.getLabour_for_bagging_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.LAST_MODIFIED,phbu.getLastModifiedDate());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.PERIOD_DEHUSK_UPDATE,phbu.getPeriod_dehusk_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.TIME_COMPLETION_OF_BAGGING_UPDATE,phbu.getTime_completion_of_bagging_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.TIME_INTERVAL_WINNOWING_UPDATE,phbu.getTime_interval_winnowing_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.TIME_PERIOD_LABOR_DRYING_GRAIN_UPDATE,phbu.getTime_period_labor_drying_grain_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.UNIT_COST_MACHINE_THRESHING_UPDATE,phbu.getUnit_cost_machine_threshing_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.UNIT_COST_MANUAL_THRESHING_UPDATE,phbu.getLabor_manual_threshing_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.UNIT_COST_OF_STORAGE_BAGS_UPDATE,phbu.getUnit_cost_of_storage_bags_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.UNIT_COST_OF_WAREHOUSE_UPDATE,phbu.getUnit_cost_of_warehouse_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.UNIT_LABOR_COST_BAGGING_UPDATE,phbu.getUnit_labor_cost_bagging_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.UNIT_LABOR_COST_WINNOWING_UPDATE,phbu.getUnit_labor_cost_winnowing_update());
+                            
+                           
+                        }
+                        
+                        
+                        
+                        farmer.put("productionupdate",productionupdate);
+                        farmer.put("postharvestupdate", postharvestupdate);
+                        farmer.put("productionbudgetupdate", productionbudgetupdate);
+                        farmer.put("postharvestbudgetupdate",postharvestbudgetupdate);
+                        
+                        details.put("farmerupdate", farmer);
+                        fa.put(details);
+                    }
+                    tx.success();
+                    out.print(fa);
+                    System.out.println("Output " + fa);
+                   
+                }
+            }
         }
+        
+
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -831,5 +1079,5 @@ public class APIController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
+

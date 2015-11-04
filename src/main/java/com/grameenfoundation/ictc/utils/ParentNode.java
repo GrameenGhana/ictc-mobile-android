@@ -53,7 +53,7 @@ public class ParentNode {
     }
 
     public static Node AgentParentNode() {
-        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.USER);
+        return Neo4jServices.getReferenceNodeCreatIfNotExist(ICTCKonstants.AGENT);
     }
 
     public static Node MeetingParentNode() {

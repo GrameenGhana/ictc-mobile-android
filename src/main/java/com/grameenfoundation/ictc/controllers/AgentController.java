@@ -6,6 +6,7 @@
 package com.grameenfoundation.ictc.controllers;
 
 import com.grameenfoundation.ictc.models.AgentModel;
+import com.grameenfoundation.ictc.utils.ICTCUtil;
 import com.grameenfoundation.ictc.wrapper.AgentWrapper;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -48,7 +49,7 @@ public class AgentController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-         
+          String url = "http://sandbox-ictchallenge.cs80.force.com/AgentRequest";
             String firstname = request.getParameter("fn");
             String lastname = request.getParameter("ln");
             String email = request.getParameter("email");
@@ -74,7 +75,7 @@ public class AgentController extends HttpServlet {
 
                 String serverResponse = "";
 
-                String url = "http://sandbox-ictchallenge.cs80.force.com/AgentRequest";
+               
 
                 JSONObject j = new JSONObject();
                 j.put("agenttype", agenttype);
@@ -105,6 +106,12 @@ public class AgentController extends HttpServlet {
                 }
 
                 System.out.println(serverResponse);
+                
+                if(null!=serverResponse)
+                {
+                    System.out.println("Agent Created");
+                    ICTCUtil.redirect(request, response,"/agent/agent_view.jsp", response);
+                }
 
             }
             else

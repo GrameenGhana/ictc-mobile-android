@@ -6,6 +6,12 @@
 
 package com.grameenfoundation.ictc.models;
 
+import com.grameenfoundation.ictc.domains.PostHarvestUpdate;
+import com.grameenfoundation.ictc.domains.ProductionUpdate;
+import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
+import com.grameenfoundation.ictc.utils.Neo4jServices;
+import org.neo4j.graphdb.Node;
+
 /**
  *
  * @author Joseph George Davis
@@ -13,5 +19,25 @@ package com.grameenfoundation.ictc.models;
  * description:
  */
 public class PostHarvestUpdateModel {
+    
+    
+    
+     public PostHarvestUpdate getPostHarvestUpdate(String field, String value) {
+        String q = "match (n:PARENT)-[:FARMER]->(f)-[:"+ICTCRelationshipTypes.HAS_POSTHARVEST+"]->(p)-[:"+ICTCRelationshipTypes.UPDATE+"]->m "
+                + " where p." + field + "='" + value + "'"
+                + " return m";
+
+        System.out.println("Query " + q);
+        try {
+            Node node = Neo4jServices.executeCypherQuerySingleResult(q,"m");
+            if (null != node) {
+                return new PostHarvestUpdate(node);
+            }
+        } catch (Exception e) {
+            System.out.println("Unable to Find Production Update");
+        }
+
+        return null;
+    }
 
 }

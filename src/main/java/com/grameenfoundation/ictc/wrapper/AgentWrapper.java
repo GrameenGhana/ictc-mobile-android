@@ -15,12 +15,16 @@ package com.grameenfoundation.ictc.wrapper;
 public class AgentWrapper {
     
     
-    String agenttype="agenttype";
-    String lastname="lastname";
-    String firstname="firstname";
-    String email="email";
-    String username="username";
-    String agentcode="agentcode";
+    private String agenttype = "agenttype";
+    private String lastname = "lastname";
+    private String firstname = "firstname";
+    private String email = "email";
+    private String username = "username";
+    private String agentcode = "agentcode";
+
+ 
+    
+    
     
     
  public  void setAgentcode(String agentcode) {

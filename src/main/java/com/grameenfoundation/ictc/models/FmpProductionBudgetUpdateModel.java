@@ -6,6 +6,7 @@
 
 package com.grameenfoundation.ictc.models;
 
+import com.grameenfoundation.ictc.domains.FmpProductionBudgetUpdate;
 import com.grameenfoundation.ictc.domains.ProductionUpdate;
 import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
 import com.grameenfoundation.ictc.utils.Neo4jServices;
@@ -14,15 +15,15 @@ import org.neo4j.graphdb.Node;
 /**
  *
  * @author Joseph George Davis
- * @date Sep 29, 2015 11:05:18 AM
+ * @date Nov 3, 2015 1:18:25 PM
  * description:
  */
-public class ProductionUpdateModel {
+public class FmpProductionBudgetUpdateModel {
     
     
     
-     public ProductionUpdate getProductionUpdate(String field, String value) {
-        String q = "match (n:PARENT)-[:FARMER]->(f)-[:"+ICTCRelationshipTypes.HAS_PRODUCTION+"]->(p)-[:"+ICTCRelationshipTypes.UPDATE+"]->m "
+     public  FmpProductionBudgetUpdate getFmpProductionBudgetUpdate(String field, String value) {
+        String q = "match (n:PARENT)-[:FARMER]->(f)-[:"+ICTCRelationshipTypes.FMP_PRODUCTION_BUDGET+"]->(p)-[:"+ICTCRelationshipTypes.UPDATE+"]->m "
                 + " where p." + field + "='" + value + "'"
                 + " return m";
 
@@ -30,7 +31,7 @@ public class ProductionUpdateModel {
         try {
             Node node = Neo4jServices.executeCypherQuerySingleResult(q,"m");
             if (null != node) {
-                return new ProductionUpdate(node);
+                return new  FmpProductionBudgetUpdate(node);
             }
         } catch (Exception e) {
             System.out.println("Unable to Find Production Update");
