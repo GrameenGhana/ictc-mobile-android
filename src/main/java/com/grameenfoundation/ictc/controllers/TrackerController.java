@@ -132,8 +132,8 @@ public class TrackerController extends HttpServlet {
 
                             System.out.println("Farms Input Received :");
                             int l = ja.length();
-                            for (i = 0; i < l; i++) {
-                                JSONObject ji = ja.getJSONObject(i);
+                            for (int k = 0; k < l; k++) {
+                                JSONObject ji = ja.getJSONObject(k);
                                 if (ji.getString("name").equals("seeds")) {
                                     seedObject = ji;
                                     if (null == seedsReceived) {
@@ -205,8 +205,8 @@ public class TrackerController extends HttpServlet {
 
                             FarmerGPSModel gpsModel = new FarmerGPSModel();
                             int l = coordinates.length();
-                            for (i = 0; i < l; i++) {
-                                JSONObject cord = coordinates.getJSONObject(i);
+                            for (int k = 0; k < l; k++) {
+                                JSONObject cord = coordinates.getJSONObject(k);
                                 gpsModel.create(new FarmGPSLocationWrapper(cord.getString("x"), cord.getString("y"), farmerId));
 
                             }
