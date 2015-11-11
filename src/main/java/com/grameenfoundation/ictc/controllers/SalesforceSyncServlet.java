@@ -466,7 +466,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                          farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
                           if (null != new TechnicalNeedsModel().getTechnicalNeed("Id", farmerID)) {
                              out.println(sendAck());
-                             System.out.println("Profiling already exist");
+                             System.out.println("Technical Needs already exist");
                          } else {
                         
                         
