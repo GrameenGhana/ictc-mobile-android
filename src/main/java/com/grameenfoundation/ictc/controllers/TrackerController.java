@@ -5,12 +5,15 @@
  */
 package com.grameenfoundation.ictc.controllers;
 
+import static com.grameenfoundation.ictc.controllers.MobileController.IVR_URL;
 import com.grameenfoundation.ictc.domains.Biodata;
 import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.models.FarmerGPSModel;
 import com.grameenfoundation.ictc.models.FarmerInputModel;
 import com.grameenfoundation.ictc.models.MeetingModel;
 import com.grameenfoundation.ictc.models.MobileTrackerModel;
+import com.grameenfoundation.ictc.utils.HTTPCommunicator;
+import com.grameenfoundation.ictc.wrapper.BiodataWrapper;
 import com.grameenfoundation.ictc.wrapper.FarmGPSLocationWrapper;
 import com.grameenfoundation.ictc.wrapper.FarmManagementWrapper;
 import com.grameenfoundation.ictc.wrapper.FarmerInputReceivedWrapper;
@@ -120,6 +123,7 @@ public class TrackerController extends HttpServlet {
                             JSONArray ja = jObject.getJSONArray("farm_inputs");
 
                             String farmer = jObject.getString("user_id");
+                            BiodataWrapper farmerDetails = new BiodataModel().getBiodataByFieldValue(Biodata.FARMERID, farmer);
                             FarmerInputModel fim = new FarmerInputModel();
                             List<FarmerInputReceivedWrapper> farmers = fim.getFarmerInputs(farmer);
 
@@ -128,7 +132,10 @@ public class TrackerController extends HttpServlet {
                             FarmerInputReceivedWrapper ploughReceived = MobileController.searchNeeds(farmers, "plough");
                             JSONObject seedObject;
                             JSONObject fertObj;
-                            JSONObject ploughObj;
+                            JSONObject ploughObj; 
+                            String seeds="N";
+                            String pl="N";
+                            String fert="N";
 
                             System.out.println("Farms Input Received :");
                             int l = ja.length();
@@ -136,6 +143,10 @@ public class TrackerController extends HttpServlet {
                                 JSONObject ji = ja.getJSONObject(k);
                                 if (ji.getString("name").equals("seeds")) {
                                     seedObject = ji;
+                                    if(seedObject.getDouble("qty")>0){
+                                    seeds="Y";
+                                    
+                                    }
                                     if (null == seedsReceived) {
                                         seedsReceived = new FarmerInputReceivedWrapper();
                                         seedsReceived.setFarmer(farmer);
@@ -149,6 +160,10 @@ public class TrackerController extends HttpServlet {
                                     }
                                 } else if (ji.getString("name").equals("fertiliser")) {
                                     fertObj = ji;
+                                    if(fertObj.getDouble("qty")>0){
+                                    fert="Y";
+                                    
+                                    }
                                     if (null == fertReceived) {
                                         fertReceived = new FarmerInputReceivedWrapper();
                                         fertReceived.setFarmer(farmer);
@@ -162,6 +177,10 @@ public class TrackerController extends HttpServlet {
                                     }
                                 } else if (ji.getString("name").equals("plough")) {
                                     ploughObj = ji;
+                                    if(ploughObj.getDouble("qty")>0){
+                                    pl="Y";
+                                    
+                                    }
                                     if (null == fertReceived) {
                                         fertReceived = new FarmerInputReceivedWrapper();
                                         fertReceived.setFarmer(farmer);
@@ -174,6 +193,9 @@ public class TrackerController extends HttpServlet {
 //|
                                     }
                                 }
+                                 
+                                HTTPCommunicator.doGet(IVR_URL + "reg&fid=" + farmer + "&s=" + seeds + "&f=" + fert + "&p=" + pl+ "&msisdn="+farmerDetails.getTelephonenumber());
+                
 
                             }
                         }
@@ -207,8 +229,8 @@ public class TrackerController extends HttpServlet {
                             int l = coordinates.length();
                             for (int k = 0; k < l; k++) {
                                 JSONObject cord = coordinates.getJSONObject(k);
+                                System.out.println("GPSItem : "+cord.getString("x")+" <> "+cord.getString("y" ));
                                 gpsModel.create(new FarmGPSLocationWrapper(cord.getString("x"), cord.getString("y"), farmerId));
-
                             }
                         }
                     }
