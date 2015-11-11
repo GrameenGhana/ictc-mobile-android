@@ -379,8 +379,8 @@ public class BiodataModel {
 
         return created;
     }
-    
-     public boolean BiodataToMeeting(String biodata, Node meeting) {
+
+    public boolean BiodataToMeeting(String biodata, Node meeting) {
 
         boolean created = false;
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
@@ -403,8 +403,8 @@ public class BiodataModel {
 
         return created;
     }
-     
-     public boolean BiodataToProduction(String biodata, Node production) {
+
+    public boolean BiodataToProduction(String biodata, Node production) {
 
         boolean created = false;
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
@@ -427,7 +427,7 @@ public class BiodataModel {
 
         return created;
     }
-     
+
     public boolean BiodataToProfiling(String biodata, Node profile) {
 
         Biodata b = null;
@@ -451,25 +451,21 @@ public class BiodataModel {
         }
 
         return created;
-    } 
-     
-     
+    }
 
     public BiodataWrapper getBiodataByFieldValue(String field, String value) {
 //        String q = "Start root=node(0) "
 //                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->p"
 //                + " where p." + field + "='" + value + "'"
 //                + " return p";
-        String q = "match (l:FARMER) WHERE l."+field+"='"+value+"' return  l ";
+        String q = "match (l:FARMER) WHERE l." + field + "='" + value + "' return  l ";
         System.out.println("Query " + q);
         try {
             List<BiodataWrapper> wrappers = Neo4jServices.getIterativeNode(q);
-            System.out.println("Received : wrapp "+wrappers.size());
-            if(wrappers.isEmpty())
-            {     
+            System.out.println("Received : wrapp " + wrappers.size());
+            if (wrappers.isEmpty()) {
                 return null;
-            }else
-            {
+            } else {
                 System.out.println("Returned 111");
                 return wrappers.get(0);
             }
@@ -481,7 +477,7 @@ public class BiodataModel {
     }
 
     public List<String> getCommunitiesList() {
-     
+
         try {
             return Neo4jServices.getIterativeString("match (n:FARMER) RETURN DISTINCT n.community as l");
         } catch (Exception e) {
@@ -493,7 +489,7 @@ public class BiodataModel {
     }
 
     public List<String> getVillageList() {
-     
+
         try {
             return Neo4jServices.getIterativeString("match (n:FARMER) RETURN DISTINCT n.village as l");
         } catch (Exception e) {
@@ -513,13 +509,12 @@ public class BiodataModel {
 
         return Neo4jServices.getAggregatedValue(" match (n:FARMER) RETURN count(DISTINCT n.community) as l");
     }
-    
-    
-   public boolean BiodataUpdate(String id, Map<String, String> data) {
-           
-           Biodata bio =  getBiodata(Biodata.ID, id);
-        boolean updated =false;
-        try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+
+    public boolean BiodataUpdate(String id, Map<String, String> data) {
+
+        Biodata bio = getBiodata(Biodata.ID, id);
+        boolean updated = false;
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             //If the setting is not null
             if (null != bio) {
 
@@ -529,44 +524,40 @@ public class BiodataModel {
                     String fieldName = dataEntry.getKey();
                     // get the field value
                     String fieldValue = dataEntry.getValue();
-                     // Assigning the alias
+                    System.out.println("Updating : "+fieldName+" <> "+fieldValue);
+                    // Assigning the alias
                     if (fieldName.equalsIgnoreCase(Biodata.CLUSTER)) {
-                        if (null!=fieldValue) {
+                        if (null != fieldValue) {
                             bio.setCluster(fieldValue);
                         }
                     }
-                    if(fieldName.equalsIgnoreCase(Biodata.FARM_AREA))
-                    {
+                    if (fieldName.equalsIgnoreCase(Biodata.FARM_AREA)) {
                         if (null != fieldValue) {
                             bio.setFarmarea(fieldValue);
                         }
                     }
-                    if(fieldName.equalsIgnoreCase(Biodata.FARM_PERIMETER))
-                    {
+                    if (fieldName.equalsIgnoreCase(Biodata.FARM_PERIMETER)) {
                         if (null != fieldValue) {
                             bio.setFarmperimeter(fieldValue);
                         }
                     }
-                
-               
-                trx.success();
-               
-                updated =  true;
-                 log.info("Bio Data Successfully Updated");
-            }   
-            }
-            else {
-              
+
+                    trx.success();
+
+                    updated = true;
+                    log.info("Bio Data Successfully Updated");
+                }
+            } else {
+
                 log.info("Unable to update Bio Data");
             }
-        } 
+        }
         return updated;
     }
 
-   
-   public boolean BiodataToBP(String biodata, Node BPBNode) {
-       
-         Biodata b = null;
+    public boolean BiodataToBP(String biodata, Node BPBNode) {
+
+        Biodata b = null;
         boolean created = false;
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
@@ -588,11 +579,10 @@ public class BiodataModel {
 
         return created;
     }
-    
-   
+
     public boolean BiodataToBPB(String biodata, Node BPBNode) {
-       
-         Biodata b = null;
+
+        Biodata b = null;
         boolean created = false;
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
@@ -614,11 +604,10 @@ public class BiodataModel {
 
         return created;
     }
-    
-    
-     public boolean BiodataToBPHB(String biodata, Node BPBNode) {
-       
-         Biodata b = null;
+
+    public boolean BiodataToBPHB(String biodata, Node BPBNode) {
+
+        Biodata b = null;
         boolean created = false;
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
@@ -640,10 +629,10 @@ public class BiodataModel {
 
         return created;
     }
-     
-     public boolean BiodataToBPH(String biodata, Node BPBNode) {
-       
-         Biodata b = null;
+
+    public boolean BiodataToBPH(String biodata, Node BPBNode) {
+
+        Biodata b = null;
         boolean created = false;
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
@@ -665,10 +654,10 @@ public class BiodataModel {
 
         return created;
     }
-    
-      public boolean BiodataToFMPPB(String biodata, Node BPBNode) {
-       
-         Biodata b = null;
+
+    public boolean BiodataToFMPPB(String biodata, Node BPBNode) {
+
+        Biodata b = null;
         boolean created = false;
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
@@ -690,9 +679,10 @@ public class BiodataModel {
 
         return created;
     }
+
     public boolean BiodataToFMPPHB(String biodata, Node BPBNode) {
-       
-         Biodata b = null;
+
+        Biodata b = null;
         boolean created = false;
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
@@ -714,10 +704,10 @@ public class BiodataModel {
 
         return created;
     }
-    
-      public boolean BiodataToFCA(String biodata, Node BPBNode) {
-       
-         Biodata b = null;
+
+    public boolean BiodataToFCA(String biodata, Node BPBNode) {
+
+        Biodata b = null;
         boolean created = false;
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
@@ -739,6 +729,5 @@ public class BiodataModel {
 
         return created;
     }
-     
-     
+
 }

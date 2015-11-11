@@ -46,7 +46,7 @@ import org.neo4j.graphdb.Transaction;
 @WebServlet(name = "MobileController", urlPatterns = {"/MobileController"})
 public class MobileController extends HttpServlet {
 
-    public String IVR_URL = "http://41.191.245.72/nymess/ictc.php?action=";
+    public static String IVR_URL = "http://41.191.245.72/nymess/ictc.php?action=";
 
     private final static Logger log = Logger.getRootLogger();
 
@@ -140,7 +140,7 @@ public class MobileController extends HttpServlet {
                 }
                 JSONObject obj = new JSONObject();
                 obj.put("rc", "00");
-                HTTPCommunicator.doGet(IVR_URL + "reg&fid=" + farmer + "&s=" + seeds + "&f=" + fertiliser + "&p=" + plough + "&msisdn=246005828");
+                HTTPCommunicator.doGet(IVR_URL + "reg&fid=" + farmer + "&s=" + seeds + "&f=" + fertiliser + "&p=" + plough + "&msisdn="+farmer);
                 out.print(obj);
 
             } else if ("fp".equalsIgnoreCase(serviceCode)) {
