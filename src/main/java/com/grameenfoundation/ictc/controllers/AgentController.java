@@ -75,8 +75,9 @@ public class AgentController extends HttpServlet {
             if (created) {
 
                 String serverResponse = "";
-
-                System.out.println("");
+               
+                System.out.println("Agent Created");
+               
 //
 //                JSONObject j = new JSONObject();
 //                j.put("agenttype", agenttype);
@@ -113,12 +114,12 @@ public class AgentController extends HttpServlet {
 //                    System.out.println("Agent Created");
 //                    ICTCUtil.redirect(request, response,"/agent/agent_view.jsp", "");
 //                }
-//
-//            }
-//            else
-//            {
-//                System.out.println("Could not send to salesforce");
-//            }
+
+            }
+            else
+            {
+                System.out.println("Could not send to salesforce");
+            }
 
         }
     }
