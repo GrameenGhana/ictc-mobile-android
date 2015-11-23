@@ -21,6 +21,17 @@ public class AgentWrapper {
     private String email = "email";
     private String username = "username";
     private String agentcode = "agentcode";
+    private String password = "password";
+    
+    
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
  
     

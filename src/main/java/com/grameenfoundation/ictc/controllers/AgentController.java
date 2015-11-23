@@ -49,8 +49,8 @@ public class AgentController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-          String url = "http://sandbox-ictchallenge.cs80.force.com/AgentRequest";
-            //String url ="http://ictchallenge.force.com/agentRequest";
+           //String url = "http://sandbox-ictchallenge.cs80.force.com/AgentRequest";
+            String url ="http://ictchallenge.force.com/agentRequest";
             String firstname = request.getParameter("fn");
             String lastname = request.getParameter("ln");
             String email = request.getParameter("email");
@@ -68,7 +68,7 @@ public class AgentController extends HttpServlet {
             agentWrapper.setEmail(email);
             agentWrapper.setFirstname(firstname);
             agentWrapper.setLastname(lastname);
-            agentWrapper.setUsername(username);
+            agentWrapper.setUsername(username+"@ictc.org");
 
             boolean created = agentModel.createAgent(agentWrapper);
 
@@ -78,42 +78,42 @@ public class AgentController extends HttpServlet {
                
                 System.out.println("Agent Created");
                
-//
-//                JSONObject j = new JSONObject();
-//                j.put("agenttype", agenttype);
-//                j.put("firstname", firstname);
-//                j.put("lastname", lastname);
-//                j.put("email", email);
-//                j.put("username", username + "@ictc.org");
-//                j.put("phonenumber", phonenumber);
-//
-//                HttpClient client = new DefaultHttpClient();
-//                HttpPost post = new HttpPost(url);
-//
-//                System.out.println("data " + j.toString());
-//
-//                List<NameValuePair> nameValuePairs = new ArrayList<>(1);
-//                nameValuePairs.add(new BasicNameValuePair("data",
-//                        j.toString()));
-//                post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-//
-//                HttpResponse resp = client.execute(post);
-//                BufferedReader rd = new BufferedReader(new InputStreamReader(resp.getEntity().getContent()));
-//                String line = "";
-//                while ((line = rd.readLine()) != null) {
-//                    System.out.println(line);
-//                    out.println(line);
-//                    serverResponse += line;
-//
-//                }
-//
-//                System.out.println(serverResponse);
-//                
-//                if(null!=serverResponse)
-//                {
-//                    System.out.println("Agent Created");
-//                    ICTCUtil.redirect(request, response,"/agent/agent_view.jsp", "");
-//                }
+
+                JSONObject j = new JSONObject();
+                j.put("agenttype", agenttype);
+                j.put("firstname", firstname);
+                j.put("lastname", lastname);
+                j.put("email", email);
+                j.put("username", username + "@ictc.org");
+                j.put("phonenumber", phonenumber);
+
+                HttpClient client = new DefaultHttpClient();
+                HttpPost post = new HttpPost(url);
+
+                System.out.println("data " + j.toString());
+
+                List<NameValuePair> nameValuePairs = new ArrayList<>(1);
+                nameValuePairs.add(new BasicNameValuePair("data",
+                        j.toString()));
+                post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                HttpResponse resp = client.execute(post);
+                BufferedReader rd = new BufferedReader(new InputStreamReader(resp.getEntity().getContent()));
+                String line = "";
+                while ((line = rd.readLine()) != null) {
+                    System.out.println(line);
+                    out.println(line);
+                    serverResponse += line;
+
+                }
+
+                System.out.println(serverResponse);
+                
+                if(null!=serverResponse)
+                {
+                    System.out.println("Agent Created");
+                    ICTCUtil.redirect(request, response,request.getContextPath()+"/agent/view_agent.jsp", "");
+                }
 
             }
             else

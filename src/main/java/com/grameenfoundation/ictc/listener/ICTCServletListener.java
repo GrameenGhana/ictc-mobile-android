@@ -41,9 +41,9 @@ public class ICTCServletListener implements ServletContextListener {
 //              }
               
               
-                 
-//             try (Transaction tx = ICTCUtil.getInstance().getGraphDB().beginTx()) {
-//                 Node node =ICTCUtil.getInstance().getGraphDB().createNode(DynamicLabel.label("root"));
+//                 
+//             try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+//                 Node node =ICTCDBUtil.getInstance().getGraphDB().createNode(DynamicLabel.label("root"));
 //                 node.setProperty("name", "ICTCROOT");
 //                 tx.success();
 //                 

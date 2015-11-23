@@ -774,7 +774,7 @@ public class APIController extends HttpServlet {
                  farmer.put("baselineproductionbudget",baselineproductionbudget);
                  farmer.put("baselinepostharvest",baselinepostharvest);
                  farmer.put("baselinepostharvestbudget",baselinepostharvestbudget);
-                 farmer.put("baselinepostharvestbudget",baselinepostharvestbudget);
+                // farmer.put("baselinepostharvestbudget",baselinepostharvestbudget);
                  farmer.put("fmpproductionbudget",fmpproductionbudget);
                  farmer.put("fieldcropassessment",fieldcropassessment);
                  farmer.put("fmppostharvestbudget",fmppostharvestbudget);
@@ -801,7 +801,7 @@ public class APIController extends HttpServlet {
                 }
                  tx.success();
                  out.print(fa);
-                 System.out.println("Output " + fa);
+                 //System.out.println("Output " + fa);
                
                 } else {
 
