@@ -68,7 +68,7 @@ public class AgentController extends HttpServlet {
             agentWrapper.setEmail(email);
             agentWrapper.setFirstname(firstname);
             agentWrapper.setLastname(lastname);
-            agentWrapper.setUsername(username+"@ictc.org");
+            agentWrapper.setUsername(username);
 
             boolean created = agentModel.createAgent(agentWrapper);
 

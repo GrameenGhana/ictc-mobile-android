@@ -42,7 +42,52 @@ public class Biodata extends Status implements GeneralInterface {
     public static String FARM_PERIMETER = "farmperimeter";
     public static String TELEPHONENUMBER ="telephonenumber";
     public static String FARMERIMAGE ="farmerimage";
+    public static String DISTRICTS_ASHANTI="Districts_Ashanti";
+    public static String DISTRICTS_BRONGAHAFO="Districts_BrongAhafo";
+    public static String DISTRICTS_VOLTA="Districts_Volta";
+    
+    
+public void setDistricts_Volta(String districts_volta) {
+underlyingNode.setProperty(DISTRICTS_VOLTA,districts_volta);
+}
+
+public String getDistricts_Volta(){
+          try {
+          return (String) underlyingNode.getProperty(DISTRICTS_VOLTA);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+    
+public void setDistricts_BrongAhafo(String districts_brongahafo) {
+underlyingNode.setProperty(DISTRICTS_BRONGAHAFO,districts_brongahafo);
+}
+
+public String getDistricts_BrongAhafo(){
+          try {
+          return (String) underlyingNode.getProperty(DISTRICTS_BRONGAHAFO);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
    
+   
+public void setDistricts_Ashanti(String districts_ashanti) {
+underlyingNode.setProperty(DISTRICTS_ASHANTI,districts_ashanti);
+}
+
+public String getDistricts_Ashanti(){
+          try {
+          return (String) underlyingNode.getProperty(DISTRICTS_ASHANTI);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
 public void setFarmerimage(String farmerimage) {
 underlyingNode.setProperty(FARMERIMAGE,farmerimage);
 }

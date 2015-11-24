@@ -35,7 +35,34 @@ public class BiodataWrapper {
     private String farmperimeter = "farmperimeter";
     String farmerimage="farmerimage";
     String telephonenumber="telephonenumber";
+    String Districts_Ashanti="Districts_Ashanti";
+    String Districts_BrongAhafo="Districts_BrongAhafo";
+    String Districts_Volta="Districts_Volta";
     
+ public  void setDistricts_Volta(String Districts_Volta) {
+      this.Districts_Volta=Districts_Volta;
+    }
+ public  String getDistricts_Volta() {
+        return Districts_Volta;
+
+    }
+    
+    
+ public  void setDistricts_BrongAhafo(String Districts_BrongAhafo) {
+      this.Districts_BrongAhafo=Districts_BrongAhafo;
+    }
+ public  String getDistricts_BrongAhafo() {
+        return Districts_BrongAhafo;
+
+    }
+    
+ public  void setDistricts_Ashanti(String Districts_Ashanti) {
+      this.Districts_Ashanti=Districts_Ashanti;
+    }
+ public  String getDistricts_Ashanti() {
+        return Districts_Ashanti;
+
+    }
  public  void setFarmerimage(String farmerimage) {
       this.farmerimage=farmerimage;
     }

@@ -36,7 +36,7 @@ public class FmpPostHarvestBudgetModel {
                 return new FmpPostHarvestBudget(node);
             }
         } catch (Exception e) {
-            System.out.println("Unable to Find geofence");
+            System.out.println("Unable to FmpPostHarvestBudget");
         }
 
         return null;

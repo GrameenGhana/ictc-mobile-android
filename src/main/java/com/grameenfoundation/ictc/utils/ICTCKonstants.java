@@ -64,7 +64,8 @@ public class ICTCKonstants {
      public static final String OPERATIONS ="farm_operation";
     
     //p
-    public static final String PROPERTIES_FILE = "/config/it.conf";
+    //public static final String PROPERTIES_FILE = "/config/it.conf";
+    public static final String PROPERTIES_FILE = "/config/ictc.conf";
     public static final String POST_HARVEST = "post_harvest";
     public static final String PRODUCTION = "production";
     public static final String PROFILING = "profiling";
