@@ -43,7 +43,16 @@ public class BaselinePostHarvestBudgetWrapper {
     String unit_cost_of_warehouse_base="unit_cost_of_warehouse_base";
     String unit_labor_cost_bagging_base="unit_labor_cost_bagging_base";
     String unit_labor_cost_winnowing_base="unit_labor_cost_winnowing_base";
+    String crop_to_cultivate_base="crop_to_cultivate_base";
     
+    
+ public  void setCrop_to_cultivate_base(String crop_to_cultivate_base) {
+      this.crop_to_cultivate_base=crop_to_cultivate_base;
+    }
+ public  String getCrop_to_cultivate_base() {
+        return crop_to_cultivate_base;
+
+    }
     
  public  void setUnit_labor_cost_winnowing_base(String unit_labor_cost_winnowing_base) {
       this.unit_labor_cost_winnowing_base=unit_labor_cost_winnowing_base;

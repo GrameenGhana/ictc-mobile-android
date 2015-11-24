@@ -55,14 +55,27 @@ public class BaselinePostHarvestBudget extends Status implements GeneralInterfac
     public static String UNIT_COST_OF_WAREHOUSE_BASE="unit_cost_of_warehouse_base";
     public static String UNIT_LABOR_COST_BAGGING_BASE="unit_labor_cost_bagging_base";
     public static String UNIT_LABOR_COST_WINNOWING_BASE="unit_labor_cost_winnowing_base";
-    
-    
-public void setUnit_labor_cost_winnowing_base(String unit_labor_cost_winnowing_base) {
-underlyingNode.setProperty(UNIT_LABOR_COST_WINNOWING_BASE,unit_labor_cost_winnowing_base);
-}
+    public static String CROP_TO_CULTIVATE_BASE = "crop_to_cultivate_base";
 
-public String getUnit_labor_cost_winnowing_base(){
-          try {
+    public void setCrop_to_cultivate_base(String crop_to_cultivate_base) {
+        underlyingNode.setProperty(CROP_TO_CULTIVATE_BASE, crop_to_cultivate_base);
+    }
+
+    public String getCrop_to_cultivate_base() {
+        try {
+            return (String) underlyingNode.getProperty(CROP_TO_CULTIVATE_BASE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public void setUnit_labor_cost_winnowing_base(String unit_labor_cost_winnowing_base) {
+        underlyingNode.setProperty(UNIT_LABOR_COST_WINNOWING_BASE, unit_labor_cost_winnowing_base);
+    }
+
+    public String getUnit_labor_cost_winnowing_base() {
+        try {
           return (String) underlyingNode.getProperty(UNIT_LABOR_COST_WINNOWING_BASE);
 
         } catch (Exception e) {
