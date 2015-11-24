@@ -50,7 +50,42 @@ public class BaselinePostHarvestWrapper {
     String typeofstoragechemical="typeofstoragechemical";
     String typeofstoragestructure="typeofstoragestructure";
     String whatcropareyouplanningtocultivate="whatcropareyouplanningtocultivate";
+    String date_winnowing_completed="date_winnowing_completed";
+    String producestoredproportion="producestoredproportion";
+    String reference_season="reference_season";
+    String reference_year="reference_year";
     
+    
+ public  void setReference_year(String reference_year) {
+      this.reference_year=reference_year;
+    }
+ public  String getReference_year() {
+        return reference_year;
+
+    }
+    
+ public  void setReference_season(String reference_season) {
+      this.reference_season=reference_season;
+    }
+ public  String getReference_season() {
+        return reference_season;
+
+    }
+    
+ public  void setProducestoredproportion(String producestoredproportion) {
+      this.producestoredproportion=producestoredproportion;
+    }
+ public  String getProducestoredproportion() {
+        return producestoredproportion;
+
+    }
+ public  void setDate_winnowing_completed(String date_winnowing_completed) {
+      this.date_winnowing_completed=date_winnowing_completed;
+    }
+ public  String getDate_winnowing_completed() {
+        return date_winnowing_completed;
+
+    }
     
  public  void setWhatcropareyouplanningtocultivate(String whatcropareyouplanningtocultivate) {
       this.whatcropareyouplanningtocultivate=whatcropareyouplanningtocultivate;

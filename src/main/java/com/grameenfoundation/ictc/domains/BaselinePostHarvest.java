@@ -61,8 +61,67 @@ public class BaselinePostHarvest extends Status implements GeneralInterface {
     public static String TYPEOFMACHINEWINONOWING="typeofmachinewinonowing";
     public static String TYPEOFSTORAGECHEMICAL="typeofstoragechemical";
     public static String TYPEOFSTORAGESTRUCTURE="typeofstoragestructure";
-    public static String WHATCROPAREYOUPLANNINGTOCULTIVATE="whatcropareyouplanningtocultivate";
+    public static String WHATCROPAREYOUPLANNINGTOCULTIVATE="Whatcropareyouplanningtocultivate";
+    public static String DATE_WINNOWING_COMPLETED="date_winnowing_completed";
+    public static String PRODUCESTOREDPROPORTION="producestoredproportion";
+    public static String REFERENCE_SEASON="reference_season";
+    public static String REFERENCE_YEAR="reference_year";
     
+    
+    
+public void setReference_year(String reference_year) {
+underlyingNode.setProperty(REFERENCE_YEAR,reference_year);
+}
+
+public String getReference_year(){
+          try {
+          return (String) underlyingNode.getProperty(REFERENCE_YEAR);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setReference_season(String reference_season) {
+underlyingNode.setProperty(REFERENCE_SEASON,reference_season);
+}
+
+public String getReference_season(){
+          try {
+          return (String) underlyingNode.getProperty(REFERENCE_SEASON);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setProducestoredproportion(String producestoredproportion) {
+underlyingNode.setProperty(PRODUCESTOREDPROPORTION,producestoredproportion);
+}
+
+public String getProducestoredproportion(){
+          try {
+          return (String) underlyingNode.getProperty(PRODUCESTOREDPROPORTION);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setDate_winnowing_completed(String date_winnowing_completed) {
+underlyingNode.setProperty(DATE_WINNOWING_COMPLETED,date_winnowing_completed);
+}
+
+public String getDate_winnowing_completed(){
+          try {
+          return (String) underlyingNode.getProperty(DATE_WINNOWING_COMPLETED);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
     
     
 public void setWhatcropareyouplanningtocultivate(String whatcropareyouplanningtocultivate) {
