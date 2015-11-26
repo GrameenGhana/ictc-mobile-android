@@ -44,7 +44,62 @@ public class FmpPostHarvestUpdateWrapper {
   String unit_cost_of_warehouse_update="unit_cost_of_warehouse_update";
   String unit_labor_cost_bagging_update="unit_labor_cost_bagging_update";
   String unit_labor_cost_winnowing_update="unit_labor_cost_winnowing_update";
+  String proportion_stored_with_chemical_update="proportion_stored_with_chemical_update";
+  String reference_season_update="reference_season_update";
+  String reference_year_update="reference_year_update";
+  String total_revenue_update="total_revenue_update";
+  String total_yield_update="total_yield_update";
+  String unit_of_chemical_application="unit_of_chemical_application";
   
+  
+ public  void setUnit_of_chemical_application(String unit_of_chemical_application) {
+      this.unit_of_chemical_application=unit_of_chemical_application;
+    }
+ public  String getUnit_of_chemical_application() {
+        return unit_of_chemical_application;
+
+    }
+  
+ public  void setTotal_yield_update(String total_yield_update) {
+      this.total_yield_update=total_yield_update;
+    }
+ public  String getTotal_yield_update() {
+        return total_yield_update;
+
+    }
+  
+ public  void setTotal_revenue_update(String total_revenue_update) {
+      this.total_revenue_update=total_revenue_update;
+    }
+ public  String getTotal_revenue_update() {
+        return total_revenue_update;
+
+    }
+  
+ public  void setReference_year_update(String reference_year_update) {
+      this.reference_year_update=reference_year_update;
+    }
+ public  String getReference_year_update() {
+        return reference_year_update;
+
+    }
+  
+ public  void setReference_season_update(String reference_season_update) {
+      this.reference_season_update=reference_season_update;
+    }
+ public  String getReference_season_update() {
+        return reference_season_update;
+
+    }  
+    
+    
+ public  void setProportion_stored_with_chemical_update(String proportion_stored_with_chemical_update) {
+      this.proportion_stored_with_chemical_update=proportion_stored_with_chemical_update;
+    }
+ public  String getProportion_stored_with_chemical_update() {
+        return proportion_stored_with_chemical_update;
+
+    }
   
  public  void setUnit_labor_cost_winnowing_update(String unit_labor_cost_winnowing_update) {
       this.unit_labor_cost_winnowing_update=unit_labor_cost_winnowing_update;

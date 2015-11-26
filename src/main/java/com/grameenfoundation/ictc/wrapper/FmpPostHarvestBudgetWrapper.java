@@ -42,7 +42,34 @@ public class FmpPostHarvestBudgetWrapper {
    String unit_cost_manual_threshing="unit_cost_manual_threshing";
    String unit_cost_of_storage_bags="unit_cost_of_storage_bags";
    String unit_labor_cost_bagging="unit_labor_cost_bagging";
+   String labor_period_dehusking="labor_period_dehusking";
+   String reference_season_current="reference_season_current";
+   String reference_year_current="reference_year_current";
    
+   
+ public  void setReference_year_current(String reference_year_current) {
+      this.reference_year_current=reference_year_current;
+    }
+ public  String getReference_year_current() {
+        return reference_year_current;
+
+    }
+   
+ public  void setReference_season_current(String reference_season_current) {
+      this.reference_season_current=reference_season_current;
+    }
+ public  String getReference_season_current() {
+        return reference_season_current;
+
+    }
+   
+ public  void setLabor_period_dehusking(String labor_period_dehusking) {
+      this.labor_period_dehusking=labor_period_dehusking;
+    }
+ public  String getLabor_period_dehusking() {
+        return labor_period_dehusking;
+
+    }
    
  public  void setUnit_labor_cost_bagging(String unit_labor_cost_bagging) {
       this.unit_labor_cost_bagging=unit_labor_cost_bagging;

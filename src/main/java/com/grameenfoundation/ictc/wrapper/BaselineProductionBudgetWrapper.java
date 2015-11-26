@@ -15,65 +15,139 @@ package com.grameenfoundation.ictc.wrapper;
 public class BaselineProductionBudgetWrapper {
     
     
-    String basal_fert_labor_period_base="basal_fert_labor_period_base";
-    String basal_fertilizer_appl_lab_base="basal_fertilizer_appl_lab_base";
-    String cost_of_applicationtopdress_base="cost_of_applicationtopdress_base";
-    String family_labor_basal_fert_base="family_labor_basal_fert_base";
-    String family_labor_fifth_weed_control_base="family_labor_fifth_weed_control_base";
-    String family_labor_first_manual_weed_base="family_labor_first_manual_weed_base";
-    String family_labor_second_weed_base="family_labor_second_weed_base";
-    String family_labor_third_weed_base="family_labor_third_weed_base";
-    String family_labor_topdress_base="family_labor_topdress_base";
-    String fertilizer_app_labour_cost_base="fertilizer_app_labour_cost_base";
-    String fifth_weeding_labor_period_base="fifth_weeding_labor_period_base";
-    String final_harvest_family_labor_base="final_harvest_family_labor_base";
-    String final_harvest_labor_no_base="final_harvest_labor_no_base";
-    String first_weeding_period_base="first_weeding_period_base";
-    String fourth_weeding_family_lab="fourth_weeding_family_lab";
-    String fourth_weeding_labor_period_base="fourth_weeding_labor_period_base";
-    String harrowing_cost_per_acre_base="harrowing_cost_per_acre_base";
-    String harvest_labor_costs_per_acre_base="harvest_labor_costs_per_acre_base";
-    String herbicide_app_labor_period_base="herbicide_app_labor_period_base";
-    String herbicide_application_cost_base="herbicide_application_cost_base";
-    String hoe_ploughing_labour_family_base="hoe_ploughing_labour_family_base";
-    String hoe_ploughing_labour_how_many_base="hoe_ploughing_labour_how_many_base";
-    String hoe_ploughing_labour_period_base="hoe_ploughing_labour_period_base";
-    String labor_fifth_weed_control_base="labor_fifth_weed_control_base";
-    String labor_for_planting_number_base="labor_for_planting_number_base";
-    String labor_for_plantingfamily_base="labor_for_plantingfamily_base";
-    String labor_fourth_weed_control_base="labor_fourth_weed_control_base";
-    String labor_no_first_manual_weed_base="labor_no_first_manual_weed_base";
-    String labor_third_weed_control_base="labor_third_weed_control_base";
-    String land_rent_base="land_rent_base";
-    String period_for_completion_of_harvest_base="period_for_completion_of_harvest_base";
-   String planting_period2_base="planting_period2_base";
-   String ploughing_cost_per_acre_base="ploughing_cost_per_acre_base";
-   String post_herbicide_application_cost_base="post_herbicide_application_cost_base";
-   String post_plant_herbicide_cost_base="post_plant_herbicide_cost_base";
-   String price_of_basal_fertilizer_base="price_of_basal_fertilizer_base";
-   String price_of_herbicide_base="price_of_herbicide_base";
-   String price_of_topdress_fertilizer_base="price_of_topdress_fertilizer_base";
-   String quantity_of_preplant_herbicide_base="quantity_of_preplant_herbicide_base";
-   String refilling_labor_family_base="refilling_labor_family_base";
-   String refilling_labor_period_base="refilling_labor_period_base";
-   String refilling_labour_cost_base="refilling_labour_cost_base";
-   String refilling_labour_no_base="refilling_labour_no_base";
-   String second_weed_labor_base="second_weed_labor_base";
-   String second_weed_period_base="second_weed_period_base";
-   String seed_bed_preparation_period_base="seed_bed_preparation_period_base";
-   String seedbed_labor_cost_base="seedbed_labor_cost_base";
-   String seedbed_labor_number_base="seedbed_labor_number_base";
-   String seedbed_labour_family_base="seedbed_labour_family_base";
-   String seedplanting_material_cost_base="seedplanting_material_cost_base";
-   String third_weeding_period_base="third_weeding_period_base";
-   String topdress_fert_labor_period_base="topdress_fert_labor_period_base";
-   String total_cost_fifth_weed_base="total_cost_fifth_weed_base";
-   String total_cost_first_manual_weed_base="total_cost_first_manual_weed_base";
-   String total_cost_second_weed_base="total_cost_second_weed_base";
-   String total_cost_third_weed_base="total_cost_third_weed_base";
-   String total_number_of_labor_topdress_base="total_number_of_labor_topdress_base";
-   String unit_cost_hoe_ploughing_base="unit_cost_hoe_ploughing_base";
+    String basal_fert_labor_period_base = "basal_fert_labor_period_base";
+    String basal_fertilizer_appl_lab_base = "basal_fertilizer_appl_lab_base";
+    String cost_of_applicationtopdress_base = "cost_of_applicationtopdress_base";
+    String family_labor_basal_fert_base = "family_labor_basal_fert_base";
+    String family_labor_fifth_weed_control_base = "family_labor_fifth_weed_control_base";
+    String family_labor_first_manual_weed_base = "family_labor_first_manual_weed_base";
+    String family_labor_second_weed_base = "family_labor_second_weed_base";
+    String family_labor_third_weed_base = "family_labor_third_weed_base";
+    String family_labor_topdress_base = "family_labor_topdress_base";
+    String fertilizer_app_labour_cost_base = "fertilizer_app_labour_cost_base";
+    String fifth_weeding_labor_period_base = "fifth_weeding_labor_period_base";
+    String final_harvest_family_labor_base = "final_harvest_family_labor_base";
+    String final_harvest_labor_no_base = "final_harvest_labor_no_base";
+    String first_weeding_period_base = "first_weeding_period_base";
+    String fourth_weeding_family_lab = "fourth_weeding_family_lab";
+    String fourth_weeding_labor_period_base = "fourth_weeding_labor_period_base";
+    String harrowing_cost_per_acre_base = "harrowing_cost_per_acre_base";
+    String harvest_labor_costs_per_acre_base = "harvest_labor_costs_per_acre_base";
+    String herbicide_app_labor_period_base = "herbicide_app_labor_period_base";
+    String herbicide_application_cost_base = "herbicide_application_cost_base";
+    String hoe_ploughing_labour_family_base = "hoe_ploughing_labour_family_base";
+    String hoe_ploughing_labour_how_many_base = "hoe_ploughing_labour_how_many_base";
+    String hoe_ploughing_labour_period_base = "hoe_ploughing_labour_period_base";
+    String labor_fifth_weed_control_base = "labor_fifth_weed_control_base";
+    String labor_for_planting_number_base = "labor_for_planting_number_base";
+    String labor_for_plantingfamily_base = "labor_for_plantingfamily_base";
+    String labor_fourth_weed_control_base = "labor_fourth_weed_control_base";
+    String labor_no_first_manual_weed_base = "labor_no_first_manual_weed_base";
+    String labor_third_weed_control_base = "labor_third_weed_control_base";
+    String land_rent_base = "land_rent_base";
+    String period_for_completion_of_harvest_base = "period_for_completion_of_harvest_base";
+    String planting_period2_base = "planting_period2_base";
+    String ploughing_cost_per_acre_base = "ploughing_cost_per_acre_base";
+    String post_herbicide_application_cost_base = "post_herbicide_application_cost_base";
+    String post_plant_herbicide_cost_base = "post_plant_herbicide_cost_base";
+    String price_of_basal_fertilizer_base = "price_of_basal_fertilizer_base";
+    String price_of_herbicide_base = "price_of_herbicide_base";
+    String price_of_topdress_fertilizer_base = "price_of_topdress_fertilizer_base";
+    String quantity_of_preplant_herbicide_base = "quantity_of_preplant_herbicide_base";
+    String refilling_labor_family_base = "refilling_labor_family_base";
+    String refilling_labor_period_base = "refilling_labor_period_base";
+    String refilling_labour_cost_base = "refilling_labour_cost_base";
+    String refilling_labour_no_base = "refilling_labour_no_base";
+    String second_weed_labor_base = "second_weed_labor_base";
+    String second_weed_period_base = "second_weed_period_base";
+    String seed_bed_preparation_period_base = "seed_bed_preparation_period_base";
+    String seedbed_labor_cost_base = "seedbed_labor_cost_base";
+    String seedbed_labor_number_base = "seedbed_labor_number_base";
+    String seedbed_labour_family_base = "seedbed_labour_family_base";
+    String seedplanting_material_cost_base = "seedplanting_material_cost_base";
+    String third_weeding_period_base = "third_weeding_period_base";
+    String topdress_fert_labor_period_base = "topdress_fert_labor_period_base";
+    String total_cost_fifth_weed_base = "total_cost_fifth_weed_base";
+    String total_cost_first_manual_weed_base = "total_cost_first_manual_weed_base";
+    String total_cost_second_weed_base = "total_cost_second_weed_base";
+    String total_cost_third_weed_base = "total_cost_third_weed_base";
+    String total_number_of_labor_topdress_base = "total_number_of_labor_topdress_base";
+    String unit_cost_hoe_ploughing_base = "unit_cost_hoe_ploughing_base";
+    String period_postplant_herb_2 = "period_postplant_herb_2";
+    String price_postplant_herb_2 = "price_postplant_herb_2";
+    String price_postplant_herb_3 = "price_postplant_herb_3";
+    String qty_of_bfert_base = "qty_of_bfert_base";
+    String qty_postplant_herb_1 = "qty_postplant_herb_1";
+    String qty_postplant_herb_2 = "qty_postplant_herb_2";
+    String qty_postplant_herb_3 = "qty_postplant_herb_3";
+   String qty_tfer="qty_tfer";
    
+   
+ public  void setQty_tfer(String qty_tfer) {
+      this.qty_tfer=qty_tfer;
+    }
+ public  String getQty_tfer() {
+        return qty_tfer;
+
+    }
+   
+ public  void setQty_postplant_herb_3(String qty_postplant_herb_3) {
+      this.qty_postplant_herb_3=qty_postplant_herb_3;
+    }
+ public  String getQty_postplant_herb_3() {
+        return qty_postplant_herb_3;
+
+    }
+   
+ public  void setQty_postplant_herb_2(String qty_postplant_herb_2) {
+      this.qty_postplant_herb_2=qty_postplant_herb_2;
+    }
+ public  String getQty_postplant_herb_2() {
+        return qty_postplant_herb_2;
+
+    }
+   
+ public  void setQty_postplant_herb_1(String qty_postplant_herb_1) {
+      this.qty_postplant_herb_1=qty_postplant_herb_1;
+    }
+ public  String getQty_postplant_herb_1() {
+        return qty_postplant_herb_1;
+
+    }
+   
+ public  void setQty_of_bfert_base(String qty_of_bfert_base) {
+      this.qty_of_bfert_base=qty_of_bfert_base;
+    }
+ public  String getQty_of_bfert_base() {
+        return qty_of_bfert_base;
+
+    }
+   
+   
+ public  void setPrice_postplant_herb_3(String price_postplant_herb_3) {
+      this.price_postplant_herb_3=price_postplant_herb_3;
+    }
+ public  String getPrice_postplant_herb_3() {
+        return price_postplant_herb_3;
+
+    }
+   
+   
+ public  void setPrice_postplant_herb_2(String price_postplant_herb_2) {
+      this.price_postplant_herb_2=price_postplant_herb_2;
+    }
+ public  String getPrice_postplant_herb_2() {
+        return price_postplant_herb_2;
+
+    }
+   
+ public  void setPeriod_postplant_herb_2(String period_postplant_herb_2) {
+      this.period_postplant_herb_2=period_postplant_herb_2;
+    }
+ public  String getPeriod_postplant_herb_2() {
+        return period_postplant_herb_2;
+
+    }
    
  public  void setUnit_cost_hoe_ploughing_base(String unit_cost_hoe_ploughing_base) {
       this.unit_cost_hoe_ploughing_base=unit_cost_hoe_ploughing_base;

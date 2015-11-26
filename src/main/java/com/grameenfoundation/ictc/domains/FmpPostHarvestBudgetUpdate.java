@@ -53,7 +53,97 @@ public class FmpPostHarvestBudgetUpdate extends Status implements GeneralInterfa
     public static String UNIT_COST_OF_WAREHOUSE_UPDATE="unit_cost_of_warehouse_update";
     public static String UNIT_LABOR_COST_BAGGING_UPDATE="unit_labor_cost_bagging_update";
     public static String UNIT_LABOR_COST_WINNOWING_UPDATE="unit_labor_cost_winnowing_update";
+    public static String PROPORTION_STORED_WITH_CHEMICAL_UPDATE="proportion_stored_with_chemical_update";
+    public static String REFERENCE_SEASON_UPDATE="reference_season_update";
+    public static String REFERENCE_YEAR_UPDATE="reference_year_update";
+    public static String TOTAL_REVENUE_UPDATE="total_revenue_update";
+    public static String TOTAL_YIELD_UPDATE="total_yield_update";
+    public static String UNIT_OF_CHEMICAL_APPLICATION="unit_of_chemical_application";
     
+    
+    
+public void setUnit_of_chemical_application(String unit_of_chemical_application) {
+underlyingNode.setProperty(UNIT_OF_CHEMICAL_APPLICATION,unit_of_chemical_application);
+}
+
+public String getUnit_of_chemical_application(){
+          try {
+          return (String) underlyingNode.getProperty(UNIT_OF_CHEMICAL_APPLICATION);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setTotal_yield_update(String total_yield_update) {
+underlyingNode.setProperty(TOTAL_YIELD_UPDATE,total_yield_update);
+}
+
+public String getTotal_yield_update(){
+          try {
+          return (String) underlyingNode.getProperty(TOTAL_YIELD_UPDATE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setTotal_revenue_update(String total_revenue_update) {
+underlyingNode.setProperty(TOTAL_REVENUE_UPDATE,total_revenue_update);
+}
+
+public String getTotal_revenue_update(){
+          try {
+          return (String) underlyingNode.getProperty(TOTAL_REVENUE_UPDATE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setReference_year_update(String reference_year_update) {
+underlyingNode.setProperty(REFERENCE_YEAR_UPDATE,reference_year_update);
+}
+
+public String getReference_year_update(){
+          try {
+          return (String) underlyingNode.getProperty(REFERENCE_YEAR_UPDATE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+public void setReference_season_update(String reference_season_update) {
+underlyingNode.setProperty(REFERENCE_SEASON_UPDATE,reference_season_update);
+}
+
+public String getReference_season_update(){
+          try {
+          return (String) underlyingNode.getProperty(REFERENCE_SEASON_UPDATE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setProportion_stored_with_chemical_update(String proportion_stored_with_chemical_update) {
+underlyingNode.setProperty(PROPORTION_STORED_WITH_CHEMICAL_UPDATE,proportion_stored_with_chemical_update);
+}
+
+public String getProportion_stored_with_chemical_update(){
+          try {
+          return (String) underlyingNode.getProperty(PROPORTION_STORED_WITH_CHEMICAL_UPDATE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
     
 public void setUnit_labor_cost_winnowing_update(String unit_labor_cost_winnowing_update) {
 underlyingNode.setProperty(UNIT_LABOR_COST_WINNOWING_UPDATE,unit_labor_cost_winnowing_update);

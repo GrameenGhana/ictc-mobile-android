@@ -32,7 +32,185 @@ public class Profiling extends Status implements GeneralInterface {
     public static String REGFAMILYLABOR_NO = "regfamilylabor_no";
     public static String RISKDISPOSITIONBORROW = "riskdispositionborrow";
     public static String SOILFERTILITYPRACTICES = "soilfertilitypractices";
+    public static String SECOND_CONSTRAINT_AFTER_FARM_PLANNING="second_constraint_after_farm_planning";
+    public static String SECOND_CONSTRAINT_AFTER_MARKETING="second_constraint_after_marketing";
+    public static String SECOND_CONSTRAINT_AFTER_POST_HARVEST="second_constraint_after_post_harvest";
+    public static String MAIN_CONSTRAINT_FARMPLANNING="main_constraint_farmplanning";
+    public static String MAIN_CONSTRAINT_FIELD_PRODUCTION="main_constraint_field_production";
+    public static String MAIN_CONSTRAINT_GENERAL="main_constraint_general";
+    public static String MAIN_CONSTRAINT_MARKETING="main_constraint_marketing";
+    public static String MAIN_CONSTRAINT_POST_HARVEST="main_constraint_post_harvest";
+    public static String OTHER_CONSTRAINT_FARM_PLANNING="other_constraint_farm_planning";
+    public static String OTHER_CONSTRAINT_FIELD_PRODUCTION="other_constraint_field_production";
+    public static String OTHER_CONSTRAINT_MARKETING="other_constraint_marketing";
+    public static String OTHER_CONSTRAINT_POST_HARVEST="other_constraint_post_harvest";
     
+    
+public void setOther_constraint_post_harvest(String other_constraint_post_harvest) {
+underlyingNode.setProperty(OTHER_CONSTRAINT_POST_HARVEST,other_constraint_post_harvest);
+}
+
+public String getOther_constraint_post_harvest(){
+          try {
+          return (String) underlyingNode.getProperty(OTHER_CONSTRAINT_POST_HARVEST);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setOther_constraint_marketing(String other_constraint_marketing) {
+underlyingNode.setProperty(OTHER_CONSTRAINT_MARKETING,other_constraint_marketing);
+}
+
+public String getOther_constraint_marketing(){
+          try {
+          return (String) underlyingNode.getProperty(OTHER_CONSTRAINT_MARKETING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setOther_constraint_field_production(String other_constraint_field_production) {
+underlyingNode.setProperty(OTHER_CONSTRAINT_FIELD_PRODUCTION,other_constraint_field_production);
+}
+
+public String getOther_constraint_field_production(){
+          try {
+          return (String) underlyingNode.getProperty(OTHER_CONSTRAINT_FIELD_PRODUCTION);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+public void setOther_constraint_farm_planning(String other_constraint_farm_planning) {
+underlyingNode.setProperty(OTHER_CONSTRAINT_FARM_PLANNING,other_constraint_farm_planning);
+}
+
+public String getOther_constraint_farm_planning(){
+          try {
+          return (String) underlyingNode.getProperty(OTHER_CONSTRAINT_FARM_PLANNING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setMain_constraint_post_harvest(String main_constraint_post_harvest) {
+underlyingNode.setProperty(MAIN_CONSTRAINT_POST_HARVEST,main_constraint_post_harvest);
+}
+
+public String getMain_constraint_post_harvest(){
+          try {
+          return (String) underlyingNode.getProperty(MAIN_CONSTRAINT_POST_HARVEST);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+public void setMain_constraint_marketing(String main_constraint_marketing) {
+underlyingNode.setProperty(MAIN_CONSTRAINT_MARKETING,main_constraint_marketing);
+}
+
+public String getMain_constraint_marketing(){
+          try {
+          return (String) underlyingNode.getProperty(MAIN_CONSTRAINT_MARKETING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setMain_constraint_general(String main_constraint_general) {
+underlyingNode.setProperty(MAIN_CONSTRAINT_GENERAL,main_constraint_general);
+}
+
+public String getMain_constraint_general(){
+          try {
+          return (String) underlyingNode.getProperty(MAIN_CONSTRAINT_GENERAL);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+public void setMain_constraint_field_production(String main_constraint_field_production) {
+underlyingNode.setProperty(MAIN_CONSTRAINT_FIELD_PRODUCTION,main_constraint_field_production);
+}
+
+public String getMain_constraint_field_production(){
+          try {
+          return (String) underlyingNode.getProperty(MAIN_CONSTRAINT_FIELD_PRODUCTION);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setMain_constraint_farmplanning(String main_constraint_farmplanning) {
+underlyingNode.setProperty(MAIN_CONSTRAINT_FARMPLANNING,main_constraint_farmplanning);
+}
+
+public String getMain_constraint_farmplanning(){
+          try {
+          return (String) underlyingNode.getProperty(MAIN_CONSTRAINT_FARMPLANNING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setSecond_constraint_after_post_harvest(String second_constraint_after_post_harvest) {
+underlyingNode.setProperty(SECOND_CONSTRAINT_AFTER_POST_HARVEST,second_constraint_after_post_harvest);
+}
+
+public String getSecond_constraint_after_post_harvest(){
+          try {
+          return (String) underlyingNode.getProperty(SECOND_CONSTRAINT_AFTER_POST_HARVEST);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+public void setSecond_constraint_after_marketing(String second_constraint_after_marketing) {
+underlyingNode.setProperty(SECOND_CONSTRAINT_AFTER_MARKETING,second_constraint_after_marketing);
+}
+
+public String getSecond_constraint_after_marketing(){
+          try {
+          return (String) underlyingNode.getProperty(SECOND_CONSTRAINT_AFTER_MARKETING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setSecond_constraint_after_farm_planning(String second_constraint_after_farm_planning) {
+underlyingNode.setProperty(SECOND_CONSTRAINT_AFTER_FARM_PLANNING,second_constraint_after_farm_planning);
+}
+
+public String getSecond_constraint_after_farm_planning(){
+          try {
+          return (String) underlyingNode.getProperty(SECOND_CONSTRAINT_AFTER_FARM_PLANNING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
     
      public Profiling(Node underlyingNode) {
         super(underlyingNode);

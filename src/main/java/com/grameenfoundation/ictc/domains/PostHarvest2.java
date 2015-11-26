@@ -63,7 +63,80 @@ public static String TYPEOFMACHINE="typeofmachine";
 public static String TYPEOFMACHINEWINOWING="typeofmachinewinowing";
 public static String TYPEOFSTORAGECHEMICAL="typeofstoragechemical";
 public static String TYPEOFSTORAGESTRUCTURE="typeofstoragestructure";
+public static String DATE_OF_COMPLETING_WINNOWING="date_of_completing_winnowing";
+public static String PROPORTION_STORED_WITH_CHEMICAL="proportion_stored_with_chemical";
+public static String REFERENCE_SEASON_CURRENT="reference_season_current";
+public static String REFERENCE_YEAR_CURRENT="reference_year_current";
+public static String UNIT_OF_CHEMICAL_APPLICATION="unit_of_chemical_application";
 
+
+public void setUnit_of_chemical_application(String unit_of_chemical_application) {
+underlyingNode.setProperty(UNIT_OF_CHEMICAL_APPLICATION,unit_of_chemical_application);
+}
+
+public String getUnit_of_chemical_application(){
+          try {
+          return (String) underlyingNode.getProperty(UNIT_OF_CHEMICAL_APPLICATION);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setReference_year_current(String reference_year_current) {
+underlyingNode.setProperty(REFERENCE_YEAR_CURRENT,reference_year_current);
+}
+
+public String getReference_year_current(){
+          try {
+          return (String) underlyingNode.getProperty(REFERENCE_YEAR_CURRENT);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setReference_season_current(String reference_season_current) {
+underlyingNode.setProperty(REFERENCE_SEASON_CURRENT,reference_season_current);
+}
+
+public String getReference_season_current(){
+          try {
+          return (String) underlyingNode.getProperty(REFERENCE_SEASON_CURRENT);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setProportion_stored_with_chemical(String proportion_stored_with_chemical) {
+underlyingNode.setProperty(PROPORTION_STORED_WITH_CHEMICAL,proportion_stored_with_chemical);
+}
+
+public String getProportion_stored_with_chemical(){
+          try {
+          return (String) underlyingNode.getProperty(PROPORTION_STORED_WITH_CHEMICAL);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setDate_of_completing_winnowing(String date_of_completing_winnowing) {
+underlyingNode.setProperty(DATE_OF_COMPLETING_WINNOWING,date_of_completing_winnowing);
+}
+
+public String getDate_of_completing_winnowing(){
+          try {
+          return (String) underlyingNode.getProperty(DATE_OF_COMPLETING_WINNOWING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
 
 public void setTypeofstoragestructure(String typeofstoragestructure) {

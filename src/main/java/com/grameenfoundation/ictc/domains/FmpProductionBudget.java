@@ -88,7 +88,109 @@ public class FmpProductionBudget extends Status implements GeneralInterface {
     public static String TOTAL_COST_OF_LABOR_THIRD_MANUAL_WEED_CO="total_cost_of_labor_third_manual_weed_co";
     public static String TOTAL_NUMBER_OF_LABOR_TOPDRESS="total_number_of_labor_topdress";
     public static String UNIT_COST_HOE_PLOUGHING="unit_cost_hoe_ploughing";
+    public static String COST_OF_BASAL_FERTILIZER="cost_of_basal_fertilizer";
+    public static String COST_OF_HERBICIDE_GHC="cost_of_herbicide_ghc";
+    public static String COST_OF_TOPDRESS_FERTILIZER="cost_of_topdress_fertilizer";
+    public static String HARROWING_COST_TOTAL="harrowing_cost_total";
+    public static String HARVEST_LABOR_COSTS="harvest_labor_costs";
+    public static String PLOUGHING_COST_TOTAL="ploughing_cost_total";
+    public static String TOTAL_COST_HOE_PLOUGHING="total_cost_hoe_ploughing";
     
+    
+public void setTotal_cost_hoe_ploughing(String total_cost_hoe_ploughing) {
+underlyingNode.setProperty(TOTAL_COST_HOE_PLOUGHING,total_cost_hoe_ploughing);
+}
+
+public String getTotal_cost_hoe_ploughing(){
+          try {
+          return (String) underlyingNode.getProperty(TOTAL_COST_HOE_PLOUGHING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setPloughing_cost_total(String ploughing_cost_total) {
+underlyingNode.setProperty(PLOUGHING_COST_TOTAL,ploughing_cost_total);
+}
+
+public String getPloughing_cost_total(){
+          try {
+          return (String) underlyingNode.getProperty(PLOUGHING_COST_TOTAL);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setHarvest_labor_costs(String harvest_labor_costs) {
+underlyingNode.setProperty(HARVEST_LABOR_COSTS,harvest_labor_costs);
+}
+
+public String getHarvest_labor_costs(){
+          try {
+          return (String) underlyingNode.getProperty(HARVEST_LABOR_COSTS);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+public void setHarrowing_cost_total(String harrowing_cost_total) {
+underlyingNode.setProperty(HARROWING_COST_TOTAL,harrowing_cost_total);
+}
+
+public String getHarrowing_cost_total(){
+          try {
+          return (String) underlyingNode.getProperty(HARROWING_COST_TOTAL);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setCost_of_topdress_fertilizer(String cost_of_topdress_fertilizer) {
+underlyingNode.setProperty(COST_OF_TOPDRESS_FERTILIZER,cost_of_topdress_fertilizer);
+}
+
+public String getCost_of_topdress_fertilizer(){
+          try {
+          return (String) underlyingNode.getProperty(COST_OF_TOPDRESS_FERTILIZER);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setCost_of_herbicide_ghc(String cost_of_herbicide_ghc) {
+underlyingNode.setProperty(COST_OF_HERBICIDE_GHC,cost_of_herbicide_ghc);
+}
+
+public String getCost_of_herbicide_ghc(){
+          try {
+          return (String) underlyingNode.getProperty(COST_OF_HERBICIDE_GHC);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setCost_of_basal_fertilizer(String cost_of_basal_fertilizer) {
+underlyingNode.setProperty(COST_OF_BASAL_FERTILIZER,cost_of_basal_fertilizer);
+}
+
+public String getCost_of_basal_fertilizer(){
+          try {
+          return (String) underlyingNode.getProperty(COST_OF_BASAL_FERTILIZER);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
     
 public void setUnit_cost_hoe_ploughing(String unit_cost_hoe_ploughing) {
 underlyingNode.setProperty(UNIT_COST_HOE_PLOUGHING,unit_cost_hoe_ploughing);

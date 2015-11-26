@@ -72,7 +72,90 @@ public class FmpProductionBudgetUpdateWrapper {
     String total_cost_second_weed_update="total_cost_second_weed_update";
     String total_cost_third_weed_update="total_cost_third_weed_update";
     String unit_cost_hoe_ploughing_update="unit_cost_hoe_ploughing_update";
+    String basalfertapplicationcostupdate="basalfertapplicationcostupdate";
+    String family_labor_fourth_weeding_update="family_labor_fourth_weeding_update";
+    String herbicidepostplant1quantity="herbicidepostplant1quantity";
+    String herbicidepostplant2quantity="herbicidepostplant2quantity";
+    String postplantherbicide2applicationcost="postplantherbicide2applicationcost";
+    String postplantherbicide2applicationperiod="postplantherbicide2applicationperiod";
+    String postplantherbicide2price="postplantherbicide2price";
+    String qtyofbasalfertilizerupdate="qtyofbasalfertilizerupdate";
+    String qtytopdressfertilizerupdate="qtytopdressfertilizerupdate";
     
+    
+ public  void setQtytopdressfertilizerupdate(String qtytopdressfertilizerupdate) {
+      this.qtytopdressfertilizerupdate=qtytopdressfertilizerupdate;
+    }
+ public  String getQtytopdressfertilizerupdate() {
+        return qtytopdressfertilizerupdate;
+
+    }
+    
+    
+ public  void setQtyofbasalfertilizerupdate(String qtyofbasalfertilizerupdate) {
+      this.qtyofbasalfertilizerupdate=qtyofbasalfertilizerupdate;
+    }
+ public  String getQtyofbasalfertilizerupdate() {
+        return qtyofbasalfertilizerupdate;
+
+    }
+    
+ public  void setPostplantherbicide2price(String postplantherbicide2price) {
+      this.postplantherbicide2price=postplantherbicide2price;
+    }
+ public  String getPostplantherbicide2price() {
+        return postplantherbicide2price;
+
+    }
+    
+ public  void setPostplantherbicide2applicationperiod(String postplantherbicide2applicationperiod) {
+      this.postplantherbicide2applicationperiod=postplantherbicide2applicationperiod;
+    }
+ public  String getPostplantherbicide2applicationperiod() {
+        return postplantherbicide2applicationperiod;
+
+    }
+    
+    
+ public  void setPostplantherbicide2applicationcost(String postplantherbicide2applicationcost) {
+      this.postplantherbicide2applicationcost=postplantherbicide2applicationcost;
+    }
+ public  String getPostplantherbicide2applicationcost() {
+        return postplantherbicide2applicationcost;
+
+    }
+    
+ public  void setHerbicidepostplant2quantity(String herbicidepostplant2quantity) {
+      this.herbicidepostplant2quantity=herbicidepostplant2quantity;
+    }
+ public  String getHerbicidepostplant2quantity() {
+        return herbicidepostplant2quantity;
+
+    }
+    
+ public  void setHerbicidepostplant1quantity(String herbicidepostplant1quantity) {
+      this.herbicidepostplant1quantity=herbicidepostplant1quantity;
+    }
+ public  String getHerbicidepostplant1quantity() {
+        return herbicidepostplant1quantity;
+
+    }
+    
+ public  void setFamily_labor_fourth_weeding_update(String family_labor_fourth_weeding_update) {
+      this.family_labor_fourth_weeding_update=family_labor_fourth_weeding_update;
+    }
+ public  String getFamily_labor_fourth_weeding_update() {
+        return family_labor_fourth_weeding_update;
+
+    }
+    
+ public  void setBasalfertapplicationcostupdate(String basalfertapplicationcostupdate) {
+      this.basalfertapplicationcostupdate=basalfertapplicationcostupdate;
+    }
+ public  String getBasalfertapplicationcostupdate() {
+        return basalfertapplicationcostupdate;
+
+    }
     
  public  void setUnit_cost_hoe_ploughing_update(String unit_cost_hoe_ploughing_update) {
       this.unit_cost_hoe_ploughing_update=unit_cost_hoe_ploughing_update;

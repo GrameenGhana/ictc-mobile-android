@@ -73,7 +73,170 @@ public class BaselineProduction extends Status implements GeneralInterface{
     public static String TYPE_FERTILIZER_TOPDRESS_BASE = "type_fertilizer_topdress_base";
     public static String TYPE_OF_HERBICIDE_POSTPLANT_BASE = "type_of_herbicide_postplant_base";
     public static String TYPE_OF_VARIETY_CULTIVATED_BASE = "type_of_variety_cultivated_base";
-   
+    public static String DATE_POSTPLANT_HERB_SECOND="date_postplant_herb_second";
+    public static String DATE_POSTPLANT_HERB_THIRD="date_postplant_herb_third";
+    public static String NAME_OF_OTHER_VARIETY_CASSAVA_BASE="name_of_other_variety_cassava_base";
+    public static String NAME_OF_OTHER_VARIETY_RICE_BASE="name_of_other_variety_rice_base";
+    public static String NAME_OF_OTHER_VARIETY_YAM_BASE="name_of_other_variety_yam_base";
+    public static String QTYOFPREPLANTHERBICIDE="qtyofpreplantherbicide";
+    public static String QUANTITY_HARVEST_SOLD="quantity_harvest_sold";
+    public static String REFERENCE_SEASON="reference_season";
+    public static String REFERENCE_YEAR="reference_year";
+    public static String REVENUE_FROM_SALES_BASE="revenue_from_sales_base";
+    public static String TYPE_OF_HYBRID="type_of_hybrid";
+    
+    
+public void setType_of_hybrid(String type_of_hybrid) {
+underlyingNode.setProperty(TYPE_OF_HYBRID,type_of_hybrid);
+}
+
+public String getType_of_hybrid(){
+          try {
+          return (String) underlyingNode.getProperty(TYPE_OF_HYBRID);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+public void setRevenue_from_sales_base(String revenue_from_sales_base) {
+underlyingNode.setProperty(REVENUE_FROM_SALES_BASE,revenue_from_sales_base);
+}
+
+public String getRevenue_from_sales_base(){
+          try {
+          return (String) underlyingNode.getProperty(REVENUE_FROM_SALES_BASE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setReference_year(String reference_year) {
+underlyingNode.setProperty(REFERENCE_YEAR,reference_year);
+}
+
+public String getReference_year(){
+          try {
+          return (String) underlyingNode.getProperty(REFERENCE_YEAR);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setReference_season(String reference_season) {
+underlyingNode.setProperty(REFERENCE_SEASON,reference_season);
+}
+
+public String getReference_season(){
+          try {
+          return (String) underlyingNode.getProperty(REFERENCE_SEASON);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setQuantity_harvest_sold(String quantity_harvest_sold) {
+underlyingNode.setProperty(QUANTITY_HARVEST_SOLD,quantity_harvest_sold);
+}
+
+public String getQuantity_harvest_sold(){
+          try {
+          return (String) underlyingNode.getProperty(QUANTITY_HARVEST_SOLD);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setQtyofpreplantherbicide(String qtyofpreplantherbicide) {
+underlyingNode.setProperty(QTYOFPREPLANTHERBICIDE,qtyofpreplantherbicide);
+}
+
+public String getQtyofpreplantherbicide(){
+          try {
+          return (String) underlyingNode.getProperty(QTYOFPREPLANTHERBICIDE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setName_of_other_variety_yam_base(String name_of_other_variety_yam_base) {
+underlyingNode.setProperty(NAME_OF_OTHER_VARIETY_YAM_BASE,name_of_other_variety_yam_base);
+}
+
+public String getName_of_other_variety_yam_base(){
+          try {
+          return (String) underlyingNode.getProperty(NAME_OF_OTHER_VARIETY_YAM_BASE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+public void setName_of_other_variety_rice_base(String name_of_other_variety_rice_base) {
+underlyingNode.setProperty(NAME_OF_OTHER_VARIETY_RICE_BASE,name_of_other_variety_rice_base);
+}
+
+public String getName_of_other_variety_rice_base(){
+          try {
+          return (String) underlyingNode.getProperty(NAME_OF_OTHER_VARIETY_RICE_BASE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+public void setName_of_other_variety_cassava_base(String name_of_other_variety_cassava_base) {
+underlyingNode.setProperty(NAME_OF_OTHER_VARIETY_CASSAVA_BASE,name_of_other_variety_cassava_base);
+}
+
+public String getName_of_other_variety_cassava_base(){
+          try {
+          return (String) underlyingNode.getProperty(NAME_OF_OTHER_VARIETY_CASSAVA_BASE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setDate_postplant_herb_third(String date_postplant_herb_third) {
+underlyingNode.setProperty(DATE_POSTPLANT_HERB_THIRD,date_postplant_herb_third);
+}
+
+public String getDate_postplant_herb_third(){
+          try {
+          return (String) underlyingNode.getProperty(DATE_POSTPLANT_HERB_THIRD);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setDate_postplant_herb_second(String date_postplant_herb_second) {
+underlyingNode.setProperty(DATE_POSTPLANT_HERB_SECOND,date_postplant_herb_second);
+}
+
+public String getDate_postplant_herb_second(){
+          try {
+          return (String) underlyingNode.getProperty(DATE_POSTPLANT_HERB_SECOND);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
    
 public void setType_of_variety_cultivated_base(String type_of_variety_cultivated_base) {
 underlyingNode.setProperty(TYPE_OF_VARIETY_CULTIVATED_BASE,type_of_variety_cultivated_base);

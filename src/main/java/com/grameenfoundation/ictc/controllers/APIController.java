@@ -460,6 +460,7 @@ public class APIController extends HttpServlet {
                  
                  if(bpb!=null)
                  {
+                     System.out.println("budget " + bpb.getBasal_fert_labor_period_base());
                      baselineproductionbudget.put(BaselineProductionBudget.BASAL_FERTILIZER_APPL_LAB_BASE, bpb.getBasal_fertilizer_appl_lab_base());
                      baselineproductionbudget.put(BaselineProductionBudget.BASAL_FERT_LABOR_PERIOD_BASE, bpb.getBasal_fert_labor_period_base());
                      baselineproductionbudget.put(BaselineProductionBudget.COST_OF_APPLICATIONTOPDRESS_BASE, bpb.getCost_of_applicationtopdress_base());

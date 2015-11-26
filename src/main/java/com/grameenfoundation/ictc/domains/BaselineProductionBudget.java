@@ -83,7 +83,126 @@ public class BaselineProductionBudget extends Status implements GeneralInterface
  public static String TOTAL_COST_THIRD_WEED_BASE="total_cost_third_weed_base";
  public static String TOTAL_NUMBER_OF_LABOR_TOPDRESS_BASE="total_number_of_labor_topdress_base";
  public static String UNIT_COST_HOE_PLOUGHING_BASE="unit_cost_hoe_ploughing_base";
+ public static String PERIOD_POSTPLANT_HERB_2="period_postplant_herb_2";
+ public static String PRICE_POSTPLANT_HERB_2="price_postplant_herb_2";
+ public static String PRICE_POSTPLANT_HERB_3="price_postplant_herb_3";
+ public static String QTY_OF_BFERT_BASE="qty_of_bfert_base";
+ public static String QTY_POSTPLANT_HERB_1="qty_postplant_herb_1";
+ public static String QTY_POSTPLANT_HERB_2="qty_postplant_herb_2";
+ public static String QTY_POSTPLANT_HERB_3="qty_postplant_herb_3";
+ public static String QTY_TFER="qty_tfer";
  
+ 
+ 
+public void setQty_tfer(String qty_tfer) {
+underlyingNode.setProperty(QTY_TFER,qty_tfer);
+}
+
+public String getQty_tfer(){
+          try {
+          return (String) underlyingNode.getProperty(QTY_TFER);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+public void setQty_postplant_herb_3(String qty_postplant_herb_3) {
+underlyingNode.setProperty(QTY_POSTPLANT_HERB_3,qty_postplant_herb_3);
+}
+
+public String getQty_postplant_herb_3(){
+          try {
+          return (String) underlyingNode.getProperty(QTY_POSTPLANT_HERB_3);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+public void setQty_postplant_herb_2(String qty_postplant_herb_2) {
+underlyingNode.setProperty(QTY_POSTPLANT_HERB_2,qty_postplant_herb_2);
+}
+
+public String getQty_postplant_herb_2(){
+          try {
+          return (String) underlyingNode.getProperty(QTY_POSTPLANT_HERB_2);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+ 
+ 
+public void setQty_postplant_herb_1(String qty_postplant_herb_1) {
+underlyingNode.setProperty(QTY_POSTPLANT_HERB_1,qty_postplant_herb_1);
+}
+
+public String getQty_postplant_herb_1(){
+          try {
+          return (String) underlyingNode.getProperty(QTY_POSTPLANT_HERB_1);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+ 
+public void setQty_of_bfert_base(String qty_of_bfert_base) {
+underlyingNode.setProperty(QTY_OF_BFERT_BASE,qty_of_bfert_base);
+}
+
+public String getQty_of_bfert_base(){
+          try {
+          return (String) underlyingNode.getProperty(QTY_OF_BFERT_BASE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+ 
+public void setPrice_postplant_herb_3(String price_postplant_herb_3) {
+underlyingNode.setProperty(PRICE_POSTPLANT_HERB_3,price_postplant_herb_3);
+}
+
+public String getPrice_postplant_herb_3(){
+          try {
+          return (String) underlyingNode.getProperty(PRICE_POSTPLANT_HERB_3);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+public void setPrice_postplant_herb_2(String price_postplant_herb_2) {
+underlyingNode.setProperty(PRICE_POSTPLANT_HERB_2,price_postplant_herb_2);
+}
+
+public String getPrice_postplant_herb_2(){
+          try {
+          return (String) underlyingNode.getProperty(PRICE_POSTPLANT_HERB_2);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+ 
+ 
+public void setPeriod_postplant_herb_2(String period_postplant_herb_2) {
+underlyingNode.setProperty(PERIOD_POSTPLANT_HERB_2,period_postplant_herb_2);
+}
+
+public String getPeriod_postplant_herb_2(){
+          try {
+          return (String) underlyingNode.getProperty(PERIOD_POSTPLANT_HERB_2);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
  
  
  

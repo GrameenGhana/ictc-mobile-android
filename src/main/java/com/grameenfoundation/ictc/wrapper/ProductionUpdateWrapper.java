@@ -55,7 +55,79 @@ public class ProductionUpdateWrapper {
  String typeofherbicideforpostplantweedcontrol="typeofherbicideforpostplantweedcontrol";
  String typeoftopdressfertilizer="typeoftopdressfertilizer";
  String whendidyoufininshpalntingyourcrop="whendidyoufininshpalntingyourcrop";
+ String manualweedcontroloccurrence="manualweedcontroloccurrence";
+ String post_plant_herbicide_no_update="post_plant_herbicide_no_update";
+ String postplantherbicidefirst="postplantherbicidefirst";
+ String postplantherbicidefrequency="postplantherbicidefrequency";
+ String postplantherbicidesecond="postplantherbicidesecond";
+ String postplantherbicidethird="postplantherbicidethird";
+ String reason_for_change_of_plant_distances="reason_for_change_of_plant_distances";
+ String refilledproportioncurrent="refilledproportioncurrent";
  
+ 
+ public  void setRefilledproportioncurrent(String refilledproportioncurrent) {
+      this.refilledproportioncurrent=refilledproportioncurrent;
+    }
+ public  String getRefilledproportioncurrent() {
+        return refilledproportioncurrent;
+
+    }
+ 
+ public  void setReason_for_change_of_plant_distances(String reason_for_change_of_plant_distances) {
+      this.reason_for_change_of_plant_distances=reason_for_change_of_plant_distances;
+    }
+ public  String getReason_for_change_of_plant_distances() {
+        return reason_for_change_of_plant_distances;
+
+    }
+ 
+ public  void setPostplantherbicidethird(String postplantherbicidethird) {
+      this.postplantherbicidethird=postplantherbicidethird;
+    }
+ public  String getPostplantherbicidethird() {
+        return postplantherbicidethird;
+
+    }
+ 
+ public  void setPostplantherbicidesecond(String postplantherbicidesecond) {
+      this.postplantherbicidesecond=postplantherbicidesecond;
+    }
+ public  String getPostplantherbicidesecond() {
+        return postplantherbicidesecond;
+
+    }
+ 
+ public  void setPostplantherbicidefrequency(String postplantherbicidefrequency) {
+      this.postplantherbicidefrequency=postplantherbicidefrequency;
+    }
+ public  String getPostplantherbicidefrequency() {
+        return postplantherbicidefrequency;
+
+    }
+ 
+ public  void setPostplantherbicidefirst(String postplantherbicidefirst) {
+      this.postplantherbicidefirst=postplantherbicidefirst;
+    }
+ public  String getPostplantherbicidefirst() {
+        return postplantherbicidefirst;
+
+    }
+ 
+ public  void setPost_plant_herbicide_no_update(String post_plant_herbicide_no_update) {
+      this.post_plant_herbicide_no_update=post_plant_herbicide_no_update;
+    }
+ public  String getPost_plant_herbicide_no_update() {
+        return post_plant_herbicide_no_update;
+
+    }
+ 
+ public  void setManualweedcontroloccurrence(String manualweedcontroloccurrence) {
+      this.manualweedcontroloccurrence=manualweedcontroloccurrence;
+    }
+ public  String getManualweedcontroloccurrence() {
+        return manualweedcontroloccurrence;
+
+    }
  
  public  void setWhendidyoufininshpalntingyourcrop(String whendidyoufininshpalntingyourcrop) {
       this.whendidyoufininshpalntingyourcrop=whendidyoufininshpalntingyourcrop;

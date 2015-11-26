@@ -46,6 +46,172 @@ public class PostHarvestUpdate extends Status implements GeneralInterface {
     public static String TYPEOFSTORAGECHEMICAL="typeofstoragechemical";
     public static String TYPEOFSTORAGESTRUCTURE="typeofstoragestructure";
     public static String WINNOWING="winnowing";
+    public static String DATE_OF_COMPLETING_DEHUSKING="date_of_completing_dehusking";
+    public static String DATECOMPLETIONWINNOWING="datecompletionwinnowing";
+    public static String METHOD_OF_DEHUSKING_UPDATE="method_of_dehusking_update";
+    public static String NOSALEOCCASIONS="nosaleoccasions";
+    public static String OTHER_METHOD_DEHUSKING="other_method_dehusking";
+    public static String PROPORTION_STORED_WITH_CHEMICAL_UPDATE="proportion_stored_with_chemical_update";
+    public static String REFERENCE_SEASON_UPDATE="reference_season_update";
+    public static String REFERENCE_YEAR_UPDATE="reference_year_update";
+    public static String TOTAL_REVENUE_UPDATE="total_revenue_update";
+    public static String TYPE_OF_CROP="type_of_crop";
+    public static String UNIT_OF_CHEMICAL_APPLICATION_UPDATE="unit_of_chemical_application_update";
+    
+    
+    
+public void setUnit_of_chemical_application_update(String unit_of_chemical_application_update) {
+underlyingNode.setProperty(UNIT_OF_CHEMICAL_APPLICATION_UPDATE,unit_of_chemical_application_update);
+}
+
+public String getUnit_of_chemical_application_update(){
+          try {
+          return (String) underlyingNode.getProperty(UNIT_OF_CHEMICAL_APPLICATION_UPDATE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setType_of_crop(String type_of_crop) {
+underlyingNode.setProperty(TYPE_OF_CROP,type_of_crop);
+}
+
+public String getType_of_crop(){
+          try {
+          return (String) underlyingNode.getProperty(TYPE_OF_CROP);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+public void setTotal_revenue_update(String total_revenue_update) {
+underlyingNode.setProperty(TOTAL_REVENUE_UPDATE,total_revenue_update);
+}
+
+public String getTotal_revenue_update(){
+          try {
+          return (String) underlyingNode.getProperty(TOTAL_REVENUE_UPDATE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setReference_year_update(String reference_year_update) {
+underlyingNode.setProperty(REFERENCE_YEAR_UPDATE,reference_year_update);
+}
+
+public String getReference_year_update(){
+          try {
+          return (String) underlyingNode.getProperty(REFERENCE_YEAR_UPDATE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+public void setReference_season_update(String reference_season_update) {
+underlyingNode.setProperty(REFERENCE_SEASON_UPDATE,reference_season_update);
+}
+
+public String getReference_season_update(){
+          try {
+          return (String) underlyingNode.getProperty(REFERENCE_SEASON_UPDATE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+public void setProportion_stored_with_chemical_update(String proportion_stored_with_chemical_update) {
+underlyingNode.setProperty(PROPORTION_STORED_WITH_CHEMICAL_UPDATE,proportion_stored_with_chemical_update);
+}
+
+public String getProportion_stored_with_chemical_update(){
+          try {
+          return (String) underlyingNode.getProperty(PROPORTION_STORED_WITH_CHEMICAL_UPDATE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setOther_method_dehusking(String other_method_dehusking) {
+underlyingNode.setProperty(OTHER_METHOD_DEHUSKING,other_method_dehusking);
+}
+
+public String getOther_method_dehusking(){
+          try {
+          return (String) underlyingNode.getProperty(OTHER_METHOD_DEHUSKING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setNosaleoccasions(String nosaleoccasions) {
+underlyingNode.setProperty(NOSALEOCCASIONS,nosaleoccasions);
+}
+
+public String getNosaleoccasions(){
+          try {
+          return (String) underlyingNode.getProperty(NOSALEOCCASIONS);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setMethod_of_dehusking_update(String method_of_dehusking_update) {
+underlyingNode.setProperty(METHOD_OF_DEHUSKING_UPDATE,method_of_dehusking_update);
+}
+
+public String getMethod_of_dehusking_update(){
+          try {
+          return (String) underlyingNode.getProperty(METHOD_OF_DEHUSKING_UPDATE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setDatecompletionwinnowing(String datecompletionwinnowing) {
+underlyingNode.setProperty(DATECOMPLETIONWINNOWING,datecompletionwinnowing);
+}
+
+public String getDatecompletionwinnowing(){
+          try {
+          return (String) underlyingNode.getProperty(DATECOMPLETIONWINNOWING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setDate_of_completing_dehusking(String date_of_completing_dehusking) {
+underlyingNode.setProperty(DATE_OF_COMPLETING_DEHUSKING,date_of_completing_dehusking);
+}
+
+public String getDate_of_completing_dehusking(){
+          try {
+          return (String) underlyingNode.getProperty(DATE_OF_COMPLETING_DEHUSKING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
 
     public PostHarvestUpdate(Node underlyingNode) {
         super(underlyingNode);

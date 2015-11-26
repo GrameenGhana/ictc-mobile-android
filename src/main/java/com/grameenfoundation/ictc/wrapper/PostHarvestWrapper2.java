@@ -49,7 +49,52 @@ public class PostHarvestWrapper2 {
     String typeofmachinewinowing="typeofmachinewinowing";
     String typeofstoragechemical="typeofstoragechemical";
     String typeofstoragestructure="typeofstoragestructure";
+    String date_of_completing_winnowing="date_of_completing_winnowing";
+    String proportion_stored_with_chemical="proportion_stored_with_chemical";
+    String reference_season_current="reference_season_current";
+    String reference_year_current="reference_year_current";
+    String unit_of_chemical_application="unit_of_chemical_application";
     
+    
+ public  void setUnit_of_chemical_application(String unit_of_chemical_application) {
+      this.unit_of_chemical_application=unit_of_chemical_application;
+    }
+ public  String getUnit_of_chemical_application() {
+        return unit_of_chemical_application;
+
+    }
+    
+ public  void setReference_year_current(String reference_year_current) {
+      this.reference_year_current=reference_year_current;
+    }
+ public  String getReference_year_current() {
+        return reference_year_current;
+
+    }
+    
+ public  void setReference_season_current(String reference_season_current) {
+      this.reference_season_current=reference_season_current;
+    }
+ public  String getReference_season_current() {
+        return reference_season_current;
+
+    }
+    
+ public  void setProportion_stored_with_chemical(String proportion_stored_with_chemical) {
+      this.proportion_stored_with_chemical=proportion_stored_with_chemical;
+    }
+ public  String getProportion_stored_with_chemical() {
+        return proportion_stored_with_chemical;
+
+    }
+    
+ public  void setDate_of_completing_winnowing(String date_of_completing_winnowing) {
+      this.date_of_completing_winnowing=date_of_completing_winnowing;
+    }
+ public  String getDate_of_completing_winnowing() {
+        return date_of_completing_winnowing;
+
+    }
     
     
  public  void setTypeofstoragestructure(String typeofstoragestructure) {

@@ -31,6 +31,9 @@
                                 <input type="text" value=""  placeholder="username" name="un"/>
                             </div>
                             <div class="span5">
+                                <input type="password" value=""  placeholder="password" name="password"/>
+                            </div>
+                            <div class="span5">
                                 <input type="text" value=""  placeholder="email" name="email"/>
                             </div>
                               

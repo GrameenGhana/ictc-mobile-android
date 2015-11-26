@@ -32,8 +32,25 @@ public class Agent extends Status implements GeneralInterface {
     public static String EMAIL="email";
     public static String USERNAME="username";
     public static String AGENTCODE="agentcode";
+    public static String PASSWORD ="password";
     
-    
+
+public void setPassword(String agentcode) {
+underlyingNode.setProperty(PASSWORD,agentcode);
+}
+
+
+public String getPassword(){
+          try {
+          return (String) underlyingNode.getProperty(PASSWORD);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
 public void setAgentcode(String agentcode) {
 underlyingNode.setProperty(AGENTCODE,agentcode);
 }

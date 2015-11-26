@@ -55,7 +55,51 @@ public class FmpPostHarvestBudget extends Status implements GeneralInterface {
  public static String UNIT_COST_MANUAL_THRESHING="unit_cost_manual_threshing";
  public static String UNIT_COST_OF_STORAGE_BAGS="unit_cost_of_storage_bags";
  public static String UNIT_LABOR_COST_BAGGING="unit_labor_cost_bagging";
+ public static String LABOR_PERIOD_DEHUSKING="labor_period_dehusking";
+ public static String REFERENCE_SEASON_CURRENT="reference_season_current";
+ public static String REFERENCE_YEAR_CURRENT="reference_year_current";
  
+ 
+ 
+public void setReference_year_current(String reference_year_current) {
+underlyingNode.setProperty(REFERENCE_YEAR_CURRENT,reference_year_current);
+}
+
+public String getReference_year_current(){
+          try {
+          return (String) underlyingNode.getProperty(REFERENCE_YEAR_CURRENT);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+ 
+public void setReference_season_current(String reference_season_current) {
+underlyingNode.setProperty(REFERENCE_SEASON_CURRENT,reference_season_current);
+}
+
+public String getReference_season_current(){
+          try {
+          return (String) underlyingNode.getProperty(REFERENCE_SEASON_CURRENT);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+public void setLabor_period_dehusking(String labor_period_dehusking) {
+underlyingNode.setProperty(LABOR_PERIOD_DEHUSKING,labor_period_dehusking);
+}
+
+public String getLabor_period_dehusking(){
+          try {
+          return (String) underlyingNode.getProperty(LABOR_PERIOD_DEHUSKING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
  
 public void setUnit_labor_cost_bagging(String unit_labor_cost_bagging) {
 underlyingNode.setProperty(UNIT_LABOR_COST_BAGGING,unit_labor_cost_bagging);

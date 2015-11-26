@@ -61,7 +61,105 @@ public class BaselineProductWrapper {
  String type_fertilizer_topdress_base="type_fertilizer_topdress_base";
  String type_of_herbicide_postplant_base="type_of_herbicide_postplant_base";
  String type_of_variety_cultivated_base="type_of_variety_cultivated_base";
+ String date_postplant_herb_second="date_postplant_herb_second";
+ String date_postplant_herb_third="date_postplant_herb_third";
+ String name_of_other_variety_cassava_base="name_of_other_variety_cassava_base";
+ String name_of_other_variety_rice_base="name_of_other_variety_rice_base";
+ String name_of_other_variety_yam_base="name_of_other_variety_yam_base";
+ String qtyofpreplantherbicide="qtyofpreplantherbicide";
+ String quantity_harvest_sold="quantity_harvest_sold";
+ String reference_season="reference_season";
+ String reference_year="reference_year";
+ String type_of_hybrid="type_of_hybrid";
  
+ 
+ public  void setType_of_hybrid(String type_of_hybrid) {
+      this.type_of_hybrid=type_of_hybrid;
+    }
+ public  String getType_of_hybrid() {
+        return type_of_hybrid;
+
+    }
+ 
+ String revenue_from_sales_base="revenue_from_sales_base";
+ public  void setRevenue_from_sales_base(String revenue_from_sales_base) {
+      this.revenue_from_sales_base=revenue_from_sales_base;
+    }
+ public  String getRevenue_from_sales_base() {
+        return revenue_from_sales_base;
+
+    }
+ public  void setReference_year(String reference_year) {
+      this.reference_year=reference_year;
+    }
+ public  String getReference_year() {
+        return reference_year;
+
+    }
+ 
+ 
+ public  void setReference_season(String reference_season) {
+      this.reference_season=reference_season;
+    }
+ public  String getReference_season() {
+        return reference_season;
+
+    }
+ 
+ public  void setQuantity_harvest_sold(String quantity_harvest_sold) {
+      this.quantity_harvest_sold=quantity_harvest_sold;
+    }
+ public  String getQuantity_harvest_sold() {
+        return quantity_harvest_sold;
+
+    }
+ 
+ public  void setQtyofpreplantherbicide(String qtyofpreplantherbicide) {
+      this.qtyofpreplantherbicide=qtyofpreplantherbicide;
+    }
+ public  String getQtyofpreplantherbicide() {
+        return qtyofpreplantherbicide;
+
+    }
+ public  void setName_of_other_variety_yam_base(String name_of_other_variety_yam_base) {
+      this.name_of_other_variety_yam_base=name_of_other_variety_yam_base;
+    }
+ public  String getName_of_other_variety_yam_base() {
+        return name_of_other_variety_yam_base;
+
+    }
+ 
+ public  void setName_of_other_variety_rice_base(String name_of_other_variety_rice_base) {
+      this.name_of_other_variety_rice_base=name_of_other_variety_rice_base;
+    }
+ public  String getName_of_other_variety_rice_base() {
+        return name_of_other_variety_rice_base;
+
+    }
+ 
+ public  void setName_of_other_variety_cassava_base(String name_of_other_variety_cassava_base) {
+      this.name_of_other_variety_cassava_base=name_of_other_variety_cassava_base;
+    }
+ public  String getName_of_other_variety_cassava_base() {
+        return name_of_other_variety_cassava_base;
+
+    }
+ 
+ public  void setDate_postplant_herb_third(String date_postplant_herb_third) {
+      this.date_postplant_herb_third=date_postplant_herb_third;
+    }
+ public  String getDate_postplant_herb_third() {
+        return date_postplant_herb_third;
+
+    }
+ 
+ public  void setDate_postplant_herb_second(String date_postplant_herb_second) {
+      this.date_postplant_herb_second=date_postplant_herb_second;
+    }
+ public  String getDate_postplant_herb_second() {
+        return date_postplant_herb_second;
+
+    }
  
  public  void setType_of_variety_cultivated_base(String type_of_variety_cultivated_base) {
       this.type_of_variety_cultivated_base=type_of_variety_cultivated_base;

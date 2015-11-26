@@ -41,7 +41,106 @@ public class PostHarvestUpdateWrapper {
     String typeofstoragechemical="typeofstoragechemical";
     String typeofstoragestructure="typeofstoragestructure";
     String winnowing="winnowing";
+    String date_of_completing_dehusking="date_of_completing_dehusking";
+    String datecompletionwinnowing="datecompletionwinnowing";
+    String method_of_dehusking_update="method_of_dehusking_update";
+    String nosaleoccasions="nosaleoccasions";
+    String other_method_dehusking="other_method_dehusking";
+    String proportion_stored_with_chemical_update="proportion_stored_with_chemical_update";
+    String reference_season_update="reference_season_update";
+    String reference_year_update="reference_year_update";
+    String total_revenue_update="total_revenue_update";
+    String type_of_crop="type_of_crop";
+    String unit_of_chemical_application_update="unit_of_chemical_application_update";
     
+    
+ public  void setUnit_of_chemical_application_update(String unit_of_chemical_application_update) {
+      this.unit_of_chemical_application_update=unit_of_chemical_application_update;
+    }
+ public  String getUnit_of_chemical_application_update() {
+        return unit_of_chemical_application_update;
+
+    }
+ public  void setType_of_crop(String type_of_crop) {
+      this.type_of_crop=type_of_crop;
+    }
+ public  String getType_of_crop() {
+        return type_of_crop;
+
+    }
+    
+ public  void setTotal_revenue_update(String total_revenue_update) {
+      this.total_revenue_update=total_revenue_update;
+    }
+ public  String getTotal_revenue_update() {
+        return total_revenue_update;
+
+    }
+    
+ public  void setReference_year_update(String reference_year_update) {
+      this.reference_year_update=reference_year_update;
+    }
+ public  String getReference_year_update() {
+        return reference_year_update;
+
+    }
+    
+ public  void setReference_season_update(String reference_season_update) {
+      this.reference_season_update=reference_season_update;
+    }
+ public  String getReference_season_update() {
+        return reference_season_update;
+
+    }
+    
+ public  void setProportion_stored_with_chemical_update(String proportion_stored_with_chemical_update) {
+      this.proportion_stored_with_chemical_update=proportion_stored_with_chemical_update;
+    }
+ public  String getProportion_stored_with_chemical_update() {
+        return proportion_stored_with_chemical_update;
+
+    }
+    
+ public  void setOther_method_dehusking(String other_method_dehusking) {
+      this.other_method_dehusking=other_method_dehusking;
+    }
+ public  String getOther_method_dehusking() {
+        return other_method_dehusking;
+
+    }
+ public  void setNosaleoccasions(String nosaleoccasions) {
+      this.nosaleoccasions=nosaleoccasions;
+    }
+ public  String getNosaleoccasions() {
+        return nosaleoccasions;
+
+    }
+    
+    
+    
+ public  void setMethod_of_dehusking_update(String method_of_dehusking_update) {
+      this.method_of_dehusking_update=method_of_dehusking_update;
+    }
+ public  String getMethod_of_dehusking_update() {
+        return method_of_dehusking_update;
+
+    }
+    
+ public  void setDatecompletionwinnowing(String datecompletionwinnowing) {
+      this.datecompletionwinnowing=datecompletionwinnowing;
+    }
+ public  String getDatecompletionwinnowing() {
+        return datecompletionwinnowing;
+
+    }
+    
+ public  void setDate_of_completing_dehusking(String date_of_completing_dehusking) {
+      this.date_of_completing_dehusking=date_of_completing_dehusking;
+    }
+ public  String getDate_of_completing_dehusking() {
+        return date_of_completing_dehusking;
+
+    }
     
  public  void setWinnowing(String winnowing) {
       this.winnowing=winnowing;

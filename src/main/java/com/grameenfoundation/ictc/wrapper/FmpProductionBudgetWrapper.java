@@ -75,7 +75,70 @@ public class FmpProductionBudgetWrapper {
     String total_cost_of_labor_third_manual_weed_co="total_cost_of_labor_third_manual_weed_co";
     String total_number_of_labor_topdress="total_number_of_labor_topdress";
     String unit_cost_hoe_ploughing="unit_cost_hoe_ploughing";
+    String cost_of_basal_fertilizer="cost_of_basal_fertilizer";
+    String cost_of_herbicide_ghc="cost_of_herbicide_ghc";
+    String cost_of_topdress_fertilizer="cost_of_topdress_fertilizer";
+    String harrowing_cost_total="harrowing_cost_total";
+    String harvest_labor_costs="harvest_labor_costs";
+    String ploughing_cost_total="ploughing_cost_total";
+    String total_cost_hoe_ploughing="total_cost_hoe_ploughing";
     
+    
+ public  void setTotal_cost_hoe_ploughing(String total_cost_hoe_ploughing) {
+      this.total_cost_hoe_ploughing=total_cost_hoe_ploughing;
+    }
+ public  String getTotal_cost_hoe_ploughing() {
+        return total_cost_hoe_ploughing;
+
+    }
+    
+ public  void setPloughing_cost_total(String ploughing_cost_total) {
+      this.ploughing_cost_total=ploughing_cost_total;
+    }
+ public  String getPloughing_cost_total() {
+        return ploughing_cost_total;
+
+    }
+    
+ public  void setHarvest_labor_costs(String harvest_labor_costs) {
+      this.harvest_labor_costs=harvest_labor_costs;
+    }
+ public  String getHarvest_labor_costs() {
+        return harvest_labor_costs;
+
+    }
+    
+ public  void setHarrowing_cost_total(String harrowing_cost_total) {
+      this.harrowing_cost_total=harrowing_cost_total;
+    }
+ public  String getHarrowing_cost_total() {
+        return harrowing_cost_total;
+
+    }
+    
+ public  void setCost_of_topdress_fertilizer(String cost_of_topdress_fertilizer) {
+      this.cost_of_topdress_fertilizer=cost_of_topdress_fertilizer;
+    }
+ public  String getCost_of_topdress_fertilizer() {
+        return cost_of_topdress_fertilizer;
+
+    }
+    
+ public  void setCost_of_herbicide_ghc(String cost_of_herbicide_ghc) {
+      this.cost_of_herbicide_ghc=cost_of_herbicide_ghc;
+    }
+ public  String getCost_of_herbicide_ghc() {
+        return cost_of_herbicide_ghc;
+
+    }
+    
+ public  void setCost_of_basal_fertilizer(String cost_of_basal_fertilizer) {
+      this.cost_of_basal_fertilizer=cost_of_basal_fertilizer;
+    }
+ public  String getCost_of_basal_fertilizer() {
+        return cost_of_basal_fertilizer;
+
+    }
  public  void setUnit_cost_hoe_ploughing(String unit_cost_hoe_ploughing) {
       this.unit_cost_hoe_ploughing=unit_cost_hoe_ploughing;
     }

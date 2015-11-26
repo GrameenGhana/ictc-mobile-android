@@ -69,7 +69,125 @@ public class ProductionUpdate extends Status implements GeneralInterface {
     public static String TYPEOFTOPDRESSFERTILIZER="typeoftopdressfertilizer";
     public static String WHENDIDYOUFININSHPALNTINGYOURCROP="whendidyoufininshpalntingyourcrop";
     public static String UPDATED="updated";
+    public static String MANUALWEEDCONTROLOCCURRENCE="manualweedcontroloccurrence";
+    public static String POST_PLANT_HERBICIDE_NO_UPDATE="post_plant_herbicide_no_update";
+    public static String POSTPLANTHERBICIDEFIRST="postplantherbicidefirst";
+    public static String POSTPLANTHERBICIDEFREQUENCY="postplantherbicidefrequency";
+    public static String POSTPLANTHERBICIDESECOND="postplantherbicidesecond";
+    public static String POSTPLANTHERBICIDETHIRD="postplantherbicidethird";
+    public static String REASON_FOR_CHANGE_OF_PLANT_DISTANCES="reason_for_change_of_plant_distances";
+    public static String REFILLEDPROPORTIONCURRENT="refilledproportioncurrent";
+    
+    
+    
+public void setRefilledproportioncurrent(String refilledproportioncurrent) {
+underlyingNode.setProperty(REFILLEDPROPORTIONCURRENT,refilledproportioncurrent);
+}
 
+public String getRefilledproportioncurrent(){
+          try {
+          return (String) underlyingNode.getProperty(REFILLEDPROPORTIONCURRENT);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setReason_for_change_of_plant_distances(String reason_for_change_of_plant_distances) {
+underlyingNode.setProperty(REASON_FOR_CHANGE_OF_PLANT_DISTANCES,reason_for_change_of_plant_distances);
+}
+
+public String getReason_for_change_of_plant_distances(){
+          try {
+          return (String) underlyingNode.getProperty(REASON_FOR_CHANGE_OF_PLANT_DISTANCES);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+public void setPostplantherbicidethird(String postplantherbicidethird) {
+underlyingNode.setProperty(POSTPLANTHERBICIDETHIRD,postplantherbicidethird);
+}
+
+public String getPostplantherbicidethird(){
+          try {
+          return (String) underlyingNode.getProperty(POSTPLANTHERBICIDETHIRD);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setPostplantherbicidesecond(String postplantherbicidesecond) {
+underlyingNode.setProperty(POSTPLANTHERBICIDESECOND,postplantherbicidesecond);
+}
+
+public String getPostplantherbicidesecond(){
+          try {
+          return (String) underlyingNode.getProperty(POSTPLANTHERBICIDESECOND);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setPostplantherbicidefrequency(String postplantherbicidefrequency) {
+underlyingNode.setProperty(POSTPLANTHERBICIDEFREQUENCY,postplantherbicidefrequency);
+}
+
+public String getPostplantherbicidefrequency(){
+          try {
+          return (String) underlyingNode.getProperty(POSTPLANTHERBICIDEFREQUENCY);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setPostplantherbicidefirst(String postplantherbicidefirst) {
+underlyingNode.setProperty(POSTPLANTHERBICIDEFIRST,postplantherbicidefirst);
+}
+
+public String getPostplantherbicidefirst(){
+          try {
+          return (String) underlyingNode.getProperty(POSTPLANTHERBICIDEFIRST);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setPost_plant_herbicide_no_update(String post_plant_herbicide_no_update) {
+underlyingNode.setProperty(POST_PLANT_HERBICIDE_NO_UPDATE,post_plant_herbicide_no_update);
+}
+
+public String getPost_plant_herbicide_no_update(){
+          try {
+          return (String) underlyingNode.getProperty(POST_PLANT_HERBICIDE_NO_UPDATE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setManualweedcontroloccurrence(String manualweedcontroloccurrence) {
+underlyingNode.setProperty(MANUALWEEDCONTROLOCCURRENCE,manualweedcontroloccurrence);
+}
+
+public String getManualweedcontroloccurrence(){
+          try {
+          return (String) underlyingNode.getProperty(MANUALWEEDCONTROLOCCURRENCE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
     
     
     
