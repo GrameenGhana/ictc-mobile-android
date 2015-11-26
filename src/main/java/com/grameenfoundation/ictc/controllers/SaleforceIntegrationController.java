@@ -568,7 +568,7 @@ public class SaleforceIntegrationController extends HttpServlet {
 
         String nodeName = field.substring(3);
         System.out.println(nodeName);
-        String finalField = nodeName.substring(0, nodeName.indexOf('_'));
+        String finalField = nodeName.substring(0, nodeName.lastIndexOf("__"));
         return finalField;
 
     }

@@ -308,7 +308,7 @@ public class APIController extends HttpServlet {
                 if(null!=p)
                 {
                     
-                 System.out.println("Production " + p.getAcresofland() + "farmer " + b.getFirstname());
+                
                  production.put( ProductionNew.ACRESOFLAND,p.getAcresofland());
                  production.put( ProductionNew.APPLICATIONMONTHOFHERBICIDEDATE,p.getApplicationmonthofherbicidedate());
                  production.put(ProductionNew.APPLICATIONOFBASALFERTILIZER, p.getApplicationofbasalfertilizer());
