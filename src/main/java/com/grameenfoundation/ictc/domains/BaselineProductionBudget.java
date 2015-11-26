@@ -104,7 +104,7 @@ public String getQty_tfer(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
 public void setQty_postplant_herb_3(String qty_postplant_herb_3) {
@@ -117,7 +117,7 @@ public String getQty_postplant_herb_3(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
 public void setQty_postplant_herb_2(String qty_postplant_herb_2) {
@@ -130,7 +130,7 @@ public String getQty_postplant_herb_2(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
 
  
@@ -145,7 +145,7 @@ public String getQty_postplant_herb_1(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
 
  
@@ -159,7 +159,7 @@ public String getQty_of_bfert_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -173,7 +173,7 @@ public String getPrice_postplant_herb_3(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
 public void setPrice_postplant_herb_2(String price_postplant_herb_2) {
@@ -186,7 +186,7 @@ public String getPrice_postplant_herb_2(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -201,7 +201,7 @@ public String getPeriod_postplant_herb_2(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -216,7 +216,7 @@ public String getUnit_cost_hoe_ploughing_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
 
  
@@ -231,7 +231,7 @@ public String getTotal_number_of_labor_topdress_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
 public void setTotal_cost_third_weed_base(String total_cost_third_weed_base) {
@@ -244,7 +244,7 @@ public String getTotal_cost_third_weed_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -258,7 +258,7 @@ public String getTotal_cost_second_weed_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -272,7 +272,7 @@ public String getTotal_cost_first_manual_weed_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -286,7 +286,7 @@ public String getTotal_cost_fifth_weed_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
 
  
@@ -301,7 +301,7 @@ public String getTopdress_fert_labor_period_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -315,7 +315,7 @@ public String getThird_weeding_period_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -329,7 +329,7 @@ public String getSeedplanting_material_cost_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -343,7 +343,7 @@ public String getSeedbed_labour_family_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
 public void setSeedbed_labor_number_base(String seedbed_labor_number_base) {
@@ -356,7 +356,7 @@ public String getSeedbed_labor_number_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
 
  
@@ -371,7 +371,7 @@ public String getSeedbed_labor_cost_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
 public void setSeed_bed_preparation_period_base(String seed_bed_preparation_period_base) {
@@ -384,7 +384,7 @@ public String getSeed_bed_preparation_period_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -398,7 +398,7 @@ public String getSecond_weed_period_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
 
  
@@ -412,7 +412,7 @@ public String getSecond_weed_labor_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
 public void setRefilling_labour_no_base(String refilling_labour_no_base) {
@@ -425,7 +425,7 @@ public String getRefilling_labour_no_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -440,7 +440,7 @@ public String getRefilling_labour_cost_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -454,7 +454,7 @@ public String getRefilling_labor_period_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -468,7 +468,7 @@ public String getRefilling_labor_family_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -482,7 +482,7 @@ public String getQuantity_of_preplant_herbicide_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -496,7 +496,7 @@ public String getPrice_of_topdress_fertilizer_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -512,7 +512,7 @@ public String getPrice_of_herbicide_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -526,7 +526,7 @@ public String getPrice_of_basal_fertilizer_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -541,7 +541,7 @@ public String getPost_plant_herbicide_cost_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
 
  
@@ -556,7 +556,7 @@ public String getPost_herbicide_application_cost_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -571,7 +571,7 @@ public String getPloughing_cost_per_acre_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
 
  
@@ -585,7 +585,7 @@ public String getPlanting_period2_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -599,7 +599,7 @@ public String getPeriod_for_completion_of_harvest_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -613,7 +613,7 @@ public String getLand_rent_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
 public void setLabor_third_weed_control_base(String labor_third_weed_control_base) {
@@ -626,7 +626,7 @@ public String getLabor_third_weed_control_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
 
  
@@ -641,7 +641,7 @@ public String getLabor_no_first_manual_weed_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
 public void setLabor_fourth_weed_control_base(String labor_fourth_weed_control_base) {
@@ -654,7 +654,7 @@ public String getLabor_fourth_weed_control_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
 
  
@@ -668,7 +668,7 @@ public String getLabor_for_plantingfamily_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -682,7 +682,7 @@ public String getLabor_for_planting_number_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
 
  
@@ -697,7 +697,7 @@ public String getLabor_fifth_weed_control_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
 
  
@@ -711,7 +711,7 @@ public String getHoe_ploughing_labour_period_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -725,7 +725,7 @@ public String getHoe_ploughing_labour_how_many_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -739,7 +739,7 @@ public String getHoe_ploughing_labour_family_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -753,7 +753,7 @@ public String getHerbicide_application_cost_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
 public void setHerbicide_app_labor_period_base(String herbicide_app_labor_period_base) {
@@ -766,7 +766,7 @@ public String getHerbicide_app_labor_period_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
 public void setHarvest_labor_costs_per_acre_base(String harvest_labor_costs_per_acre_base) {
@@ -779,7 +779,7 @@ public String getHarvest_labor_costs_per_acre_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
 
  
@@ -794,7 +794,7 @@ public String getHarrowing_cost_per_acre_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -808,7 +808,7 @@ public String getFourth_weeding_labor_period_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -822,7 +822,7 @@ public String getFourth_weeding_family_lab(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
 public void setFirst_weeding_period_base(String first_weeding_period_base) {
@@ -835,7 +835,7 @@ public String getFirst_weeding_period_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
 public void setFinal_harvest_labor_no_base(String final_harvest_labor_no_base) {
@@ -848,7 +848,7 @@ public String getFinal_harvest_labor_no_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -862,7 +862,7 @@ public String getFinal_harvest_family_labor_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -876,7 +876,7 @@ public String getFifth_weeding_labor_period_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -890,7 +890,7 @@ public String getFertilizer_app_labour_cost_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -906,7 +906,7 @@ public String getFamily_labor_topdress_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -920,7 +920,7 @@ public String getFamily_labor_third_weed_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -934,7 +934,7 @@ public String getFamily_labor_second_weed_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
 
  
@@ -949,7 +949,7 @@ public String getFamily_labor_first_manual_weed_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -963,7 +963,7 @@ public String getFamily_labor_fifth_weed_control_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -978,7 +978,7 @@ public String getFamily_labor_basal_fert_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
 public void setCost_of_applicationtopdress_base(String cost_of_applicationtopdress_base) {
@@ -991,7 +991,7 @@ public String getCost_of_applicationtopdress_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
  
  
@@ -1005,7 +1005,7 @@ public String getBasal_fertilizer_appl_lab_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
 public void setBasal_fert_labor_period_base(String basal_fert_labor_period_base) {
 underlyingNode.setProperty(BASAL_FERT_LABOR_PERIOD_BASE,basal_fert_labor_period_base);
@@ -1017,7 +1017,7 @@ public String getBasal_fert_labor_period_base(){
 
         } catch (Exception e) {
         }
-        return null;
+        return  "";
     }
 
     
