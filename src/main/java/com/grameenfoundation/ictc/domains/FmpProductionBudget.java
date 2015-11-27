@@ -95,7 +95,36 @@ public class FmpProductionBudget extends Status implements GeneralInterface {
     public static String HARVEST_LABOR_COSTS="harvest_labor_costs";
     public static String PLOUGHING_COST_TOTAL="ploughing_cost_total";
     public static String TOTAL_COST_HOE_PLOUGHING="total_cost_hoe_ploughing";
+    public static String BASAL_FERTILIZER_APPLICATION_HIRED="basal_fertilizer_application_hired";
+    public static String FINAL_HARVEST_LABOR_HIRED="final_harvest_labor_hired";
     
+    
+public void setFinal_harvest_labor_hired(String final_harvest_labor_hired) {
+underlyingNode.setProperty(FINAL_HARVEST_LABOR_HIRED,final_harvest_labor_hired);
+}
+
+public String getFinal_harvest_labor_hired(){
+          try {
+          return (String) underlyingNode.getProperty(FINAL_HARVEST_LABOR_HIRED);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setBasal_fertilizer_application_hired(String basal_fertilizer_application_hired) {
+underlyingNode.setProperty(BASAL_FERTILIZER_APPLICATION_HIRED,basal_fertilizer_application_hired);
+}
+
+public String getBasal_fertilizer_application_hired(){
+          try {
+          return (String) underlyingNode.getProperty(BASAL_FERTILIZER_APPLICATION_HIRED);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
     
 public void setTotal_cost_hoe_ploughing(String total_cost_hoe_ploughing) {
 underlyingNode.setProperty(TOTAL_COST_HOE_PLOUGHING,total_cost_hoe_ploughing);

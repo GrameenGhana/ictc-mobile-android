@@ -1016,12 +1016,12 @@ public class SalesforceSyncServlet extends HttpServlet {
        public String getCluster(int score)
     {
         System.out.println("score is " + score);
-        if (score >= 45 && score <= 60) {
+        if (score >= 46 && score <= 70) {
             return "1";
         } 
-        else if (score >=30 && score <=45) {
+        else if (score >=31 && score <=45) {
             return "2";
-        } else if (score >=16 && score <=29) {
+        } else if (score >=16 && score <=20) {
             return "3";
         }
         else {

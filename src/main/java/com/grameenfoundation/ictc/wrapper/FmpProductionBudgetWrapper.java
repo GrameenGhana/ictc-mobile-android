@@ -82,7 +82,26 @@ public class FmpProductionBudgetWrapper {
     String harvest_labor_costs="harvest_labor_costs";
     String ploughing_cost_total="ploughing_cost_total";
     String total_cost_hoe_ploughing="total_cost_hoe_ploughing";
+    String basal_fertilizer_application_hired="basal_fertilizer_application_hired";
+    String final_harvest_labor_hired="final_harvest_labor_hired";
     
+    
+ public  void setFinal_harvest_labor_hired(String final_harvest_labor_hired) {
+      this.final_harvest_labor_hired=final_harvest_labor_hired;
+    }
+ public  String getFinal_harvest_labor_hired() {
+        return final_harvest_labor_hired;
+
+    }
+    
+    
+ public  void setBasal_fertilizer_application_hired(String basal_fertilizer_application_hired) {
+      this.basal_fertilizer_application_hired=basal_fertilizer_application_hired;
+    }
+ public  String getBasal_fertilizer_application_hired() {
+        return basal_fertilizer_application_hired;
+
+    }
     
  public  void setTotal_cost_hoe_ploughing(String total_cost_hoe_ploughing) {
       this.total_cost_hoe_ploughing=total_cost_hoe_ploughing;
