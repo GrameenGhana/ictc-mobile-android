@@ -70,8 +70,136 @@ public static String TOPDRESSFERTILIZEROTHER="topdressfertilizerother";
 public static String TYPEOFBASALFERTILIZER="typeofbasalfertilizer";
 public static String TYPEOFFERTILIZERTOPDRESSING="typeoffertilizertopdressing";
 public static String TYPEOFHERBICIDEPOSTPLANTWEED="typeofherbicidepostplantweed";
+public static String EXPECTED_REVENUE_FROM_SALE="expected_revenue_from_sale";
+public static String CROP_TO_CULTIVATE_CURRENT="crop_to_cultivate_current";
+public static String DATE_POSTPLANT_HERB_SECOND_CURRENT="date_postplant_herb_second_current";
+public static String DATE_POSTPLANT_HERB_THIRD_CURRENT="date_postplant_herb_third_current";
+public static String NAMEOFLOCALVARIETY="nameoflocalvariety";
+public static String QTYOFPREPLANTHERBICIDE="qtyofpreplantherbicide";
+public static String REFERENCE_SEASON_CURRENT="reference_season_current";
+public static String REFERENCE_YEAR_CURRENT="reference_year_current";
+public static String NAME_OF_HYBRID_VARIETY="name_of_hybrid_variety";
 
 
+public void setName_of_hybrid_variety(String name_of_hybrid_variety) {
+underlyingNode.setProperty(NAME_OF_HYBRID_VARIETY,name_of_hybrid_variety);
+}
+
+public String getName_of_hybrid_variety(){
+          try {
+          return (String) underlyingNode.getProperty(NAME_OF_HYBRID_VARIETY);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setReference_year_current(String reference_year_current) {
+underlyingNode.setProperty(REFERENCE_YEAR_CURRENT,reference_year_current);
+}
+
+public String getReference_year_current(){
+          try {
+          return (String) underlyingNode.getProperty(REFERENCE_YEAR_CURRENT);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setReference_season_current(String reference_season_current) {
+underlyingNode.setProperty(REFERENCE_SEASON_CURRENT,reference_season_current);
+}
+
+public String getReference_season_current(){
+          try {
+          return (String) underlyingNode.getProperty(REFERENCE_SEASON_CURRENT);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setQtyofpreplantherbicide(String qtyofpreplantherbicide) {
+underlyingNode.setProperty(QTYOFPREPLANTHERBICIDE,qtyofpreplantherbicide);
+}
+
+public String getQtyofpreplantherbicide(){
+          try {
+          return (String) underlyingNode.getProperty(QTYOFPREPLANTHERBICIDE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setNameoflocalvariety(String nameoflocalvariety) {
+underlyingNode.setProperty(NAMEOFLOCALVARIETY,nameoflocalvariety);
+}
+
+public String getNameoflocalvariety(){
+          try {
+          return (String) underlyingNode.getProperty(NAMEOFLOCALVARIETY);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setDate_postplant_herb_third_current(String date_postplant_herb_third_current) {
+underlyingNode.setProperty(DATE_POSTPLANT_HERB_THIRD_CURRENT,date_postplant_herb_third_current);
+}
+
+public String getDate_postplant_herb_third_current(){
+          try {
+          return (String) underlyingNode.getProperty(DATE_POSTPLANT_HERB_THIRD_CURRENT);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setDate_postplant_herb_second_current(String date_postplant_herb_second_current) {
+underlyingNode.setProperty(DATE_POSTPLANT_HERB_SECOND_CURRENT,date_postplant_herb_second_current);
+}
+
+public String getDate_postplant_herb_second_current(){
+          try {
+          return (String) underlyingNode.getProperty(DATE_POSTPLANT_HERB_SECOND_CURRENT);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setCrop_to_cultivate_current(String crop_to_cultivate_current) {
+underlyingNode.setProperty(CROP_TO_CULTIVATE_CURRENT,crop_to_cultivate_current);
+}
+
+public String getCrop_to_cultivate_current(){
+          try {
+          return (String) underlyingNode.getProperty(CROP_TO_CULTIVATE_CURRENT);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setExpected_revenue_from_sale(String expected_revenue_from_sale) {
+underlyingNode.setProperty(EXPECTED_REVENUE_FROM_SALE,expected_revenue_from_sale);
+}
+
+public String getExpected_revenue_from_sale(){
+          try {
+          return (String) underlyingNode.getProperty(EXPECTED_REVENUE_FROM_SALE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
 public void setTypeofherbicidepostplantweed(String typeofherbicidepostplantweed) {
 underlyingNode.setProperty(TYPEOFHERBICIDEPOSTPLANTWEED,typeofherbicidepostplantweed);

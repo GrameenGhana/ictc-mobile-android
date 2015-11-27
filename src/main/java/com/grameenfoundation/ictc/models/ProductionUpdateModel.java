@@ -23,7 +23,7 @@ public class ProductionUpdateModel {
     
      public ProductionUpdate getProductionUpdate(String field, String value) {
         String q = "match (n:PARENT)-[:FARMER]->(f)-[:"+ICTCRelationshipTypes.HAS_PRODUCTION+"]->(p)-[:"+ICTCRelationshipTypes.UPDATE+"]->m "
-                + " where p." + field + "='" + value + "'"
+                + " where f." + field + "='" + value + "'"
                 + " return m";
 
         System.out.println("Query " + q);

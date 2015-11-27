@@ -24,7 +24,7 @@ public class PostHarvestUpdateModel {
     
      public PostHarvestUpdate getPostHarvestUpdate(String field, String value) {
         String q = "match (n:PARENT)-[:FARMER]->(f)-[:"+ICTCRelationshipTypes.HAS_POSTHARVEST+"]->(p)-[:"+ICTCRelationshipTypes.UPDATE+"]->m "
-                + " where p." + field + "='" + value + "'"
+                + " where f." + field + "='" + value + "'"
                 + " return m";
 
         System.out.println("Query " + q);

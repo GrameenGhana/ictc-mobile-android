@@ -67,7 +67,102 @@ public class ProductionNewWrapper
      String typeofbasalfertilizer="typeofbasalfertilizer";
      String typeoffertilizertopdressing="typeoffertilizertopdressing";
      String typeofherbicidepostplantweed="typeofherbicidepostplantweed";
+     String Expected_produce_sale_proportion="expected_produce_sale_proportion";
+     String Expected_revenue_from_sale="expected_revenue_from_sale";
+     String crop_to_cultivate_current="crop_to_cultivate_current";
+     String date_postplant_herb_second_current="date_postplant_herb_second_current";
+     String date_postplant_herb_third_current="date_postplant_herb_third_current";
+     String nameoflocalvariety="nameoflocalvariety";
+     String qtyofpreplantherbicide="qtyofpreplantherbicide";
+     String reference_season_current="reference_season_current";
+     String reference_year_current="reference_year_current";
+     String Name_of_hybrid_variety="name_of_hybrid_variety";
      
+     
+ public  void setName_of_hybrid_variety(String Name_of_hybrid_variety) {
+      this.Name_of_hybrid_variety=Name_of_hybrid_variety;
+    }
+ public  String getName_of_hybrid_variety() {
+        return Name_of_hybrid_variety;
+
+    }
+     
+ public  void setReference_year_current(String reference_year_current) {
+      this.reference_year_current=reference_year_current;
+    }
+ public  String getReference_year_current() {
+        return reference_year_current;
+
+    }
+     
+ public  void setReference_season_current(String reference_season_current) {
+      this.reference_season_current=reference_season_current;
+    }
+ public  String getReference_season_current() {
+        return reference_season_current;
+
+    }
+     
+ public  void setQtyofpreplantherbicide(String qtyofpreplantherbicide) {
+      this.qtyofpreplantherbicide=qtyofpreplantherbicide;
+    }
+ public  String getQtyofpreplantherbicide() {
+        return qtyofpreplantherbicide;
+
+    }
+     
+ public  void setNameoflocalvariety(String nameoflocalvariety) {
+      this.nameoflocalvariety=nameoflocalvariety;
+    }
+ public  String getNameoflocalvariety() {
+        return nameoflocalvariety;
+
+    }
+     
+     
+ public  void setDate_postplant_herb_third_current(String date_postplant_herb_third_current) {
+      this.date_postplant_herb_third_current=date_postplant_herb_third_current;
+    }
+ public  String getDate_postplant_herb_third_current() {
+        return date_postplant_herb_third_current;
+
+    }
+     
+ public  void setDate_postplant_herb_second_current(String date_postplant_herb_second_current) {
+      this.date_postplant_herb_second_current=date_postplant_herb_second_current;
+    }
+ public  String getDate_postplant_herb_second_current() {
+        return date_postplant_herb_second_current;
+
+    }
+     
+ public  void setCrop_to_cultivate_current(String crop_to_cultivate_current) {
+      this.crop_to_cultivate_current=crop_to_cultivate_current;
+    }
+ public  String getCrop_to_cultivate_current() {
+        return crop_to_cultivate_current;
+
+    }
+     
+ public  void setExpected_revenue_from_sale(String Expected_revenue_from_sale) {
+      this.Expected_revenue_from_sale=Expected_revenue_from_sale;
+    }
+ public  String getExpected_revenue_from_sale() {
+        return Expected_revenue_from_sale;
+
+    }
+     
+
+
+
+ public  void setExpected_produce_sale_proportion(String Expected_produce_sale_proportion) {
+      this.Expected_produce_sale_proportion=Expected_produce_sale_proportion;
+    }
+ public  String getExpected_produce_sale_proportion() {
+        return Expected_produce_sale_proportion;
+
+    }
+
      
      
  public  void setTypeofherbicidepostplantweed(String typeofherbicidepostplantweed) {

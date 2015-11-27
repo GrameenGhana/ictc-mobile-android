@@ -18,6 +18,7 @@ import com.grameenfoundation.ictc.domains.PostHarvest2;
 import com.grameenfoundation.ictc.domains.ProductionNew;
 import com.grameenfoundation.ictc.domains.ProductionUpdate;
 import com.grameenfoundation.ictc.domains.Profiling;
+import com.grameenfoundation.ictc.models.BaselinePostHarvestBudgetModel;
 import com.grameenfoundation.ictc.models.BaselinePostHarvestModel;
 import com.grameenfoundation.ictc.models.BaselineProductionBudgetModel;
 import com.grameenfoundation.ictc.models.BaselineProductionModel;
@@ -600,9 +601,9 @@ public class SalesforceSyncServlet extends HttpServlet {
                     {
                         farmerID = getXmlNodeValue("sf:Farmer_Biodata__c", ele);
                     
-                          if (null != new BaselinePostHarvestModel().getBaselinePostHarvest("Id", farmerID)) {
+                          if (null != new BaselinePostHarvestBudgetModel().getBaselinePostHarvestBudget("Id", farmerID)) {
                             out.println(sendAck());
-                            System.out.println("Baseline Production already exist");
+                            System.out.println("Baseline Post Harvest already exist");
                         } else {
                         
                         org.neo4j.graphdb.Node BPHBParent;
@@ -687,7 +688,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                         farmerID = getXmlNodeValue("sf:Farmer_Biodata__c", ele);
                         if (null != new FmpProductionBudgetModel().getFmpProductionBudget("Id", farmerID)) {
                             out.println(sendAck());
-                            System.out.println("Baseline Post Harvest already exist");
+                            System.out.println("FMP Production Budget already exist");
                         } else {
                             org.neo4j.graphdb.Node FMPPBParent;
                             org.neo4j.graphdb.Node FMPPBNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FMP_PRODUCTION_BUDGET);
