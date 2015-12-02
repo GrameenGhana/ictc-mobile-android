@@ -169,7 +169,19 @@
         <div class="main">
 
             <div class="main-inner">
+                <div class="col-md-8">
+                    <div style="display: none" class="alert alert-danger-alt alert-dismissable" id="error">
+                        <span class="glyphicon glyphicon-certificate"></span>
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>${generalResponse.error}</strong>
+                    </div>
 
+                    <div style="display: none" class="alert alert-success-alt alert-dismissable" id="success">
+                        <span class="glyphicon glyphicon-certificate"></span>
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>${generalResponse.success}</strong>
+                    </div>
+                </div>
                 <div class="container">
 
                     <div class="row">
@@ -292,6 +304,22 @@
 });
     </script>
 
+    
+     <script type="text/javascript">
+    
+     $(function() {
+        var eMsg =$("#error strong").html();
+        var sMsg =$("#success strong").html();
+              
+        alert(sMsg);
+        
+        //Console.info("success message " + sMsg )
+        if(eMsg.length > 1) $(".alert-danger-alt").css("display","block");
+        if(sMsg.length > 1) $(".alert.alert-success-alt").css("display","block");
+        
+    });
+    
+     </script>
 
    <decorator:getProperty property="page.scripts"/>
 

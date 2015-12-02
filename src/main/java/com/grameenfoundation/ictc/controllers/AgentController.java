@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -59,7 +61,7 @@ public class AgentController extends HttpServlet {
             String phonenumber = request.getParameter("pn");
             String agentcode = request.getParameter("ac");
             String password = request.getParameter("password");
-
+            Map<String, String> generalResponse = new HashMap<>();
             AgentModel agentModel = new AgentModel();
 
             AgentWrapper agentWrapper = new AgentWrapper();
@@ -114,15 +116,20 @@ public class AgentController extends HttpServlet {
                 if(null!=serverResponse)
                 {
                     System.out.println("Agent Created");
-                    ICTCUtil.redirect(request, response,request.getContextPath()+"/agent/view_agent.jsp", "");
+                     generalResponse.put(ICTCUtil.SUCCESS, "Agent Created");
+                    
                 }
 
             }
             else
             {
                 System.out.println("Could not send to salesforce");
-            }
-
+                generalResponse.put(ICTCUtil.ERROR, "Agent not created");
+                ICTCUtil.redirect(request, response,"/agent/add_agent.jsp", "");
+            } 
+            
+              request.setAttribute(ICTCUtil.GENERAL_RESPONSE, generalResponse);
+              ICTCUtil.redirect(request, response,"/agent/view_agent.jsp", "");
         }
     }
 

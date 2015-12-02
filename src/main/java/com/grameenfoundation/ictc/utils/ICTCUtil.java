@@ -23,7 +23,9 @@ import javax.servlet.http.HttpSession;
  */
 public class ICTCUtil {
 
-    
+     public static final String GENERAL_RESPONSE = "generalResponse";
+     public static final String ERROR = "error";
+     public static final String SUCCESS = "success";
      //Converts date to timesramp
      public static long dateToLong(Date date) {
         if (date != null) {
