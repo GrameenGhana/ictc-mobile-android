@@ -1000,7 +1000,7 @@ public class APIController extends HttpServlet {
                               
                         }
                         
-                        FmpPostHarvestBudgetUpdate phbu  = fmpPostHarvestBudgetUpdateModel.getFmpProductionBudgetUpdate("Id",bb.getFarmID());
+                        FmpPostHarvestBudgetUpdate phbu  = fmpPostHarvestBudgetUpdateModel.getFmpPostHarvestBudgetUpdate("Id",bb.getFarmID());
                         
                         
                         if(null!=phbu)

@@ -73,55 +73,55 @@ public class AgentController extends HttpServlet {
             agentWrapper.setPassword(password);
 
             boolean created = agentModel.createAgent(agentWrapper);
-//
-//            if (created) {
-//
-//                String serverResponse = "";
-//               
-//                System.out.println("Agent Created");
-//               
-//
-//                JSONObject j = new JSONObject();
-//                j.put("agenttype", agenttype);
-//                j.put("firstname", firstname);
-//                j.put("lastname", lastname);
-//                j.put("email", email);
-//                j.put("username", username + "@ictc.org");
-//                j.put("phonenumber", phonenumber);
-//
-//                HttpClient client = new DefaultHttpClient();
-//                HttpPost post = new HttpPost(url);
-//
-//                System.out.println("data " + j.toString());
-//
-//                List<NameValuePair> nameValuePairs = new ArrayList<>(1);
-//                nameValuePairs.add(new BasicNameValuePair("data",
-//                        j.toString()));
-//                post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-//
-//                HttpResponse resp = client.execute(post);
-//                BufferedReader rd = new BufferedReader(new InputStreamReader(resp.getEntity().getContent()));
-//                String line = "";
-//                while ((line = rd.readLine()) != null) {
-//                    System.out.println(line);
-//                    out.println(line);
-//                    serverResponse += line;
-//
-//                }
-//
-//                System.out.println(serverResponse);
-//                
-//                if(null!=serverResponse)
-//                {
-//                    System.out.println("Agent Created");
-//                    ICTCUtil.redirect(request, response,request.getContextPath()+"/agent/view_agent.jsp", "");
-//                }
-//
-//            }
-//            else
-//            {
-//                System.out.println("Could not send to salesforce");
-//            }
+
+            if (created) {
+
+                String serverResponse = "";
+               
+                System.out.println("Agent Created");
+               
+
+                JSONObject j = new JSONObject();
+                j.put("agenttype", agenttype);
+                j.put("firstname", firstname);
+                j.put("lastname", lastname);
+                j.put("email", email);
+                j.put("username", username + "@ictc.org");
+                j.put("phonenumber", phonenumber);
+
+                HttpClient client = new DefaultHttpClient();
+                HttpPost post = new HttpPost(url);
+
+                System.out.println("data " + j.toString());
+
+                List<NameValuePair> nameValuePairs = new ArrayList<>(1);
+                nameValuePairs.add(new BasicNameValuePair("data",
+                        j.toString()));
+                post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                HttpResponse resp = client.execute(post);
+                BufferedReader rd = new BufferedReader(new InputStreamReader(resp.getEntity().getContent()));
+                String line = "";
+                while ((line = rd.readLine()) != null) {
+                    System.out.println(line);
+                    out.println(line);
+                    serverResponse += line;
+
+                }
+
+                System.out.println(serverResponse);
+                
+                if(null!=serverResponse)
+                {
+                    System.out.println("Agent Created");
+                    ICTCUtil.redirect(request, response,request.getContextPath()+"/agent/view_agent.jsp", "");
+                }
+
+            }
+            else
+            {
+                System.out.println("Could not send to salesforce");
+            }
 
         }
     }

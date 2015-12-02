@@ -21,9 +21,9 @@ import org.neo4j.graphdb.Node;
 public class FmpPostHarvestBudgetUpdateModel {
     
     
-      public  FmpPostHarvestBudgetUpdate getFmpProductionBudgetUpdate(String field, String value) {
-        String q = "match (n:PARENT)-[:FARMER]->(f)-[:"+ICTCRelationshipTypes.FMP_POSTHARVEST_BUDGET+"]->(p)-[:"+ICTCRelationshipTypes.UPDATE+"]->m "
-                + " where p." + field + "='" + value + "'"
+      public  FmpPostHarvestBudgetUpdate getFmpPostHarvestBudgetUpdate(String field, String value) {
+        String q = "match (n:PARENT)-[:FARMER]->(f)-[:"+ICTCRelationshipTypes.HAS_POSTHARVEST_BUDGET+"]->(p)-[:"+ICTCRelationshipTypes.UPDATE+"]->m "
+                + " where f." + field + "='" + value + "'"
                 + " return m";
 
         System.out.println("Query " + q);

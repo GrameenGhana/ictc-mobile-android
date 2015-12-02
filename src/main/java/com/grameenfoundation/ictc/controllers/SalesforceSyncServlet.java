@@ -107,8 +107,8 @@ public class SalesforceSyncServlet extends HttpServlet {
            // tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
             org.neo4j.graphdb.Node FarmerParent;
             
-            Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
-             try {
+            
+             try(Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
                 System.out.println(" " + request.getContentType());
                 //File xmlFile = new File("/home/grameen/test.xml");
@@ -730,7 +730,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                        
                        if (null != new FmpProductionBudgetUpdateModel().getFmpProductionBudgetUpdate("Id", farmerID)) {
                             out.println(sendAck());
-                            System.out.println("Baseline Post Harvest already exist");
+                            System.out.println("Fmp Production budget already exist");
                         } else {
                         org.neo4j.graphdb.Node FMPPBUNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.UPDATE);
                         
@@ -817,7 +817,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                     {
                          farmerID = getXmlNodeValue("sf:Farmer_Biodata__c", ele);
                        
-                       if (null != new FmpPostHarvestBudgetUpdateModel().getFmpProductionBudgetUpdate("Id", farmerID) ) {
+                       if (null != new FmpPostHarvestBudgetUpdateModel().getFmpPostHarvestBudgetUpdate("Id", farmerID) ) {
                             out.println(sendAck());
                             System.out.println("Baseline Post Harvest Budget Update already exist");
                         } else {
@@ -907,14 +907,14 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                 System.out.println("Root element " + doc.getDocumentElement());
              }
-             catch (Exception ex) {
-                Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, ex);
-                ex.printStackTrace();
-                tx.failure();
-            }
-             finally{
-                 tx.finish();
-             }
+            catch (Exception ex) {
+              Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, ex);
+               ex.printStackTrace();
+             // tx.failure();
+          }
+//           finally{
+//                 tx.finish();
+//             }
          
          }
         

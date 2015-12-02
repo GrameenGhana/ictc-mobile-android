@@ -23,8 +23,8 @@ public class FmpProductionBudgetUpdateModel {
     
     
      public  FmpProductionBudgetUpdate getFmpProductionBudgetUpdate(String field, String value) {
-        String q = "match (n:PARENT)-[:FARMER]->(f)-[:"+ICTCRelationshipTypes.FMP_PRODUCTION_BUDGET+"]->(p)-[:"+ICTCRelationshipTypes.UPDATE+"]->m "
-                + " where p." + field + "='" + value + "'"
+        String q = "match (n:PARENT)-[:FARMER]->(f)-[:"+ICTCRelationshipTypes.HAS_PRODUCTION_BUDGET+"]->(p)-[:"+ICTCRelationshipTypes.UPDATE+"]->m "
+                + " where f." + field + "='" + value + "'"
                 + " return m";
 
         System.out.println("Query " + q);
