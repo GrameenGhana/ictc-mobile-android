@@ -31,21 +31,21 @@ import scala.collection.Iterator;
  * @author skwakwa
  */
 public class MobileTrackerModel {
-
+    
     Logger log = Logger.getLogger(MobileTrackerModel.class.getName());
     Node trackerParent;
-
+    
     public boolean create(MobileTrackerWrapper mw) {
-
+        
         boolean created = true;
 
 //        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
-
-                 Node stNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.MOBILE_TRACKER);
-
+            
+            Node stNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
+            
             MobileTracker meet = new MobileTracker(stNode);
-
+            stNode.addLabel(Labels.MOBILE_TRACKER);
             if (null == meet) {
                 log.info("tracker is invalid");
                 created = false;
@@ -64,36 +64,36 @@ public class MobileTrackerModel {
                 meet.setVersion(mw.getVersion());
                 meet.setTimeSpent(mw.getTimeSpent());
                 meet.setId(String.valueOf(stNode.getId()) + new Date().getTime());
-
+                
                 trackerParent.createRelationshipTo(stNode, ICTCRelationshipTypes.MOBILE_TRACKER);
-
+                
                 log.log(Level.INFO, "new node created tracker. {0}", meet.getUnderlyingNode().getId());
                 trx.success();
                 return true;
-
+                
             }
-
+            
         } catch (Exception e) {
-
+            
             created = false;
             log.severe("Creation of tRACKER Failed");
             e.printStackTrace();
         }
-
+        
         return false;
     }
-
+    
     public List<MobileTrackerWrapper> findAll() {
-
+        
         return meetingQuery("match (l:" + ICTCRelationshipTypes.MOBILE_TRACKER + ") return  l", "l");
     }
-
+    
     public List<MobileTrackerWrapper> findPerUser(String user) {
-
+        
         return meetingQuery("match (l:" + ICTCRelationshipTypes.MOBILE_TRACKER + ") where l." + MobileTracker.USER_ID + "='" + user + "'"
                 + " return  l", "l");
     }
-
+    
     private List<MobileTrackerWrapper> meetingQuery(String q, String returnedItem) {
         List<MobileTrackerWrapper> mtg = new ArrayList<>();
         System.out.println("Query Meeting : " + q);
@@ -102,7 +102,7 @@ public class MobileTrackerModel {
             while (n_column.hasNext()) {
                 MobileTracker m = new MobileTracker(n_column.next());
                 MobileTrackerWrapper mr = new MobileTrackerWrapper();
-
+                
                 mr.setId(m.getId());
                 mr.setBattery(m.getBattery());
                 mr.setData(m.getData());
@@ -114,12 +114,12 @@ public class MobileTrackerModel {
                 mr.setSection(m.getSection());
                 mr.setUserId(m.getUserId());
                 mr.setVersion(m.getVersion());
-
+                
                 mtg.add(mr);
             }
-
+            
         }
         return mtg;
     }
-
+    
 }
