@@ -129,7 +129,7 @@ public class AgentController extends HttpServlet {
             } 
             
               request.setAttribute(ICTCUtil.GENERAL_RESPONSE, generalResponse);
-              ICTCUtil.redirect(request, response,"/agent/view_agent.jsp", "");
+              ICTCUtil.redirect(request, response,"/agent/view_agent.jsp");
         }
     }
 

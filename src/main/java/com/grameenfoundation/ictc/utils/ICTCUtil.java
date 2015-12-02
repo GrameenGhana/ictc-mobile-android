@@ -245,5 +245,26 @@ public class ICTCUtil {
     public static String getApplicationLocationWithPort(HttpServletRequest request) {
         return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
     }
+    
+     public static void redirect(HttpServletRequest request, HttpServletResponse response, String url) throws IOException {
+		  	 
+        try {
+            String path = "";
+            if (request.getHeader("referer") != null) {
+                path = request.getHeader("referer");
+            } else if (url != null || url == "") {
+                path = url;
+            } else {
+                path = request.getContextPath();
+            }
+            
+            request.getRequestDispatcher(url).forward(request, response);
+            return;
+        } catch (Exception e) {
+            //System.out.println("Error Occured : " + e.toString());
+            e.printStackTrace();
+            return;
+        }
+    }
 
 }
