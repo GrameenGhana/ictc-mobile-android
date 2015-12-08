@@ -139,7 +139,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                     
                      if (salesforceObj.equalsIgnoreCase("sf:Farmer_Biodata__c")) {
                       
-                        org.neo4j.graphdb.Node biodataNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARMER);
+                        org.neo4j.graphdb.Node biodataNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
+                        biodataNode.addLabel(Labels.FARMER);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
                             
                            // System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());

@@ -311,7 +311,7 @@
         var eMsg =$("#error strong").html();
         var sMsg =$("#success strong").html();
               
-        alert(sMsg);
+        //alert(sMsg);
         
         //Console.info("success message " + sMsg )
         if(eMsg.length > 1) $(".alert-danger-alt").css("display","block");

@@ -242,6 +242,23 @@ public class MobileController extends HttpServlet {
                     System.out.println("Update not done");
                 }
             }
+             else if("images".equals(serviceCode))
+            {
+                 String url = "http://sandbox-ictchallenge.cs80.force.com/AgentRequest";
+                  //String url ="http://ictchallenge.force.com/agentRequest";
+                 Map<String,String> parameters =  new HashMap<String,String>();
+                
+                 String farmer_id = request.getParameter("farmerid");
+                 
+                 String result = SalesforceHttpClient.getSalesforceData(url, parameters);
+                 
+                 
+                 
+                
+                 out.print(result);
+                
+                
+            }
              else if ("fdetails".equalsIgnoreCase(serviceCode)) {
                 
                  Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
