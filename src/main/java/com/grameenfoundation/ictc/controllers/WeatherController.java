@@ -38,7 +38,14 @@ public class WeatherController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, HEAD, OPTIONS");
+        response.setHeader("Access-Control-Allow-Headers", "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+
         try (PrintWriter out = response.getWriter()) {
+                        response.setContentType("application/json;charset=UTF-8");
+
             WeatherModel weatherModel = new  WeatherModel();
             List<WeatherWrapper>  weathers = weatherModel.getWeatherPerCommunity();
             JSONArray weatherArray = new JSONArray();
