@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.grameenfoundation.ictc.utils;
 
 import java.io.IOException;
@@ -18,26 +17,25 @@ import javax.servlet.http.HttpSession;
 /**
  *
  * @author Joseph George Davis
- * @date Jul 16, 2015 11:31:27 AM
- * description:
+ * @date Jul 16, 2015 11:31:27 AM description:
  */
 public class ICTCUtil {
 
-     public static final String GENERAL_RESPONSE = "generalResponse";
-     public static final String ERROR = "error";
-     public static final String SUCCESS = "success";
-     //Converts date to timesramp
-     public static long dateToLong(Date date) {
+    public static final String GENERAL_RESPONSE = "generalResponse";
+    public static final String ERROR = "error";
+    public static final String SUCCESS = "success";
+
+    //Converts date to timesramp
+
+    public static long dateToLong(Date date) {
         if (date != null) {
             return date.getTime();
         } else {
             return 0l;
         }
     }
-    
-    
-    
-  public static Date LongToDate(long str) {
+
+    public static Date LongToDate(long str) {
 
         if (str == 0l) {
             return null;
@@ -47,17 +45,18 @@ public class ICTCUtil {
             t.setTime(str);
             return t;
         }
-  }
-          public static String  replaceKeyInObject(String toBeReplace){
-      String []  keys={"production","identification","expected","renting","number","target","renting","application","fertilizer","herbicide","renting","applied","quantity","yield","acre","number","land","price","ton","of"};
-      for (String key : keys) {
-        toBeReplace =  toBeReplace.replace(key, " "+key.substring(0, 1).toUpperCase()+key.substring(1));
-          System.out.println("Rreplcea : "+toBeReplace);
-      }
-      return  toBeReplace;  
-  
     }
-          
+
+    public static String replaceKeyInObject(String toBeReplace) {
+        String[] keys = {"production", "identification", "expected", "renting", "number", "target", "renting", "application", "fertilizer", "herbicide", "renting", "applied", "quantity", "yield", "acre", "number", "land", "price", "ton", "of"};
+        for (String key : keys) {
+            toBeReplace = toBeReplace.replace(key, " " + key.substring(0, 1).toUpperCase() + key.substring(1));
+            System.out.println("Rreplcea : " + toBeReplace);
+        }
+        return toBeReplace;
+
+    }
+
     public static void redirect(HttpServletRequest request, HttpServletResponse response, String redirectTo, Map<String, String> errors) throws ServletException, IOException {
         String tmp = request.getHeader("referer").trim();
 
@@ -192,7 +191,6 @@ public class ICTCUtil {
 //           // log.warn("--After Response--");
             //  //System.out.println("Errrr : " + errors);
 
-            
             response.sendRedirect(request.getContextPath() + url);
 //           // log.warn("Redirect to : " + url);
 //           // log.warn("Gen Errors : " + request.getAttribute("genResponse"));
@@ -225,15 +223,15 @@ public class ICTCUtil {
 
     public static void redirectWithGeneralInfo(String url, HttpServletRequest request, HttpServletResponse response, Map<String, String> errors) {
         try {
-           // log.warn("do RRdirect ");
+            // log.warn("do RRdirect ");
             //request.getSession().setAttribute("error", errors);
             request.getSession().setAttribute("response", "000");
             request.getSession().setAttribute("genResponse", errors);
-           // log.warn("--After Response--");
+            // log.warn("--After Response--");
             //  //System.out.println("Errrr : " + errors);
             //request.setAttribute("PAGE_ID", getActionModel().actionByUrl(url));
             response.sendRedirect(request.getContextPath() + url);
-           // log.warn("Redirect to : " + url);
+            // log.warn("Redirect to : " + url);
             // //System.out.println("After Redirect");
         } catch (Exception e) {
             // //System.out.println("Error Occured : " + e.toString());
@@ -265,6 +263,14 @@ public class ICTCUtil {
             e.printStackTrace();
             return;
         }
+    }
+
+    public static String formatDecimal(double amt, int decimals) {
+        return String.format("%." + decimals + "f", amt);
+    }
+
+    public static double formatToDecimal(double amt, int decimals) {
+        return Double.parseDouble(formatDecimal(amt, decimals));
     }
 
 }
