@@ -91,27 +91,27 @@ public class AgentController extends HttpServlet {
                 j.put("username", username + "@ictc.org");
                 j.put("phonenumber", phonenumber);
 
-//                HttpClient client = new DefaultHttpClient();
-//                HttpPost post = new HttpPost(url);
-//
-//                System.out.println("data " + j.toString());
-//
-//                List<NameValuePair> nameValuePairs = new ArrayList<>(1);
-//                nameValuePairs.add(new BasicNameValuePair("data",
-//                        j.toString()));
-//                post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-//
-//                HttpResponse resp = client.execute(post);
-//             BufferedReader rd = new BufferedReader(new InputStreamReader(resp.getEntity().getContent()));
-//                String line = "";
-//                while ((line = rd.readLine()) != null) {
-//                    System.out.println(line);
-//                    out.println(line);
-//                    serverResponse += line;
-//
-//                }
+                HttpClient client = new DefaultHttpClient();
+                HttpPost post = new HttpPost(url);
 
-                 serverResponse ="saved";
+                System.out.println("data " + j.toString());
+
+                List<NameValuePair> nameValuePairs = new ArrayList<>(1);
+                nameValuePairs.add(new BasicNameValuePair("data",
+                        j.toString()));
+                post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                HttpResponse resp = client.execute(post);
+             BufferedReader rd = new BufferedReader(new InputStreamReader(resp.getEntity().getContent()));
+                String line = "";
+                while ((line = rd.readLine()) != null) {
+                    System.out.println(line);
+                    out.println(line);
+                    serverResponse += line;
+
+                }
+
+                // serverResponse ="saved";
                 
                 
                 

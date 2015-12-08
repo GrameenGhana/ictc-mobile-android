@@ -249,6 +249,7 @@ public class MobileController extends HttpServlet {
                  Map<String,String> parameters =  new HashMap<String,String>();
                 
                  String farmer_id = request.getParameter("farmerid");
+                 //dparameters.put("data", url)
                  
                  String result = SalesforceHttpClient.getSalesforceData(url, parameters);
                  

@@ -18,6 +18,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -41,10 +42,10 @@ public class SalesforceHttpClient {
             for (Map.Entry<String, String> entrySet : parameters.entrySet()) {
                 String key = entrySet.getKey();
                 String value = entrySet.getValue();
-                
+                System.out.println("key " + key +" "+ value +" "+ url);
                 nameValuePairs.add(new BasicNameValuePair(key,value));
             }
-            
+            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse resp = client.execute(post); 
             BufferedReader rd = new BufferedReader(new InputStreamReader(resp.getEntity().getContent()));
             String line = "";

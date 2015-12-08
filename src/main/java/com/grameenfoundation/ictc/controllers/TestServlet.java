@@ -285,179 +285,179 @@ public class TestServlet extends HttpServlet {
            // qu.createQuestion(q11d);
             
             
-            QuestionWrapper q4a = new QuestionWrapper();
-            q4a.setQuestion("borrowmoney");
-            q4a.setAnswer("Annually or seasonally");
-            q4a.setScore("7");
-            qu.createQuestion(q4a);
-            
-            QuestionWrapper q4b = new QuestionWrapper();
-            q4b.setQuestion("borrowmoney");
-            q4b.setAnswer("Every two years");
-            q4b.setScore("5");
-            qu.createQuestion(q4b);
-            
-            QuestionWrapper q4c = new QuestionWrapper();
-            q4c.setQuestion("borrowmoney");
-            q4c.setAnswer("Occasionally (more than 2 years interval)");
-            q4c.setScore("3");
-            qu.createQuestion(q4c);
-            
-            QuestionWrapper q4d = new QuestionWrapper();
-            q4d.setQuestion("borrowmoney");
-            q4d.setAnswer("I never borrow money for my farming.");
-            q4d.setScore("1");
-            qu.createQuestion(q4d);
-            
-            QuestionWrapper q6a = new QuestionWrapper();
-            q6a.setQuestion("familylabor");
-            q6a.setAnswer("All my farm labor come from my family or voluntary labor group");
-            q6a.setScore("1");
-            qu.createQuestion(q6a);
-            
-            
-            QuestionWrapper q6b = new QuestionWrapper();
-            q6b.setQuestion("familylabor");
-            q6b.setAnswer("More than 50% but less than 100%");
-            q6b.setScore("3");
-            qu.createQuestion(q6b);
-            
-            QuestionWrapper q6c = new QuestionWrapper();
-            q6c.setQuestion("familylabor");
-            q6c.setAnswer("About 50%");
-            q6c.setScore("5");
-            qu.createQuestion(q6c);
-            
-            QuestionWrapper q6d = new QuestionWrapper();
-            q6d.setQuestion("familylabor");
-            q6d.setAnswer("About 20% or less");
-            q6d.setScore("3");
-            qu.createQuestion(q6d);
-            
-            QuestionWrapper q6e = new QuestionWrapper();
-            q6e.setQuestion("familylabor");
-            q6e.setAnswer("None");
-            q6e.setScore("10");
-            qu.createQuestion(q6e);
-            
-            
-            
-            QuestionWrapper q7na = new QuestionWrapper();
-            q7na.setQuestion("proportion sold");
-            q7na.setAnswer("All my produce is sold");
-            q7na.setScore("10");
-            qu.createQuestion(q7na);
-            
-            QuestionWrapper q7nb = new QuestionWrapper();
-            q7nb.setQuestion("proportion sold");
-            q7nb.setAnswer("About 80%.");
-            q7nb.setScore("7");
-            qu.createQuestion(q7nb);
-            
-            QuestionWrapper q7nc = new QuestionWrapper();
-            q7nc.setQuestion("proportion sold");
-            q7nc.setAnswer("About 50%");
-            q7nc.setScore("5");
-            qu.createQuestion(q7nc);
-            
-            
-            QuestionWrapper q7nd = new QuestionWrapper();
-            q7nd.setQuestion("proportion sold");
-            q7nd.setAnswer("About 30%");
-            q7nd.setScore("3");
-            qu.createQuestion(q7nd);
-            
-            QuestionWrapper q7ne = new QuestionWrapper();
-            q7ne.setQuestion("proportion sold");
-            q7ne.setAnswer("Less than 10%");
-            q7ne.setScore("1");
-            qu.createQuestion(q7ne);
-            
-            
-            QuestionWrapper q8na = new QuestionWrapper();
-            q8na.setQuestion("new idea");
-            q8na.setAnswer("Every year or season");
-            q8na.setScore("10");
-            qu.createQuestion(q8na);
-            
-            QuestionWrapper q8nb = new QuestionWrapper();
-            q8nb.setQuestion("new idea");
-            q8nb.setAnswer("About every 2 years");
-            q8nb.setScore("7");
-            qu.createQuestion(q8nb);
-            
-            QuestionWrapper q8nc = new QuestionWrapper();
-            q8nc.setQuestion("new idea");
-            q8nc.setAnswer("About every 5 years");
-            q8nc.setScore("3");
-            qu.createQuestion(q8nc);
-            
-            
-            QuestionWrapper q8nd = new QuestionWrapper();
-            q8nd.setQuestion("new idea");
-            q8nd.setAnswer("About every 10 years");
-            q8nd.setScore("1");
-            qu.createQuestion(q8nd); 
-            
-            QuestionWrapper q9na = new QuestionWrapper();
-            q9na.setQuestion("regular practice");
-            q9na.setAnswer("Leaving residues of harvested crops");
-            q9na.setScore("1");
-            qu.createQuestion(q9na); 
-            
-            QuestionWrapper q9nb = new QuestionWrapper();
-            q9nb.setQuestion("regular practice");
-            q9nb.setAnswer("Crop rotation with beans");
-            q9nb.setScore("3");
-            qu.createQuestion(q9nb);
-            
-            
-            QuestionWrapper q9nc = new QuestionWrapper();
-            q9nc.setQuestion("regular practice");
-            q9nc.setAnswer("Application of animal manure");
-            q9nc.setScore("5");
-            qu.createQuestion(q9nc);
-            
-            QuestionWrapper q9nd = new QuestionWrapper();
-            q9nd.setQuestion("regular practice");
-            q9nd.setAnswer("Application of compost");
-            q9nd.setScore("7");
-            qu.createQuestion(q9nd);
-            
-            
-            QuestionWrapper q10na = new QuestionWrapper();
-            q10na.setQuestion("regular practice");
-            q10na.setAnswer("None or very little loss");
-            q10na.setScore("10");
-            qu.createQuestion(q10na);
-            
-            QuestionWrapper q10nb = new QuestionWrapper();
-            q10nb.setQuestion("regular practice");
-            q10nb.setAnswer("up to 10% loss");
-            q10nb.setScore("7");
-            qu.createQuestion(q10nb);
-            
-            QuestionWrapper q10nc = new QuestionWrapper();
-            q10nc.setQuestion("regular practice");
-            q10nc.setAnswer("10 to 20% loss");
-            q10nc.setScore("5");
-            qu.createQuestion(q10nc);
-            
-            QuestionWrapper q10nd = new QuestionWrapper();
-            q10nd.setQuestion("regular practice");
-            q10nd.setAnswer("20 to 30% loss");
-            q10nd.setScore("3");
-            qu.createQuestion(q10nd);
-            
-            
-            QuestionWrapper q10ne = new QuestionWrapper();
-            q10ne.setQuestion("regular practice");
-            q10ne.setAnswer("More than 30% loss");
-            q10ne.setScore("1");
-            qu.createQuestion(q10ne);
+//            QuestionWrapper q4a = new QuestionWrapper();
+//            q4a.setQuestion("borrowmoney");
+//            q4a.setAnswer("Annually or seasonally");
+//            q4a.setScore("7");
+//            qu.createQuestion(q4a);
 //            
-           System.out.println("Question done");
+//            QuestionWrapper q4b = new QuestionWrapper();
+//            q4b.setQuestion("borrowmoney");
+//            q4b.setAnswer("Every two years");
+//            q4b.setScore("5");
+//            qu.createQuestion(q4b);
+//            
+//            QuestionWrapper q4c = new QuestionWrapper();
+//            q4c.setQuestion("borrowmoney");
+//            q4c.setAnswer("Occasionally (more than 2 years interval)");
+//            q4c.setScore("3");
+//            qu.createQuestion(q4c);
+//            
+//            QuestionWrapper q4d = new QuestionWrapper();
+//            q4d.setQuestion("borrowmoney");
+//            q4d.setAnswer("I never borrow money for my farming.");
+//            q4d.setScore("1");
+//            qu.createQuestion(q4d);
+//            
+//            QuestionWrapper q6a = new QuestionWrapper();
+//            q6a.setQuestion("familylabor");
+//            q6a.setAnswer("All my farm labor come from my family or voluntary labor group");
+//            q6a.setScore("1");
+//            qu.createQuestion(q6a);
+//            
+//            
+//            QuestionWrapper q6b = new QuestionWrapper();
+//            q6b.setQuestion("familylabor");
+//            q6b.setAnswer("More than 50% but less than 100%");
+//            q6b.setScore("3");
+//            qu.createQuestion(q6b);
+//            
+//            QuestionWrapper q6c = new QuestionWrapper();
+//            q6c.setQuestion("familylabor");
+//            q6c.setAnswer("About 50%");
+//            q6c.setScore("5");
+//            qu.createQuestion(q6c);
+//            
+//            QuestionWrapper q6d = new QuestionWrapper();
+//            q6d.setQuestion("familylabor");
+//            q6d.setAnswer("About 20% or less");
+//            q6d.setScore("3");
+//            qu.createQuestion(q6d);
+//            
+//            QuestionWrapper q6e = new QuestionWrapper();
+//            q6e.setQuestion("familylabor");
+//            q6e.setAnswer("None");
+//            q6e.setScore("10");
+//            qu.createQuestion(q6e);
+//            
+//            
+//            
+//            QuestionWrapper q7na = new QuestionWrapper();
+//            q7na.setQuestion("proportion sold");
+//            q7na.setAnswer("All my produce is sold");
+//            q7na.setScore("10");
+//            qu.createQuestion(q7na);
+//            
+//            QuestionWrapper q7nb = new QuestionWrapper();
+//            q7nb.setQuestion("proportion sold");
+//            q7nb.setAnswer("About 80%.");
+//            q7nb.setScore("7");
+//            qu.createQuestion(q7nb);
+//            
+//            QuestionWrapper q7nc = new QuestionWrapper();
+//            q7nc.setQuestion("proportion sold");
+//            q7nc.setAnswer("About 50%");
+//            q7nc.setScore("5");
+//            qu.createQuestion(q7nc);
+//            
+//            
+//            QuestionWrapper q7nd = new QuestionWrapper();
+//            q7nd.setQuestion("proportion sold");
+//            q7nd.setAnswer("About 30%");
+//            q7nd.setScore("3");
+//            qu.createQuestion(q7nd);
+//            
+//            QuestionWrapper q7ne = new QuestionWrapper();
+//            q7ne.setQuestion("proportion sold");
+//            q7ne.setAnswer("Less than 10%");
+//            q7ne.setScore("1");
+//            qu.createQuestion(q7ne);
+//            
+//            
+//            QuestionWrapper q8na = new QuestionWrapper();
+//            q8na.setQuestion("new idea");
+//            q8na.setAnswer("Every year or season");
+//            q8na.setScore("10");
+//            qu.createQuestion(q8na);
+//            
+//            QuestionWrapper q8nb = new QuestionWrapper();
+//            q8nb.setQuestion("new idea");
+//            q8nb.setAnswer("About every 2 years");
+//            q8nb.setScore("7");
+//            qu.createQuestion(q8nb);
+//            
+//            QuestionWrapper q8nc = new QuestionWrapper();
+//            q8nc.setQuestion("new idea");
+//            q8nc.setAnswer("About every 5 years");
+//            q8nc.setScore("3");
+//            qu.createQuestion(q8nc);
+//            
+//            
+//            QuestionWrapper q8nd = new QuestionWrapper();
+//            q8nd.setQuestion("new idea");
+//            q8nd.setAnswer("About every 10 years");
+//            q8nd.setScore("1");
+//            qu.createQuestion(q8nd); 
+//            
+//            QuestionWrapper q9na = new QuestionWrapper();
+//            q9na.setQuestion("regular practice");
+//            q9na.setAnswer("Leaving residues of harvested crops");
+//            q9na.setScore("1");
+//            qu.createQuestion(q9na); 
+//            
+//            QuestionWrapper q9nb = new QuestionWrapper();
+//            q9nb.setQuestion("regular practice");
+//            q9nb.setAnswer("Crop rotation with beans");
+//            q9nb.setScore("3");
+//            qu.createQuestion(q9nb);
+//            
+//            
+//            QuestionWrapper q9nc = new QuestionWrapper();
+//            q9nc.setQuestion("regular practice");
+//            q9nc.setAnswer("Application of animal manure");
+//            q9nc.setScore("5");
+//            qu.createQuestion(q9nc);
+//            
+//            QuestionWrapper q9nd = new QuestionWrapper();
+//            q9nd.setQuestion("regular practice");
+//            q9nd.setAnswer("Application of compost");
+//            q9nd.setScore("7");
+//            qu.createQuestion(q9nd);
+//            
+//            
+//            QuestionWrapper q10na = new QuestionWrapper();
+//            q10na.setQuestion("regular practice");
+//            q10na.setAnswer("None or very little loss");
+//            q10na.setScore("10");
+//            qu.createQuestion(q10na);
+//            
+//            QuestionWrapper q10nb = new QuestionWrapper();
+//            q10nb.setQuestion("regular practice");
+//            q10nb.setAnswer("up to 10% loss");
+//            q10nb.setScore("7");
+//            qu.createQuestion(q10nb);
+//            
+//            QuestionWrapper q10nc = new QuestionWrapper();
+//            q10nc.setQuestion("regular practice");
+//            q10nc.setAnswer("10 to 20% loss");
+//            q10nc.setScore("5");
+//            qu.createQuestion(q10nc);
+//            
+//            QuestionWrapper q10nd = new QuestionWrapper();
+//            q10nd.setQuestion("regular practice");
+//            q10nd.setAnswer("20 to 30% loss");
+//            q10nd.setScore("3");
+//            qu.createQuestion(q10nd);
+//            
+//            
+//            QuestionWrapper q10ne = new QuestionWrapper();
+//            q10ne.setQuestion("regular practice");
+//            q10ne.setAnswer("More than 30% loss");
+//            q10ne.setScore("1");
+//            qu.createQuestion(q10ne);
 ////            
+//           System.out.println("Question done");
+//////            
 //                         ProfilingModel pm = new ProfilingModel();
 //                          Map<String,String> update = new HashMap<>();
 //                          BiodataModel biodataModel = new BiodataModel();
@@ -513,20 +513,23 @@ public class TestServlet extends HttpServlet {
 //        else {
 //            return "4";
 //        }
-//     String serverResponse = "";
-//
-//     String url = "http://sandbox-ictchallenge.cs80.force.com/AgentRequest";
-//     
-//     
-//     
-//            JSONObject j = new JSONObject();
-//            j.put("agentcode", "ICTC234");
-//            j.put("organisation", "MOFA");
-//            j.put("firstname", "Edward");
-//            j.put("lastname","Pie");
-//            j.put("agenttype","MOFA");
-//            
-//
+     String serverResponse = "";
+
+     String url = "http://sandbox-ictchallenge.cs80.force.com/getImages";
+     
+     
+     
+            JSONObject j = new JSONObject();
+            j.put("requestType", "farmer");
+            j.put("farmerId", "a0k25000000c1aKAAQ");
+            
+            Map<String,String> parameters = new HashMap<String,String>();
+            
+            parameters.put("data", j.toString());
+           
+            String result = SalesforceHttpClient.getSalesforceData(url, parameters);
+            System.out.println(result);
+            out.println(result);
 //            HttpClient client = new DefaultHttpClient();
 //            HttpPost post = new HttpPost(url);
 //            
@@ -548,8 +551,8 @@ public class TestServlet extends HttpServlet {
 //            }
 //            
 //             System.out.println(serverResponse);
-//    
-//    
+    
+    
        }
      
     }
