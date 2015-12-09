@@ -37,7 +37,7 @@ public class Biodata extends Status implements GeneralInterface {
     public static String EDUCATION ="education";
     public static String MAJOR_CROP ="majorcrop";
     public static String CLUSTER = "cluster";
-    public static String FARMERID = "farmerid";
+    public static String FARMERID = "Id";
     public static String FARM_AREA ="farmarea";
     public static String FARM_PERIMETER = "farmperimeter";
     public static String TELEPHONENUMBER ="telephonenumber";
