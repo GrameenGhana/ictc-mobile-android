@@ -541,11 +541,17 @@ public class BiodataModel {
                             bio.setFarmperimeter(fieldValue);
                         }
                     }
+                    
+                     if (fieldName.equalsIgnoreCase(Biodata.IMAGE_URL)) {
+                        if (null != fieldValue) {
+                            bio.setImage_Url(fieldValue);
+                        }
+                    }
 
                     trx.success();
 
                     updated = true;
-                    log.info("Bio Data Successfully Updated");
+                    log.log(Level.INFO, "Bio Data Successfully Updated {0}", updated);
                 }
             } else {
 

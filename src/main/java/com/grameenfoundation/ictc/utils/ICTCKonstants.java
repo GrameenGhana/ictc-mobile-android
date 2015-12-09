@@ -16,6 +16,7 @@ public class ICTCKonstants {
     
     //a
      public static final String AGENT = "agent";
+      public static final String GET_AGENT = "/agentRequest";
      
      //b
       public static final String BASELINE_PRODUCTION_BUDGET = "baselineproductionbudget";
@@ -45,7 +46,7 @@ public class ICTCKonstants {
      
     //i
       public static final String ID = "Id";
-      
+      public static final String GET_IMAGES = "/getImages";
    //l
      public static final String LAST_MODIFIED_DATE = "lastModifieddate";
      
@@ -79,7 +80,8 @@ public class ICTCKonstants {
     
     //s
      public static final String STORAGE = "storage";
-     
+     public static final String SALESFORCEURL_PRODUCTION = "http://ictchallenge.force.com";
+     public static final String SALESFORCEURL_SANDBOX = "http://sandbox-ictchallenge.cs80.force.com"; 
      //t
      public static final String TECHNICAL_NEED = "technicalneed";
      

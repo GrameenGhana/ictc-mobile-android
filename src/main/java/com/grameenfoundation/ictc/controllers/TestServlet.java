@@ -33,10 +33,13 @@ import com.grameenfoundation.ictc.wrapper.PostHarvestWrapper;
 import com.grameenfoundation.ictc.wrapper.QuestionWrapper;
 import com.grameenfoundation.ictc.wrapper.StorageWrapper;
 import com.grameenfoundation.ictc.wrapper.TechnicalNeedsWrapper;
+import com.sun.jersey.core.util.Base64;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,6 +69,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.neo4j.graphdb.Transaction;
+
 
 /**
  *
@@ -521,16 +525,38 @@ public class TestServlet extends HttpServlet {
      
             JSONObject j = new JSONObject();
             j.put("requestType", "farmer");
-            j.put("farmerId", "a0k25000000c1aKAAQ");
+            j.put("farmerId", "a0k25000000c1aZAAQ");
             
-            Map<String,String> parameters = new HashMap<String,String>();
-            
+            Map<String, String> parameters = new HashMap<String, String>();
+
             parameters.put("data", j.toString());
-           
+
             String result = SalesforceHttpClient.getSalesforceData(url, parameters);
             System.out.println(result);
             out.println(result);
-//            HttpClient client = new DefaultHttpClient();
+
+            JSONObject json = new JSONObject(result);
+
+            String res = json.getString("image");
+
+            String root = "com.sun.aas.instanceRoot";
+           
+       
+           
+            String path = "";
+
+            File f = new File(System.getProperty(root) + "/docroot/images");
+
+            if (!f.exists()) {
+                f.mkdirs();
+            } 
+            path = f.getPath() + File.separator + "n.jpg";
+            System.out.println("path " + path);
+            byte[] data = Base64.decode(res);
+            try (OutputStream stream = new FileOutputStream(path)) {
+                stream.write(data);
+            }
+//            HttpCliSent client = new DefaultHttpClient();
 //            HttpPost post = new HttpPost(url);
 //            
 //            System.out.println("data " + j.toString());

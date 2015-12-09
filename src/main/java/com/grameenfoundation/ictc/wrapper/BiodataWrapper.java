@@ -38,6 +38,18 @@ public class BiodataWrapper {
     String Districts_Ashanti="Districts_Ashanti";
     String Districts_BrongAhafo="Districts_BrongAhafo";
     String Districts_Volta="Districts_Volta";
+    String image_url = "image_url";
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+    }
+    
+    
+    
     
  public  void setDistricts_Volta(String Districts_Volta) {
       this.Districts_Volta=Districts_Volta;

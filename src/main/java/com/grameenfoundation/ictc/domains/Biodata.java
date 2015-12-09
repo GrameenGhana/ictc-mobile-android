@@ -45,7 +45,21 @@ public class Biodata extends Status implements GeneralInterface {
     public static String DISTRICTS_ASHANTI="Districts_Ashanti";
     public static String DISTRICTS_BRONGAHAFO="Districts_BrongAhafo";
     public static String DISTRICTS_VOLTA="Districts_Volta";
+    public static String IMAGE_URL ="image_url";
     
+  public void setImage_Url(String image_url) {
+  underlyingNode.setProperty(IMAGE_URL,image_url);
+}  
+  
+  
+public String getImage_Url(){
+          try {
+          return (String) underlyingNode.getProperty(IMAGE_URL);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
     
 public void setDistricts_Volta(String districts_volta) {
 underlyingNode.setProperty(DISTRICTS_VOLTA,districts_volta);

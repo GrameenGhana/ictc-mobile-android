@@ -37,14 +37,19 @@ import com.grameenfoundation.ictc.models.ProfilingModel;
 import com.grameenfoundation.ictc.models.TechnicalNeedsModel;
 import com.grameenfoundation.ictc.models.UserModel;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
+import com.grameenfoundation.ictc.utils.ICTCKonstants;
 import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
 import com.grameenfoundation.ictc.utils.Labels;
 import com.grameenfoundation.ictc.utils.MeetingSchedule;
 import com.grameenfoundation.ictc.utils.ParentNode;
 import com.grameenfoundation.ictc.wrapper.MeetingWrapper;
+import com.sun.jersey.core.util.Base64;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringReader;
 import java.util.Date;
@@ -60,6 +65,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.commons.io.IOUtils;
+import org.json.JSONObject;
 import org.neo4j.graphdb.Transaction;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -125,7 +131,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                 Element ele = doc.getDocumentElement();
                 //System.out.println("Root element :" + doc.getDocumentElement());
                 Node node = doc.getDocumentElement();
-                
+                JSONObject json = new JSONObject();
                  //get fields from objects
                 NodeList sObject = doc.getElementsByTagName("sObject");
                 
@@ -138,7 +144,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                     System.out.println(salesforceObj);
                     
                      if (salesforceObj.equalsIgnoreCase("sf:Farmer_Biodata__c")) {
-                      
+                        Map<String,String> imageUpdate = new HashMap<>();
                         org.neo4j.graphdb.Node biodataNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
                         biodataNode.addLabel(Labels.FARMER);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
@@ -165,6 +171,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                         log.log(Level.INFO, "new node created {0}", biodataNode.getId());
                       
                         
+                        
                        
                         out.println(sendAck());
                         
@@ -173,6 +180,16 @@ public class SalesforceSyncServlet extends HttpServlet {
                         
                         String majorcrop = getXmlNodeValue("sf:majorcrop__c", ele);
                         Biodata farmer = new Biodata(biodataNode);
+                        
+                        json.put("requestType","farmer");
+                        json.put("farmerId", farmer.getFarmerID());
+                        
+                        //get farmer image from salesforce and saves it
+                       // String image_url = getFarmerImage(farmer.getFarmerID(),ICTCKonstants.SALESFORCEURL_PRODUCTION+ICTCKonstants.GET_IMAGES,json.toString());
+                        String image_url = getFarmerImage(farmer.getFarmerID(),ICTCKonstants.SALESFORCEURL_SANDBOX+ICTCKonstants.GET_IMAGES,json.toString());
+                        
+                        imageUpdate.put(Biodata.IMAGE_URL,image_url);
+                        biodataModel.BiodataUpdate(farmer.getFarmerID(),imageUpdate);
                         
                         
                         
@@ -223,7 +240,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                             }
 
                         }
-
+                        
                         tx.success();
                      }
                     else if(salesforceObj.equalsIgnoreCase("sf:FMP_Production_New__c"))
@@ -235,7 +252,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                              System.out.println("Production already exist");
                          } else {
                              org.neo4j.graphdb.Node ProductionNewParent;
-                             org.neo4j.graphdb.Node productionNewNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.PRODUCTION);
+                             org.neo4j.graphdb.Node productionNewNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
+                             productionNewNode.addLabel(Labels.PRODUCTION);
 
                              System.out.println("farmerid " + farmerID);
                              for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
@@ -282,7 +300,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                          } else {
                              
                              org.neo4j.graphdb.Node PostHarvestNewParent;
-                             org.neo4j.graphdb.Node postHarvestNewNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.POSTHARVEST);
+                             org.neo4j.graphdb.Node postHarvestNewNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
+                             postHarvestNewNode.addLabel(Labels.POSTHARVEST);
                              
                              System.out.println("farmerid " + farmerID);
                              for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
@@ -1029,6 +1048,44 @@ public class SalesforceSyncServlet extends HttpServlet {
             return "4";
         }
 
+    }
+       
+    public String getFarmerImage(String farmer,String url,String detail)
+    {
+         String image_url =""; 
+         
+         Map<String, String> parameters = new HashMap<String, String>();
+
+            parameters.put("data", detail);
+
+            String result = SalesforceHttpClient.getSalesforceData(url, parameters);
+            System.out.println(result);
+            JSONObject json = new JSONObject(result);
+
+            String res = json.getString("image");
+
+            String root = "com.sun.aas.instanceRoot";
+           
+            String path = "";
+
+            File f = new File(System.getProperty(root) + "/docroot/images");
+
+            if (!f.exists()) {
+                f.mkdirs();
+            } 
+            path = f.getPath() + File.separator + "n.jpg";
+            System.out.println("path " + path);
+            image_url = path;
+            byte[] data = Base64.decode(res);
+            try (OutputStream stream = new FileOutputStream(path)) {
+                stream.write(data);
+            } catch (FileNotFoundException ex) {
+            Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+       return image_url;     
     }
 
 }
