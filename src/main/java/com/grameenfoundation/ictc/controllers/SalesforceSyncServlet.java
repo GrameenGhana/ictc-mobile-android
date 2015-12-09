@@ -1059,7 +1059,7 @@ public class SalesforceSyncServlet extends HttpServlet {
             parameters.put("data", detail);
 
             String result = SalesforceHttpClient.getSalesforceData(url, parameters);
-            System.out.println(result);
+           // System.out.println(result);
             JSONObject json = new JSONObject(result);
 
             String res = json.getString("image");
@@ -1073,7 +1073,7 @@ public class SalesforceSyncServlet extends HttpServlet {
             if (!f.exists()) {
                 f.mkdirs();
             } 
-            path = f.getPath() + File.separator + "n.jpg";
+            path = f.getPath() + File.separator +farmer +".jpg";
             System.out.println("path " + path);
             image_url = path;
             byte[] data = Base64.decode(res);
