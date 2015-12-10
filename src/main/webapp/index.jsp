@@ -10,7 +10,7 @@
 <%@page import="com.grameenfoundation.ictc.models.BiodataModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%BiodataModel bioModel = new BiodataModel();
-ReportModel rModel = new ReportModel();
+    ReportModel rModel = new ReportModel();
 
 %>
 <!DOCTYPE html>
@@ -55,7 +55,7 @@ ReportModel rModel = new ReportModel();
         </div>
 
 
-        <div class="span6">
+        <div class="span5">
             <div class="widget widget-nopad">
                 <div class="widget-header"> <i class="icon-list-alt"></i>
                     <h3>Totals</h3>
@@ -63,23 +63,23 @@ ReportModel rModel = new ReportModel();
                 <!-- /widget-header -->
                 <div class="widget-content">
                     <div class="widget big-stats-container">
-                        <div class="widget-content">
+                        <div class="widget-content" style="padding: 5px">
                             <h6 class="bigstats">Total</h6>
                             <table class='table table-striped table-bordered' >
                                 <tr>
                                     <th>Totals</th>
                                     <th>Values</th>
                                 </tr>
-                            <%
-                            List<ListItem> totals = rModel.getInfos();
-                            for(ListItem item:totals){
-                            %>
+                                <%
+                                    List<ListItem> totals = rModel.getInfos();
+                                    for (ListItem item : totals) {
+                                %>
 
-                            <tr>
-                                <td><%=item.getName() %></td>
-                               <td><%=item.getValue()%></td>
-                            </tr>
-<% }%>
+                                <tr>
+                                    <td><%=item.getName()%></td>
+                                    <td><%=item.getValue()%></td>
+                                </tr>
+                                <% }%>
                             </table>
                         </div>
                     </div>
@@ -91,7 +91,7 @@ ReportModel rModel = new ReportModel();
 
 
 
-        <div class="span6">
+        <div class="span5">
             <div class="widget widget-nopad">
                 <div class="widget-header"> <i class="icon-list-alt"></i>
                     <h3>Averages</h3>
@@ -99,23 +99,23 @@ ReportModel rModel = new ReportModel();
                 <!-- /widget-header -->
                 <div class="widget-content">
                     <div class="widget big-stats-container">
-                        <div class="widget-content">
+                        <div class="widget-content"  style="padding: 5px">
                             <h6 class="bigstats">Averages</h6>
-<table class='table table-striped table-bordered' >
+                            <table class='table table-striped table-bordered' >
                                 <tr>
                                     <th>Averages</th>
                                     <th>Values</th>
                                 </tr>
-                            <%
-                            totals = rModel.getAverageInfos();
-                            for(ListItem item:totals){
-                            %>
+                                <%
+                                    totals = rModel.getAverageInfos();
+                                    for (ListItem item : totals) {
+                                %>
 
-                            <tr>
-                                <td><%=item.getName() %></td>
-                               <td><%=item.getValue()%></td>
-                            </tr>
-<% }%>
+                                <tr>
+                                    <td><%=item.getName()%></td>
+                                    <td><%=item.getValue()%></td>
+                                </tr>
+                                <% }%>
                             </table>
                         </div>
                     </div>
@@ -124,8 +124,8 @@ ReportModel rModel = new ReportModel();
                 </div>
             </div>
         </div>
-                                    
-                                     <div class="span6">
+
+        <div class="span6">
             <div class="widget widget-nopad">
                 <div class="widget-header"> <i class="icon-list-alt"></i>
                     <h3>Revenue</h3>
@@ -133,23 +133,23 @@ ReportModel rModel = new ReportModel();
                 <!-- /widget-header -->
                 <div class="widget-content">
                     <div class="widget big-stats-container">
-                        <div class="widget-content">
+                        <div class="widget-content"  style="padding: 5px">
                             <h6 class="bigstats">Revenue</h6>
-<table class='table table-striped table-bordered' >
+                            <table class='table table-striped table-bordered' >
                                 <tr>
                                     <th>Totals</th>
                                     <th>Values</th>
                                 </tr>
-                            <%
-                            totals = rModel.getRevenues();
-                            for(ListItem item:totals){
-                            %>
+                                <%
+                                    totals = rModel.getRevenues();
+                                    for (ListItem item : totals) {
+                                %>
 
-                            <tr>
-                                <td><%=item.getName() %></td>
-                               <td><%=item.getValue()%></td>
-                            </tr>
-<% }%>
+                                <tr>
+                                    <td><%=item.getName()%></td>
+                                    <td><%=item.getValue()%></td>
+                                </tr>
+                                <% }%>
                             </table>
                         </div>
                     </div>

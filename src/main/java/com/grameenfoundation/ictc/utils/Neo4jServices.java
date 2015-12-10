@@ -499,11 +499,16 @@ public class Neo4jServices {
             result = engine.execute(q);
 
             n_column = result.columnAs("l");
+            if(n_column.isEmpty()) 
+                return  0;
+            System.out.println("Not Emptty");
             while (n_column.hasNext()) {
                 if(null == n_column.next())
                     return  0;
                 return n_column.next();
             }
+        }catch(Exception e){
+            return  0;
         }
 
         return 0;
