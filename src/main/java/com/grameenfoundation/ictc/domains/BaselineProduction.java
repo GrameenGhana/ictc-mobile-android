@@ -83,7 +83,9 @@ public class BaselineProduction extends Status implements GeneralInterface{
     public static String REFERENCE_SEASON="reference_season";
     public static String REFERENCE_YEAR="reference_year";
     public static String REVENUE_FROM_SALES_BASE="revenue_from_sales_base";
-    public static String TYPE_OF_HYBRID="type_of_hybrid";
+    public static String TYPE_OF_HYBRID="type_of_hybrid";    
+    public static String COST_PRODUCTION="production_cost";
+    public static String GROSS_MARGIN="gross_margin";
     
     
 public void setType_of_hybrid(String type_of_hybrid) {

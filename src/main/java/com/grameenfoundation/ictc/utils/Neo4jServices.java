@@ -489,6 +489,33 @@ public class Neo4jServices {
         return 0l;
     }
 
+    public static int getSumValue(String q) {
+        Iterator<Integer> n_column = null; 
+        ExecutionResult result = null;
+        // let's execute a query now
+        try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            ExecutionEngine engine = new ExecutionEngine(
+                    ICTCDBUtil.getInstance().getGraphDB(), StringLogger.SYSTEM);
+            result = engine.execute(q);
+
+            n_column = result.columnAs("l");
+            while (n_column.hasNext()) {
+                if(null == n_column.next())
+                    return  0;
+                return n_column.next();
+            }
+        }
+
+        return 0;
+    }
+    
+    public static float  getCollectionValue(String type,String label,String fieldName){
+    String q=" match(n:"+label+") return "+type+"(toFloat(n."+fieldName+"))  as l ";
+        System.out.println("Query : "+q);
+    return getSumValue(q);
+        
+    }
+
     public static List<String> getIterativeString(String q) {
         Iterator<String> n_column = null;
         List<String> bdata = new ArrayList<>();

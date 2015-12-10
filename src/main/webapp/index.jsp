@@ -4,9 +4,15 @@
     Author     : skwakwa
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="com.grameenfoundation.ictc.wrapper.ListItem"%>
+<%@page import="com.grameenfoundation.ictc.models.ReportModel"%>
 <%@page import="com.grameenfoundation.ictc.models.BiodataModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%BiodataModel bioModel = new BiodataModel(); %>
+<%BiodataModel bioModel = new BiodataModel();
+ReportModel rModel = new ReportModel();
+
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,12 +31,12 @@
                         <div class="widget-content">
                             <h6 class="bigstats">.</h6>
                             <div id="big_stats" class="cf">
-                                <div class="stat"> <i class="icon-anchor"></i> <span class="value"><%=bioModel.getFarmerCount() %></span> 
+                                <div class="stat"> <i class="icon-anchor"></i> <span class="value"><%=bioModel.getFarmerCount()%></span> 
                                     <div>Total Farmers</div>
                                 </div>
                                 <!-- .stat -->
 
-                                <div class="stat"> <i class="icon-thumbs-up-alt"></i> <span class="value"><%=bioModel.getCommunityCount() %></span>    
+                                <div class="stat"> <i class="icon-thumbs-up-alt"></i> <span class="value"><%=bioModel.getCommunityCount()%></span>    
                                     <div>Communities</div></div>
                                 <!-- .stat -->
 
@@ -38,15 +44,120 @@
                                     <div>Agents</div></div>
                                 <!-- .stat -->
 
-                             </div>
-                                <!-- .stat --> 
                             </div>
+                            <!-- .stat --> 
                         </div>
-                        <!-- /widget-content --> 
-
                     </div>
+                    <!-- /widget-content --> 
+
                 </div>
             </div>
         </div>
-    </body>
+
+
+        <div class="span6">
+            <div class="widget widget-nopad">
+                <div class="widget-header"> <i class="icon-list-alt"></i>
+                    <h3>Totals</h3>
+                </div>
+                <!-- /widget-header -->
+                <div class="widget-content">
+                    <div class="widget big-stats-container">
+                        <div class="widget-content">
+                            <h6 class="bigstats">Total</h6>
+                            <table class='table table-striped table-bordered' >
+                                <tr>
+                                    <th>Totals</th>
+                                    <th>Values</th>
+                                </tr>
+                            <%
+                            List<ListItem> totals = rModel.getInfos();
+                            for(ListItem item:totals){
+                            %>
+
+                            <tr>
+                                <td><%=item.getName() %></td>
+                               <td><%=item.getValue()%></td>
+                            </tr>
+<% }%>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /widget-content --> 
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="span6">
+            <div class="widget widget-nopad">
+                <div class="widget-header"> <i class="icon-list-alt"></i>
+                    <h3>Averages</h3>
+                </div>
+                <!-- /widget-header -->
+                <div class="widget-content">
+                    <div class="widget big-stats-container">
+                        <div class="widget-content">
+                            <h6 class="bigstats">Averages</h6>
+<table class='table table-striped table-bordered' >
+                                <tr>
+                                    <th>Averages</th>
+                                    <th>Values</th>
+                                </tr>
+                            <%
+                            totals = rModel.getAverageInfos();
+                            for(ListItem item:totals){
+                            %>
+
+                            <tr>
+                                <td><%=item.getName() %></td>
+                               <td><%=item.getValue()%></td>
+                            </tr>
+<% }%>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /widget-content --> 
+
+                </div>
+            </div>
+        </div>
+                                    
+                                     <div class="span6">
+            <div class="widget widget-nopad">
+                <div class="widget-header"> <i class="icon-list-alt"></i>
+                    <h3>Revenue</h3>
+                </div>
+                <!-- /widget-header -->
+                <div class="widget-content">
+                    <div class="widget big-stats-container">
+                        <div class="widget-content">
+                            <h6 class="bigstats">Revenue</h6>
+<table class='table table-striped table-bordered' >
+                                <tr>
+                                    <th>Totals</th>
+                                    <th>Values</th>
+                                </tr>
+                            <%
+                            totals = rModel.getRevenues();
+                            for(ListItem item:totals){
+                            %>
+
+                            <tr>
+                                <td><%=item.getName() %></td>
+                               <td><%=item.getValue()%></td>
+                            </tr>
+<% }%>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /widget-content --> 
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
