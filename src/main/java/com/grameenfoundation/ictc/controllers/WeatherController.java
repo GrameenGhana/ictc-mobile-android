@@ -57,6 +57,7 @@ public class WeatherController extends HttpServlet {
                 jobject.put("min_temp", ICTCUtil.formatToDecimal(weather.getMinTemprature(),1));
                 jobject.put("detail",weather.getDetail());
                 jobject.put("icon", weather.getIcon());
+                jobject.put("time",weather.getTime());
                 
                 weatherArray.put(jobject);
                         
