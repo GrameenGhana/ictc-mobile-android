@@ -352,7 +352,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                               
                               ProductionModel product = new ProductionModel();
                               
-                              org.neo4j.graphdb.Node productionUpdateNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.UPDATE);
+                              org.neo4j.graphdb.Node productionUpdateNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
+                              productionUpdateNode.addLabel(Labels.UPDATE);
                               
                               System.out.println("farmerid " + farmerID);
                               for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
@@ -397,8 +398,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                          } else {
                              
                           
-                        org.neo4j.graphdb.Node postHarvestUpdateNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.UPDATE);
-                        
+                        org.neo4j.graphdb.Node postHarvestUpdateNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
+                        postHarvestUpdateNode .addLabel(Labels.UPDATE);
                       
                         System.out.println("farmerid " + farmerID);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
