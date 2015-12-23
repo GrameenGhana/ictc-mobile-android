@@ -187,7 +187,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                         //get farmer image from salesforce and saves it
                        //
                      String image_url = getFarmerImage(farmer.getFarmerID(),ICTCKonstants.SALESFORCEURL_PRODUCTION+ICTCKonstants.GET_IMAGES,json.toString());
-                        //String image_url = getFarmerImage(farmer.getFarmerID(),ICTCKonstants.SALESFORCEURL_SANDBOX+ICTCKonstants.GET_IMAGES,json.toString());
+                      //String image_url = getFarmerImage(farmer.getFarmerID(),ICTCKonstants.SALESFORCEURL_SANDBOX+ICTCKonstants.GET_IMAGES,json.toString());
                         
                         imageUpdate.put(Biodata.IMAGE_URL,image_url);
                         biodataModel.BiodataUpdate(farmer.getFarmerID(),imageUpdate);
