@@ -20,7 +20,7 @@
         <title>ICT Challenge</title>
     </head>
     <body>
-        <div class="span6">
+        <div class="span11">
             <div class="widget widget-nopad">
                 <div class="widget-header"> <i class="icon-list-alt"></i>
                     <h3>Stats</h3>
@@ -29,7 +29,7 @@
                 <div class="widget-content">
                     <div class="widget big-stats-container">
                         <div class="widget-content">
-                            <h6 class="bigstats">.</h6>
+                     
                             <div id="big_stats" class="cf">
                                 <div class="stat"> <i class="icon-anchor"></i> <span class="value"><%=bioModel.getFarmerCount()%></span> 
                                     <div>Total Farmers</div>
@@ -40,8 +40,10 @@
                                     <div>Communities</div></div>
                                 <!-- .stat -->
 
-                                <div class="stat"> <i class="icon-twitter-sign"></i> <span class="value">-</span>    
-                                    <div>Agents</div></div>
+                                <div class="stat">
+                                    <i class="icon-twitter-sign"></i> <span class="value">-</span>    
+                                    <div>Agents</div>
+                                </div>
                                 <!-- .stat -->
 
                             </div>
@@ -55,7 +57,7 @@
         </div>
 
 
-        <div class="span5">
+        <div class="span4">
             <div class="widget widget-nopad">
                 <div class="widget-header"> <i class="icon-list-alt"></i>
                     <h3>Totals</h3>
@@ -64,7 +66,7 @@
                 <div class="widget-content">
                     <div class="widget big-stats-container">
                         <div class="widget-content" style="padding: 5px">
-                            <h6 class="bigstats">Total</h6>
+                           
                             <table class='table table-striped table-bordered' >
                                 <tr>
                                     <th>Totals</th>
@@ -91,16 +93,16 @@
 
 
 
-        <div class="span5">
+        <div class="span3">
             <div class="widget widget-nopad">
-                <div class="widget-header"> <i class="icon-list-alt"></i>
+                <div class="widget-header"><i class="icon-list-alt"></i>
                     <h3>Averages</h3>
                 </div>
                 <!-- /widget-header -->
                 <div class="widget-content">
                     <div class="widget big-stats-container">
                         <div class="widget-content"  style="padding: 5px">
-                            <h6 class="bigstats">Averages</h6>
+                        
                             <table class='table table-striped table-bordered' >
                                 <tr>
                                     <th>Averages</th>
@@ -115,7 +117,7 @@
                                     <td><%=item.getName()%></td>
                                     <td><%=item.getValue()%></td>
                                 </tr>
-                                <% }%>
+                                <% } %>
                             </table>
                         </div>
                     </div>
@@ -125,7 +127,7 @@
             </div>
         </div>
 
-        <div class="span6">
+        <div class="span4">
             <div class="widget widget-nopad">
                 <div class="widget-header"> <i class="icon-list-alt"></i>
                     <h3>Revenue</h3>
@@ -134,7 +136,7 @@
                 <div class="widget-content">
                     <div class="widget big-stats-container">
                         <div class="widget-content"  style="padding: 5px">
-                            <h6 class="bigstats">Revenue</h6>
+                           
                             <table class='table table-striped table-bordered' >
                                 <tr>
                                     <th>Totals</th>

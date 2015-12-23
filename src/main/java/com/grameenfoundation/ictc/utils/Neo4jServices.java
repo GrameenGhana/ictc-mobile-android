@@ -25,6 +25,7 @@ import com.grameenfoundation.ictc.wrapper.StorageWrapper;
 import com.grameenfoundation.ictc.wrapper.TechnicalNeedsWrapper;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.apache.log4j.Logger;
 import org.neo4j.cypher.ExecutionEngine;
 import org.neo4j.cypher.ExecutionResult;
@@ -203,7 +204,7 @@ public class Neo4jServices {
                     Operations opt = b.getFarmOperation();
 
                     OperationsWrapper wr = new OperationsWrapper();
-                //wr.set
+                    //wr.set
 //  System.out.println("bef2");
                     if (opt != null) {
                         wr.setLandSize(opt.getLandSize());
@@ -382,12 +383,14 @@ public class Neo4jServices {
             }
         }
         return null;
-    }  public static List<Node> findNodeFromRelations(Node underlyingNode, Direction direction, ICTCRelationshipTypes relationType) {
+    }
+
+    public static List<Node> findNodeFromRelations(Node underlyingNode, Direction direction, ICTCRelationshipTypes relationType) {
         Iterable<Relationship> relationships = underlyingNode.getRelationships(direction, relationType);
         List<Node> n = new ArrayList<Node>();
         for (Relationship relationshp : relationships) {
             if (direction.equals(Direction.OUTGOING)) {
-              n.add(relationshp.getEndNode());
+                n.add(relationshp.getEndNode());
             } else {
                 n.add(relationshp.getStartNode());
             }
@@ -396,9 +399,14 @@ public class Neo4jServices {
     }
 
     public static List<BiodataWrapper> findByLabel(ICTCRelationshipTypes primaryRel, String searchField, String searchValue) {
+        return findByLabel(primaryRel, searchField, searchValue, "");
+
+    }
+    
+     public static List<BiodataWrapper> findByLabel(ICTCRelationshipTypes primaryRel, String searchField, String searchValue,String xtra) {
         String searchParam = (searchField.isEmpty()) ? "" : " where l." + searchField + "= '" + searchValue + "' ";
 
-        String query = " match (l:" + primaryRel + ") " + searchParam + " return l ";
+        String query = " match (l:" + primaryRel + ") " + searchParam + " return l "+xtra;
         System.out.println("Query : " + query);
         return getIterativeNode(query);
 
@@ -489,8 +497,8 @@ public class Neo4jServices {
         return 0l;
     }
 
-    public static int getSumValue(String q) {
-        Iterator<Integer> n_column = null; 
+    public static long getSumValue(String q) {
+        Iterator<Long> n_column = null;
         ExecutionResult result = null;
         // let's execute a query now
         try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
@@ -499,26 +507,66 @@ public class Neo4jServices {
             result = engine.execute(q);
 
             n_column = result.columnAs("l");
-            if(n_column.isEmpty()) 
-                return  0;
+            if (n_column.isEmpty()) {
+                return 0;
+            }
             System.out.println("Not Emptty");
             while (n_column.hasNext()) {
-                if(null == n_column.next())
-                    return  0;
+                if (null == n_column.next()) {
+                    return 0;
+                }
                 return n_column.next();
             }
-        }catch(Exception e){
-            return  0;
+        } catch (Exception e) {
+            System.out.println("Exception SUm Values  -> " + e.getLocalizedMessage());
+            return 0;
         }
 
         return 0;
     }
-    
-    public static float  getCollectionValue(String type,String label,String fieldName){
-    String q=" match(n:"+label+") return "+type+"(toFloat(n."+fieldName+"))  as l ";
-        System.out.println("Query : "+q);
-    return getSumValue(q);
-        
+
+    public static Object getAggregateItem(String q) {
+        Iterator<Long> n_column = null;
+        org.neo4j.cypher.javacompat.ExecutionResult result = null;
+        // let's execute a query now
+        try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            org.neo4j.cypher.javacompat.ExecutionEngine engine = new org.neo4j.cypher.javacompat.ExecutionEngine(
+                    ICTCDBUtil.getInstance().getGraphDB(), StringLogger.SYSTEM);
+            result = engine.execute(q);
+
+            String rows = "";
+            for (Map<String, Object> row : result) {
+                for (Map.Entry<String, Object> column : row.entrySet()) {
+                    rows += column.getKey() + ": " + column.getValue() + "; ";
+                    System.out.println("Rows : " + row);
+                    return column.getValue();
+                }
+                rows += "\n";
+            }
+
+        } catch (Exception e) {
+            System.out.println("Exception SUm Values  -> " + e.getLocalizedMessage());
+            return 0;
+        }
+
+        return 0;
+    }
+
+    public static double getCollectionValue(String type, String label, String fieldName) {
+        String q = " match(n:" + label + ") return " + type + "(toFloat(n." + fieldName + "))  as l ";
+        System.out.println("Query : " + q);
+        Object j = getAggregateItem(q);
+
+        try {
+            if (null != j) {
+                String jk = j.toString();
+
+                return Double.parseDouble(jk);
+            }
+        } catch (Exception e) {
+        }
+        return 0.0;
+
     }
 
     public static List<String> getIterativeString(String q) {
@@ -558,56 +606,53 @@ public class Neo4jServices {
         }
 
     }
-    
+
     public static void executeVoidQuery(String query) {
 
         try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             ExecutionEngine engine = new ExecutionEngine(
                     ICTCDBUtil.getInstance().getGraphDB(), StringLogger.SYSTEM);
             ExecutionResult result = executeCypherQuery(query);
-            
+
         }
 
     }
-    
-    
-     public static Node executeSingleQuery(String query, String returnItem) {
+
+    public static Node executeSingleQuery(String query, String returnItem) {
 
         try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
-            
+
             ExecutionResult result = executeCypherQuery(query);
-            Iterator<Node>  n = result.columnAs(returnItem);
-            while(n.hasNext()){
+            Iterator<Node> n = result.columnAs(returnItem);
+            while (n.hasNext()) {
                 return n.next();
             }
-            
+
             return null;
         }
 
     }
-     public static Node getFarmerNode(String farmerId) {
+
+    public static Node getFarmerNode(String farmerId) {
         return findByLabelID(ICTCRelationshipTypes.FARMER, farmerId);
     }
-     
-     
-     public static Node findByLabelID(ICTCRelationshipTypes relType,String id) {
 
-         String query="match (n:"+relType+")  where n."+Biodata.ID+" ='"+id+"' return n ";
-         String returnItem="n";
+    public static Node findByLabelID(ICTCRelationshipTypes relType, String id) {
+
+        String query = "match (n:" + relType + ")  where n." + Biodata.ID + " ='" + id + "' return n ";
+        String returnItem = "n";
         try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
-            
+
             ExecutionResult result = executeCypherQuery(query);
-            Iterator<Node>  n = result.columnAs(returnItem);
-            while(n.hasNext()){
+            Iterator<Node> n = result.columnAs(returnItem);
+            while (n.hasNext()) {
                 return n.next();
             }
-            
+
             return null;
         }
 
     }
-    
-    
 
     public static List<BiodataWrapper> findByLabel(Labels primaryRel, ICTCRelationshipTypes secondaryRel, String searchField, String searchValue) {
         String searchParam = (searchField.isEmpty()) ? "" : " where l." + searchField + "= '" + searchValue + "' ";

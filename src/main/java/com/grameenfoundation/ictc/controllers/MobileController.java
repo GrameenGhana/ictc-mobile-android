@@ -94,6 +94,8 @@ public class MobileController extends HttpServlet {
                     jSONObject.put("org", user.getOrganisation());
                     jSONObject.put("lname", user.getLastName());
                     jSONObject.put("fname", user.getFirstName());
+                    jSONObject.put("userId", user.getAgentCode());
+                    
                     jSONObject.put("type", user.getAgentType());
 
                     out.print(jSONObject);

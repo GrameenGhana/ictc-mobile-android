@@ -43,10 +43,10 @@ public class ReportModel {
      
      public List<ListItem> getRevenues(){
         List<ListItem> items = new ArrayList<>();
-        float totalRevenue = Neo4jServices.getCollectionValue("sum", "BASELINE_PRODUCTION", "revenue_from_sales_base");
-        float totalGrossMargin = Neo4jServices.getCollectionValue("sum", "BASELINE_PRODUCTION", "gross_margin");
-        float totalCost=Neo4jServices.getCollectionValue("sum", "BASELINE_PRODUCTION", "production_cost");
-        float totalAcre= Neo4jServices.getCollectionValue("sum", "BASELINE_PRODUCTION", "area_cultivated_base");
+        double totalRevenue = Neo4jServices.getCollectionValue("sum", "BASELINE_PRODUCTION", "revenue_from_sales_base");
+        double totalGrossMargin = Neo4jServices.getCollectionValue("sum", "BASELINE_PRODUCTION", "gross_margin");
+        double totalCost=Neo4jServices.getCollectionValue("sum", "BASELINE_PRODUCTION", "production_cost");
+        double totalAcre= Neo4jServices.getCollectionValue("sum", "BASELINE_PRODUCTION", "area_cultivated_base");
         long farmersCnt =  new BiodataModel().getFarmerCount();
         
        items.add(new ListItem("Average revenue per acre", totalRevenue/totalAcre));
