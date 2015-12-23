@@ -161,6 +161,55 @@ public class MeetingModel {
         }
         return mtg;
     }
+    
+    
+    private List<MeetingWrapper> meetingNodeToer(Node n) {
+        List<MeetingWrapper> mtg = new ArrayList<>();
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+        
+                Meeting m = new Meeting(n);
+                MeetingWrapper mr = new MeetingWrapper();
+
+                mr.setType(m.getType());
+                mr.setMeetingIndex(m.getMeetingIndex());
+                mr.setSeason(m.getSeason());
+                mr.setStartDate(m.getStartdate());
+                mr.setEndDate(m.getEnddate());
+                mr.setAttended(m.getAttended());
+
+                mtg.add(mr);
+                //todo Find relationship to farmer to replace
+
+//               wr.(u.getFirstname());
+        
+        }
+        return mtg;
+    }
+    private List<MeetingWrapper> meetingNodeToer(List<Node> n) {
+        List<MeetingWrapper> mtg = new ArrayList<>();
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            for (Node  node: n) {
+                
+        
+                Meeting m = new Meeting(node);
+                MeetingWrapper mr = new MeetingWrapper();
+
+                mr.setType(m.getType());
+                mr.setMeetingIndex(m.getMeetingIndex());
+                mr.setSeason(m.getSeason());
+                mr.setStartDate(m.getStartdate());
+                mr.setEndDate(m.getEnddate());
+                mr.setAttended(m.getAttended());
+
+                mtg.add(mr);
+                //todo Find relationship to farmer to replace
+
+//               wr.(u.getFirstname());
+        
+            }
+        }
+        return mtg;
+    }
 
     public Meeting getMeeting(String field, String value) {
         String q = "Start root=node(0) "

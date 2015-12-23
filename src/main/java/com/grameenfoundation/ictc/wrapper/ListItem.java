@@ -11,9 +11,9 @@ package com.grameenfoundation.ictc.wrapper;
  */
 public class ListItem {
     private String name;
-    private float value;
+    private double value;
 
-    public ListItem(String name, float value) {
+    public ListItem(String name, double value) {
         this.name = name;
         this.value = value;
     }
@@ -37,14 +37,14 @@ public class ListItem {
     /**
      * @return the value
      */
-    public float getValue() {
+    public double getValue() {
         return value;
     }
 
     /**
      * @param value the value to set
      */
-    public void setValue(float value) {
+    public void setValue(double value) {
         this.value = value;
     }
 }
