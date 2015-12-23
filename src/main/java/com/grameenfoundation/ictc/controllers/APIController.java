@@ -242,7 +242,7 @@ public class APIController extends HttpServlet {
                     FieldCropAssessment fca = null;
 
                     FmpPostHarvestBudget fmpphb = null;
- List<FarmGPSLocationWrapper> wr  = null;
+                    List<FarmGPSLocationWrapper> wr  = null;
                     JSONArray farmGps = null;
                     for (BiodataWrapper bb : bw) {
 
