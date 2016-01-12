@@ -24,12 +24,14 @@ public class Agent extends Status implements GeneralInterface {
     }
 
     public static String AGENTTYPE = "agenttype";
+    public static String AGENTID = "agentId";
     public static String FIRSTNAME = "firstname";
     public static String LASTNAME = "lastname";
     public static String EMAIL = "email";
     public static String USERNAME = "username";
     public static String AGENTCODE = "agentcode";
     public static String PASSWORD = "password";
+    public static String ORGANISATION = "organisation";
 
     public void setPassword(String agentcode) {
         underlyingNode.setProperty(PASSWORD, agentcode);
@@ -41,7 +43,18 @@ public class Agent extends Status implements GeneralInterface {
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
+    }public void setAgentId(String agentcode) {
+        underlyingNode.setProperty(AGENTID, agentcode);
+    }
+
+    public String getAgentId() {
+        try {
+            return (String) underlyingNode.getProperty(AGENTID);
+
+        } catch (Exception e) {
+        }
+        return "";
     }
 
     public void setAgentcode(String agentcode) {

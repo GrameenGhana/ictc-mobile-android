@@ -193,8 +193,11 @@ public class APIController extends HttpServlet {
                 
                 String agentId = request.getParameter("a");
                 
+                if(null == agentId || agentId.isEmpty()){
+                 agentId="00524000001xFMiAAM";
+                }
                 Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
-                List<BiodataWrapper> bw = new BiodataModel().getBioData("createdBy", agentId);
+                List<BiodataWrapper> bw = new BiodataModel().getBioDataSearch("CreatedById", agentId);
                 System.out.println("Farmer count " + bw.size());
                 BiodataModel biodataModel = new BiodataModel();
                 ProductionModel productionModel = new ProductionModel();

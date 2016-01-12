@@ -3,16 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.grameenfoundation.ictc.models;
 
 import com.grameenfoundation.ictc.domains.Agent;
+import com.grameenfoundation.ictc.domains.User;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
 import com.grameenfoundation.ictc.utils.Labels;
 import com.grameenfoundation.ictc.utils.Neo4jServices;
 import com.grameenfoundation.ictc.utils.ParentNode;
+import com.grameenfoundation.ictc.utils.security.CryptoLibrary;
 import com.grameenfoundation.ictc.wrapper.AgentWrapper;
+import com.grameenfoundation.ictc.wrapper.UserWrapper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -21,24 +23,24 @@ import org.neo4j.cypher.ExecutionResult;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
 import scala.collection.Iterator;
+
 /**
  *
  * @author Joseph George Davis
- * @date Oct 30, 2015 11:41:32 AM
- * description:
+ * @date Oct 30, 2015 11:41:32 AM description:
  */
 public class AgentModel {
-    
-     Logger log = Logger.getLogger(AgentModel.class.getName());
-    
-     public boolean createAgent(AgentWrapper agent) {
+
+    Logger log = Logger.getLogger(AgentModel.class.getName());
+
+    public boolean createAgent(AgentWrapper agent) {
         boolean created = true;
-        
-     Node AgentParent;
+
+        Node AgentParent;
 
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
-            Node agentNode= ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.AGENT);
+            Node agentNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.AGENT);
 
             Agent ag = new Agent(agentNode);
 
@@ -46,19 +48,19 @@ public class AgentModel {
                 log.info("Agent is invalid");
                 created = false;
             } else {
-               AgentParent = ParentNode.AgentParentNode();
+                AgentParent = ParentNode.AgentParentNode();
 
-               ag.setAgentcode(agent.getAgentcode());
-               ag.setAgenttype(agent.getAgenttype());
-               ag.setEmail(agent.getEmail());
-               ag.setFirstname(agent.getFirstname());
-               ag.setLastname(agent.getLastname());
-               ag.setUsername(agent.getUsername());
-               ag.setPassword(agent.getPassword());
- 
+                ag.setAgentcode(agent.getAgentcode());
+                ag.setAgenttype(agent.getAgenttype());
+                ag.setEmail(agent.getEmail());
+                ag.setFirstname(agent.getFirstname());
+                ag.setLastname(agent.getLastname());
+                ag.setUsername(agent.getUsername());
+                ag.setPassword(agent.getPassword());
+
                 AgentParent.createRelationshipTo(agentNode, ICTCRelationshipTypes.AGENT);
 
-                log.log(Level.INFO, "new node created {0}",ag.getUnderlyingNode().getId());
+                log.log(Level.INFO, "new node created {0}", ag.getUnderlyingNode().getId());
                 trx.success();
 
             }
@@ -69,34 +71,32 @@ public class AgentModel {
             log.severe("Creation of Agent Failed");
             e.printStackTrace();
         }
-        
+
         return created;
-     } 
-     
-     
-   public List<AgentWrapper> findAllAgents()
-   {
-     List<AgentWrapper> aglist =  new ArrayList<>();
-     
-     String q = "match (l:AGENT) return l";
-       
-        try(Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx() ) {
+    }
+
+    public List<AgentWrapper> findAllAgents() {
+        List<AgentWrapper> aglist = new ArrayList<>();
+
+        String q = "match (l:AGENT) return l";
+
+        try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             ExecutionResult result = Neo4jServices.executeCypherQuery(q);
-            
+
             Iterator<Node> n_column = result.columnAs("l");
             while (n_column.hasNext()) {
-               // aglist.add(new Agent(n_column.next()));
-                    Agent ag =new Agent(n_column.next());
-                  
-                    AgentWrapper wrapper = new AgentWrapper();
-                    wrapper.setAgentcode(ag.getAgentcode());
-                    wrapper.setAgenttype(ag.getAgenttype());
-                    wrapper.setEmail(ag.getEmail());
-                    wrapper.setFirstname(ag.getFirstname());
-                    wrapper.setLastname(ag.getLastname());
-                    wrapper.setUsername(ag.getUsername());
-              
-                    aglist.add(wrapper);
+                // aglist.add(new Agent(n_column.next()));
+                Agent ag = new Agent(n_column.next());
+
+                AgentWrapper wrapper = new AgentWrapper();
+                wrapper.setAgentcode(ag.getAgentcode());
+                wrapper.setAgenttype(ag.getAgenttype());
+                wrapper.setEmail(ag.getEmail());
+                wrapper.setFirstname(ag.getFirstname());
+                wrapper.setLastname(ag.getLastname());
+                wrapper.setUsername(ag.getUsername());
+
+                aglist.add(wrapper);
 
             }
             tx.success();
@@ -105,10 +105,45 @@ public class AgentModel {
 //            log.log(Level.SEVERE,e.getMessage());
 //            e.printStackTrace();
 //        }
-        
-        
+
         return aglist;
-   }
-     
+    }
+
+    public AgentWrapper findUser(String username, String password) {
+        CryptoLibrary crypt = new CryptoLibrary();
+        String q = "match (l:AGENT) WHERE l." + User.USERNAME + "= '" + username + "'  "
+                //+ "and  l." + User.PASSWORD + "='" + (password) + "'"
+                + "  return l";
+        System.out.println("login : " + q);
+        List<AgentWrapper> usr = userQuery(q, "l");
+        if (null != usr && !usr.isEmpty()) {
+            return usr.get(0);
+        }
+        return null;
+    }
+
+    private List<AgentWrapper> userQuery(String q, String returnedItem) {
+        List<AgentWrapper> usrs = new ArrayList<>();
+        System.out.println("Query : " + q);
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            Iterator<Node> n_column = Neo4jServices.executeIteratorQuery(q, returnedItem);
+            while (n_column.hasNext()) {
+                Agent u = new Agent(n_column.next());
+                AgentWrapper wr = new AgentWrapper();
+                wr.setAgentcode(u.getAgentcode());
+                wr.setAgenttype(u.getAgenttype());
+                wr.setFirstname(u.getFirstname());
+                wr.setLastname(u.getLastname());
+                wr.setEmail(u.getEmail());
+
+                usrs.add(wr);
+                //todo Find relationship to farmer to replace
+//                wr.setMyFarmers(Neo4jServices.findByLabel(Labels.FARMER, ICTCRelationshipTypes.USER, "id", wr.getAgentcode()));
+//               wr.(u.getFirstname());
+            }
+
+        }
+        return usrs;
+    }
 
 }

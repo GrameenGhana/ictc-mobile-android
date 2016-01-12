@@ -10,6 +10,7 @@ import com.grameenfoundation.ictc.domains.Meeting;
 import com.grameenfoundation.ictc.domains.PostHarvest;
 import com.grameenfoundation.ictc.domains.PostHarvest2;
 import com.grameenfoundation.ictc.domains.ProductionNew;
+import com.grameenfoundation.ictc.models.AgentModel;
 import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.models.FarmerInputModel;
 import com.grameenfoundation.ictc.models.MeetingModel;
@@ -18,6 +19,7 @@ import com.grameenfoundation.ictc.models.ProductionModel;
 import com.grameenfoundation.ictc.models.UserModel;
 import com.grameenfoundation.ictc.utils.HTTPCommunicator;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
+import com.grameenfoundation.ictc.wrapper.AgentWrapper;
 import com.grameenfoundation.ictc.wrapper.BiodataWrapper;
 import com.grameenfoundation.ictc.wrapper.FarmerInputReceivedWrapper;
 import com.grameenfoundation.ictc.wrapper.MeetingWrapper;
@@ -79,25 +81,30 @@ public class MobileController extends HttpServlet {
 
                 String username = request.getParameter("us");
                 String pwd = request.getParameter("pwd");
-                UserWrapper user = new UserModel().findUser(username, pwd);
+                AgentWrapper user = new AgentModel().findUser(username, pwd);
+                System.out.println("User: "+user);
                 if (null == user) {
                     jSONObject.put("rc", "01");
                     jSONObject.put("msg", "Unable to Login");
+                       out.print(jSONObject);
                 } else {
                     //do as details action   
 //                    List<BiodataWrapper> farmers = bModel.getBioData("a", "");
 //                    JSONArray farmerArray = getFarmers(farmers);
 
-                    jSONObject.put("rc", "00");
+                    jSONObject.put("rc", "000");
 
 //                    jSONObject.put("farmer", farmerArray);
-                    jSONObject.put("org", user.getOrganisation());
-                    jSONObject.put("lname", user.getLastName());
-                    jSONObject.put("fname", user.getFirstName());
-                    jSONObject.put("userId", user.getAgentCode());
-                    jSONObject.put("sfId", user.getAgentCode());
+                    jSONObject.put("org", user.getAgenttype());
+                    jSONObject.put("lname", user.getLastname());
+                    jSONObject.put("fname", user.getFirstname());
+                    jSONObject.put("userId", user.getAgentcode());
+                    String agentId = user.getAgentId();
+                    if(agentId.isEmpty())
+                        agentId="00524000001xFMiAAM";
+                    jSONObject.put("sfId", agentId);
                     
-                    jSONObject.put("type", user.getAgentType());
+                    jSONObject.put("type", user.getAgenttype());
 
                     out.print(jSONObject);
                 }

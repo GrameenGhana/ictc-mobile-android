@@ -78,7 +78,7 @@ public class User extends Status implements GeneralInterface{
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
       
       
@@ -93,7 +93,7 @@ public class User extends Status implements GeneralInterface{
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
         
      public void setAgentCode(String agentCode) {
@@ -106,7 +106,7 @@ public class User extends Status implements GeneralInterface{
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
       
       public void setOrganisation(String organisation) {
@@ -120,7 +120,7 @@ public class User extends Status implements GeneralInterface{
 
         } catch (Exception e) {
         }
-        return null;
+        return "";
     }
       
       

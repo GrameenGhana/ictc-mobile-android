@@ -16,6 +16,7 @@ public class AgentWrapper {
     
     
     private String agenttype = "agenttype";
+    private String agentid = "";
     private String lastname = "lastname";
     private String firstname = "firstname";
     private String email = "email";
@@ -25,6 +26,13 @@ public class AgentWrapper {
     
     
 
+    public String getAgentId() {
+        return agentid;
+    }
+
+    public void setAgentId(String password) {
+        this.agentid = password;
+    }
     public String getPassword() {
         return password;
     }
