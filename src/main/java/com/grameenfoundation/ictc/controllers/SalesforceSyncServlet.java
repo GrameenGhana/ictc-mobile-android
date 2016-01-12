@@ -42,6 +42,7 @@ import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
 import com.grameenfoundation.ictc.utils.Labels;
 import com.grameenfoundation.ictc.utils.MeetingSchedule;
 import com.grameenfoundation.ictc.utils.ParentNode;
+import com.grameenfoundation.ictc.wrapper.BiodataWrapper;
 import com.grameenfoundation.ictc.wrapper.MeetingWrapper;
 import com.sun.jersey.core.util.Base64;
 import java.io.File;
@@ -94,6 +95,7 @@ public class SalesforceSyncServlet extends HttpServlet {
         response.setContentType("text/xml;charset=UTF-8");
         Logger log = Logger.getLogger(SalesforceSyncServlet.class.getName());
         BiodataModel biodataModel = new BiodataModel();
+        Biodata bb = null;
         MeetingSchedule meetingSchedule = new MeetingSchedule();
         MeetingModel  meetingModel = new MeetingModel();
         UserModel user = new UserModel();
@@ -143,15 +145,31 @@ public class SalesforceSyncServlet extends HttpServlet {
                     String salesforceObj = rowNode.getAttributes().getNamedItem("xsi:type").getNodeValue();
                     System.out.println(salesforceObj);
                     
+                    
+                    
                      if (salesforceObj.equalsIgnoreCase("sf:Farmer_Biodata__c")) {
+                        farmerID = getXmlNodeValue("sf:Id",ele);
+                        bb = biodataModel.getBiodata("Id", farmerID);
+                       
+                        
+                        if(null!=bb )
+                        {
+                            update.put("createdBy",farmerID);
+                            biodataModel.BiodataUpdate(bb.getFarmerID(), update);
+                            sendAck();
+                        }
+                        
+                       else
+                       {
                         Map<String,String> imageUpdate = new HashMap<>();
                         org.neo4j.graphdb.Node biodataNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
                         biodataNode.addLabel(Labels.FARMER);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
                             
                            // System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
-                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
+                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") ||rowNode.getChildNodes().item(k).getNodeName().equals("sf:CreatedById") ) {
                                 System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+ 
                                 biodataNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                             }
 
@@ -243,6 +261,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                         }
                         
                         tx.success();
+                       }
                      }
                     else if(salesforceObj.equalsIgnoreCase("sf:FMP_Production_New__c"))
                      {

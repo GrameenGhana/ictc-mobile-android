@@ -547,6 +547,12 @@ public class BiodataModel {
                             bio.setImage_Url(fieldValue);
                         }
                     }
+                     
+                     if (fieldName.equalsIgnoreCase(Biodata.CREATED_BY)) {
+                        if (null != fieldValue) {
+                            bio.setCreatedById(fieldValue);
+                        }
+                    }
 
                     trx.success();
 
