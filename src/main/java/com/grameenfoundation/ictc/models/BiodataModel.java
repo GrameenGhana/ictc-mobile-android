@@ -548,7 +548,7 @@ public class BiodataModel {
                         }
                     }
                      
-                     if (fieldName.equalsIgnoreCase(Biodata.CREATED_BY)) {
+                   if (fieldName.equalsIgnoreCase(Biodata.CREATED_BY)) {
                         if (null != fieldValue) {
                             bio.setCreatedById(fieldValue);
                         }

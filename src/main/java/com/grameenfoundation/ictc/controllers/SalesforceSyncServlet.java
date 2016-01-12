@@ -148,13 +148,13 @@ public class SalesforceSyncServlet extends HttpServlet {
                     
                     
                      if (salesforceObj.equalsIgnoreCase("sf:Farmer_Biodata__c")) {
-                        farmerID = getXmlNodeValue("sf:Id",ele);
+                        farmerID = getXmlNodeValue("sf:CreatedById",ele);
                         bb = biodataModel.getBiodata("Id", farmerID);
                        
                         
                         if(null!=bb )
                         {
-                            update.put("createdBy",farmerID);
+                            update.put(Biodata.CREATED_BY,farmerID);
                             biodataModel.BiodataUpdate(bb.getFarmerID(), update);
                             out.println(sendAck());
                         
