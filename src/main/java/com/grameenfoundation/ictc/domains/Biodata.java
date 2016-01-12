@@ -50,7 +50,7 @@ public class Biodata extends Status implements GeneralInterface {
     public static String DISTRICTS_BRONGAHAFO = "Districts_BrongAhafo";
     public static String DISTRICTS_VOLTA = "Districts_Volta";
     public static String IMAGE_URL = "image_url";
-    public static String CREATED_BY = "createdBy";
+    public static String CREATED_BY = "CreatedById";
     
     
      public void setCreatedById(String createBy) {
