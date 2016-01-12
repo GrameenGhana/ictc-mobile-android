@@ -160,7 +160,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                             System.out.println("Agent Id" + agentId);
                             biodataModel.BiodataUpdate(bb.getFarmerID(), update);
                             out.println(sendAck());
-                        
+                            
+                          
                         }
                        else
                        {
@@ -263,8 +264,10 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                         }
                         
-                        tx.success();
+                        
                        }
+                        
+                      tx.success();
                      }
                     else if(salesforceObj.equalsIgnoreCase("sf:FMP_Production_New__c"))
                      {
@@ -683,7 +686,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                         out.println(sendAck());
 
                         tx.success();
-                          }
+                       }
                     }  else if(salesforceObj.equals("sf:BASELINE_POST_HARVEST__c"))
                     {
                         
