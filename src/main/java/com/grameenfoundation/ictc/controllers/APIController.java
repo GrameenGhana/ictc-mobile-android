@@ -190,8 +190,11 @@ public class APIController extends HttpServlet {
                 out.print(js);
 
             } else if ("fdetails".equalsIgnoreCase(serviceCode)) {
+                
+                String agentId = request.getParameter("a");
+                
                 Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
-                List<BiodataWrapper> bw = new BiodataModel().getBioData("", "");
+                List<BiodataWrapper> bw = new BiodataModel().getBioData("createdBy", agentId);
                 System.out.println("Farmer count " + bw.size());
                 BiodataModel biodataModel = new BiodataModel();
                 ProductionModel productionModel = new ProductionModel();

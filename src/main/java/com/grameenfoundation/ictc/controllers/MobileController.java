@@ -85,8 +85,8 @@ public class MobileController extends HttpServlet {
                     jSONObject.put("msg", "Unable to Login");
                 } else {
                     //do as details action   
-                    List<BiodataWrapper> farmers = bModel.getBioData("a", "");
-                    JSONArray farmerArray = getFarmers(farmers);
+//                    List<BiodataWrapper> farmers = bModel.getBioData("a", "");
+//                    JSONArray farmerArray = getFarmers(farmers);
 
                     jSONObject.put("rc", "00");
 
@@ -95,6 +95,7 @@ public class MobileController extends HttpServlet {
                     jSONObject.put("lname", user.getLastName());
                     jSONObject.put("fname", user.getFirstName());
                     jSONObject.put("userId", user.getAgentCode());
+                    jSONObject.put("sfId", user.getAgentCode());
                     
                     jSONObject.put("type", user.getAgentType());
 
