@@ -549,16 +549,19 @@ public class BiodataModel {
                     }
                      
                    if (fieldName.equalsIgnoreCase(Biodata.CREATED_BY)) {
+                        System.out.println("createdout " + fieldValue);
                         if (null != fieldValue) {
+                            System.out.println("created " + fieldValue);
                             bio.setCreatedById(fieldValue);
                         }
                     }
 
-                    trx.success();
-
-                    updated = true;
-                    log.log(Level.INFO, "Bio Data Successfully Updated {0}", updated);
+                    
                 }
+                trx.success();
+
+                updated = true;
+                log.log(Level.INFO, "Bio Data Successfully Updated {0}", updated);
             } else {
 
                 log.info("Unable to update Bio Data");

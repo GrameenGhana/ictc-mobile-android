@@ -101,8 +101,9 @@ public class SalesforceSyncServlet extends HttpServlet {
         UserModel user = new UserModel();
         Map<String,MeetingWrapper> meetingMap = new HashMap<>();
         
-        String farmerID = null ;
         
+        String farmerID = null ;
+        String agentId = null;
         
          try (PrintWriter out = response.getWriter()) {
              
@@ -149,14 +150,14 @@ public class SalesforceSyncServlet extends HttpServlet {
                     
                      if (salesforceObj.equalsIgnoreCase("sf:Farmer_Biodata__c")) {
                         farmerID = getXmlNodeValue("sf:Id",ele);
-                        String agentId = getXmlNodeValue("sf:CreatedById",ele);
+                        agentId = getXmlNodeValue("sf:CreatedById",ele);
                         bb = biodataModel.getBiodata("Id", farmerID);
                        
                         
                         if(null!=bb )
                         {
                             update.put(Biodata.CREATED_BY,agentId);
-                            System.out.println("Agent Id" + farmerID);
+                            System.out.println("Agent Id" + agentId);
                             biodataModel.BiodataUpdate(bb.getFarmerID(), update);
                             out.println(sendAck());
                         

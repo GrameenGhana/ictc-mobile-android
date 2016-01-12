@@ -54,6 +54,7 @@ public class Biodata extends Status implements GeneralInterface {
     
     
      public void setCreatedById(String createBy) {
+         System.out.println("setProperty " + createBy);
         underlyingNode.setProperty(CREATED_BY, createBy);
     }
 
