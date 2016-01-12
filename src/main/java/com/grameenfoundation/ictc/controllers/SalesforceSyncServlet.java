@@ -156,7 +156,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                         {
                             update.put("createdBy",farmerID);
                             biodataModel.BiodataUpdate(bb.getFarmerID(), update);
-                            sendAck();
+                            out.println(sendAck());
+                        
                         }
                         
                        else
@@ -173,7 +174,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                                 biodataNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                             }
 
-                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")) {
+                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:CreatedById")) {
 
                                  System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
                                 biodataNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
