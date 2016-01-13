@@ -57,6 +57,7 @@ public class AgentModel {
                 ag.setLastname(agent.getLastname());
                 ag.setUsername(agent.getUsername());
                 ag.setPassword(agent.getPassword());
+                ag.setAgentId(agent.getAgentId());
 
                 AgentParent.createRelationshipTo(agentNode, ICTCRelationshipTypes.AGENT);
 
@@ -134,6 +135,7 @@ public class AgentModel {
                 wr.setAgenttype(u.getAgenttype());
                 wr.setFirstname(u.getFirstname());
                 wr.setLastname(u.getLastname());
+                wr.setAgentId(u.getAgentId());
                 wr.setEmail(u.getEmail());
 
                 usrs.add(wr);

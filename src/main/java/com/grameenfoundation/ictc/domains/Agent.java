@@ -24,7 +24,7 @@ public class Agent extends Status implements GeneralInterface {
     }
 
     public static String AGENTTYPE = "agenttype";
-    public static String AGENTID = "agentId";
+    public static String AGENTID = "Id";
     public static String FIRSTNAME = "firstname";
     public static String LASTNAME = "lastname";
     public static String EMAIL = "email";

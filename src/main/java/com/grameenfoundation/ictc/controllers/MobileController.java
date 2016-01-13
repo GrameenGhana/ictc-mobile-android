@@ -86,13 +86,13 @@ public class MobileController extends HttpServlet {
                 if (null == user) {
                     jSONObject.put("rc", "01");
                     jSONObject.put("msg", "Unable to Login");
-                       out.print(jSONObject);
+                    out.print(jSONObject);
                 } else {
                     //do as details action   
 //                    List<BiodataWrapper> farmers = bModel.getBioData("a", "");
 //                    JSONArray farmerArray = getFarmers(farmers);
 
-                    jSONObject.put("rc", "000");
+                    jSONObject.put("rc", "00");
 
 //                    jSONObject.put("farmer", farmerArray);
                     jSONObject.put("org", user.getAgenttype());
