@@ -191,6 +191,11 @@ public class Neo4jServices {
                     BiodataWrapper bw = (new BiodataWrapper(b.getFirstname(), b.getLastname(), b.getNickname(), b.getCommunity(), b.getVillage(), b.getDistrict(), b.getRegion(), b.getAge(), b.getGender(),
                             b.getMaritalstatus(), b.getNumberofchildren(), b.getNumberofdependants(), b.getEducation(), "1", (b.getId()), b.getMajorCrop()));
 //                    System.out.println("After Here");
+                   String imgUrl =b.getImage_Url();
+                   if(null != imgUrl){
+                       imgUrl = imgUrl.replace("/home/jdavis/glassfish-4.1/glassfish/domains/domain1/docroot", "");
+                   }
+                   bw.setImage_url(imgUrl);
                     TechnicalNeed technicalNeed = b.getTechNeeds();
                     if (null != technicalNeed) {
                         bw.setTechNeeds(new TechnicalNeedsWrapper(technicalNeed.getFarmPlanning(), technicalNeed.getCropVarietyAndSeed(), technicalNeed.getWeedControl(), technicalNeed.getCropEstablishment(), technicalNeed.getIntegratedSoilFertilityManagement(), technicalNeed.getHarvestAndPostHarvest()));
