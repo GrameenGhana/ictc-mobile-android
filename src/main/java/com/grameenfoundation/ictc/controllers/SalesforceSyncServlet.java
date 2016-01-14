@@ -1102,7 +1102,7 @@ public class SalesforceSyncServlet extends HttpServlet {
             } 
             path = f.getPath() + File.separator +farmer +".jpg";
             System.out.println("path " + path);
-            image_url = path;
+            image_url = "/images"+File.separator +farmer +".jpg";
             byte[] data = Base64.decode(res);
             try (OutputStream stream = new FileOutputStream(path)) {
                 stream.write(data);

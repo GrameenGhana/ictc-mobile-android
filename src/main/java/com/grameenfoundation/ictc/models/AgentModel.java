@@ -17,6 +17,7 @@ import com.grameenfoundation.ictc.wrapper.AgentWrapper;
 import com.grameenfoundation.ictc.wrapper.UserWrapper;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.neo4j.cypher.ExecutionResult;
@@ -122,6 +123,40 @@ public class AgentModel {
         }
         return null;
     }
+    
+     public AgentWrapper findUser(String username) {
+       
+        String q = "match (l:AGENT) WHERE l." + User.USERNAME + "= '" + username + "'  "
+                //+ "and  l." + User.PASSWORD + "='" + (password) + "'"
+                + "  return l";
+        System.out.println("login : " + q);
+        List<AgentWrapper> usr = userQuery(q, "l");
+        if (null != usr && !usr.isEmpty()) {
+            return usr.get(0);
+        }
+        return null;
+    }
+     
+     
+      public Agent getAgent(String field, String value) {
+        String q = "Start root=node(0) "
+                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.AGENT + "]->p"
+                + " where p." + field + "='" + value + "'"
+                + " return p";
+
+        System.out.println("Query " + q);
+        try {
+            Node node = Neo4jServices.executeCypherQuerySingleResult(q, "p");
+            if (null != node) {
+                return new Agent(node);
+            }
+        } catch (Exception e) {
+            System.out.println("Unable to Find Agent");
+        }
+
+        return null;
+    }
+    
 
     private List<AgentWrapper> userQuery(String q, String returnedItem) {
         List<AgentWrapper> usrs = new ArrayList<>();
@@ -146,6 +181,46 @@ public class AgentModel {
 
         }
         return usrs;
+    }
+    
+    
+    
+    public boolean AgentUpdate(String id, Map<String, String> data) {
+        
+      
+
+        Agent  ag  = getAgent(Agent.USERNAME, id);
+        boolean updated = false;
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            //If the setting is not null
+            if (null != ag) {
+
+                for (Map.Entry<String, String> dataEntry : data.entrySet()) {
+
+                    // get the field name
+                    String fieldName = dataEntry.getKey();
+                    // get the field value
+                    String fieldValue = dataEntry.getValue();
+                    System.out.println("Updating : "+fieldName+" <> "+fieldValue);
+                    // Assigning the alias
+                    if (fieldName.equalsIgnoreCase(Agent.AGENTID)) {
+                        if (null != fieldValue) {
+                            ag.setAgentId(fieldValue);
+                        }
+                    }
+                    
+                }
+                trx.success();
+
+                updated = true;
+                log.log(Level.INFO, "Bio Data Successfully Updated {0}", updated);
+               
+            } else {
+
+                log.info("Unable to update Bio Data");
+            }
+        }
+        return updated;
     }
 
 }

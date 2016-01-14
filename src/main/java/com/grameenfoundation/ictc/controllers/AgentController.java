@@ -5,6 +5,7 @@
  */
 package com.grameenfoundation.ictc.controllers;
 
+import com.grameenfoundation.ictc.domains.Agent;
 import com.grameenfoundation.ictc.models.AgentModel;
 import com.grameenfoundation.ictc.utils.ICTCUtil;
 import com.grameenfoundation.ictc.wrapper.AgentWrapper;
@@ -51,8 +52,8 @@ public class AgentController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-           //String url = "http://sandbox-ictchallenge.cs80.force.com/AgentRequest";
-            String url ="http://ictchallenge.force.com/agentRequest";
+           String url = "http://sandbox-ictchallenge.cs80.force.com/AgentRequest";
+           // String url ="http://ictchallenge.force.com/agentRequest";
             String firstname = request.getParameter("fn");
             String lastname = request.getParameter("ln");
             String email = request.getParameter("email");
@@ -61,10 +62,16 @@ public class AgentController extends HttpServlet {
             String phonenumber = request.getParameter("pn");
             String agentcode = request.getParameter("ac");
             String password = request.getParameter("password");
+            String formattedResponse = null;
+            String jsonformat = null;
+            String fullusername = null;
+            String userId = null;
             Map<String, String> generalResponse = new HashMap<>();
             AgentModel agentModel = new AgentModel();
+            
 
             AgentWrapper agentWrapper = new AgentWrapper();
+            
 
             agentWrapper.setAgentcode(agentcode);
             agentWrapper.setAgenttype(agenttype);
@@ -120,8 +127,33 @@ public class AgentController extends HttpServlet {
                 if(null!=serverResponse)
                 {
                     System.out.println("Agent Created");
-                     generalResponse.put(ICTCUtil.SUCCESS, "Agent Created");
-                    
+                   generalResponse.put(ICTCUtil.SUCCESS, "Agent Created");
+                   
+                   formattedResponse = serverResponse.substring(serverResponse.indexOf("'"), serverResponse.indexOf(";"));
+                   
+                   jsonformat =formattedResponse.substring(formattedResponse.indexOf("'")+1, formattedResponse.lastIndexOf("'"));
+                    System.out.println("Converted to JSON format " + jsonformat);
+                   
+                    try {
+                        JSONObject  js = new JSONObject(jsonformat);
+                        System.out.println(js.toString());
+                        
+                        //fullusername = js.getString("username");
+                        //String user = fullusername.substring(0,fullusername.indexOf("@"));
+                        userId  = js.getString("userId");
+                        
+                        Agent agent = agentModel.getAgent(Agent.USERNAME,agentWrapper.getUsername());
+                        Map<String,String> update = new HashMap<String,String>();
+                        update.put(Agent.AGENTID,userId);
+                        
+                        agentModel.AgentUpdate(Agent.USERNAME,update);
+                        
+                    } catch (Exception e) {
+                        
+                        System.out.println("couldnt pass response from salesforce");
+                    }
+                   
+                   
                 }
 
             }

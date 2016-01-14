@@ -21,6 +21,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import org.json.JSONObject;
 
 /**
  *
@@ -36,17 +37,44 @@ public class ictc {
                  //TODO code application logic here
                 
                 //genCode("firstName");
-                 //genWrapperCode("firstName");
-        Scanner sc = new Scanner(System.in);
-        String input = "";
-        while (!sc.next().equals("exit")) {
-            System.out.println("Enter Variabe name");
+//                 //genWrapperCode("firstName");
+//        Scanner sc = new Scanner(System.in);
+//        String input = "";
+//        while (!sc.next().equals("exit")) {
+//            System.out.println("Enter Variabe name");
+//
+//            input = sc.next();
+//            genWrapperCode(input);
+//            genGraphCode(input);
+//       }
 
-            input = sc.next();
-            genWrapperCode(input);
-            genGraphCode(input);
-       }
-
+        String codefrom = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n" +
+"Info:   <html>\n" +
+"Info:   <head>\n" +
+"Info:   <meta HTTP-EQUIV=\"PRAGMA\" CONTENT=\"NO-CACHE\">\n" +
+"Info:   <script>\n" +
+"Info:   if (this.SfdcApp && this.SfdcApp.projectOneNavigator) { SfdcApp.projectOneNavigator.handleRedirect('{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }'); }  else\n" +
+"Info:   if (window.location.replace){\n" +
+"Info:   window.location.replace('{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }');\n" +
+"Info:   } else {;\n" +
+"Info:   window.location.href ='{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }';\n" +
+"Info:   }\n" +
+"Info:   </script>\n" +
+"Info:   </head>\n" +
+"Info:   </html>\n" +
+"Info:   <!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\"><html><head>    <meta HTTP-EQUIV=\"PRAGMA\" CONTENT=\"NO-CACHE\"><script>if (this.SfdcApp && this.SfdcApp.projectOneNavigator) { SfdcApp.projectOneNavigator.handleRedirect('{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }'); }  else if (window.location.replace){ window.location.replace('{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }');} else {;window.location.href ='{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }';} </script></head></html>\n" +
+"Info:   Agent Created";
+        
+        String u = "konetyme@ictc.org";
+        
+        System.out.println(u.substring(0,u.indexOf("@")));
+        
+        String onetyme =codefrom.substring(codefrom.indexOf("'"), codefrom.indexOf(";"));
+        
+        String jsonformat =onetyme.substring(onetyme.indexOf("'")+1, onetyme.lastIndexOf("'"));
+        
+        JSONObject json = new JSONObject(jsonformat);
+        System.out.println(json.toString());
        
           //System.out.println("3.josss".substring(0,1));       
                 
