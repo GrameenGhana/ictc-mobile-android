@@ -217,7 +217,7 @@ public class AgentModel {
                
             } else {
 
-                log.info("Unable to update Bio Data");
+                log.info("Unable to update Agent");
             }
         }
         return updated;

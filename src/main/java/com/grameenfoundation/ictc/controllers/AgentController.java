@@ -112,8 +112,8 @@ public class AgentController extends HttpServlet {
              BufferedReader rd = new BufferedReader(new InputStreamReader(resp.getEntity().getContent()));
                 String line = "";
                 while ((line = rd.readLine()) != null) {
-                    System.out.println(line);
-                    out.println(line);
+                    //System.out.println(line);
+                   // out.println(line);
                     serverResponse += line;
 
                 }
@@ -141,12 +141,13 @@ public class AgentController extends HttpServlet {
                         //fullusername = js.getString("username");
                         //String user = fullusername.substring(0,fullusername.indexOf("@"));
                         userId  = js.getString("userId");
-                        
-                        Agent agent = agentModel.getAgent(Agent.USERNAME,agentWrapper.getUsername());
+                        System.out.println("userId" + userId);
+                       // Agent agent = agentModel.getAgent(Agent.USERNAME,agentWrapper.getUsername());
                         Map<String,String> update = new HashMap<String,String>();
                         update.put(Agent.AGENTID,userId);
                         
-                        agentModel.AgentUpdate(Agent.USERNAME,update);
+                        agentModel.AgentUpdate(agentWrapper.getUsername(),update);
+                        System.out.println("Agent updated");
                         
                     } catch (Exception e) {
                         
