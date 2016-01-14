@@ -24,6 +24,9 @@
     <body>
         <% if(wrapper != null) {%>
         <div class="col-sm-6 col-md-6 span5">
+            <% if(wrapper.getImage_url().length() >3)  { %>
+            <<img src="<%=wrapper.getImage_url()%>" title="<%=wrapper.getLastName()%>"  width="200" style='float:left'/>
+            <% } %>
             <h2>Farmer Details #<%=wrapper.getFarmID()%></h2>
             <h3>Bio Data</h3>
             <table class="table table-striped table-bordered">

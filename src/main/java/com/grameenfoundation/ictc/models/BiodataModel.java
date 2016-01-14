@@ -13,16 +13,22 @@ import com.grameenfoundation.ictc.utils.Labels;
 import com.grameenfoundation.ictc.utils.Neo4jServices;
 import com.grameenfoundation.ictc.utils.ParentNode;
 import com.grameenfoundation.ictc.wrapper.BiodataWrapper;
+import com.grameenfoundation.ictc.wrapper.CommunityCounterWrapper;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.neo4j.cypher.ExecutionEngine;
+import org.neo4j.cypher.ExecutionResult;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.helpers.collection.IteratorUtil;
+import org.neo4j.kernel.impl.util.StringLogger;
 import scala.collection.Iterator;
 import scala.sys.process.processInternal;
 
@@ -510,6 +516,53 @@ public class BiodataModel {
         return Neo4jServices.getAggregatedValue(" match (n:FARMER) RETURN count(DISTINCT n.community) as l");
     }
 
+    public Long getAgentCount() {
+
+        return Neo4jServices.getAggregatedValue(" match (n:AGENT) RETURN count(n) as l");
+    }
+
+    public List<CommunityCounterWrapper> getCommunityWrapper() {
+ List<CommunityCounterWrapper>  ccw= new ArrayList<>();
+        String q = "match (n:FARMER) RETURN n.community as c, count(n.Id) as s order by n.community";
+
+        Iterator<Long> n_column = null;
+        org.neo4j.cypher.javacompat.ExecutionResult result = null;
+        // let's execute a query now
+        try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            org.neo4j.cypher.javacompat.ExecutionEngine engine = new org.neo4j.cypher.javacompat.ExecutionEngine(
+                    ICTCDBUtil.getInstance().getGraphDB(), StringLogger.SYSTEM);
+            result = engine.execute(q);
+
+            ResourceIterator<Object> communities = result.columnAs("c");
+	ResourceIterator<Object> sumations = result.columnAs("s");
+        while(communities.hasNext())
+        {
+            String com = (String)communities.next();
+            Long l = (Long)sumations.next();
+            
+            ccw.add(new CommunityCounterWrapper(com, l));
+        }
+        
+//            while (result.hasNext()) {
+//                CommunityCounterWrapper  communityWrapper = new CommunityCounterWrapper();
+//                
+//                Map<String, Object> row = (Map<String, Object>) result.next();
+//                for (Entry<String, Object> column : row.entrySet()) {
+//                    if(column.getKey().equalsIgnoreCase("c"))
+//                        communityWrapper.setCommunity((String)column.getValue());
+//                    else
+//                        communityWrapper.setNoOfFarmers((Long)column.getValue());
+//                        
+//                    
+//                }
+//                ccw.add(communityWrapper);
+//            }
+
+        }
+
+        return ccw;
+    }
+
     public boolean BiodataUpdate(String id, Map<String, String> data) {
 
         Biodata bio = getBiodata(Biodata.ID, id);
@@ -524,7 +577,7 @@ public class BiodataModel {
                     String fieldName = dataEntry.getKey();
                     // get the field value
                     String fieldValue = dataEntry.getValue();
-                    System.out.println("Updating : "+fieldName+" <> "+fieldValue);
+                    System.out.println("Updating : " + fieldName + " <> " + fieldValue);
                     // Assigning the alias
                     if (fieldName.equalsIgnoreCase(Biodata.CLUSTER)) {
                         if (null != fieldValue) {
@@ -541,28 +594,27 @@ public class BiodataModel {
                             bio.setFarmperimeter(fieldValue);
                         }
                     }
-                    
-                     if (fieldName.equalsIgnoreCase(Biodata.IMAGE_URL)) {
+
+                    if (fieldName.equalsIgnoreCase(Biodata.IMAGE_URL)) {
                         if (null != fieldValue) {
                             bio.setImage_Url(fieldValue);
                         }
                     }
-                     
-                   if (fieldName.equalsIgnoreCase(Biodata.CREATED_BY)) {
-                       
+
+                    if (fieldName.equalsIgnoreCase(Biodata.CREATED_BY)) {
+
                         if (null != fieldValue) {
-                            
+
                             bio.setCreatedById(fieldValue);
                         }
                     }
 
-                    
                 }
                 trx.success();
 
                 updated = true;
                 log.log(Level.INFO, "Bio Data Successfully Updated {0}", updated);
-               
+
             } else {
 
                 log.info("Unable to update Bio Data");
