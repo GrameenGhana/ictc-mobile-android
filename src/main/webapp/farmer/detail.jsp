@@ -24,9 +24,7 @@
     <body>
         <% if(wrapper != null) {%>
         <div class="col-sm-6 col-md-6 span5">
-            <% if(wrapper.getImage_url().length() >3)  { %>
-            <<img src="<%=wrapper.getImage_url()%>" title="<%=wrapper.getLastName()%>"  width="200" style='float:left'/>
-            <% } %>
+         
             <h2>Farmer Details #<%=wrapper.getFarmID()%></h2>
             <h3>Bio Data</h3>
             <table class="table table-striped table-bordered">
@@ -129,7 +127,8 @@
 
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">FMP</a></li>
+                    <li role="presentation" class="active"><a href="#imgs" aria-controls="imgs" role="tab" data-toggle="tab">Image</a></li>
+                    <li role="presentation" class=""><a href="#home" aria-controls="home" role="tab" data-toggle="tab">FMP</a></li>
                     <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Visit</a></li>
                     <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Activities</a></li>
                     <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">map</a></li>
@@ -137,7 +136,13 @@
 
                 <!-- Tab panes -->
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="home">Farm Management Plan
+                    <div role="tabpanel" class="tab-pane active" id="imgs">
+                        
+                           <% if(null != wrapper.getImage_url()){ %>
+            <<img src="<%=wrapper.getImage_url()%>" title="<%=wrapper.getLastName()%>"  width="500" style='float:left'/>
+            <% } %>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="home">Farm Management Plan
                         <table>
                             <% List<FieldObject> objs = wrapper.getFmpValues(); 
                             if(null != objs){
