@@ -523,7 +523,7 @@ public class BiodataModel {
 
     public List<CommunityCounterWrapper> getCommunityWrapper() {
  List<CommunityCounterWrapper>  ccw= new ArrayList<>();
-        String q = "match (n:FARMER) RETURN n.community as c, count(n.Id) as s order by n.community";
+        String q = "match (n:FARMER) RETURN n.community as c, count(n.community) as s order by n.community";
 
         Iterator<Long> n_column = null;
         org.neo4j.cypher.javacompat.ExecutionResult result = null;
@@ -535,12 +535,31 @@ public class BiodataModel {
 
             ResourceIterator<Object> communities = result.columnAs("c");
 	ResourceIterator<Object> sumations = result.columnAs("s");
+         String com =""; long l =0;
         while(communities.hasNext())
         {
-            String com = (String)communities.next();
-            Long l = (Long)sumations.next();
+            try {
+                
             
-            ccw.add(new CommunityCounterWrapper(com, l));
+            try {
+                  com = (String)communities.next();
+            } catch (Exception e) {
+                 System.out.println("Error comm: "+e.getLocalizedMessage());
+                com="Null";
+            }
+           
+            try {
+                Object sums = sumations.next();
+                System.out.println("Sum: "+sums.toString());
+                l = (Long)sumations.next();
+            } catch (Exception e) {
+                 System.out.println("Error l: "+e.getLocalizedMessage());
+                l=0;
+            }
+            
+            ccw.add(new CommunityCounterWrapper(com, l));} catch (Exception e) {
+                System.out.println("Error: "+e.getLocalizedMessage());
+            }
         }
         
 //            while (result.hasNext()) {

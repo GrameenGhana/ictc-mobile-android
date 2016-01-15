@@ -4,12 +4,14 @@
     Author     : skwakwa
 --%>
 
+<%@page import="com.grameenfoundation.ictc.models.AgentModel"%>
+<%@page import="com.grameenfoundation.ictc.wrapper.AgentWrapper"%>
 <%@page import="java.util.List"%>
 <%@page import="com.grameenfoundation.ictc.models.UserModel"%>
 <%@page import="com.grameenfoundation.ictc.wrapper.UserWrapper"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-List<UserWrapper> users = new UserModel().findAll();
+List<AgentWrapper> users = new AgentModel().findAllAgents();
 %>
 <!DOCTYPE html>
 <html>
@@ -30,19 +32,19 @@ List<UserWrapper> users = new UserModel().findAll();
             </tr>
 
 
-            <% for (UserWrapper bio : users) {%>
+            <% for (AgentWrapper bio : users) {%>
 
             <tr>
-                <td><%= bio.getID()%></td>
-                <td><%= bio.getLastName()%></td>
-                <td><%= bio.getFirstName() %></td>
-                <td><%= bio.getAgentCode()%></td>
-                <td><%= bio.getAgentType()%></td>
-                <td><%= bio.getOrganisation()%></td>
+                <td><%= bio.getAgentId()%></td>
+                <td><%= bio.getLastname()%></td>
+                <td><%= bio.getFirstname()%></td>
+                <td><%= bio.getAgentcode()%></td>
+                <td><%= bio.getAgenttype()%></td>
+                <td><%= bio.getAgenttype()%></td>
                
                 <td>
                    
-                    <a href="farmers.jsp?id=<%=bio.getID()%>" class="btn btn-success">Farmers <span class="badge badge-info"><%=bio.getMyFarmers().size() %></span></a>
+                    <a href="farmers.jsp?id=<%=bio.get() %>" class="btn btn-success">Farmers</a>
                    <a href="details.jsp?id=<%=bio.getID()%>" class="btn btn-info">Details</a>
                 </td>
             </tr>
