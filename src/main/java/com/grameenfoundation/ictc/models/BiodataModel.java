@@ -590,6 +590,27 @@ public class BiodataModel {
 
         return ccw;
     }
+    
+    
+    public boolean lastmodifiedUpdate(String id,long lastmodified)
+    {
+         boolean updated = false;
+         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+         Biodata bio = getBiodata(Biodata.ID, id);
+         
+             if (null != bio) {
+
+                 bio.setLastModifiedDate(lastmodified);
+                 trx.success();
+                 updated = true;
+                 log.log(Level.INFO, "Bio Data Successfully Updated with lastmodified date {0}", updated);
+             } else {
+                  log.log(Level.INFO, "Farmer not available");
+             }
+        }
+         
+         return updated;
+    }
 
     public boolean BiodataUpdate(String id, Map<String, String> data) {
 
@@ -636,6 +657,7 @@ public class BiodataModel {
                             bio.setCreatedById(fieldValue);
                         }
                     }
+                   
 
                 }
                 trx.success();

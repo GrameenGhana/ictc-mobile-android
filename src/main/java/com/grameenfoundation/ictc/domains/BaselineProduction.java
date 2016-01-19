@@ -86,7 +86,79 @@ public class BaselineProduction extends Status implements GeneralInterface{
     public static String TYPE_OF_HYBRID="type_of_hybrid";    
     public static String COST_PRODUCTION="production_cost";
     public static String GROSS_MARGIN="gross_margin";
+    public static String LANDHISTORYBASE="landhistorybase";
+    public static String ORGANICFERTILIZERAPPLICATION="organicfertilizerapplication";
+    public static String ORGANICFERTILIZERDATE="organicfertilizerdate";
+    public static String ORGANICFERTMETHOD="organicfertmethod";
+    public static String ORGANICRESIDUE="organicresidue";
     
+    
+public void setOrganicresidue(String organicresidue) {
+underlyingNode.setProperty(ORGANICRESIDUE,organicresidue);
+}
+
+public String getOrganicresidue(){
+          try {
+          return (String) underlyingNode.getProperty(ORGANICRESIDUE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setOrganicfertmethod(String organicfertmethod) {
+underlyingNode.setProperty(ORGANICFERTMETHOD,organicfertmethod);
+}
+
+public String getOrganicfertmethod(){
+          try {
+          return (String) underlyingNode.getProperty(ORGANICFERTMETHOD);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+public void setOrganicfertilizerdate(String organicfertilizerdate) {
+underlyingNode.setProperty(ORGANICFERTILIZERDATE,organicfertilizerdate);
+}
+
+public String getOrganicfertilizerdate(){
+          try {
+          return (String) underlyingNode.getProperty(ORGANICFERTILIZERDATE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setOrganicfertilizerapplication(String organicfertilizerapplication) {
+underlyingNode.setProperty(ORGANICFERTILIZERAPPLICATION,organicfertilizerapplication);
+}
+
+public String getOrganicfertilizerapplication(){
+          try {
+          return (String) underlyingNode.getProperty(ORGANICFERTILIZERAPPLICATION);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setLandhistorybase(String landhistorybase) {
+underlyingNode.setProperty(LANDHISTORYBASE,landhistorybase);
+}
+
+public String getLandhistorybase(){
+          try {
+          return (String) underlyingNode.getProperty(LANDHISTORYBASE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
     
 public void setType_of_hybrid(String type_of_hybrid) {
 underlyingNode.setProperty(TYPE_OF_HYBRID,type_of_hybrid);

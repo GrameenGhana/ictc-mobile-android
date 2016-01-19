@@ -54,7 +54,78 @@ public class BaselinePostHarvestWrapper {
     String producestoredproportion="producestoredproportion";
     String reference_season="reference_season";
     String reference_year="reference_year";
+    String bagspostprocessing="bagspostprocessing";
+    String buyernumber="buyernumber";
+    String dryingcobs="dryingcobs";
+    String harvestmethod="harvestmethod";
+    String processingcombination="processingcombination";
+    String processingcompleted="processingcompleted";
+    String shellingmethod="shellingmethod";
+    String shellingmethodother="shellingmethodother";
     
+    
+ public  void setShellingmethodother(String shellingmethodother) {
+      this.shellingmethodother=shellingmethodother;
+    }
+ public  String getShellingmethodother() {
+        return shellingmethodother;
+
+    }
+    
+ public  void setShellingmethod(String shellingmethod) {
+      this.shellingmethod=shellingmethod;
+    }
+ public  String getShellingmethod() {
+        return shellingmethod;
+
+    }
+    
+ public  void setProcessingcompleted(String processingcompleted) {
+      this.processingcompleted=processingcompleted;
+    }
+ public  String getProcessingcompleted() {
+        return processingcompleted;
+
+    }
+    
+ public  void setProcessingcombination(String processingcombination) {
+      this.processingcombination=processingcombination;
+    }
+ public  String getProcessingcombination() {
+        return processingcombination;
+
+    }
+    
+ public  void setHarvestmethod(String harvestmethod) {
+      this.harvestmethod=harvestmethod;
+    }
+ public  String getHarvestmethod() {
+        return harvestmethod;
+
+    }
+    
+ public  void setDryingcobs(String dryingcobs) {
+      this.dryingcobs=dryingcobs;
+    }
+ public  String getDryingcobs() {
+        return dryingcobs;
+
+    }
+ public  void setBuyernumber(String buyernumber) {
+      this.buyernumber=buyernumber;
+    }
+ public  String getBuyernumber() {
+        return buyernumber;
+
+    }
+    
+ public  void setBagspostprocessing(String bagspostprocessing) {
+      this.bagspostprocessing=bagspostprocessing;
+    }
+ public  String getBagspostprocessing() {
+        return bagspostprocessing;
+
+    }
     
  public  void setReference_year(String reference_year) {
       this.reference_year=reference_year;

@@ -60,6 +60,12 @@ public class Generalimpl implements GeneralInterface {
     @Override
     public void setLastModifiedDate(Date lastModificationDate) {
         underlyingNode.setProperty(LAST_MODIFIED,   ICTCUtil.dateToLong(lastModificationDate));
+    } 
+    
+    
+    @Override
+    public void setLastModifiedDate(long lastModificationDate) {
+        underlyingNode.setProperty(LAST_MODIFIED,  (lastModificationDate));
     }
 
     @Override

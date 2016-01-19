@@ -91,7 +91,65 @@ public class BaselineProductionBudget extends Status implements GeneralInterface
  public static String QTY_POSTPLANT_HERB_2="qty_postplant_herb_2";
  public static String QTY_POSTPLANT_HERB_3="qty_postplant_herb_3";
  public static String QTY_TFER="qty_tfer";
+ public static String ORGANICFERTILIZERAPPCOST="organicfertilizerappcost";
+ public static String ORGANICFERTILIZERQTY="organicfertilizerqty";
+ public static String ORGFERTILIZERPRICE="orgfertilizerprice";
+ public static String POSTPLANTHERBICIDE2APPLICATIONCOST="postplantherbicide2applicationcost";
  
+ 
+public void setPostplantherbicide2applicationcost(String postplantherbicide2applicationcost) {
+underlyingNode.setProperty(POSTPLANTHERBICIDE2APPLICATIONCOST,postplantherbicide2applicationcost);
+}
+
+public String getPostplantherbicide2applicationcost(){
+          try {
+          return (String) underlyingNode.getProperty(POSTPLANTHERBICIDE2APPLICATIONCOST);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+public void setOrgfertilizerprice(String orgfertilizerprice) {
+underlyingNode.setProperty(ORGFERTILIZERPRICE,orgfertilizerprice);
+}
+
+public String getOrgfertilizerprice(){
+          try {
+          return (String) underlyingNode.getProperty(ORGFERTILIZERPRICE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+ 
+public void setOrganicfertilizerqty(String organicfertilizerqty) {
+underlyingNode.setProperty(ORGANICFERTILIZERQTY,organicfertilizerqty);
+}
+
+public String getOrganicfertilizerqty(){
+          try {
+          return (String) underlyingNode.getProperty(ORGANICFERTILIZERQTY);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+ 
+public void setOrganicfertilizerappcost(String organicfertilizerappcost) {
+underlyingNode.setProperty(ORGANICFERTILIZERAPPCOST,organicfertilizerappcost);
+}
+
+public String getOrganicfertilizerappcost(){
+          try {
+          return (String) underlyingNode.getProperty(ORGANICFERTILIZERAPPCOST);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
  
  
 public void setQty_tfer(String qty_tfer) {

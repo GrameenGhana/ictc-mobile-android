@@ -66,7 +66,124 @@ public class BaselinePostHarvest extends Status implements GeneralInterface {
     public static String PRODUCESTOREDPROPORTION="producestoredproportion";
     public static String REFERENCE_SEASON="reference_season";
     public static String REFERENCE_YEAR="reference_year";
+    public static String BAGSPOSTPROCESSING="bagspostprocessing";
+    public static String BUYERNUMBER="buyernumber";
+    public static String DRYINGCOBS="dryingcobs";
+    public static String HARVESTMETHOD="harvestmethod";
+    public static String PROCESSINGCOMBINATION="processingcombination";
+    public static String PROCESSINGCOMPLETED="processingcompleted";
+    public static String SHELLINGMETHOD="shellingmethod";
+    public static String SHELLINGMETHODOTHER="shellingmethodother";
     
+    
+    
+public void setShellingmethodother(String shellingmethodother) {
+underlyingNode.setProperty(SHELLINGMETHODOTHER,shellingmethodother);
+}
+
+public String getShellingmethodother(){
+          try {
+          return (String) underlyingNode.getProperty(SHELLINGMETHODOTHER);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+public void setShellingmethod(String shellingmethod) {
+underlyingNode.setProperty(SHELLINGMETHOD,shellingmethod);
+}
+
+public String getShellingmethod(){
+          try {
+          return (String) underlyingNode.getProperty(SHELLINGMETHOD);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+public void setProcessingcompleted(String processingcompleted) {
+underlyingNode.setProperty(PROCESSINGCOMPLETED,processingcompleted);
+}
+
+public String getProcessingcompleted(){
+          try {
+          return (String) underlyingNode.getProperty(PROCESSINGCOMPLETED);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+public void setProcessingcombination(String processingcombination) {
+underlyingNode.setProperty(PROCESSINGCOMBINATION,processingcombination);
+}
+
+public String getProcessingcombination(){
+          try {
+          return (String) underlyingNode.getProperty(PROCESSINGCOMBINATION);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setHarvestmethod(String harvestmethod) {
+underlyingNode.setProperty(HARVESTMETHOD,harvestmethod);
+}
+
+public String getHarvestmethod(){
+          try {
+          return (String) underlyingNode.getProperty(HARVESTMETHOD);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+public void setDryingcobs(String dryingcobs) {
+underlyingNode.setProperty(DRYINGCOBS,dryingcobs);
+}
+
+public String getDryingcobs(){
+          try {
+          return (String) underlyingNode.getProperty(DRYINGCOBS);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setBuyernumber(String buyernumber) {
+underlyingNode.setProperty(BUYERNUMBER,buyernumber);
+}
+
+public String getBuyernumber(){
+          try {
+          return (String) underlyingNode.getProperty(BUYERNUMBER);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setBagspostprocessing(String bagspostprocessing) {
+underlyingNode.setProperty(BAGSPOSTPROCESSING,bagspostprocessing);
+}
+
+public String getBagspostprocessing(){
+          try {
+          return (String) underlyingNode.getProperty(BAGSPOSTPROCESSING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
     
     
 public void setReference_year(String reference_year) {

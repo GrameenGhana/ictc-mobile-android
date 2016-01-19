@@ -58,7 +58,53 @@ public class FmpPostHarvestBudget extends Status implements GeneralInterface {
  public static String LABOR_PERIOD_DEHUSKING="labor_period_dehusking";
  public static String REFERENCE_SEASON_CURRENT="reference_season_current";
  public static String REFERENCE_YEAR_CURRENT="reference_year_current";
+ public static String PROCESSINGCOSTS1="processingcosts1";
+ public static String TRANSPORTCOSTHOME1="transportcosthome1";
+ public static String TRANSPORTCOSTMARKET1="transportcostmarket1";
  
+ 
+public void setTransportcostmarket1(String transportcostmarket1) {
+underlyingNode.setProperty(TRANSPORTCOSTMARKET1,transportcostmarket1);
+}
+
+public String getTransportcostmarket1(){
+          try {
+          return (String) underlyingNode.getProperty(TRANSPORTCOSTMARKET1);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+ 
+ 
+ 
+public void setTransportcosthome1(String transportcosthome1) {
+underlyingNode.setProperty(TRANSPORTCOSTHOME1,transportcosthome1);
+}
+
+public String getTransportcosthome1(){
+          try {
+          return (String) underlyingNode.getProperty(TRANSPORTCOSTHOME1);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+ 
+public void setProcessingcosts1(String processingcosts1) {
+underlyingNode.setProperty(PROCESSINGCOSTS1,processingcosts1);
+}
+
+public String getProcessingcosts1(){
+          try {
+          return (String) underlyingNode.getProperty(PROCESSINGCOSTS1);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
  
  
 public void setReference_year_current(String reference_year_current) {

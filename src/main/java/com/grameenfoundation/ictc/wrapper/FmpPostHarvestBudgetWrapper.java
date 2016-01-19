@@ -45,7 +45,34 @@ public class FmpPostHarvestBudgetWrapper {
    String labor_period_dehusking="labor_period_dehusking";
    String reference_season_current="reference_season_current";
    String reference_year_current="reference_year_current";
+   String processingcosts1="processingcosts1";
+   String transportcosthome1="transportcosthome1";
+   String transportcostmarket1="transportcostmarket1";
    
+   
+ public  void setTransportcostmarket1(String transportcostmarket1) {
+      this.transportcostmarket1=transportcostmarket1;
+    }
+ public  String getTransportcostmarket1() {
+        return transportcostmarket1;
+
+    }
+   
+ public  void setTransportcosthome1(String transportcosthome1) {
+      this.transportcosthome1=transportcosthome1;
+    }
+ public  String getTransportcosthome1() {
+        return transportcosthome1;
+
+    }
+   
+ public  void setProcessingcosts1(String processingcosts1) {
+      this.processingcosts1=processingcosts1;
+    }
+ public  String getProcessingcosts1() {
+        return processingcosts1;
+
+    }
    
  public  void setReference_year_current(String reference_year_current) {
       this.reference_year_current=reference_year_current;

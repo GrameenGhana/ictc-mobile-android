@@ -97,7 +97,202 @@ public class FmpProductionBudget extends Status implements GeneralInterface {
     public static String TOTAL_COST_HOE_PLOUGHING="total_cost_hoe_ploughing";
     public static String BASAL_FERTILIZER_APPLICATION_HIRED="basal_fertilizer_application_hired";
     public static String FINAL_HARVEST_LABOR_HIRED="final_harvest_labor_hired";
+    public static String ORGANICFERTILIZERAPPCOSTCURRENT="organicfertilizerappcostcurrent";
+    public static String ORGANICFERTILIZERQTYCURRENT="organicfertilizerqtycurrent";
+    public static String ORGFERTILIZERCOSTCURRENT="orgfertilizercostcurrent";
+    public static String POSTPLANTHERBICIDE1APPCOST="postplantherbicide1appcost";
+    public static String POSTPLANTHERBICIDE1APPERIOD="postplantherbicide1apperiod";
+    public static String POSTPLANTHERBICIDE1PRICE="postplantherbicide1price";
+    public static String POSTPLANTHERBICIDE1QTY="postplantherbicide1qty";
+    public static String POSTPLANTHERBICIDE2APPLICATIONCOST="postplantherbicide2applicationcost";
+    public static String POSTPLANTHERBICIDE2APPLICATIONPERIOD="postplantherbicide2applicationperiod";
+    public static String POSTPLANTHERBICIDE2PRICE="postplantherbicide2price";
+    public static String POSTPLANTHERBICIDE2QTY="postplantherbicide2qty";
+    public static String FERTILIZERBASALNOBAGS="fertilizerbasalnobags";
+    public static String FERTILIZERTOPDRESSNOBAGS="fertilizertopdressnobags";
     
+    
+    
+public void setFertilizertopdressnobags(String fertilizertopdressnobags) {
+underlyingNode.setProperty(FERTILIZERTOPDRESSNOBAGS,fertilizertopdressnobags);
+}
+
+public String getFertilizertopdressnobags(){
+          try {
+          return (String) underlyingNode.getProperty(FERTILIZERTOPDRESSNOBAGS);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+public void setFertilizerbasalnobags(String fertilizerbasalnobags) {
+underlyingNode.setProperty(FERTILIZERBASALNOBAGS,fertilizerbasalnobags);
+}
+
+public String getFertilizerbasalnobags(){
+          try {
+          return (String) underlyingNode.getProperty(FERTILIZERBASALNOBAGS);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setPostplantherbicide2qty(String postplantherbicide2qty) {
+underlyingNode.setProperty(POSTPLANTHERBICIDE2QTY,postplantherbicide2qty);
+}
+
+public String getPostplantherbicide2qty(){
+          try {
+          return (String) underlyingNode.getProperty(POSTPLANTHERBICIDE2QTY);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setPostplantherbicide2price(String postplantherbicide2price) {
+underlyingNode.setProperty(POSTPLANTHERBICIDE2PRICE,postplantherbicide2price);
+}
+
+public String getPostplantherbicide2price(){
+          try {
+          return (String) underlyingNode.getProperty(POSTPLANTHERBICIDE2PRICE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+public void setPostplantherbicide2applicationperiod(String postplantherbicide2applicationperiod) {
+underlyingNode.setProperty(POSTPLANTHERBICIDE2APPLICATIONPERIOD,postplantherbicide2applicationperiod);
+}
+
+public String getPostplantherbicide2applicationperiod(){
+          try {
+          return (String) underlyingNode.getProperty(POSTPLANTHERBICIDE2APPLICATIONPERIOD);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setPostplantherbicide2applicationcost(String postplantherbicide2applicationcost) {
+underlyingNode.setProperty(POSTPLANTHERBICIDE2APPLICATIONCOST,postplantherbicide2applicationcost);
+}
+
+public String getPostplantherbicide2applicationcost(){
+          try {
+          return (String) underlyingNode.getProperty(POSTPLANTHERBICIDE2APPLICATIONCOST);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setPostplantherbicide1qty(String postplantherbicide1qty) {
+underlyingNode.setProperty(POSTPLANTHERBICIDE1QTY,postplantherbicide1qty);
+}
+
+public String getPostplantherbicide1qty(){
+          try {
+          return (String) underlyingNode.getProperty(POSTPLANTHERBICIDE1QTY);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+public void setPostplantherbicide1price(String postplantherbicide1price) {
+underlyingNode.setProperty(POSTPLANTHERBICIDE1PRICE,postplantherbicide1price);
+}
+
+public String getPostplantherbicide1price(){
+          try {
+          return (String) underlyingNode.getProperty(POSTPLANTHERBICIDE1PRICE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+    
+public void setPostplantherbicide1apperiod(String postplantherbicide1apperiod) {
+underlyingNode.setProperty(POSTPLANTHERBICIDE1APPERIOD,postplantherbicide1apperiod);
+}
+
+public String getPostplantherbicide1apperiod(){
+          try {
+          return (String) underlyingNode.getProperty(POSTPLANTHERBICIDE1APPERIOD);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+public void setPostplantherbicide1appcost(String postplantherbicide1appcost) {
+underlyingNode.setProperty(POSTPLANTHERBICIDE1APPCOST,postplantherbicide1appcost);
+}
+
+public String getPostplantherbicide1appcost(){
+          try {
+          return (String) underlyingNode.getProperty(POSTPLANTHERBICIDE1APPCOST);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setOrgfertilizercostcurrent(String orgfertilizercostcurrent) {
+underlyingNode.setProperty(ORGFERTILIZERCOSTCURRENT,orgfertilizercostcurrent);
+}
+
+public String getOrgfertilizercostcurrent(){
+          try {
+          return (String) underlyingNode.getProperty(ORGFERTILIZERCOSTCURRENT);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+    
+    
+public void setOrganicfertilizerqtycurrent(String organicfertilizerqtycurrent) {
+underlyingNode.setProperty(ORGANICFERTILIZERQTYCURRENT,organicfertilizerqtycurrent);
+}
+
+public String getOrganicfertilizerqtycurrent(){
+          try {
+          return (String) underlyingNode.getProperty(ORGANICFERTILIZERQTYCURRENT);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setOrganicfertilizerappcostcurrent(String organicfertilizerappcostcurrent) {
+underlyingNode.setProperty(ORGANICFERTILIZERAPPCOSTCURRENT,organicfertilizerappcostcurrent);
+}
+
+public String getOrganicfertilizerappcostcurrent(){
+          try {
+          return (String) underlyingNode.getProperty(ORGANICFERTILIZERAPPCOSTCURRENT);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
     
 public void setFinal_harvest_labor_hired(String final_harvest_labor_hired) {
 underlyingNode.setProperty(FINAL_HARVEST_LABOR_HIRED,final_harvest_labor_hired);

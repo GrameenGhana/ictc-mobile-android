@@ -80,8 +80,44 @@ public class BaselineProductionBudgetWrapper {
     String qty_postplant_herb_1 = "qty_postplant_herb_1";
     String qty_postplant_herb_2 = "qty_postplant_herb_2";
     String qty_postplant_herb_3 = "qty_postplant_herb_3";
-   String qty_tfer="qty_tfer";
-   
+    String qty_tfer="qty_tfer";
+    String organicfertilizerappcost="organicfertilizerappcost";
+    String organicfertilizerqty="organicfertilizerqty";
+    String orgfertilizerprice="orgfertilizerprice";
+    String postplantherbicide2applicationcost="postplantherbicide2applicationcost";
+    
+    
+ public  void setPostplantherbicide2applicationcost(String postplantherbicide2applicationcost) {
+      this.postplantherbicide2applicationcost=postplantherbicide2applicationcost;
+    }
+ public  String getPostplantherbicide2applicationcost() {
+        return postplantherbicide2applicationcost;
+
+    }
+ public  void setOrgfertilizerprice(String orgfertilizerprice) {
+      this.orgfertilizerprice=orgfertilizerprice;
+    }
+ public  String getOrgfertilizerprice() {
+        return orgfertilizerprice;
+
+    }
+    
+ public  void setOrganicfertilizerqty(String organicfertilizerqty) {
+      this.organicfertilizerqty=organicfertilizerqty;
+    }
+ public  String getOrganicfertilizerqty() {
+        return organicfertilizerqty;
+
+    }
+    
+    
+ public  void setOrganicfertilizerappcost(String organicfertilizerappcost) {
+      this.organicfertilizerappcost=organicfertilizerappcost;
+    }
+ public  String getOrganicfertilizerappcost() {
+        return organicfertilizerappcost;
+
+    }
    
  public  void setQty_tfer(String qty_tfer) {
       this.qty_tfer=qty_tfer;

@@ -79,7 +79,107 @@ public static String QTYOFPREPLANTHERBICIDE="qtyofpreplantherbicide";
 public static String REFERENCE_SEASON_CURRENT="reference_season_current";
 public static String REFERENCE_YEAR_CURRENT="reference_year_current";
 public static String NAME_OF_HYBRID_VARIETY="name_of_hybrid_variety";
+public static String LANDHISTORYCURRENT="landhistorycurrent";
+public static String LOCALCROPVARIETYCASSAVA="localcropvarietycassava";
+public static String LOCALCROPVARIETYRICE="localcropvarietyrice";
+public static String LOCALCROPVARIETYYAM="localcropvarietyyam";
+public static String ORGANICFERTILIZERAPPLICATIONCURRENT="organicfertilizerapplicationcurrent";
+public static String ORGANICFERTILIZERDATECURRENT="organicfertilizerdatecurrent";
+public static String ORGANICRESIDUECURRENT="organicresiduecurrent";
 
+
+
+public void setOrganicresiduecurrent(String organicresiduecurrent) {
+underlyingNode.setProperty(ORGANICRESIDUECURRENT,organicresiduecurrent);
+}
+
+public String getOrganicresiduecurrent(){
+          try {
+          return (String) underlyingNode.getProperty(ORGANICRESIDUECURRENT);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setOrganicfertilizerdatecurrent(String organicfertilizerdatecurrent) {
+underlyingNode.setProperty(ORGANICFERTILIZERDATECURRENT,organicfertilizerdatecurrent);
+}
+
+public String getOrganicfertilizerdatecurrent(){
+          try {
+          return (String) underlyingNode.getProperty(ORGANICFERTILIZERDATECURRENT);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+public void setOrganicfertilizerapplicationcurrent(String organicfertilizerapplicationcurrent) {
+underlyingNode.setProperty(ORGANICFERTILIZERAPPLICATIONCURRENT,organicfertilizerapplicationcurrent);
+}
+
+public String getOrganicfertilizerapplicationcurrent(){
+          try {
+          return (String) underlyingNode.getProperty(ORGANICFERTILIZERAPPLICATIONCURRENT);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setLocalcropvarietyyam(String localcropvarietyyam) {
+underlyingNode.setProperty(LOCALCROPVARIETYYAM,localcropvarietyyam);
+}
+
+public String getLocalcropvarietyyam(){
+          try {
+          return (String) underlyingNode.getProperty(LOCALCROPVARIETYYAM);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setLocalcropvarietyrice(String localcropvarietyrice) {
+underlyingNode.setProperty(LOCALCROPVARIETYRICE,localcropvarietyrice);
+}
+
+public String getLocalcropvarietyrice(){
+          try {
+          return (String) underlyingNode.getProperty(LOCALCROPVARIETYRICE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setLocalcropvarietycassava(String localcropvarietycassava) {
+underlyingNode.setProperty(LOCALCROPVARIETYCASSAVA,localcropvarietycassava);
+}
+
+public String getLocalcropvarietycassava(){
+          try {
+          return (String) underlyingNode.getProperty(LOCALCROPVARIETYCASSAVA);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setLandhistorycurrent(String landhistorycurrent) {
+underlyingNode.setProperty(LANDHISTORYCURRENT,landhistorycurrent);
+}
+
+public String getLandhistorycurrent(){
+          try {
+          return (String) underlyingNode.getProperty(LANDHISTORYCURRENT);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
 public void setName_of_hybrid_variety(String name_of_hybrid_variety) {
 underlyingNode.setProperty(NAME_OF_HYBRID_VARIETY,name_of_hybrid_variety);

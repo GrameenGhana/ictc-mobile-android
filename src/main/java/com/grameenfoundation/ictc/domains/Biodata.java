@@ -51,7 +51,97 @@ public class Biodata extends Status implements GeneralInterface {
     public static String DISTRICTS_VOLTA = "Districts_Volta";
     public static String IMAGE_URL = "image_url";
     public static String CREATED_BY = "CreatedById";
+    public static String DISRICTRESIDENCEASH="disrictresidenceash";
+    public static String DISTRICTRESIDENCEBA="districtresidenceba";
+    public static String DISTRICTRESIDENCEVOLTA="districtresidencevolta";
+    public static String NUMBEROFDEPENDANTSMALE="numberofdependantsmale";
+    public static String NUMBEROFDEPENDENTSFEMALE="numberofdependentsfemale";
+    public static String REGIONRESIDENCE="regionresidence";
     
+    
+    
+public void setRegionresidence(String regionresidence) {
+underlyingNode.setProperty(REGIONRESIDENCE,regionresidence);
+}
+
+public String getRegionresidence(){
+          try {
+          return (String) underlyingNode.getProperty(REGIONRESIDENCE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setNumberofdependentsfemale(String numberofdependentsfemale) {
+underlyingNode.setProperty(NUMBEROFDEPENDENTSFEMALE,numberofdependentsfemale);
+}
+
+public String getNumberofdependentsfemale(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBEROFDEPENDENTSFEMALE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setNumberofdependantsmale(String numberofdependantsmale) {
+underlyingNode.setProperty(NUMBEROFDEPENDANTSMALE,numberofdependantsmale);
+}
+
+public String getNumberofdependantsmale(){
+          try {
+          return (String) underlyingNode.getProperty(NUMBEROFDEPENDANTSMALE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setDistrictresidencevolta(String districtresidencevolta) {
+underlyingNode.setProperty(DISTRICTRESIDENCEVOLTA,districtresidencevolta);
+}
+
+public String getDistrictresidencevolta(){
+          try {
+          return (String) underlyingNode.getProperty(DISTRICTRESIDENCEVOLTA);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setDistrictresidenceba(String districtresidenceba) {
+underlyingNode.setProperty(DISTRICTRESIDENCEBA,districtresidenceba);
+}
+
+public String getDistrictresidenceba(){
+          try {
+          return (String) underlyingNode.getProperty(DISTRICTRESIDENCEBA);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+public void setDisrictresidenceash(String disrictresidenceash) {
+underlyingNode.setProperty(DISRICTRESIDENCEASH,disrictresidenceash);
+}
+
+public String getDisrictresidenceash(){
+          try {
+          return (String) underlyingNode.getProperty(DISRICTRESIDENCEASH);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
     
      public void setCreatedById(String createBy) {
         

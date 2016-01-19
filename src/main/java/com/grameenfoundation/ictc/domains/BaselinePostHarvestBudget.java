@@ -56,7 +56,52 @@ public class BaselinePostHarvestBudget extends Status implements GeneralInterfac
     public static String UNIT_LABOR_COST_BAGGING_BASE="unit_labor_cost_bagging_base";
     public static String UNIT_LABOR_COST_WINNOWING_BASE="unit_labor_cost_winnowing_base";
     public static String CROP_TO_CULTIVATE_BASE = "crop_to_cultivate_base";
+    public static String PROCESSINGCOSTS="processingcosts";
+    public static String TRANSPORTCOSTHOME="transportcosthome";
+    public static String TRANSPORTCOSTMARKET="transportcostmarket";
+    
+    
+    
+public void setTransportcostmarket(String transportcostmarket) {
+underlyingNode.setProperty(TRANSPORTCOSTMARKET,transportcostmarket);
+}
 
+public String getTransportcostmarket(){
+          try {
+          return (String) underlyingNode.getProperty(TRANSPORTCOSTMARKET);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setTransportcosthome(String transportcosthome) {
+underlyingNode.setProperty(TRANSPORTCOSTHOME,transportcosthome);
+}
+
+public String getTransportcosthome(){
+          try {
+          return (String) underlyingNode.getProperty(TRANSPORTCOSTHOME);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+public void setProcessingcosts(String processingcosts) {
+underlyingNode.setProperty(PROCESSINGCOSTS,processingcosts);
+}
+
+public String getProcessingcosts(){
+          try {
+          return (String) underlyingNode.getProperty(PROCESSINGCOSTS);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
     public void setCrop_to_cultivate_base(String crop_to_cultivate_base) {
         underlyingNode.setProperty(CROP_TO_CULTIVATE_BASE, crop_to_cultivate_base);
     }
