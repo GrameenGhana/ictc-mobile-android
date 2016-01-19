@@ -36,6 +36,10 @@ public interface GeneralInterface {
      public Date getLastModifiedDate();
 
     public void setLastModifiedDate(Date lastModifiedDate);
+    
+   
+    public void setLastModifiedDate(long lastModifiedDate);
+    
 
     public Node getLastModifiedBy();
 

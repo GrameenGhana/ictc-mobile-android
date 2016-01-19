@@ -512,10 +512,11 @@ public class SalesforceSyncServlet extends HttpServlet {
                           out.println(sendAck());        
                           
                           update.put(Biodata.CLUSTER, getCluster(getUserScore(farmerID)));
+                          update.put(Biodata.LAST_MODIFIED,String.valueOf(new Date().getTime()));
                           biodataModel.BiodataUpdate(farmerID, update);
-                          
-                           if(modified(farmerID))
-                                 System.out.println("Last modified done");
+//                          
+//                           if(modified(farmerID))
+//                                 System.out.println("Last modified done");
                            tx.success();
                             }
                       } 
@@ -1141,9 +1142,8 @@ public class SalesforceSyncServlet extends HttpServlet {
     public boolean modified(String farmerId){
         Date now = new Date();
         BiodataModel biodataModel = new BiodataModel();
-        Map<String,String>  update = new HashMap<String,String>();
-        update.put(Biodata.LAST_MODIFIED,String.valueOf(now.getTime()));
-       return  biodataModel.BiodataUpdate(farmerId, update);
+       
+       return  biodataModel.lastmodifiedUpdate(farmerId,now.getTime());
     }
 
 }
