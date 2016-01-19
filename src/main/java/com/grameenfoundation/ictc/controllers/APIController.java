@@ -54,6 +54,7 @@ import com.grameenfoundation.ictc.wrapper.MobileTrackerWrapper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -192,12 +193,25 @@ public class APIController extends HttpServlet {
             } else if ("fdetails".equalsIgnoreCase(serviceCode)) {
                 
                 String agentId = request.getParameter("a");
-                
+                String lm = request.getParameter("lm");
+                long lastMdate=0;
                 if(null == agentId || agentId.isEmpty()){
                  agentId="00524000001xFMiAAM";
                 }
+                
+                if(null == lm || lm.isEmpty()){
+                 lm="0";
+                }else{
+                    try {
+                        lastMdate = Long.parseLong(lm);
+                    } catch (Exception e) {
+                        lastMdate=0l;
+                    }
+                }
+                long lastModified = new Date().getTime();
+                
                 Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
-                List<BiodataWrapper> bw = new BiodataModel().getBioDataSearch("CreatedById", agentId);
+                List<BiodataWrapper> bw = new BiodataModel().getBioDataSearch(agentId,lastMdate);
                 System.out.println("Farmer count " + bw.size());
                 BiodataModel biodataModel = new BiodataModel();
                 ProductionModel productionModel = new ProductionModel();
@@ -804,6 +818,7 @@ pr =b.getProfiling();
 //                        if (inputArray.length() > 0) {
                             farmer.put("inputs", inputArray);
 //                        }
+                            farmer.put("lm",lastModified);
 
                         details.put("farmer", farmer);
 

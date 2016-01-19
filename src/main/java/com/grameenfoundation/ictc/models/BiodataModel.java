@@ -11,6 +11,7 @@ import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
 import com.grameenfoundation.ictc.utils.Labels;
 import com.grameenfoundation.ictc.utils.Neo4jServices;
+import static com.grameenfoundation.ictc.utils.Neo4jServices.getIterativeNode;
 import com.grameenfoundation.ictc.utils.ParentNode;
 import com.grameenfoundation.ictc.wrapper.BiodataWrapper;
 import com.grameenfoundation.ictc.wrapper.CommunityCounterWrapper;
@@ -164,6 +165,14 @@ public class BiodataModel {
         return null;
     }
 
+    
+    public List<BiodataWrapper>  getBioDataSearch( String value, long lastModified){
+        
+        String q=" match(l:FARMER) WHERE l."+Biodata.CREATED_BY+" ='"+value+"' and l."+Biodata.LAST_MODIFIED+" >= "+lastModified+" return  l";
+        return Neo4jServices.getIterativeNode(q);
+    
+  //  getIterativeNode
+    }
     public List<BiodataWrapper> getBioDataSearch(String field, String value) {
         List<Biodata> bioData = new ArrayList<>();
         try {

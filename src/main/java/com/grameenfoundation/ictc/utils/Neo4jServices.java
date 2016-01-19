@@ -167,6 +167,7 @@ public class Neo4jServices {
     }
 
     public static List<BiodataWrapper> getIterativeNode(String q) {
+        System.out.println("Iterative Query : "+q);
         Iterator<Node> n_column = null;
         List<Biodata> bdata = new ArrayList<>();
         List<BiodataWrapper> bdatac = new ArrayList<>();
