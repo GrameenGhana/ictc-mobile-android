@@ -44,7 +44,34 @@ public class BaselinePostHarvestBudgetWrapper {
     String unit_labor_cost_bagging_base="unit_labor_cost_bagging_base";
     String unit_labor_cost_winnowing_base="unit_labor_cost_winnowing_base";
     String crop_to_cultivate_base="crop_to_cultivate_base";
+    String processingcosts="processingcosts";
+    String transportcosthome="transportcosthome";
+    String transportcostmarket="transportcostmarket";
     
+    
+ public  void setTransportcostmarket(String transportcostmarket) {
+      this.transportcostmarket=transportcostmarket;
+    }
+ public  String getTransportcostmarket() {
+        return transportcostmarket;
+
+    }
+    
+ public  void setTransportcosthome(String transportcosthome) {
+      this.transportcosthome=transportcosthome;
+    }
+ public  String getTransportcosthome() {
+        return transportcosthome;
+
+    }
+    
+ public  void setProcessingcosts(String processingcosts) {
+      this.processingcosts=processingcosts;
+    }
+ public  String getProcessingcosts() {
+        return processingcosts;
+
+    }
     
  public  void setCrop_to_cultivate_base(String crop_to_cultivate_base) {
       this.crop_to_cultivate_base=crop_to_cultivate_base;

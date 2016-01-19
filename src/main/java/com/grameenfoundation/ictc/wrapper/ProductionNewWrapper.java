@@ -77,8 +77,70 @@ public class ProductionNewWrapper
      String reference_season_current="reference_season_current";
      String reference_year_current="reference_year_current";
      String Name_of_hybrid_variety="name_of_hybrid_variety";
+     String landhistorycurrent="landhistorycurrent";
+    String localcropvarietycassava="localcropvarietycassava";
+    String localcropvarietyrice="localcropvarietyrice";
+    String localcropvarietyyam="localcropvarietyyam";
+    String organicfertilizerapplicationcurrent="organicfertilizerapplicationcurrent";
+    String organicfertilizerdatecurrent="organicfertilizerdatecurrent";
+    String organicresiduecurrent="organicresiduecurrent";
      
-     
+    public  void setOrganicresiduecurrent(String organicresiduecurrent) {
+      this.organicresiduecurrent=organicresiduecurrent;
+    }
+ public  String getOrganicresiduecurrent() {
+        return organicresiduecurrent;
+
+    }
+ public  void setOrganicfertilizerdatecurrent(String organicfertilizerdatecurrent) {
+      this.organicfertilizerdatecurrent=organicfertilizerdatecurrent;
+    }
+ public  String getOrganicfertilizerdatecurrent() {
+        return organicfertilizerdatecurrent;
+
+    }
+    
+ public  void setOrganicfertilizerapplicationcurrent(String organicfertilizerapplicationcurrent) {
+      this.organicfertilizerapplicationcurrent=organicfertilizerapplicationcurrent;
+    }
+ public  String getOrganicfertilizerapplicationcurrent() {
+        return organicfertilizerapplicationcurrent;
+
+    }
+    
+ public  void setLocalcropvarietyyam(String localcropvarietyyam) {
+      this.localcropvarietyyam=localcropvarietyyam;
+    }
+ public  String getLocalcropvarietyyam() {
+        return localcropvarietyyam;
+
+    }
+    
+ public  void setLocalcropvarietyrice(String localcropvarietyrice) {
+      this.localcropvarietyrice=localcropvarietyrice;
+    }
+ public  String getLocalcropvarietyrice() {
+        return localcropvarietyrice;
+
+    }
+    
+ public  void setLocalcropvarietycassava(String localcropvarietycassava) {
+      this.localcropvarietycassava=localcropvarietycassava;
+    }
+ public  String getLocalcropvarietycassava() {
+        return localcropvarietycassava;
+
+    }
+    
+ public  void setLandhistorycurrent(String landhistorycurrent) {
+      this.landhistorycurrent=landhistorycurrent;
+    }
+ public  String getLandhistorycurrent() {
+        return landhistorycurrent;
+
+    }
+    
+    
  public  void setName_of_hybrid_variety(String Name_of_hybrid_variety) {
       this.Name_of_hybrid_variety=Name_of_hybrid_variety;
     }

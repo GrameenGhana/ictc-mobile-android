@@ -84,7 +84,135 @@ public class FmpProductionBudgetWrapper {
     String total_cost_hoe_ploughing="total_cost_hoe_ploughing";
     String basal_fertilizer_application_hired="basal_fertilizer_application_hired";
     String final_harvest_labor_hired="final_harvest_labor_hired";
+    String organicfertilizerappcostcurrent="organicfertilizerappcostcurrent";
+    String organicfertilizerqtycurrent="organicfertilizerqtycurrent";
+    String orgfertilizercostcurrent="orgfertilizercostcurrent";
+    String postplantherbicide1appcost="postplantherbicide1appcost";
+    String postplantherbicide1apperiod="postplantherbicide1apperiod";
+    String postplantherbicide1price="postplantherbicide1price";
+    String postplantherbicide1qty="postplantherbicide1qty";
+    String postplantherbicide2applicationcost="postplantherbicide2applicationcost";
+    String postplantherbicide2applicationperiod="postplantherbicide2applicationperiod";
+    String postplantherbicide2price="postplantherbicide2price";
+    String postplantherbicide2qty="postplantherbicide2qty";
+    String fertilizerbasalnobags="fertilizerbasalnobags";
+    String fertilizertopdressnobags="fertilizertopdressnobags";
     
+    
+ public  void setFertilizertopdressnobags(String fertilizertopdressnobags) {
+      this.fertilizertopdressnobags=fertilizertopdressnobags;
+    }
+ public  String getFertilizertopdressnobags() {
+        return fertilizertopdressnobags;
+
+    }
+    
+    
+ public  void setFertilizerbasalnobags(String fertilizerbasalnobags) {
+      this.fertilizerbasalnobags=fertilizerbasalnobags;
+    }
+ public  String getFertilizerbasalnobags() {
+        return fertilizerbasalnobags;
+
+    }
+    
+ public  void setPostplantherbicide2qty(String postplantherbicide2qty) {
+      this.postplantherbicide2qty=postplantherbicide2qty;
+    }
+ public  String getPostplantherbicide2qty() {
+        return postplantherbicide2qty;
+
+    }
+    
+    
+ public  void setPostplantherbicide2price(String postplantherbicide2price) {
+      this.postplantherbicide2price=postplantherbicide2price;
+    }
+ public  String getPostplantherbicide2price() {
+        return postplantherbicide2price;
+
+    }
+    
+ public  void setPostplantherbicide2applicationperiod(String postplantherbicide2applicationperiod) {
+      this.postplantherbicide2applicationperiod=postplantherbicide2applicationperiod;
+    }
+ public  String getPostplantherbicide2applicationperiod() {
+        return postplantherbicide2applicationperiod;
+
+    }
+    
+ public  void setPostplantherbicide2applicationcost(String postplantherbicide2applicationcost) {
+      this.postplantherbicide2applicationcost=postplantherbicide2applicationcost;
+    }
+ public  String getPostplantherbicide2applicationcost() {
+        return postplantherbicide2applicationcost;
+
+    }
+    
+    
+ public  void setPostplantherbicide1qty(String postplantherbicide1qty) {
+      this.postplantherbicide1qty=postplantherbicide1qty;
+    }
+ public  String getPostplantherbicide1qty() {
+        return postplantherbicide1qty;
+
+    }
+    
+ public  void setPostplantherbicide1price(String postplantherbicide1price) {
+      this.postplantherbicide1price=postplantherbicide1price;
+    }
+ public  String getPostplantherbicide1price() {
+        return postplantherbicide1price;
+
+    }
+    
+    
+    
+    
+    
+ public  void setPostplantherbicide1apperiod(String postplantherbicide1apperiod) {
+      this.postplantherbicide1apperiod=postplantherbicide1apperiod;
+    }
+ public  String getPostplantherbicide1apperiod() {
+        return postplantherbicide1apperiod;
+
+    }
+    
+    
+    
+ public  void setPostplantherbicide1appcost(String postplantherbicide1appcost) {
+      this.postplantherbicide1appcost=postplantherbicide1appcost;
+    }
+ public  String getPostplantherbicide1appcost() {
+        return postplantherbicide1appcost;
+
+    }
+    
+ public  void setOrgfertilizercostcurrent(String orgfertilizercostcurrent) {
+      this.orgfertilizercostcurrent=orgfertilizercostcurrent;
+    }
+ public  String getOrgfertilizercostcurrent() {
+        return orgfertilizercostcurrent;
+
+    }
+    
+ public  void setOrganicfertilizerqtycurrent(String organicfertilizerqtycurrent) {
+      this.organicfertilizerqtycurrent=organicfertilizerqtycurrent;
+    }
+ public  String getOrganicfertilizerqtycurrent() {
+        return organicfertilizerqtycurrent;
+
+    }
+ public  void setOrganicfertilizerappcostcurrent(String organicfertilizerappcostcurrent) {
+      this.organicfertilizerappcostcurrent=organicfertilizerappcostcurrent;
+    }
+ public  String getOrganicfertilizerappcostcurrent() {
+        return organicfertilizerappcostcurrent;
+
+    }
+    
+    
+ 
     
  public  void setFinal_harvest_labor_hired(String final_harvest_labor_hired) {
       this.final_harvest_labor_hired=final_harvest_labor_hired;

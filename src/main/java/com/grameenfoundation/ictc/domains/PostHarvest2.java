@@ -68,7 +68,144 @@ public static String PROPORTION_STORED_WITH_CHEMICAL="proportion_stored_with_che
 public static String REFERENCE_SEASON_CURRENT="reference_season_current";
 public static String REFERENCE_YEAR_CURRENT="reference_year_current";
 public static String UNIT_OF_CHEMICAL_APPLICATION="unit_of_chemical_application";
+public static String BUYERNUMBER1="buyernumber1";
+public static String CROPCULTIVATEDPH="cropcultivatedph";
+public static String DRYINGCOBS1="dryingcobs1";
+public static String DRYINGGRAIN1="dryinggrain1";
+public static String HARVESTMETHODPH="harvestmethodph";
+public static String PROCESSINGCOMBINATION1="processingcombination1";
+public static String PROCESSINGCOMPLETED1="processingcompleted1";
+public static String SHELLINGMETHOD1="shellingmethod1";
+public static String SHELLINGMETHODOTHER1="shellingmethodother1";
 
+
+public void setShellingmethodother1(String shellingmethodother1) {
+underlyingNode.setProperty(SHELLINGMETHODOTHER1,shellingmethodother1);
+}
+
+public String getShellingmethodother1(){
+          try {
+          return (String) underlyingNode.getProperty(SHELLINGMETHODOTHER1);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setShellingmethod1(String shellingmethod1) {
+underlyingNode.setProperty(SHELLINGMETHOD1,shellingmethod1);
+}
+
+public String getShellingmethod1(){
+          try {
+          return (String) underlyingNode.getProperty(SHELLINGMETHOD1);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setProcessingcompleted1(String processingcompleted1) {
+underlyingNode.setProperty(PROCESSINGCOMPLETED1,processingcompleted1);
+}
+
+public String getProcessingcompleted1(){
+          try {
+          return (String) underlyingNode.getProperty(PROCESSINGCOMPLETED1);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setProcessingcombination1(String processingcombination1) {
+underlyingNode.setProperty(PROCESSINGCOMBINATION1,processingcombination1);
+}
+
+public String getProcessingcombination1(){
+          try {
+          return (String) underlyingNode.getProperty(PROCESSINGCOMBINATION1);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setHarvestmethodph(String harvestmethodph) {
+underlyingNode.setProperty(HARVESTMETHODPH,harvestmethodph);
+}
+
+public String getHarvestmethodph(){
+          try {
+          return (String) underlyingNode.getProperty(HARVESTMETHODPH);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+public void setDryinggrain1(String dryinggrain1) {
+underlyingNode.setProperty(DRYINGGRAIN1,dryinggrain1);
+}
+
+public String getDryinggrain1(){
+          try {
+          return (String) underlyingNode.getProperty(DRYINGGRAIN1);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+
+public void setDryingcobs1(String dryingcobs1) {
+underlyingNode.setProperty(DRYINGCOBS1,dryingcobs1);
+}
+
+public String getDryingcobs1(){
+          try {
+          return (String) underlyingNode.getProperty(DRYINGCOBS1);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+public void setCropcultivatedph(String cropcultivatedph) {
+underlyingNode.setProperty(CROPCULTIVATEDPH,cropcultivatedph);
+}
+
+public String getCropcultivatedph(){
+          try {
+          return (String) underlyingNode.getProperty(CROPCULTIVATEDPH);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setBuyernumber1(String buyernumber1) {
+underlyingNode.setProperty(BUYERNUMBER1,buyernumber1);
+}
+
+public String getBuyernumber1(){
+          try {
+          return (String) underlyingNode.getProperty(BUYERNUMBER1);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
 public void setUnit_of_chemical_application(String unit_of_chemical_application) {
 underlyingNode.setProperty(UNIT_OF_CHEMICAL_APPLICATION,unit_of_chemical_application);

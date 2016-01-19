@@ -54,7 +54,88 @@ public class PostHarvestWrapper2 {
     String reference_season_current="reference_season_current";
     String reference_year_current="reference_year_current";
     String unit_of_chemical_application="unit_of_chemical_application";
+    String buyernumber1="buyernumber1";
+    String cropcultivatedph="cropcultivatedph";
+    String dryingcobs1="dryingcobs1";
+    String dryinggrain1="dryinggrain1";
+    String harvestmethodph="harvestmethodph";
+    String processingcombination1="processingcombination1";
+    String processingcompleted1="processingcompleted1";
+    String shellingmethod1="shellingmethod1";
+    String shellingmethodother1="shellingmethodother1";
     
+    
+ public  void setShellingmethodother1(String shellingmethodother1) {
+      this.shellingmethodother1=shellingmethodother1;
+    }
+ public  String getShellingmethodother1() {
+        return shellingmethodother1;
+
+    }
+    
+ public  void setShellingmethod1(String shellingmethod1) {
+      this.shellingmethod1=shellingmethod1;
+    }
+ public  String getShellingmethod1() {
+        return shellingmethod1;
+
+    }
+    
+    
+ public  void setProcessingcompleted1(String processingcompleted1) {
+      this.processingcompleted1=processingcompleted1;
+    }
+ public  String getProcessingcompleted1() {
+        return processingcompleted1;
+
+    }
+    
+ public  void setProcessingcombination1(String processingcombination1) {
+      this.processingcombination1=processingcombination1;
+    }
+ public  String getProcessingcombination1() {
+        return processingcombination1;
+
+    }
+    
+ public  void setHarvestmethodph(String harvestmethodph) {
+      this.harvestmethodph=harvestmethodph;
+    }
+ public  String getHarvestmethodph() {
+        return harvestmethodph;
+
+    }
+    
+ public  void setDryinggrain1(String dryinggrain1) {
+      this.dryinggrain1=dryinggrain1;
+    }
+ public  String getDryinggrain1() {
+        return dryinggrain1;
+
+    }
+    
+ public  void setDryingcobs1(String dryingcobs1) {
+      this.dryingcobs1=dryingcobs1;
+    }
+ public  String getDryingcobs1() {
+        return dryingcobs1;
+
+    }
+ public  void setCropcultivatedph(String cropcultivatedph) {
+      this.cropcultivatedph=cropcultivatedph;
+    }
+ public  String getCropcultivatedph() {
+        return cropcultivatedph;
+
+    }
+    
+ public  void setBuyernumber1(String buyernumber1) {
+      this.buyernumber1=buyernumber1;
+    }
+ public  String getBuyernumber1() {
+        return buyernumber1;
+
+    }
     
  public  void setUnit_of_chemical_application(String unit_of_chemical_application) {
       this.unit_of_chemical_application=unit_of_chemical_application;

@@ -39,7 +39,61 @@ public class BiodataWrapper {
     String Districts_BrongAhafo="Districts_BrongAhafo";
     String Districts_Volta="Districts_Volta";
     String image_url = "image_url";
+    String disrictresidenceash="disrictresidenceash";
+    String districtresidenceba="districtresidenceba";
+    String districtresidencevolta="districtresidencevolta";
+    String numberofdependantsmale="numberofdependantsmale";
+    String numberofdependentsfemale="numberofdependentsfemale";
+    String regionresidence="regionresidence";
+    
+    
+ public  void setRegionresidence(String regionresidence) {
+      this.regionresidence=regionresidence;
+    }
+ public  String getRegionresidence() {
+        return regionresidence;
 
+    }
+    
+ public  void setNumberofdependentsfemale(String numberofdependentsfemale) {
+      this.numberofdependentsfemale=numberofdependentsfemale;
+    }
+ public  String getNumberofdependentsfemale() {
+        return numberofdependentsfemale;
+
+    }
+    
+ public  void setNumberofdependantsmale(String numberofdependantsmale) {
+      this.numberofdependantsmale=numberofdependantsmale;
+    }
+ public  String getNumberofdependantsmale() {
+        return numberofdependantsmale;
+
+    }
+    
+ public  void setDistrictresidencevolta(String districtresidencevolta) {
+      this.districtresidencevolta=districtresidencevolta;
+    }
+ public  String getDistrictresidencevolta() {
+        return districtresidencevolta;
+
+    }
+    
+ public  void setDistrictresidenceba(String districtresidenceba) {
+      this.districtresidenceba=districtresidenceba;
+    }
+ public  String getDistrictresidenceba() {
+        return districtresidenceba;
+
+    }
+    
+ public  void setDisrictresidenceash(String disrictresidenceash) {
+      this.disrictresidenceash=disrictresidenceash;
+    }
+ public  String getDisrictresidenceash() {
+        return disrictresidenceash;
+
+    }
     public String getImage_url() {
         return image_url;
     }

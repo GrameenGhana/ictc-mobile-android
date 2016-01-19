@@ -71,7 +71,52 @@ public class BaselineProductWrapper {
  String reference_season="reference_season";
  String reference_year="reference_year";
  String type_of_hybrid="type_of_hybrid";
+ String landhistorybase="landhistorybase";
+ String organicfertilizerapplication="organicfertilizerapplication";
+ String organicfertilizerdate="organicfertilizerdate";
+ String organicfertmethod="organicfertmethod";
+ String organicresidue="organicresidue";
  
+ 
+ public  void setOrganicresidue(String organicresidue) {
+      this.organicresidue=organicresidue;
+    }
+ public  String getOrganicresidue() {
+        return organicresidue;
+
+    }
+ 
+ public  void setOrganicfertmethod(String organicfertmethod) {
+      this.organicfertmethod=organicfertmethod;
+    }
+ public  String getOrganicfertmethod() {
+        return organicfertmethod;
+
+    }
+ 
+ public  void setOrganicfertilizerdate(String organicfertilizerdate) {
+      this.organicfertilizerdate=organicfertilizerdate;
+    }
+ public  String getOrganicfertilizerdate() {
+        return organicfertilizerdate;
+
+    }   
+    
+ public  void setOrganicfertilizerapplication(String organicfertilizerapplication) {
+      this.organicfertilizerapplication=organicfertilizerapplication;
+    }
+ public  String getOrganicfertilizerapplication() {
+        return organicfertilizerapplication;
+
+    }
+ 
+ public  void setLandhistorybase(String landhistorybase) {
+      this.landhistorybase=landhistorybase;
+    }
+ public  String getLandhistorybase() {
+        return landhistorybase;
+
+    }
  
  public  void setType_of_hybrid(String type_of_hybrid) {
       this.type_of_hybrid=type_of_hybrid;
