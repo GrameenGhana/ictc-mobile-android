@@ -102,6 +102,7 @@ public class SalesforceSyncServlet extends HttpServlet {
         Map<String,MeetingWrapper> meetingMap = new HashMap<>();
         
         
+        
         String farmerID = null ;
         String agentId = null;
         
@@ -273,6 +274,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                      {
                           farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
                           
+                          
                          if (null != new ProductionModel().getProduction("Id", farmerID)) {
                                out.println(sendAck());
                              System.out.println("Production already exist");
@@ -304,11 +306,14 @@ public class SalesforceSyncServlet extends HttpServlet {
                              ProductionNewParent.createRelationshipTo(productionNewNode, ICTCRelationshipTypes.PRODUCTION);
 
                              log.log(Level.INFO, "new node created {0}", productionNewNode.getId());
-
+                            
                              Biodata b = biodataModel.getBiodata("Id", farmerID);
-
+                             
                              biodataModel.BiodataToProduction(b.getId(), productionNewNode);
-
+                             
+                             if(modified(farmerID))
+                                 System.out.println("Last modified done");
+                            
                              tx.success();
 
                              out.println(sendAck());
@@ -356,7 +361,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                              Biodata b = biodataModel.getBiodata("Id", farmerID);
                              
                              biodataModel.BiodataToPostHarvest(b.getId(), postHarvestNewNode);
-                             
+                              if(modified(farmerID))
+                                 System.out.println("Last modified done");
                              tx.success();
                              
                              out.println(sendAck());
@@ -406,7 +412,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                               ProductionNew p = product.getProduction("Id", farmerID);
                               
                               product.ProductionToUpdate(p, productionUpdateNode);
-                              
+                               if(modified(farmerID))
+                                 System.out.println("Last modified done");
                               tx.success();
                               
                               out.println(sendAck());
@@ -453,7 +460,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                          
                          ph.PostHarvestToUpdate(p,postHarvestUpdateNode);
                             
-                        
+                         if(modified(farmerID))
+                            System.out.println("Last modified done");
                          tx.success();
 
                         out.println(sendAck());
@@ -506,6 +514,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                           update.put(Biodata.CLUSTER, getCluster(getUserScore(farmerID)));
                           biodataModel.BiodataUpdate(farmerID, update);
                           
+                           if(modified(farmerID))
+                                 System.out.println("Last modified done");
                            tx.success();
                             }
                       } 
@@ -550,7 +560,8 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                         biodataModel.BiodataToTechNeeds(b.getId(), TNNode);
                        
-                     
+                         if(modified(farmerID))
+                                 System.out.println("Last modified done");
                         out.println(sendAck());
                     
                        tx.success();
@@ -596,7 +607,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                             biodataModel.BiodataToBPB(b.getId(), BPBNode);
 
                             out.println(sendAck());
-
+                            if(modified(farmerID))
+                                 System.out.println("Last modified done");
                             tx.success();
                         }
                     }
@@ -639,7 +651,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                             biodataModel.BiodataToBP(b.getId(), BPNode);
                             
                             out.println(sendAck());
-                            
+                             if(modified(farmerID))
+                                 System.out.println("Last modified done");
                             tx.success();
                         }
                     }
@@ -684,7 +697,9 @@ public class SalesforceSyncServlet extends HttpServlet {
                         biodataModel.BiodataToBPHB(b.getId(), BPHBNode);
 
                         out.println(sendAck());
-
+                              if (modified(farmerID)) {
+                                  System.out.println("Last modified done");
+                              }
                         tx.success();
                        }
                     }  else if(salesforceObj.equals("sf:BASELINE_POST_HARVEST__c"))
@@ -726,7 +741,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                         biodataModel.BiodataToBPH(b.getId(), BPHNode);
 
                         out.println(sendAck());
-
+                         if(modified(farmerID))
+                                 System.out.println("Last modified done");
                         tx.success();
                           }
                     }
@@ -765,7 +781,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                             Biodata b = biodataModel.getBiodata("Id", farmerID);
                             
                             biodataModel.BiodataToFMPPB(b.getId(), FMPPBNode);
-                            
+                             if(modified(farmerID))
+                                 System.out.println("Last modified done");
                             out.println(sendAck());
                             
                             tx.success();
@@ -811,7 +828,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                         System.out.println("updated" + fmp.FmpProductionBudgetToUpdate(p, FMPPBUNode) ); 
 
                         out.println(sendAck());
-
+                         if(modified(farmerID))
+                                 System.out.println("Last modified done");
                         tx.success();
                        }
                     }
@@ -853,7 +871,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                         Biodata b = biodataModel.getBiodata("Id", farmerID);
 
                         biodataModel.BiodataToFMPPHB(b.getId(), FMPPBHNode);
-
+                         if(modified(farmerID))
+                                 System.out.println("Last modified done");
                         out.println(sendAck());
 
                         tx.success();
@@ -900,7 +919,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                         System.out.println("updated" + fmp.FmpPostHarvestBudgetToUpdate(p, FMPPHBUNode) ); 
 
                         out.println(sendAck());
-
+                         if(modified(farmerID))
+                                 System.out.println("Last modified done");
                         tx.success();
                        }
                     }
@@ -944,7 +964,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                              biodataModel.BiodataToFCA(b.getId(), FCANode);
 
                              out.println(sendAck());
-
+                               if(modified(farmerID))
+                                 System.out.println("Last modified done");
                              tx.success();
                          }
                      }
@@ -1113,6 +1134,16 @@ public class SalesforceSyncServlet extends HttpServlet {
         }
             
        return image_url;     
+    }
+    
+    
+    
+    public boolean modified(String farmerId){
+        Date now = new Date();
+        BiodataModel biodataModel = new BiodataModel();
+        Map<String,String>  update = new HashMap<String,String>();
+        update.put(Biodata.LAST_MODIFIED,String.valueOf(now.getTime()));
+       return  biodataModel.BiodataUpdate(farmerId, update);
     }
 
 }

@@ -25,7 +25,100 @@ public class FieldCropAssessmentWrapper {
     String photo_weed_management_status="photo_weed_management_status";
     String soil_fertility_score="soil_fertility_score";
     String weed_management_score_="weed_management_score_";
+    String photocropestablishment3="photocropestablishment3";
+    String photocropestablisment2="photocropestablisment2";
+    String photodisease2="photodisease2";
+    String photodisease3="photodisease3";
+    String photopestmanagement2="photopestmanagement2";
+    String photopestmanagement3="photopestmanagement3";
+    String photosoilfertility2="photosoilfertility2";
+    String photosoilfertility3="photosoilfertility3";
+    String photoweedstatus2="photoweedstatus2";
+    String plant_population_density_and_crop_est="plant_population_density_and_crop_est";
     
+    
+    
+ public  void setPlant_population_density_and_crop_est(String plant_population_density_and_crop_est) {
+      this.plant_population_density_and_crop_est=plant_population_density_and_crop_est;
+    }
+ public  String getPlant_population_density_and_crop_est() {
+        return plant_population_density_and_crop_est;
+
+    }
+    
+ public  void setPhotoweedstatus2(String photoweedstatus2) {
+      this.photoweedstatus2=photoweedstatus2;
+    }
+ public  String getPhotoweedstatus2() {
+        return photoweedstatus2;
+
+    }
+    
+ public  void setPhotosoilfertility3(String photosoilfertility3) {
+      this.photosoilfertility3=photosoilfertility3;
+    }
+ public  String getPhotosoilfertility3() {
+        return photosoilfertility3;
+
+    }
+    
+ public  void setPhotosoilfertility2(String photosoilfertility2) {
+      this.photosoilfertility2=photosoilfertility2;
+    }
+ public  String getPhotosoilfertility2() {
+        return photosoilfertility2;
+
+    }
+    
+ public  void setPhotopestmanagement3(String photopestmanagement3) {
+      this.photopestmanagement3=photopestmanagement3;
+    }
+ public  String getPhotopestmanagement3() {
+        return photopestmanagement3;
+
+    }
+    
+ public  void setPhotopestmanagement2(String photopestmanagement2) {
+      this.photopestmanagement2=photopestmanagement2;
+    }
+ public  String getPhotopestmanagement2() {
+        return photopestmanagement2;
+
+    }
+    
+ public  void setPhotodisease3(String photodisease3) {
+      this.photodisease3=photodisease3;
+    }
+ public  String getPhotodisease3() {
+        return photodisease3;
+
+    }
+    
+    
+ public  void setPhotodisease2(String photodisease2) {
+      this.photodisease2=photodisease2;
+    }
+ public  String getPhotodisease2() {
+        return photodisease2;
+
+    }
+    
+    
+ public  void setPhotocropestablisment2(String photocropestablisment2) {
+      this.photocropestablisment2=photocropestablisment2;
+    }
+ public  String getPhotocropestablisment2() {
+        return photocropestablisment2;
+
+    }
+    
+ public  void setPhotocropestablishment3(String photocropestablishment3) {
+      this.photocropestablishment3=photocropestablishment3;
+    }
+ public  String getPhotocropestablishment3() {
+        return photocropestablishment3;
+
+    }
     
  public  void setWeed_management_score_(String weed_management_score_) {
       this.weed_management_score_=weed_management_score_;

@@ -627,6 +627,13 @@ public class BiodataModel {
                             bio.setCreatedById(fieldValue);
                         }
                     }
+                    if (fieldName.equalsIgnoreCase(Biodata.LAST_MODIFIED)) {
+
+                        if (null != fieldValue) {
+
+                            bio.setCreatedById(fieldValue);
+                        }
+                    }
 
                 }
                 trx.success();

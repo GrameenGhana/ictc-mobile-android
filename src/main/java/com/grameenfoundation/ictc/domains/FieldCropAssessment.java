@@ -32,7 +32,159 @@ public class FieldCropAssessment extends Status implements GeneralInterface{
     public static String PHOTO_WEED_MANAGEMENT_STATUS="photo_weed_management_status";
     public static String SOIL_FERTILITY_SCORE="soil_fertility_score";
     public static String WEED_MANAGEMENT_SCORE_="weed_management_score_";
+    public static String PHOTOCROPESTABLISHMENT3="photocropestablishment3";
+    public static String PHOTOCROPESTABLISMENT2="photocropestablisment2";
+    public static String PHOTODISEASE2="photodisease2";
+    public static String PHOTODISEASE3="photodisease3";
+    public static String PHOTOPESTMANAGEMENT2="photopestmanagement2";
+    public static String PHOTOPESTMANAGEMENT3="photopestmanagement3";
+    public static String PHOTOSOILFERTILITY2="photosoilfertility2";
+    public static String PHOTOSOILFERTILITY3="photosoilfertility3";
+    public static String PHOTOWEEDSTATUS2="photoweedstatus2";
+    public static String PLANT_POPULATION_DENSITY_AND_CROP_EST="plant_population_density_and_crop_est";
     
+    
+    
+public void setPlant_population_density_and_crop_est(String plant_population_density_and_crop_est) {
+underlyingNode.setProperty(PLANT_POPULATION_DENSITY_AND_CROP_EST,plant_population_density_and_crop_est);
+}
+
+public String getPlant_population_density_and_crop_est(){
+          try {
+          return (String) underlyingNode.getProperty(PLANT_POPULATION_DENSITY_AND_CROP_EST);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+public void setPhotoweedstatus2(String photoweedstatus2) {
+underlyingNode.setProperty(PHOTOWEEDSTATUS2,photoweedstatus2);
+}
+
+public String getPhotoweedstatus2(){
+          try {
+          return (String) underlyingNode.getProperty(PHOTOWEEDSTATUS2);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+public void setPhotosoilfertility3(String photosoilfertility3) {
+underlyingNode.setProperty(PHOTOSOILFERTILITY3,photosoilfertility3);
+}
+
+public String getPhotosoilfertility3(){
+          try {
+          return (String) underlyingNode.getProperty(PHOTOSOILFERTILITY3);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setPhotosoilfertility2(String photosoilfertility2) {
+underlyingNode.setProperty(PHOTOSOILFERTILITY2,photosoilfertility2);
+}
+
+public String getPhotosoilfertility2(){
+          try {
+          return (String) underlyingNode.getProperty(PHOTOSOILFERTILITY2);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+public void setPhotopestmanagement3(String photopestmanagement3) {
+underlyingNode.setProperty(PHOTOPESTMANAGEMENT3,photopestmanagement3);
+}
+
+public String getPhotopestmanagement3(){
+          try {
+          return (String) underlyingNode.getProperty(PHOTOPESTMANAGEMENT3);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+    
+public void setPhotopestmanagement2(String photopestmanagement2) {
+underlyingNode.setProperty(PHOTOPESTMANAGEMENT2,photopestmanagement2);
+}
+
+public String getPhotopestmanagement2(){
+          try {
+          return (String) underlyingNode.getProperty(PHOTOPESTMANAGEMENT2);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setPhotodisease3(String photodisease3) {
+underlyingNode.setProperty(PHOTODISEASE3,photodisease3);
+}
+
+public String getPhotodisease3(){
+          try {
+          return (String) underlyingNode.getProperty(PHOTODISEASE3);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+public void setPhotodisease2(String photodisease2) {
+underlyingNode.setProperty(PHOTODISEASE2,photodisease2);
+}
+
+public String getPhotodisease2(){
+          try {
+          return (String) underlyingNode.getProperty(PHOTODISEASE2);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setPhotocropestablisment2(String photocropestablisment2) {
+underlyingNode.setProperty(PHOTOCROPESTABLISMENT2,photocropestablisment2);
+}
+
+public String getPhotocropestablisment2(){
+          try {
+          return (String) underlyingNode.getProperty(PHOTOCROPESTABLISMENT2);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setPhotocropestablishment3(String photocropestablishment3) {
+underlyingNode.setProperty(PHOTOCROPESTABLISHMENT3,photocropestablishment3);
+}
+
+public String getPhotocropestablishment3(){
+          try {
+          return (String) underlyingNode.getProperty(PHOTOCROPESTABLISHMENT3);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
     
     
 public void setWeed_management_score_(String weed_management_score_) {
