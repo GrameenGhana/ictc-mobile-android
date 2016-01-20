@@ -76,6 +76,7 @@
                
                 <th>Start</th>
                 <th>End</th>
+                <th>Time Spent</th>
                 <th>Version</th>
                 <th>Battery</th>
                 <th>IMEI</th>
@@ -95,6 +96,7 @@
                 simpleDate.format(new Date(mobileTracker.getStartTime()))
                %></td>
                 <td><%= simpleDate.format(new Date(mobileTracker.getEndTime()))%></td>
+                <td><%= String.valueOf(mobileTracker.getTimeSpent()/1000)%></td>
                 <td><%= mobileTracker.getVersion()%></td>
                 <td><%= mobileTracker.getBattery()%></td>
                 <td><%= mobileTracker.getImei()%></td>

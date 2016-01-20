@@ -123,6 +123,7 @@ public class MobileTrackerModel {
                 mr.setPage(m.getPage());
                 mr.setSection(m.getSection());
                 mr.setUserId(m.getUserId());
+                     mr.setTimeSpent(m.getTimeSpent());
                 mr.setVersion(m.getVersion());
                 
                 mtg.add(mr);

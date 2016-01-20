@@ -194,10 +194,12 @@ public class ReportControllerServlet extends HttpServlet {
                         writableSheet.addCell(new Label(4, i, log.getSection()));
                         writableSheet.addCell(new Label(5, i, simpleDate.format(new Date(log.getStartTime()))));
                         writableSheet.addCell(new Label(6, i, simpleDate.format(new Date(log.getEndTime()))));
-                        writableSheet.addCell(new Label(7, i, String.valueOf(log.getVersion())));
-                        writableSheet.addCell(new Label(8, i, String.valueOf(log.getBattery())));
-                        writableSheet.addCell(new Label(9, i, String.valueOf(log.getImei())));
-                        writableSheet.addCell(new Label(10, i, String.valueOf(log.getData())));
+                        writableSheet.addCell(new Label(7, i, String.valueOf(log.getVersion())));          
+                        writableSheet.addCell(new Label(8, i, String.valueOf(log.getTimeSpent()/1000)));
+
+                        writableSheet.addCell(new Label(9, i, String.valueOf(log.getBattery())));
+                        writableSheet.addCell(new Label(10, i, String.valueOf(log.getImei())));
+                        writableSheet.addCell(new Label(11, i, String.valueOf(log.getData())));
                         
                         i++;
                     }
