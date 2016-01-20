@@ -17,18 +17,16 @@
         <link href="<%= request.getContextPath()%>/theme/egrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
         <link href="<%= request.getContextPath()%>/theme/egrap/css/font-awesome.css" rel="stylesheet">
-        
+
         <link href="<%= request.getContextPath()%>/theme/egrap/css/style.css" rel="stylesheet">
         <link href="<%= request.getContextPath()%>/theme/egrap/css/pages/dashboard.css" rel="stylesheet">
-        <link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet">
-        
-        
+        <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/theme/egrap/js/DataTables/media/css/jquery.dataTables.css">
 
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-
+        <link href="<%= request.getContextPath()%>/public/js/datepicker/css/datepicker.css" rel="stylesheet" />
     </head>
 
     <body>
@@ -230,28 +228,28 @@
                         <div class="span3">
                             <h4></h4>
                             <ul>
-                                     </ul>
-                        </div>
-                        <!-- /span3 -->
-                        <div class="span3">
-                            <h4>
-                                </h4>
-                            <ul>
-                                                </ul>
-                        </div>
-                        <!-- /span3 -->
-                        <div class="span3">
-                            <h4></h4>
-                            <ul>
-                              
                             </ul>
                         </div>
                         <!-- /span3 -->
                         <div class="span3">
                             <h4>
-                               </h4>
+                            </h4>
                             <ul>
-                               </ul>
+                            </ul>
+                        </div>
+                        <!-- /span3 -->
+                        <div class="span3">
+                            <h4></h4>
+                            <ul>
+
+                            </ul>
+                        </div>
+                        <!-- /span3 -->
+                        <div class="span3">
+                            <h4>
+                            </h4>
+                            <ul>
+                            </ul>
                         </div>
                         <!-- /span3 -->
                     </div> <!-- /row -->
@@ -287,42 +285,47 @@
 
 
 
-        <script src="<%= request.getContextPath()%>/theme/egrap/js/jquery-1.7.2.min.js"></script>
+        <!--<script src="<%= request.getContextPath()%>/theme/egrap/js/jquery-1.7.2.min.js"></script>-->
+        <script src="<%= request.getContextPath()%>/theme/egrap//js/DataTables/media/js/jquery.js"></script>
 
+        <script type="text/javascript" language="javascript" src="<%= request.getContextPath()%>/theme/egrap/js/DataTables/media/js/jquery.dataTables.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.myt-table').DataTable();
+            });
+        </script>
         <script src="<%= request.getContextPath()%>/theme/egrap/js/bootstrap.js"></script>
         <script src="<%= request.getContextPath()%>/theme/egrap/js/base.js"></script>
 
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry"></script>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry"></script>
 
-    <script src="<%= request.getContextPath()%>/theme/egrap/js/map.js"></script>
-    <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
-    
-    
-    <script type="text/javascript">
-    $(document).ready(function(){
-    $('.my-table').DataTable();
-});
-    </script>
+        <script src="<%= request.getContextPath()%>/theme/egrap/js/map.js"></script>
+        <script type="text/javascript" src="<%= request.getContextPath()%>/public/js/datepicker/js/bootstrap-datepicker.js"></script>
 
-    
-     <script type="text/javascript">
-    
-     $(function() {
-        var eMsg =$("#error strong").html();
-        var sMsg =$("#success strong").html();
-              
-        //alert(sMsg);
-        
-        //Console.info("success message " + sMsg )
-        if(eMsg.length > 1) $(".alert-danger-alt").css("display","block");
-        if(sMsg.length > 1) $(".alert.alert-success-alt").css("display","block");
-        
-    });
-    
-     </script>
 
-   <decorator:getProperty property="page.scripts"/>
 
-</body>
+
+        <script type="text/javascript">
+
+            $(function () {
+                var eMsg = $("#error strong").html();
+                var sMsg = $("#success strong").html();
+
+                //alert(sMsg);
+
+                //Console.info("success message " + sMsg )
+                if (eMsg.length > 1)
+                    $(".alert-danger-alt").css("display", "block");
+                if (sMsg.length > 1)
+                    $(".alert.alert-success-alt").css("display", "block");
+
+            });
+
+        </script>
+
+        <decorator:getProperty property="page.scripts"/>
+
+    </body>
 
 </html>

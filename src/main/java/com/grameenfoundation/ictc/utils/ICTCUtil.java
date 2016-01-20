@@ -35,6 +35,19 @@ public class ICTCUtil {
         }
     }
 
+    
+    public static String dt(String date) {
+        if (date != null) {
+           
+        } else {
+            return "";
+        }
+        
+        return "";
+    }
+
+    
+    
     public static Date LongToDate(long str) {
 
         if (str == 0l) {

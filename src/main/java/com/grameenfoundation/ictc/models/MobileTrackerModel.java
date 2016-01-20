@@ -87,7 +87,17 @@ public class MobileTrackerModel {
         
         return meetingQuery("match (l:" + ICTCRelationshipTypes.MOBILE_TRACKER + ") return  l", "l");
     }
-    
+       public List<MobileTrackerWrapper> findAll(Date startDate, Date endDate) {
+           if(startDate == null)
+               startDate=new Date();
+           if(endDate==null)
+               endDate=new Date();
+        
+           String q= "match (l:" + ICTCRelationshipTypes.MOBILE_TRACKER + ") where l."+MobileTracker.START_DATE+">="+startDate.getTime()+" and l."+MobileTracker.END_DATE+"<="+endDate.getTime()+" return  l";
+       
+           System.out.println("Query Q: "+q);
+           return meetingQuery(q, "l");
+    }
     public List<MobileTrackerWrapper> findPerUser(String user) {
         
         return meetingQuery("match (l:" + ICTCRelationshipTypes.MOBILE_TRACKER + ") where l." + MobileTracker.USER_ID + "='" + user + "'"

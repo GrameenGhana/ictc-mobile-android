@@ -5,10 +5,15 @@
  */
 package com.grameenfoundation.ictc.controllers;
 
+import com.grameenfoundation.ictc.domains.MobileTracker;
 import com.grameenfoundation.ictc.models.BiodataModel;
+import com.grameenfoundation.ictc.models.MobileTrackerModel;
 import com.grameenfoundation.ictc.wrapper.BiodataWrapper;
+import com.grameenfoundation.ictc.wrapper.MobileTrackerWrapper;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,11 +57,11 @@ public class ReportControllerServlet extends HttpServlet {
                 String community = request.getParameter("cm");
                 String mainCrop = request.getParameter("mc");
                 String age = request.getParameter("ag");
-                
-                System.out.println("Nm "+nm);
-                System.out.println("Cm "+community);
-                System.out.println("Mc "+mainCrop);
-                System.out.println("ag "+age);
+
+                System.out.println("Nm " + nm);
+                System.out.println("Cm " + community);
+                System.out.println("Mc " + mainCrop);
+                System.out.println("ag " + age);
                 BiodataModel biodataModel = new BiodataModel();
                 List<BiodataWrapper> bios = biodataModel.getBioData("", "");
 
@@ -112,6 +117,95 @@ public class ReportControllerServlet extends HttpServlet {
                     writableWorkbook.write();
                     writableWorkbook.close();
                 } catch (Exception e) {
+                }
+            } else if (action.equalsIgnoreCase("logs")) {
+                response.setContentType("application/vnd.ms-excel");
+
+
+                MobileTrackerModel biodataModel = new MobileTrackerModel();
+                String format = "dd-MM-yyyy HH:mm";
+
+                SimpleDateFormat simpleDate = new SimpleDateFormat(format);
+
+                String s = request.getParameter("s");
+                String e = request.getParameter("d");
+                SimpleDateFormat todateDate = new SimpleDateFormat(
+                        "yyyy-MM-dd");
+                SimpleDateFormat todateDates = new SimpleDateFormat(
+                        "yyyy-MM-dd HH:mm:ss");
+                if (s == null || s.isEmpty()) {
+                    s = todateDate.format(new Date());
+                }
+                if (e == null || e.isEmpty()) {
+                    e = todateDate.format(new Date());
+                }
+
+                System.out.println("Start s : " + s);
+                System.out.println("Start s : " + e);
+                Date startDate = new Date();
+                Date endDate = new Date();
+                
+                response.setHeader("Content-Disposition", "attachment;filename=ICTCLogs="+s+"-"+e+".xls");
+
+                try {
+
+                    endDate = todateDates.parse(e + " 23:59:59");
+                    startDate = todateDates.parse(s + " 00:00:00");
+
+                } catch (Exception k) {
+                }
+                List<MobileTrackerWrapper> logs = biodataModel.findAll(startDate, endDate);
+
+
+                
+                WritableWorkbook writableWorkbook = Workbook.createWorkbook(response.getOutputStream());
+
+                WritableSheet writableSheet = writableWorkbook.createSheet("ICTCLogs-"+s+"-"+e, 0);
+                writableSheet.getSettings().setDefaultColumnWidth(25);
+
+//                writableSheet.getSettings().setDefaultRowHeight(100 * 20);
+                WritableFont cellFont = new WritableFont(WritableFont.TIMES, 12);
+                WritableCellFormat cellFormat = new WritableCellFormat(cellFont);
+                /**
+                 *
+                 */
+                try {
+                    writableSheet.setRowView(0, 20 * 20);
+                    writableSheet.addCell(new Label(0, 0, "ID"));
+                    writableSheet.addCell(new Label(1, 0, "Username"));
+                    writableSheet.addCell(new Label(2, 0, "Module"));
+                    writableSheet.addCell(new Label(3, 0, "Page"));
+                    writableSheet.addCell(new Label(4, 0, "Section"));
+                    writableSheet.addCell(new Label(5, 0, "Start time"));
+                    writableSheet.addCell(new Label(6, 0, "End Time"));
+                    writableSheet.addCell(new Label(7, 0, "Version"));
+                    writableSheet.addCell(new Label(8, 0, "Battery"));
+                    writableSheet.addCell(new Label(9, 0, "IMEI"));
+                    writableSheet.addCell(new Label(10, 0, "Data"));
+
+                    
+                    int i = 1;
+                    for (MobileTrackerWrapper log : logs) {
+
+                        writableSheet.addCell(new Label(0, i, log.getId()));
+                        writableSheet.addCell(new Label(1, i, log.getUserId()));
+                        writableSheet.addCell(new Label(2, i, log.getModule()));
+                        writableSheet.addCell(new Label(3, i, log.getPage()));
+                        writableSheet.addCell(new Label(4, i, log.getSection()));
+                        writableSheet.addCell(new Label(5, i, simpleDate.format(new Date(log.getStartTime()))));
+                        writableSheet.addCell(new Label(6, i, simpleDate.format(new Date(log.getEndTime()))));
+                        writableSheet.addCell(new Label(7, i, String.valueOf(log.getVersion())));
+                        writableSheet.addCell(new Label(8, i, String.valueOf(log.getBattery())));
+                        writableSheet.addCell(new Label(9, i, String.valueOf(log.getImei())));
+                        writableSheet.addCell(new Label(10, i, String.valueOf(log.getData())));
+                        
+                        i++;
+                    }
+                    
+                    
+                    writableWorkbook.write();
+                    writableWorkbook.close();
+                }catch(Exception r){
                 }
             }
 
