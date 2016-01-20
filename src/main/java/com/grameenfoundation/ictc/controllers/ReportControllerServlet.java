@@ -145,7 +145,7 @@ public class ReportControllerServlet extends HttpServlet {
                 Date startDate = new Date();
                 Date endDate = new Date();
                 
-                response.setHeader("Content-Disposition", "attachment;filename=ICTCLogs="+s+"-"+e+".xls");
+                response.setHeader("Content-Disposition", "attachment;filename=ICTCLogs_"+s+"_"+e+".xls");
 
                 try {
 
@@ -160,7 +160,7 @@ public class ReportControllerServlet extends HttpServlet {
                 
                 WritableWorkbook writableWorkbook = Workbook.createWorkbook(response.getOutputStream());
 
-                WritableSheet writableSheet = writableWorkbook.createSheet("ICTCLogs-"+s+"-"+e, 0);
+                WritableSheet writableSheet = writableWorkbook.createSheet("ICTCLogs_"+s+"_"+e, 0);
                 writableSheet.getSettings().setDefaultColumnWidth(25);
 
 //                writableSheet.getSettings().setDefaultRowHeight(100 * 20);
@@ -201,8 +201,7 @@ public class ReportControllerServlet extends HttpServlet {
                         
                         i++;
                     }
-                    
-                    
+
                     writableWorkbook.write();
                     writableWorkbook.close();
                 }catch(Exception r){
