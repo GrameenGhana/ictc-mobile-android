@@ -301,6 +301,7 @@ public class APIController extends HttpServlet {
                             farmer.put(Biodata.NUMBER_OF_DEPENDANTS, b.getNumberofdependants());
                             farmer.put(Biodata.REGION, b.getRegion());
                             farmer.put(Biodata.VILLAGE, b.getVillage());
+                            farmer.put(Biodata.DISTRICT, b.getDistrict());
 
                             farmer.put(Biodata.FARM_PERIMETER, b.getFarmperimeter());
 
@@ -354,12 +355,20 @@ public class APIController extends HttpServlet {
                             production.put(ProductionNew.APPLICATIONOFBASALFERTILIZER, p.getApplicationofbasalfertilizer());
                             production.put(ProductionNew.APPLICATIONOFBASALFERTILIZERDATE, p.getApplicationofbasalfertilizerdate());
                             production.put(ProductionNew.APPLICATIONOFTOPDRESSFERTILIZER, p.getApplicationoftopdressfertilizer());
+                            production.put(ProductionNew.CROP_TO_CULTIVATE_CURRENT, p.getCrop_to_cultivate_current());
                             production.put(ProductionNew.DATEFIFTHPOSTGEMWEEDCONTROL, p.getDatefifthpostgemweedcontrol());
                             production.put(ProductionNew.DATEFIRSTMANUALWEEDCONTROL, p.getDatefirstmanualweedcontrol());
                             production.put(ProductionNew.DATEFOURTHPOSTGEMWEEDCONTROL, p.getDatefourthpostgemweedcontrol());
                             production.put(ProductionNew.DATEOFSECONDMANUALWEEDCONTROL, p.getDateofsecondmanualweedcontrol());
                             production.put(ProductionNew.DATETHIRDMANUALWEEDCONTROL, p.getDatethirdmanualweedcontrol());
+                            production.put(ProductionNew.DATE_POSTPLANT_HERB_SECOND_CURRENT, p.getDate_postplant_herb_second_current());
+                            production.put(ProductionNew.DATE_POSTPLANT_HERB_THIRD_CURRENT, p.getDate_postplant_herb_third_current());
+                            production.put(ProductionNew.EXPECTED_REVENUE_FROM_SALE, p.getExpected_revenue_from_sale());
                             production.put(ProductionNew.LANDCLEARINGDATE, p.getLandclearingdate());
+                            production.put(ProductionNew.LANDHISTORYCURRENT, p.getLandhistorycurrent());
+                            production.put(ProductionNew.LOCALCROPVARIETYCASSAVA, p.getLocalcropvarietycassava());
+                            production.put(ProductionNew.LOCALCROPVARIETYRICE, p.getLocalcropvarietyrice());
+                            production.put(ProductionNew.LOCALCROPVARIETYYAM, p.getLocalcropvarietyyam());
                             production.put(ProductionNew.METHODOFBASALFERTILIZERAPPLICATION, p.getMethodofbasalfertilizerapplication());
                             production.put(ProductionNew.METHODOFBASALFERTILIZERAPPLICATIONOTHER, p.getMethodofbasalfertilizerapplicationother());
                             production.put(ProductionNew.METHODOFLANDCLEARING, p.getMethodoflandclearing());
@@ -369,7 +378,12 @@ public class APIController extends HttpServlet {
                             production.put(ProductionNew.NAMEOFCROPVARIETYCASSAVA, p.getNameofcropvarietycassava());
                             production.put(ProductionNew.NAMEOFCROPVARIETYRICE, p.getNameofcropvarietyrice());
                             production.put(ProductionNew.NAMEOFCROPVARIETYYAM, p.getNameofcropvarietyyam());
+                            production.put(ProductionNew.NAMEOFLOCALVARIETY, p.getNameoflocalvariety());
+                            production.put(ProductionNew.NAME_OF_HYBRID_VARIETY, p.getName_of_hybrid_variety());
                             production.put(ProductionNew.OTHERFERTILIZER, p.getOtherfertilizer());
+                            production.put(ProductionNew.ORGANICFERTILIZERAPPLICATIONCURRENT, p.getOrganicfertilizerapplicationcurrent());
+                            production.put(ProductionNew.ORGANICFERTILIZERDATECURRENT, p.getOrganicfertilizerdatecurrent());
+                            production.put(ProductionNew.ORGANICRESIDUECURRENT, p.getOrganicresiduecurrent());
                             production.put(ProductionNew.PLANTINGDATE, p.getPlantingdate());
                             production.put(ProductionNew.PLANTINGDISTANCEBETWEENPLANTSMAIZE, p.getPlantingdate());
                             production.put(ProductionNew.PLANTINGDISTANCEBETWEENPLANTSMAIZEYC, p.getPlantingdistancebetweenplantsmaizeyc());
@@ -381,8 +395,11 @@ public class APIController extends HttpServlet {
                             production.put(ProductionNew.QUANTITYOFBASALFERTILIZERPURCHASEDAPPLY, p.getQuantityofbasalfertilizerpurchasedapply());
                             production.put(ProductionNew.QUANTITYOFTOPDRESSERFERTILIZERPURCHASED, p.getQuantityoftopdresserfertilizerpurchased());
                             production.put(ProductionNew.QUANTITYPOSTPLANTHERBICIDE, p.getQuantitypostplantherbicide());
+                            production.put(ProductionNew.QTYOFPREPLANTHERBICIDE, p.getQtyofpreplantherbicide());
                             production.put(ProductionNew.REFILLINGGAPSOCCURENCE, p.getRefillinggapsoccurence());
                             production.put(ProductionNew.REFILLINGGAPSPROPORTION, p.getRefillinggapsproportion());
+                            production.put(ProductionNew.REFERENCE_SEASON_CURRENT, p.getReference_season_current());
+                            production.put(ProductionNew.REFERENCE_YEAR_CURRENT, p.getReference_year_current());
                             production.put(ProductionNew.SEEDBEDFORMTYPE, p.getSeedbedformtype());
                             production.put(ProductionNew.SEEDBEDPREPARATIONDATE, p.getSeedbedformtype());
                             production.put(ProductionNew.SOURCEOFSEEDORPLANTINGMATERIAL, p.getSourceofseedorplantingmaterial());
@@ -401,14 +418,21 @@ public class APIController extends HttpServlet {
                         ph= b.getPostHavest2();
 //                        ph = postHarvestModel.getPostHarvest("Id", bb.getFarmID());
                         if (null != ph) {
-                            System.out.println("Post Harvest " + ph.getApplicationrateofstoragechemical() + "farmer " + b.getFirstname());
+                            //System.out.println("Post Harvest " + ph.getApplicationrateofstoragechemical() + "farmer " + b.getFirstname());
                             postHarvest.put(PostHarvest2.APPLICATIONRATEOFSTORAGECHEMICAL, ph.getApplicationrateofstoragechemical());
+                            postHarvest.put(PostHarvest2.BUYERNUMBER1, ph.getBuyernumber1());
+                            postHarvest.put(PostHarvest2.CROPCULTIVATEDPH, ph.getCropcultivatedph());
+                            postHarvest.put(PostHarvest2.DATETOCOMPLETEDRYING, ph.getDatetocompletedrying());
                             postHarvest.put(PostHarvest2.COMPLETIONOFPRODUCEMARKETING, ph.getCompletionofproducemarketing());
                             postHarvest.put(PostHarvest2.COMPLETIONOFTHRESHING, ph.getCompletionofthreshing());
                             postHarvest.put(PostHarvest2.DATEOFCOMPLETINGDRYING, ph.getDateofcompletingdrying());
                             postHarvest.put(PostHarvest2.DATETOCOMPLETEDRYING, ph.getDatetocompletedrying());
+                            postHarvest.put(PostHarvest2.DATE_OF_COMPLETING_WINNOWING, ph.getDate_of_completing_winnowing());
                             postHarvest.put(PostHarvest2.DEHUSKINGDATE, ph.getDehuskingdate());
+                            postHarvest.put(PostHarvest2.DRYINGCOBS1, ph.getDryingcobs1());
+                            postHarvest.put(PostHarvest2.DRYINGGRAIN1, ph.getDryinggrain1());
                             postHarvest.put(PostHarvest2.FIRSTSALEDATE, ph.getFirstsaledate());
+                            postHarvest.put(PostHarvest2.HARVESTMETHODPH, ph.getHarvestmethodph());
                             postHarvest.put(PostHarvest2.MAINPOINTOFSALEORCONTACT, ph.getMainpointofsaleorcontact());
                             postHarvest.put(PostHarvest2.MANUALTHRESHING, ph.getManualthreshing());
                             postHarvest.put(PostHarvest2.MANUALWINNOWING, ph.getManualwinnowing());
@@ -430,12 +454,22 @@ public class APIController extends HttpServlet {
                             postHarvest.put(PostHarvest2.PROCESSINGOFCASSAVA, ph.getProcessingofcassava());
                             postHarvest.put(PostHarvest2.PROPORTIONFORMARKET, ph.getProportionformarket());
                             postHarvest.put(PostHarvest2.PROPORTIONOFCASSAVAPROCESSEDINTOCHIPS, ph.getProportionofcassavaprocessedintochips());
+                            postHarvest.put(PostHarvest2.PROPORTION_STORED_WITH_CHEMICAL, ph.getProportion_stored_with_chemical());
+                            postHarvest.put(PostHarvest2.PROCESSINGCOMBINATION1, ph.getProcessingcombination1());
+                            postHarvest.put(PostHarvest2.PROCESSINGCOMPLETED1, ph.getProcessingcompleted1());
+                            postHarvest.put(PostHarvest2.REFERENCE_SEASON_CURRENT, ph.getReference_season_current());
+                            postHarvest.put(PostHarvest2.REFERENCE_YEAR_CURRENT, ph.getReference_year_current());
+                            postHarvest.put(PostHarvest2.SHELLINGMETHOD1, ph.getShellingmethod1());
+                            postHarvest.put(PostHarvest2.SHELLINGMETHODOTHER1, ph.getShellingmethodother1());
                             postHarvest.put(PostHarvest2.THERAPPLICATIONRATEOFSTORAGECHEMIC, ph.getTherapplicationrateofstoragechemic());
                             postHarvest.put(PostHarvest2.TYPEOFBAGUSEDINBULKINGPRODUCT, ph.getTypeofbagusedinbulkingproduct());
                             postHarvest.put(PostHarvest2.TYPEOFMACHINE, ph.getTypeofmachine());
                             postHarvest.put(PostHarvest2.TYPEOFMACHINEWINOWING, ph.getTypeofmachinewinowing());
                             postHarvest.put(PostHarvest2.TYPEOFSTORAGECHEMICAL, ph.getTypeofstoragechemical());
                             postHarvest.put(PostHarvest2.TYPEOFSTORAGESTRUCTURE, ph.getTypeofstoragestructure());
+                            postHarvest.put(PostHarvest2.UNIT_OF_CHEMICAL_APPLICATION, ph.getUnit_of_chemical_application());
+                            
+                            
                         }
 
 //                        bp = baselineProductionModel.getProduction("Id", bb.getFarmID());        
@@ -449,14 +483,18 @@ public class APIController extends HttpServlet {
                             baselineproduction.put(BaselineProduction.APPLIC_TOPDRESS_FERT_BASE, bp.getApplic_topdress_fert_base());
                             baselineproduction.put(BaselineProduction.AREA_CULTIVATED_BASE, bp.getArea_cultivated_base());
                             baselineproduction.put(BaselineProduction.CROP_TO_CULTIVATE_BASE, bp.getCrop_to_cultivate_base());
+                            baselineproduction.put(BaselineProduction.COST_PRODUCTION, bp.getCrop_to_cultivate_base());
                             baselineproduction.put(BaselineProduction.DATE_FIFTH_MANUAL_WEED_BASE, bp.getDate_fifth_manual_weed_base());
                             baselineproduction.put(BaselineProduction.DATE_FIRST_MANUAL_WEED_BASE, bp.getDate_first_manual_weed_base());
                             baselineproduction.put(BaselineProduction.DATE_FOURTH_MANUAL_WEED_BASE, bp.getDate_fourth_manual_weed_base());
                             baselineproduction.put(BaselineProduction.DATE_OF_HARVEST_BASE, bp.getDate_of_harvest_base());
                             baselineproduction.put(BaselineProduction.DATE_SECOND_MANUAL_WEED_BASE, bp.getDate_second_manual_weed_base());
                             baselineproduction.put(BaselineProduction.DATE_THIRD_MANUAL_WEED_BASE, bp.getDate_third_manual_weed_base());
+                            baselineproduction.put(BaselineProduction.DATE_POSTPLANT_HERB_SECOND, bp.getDate_postplant_herb_second());
+                            baselineproduction.put(BaselineProduction.DATE_POSTPLANT_HERB_THIRD, bp.getDate_postplant_herb_third());
                             baselineproduction.put(BaselineProduction.DISTANCE_BETWEEN_PLANTS_BASE, bp.getDistance_between_plants_base());
                             baselineproduction.put(BaselineProduction.DISTANCE_BETWEEN_ROWS_BASE, bp.getDistance_between_rows_base());
+                            baselineproduction.put(BaselineProduction.LANDHISTORYBASE, bp.getLandhistorybase());
                             baselineproduction.put(BaselineProduction.LAND_CLEARING_DATE_BASE, bp.getLand_clearing_date_base());
                             baselineproduction.put(BaselineProduction.METHOD_BFERT_APPLIC_BASE, bp.getMethod_bfert_applic_base());
                             baselineproduction.put(BaselineProduction.METHOD_OF_LAND_CLEARING_BASE, bp.getMethod_of_land_clearing_base());
@@ -467,7 +505,14 @@ public class APIController extends HttpServlet {
                             baselineproduction.put(BaselineProduction.NAME_OF_VARIETY_CASS_BASE, bp.getName_of_variety_cass_base());
                             baselineproduction.put(BaselineProduction.NAME_OF_VARIETY_RICE_BASE, bp.getName_of_variety_rice_base());
                             baselineproduction.put(BaselineProduction.NAME_OF_VARIETY_YAM, bp.getName_of_variety_yam());
+                            baselineproduction.put(BaselineProduction.NAME_OF_OTHER_VARIETY_CASSAVA_BASE, bp.getName_of_other_variety_cassava_base());
+                            baselineproduction.put(BaselineProduction.NAME_OF_VARIETY_RICE_BASE, bp.getName_of_variety_rice_base());
+                            baselineproduction.put(BaselineProduction.NAME_OF_OTHER_VARIETY_YAM_BASE, bp.getName_of_other_variety_yam_base());
                             baselineproduction.put(BaselineProduction.NO_OCCASIONS_MANUAL_WEED_BASE, bp.getNo_occasions_manual_weed_base());
+                            baselineproduction.put(BaselineProduction.ORGANICFERTILIZERAPPLICATION, bp.getOrganicfertilizerapplication());
+                            baselineproduction.put(BaselineProduction.ORGANICFERTILIZERDATE, bp.getOrganicfertilizerdate());
+                            baselineproduction.put(BaselineProduction.ORGANICFERTMETHOD, bp.getOrganicfertmethod());
+                            baselineproduction.put(BaselineProduction.ORGANICRESIDUE, bp.getOrganicresidue());
                             baselineproduction.put(BaselineProduction.OTHER_BASAL_FERT_BASE, bp.getOther_basal_fert_base());
                             baselineproduction.put(BaselineProduction.OTHER_METHOD_BFERT_APPLIC_BASE, bp.getOther_basal_fert_base());
                             baselineproduction.put(BaselineProduction.OTHER_SOURCES_SEED_BASE, bp.getOther_sources_seed_base());
@@ -476,10 +521,15 @@ public class APIController extends HttpServlet {
                             baselineproduction.put(BaselineProduction.PLOUGHING_DATE_BASE, bp.getPloughing_date_base());
                             baselineproduction.put(BaselineProduction.POSTPLANT_HERBICIDE_USE_BASE, bp.getPostplant_herbicide_use_base());
                             baselineproduction.put(BaselineProduction.QTY_OF_BFERT_APPLIED_BASE, bp.getQuantity_postplant_herbicide_base());
+                            baselineproduction.put(BaselineProduction.QTYOFPREPLANTHERBICIDE, bp.getQtyofpreplantherbicide());
+                            baselineproduction.put(BaselineProduction.QUANTITY_HARVEST_SOLD, bp.getQuantity_harvest_sold());
                             baselineproduction.put(BaselineProduction.QUANTITY_POSTPLANT_HERBICIDE_BASE, bp.getQuantity_postplant_herbicide_base());
                             baselineproduction.put(BaselineProduction.QUANTITY_TOPDRESS_FERTILIZER_BASE, bp.getQuantity_topdress_fertilizer_base());
                             baselineproduction.put(BaselineProduction.REFILLING_GAPS_OCCURRENCE_BASE, bp.getRefilling_gaps_occurrence_base());
                             baselineproduction.put(BaselineProduction.REFILLING_PROPORTION_BASE, bp.getRefilling_proportion_base());
+                            baselineproduction.put(BaselineProduction.REFERENCE_SEASON, bp.getReference_season());
+                            baselineproduction.put(BaselineProduction.REFERENCE_YEAR, bp.getReference_year());
+                            baselineproduction.put(BaselineProduction.REVENUE_FROM_SALES_BASE, bp.getRevenue_from_sales_base());
                             baselineproduction.put(BaselineProduction.SEEDBED_TYPE_BASE, bp.getSeed_bed_preparation_date_base());
                             baselineproduction.put(BaselineProduction.SEED_BED_PREPARATION_DATE_BASE, bp.getSeed_bed_preparation_date_base());
                             baselineproduction.put(BaselineProduction.SOURCE_OF_SEED_BASE, bp.getSource_of_seed_base());
@@ -490,6 +540,8 @@ public class APIController extends HttpServlet {
                             baselineproduction.put(BaselineProduction.TYPE_FERTILIZER_TOPDRESS_BASE, bp.getType_fertilizer_topdress_base());
                             baselineproduction.put(BaselineProduction.TYPE_OF_HERBICIDE_POSTPLANT_BASE, bp.getType_of_herbicide_postplant_base());
                             baselineproduction.put(BaselineProduction.TYPE_OF_VARIETY_CULTIVATED_BASE, bp.getType_of_variety_cultivated_base());
+                            baselineproduction.put(BaselineProduction.TYPE_OF_HYBRID, bp.getType_of_hybrid());
+                            
 
                         }
 
@@ -532,7 +584,10 @@ public class APIController extends HttpServlet {
                             baselineproductionbudget.put(BaselineProductionBudget.LAND_RENT_BASE, bpb.getLand_rent_base());
                             baselineproductionbudget.put(BaselineProductionBudget.LABOR_FOR_PLANTINGFAMILY_BASE, bpb.getLabor_for_plantingfamily_base());
                             baselineproductionbudget.put(BaselineProductionBudget.PERIOD_FOR_COMPLETION_OF_HARVEST_BASE, bpb.getPeriod_for_completion_of_harvest_base());
+                            baselineproductionbudget.put(BaselineProductionBudget.PERIOD_POSTPLANT_HERB_2, bpb.getPeriod_postplant_herb_2());
                             baselineproductionbudget.put(BaselineProductionBudget.PLANTING_PERIOD2_BASE, bpb.getPlanting_period2_base());
+                            baselineproductionbudget.put(BaselineProductionBudget.PRICE_POSTPLANT_HERB_2, bpb.getPrice_postplant_herb_2());
+                            baselineproductionbudget.put(BaselineProductionBudget.PRICE_POSTPLANT_HERB_3, bpb.getPrice_postplant_herb_3());
                             baselineproductionbudget.put(BaselineProductionBudget.PLOUGHING_COST_PER_ACRE_BASE, bpb.getPloughing_cost_per_acre_base());
                             baselineproductionbudget.put(BaselineProductionBudget.POST_HERBICIDE_APPLICATION_COST_BASE, bpb.getPost_herbicide_application_cost_base());
                             baselineproductionbudget.put(BaselineProductionBudget.POST_PLANT_HERBICIDE_COST_BASE, bpb.getPost_plant_herbicide_cost_base());
@@ -540,6 +595,9 @@ public class APIController extends HttpServlet {
                             baselineproductionbudget.put(BaselineProductionBudget.PRICE_OF_HERBICIDE_BASE, bpb.getPrice_of_herbicide_base());
                             baselineproductionbudget.put(BaselineProductionBudget.PRICE_OF_TOPDRESS_FERTILIZER_BASE, bpb.getPrice_of_topdress_fertilizer_base());
                             baselineproductionbudget.put(BaselineProductionBudget.QUANTITY_OF_PREPLANT_HERBICIDE_BASE, bpb.getQuantity_of_preplant_herbicide_base());
+                            baselineproductionbudget.put(BaselineProductionBudget.QTY_OF_BFERT_BASE, bpb.getQty_of_bfert_base());
+                            baselineproductionbudget.put(BaselineProductionBudget.QTY_OF_BFERT_BASE, bpb.getQty_of_bfert_base());
+                            baselineproductionbudget.put(BaselineProductionBudget.PLOUGHING_COST_PER_ACRE_BASE, bpb.getPloughing_cost_per_acre_base());
                             baselineproductionbudget.put(BaselineProductionBudget.REFILLING_LABOR_FAMILY_BASE, bpb.getRefilling_labor_family_base());
                             baselineproductionbudget.put(BaselineProductionBudget.REFILLING_LABOR_PERIOD_BASE, bpb.getRefilling_labor_period_base());
                             baselineproductionbudget.put(BaselineProductionBudget.REFILLING_LABOUR_COST_BASE, bpb.getRefilling_labour_cost_base());
@@ -626,7 +684,7 @@ public class APIController extends HttpServlet {
                         }
 
 //                        pr = profilingModel.getProfile("Id", bb.getFarmID());
-pr =b.getProfiling();
+                      pr =b.getProfiling();
                         if (null != pr) {
                             profiling.put(Profiling.FARMRECORDKEEPINGSTATUS, pr.getFarmrecordkeepingstatus());
                             profiling.put(Profiling.FBOMEMBERSHIP, pr.getFbomembership());
