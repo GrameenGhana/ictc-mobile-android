@@ -44,6 +44,7 @@ import com.grameenfoundation.ictc.utils.MeetingSchedule;
 import com.grameenfoundation.ictc.utils.ParentNode;
 import com.grameenfoundation.ictc.wrapper.BiodataWrapper;
 import com.grameenfoundation.ictc.wrapper.MeetingWrapper;
+import com.sun.javafx.WeakReferenceQueue;
 import com.sun.jersey.core.util.Base64;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -53,6 +54,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringReader;
+import java.lang.ref.WeakReference;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -215,8 +217,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                         imageUpdate.put(Biodata.IMAGE_URL,image_url);
                         biodataModel.BiodataUpdate(farmer.getFarmerID(),imageUpdate);
                         
-                        
-                        
+                         
                         //create farmer meeting schedule
                         if (majorcrop.equalsIgnoreCase("Maize")) {
 
@@ -375,11 +376,11 @@ public class SalesforceSyncServlet extends HttpServlet {
                       {
                           
                            farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
-                           
-                           if (null != new ProductionUpdateModel().getProductionUpdate("Id", farmerID)) {
-                              out.println(sendAck());
-                              System.out.println("Production Update already exist");
-                          } else {
+//                           
+//                           if (null != new ProductionUpdateModel().getProductionUpdate("Id", farmerID)) {
+//                              out.println(sendAck());
+//                              System.out.println("Production Update already exist");
+//                          } else {
                               
                               ProductionModel product = new ProductionModel();
                               
@@ -417,17 +418,17 @@ public class SalesforceSyncServlet extends HttpServlet {
                               tx.success();
                               
                               out.println(sendAck());
-                          }
+                        //  }
                       }
                   else if(salesforceObj.equalsIgnoreCase("sf:FMP_PostHarvest_update__c"))
                       {
                          PostHarvestModel ph = new PostHarvestModel();
-                         
-                          farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
-                          if (null != new PostHarvestUpdateModel().getPostHarvestUpdate("Id", farmerID)) {
-                             out.println(sendAck());
-                             System.out.println("PostHarvest Update already exist");
-                         } else {
+//                         
+//                          farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
+//                          if (null != new PostHarvestUpdateModel().getPostHarvestUpdate("Id", farmerID)) {
+//                             out.println(sendAck());
+//                             System.out.println("PostHarvest Update already exist");
+//                         } else {
                              
                           
                         org.neo4j.graphdb.Node postHarvestUpdateNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
@@ -465,7 +466,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                          tx.success();
 
                         out.println(sendAck());
-                          }
+                         // }
                          
                       }
                      else if(salesforceObj.equalsIgnoreCase("sf:Profiling__c"))
@@ -793,10 +794,10 @@ public class SalesforceSyncServlet extends HttpServlet {
                     {
                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c", ele);
                        
-                       if (null != new FmpProductionBudgetUpdateModel().getFmpProductionBudgetUpdate("Id", farmerID)) {
-                            out.println(sendAck());
-                            System.out.println("Fmp Production budget already exist");
-                        } else {
+//                       if (null != new FmpProductionBudgetUpdateModel().getFmpProductionBudgetUpdate("Id", farmerID)) {
+//                            out.println(sendAck());
+//                            System.out.println("Fmp Production budget already exist");
+//                        } else {
                         org.neo4j.graphdb.Node FMPPBUNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.UPDATE);
                         
                         FmpProductionBudgetModel fmp = new FmpProductionBudgetModel();
@@ -832,7 +833,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                          if(modified(farmerID))
                                  System.out.println("Last modified done");
                         tx.success();
-                       }
+                       //}
                     }
                       else if(salesforceObj.equals("sf:FMP_PH_Budget__c"))
                     {
@@ -884,10 +885,10 @@ public class SalesforceSyncServlet extends HttpServlet {
                     {
                          farmerID = getXmlNodeValue("sf:Farmer_Biodata__c", ele);
                        
-                       if (null != new FmpPostHarvestBudgetUpdateModel().getFmpPostHarvestBudgetUpdate("Id", farmerID) ) {
-                            out.println(sendAck());
-                            System.out.println("Baseline Post Harvest Budget Update already exist");
-                        } else {
+//                       if (null != new FmpPostHarvestBudgetUpdateModel().getFmpPostHarvestBudgetUpdate("Id", farmerID) ) {
+//                            out.println(sendAck());
+//                            System.out.println("Baseline Post Harvest Budget Update already exist");
+//                        } else {
                         
                         org.neo4j.graphdb.Node FMPPHBUNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.UPDATE);
                         
@@ -923,7 +924,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                          if(modified(farmerID))
                                  System.out.println("Last modified done");
                         tx.success();
-                       }
+                       //}
                     }
                      else if(salesforceObj.equals("sf:FIELD_CROP_ASSESSMENT__c"))
                     {
