@@ -612,7 +612,7 @@ public class BiodataModel {
          return updated;
     }
 
-    public boolean BiodataUpdate(String id, Map<String, String> data) {
+      public boolean BiodataUpdate(String id, Map<String, String> data) {
 
         Biodata bio = getBiodata(Biodata.ID, id);
         boolean updated = false;

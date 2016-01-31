@@ -940,6 +940,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                              System.out.println("Field Crop Asessment already exist");
                          } else {
 
+                             Map<String,String> images = new HashMap<String,String>();
+                             
                              org.neo4j.graphdb.Node FCAParent;
                              org.neo4j.graphdb.Node FCANode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FIELD_CROP_ASSESSMENT);
 
@@ -970,13 +972,31 @@ public class SalesforceSyncServlet extends HttpServlet {
                              biodataModel.BiodataToFCA(b.getId(), FCANode);
                              
                              FieldCropAssessment fca = new FieldCropAssessment(FCANode);
-                             
-                             JSONArray m = new JSONArray();
+                            images.put(FieldCropAssessment.PHOTOCROPESTABLISHMENT3,fca.getPhotocropestablishment3().substring(fca.getPhotocropestablishment3().indexOf("=")));
+                            images.put(FieldCropAssessment.PHOTOCROPESTABLISHMENT3,fca.getPhotocropestablishment3().substring(fca.getPhotocropestablishment3().indexOf("="))); 
+                            JSONArray m = new JSONArray();
+                            m.put(getImageId(fca.getPhoto_crop_establishment_status()));
+                            m.put(getImageId(fca.getPhoto_disease_mangement_status()));
+                            m.put(getImageId(fca.getPhoto_pest_management_status()));
+                            m.put(getImageId(fca.getPhoto_weed_management_status()));
+                            m.put(getImageId(fca.getPhoto_soil_fertility_status()));
+                            m.put(getImageId(fca.getPhotocropestablishment3()));
+                            m.put(getImageId(fca.getPhotocropestablisment2()));
+                            m.put(getImageId(fca.getPhotodisease2()));
+                            m.put(getImageId(fca.getPhotodisease3()));
+                            m.put(getImageId(fca.getPhotopestmanagement2()));
+                            m.put(getImageId(fca.getPhotopestmanagement3()));
+                            m.put(getImageId(fca.getPhotosoilfertility2()));
+                            m.put(getImageId(fca.getPhotosoilfertility3()));
+                            m.put(getImageId(fca.getPhotoweedstatus2()));
                              
                             
-                             JSONObject fc = new JSONObject();
+                            JSONObject fc = new JSONObject();
+                            fc.put("requestType","cropassessment");
+                            fc.put("farmerId",farmerID);
+                            fc.put("imageIds",m);
                              
-                             
+                            
                              
 
                              out.println(sendAck());
@@ -1153,9 +1173,9 @@ public class SalesforceSyncServlet extends HttpServlet {
     }
     
     
-    public List<String> getCropAssessmentImage(String Id,String url,String detail)
+    public Map<String,String> getCropAssessmentImage(String Id,String url,String detail)
     {
-        List<String> images = new ArrayList<String>();
+        Map<String,String> images = new HashMap<String,String>();
         
         Map<String, String> parameters = new HashMap<String, String>();
 
@@ -1181,12 +1201,12 @@ public class SalesforceSyncServlet extends HttpServlet {
            {
                JSONObject o = (JSONObject) ja.get(i);
            
-            path = f.getPath() + File.separator + i+"_"+Id;
+            path = f.getPath() + File.separator + i+"_"+o.getString("imageId");
             System.out.println("path " + path);
             byte[] data = Base64.decode(o.getString("imageData"));
             try (OutputStream stream = new FileOutputStream(path)) {
                 stream.write(data);
-                images.add(path);
+                images.put(o.getString("imageId"), path);
                 return images;
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -1205,6 +1225,12 @@ public class SalesforceSyncServlet extends HttpServlet {
         BiodataModel biodataModel = new BiodataModel();
        
        return  biodataModel.lastmodifiedUpdate(farmerId,now.getTime());
+    }
+    
+    
+    public String getImageId(String url)
+    {
+        return url.substring(url.indexOf("=")+1);
     }
 
 }

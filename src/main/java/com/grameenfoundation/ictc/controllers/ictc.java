@@ -65,17 +65,22 @@ public class ictc {
 "Info:   <!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\"><html><head>    <meta HTTP-EQUIV=\"PRAGMA\" CONTENT=\"NO-CACHE\"><script>if (this.SfdcApp && this.SfdcApp.projectOneNavigator) { SfdcApp.projectOneNavigator.handleRedirect('{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }'); }  else if (window.location.replace){ window.location.replace('{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }');} else {;window.location.href ='{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }';} </script></head></html>\n" +
 "Info:   Agent Created";
         
-        String u = "konetyme@ictc.org";
+//        String u = "konetyme@ictc.org";
+//        
+//        System.out.println(u.substring(0,u.indexOf("@")));
+//        
+//        String onetyme =codefrom.substring(codefrom.indexOf("'"), codefrom.indexOf(";"));
+//        
+//        String jsonformat =onetyme.substring(onetyme.indexOf("'")+1, onetyme.lastIndexOf("'"));
+//        
+//        JSONObject json = new JSONObject(jsonformat);
+//        System.out.println(json.toString());
         
-        System.out.println(u.substring(0,u.indexOf("@")));
+        String  f = "https://na1.salesforce.com/servlet/servlet.FileDownload?file=00P24000004ovnVEAQ";
         
-        String onetyme =codefrom.substring(codefrom.indexOf("'"), codefrom.indexOf(";"));
+        System.out.println(f.substring(f.indexOf("=")+1));
         
-        String jsonformat =onetyme.substring(onetyme.indexOf("'")+1, onetyme.lastIndexOf("'"));
-        
-        JSONObject json = new JSONObject(jsonformat);
-        System.out.println(json.toString());
-       
+//       
           //System.out.println("3.josss".substring(0,1));       
                 
 //                File xmlFile = new File("/home/grameen/test.xml");
