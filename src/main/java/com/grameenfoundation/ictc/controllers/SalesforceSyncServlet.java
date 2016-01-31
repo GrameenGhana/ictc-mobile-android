@@ -10,6 +10,7 @@ import static com.grameenfoundation.ictc.controllers.SaleforceIntegrationControl
 import com.grameenfoundation.ictc.domain.commons.Generalimpl;
 import com.grameenfoundation.ictc.domains.BaselineProductionBudget;
 import com.grameenfoundation.ictc.domains.Biodata;
+import com.grameenfoundation.ictc.domains.CropAssessmentImage;
 import com.grameenfoundation.ictc.domains.FieldCropAssessment;
 import com.grameenfoundation.ictc.domains.FmpPostHarvestBudget;
 import com.grameenfoundation.ictc.domains.FmpProductionBudget;
@@ -106,9 +107,7 @@ public class SalesforceSyncServlet extends HttpServlet {
         MeetingModel  meetingModel = new MeetingModel();
         UserModel user = new UserModel();
         Map<String,MeetingWrapper> meetingMap = new HashMap<>();
-        
-        
-        
+        Map<String,String> image_url = new HashMap<String,String>();
         String farmerID = null ;
         String agentId = null;
         
@@ -215,10 +214,10 @@ public class SalesforceSyncServlet extends HttpServlet {
                         
                         //get farmer image from salesforce and saves it
                        //
-                     String image_url = getFarmerImage(farmer.getFarmerID(),ICTCKonstants.SALESFORCEURL_PRODUCTION+ICTCKonstants.GET_IMAGES,json.toString());
+                     String imageurl = getFarmerImage(farmer.getFarmerID(),ICTCKonstants.SALESFORCEURL_PRODUCTION+ICTCKonstants.GET_IMAGES,json.toString());
                       //String image_url = getFarmerImage(farmer.getFarmerID(),ICTCKonstants.SALESFORCEURL_SANDBOX+ICTCKonstants.GET_IMAGES,json.toString());
                         
-                        imageUpdate.put(Biodata.IMAGE_URL,image_url);
+                        imageUpdate.put(Biodata.IMAGE_URL,imageurl);
                         biodataModel.BiodataUpdate(farmer.getFarmerID(),imageUpdate);
                         
                          
@@ -926,7 +925,7 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                         out.println(sendAck());
                          if(modified(farmerID))
-                                 System.out.println("Last modified done");
+                             System.out.println("Last modified done");
                         tx.success();
                        //}
                     }
@@ -995,8 +994,23 @@ public class SalesforceSyncServlet extends HttpServlet {
                             fc.put("farmerId",farmerID);
                             fc.put("imageIds",m);
                              
-                            Map<String,String> image_url = getCropAssessmentImage(farmerID,ICTCKonstants.SALESFORCEURL_PRODUCTION+ICTCKonstants.GET_IMAGES,fc.toString());
+                            image_url = getCropAssessmentImage(farmerID,ICTCKonstants.SALESFORCEURL_PRODUCTION+ICTCKonstants.GET_IMAGES,fc.toString());
                             
+                        
+                           org.neo4j.graphdb.Node imageNode= ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.IMAGE);
+                          
+                             for (Map.Entry<String, String> entrySet : image_url.entrySet()) {
+                                 String key = entrySet.getKey();
+                                 String value = entrySet.getValue();
+                                 imageNode.setProperty(CropAssessmentImage.TAG,key);
+                                 imageNode.setProperty(CropAssessmentImage.IMAGE,value);
+                                 
+                                 CropAssessmentImage img = new CropAssessmentImage(imageNode);
+                                 
+                                 fca.setImage(img);
+                                 
+                                 
+                             }
                             
                             
                              
