@@ -8,6 +8,9 @@ package com.grameenfoundation.ictc.domains;
 
 import com.grameenfoundation.ictc.domain.commons.GeneralInterface;
 import com.grameenfoundation.ictc.domain.commons.Status;
+import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
+import com.grameenfoundation.ictc.utils.Neo4jServices;
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
 
 /**
@@ -340,5 +343,15 @@ public String getCrop_establishment_score(){
         }
         return null;
     }
+
+public void setImage(CropAssessmentImage image)
+{
+    underlyingNode.createRelationshipTo(image.underlyingNode,ICTCRelationshipTypes.HAS_IMAGE);
+}
+
+public CropAssessmentImage getImage()
+{
+    return new CropAssessmentImage(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_IMAGE));
+}
 
 }

@@ -972,8 +972,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                              biodataModel.BiodataToFCA(b.getId(), FCANode);
                              
                              FieldCropAssessment fca = new FieldCropAssessment(FCANode);
-                            images.put(FieldCropAssessment.PHOTOCROPESTABLISHMENT3,fca.getPhotocropestablishment3().substring(fca.getPhotocropestablishment3().indexOf("=")));
-                            images.put(FieldCropAssessment.PHOTOCROPESTABLISHMENT3,fca.getPhotocropestablishment3().substring(fca.getPhotocropestablishment3().indexOf("="))); 
+                          
                             JSONArray m = new JSONArray();
                             m.put(getImageId(fca.getPhoto_crop_establishment_status()));
                             m.put(getImageId(fca.getPhoto_disease_mangement_status()));
@@ -996,6 +995,9 @@ public class SalesforceSyncServlet extends HttpServlet {
                             fc.put("farmerId",farmerID);
                             fc.put("imageIds",m);
                              
+                            Map<String,String> image_url = getCropAssessmentImage(farmerID,ICTCKonstants.SALESFORCEURL_PRODUCTION+ICTCKonstants.GET_IMAGES,fc.toString());
+                            
+                            
                             
                              
 
@@ -1199,9 +1201,9 @@ public class SalesforceSyncServlet extends HttpServlet {
             
            for(int i =0;i<ja.length();i++)
            {
-               JSONObject o = (JSONObject) ja.get(i);
-           
-            path = f.getPath() + File.separator + i+"_"+o.getString("imageId");
+            JSONObject o = (JSONObject) ja.get(i);
+            
+            path = f.getPath() + File.separator + i + "_" + o.getString("imageId");
             System.out.println("path " + path);
             byte[] data = Base64.decode(o.getString("imageData"));
             try (OutputStream stream = new FileOutputStream(path)) {
@@ -1213,7 +1215,7 @@ public class SalesforceSyncServlet extends HttpServlet {
             } catch (IOException ex) {
                 Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-           }
+        }
 
         return null;
     }
