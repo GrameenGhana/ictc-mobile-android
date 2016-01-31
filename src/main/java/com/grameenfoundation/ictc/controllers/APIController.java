@@ -777,6 +777,7 @@ public class APIController extends HttpServlet {
                         if (fmppb != null) {
                             fmpproductionbudget.put(FmpProductionBudget.BASAL_FERTILIZER_APPLICATION_TOTAL_LABOU, fmppb.getBasal_fert_labor_period());
                             fmpproductionbudget.put(FmpProductionBudget.BASAL_FERTILIZER_APPL_LABOUR_COST, fmppb.getBasal_fertilizer_appl_labour_cost());
+                            fmpproductionbudget.put(FmpProductionBudget.BASAL_FERTILIZER_APPLICATION_HIRED, fmppb.getBasal_fertilizer_application_hired());
                             fmpproductionbudget.put(FmpProductionBudget.BASAL_FERT_LABOR_PERIOD, fmppb.getBasal_fert_labor_period());
                             fmpproductionbudget.put(FmpProductionBudget.COST_OF_APPLICATIONTOPDRESS, fmppb.getCost_of_applicationtopdress());
                             fmpproductionbudget.put(FmpProductionBudget.COST_OF_BASAL_FERTILIZER, fmppb.getCost_of_basal_fertilizer()); 
@@ -790,7 +791,10 @@ public class APIController extends HttpServlet {
                             fmpproductionbudget.put(FmpProductionBudget.FAMILY_LABOR_THIRD_WEED_CONTROL, fmppb.getFamily_labor_third_weed_control());
                             fmpproductionbudget.put(FmpProductionBudget.FAMILY_LABOR_TOPDRESS_FERTILIZER_APPLICA, fmppb.getFamily_labor_topdress_fertilizer_applica());
                             fmpproductionbudget.put(FmpProductionBudget.FIFTH_MANUAL_WEEDING_LABOR_PERIOD, fmppb.getFifth_manual_weeding_labor_period());
+                            fmpproductionbudget.put(FmpProductionBudget.FERTILIZERBASALNOBAGS, fmppb.getFertilizerbasalnobags());
+                            fmpproductionbudget.put(FmpProductionBudget.FERTILIZERTOPDRESSNOBAGS, fmppb.getFertilizertopdressnobags());
                             fmpproductionbudget.put(FmpProductionBudget.FINAL_HARVEST_FAMILY_LABOR, fmppb.getFinal_harvest_family_labor());
+                            fmpproductionbudget.put(FmpProductionBudget.FINAL_HARVEST_LABOR_HIRED, fmppb.getFinal_harvest_labor_hired());
                             fmpproductionbudget.put(FmpProductionBudget.FINAL_HARVEST_LABOR_HOW_MANY_LABOR_HANDS, fmppb.getFinal_harvest_labor_how_many_labor_hands());
                             fmpproductionbudget.put(FmpProductionBudget.FIRST_MANUAL_WEEDING_LABOR_PERIOD, fmppb.getFirst_manual_weeding_labor_period());
                             fmpproductionbudget.put(FmpProductionBudget.FOURTH_MANUAL_WEEDING_LABOR_PERIOD, fmppb.getFourth_manual_weeding_labor_period());
@@ -802,18 +806,34 @@ public class APIController extends HttpServlet {
                             fmpproductionbudget.put(FmpProductionBudget.HOE_PLOUGHING_LABOUR_FAMILY_HOW_MANY_FAM, fmppb.getHoe_ploughing_labour_family_how_many_fam());
                             fmpproductionbudget.put(FmpProductionBudget.HOE_PLOUGHING_LABOUR_HOW_MANY_PEOPLE, fmppb.getHoe_ploughing_labour_how_many_people());
                             fmpproductionbudget.put(FmpProductionBudget.HOE_PLOUGHING_LABOUR_PERIOD, fmppb.getHoe_ploughing_labour_period());
+                            fmpproductionbudget.put(FmpProductionBudget.HARROWING_COST_TOTAL, fmppb.getHarrowing_cost_total());
+                            fmpproductionbudget.put(FmpProductionBudget.HARVEST_LABOR_COSTS, fmppb.getHarvest_labor_costs());
                             fmpproductionbudget.put(FmpProductionBudget.LABOR_FIFTH_WEED_CONTROL, fmppb.getLabor_fifth_weed_control());
                             fmpproductionbudget.put(FmpProductionBudget.LABOR_FOR_PLANTINGFAMILY, fmppb.getLabor_for_plantingfamily());
                             fmpproductionbudget.put(FmpProductionBudget.LABOR_FOR_PLANTING_NUMBER, fmppb.getLabor_for_planting_number());
                             fmpproductionbudget.put(FmpProductionBudget.LABOR_FOURTH_WEED_CONTROL, fmppb.getLabor_fourth_weed_control());
                             fmpproductionbudget.put(FmpProductionBudget.LABOR_THIRD_WEED_CONTROL, fmppb.getLabor_third_weed_control());
                             fmpproductionbudget.put(FmpProductionBudget.LAND_RENT, fmppb.getLand_rent());
+                            fmpproductionbudget.put(FmpProductionBudget.ORGANICFERTILIZERAPPCOSTCURRENT, fmppb.getOrganicfertilizerappcostcurrent());
+                            fmpproductionbudget.put(FmpProductionBudget.ORGANICFERTILIZERQTYCURRENT, fmppb.getOrganicfertilizerqtycurrent());
+                            fmpproductionbudget.put(FmpProductionBudget.ORGFERTILIZERCOSTCURRENT, fmppb.getOrgfertilizercostcurrent());
                             fmpproductionbudget.put(FmpProductionBudget.PERIOD_FOR_COMPLETION_OF_HARVEST, fmppb.getPeriod_for_completion_of_harvest());
                             fmpproductionbudget.put(FmpProductionBudget.PLANTING_LABOR_COST, fmppb.getPlanting_labor_cost());
                             fmpproductionbudget.put(FmpProductionBudget.PLANTING_PERIOD2, fmppb.getPlanting_period2());
                             fmpproductionbudget.put(FmpProductionBudget.PLOUGHING_COST_PER_ACRE, fmppb.getPloughing_cost_per_acre());
+                            fmpproductionbudget.put(FmpProductionBudget.PLOUGHING_COST_TOTAL, fmppb.getPloughing_cost_total());
                             fmpproductionbudget.put(FmpProductionBudget.POST_PLANT_HERBICIDE_COST, fmppb.getPost_plant_herbicide_cost());
                             fmpproductionbudget.put(FmpProductionBudget.PRICE_OF_BASAL_FERTILIZER, fmppb.getPrice_of_basal_fertilizer());
+                            fmpproductionbudget.put(FmpProductionBudget.POSTPLANTHERBICIDE1APPCOST, fmppb.getPostplantherbicide1appcost());
+                            fmpproductionbudget.put(FmpProductionBudget.POST_PLANT_HERBICIDE_COST, fmppb.getPost_plant_herbicide_cost());
+                            fmpproductionbudget.put(FmpProductionBudget.POSTPLANTHERBICIDE1APPERIOD, fmppb.getPostplantherbicide1apperiod());
+                            fmpproductionbudget.put(FmpProductionBudget.POSTPLANTHERBICIDE1PRICE, fmppb.getPostplantherbicide1price());
+                            fmpproductionbudget.put(FmpProductionBudget.POSTPLANTHERBICIDE1QTY, fmppb.getPostplantherbicide1qty());
+                            fmpproductionbudget.put(FmpProductionBudget.POSTPLANTHERBICIDE2APPLICATIONCOST, fmppb.getPostplantherbicide2applicationcost());
+                            fmpproductionbudget.put(FmpProductionBudget.POSTPLANTHERBICIDE2APPLICATIONPERIOD, fmppb.getPostplantherbicide2applicationperiod());
+                            fmpproductionbudget.put(FmpProductionBudget.POSTPLANTHERBICIDE2APPLICATIONCOST, fmppb.getPostplantherbicide2applicationcost());
+                            fmpproductionbudget.put(FmpProductionBudget.POSTPLANTHERBICIDE2PRICE, fmppb.getPostplantherbicide2price());
+                            fmpproductionbudget.put(FmpProductionBudget.POSTPLANTHERBICIDE2QTY, fmppb.getPostplantherbicide2qty());
                             fmpproductionbudget.put(FmpProductionBudget.PRICE_OF_HERBICIDE_GHC, fmppb.getPrice_of_herbicide_ghc());
                             fmpproductionbudget.put(FmpProductionBudget.PRICE_OF_TOPDRESS_FERTILIZER, fmppb.getPrice_of_topdress_fertilizer());
                             fmpproductionbudget.put(FmpProductionBudget.QUANTITY_OF_PREPLANT_HERBICIDE_LITERS, fmppb.getQuantity_of_preplant_herbicide_liters());
@@ -834,6 +854,7 @@ public class APIController extends HttpServlet {
                             fmpproductionbudget.put(FmpProductionBudget.TOTAL_COST_OF_LABOR_FOURTH_MANUAL_WEED, fmppb.getTotal_cost_of_labor_fourth_manual_weed());
                             fmpproductionbudget.put(FmpProductionBudget.TOTAL_COST_OF_LABOR_SECOND_MANUAL_WEED, fmppb.getTotal_cost_of_labor_second_manual_weed());
                             fmpproductionbudget.put(FmpProductionBudget.TOTAL_COST_OF_LABOR_THIRD_MANUAL_WEED_CO, fmppb.getTotal_cost_of_labor_third_manual_weed_co());
+                            fmpproductionbudget.put(FmpProductionBudget.TOTAL_COST_HOE_PLOUGHING, fmppb.getTotal_cost_hoe_ploughing());
                             fmpproductionbudget.put(FmpProductionBudget.TOTAL_NUMBER_OF_LABOR_TOPDRESS, fmppb.getTotal_number_of_labor_topdress());
                             fmpproductionbudget.put(FmpProductionBudget.UNIT_COST_HOE_PLOUGHING, fmppb.getUnit_cost_hoe_ploughing());
 

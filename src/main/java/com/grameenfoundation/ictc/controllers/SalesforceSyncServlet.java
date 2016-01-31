@@ -10,6 +10,7 @@ import static com.grameenfoundation.ictc.controllers.SaleforceIntegrationControl
 import com.grameenfoundation.ictc.domain.commons.Generalimpl;
 import com.grameenfoundation.ictc.domains.BaselineProductionBudget;
 import com.grameenfoundation.ictc.domains.Biodata;
+import com.grameenfoundation.ictc.domains.FieldCropAssessment;
 import com.grameenfoundation.ictc.domains.FmpPostHarvestBudget;
 import com.grameenfoundation.ictc.domains.FmpProductionBudget;
 import com.grameenfoundation.ictc.domains.FmpProductionBudgetUpdate;
@@ -55,8 +56,10 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringReader;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,6 +71,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.neo4j.graphdb.Transaction;
 import org.w3c.dom.Document;
@@ -964,6 +968,16 @@ public class SalesforceSyncServlet extends HttpServlet {
                              Biodata b = biodataModel.getBiodata("Id", farmerID);
 
                              biodataModel.BiodataToFCA(b.getId(), FCANode);
+                             
+                             FieldCropAssessment fca = new FieldCropAssessment(FCANode);
+                             
+                             JSONArray m = new JSONArray();
+                             
+                            
+                             JSONObject fc = new JSONObject();
+                             
+                             
+                             
 
                              out.println(sendAck());
                                if(modified(farmerID))
@@ -1136,6 +1150,52 @@ public class SalesforceSyncServlet extends HttpServlet {
         }
             
        return image_url;     
+    }
+    
+    
+    public List<String> getCropAssessmentImage(String Id,String url,String detail)
+    {
+        List<String> images = new ArrayList<String>();
+        
+        Map<String, String> parameters = new HashMap<String, String>();
+
+        parameters.put("data", detail);
+
+        String result = SalesforceHttpClient.getSalesforceData(url, parameters);
+        
+         JSONObject json = new JSONObject(result);
+         
+           
+            String root = "com.sun.aas.instanceRoot";
+           
+          JSONArray ja = json.getJSONArray("imageResults");
+           
+            String path = "";
+
+            File f = new File(System.getProperty(root) + "/docroot/newimages");
+             if (!f.exists()) {
+                f.mkdirs();
+            } 
+            
+           for(int i =0;i<ja.length();i++)
+           {
+               JSONObject o = (JSONObject) ja.get(i);
+           
+            path = f.getPath() + File.separator + i+"_"+Id;
+            System.out.println("path " + path);
+            byte[] data = Base64.decode(o.getString("imageData"));
+            try (OutputStream stream = new FileOutputStream(path)) {
+                stream.write(data);
+                images.add(path);
+                return images;
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           }
+
+        return null;
     }
     
     

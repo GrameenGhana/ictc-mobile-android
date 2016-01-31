@@ -64,6 +64,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
+import org.json.JSONArray;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -521,11 +522,17 @@ public class TestServlet extends HttpServlet {
 
      String url = "http://sandbox-ictchallenge.cs80.force.com/getImages";
      
-     
+           JSONArray m = new JSONArray();
+           
+          m.put("00P25000000gLqrEAE");
+          m.put("00P25000000gLqwEAE");
+          m.put("00P25000000gLr1EAE");
      
             JSONObject j = new JSONObject();
-            j.put("requestType", "farmer");
+            j.put("requestType", "cropassessment");
             j.put("farmerId", "a0k25000000c1aZAAQ");
+            j.put("imageIds", m);
+            
             
             Map<String, String> parameters = new HashMap<String, String>();
 
@@ -536,26 +543,33 @@ public class TestServlet extends HttpServlet {
             out.println(result);
 
             JSONObject json = new JSONObject(result);
+            
 
-            String res = json.getString("image");
-
+         // String res = json.getString("image");
+            JSONArray ja = json.getJSONArray("imageResults");
+            
             String root = "com.sun.aas.instanceRoot";
            
        
            
             String path = "";
 
-            File f = new File(System.getProperty(root) + "/docroot/images");
-
-            if (!f.exists()) {
+            File f = new File(System.getProperty(root) + "/docroot/newimages");
+             if (!f.exists()) {
                 f.mkdirs();
             } 
-            path = f.getPath() + File.separator + "n.jpg";
+            
+           for(int i =0;i<ja.length();i++)
+           {
+               JSONObject o = (JSONObject) ja.get(i);
+           
+            path = f.getPath() + File.separator + i+"n.jpg";
             System.out.println("path " + path);
-            byte[] data = Base64.decode(res);
+            byte[] data = Base64.decode(o.getString("imageData"));
             try (OutputStream stream = new FileOutputStream(path)) {
                 stream.write(data);
             }
+           }
 //            HttpCliSent client = new DefaultHttpClient();
 //            HttpPost post = new HttpPost(url);
 //            
