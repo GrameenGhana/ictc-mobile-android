@@ -92,7 +92,7 @@ public class ICTCDBUtil {
                 setConfig(GraphDatabaseSettings.node_keys_indexable,  dbProperties.getProperty("node_keys_indexable")).
                 setConfig(GraphDatabaseSettings.node_auto_indexing,  dbProperties.getProperty("node_auto_indexing")).
                 setConfig(GraphDatabaseSettings.cache_type,  dbProperties.getProperty("cache_type")).
-               //setConfig(GraphDatabaseSettings.allow_store_upgrade,  dbProperties.getProperty("allow_store_upgrade")).
+                setConfig(GraphDatabaseSettings.allow_store_upgrade,  dbProperties.getProperty("allow_store_upgrade")).
                 setConfig(GraphDatabaseSettings.nodestore_propertystore_mapped_memory_size,  dbProperties.getProperty("nodestore_propertystore_mapped_memory_size")).
                 setConfig(GraphDatabaseSettings.nodestore_mapped_memory_size, dbProperties.getProperty("nodestore_mapped_memory_size")).
                 setConfig(GraphDatabaseSettings.relationshipstore_mapped_memory_size,  dbProperties.getProperty("relationshipstore_mapped_memory_size")).

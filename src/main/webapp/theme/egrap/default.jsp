@@ -12,7 +12,8 @@
         <meta charset="utf-8">
         <title>ICTC - <decorator:title default="Default" /></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <meta name="apple-mobile-web-app-capable" content="yes">    
+        <meta name="apple-mobile-web-app-capable" content="yes">  
+         <!--<link href="<%= request.getContextPath()%>/theme/egrap/css/checklist.css" rel="stylesheet">-->
         <link href="<%= request.getContextPath()%>/theme/egrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="<%= request.getContextPath()%>/theme/egrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
@@ -21,7 +22,7 @@
         <link href="<%= request.getContextPath()%>/theme/egrap/css/style.css" rel="stylesheet">
         <link href="<%= request.getContextPath()%>/theme/egrap/css/pages/dashboard.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/theme/egrap/js/DataTables/media/css/jquery.dataTables.css">
-
+       
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -285,8 +286,8 @@
 
 
 
-        <!--<script src="<%= request.getContextPath()%>/theme/egrap/js/jquery-1.7.2.min.js"></script>-->
-        <script src="<%= request.getContextPath()%>/theme/egrap//js/DataTables/media/js/jquery.js"></script>
+        <script src="<%= request.getContextPath()%>/theme/egrap/js/jquery-1.11.0.min.js"></script>
+        <script src="<%= request.getContextPath()%>/theme/egrap/js/DataTables/media/js/jquery.js"></script>
 
         <script type="text/javascript" language="javascript" src="<%= request.getContextPath()%>/theme/egrap/js/DataTables/media/js/jquery.dataTables.js"></script>
 
@@ -295,7 +296,7 @@
                 $('.myt-table').DataTable();
             });
         </script>
-        <script src="<%= request.getContextPath()%>/theme/egrap/js/bootstrap.js"></script>
+        <script src="<%= request.getContextPath()%>/theme/egrap/js/bootstrap.min.js"></script>
         <script src="<%= request.getContextPath()%>/theme/egrap/js/base.js"></script>
 
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry"></script>
@@ -303,7 +304,7 @@
         <script src="<%= request.getContextPath()%>/theme/egrap/js/map.js"></script>
         <script type="text/javascript" src="<%= request.getContextPath()%>/public/js/datepicker/js/bootstrap-datepicker.js"></script>
 
-
+      <!-- <script src="<%= request.getContextPath()%>/theme/egrap/js/checklist.js"></script>->
 
 
         <script type="text/javascript">

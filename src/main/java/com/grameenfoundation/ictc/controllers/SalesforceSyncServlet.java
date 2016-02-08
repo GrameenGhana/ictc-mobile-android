@@ -997,24 +997,22 @@ public class SalesforceSyncServlet extends HttpServlet {
                             image_url = getCropAssessmentImage(farmerID,ICTCKonstants.SALESFORCEURL_PRODUCTION+ICTCKonstants.GET_IMAGES,fc.toString());
                             
                         
-                           org.neo4j.graphdb.Node imageNode= ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.IMAGE);
+                          
                           
                              for (Map.Entry<String, String> entrySet : image_url.entrySet()) {
+                                 org.neo4j.graphdb.Node imageNode= ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.IMAGE);
                                  String key = entrySet.getKey();
                                  String value = entrySet.getValue();
+                                 
+                                 
                                  imageNode.setProperty(CropAssessmentImage.TAG,key);
                                  imageNode.setProperty(CropAssessmentImage.IMAGE,value);
                                  
                                  CropAssessmentImage img = new CropAssessmentImage(imageNode);
                                  
                                  fca.setImage(img);
-                                 
-                                 
+                                    
                              }
-                            
-                            
-                             
-
                              out.println(sendAck());
                                if(modified(farmerID))
                                  System.out.println("Last modified done");

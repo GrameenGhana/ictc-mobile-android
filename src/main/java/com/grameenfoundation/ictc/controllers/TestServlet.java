@@ -520,7 +520,7 @@ public class TestServlet extends HttpServlet {
 //        }
      String serverResponse = "";
 
-     String url = "http://sandbox-ictchallenge.cs80.force.com/getImages";
+     String url = "http://sandbox-ictchallenge.cs80.force.com/assessment";
      
            JSONArray m = new JSONArray();
            

@@ -301,7 +301,20 @@ public class APIController extends HttpServlet {
                             farmer.put(Biodata.NUMBER_OF_DEPENDANTS, b.getNumberofdependants());
                             farmer.put(Biodata.REGION, b.getRegion());
                             farmer.put(Biodata.VILLAGE, b.getVillage());
-                            farmer.put(Biodata.DISTRICT, b.getDistrict());
+                           
+                            
+                            if(null!=b.getDistricts_Ashanti())
+                            {
+                                farmer.put(Biodata.DISTRICT, b.getDistricts_Ashanti()); 
+                            }
+                            else if(null!=b.getDistricts_BrongAhafo())
+                            {
+                                farmer.put(Biodata.DISTRICT, b.getDistricts_BrongAhafo()); 
+                            }
+                            else
+                            {
+                                farmer.put(Biodata.DISTRICT, b.getDistricts_Volta()); 
+                            }
 
                             farmer.put(Biodata.FARM_PERIMETER, b.getFarmperimeter());
 
