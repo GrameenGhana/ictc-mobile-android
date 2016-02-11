@@ -41,12 +41,17 @@ public class ICTCKonstants {
      
     public static final String FARM_GPS= "farm_gps";
     
+    //g
+     public static final String GET_IMAGES = "/getImages";
+      public static final String GET_ASSESSMENT = "/assessment";
+    
      //h
       public static final String HARVEST = "harvest";
      
     //i
       public static final String ID = "Id";
-      public static final String GET_IMAGES = "/getImages";
+     
+      
    //l
      public static final String LAST_MODIFIED_DATE = "lastModifieddate";
      

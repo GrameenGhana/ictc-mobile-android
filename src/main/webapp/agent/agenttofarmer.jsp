@@ -16,11 +16,18 @@
        <title>Assign Agent To Farmer</title>
        <%
            BiodataModel biodataModel = new BiodataModel();
+           
+           String agent = request.getParameter("q");
+          //  BiodataModel biodataModel = new BiodataModel();
+   // String type = request.getParameter("type");
+   // String value = request.getParameter("q");
+
+  //  List<BiodataWrapper> bioWrapper = biodataModel.getBioDataSearch(type, value);
          List<BiodataWrapper> bioWrapper = biodataModel.getBioData("", "");
         %>
     </head>
     <body>
-        <form action="<%=request.getContextPath()%>/agent/add" method="post" >
+        <form action="<%=request.getContextPath()%>/agent/assignfarmer" method="post" >
         <div class="container" style="margin-top:20px;">
           <div class="row">
             <!--<div class="col-xs-6">
@@ -43,13 +50,14 @@
     <ul class="list-group">
         
      <% for(BiodataWrapper bio : bioWrapper ){ %>
-     <li class="list-group-item"><input type="checkbox" id="farmer" value="<%=bio.getFarmID()%>"><%= bio.getFirstName()%><%= bio.getLastName()%></li>
+     <li class="list-group-item"><input type="checkbox" id="farmer" name="farmer" value="<%=bio.getFarmID()%>"><%= bio.getFirstName()%><%= bio.getLastName()%></li>
     <%}%>
     </ul> 
   
           </div>
             
               <div>
+                  <input type="hidden" value="<%=agent%>" name="agent" />
         <input type="submit" class="btn btn-primary"  value="Add Farmer(s)" />
     </div>   
         </div>

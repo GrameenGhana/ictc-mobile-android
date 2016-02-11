@@ -139,6 +139,9 @@ public class AgentModel {
      
      
       public Agent getAgent(String field, String value) {
+          
+      try(Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx())
+      {
         String q = "Start root=node(0) "
                 + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.AGENT + "]->p"
                 + " where p." + field + "='" + value + "'"
@@ -153,6 +156,9 @@ public class AgentModel {
         } catch (Exception e) {
             System.out.println("Unable to Find Agent");
         }
+        
+       tx.success();
+      }
 
         return null;
     }

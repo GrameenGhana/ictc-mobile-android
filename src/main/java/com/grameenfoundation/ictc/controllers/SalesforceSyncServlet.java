@@ -994,7 +994,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                             fc.put("farmerId",farmerID);
                             fc.put("imageIds",m);
                              
-                            image_url = getCropAssessmentImage(farmerID,ICTCKonstants.SALESFORCEURL_PRODUCTION+ICTCKonstants.GET_IMAGES,fc.toString());
+                            image_url = getCropAssessmentImage(farmerID,ICTCKonstants.SALESFORCEURL_PRODUCTION+ICTCKonstants.GET_ASSESSMENT,fc.toString());
                             
                         
                           
@@ -1004,9 +1004,18 @@ public class SalesforceSyncServlet extends HttpServlet {
                                  String key = entrySet.getKey();
                                  String value = entrySet.getValue();
                                  
-                                 
-                                 imageNode.setProperty(CropAssessmentImage.TAG,key);
-                                 imageNode.setProperty(CropAssessmentImage.IMAGE,value);
+                                 System.out.println("key:" + key);
+                                 System.out.println("Value " + value);
+                                 if(getImageId(fca.getPhoto_crop_establishment_status()).equalsIgnoreCase(key))
+                                 {
+                                   imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTO_CROP_ESTABLISHMENT_STATUS);
+                                   imageNode.setProperty(CropAssessmentImage.IMAGE,value);
+                                 }
+                                 else
+                                 {
+                                  imageNode.setProperty(CropAssessmentImage.TAG,key);
+                                   imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
+                                 }
                                  
                                  CropAssessmentImage img = new CropAssessmentImage(imageNode);
                                  
@@ -1200,7 +1209,7 @@ public class SalesforceSyncServlet extends HttpServlet {
          JSONObject json = new JSONObject(result);
          
            
-            String root = "com.sun.aas.instanceRoot";
+          String root = "com.sun.aas.instanceRoot";
            
           JSONArray ja = json.getJSONArray("imageResults");
            
@@ -1220,7 +1229,7 @@ public class SalesforceSyncServlet extends HttpServlet {
             byte[] data = Base64.decode(o.getString("imageData"));
             try (OutputStream stream = new FileOutputStream(path)) {
                 stream.write(data);
-                images.put(o.getString("imageId"), path);
+                images.put(o.getString("imageId"), File.separator + i + "_" + o.getString("imageId"));
                 return images;
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, ex);
