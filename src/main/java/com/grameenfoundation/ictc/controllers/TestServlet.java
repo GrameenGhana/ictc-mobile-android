@@ -24,9 +24,6 @@ import com.grameenfoundation.ictc.models.QuestionModel;
 import com.grameenfoundation.ictc.models.StorageModel;
 import com.grameenfoundation.ictc.models.TechnicalNeedsModel;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
-import com.grameenfoundation.ictc.utils.ICTCKonstants;
-import com.grameenfoundation.ictc.utils.Neo4jServices;
-import static com.grameenfoundation.ictc.utils.Neo4jServices.getReferenceNode;
 import com.grameenfoundation.ictc.utils.XMLParser;
 import com.grameenfoundation.ictc.wrapper.BiodataWrapper;
 import com.grameenfoundation.ictc.wrapper.FarmManagementWrapper;
@@ -68,8 +65,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 import org.json.JSONArray;
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Result;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -523,103 +518,58 @@ public class TestServlet extends HttpServlet {
 //        else {
 //            return "4";
 //        }
-//     String serverResponse = "";
-//
-//     String url = "http://sandbox-ictchallenge.cs80.force.com/getImages";
-//     
-//           JSONArray m = new JSONArray();
-//           
-//          m.put("00P25000000gLqrEAE");
-//          m.put("00P25000000gLqwEAE");
-//          m.put("00P25000000gLr1EAE");
-//     
-//            JSONObject j = new JSONObject();
-//            j.put("requestType", "cropassessment");
-//            j.put("farmerId", "a0k25000000c1aZAAQ");
-//            j.put("imageIds", m);
-//            
-//            
-//            Map<String, String> parameters = new HashMap<String, String>();
-//
-//            parameters.put("data", j.toString());
-//
-//            String result = SalesforceHttpClient.getSalesforceData(url, parameters);
-//            System.out.println(result);
-//            out.println(result);
-//
-//            JSONObject json = new JSONObject(result);
-//            
-//
-//         // String res = json.getString("image");
-//            JSONArray ja = json.getJSONArray("imageResults");
-//            
-//            String root = "com.sun.aas.instanceRoot";
-//           
-//       
-//           
-//            String path = "";
-//
-//            File f = new File(System.getProperty(root) + "/docroot/newimages");
-//             if (!f.exists()) {
-//                f.mkdirs();
-//            } 
-//            
-//           for(int i =0;i<ja.length();i++)
-//           {
-//               JSONObject o = (JSONObject) ja.get(i);
-//           
-//            path = f.getPath() + File.separator + i+"n.jpg";
-//            System.out.println("path " + path);
-//            byte[] data = Base64.decode(o.getString("imageData"));
-//            try (OutputStream stream = new FileOutputStream(path)) {
-//                stream.write(data);
-//            }
-//           }
-             
-             
-             
-             
-         String query =  "Start root=node(0)  MATCH root-[:ENTITY]->parent-[:AGENT]->p where p.username='gforson' return p";
-        
-        GraphDatabaseService db =  ICTCDBUtil.getInstance().getGraphDB();
-        
-        
-        try(Transaction tx = db.beginTx()) {
+     String serverResponse = "";
 
      String url = "http://sandbox-ictchallenge.cs80.force.com/assessment";
      
            JSONArray m = new JSONArray();
            
-         //  System.out.println("node 4 " + p.getProperty("name"));
-           // org.neo4j.graphdb.Node node;
-//            node = Neo4jServices.executeCypherQuerySingleResult("start rt=node(0) return rt", "rt");
-//            System.out.println("node " + node.toString());
+          m.put("00P25000000gLqrEAE");
+          m.put("00P25000000gLqwEAE");
+          m.put("00P25000000gLr1EAE");
+     
+            JSONObject j = new JSONObject();
+            j.put("requestType", "cropassessment");
+            j.put("farmerId", "a0k25000000c1aZAAQ");
+            j.put("imageIds", m);
+            
+            
+            Map<String, String> parameters = new HashMap<String, String>();
+
+            parameters.put("data", j.toString());
+
+            String result = SalesforceHttpClient.getSalesforceData(url, parameters);
+            System.out.println(result);
+            out.println(result);
+
+            JSONObject json = new JSONObject(result);
+            
+
+         // String res = json.getString("image");
+            JSONArray ja = json.getJSONArray("imageResults");
+            
+            String root = "com.sun.aas.instanceRoot";
            
-//               
-//                    while ( result.hasNext() )
-//     {
-//         Map<String, Object> row = result.next();
-//         for ( String key : result.columns() )
-//         {
-//             System.out.printf( "%s = %s%n", key, row.get( key ) );
-//             System.out.println("In the aggregate");
-//             //log.info("" +key+"" + row.get( key ));
-//           // logg.log(Level.INFO, "{0}{1}", new Object[]{key, row.get( key )});
-//         }
-//     }
-//            System.out.println("post " + new PostHarvest(node).getId());
-//            
-//            out.println("post " + new PostHarvest(node).getMethodOfDryingGrain());
-            tx.success();
-        } 
-        
-             
-             
-             
-             
-             
-             
-             
+       
+           
+            String path = "";
+
+            File f = new File(System.getProperty(root) + "/docroot/newimages");
+             if (!f.exists()) {
+                f.mkdirs();
+            } 
+            
+           for(int i =0;i<ja.length();i++)
+           {
+               JSONObject o = (JSONObject) ja.get(i);
+           
+            path = f.getPath() + File.separator + i+"n.jpg";
+            System.out.println("path " + path);
+            byte[] data = Base64.decode(o.getString("imageData"));
+            try (OutputStream stream = new FileOutputStream(path)) {
+                stream.write(data);
+            }
+           }
 //            HttpCliSent client = new DefaultHttpClient();
 //            HttpPost post = new HttpPost(url);
 //            
