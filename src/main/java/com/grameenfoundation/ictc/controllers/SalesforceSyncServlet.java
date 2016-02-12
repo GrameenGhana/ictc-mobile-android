@@ -113,8 +113,8 @@ public class SalesforceSyncServlet extends HttpServlet {
         
          try (PrintWriter out = response.getWriter()) {
              
-            String theString = IOUtils.toString(request.getInputStream(), "UTF-8");
-            System.out.println("Salesforce data/n " + theString);
+           // String theString = IOUtils.toString(request.getInputStream(), "UTF-8");
+           // System.out.println("Salesforce data/n " + theString);
             //gets request input stream
             InputStream in = request.getInputStream();
             InputSource input = null;
@@ -126,14 +126,14 @@ public class SalesforceSyncServlet extends HttpServlet {
              try(Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
                 System.out.println(" " + request.getContentType());
-                //File xmlFile = new File("/home/grameen/test.xml");
+                File xmlFile = new File("/home/grameen/test.xml");
                 DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                 InputSource is = new InputSource();
                 Map<String,String> update = new HashMap<>();
-                is.setCharacterStream(new StringReader(theString));
+                //is.setCharacterStream(new StringReader(theString));
                 System.out.println("After parsing XML");
-                Document doc = db.parse(is);
-               // Document doc = db.parse(xmlFile);   
+                //Document doc = db.parse(is);
+               Document doc = db.parse(xmlFile);   
                 System.out.println("Should be normalised now");
                 doc.getDocumentElement().normalize();
           
@@ -934,10 +934,12 @@ public class SalesforceSyncServlet extends HttpServlet {
                         
                         farmerID = getXmlNodeValue("sf:Farmer_Biodata__c", ele);
                        
-                         if (null != new FieldCropAssessmentModel().getFieldCropAssessment("Id", farmerID)) {
-                             out.println(sendAck());
-                             System.out.println("Field Crop Asessment already exist");
-                         } else {
+//                         if (null != new FieldCropAssessmentModel().getFieldCropAssessment("Id", farmerID)) {
+//                             out.println(sendAck());
+//                             System.out.println("Field Crop Asessment already exist");
+//                         }
+                         
+                         if(true) {
 
                              Map<String,String> images = new HashMap<String,String>();
                              
@@ -971,7 +973,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                              biodataModel.BiodataToFCA(b.getId(), FCANode);
                              
                              FieldCropAssessment fca = new FieldCropAssessment(FCANode);
-                          
+                              CropAssessmentImage img = null;
                             JSONArray m = new JSONArray();
                             m.put(getImageId(fca.getPhoto_crop_establishment_status()));
                             m.put(getImageId(fca.getPhoto_disease_mangement_status()));
@@ -996,7 +998,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                              
                             image_url = getCropAssessmentImage(farmerID,ICTCKonstants.SALESFORCEURL_PRODUCTION+ICTCKonstants.GET_ASSESSMENT,fc.toString());
                             
-                        
+                             System.out.println("image size " + image_url.size());
                           
                           
                              for (Map.Entry<String, String> entrySet : image_url.entrySet()) {
@@ -1011,13 +1013,39 @@ public class SalesforceSyncServlet extends HttpServlet {
                                    imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTO_CROP_ESTABLISHMENT_STATUS);
                                    imageNode.setProperty(CropAssessmentImage.IMAGE,value);
                                  }
-                                 else
+                                 if(getImageId(fca.getPhoto_disease_mangement_status()).equalsIgnoreCase(key))
                                  {
-                                  imageNode.setProperty(CropAssessmentImage.TAG,key);
-                                   imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
+                                  imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTO_DISEASE_MANGEMENT_STATUS);
+                                  imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
                                  }
-                                 
-                                 CropAssessmentImage img = new CropAssessmentImage(imageNode);
+                                 if(getImageId(fca.getPhoto_pest_management_status()).equalsIgnoreCase(key))
+                                 {
+                                     imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTO_PEST_MANAGEMENT_STATUS);
+                                     imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
+                                 }
+                                  if(getImageId(fca.getPhoto_soil_fertility_status()).equalsIgnoreCase(key))
+                                 {
+                                     imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTO_SOIL_FERTILITY_STATUS);
+                                     imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
+                                 }
+                                  
+                                  if(getImageId(fca.getPhoto_weed_management_status()).equalsIgnoreCase(key))
+                                 {
+                                     imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTO_WEED_MANAGEMENT_STATUS);
+                                     imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
+                                 }
+                                  if(getImageId(fca.getPhotocropestablishment3()).equalsIgnoreCase(key))
+                                 {
+                                     imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTOCROPESTABLISHMENT3);
+                                     imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
+                                 }
+                                   if(getImageId(fca.getPhotocropestablisment2()).equalsIgnoreCase(key))
+                                 {
+                                     imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTOCROPESTABLISMENT2);
+                                     imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
+                                 }
+                                  
+                                  img = new CropAssessmentImage(imageNode);
                                  
                                  fca.setImage(img);
                                     
@@ -1219,26 +1247,26 @@ public class SalesforceSyncServlet extends HttpServlet {
              if (!f.exists()) {
                 f.mkdirs();
             } 
-            
+            System.out.println("length :" + ja.length() );
            for(int i =0;i<ja.length();i++)
            {
             JSONObject o = (JSONObject) ja.get(i);
             
-            path = f.getPath() + File.separator + i + "_" + o.getString("imageId");
+            path = f.getPath() + File.separator + i + "_" + o.getString("imageId")+".jpg";
             System.out.println("path " + path);
             byte[] data = Base64.decode(o.getString("imageData"));
             try (OutputStream stream = new FileOutputStream(path)) {
                 stream.write(data);
-                images.put(o.getString("imageId"), File.separator + i + "_" + o.getString("imageId"));
-                return images;
+                images.put(o.getString("imageId"), "/newimages"+File.separator + i + "_" + o.getString("imageId")+".jpg");
+                
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+         }
 
-        return null;
+       return images;
     }
     
     
