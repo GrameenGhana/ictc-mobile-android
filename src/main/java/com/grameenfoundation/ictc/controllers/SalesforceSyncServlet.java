@@ -126,7 +126,7 @@ public class SalesforceSyncServlet extends HttpServlet {
              try(Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
                 System.out.println(" " + request.getContentType());
-                File xmlFile = new File("/home/grameen/test.xml");
+              //  File xmlFile = new File("/home/grameen/test.xml");
                 DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                 InputSource is = new InputSource();
                 Map<String,String> update = new HashMap<>();
@@ -1300,7 +1300,7 @@ public class SalesforceSyncServlet extends HttpServlet {
             try (OutputStream stream = new FileOutputStream(path)) {
                 //images.put(o.getString("imageId"), "/newimages"+File.separator + i + "_" + o.getString("imageId")+".jpg");
                 stream.write(data);
-                images.put(o.getString("imageId"), "/newimages"+File.separator + i + "_" + o.getString("imageId")+".jpg");
+                images.put(o.getString("imageId"), "/assessmentimages"+File.separator + i + "_" + o.getString("imageId")+".jpg");
                 
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, ex);
