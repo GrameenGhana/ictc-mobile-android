@@ -1298,7 +1298,7 @@ public class SalesforceSyncServlet extends HttpServlet {
             System.out.println("path " + path);
             byte[] data = Base64.decode(o.getString("imageData"));
             try (OutputStream stream = new FileOutputStream(path)) {
-                images.put(o.getString("imageId"), "/newimages"+File.separator + i + "_" + o.getString("imageId")+".jpg");
+                //images.put(o.getString("imageId"), "/newimages"+File.separator + i + "_" + o.getString("imageId")+".jpg");
                 stream.write(data);
                 images.put(o.getString("imageId"), "/newimages"+File.separator + i + "_" + o.getString("imageId")+".jpg");
                 
