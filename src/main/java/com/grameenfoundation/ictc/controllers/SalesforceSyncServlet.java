@@ -1055,10 +1055,45 @@ public class SalesforceSyncServlet extends HttpServlet {
                                      imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTODISEASE3);
                                      imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
                                  }
+                                 if(getImageId(fca.getPhotopestmanagement2()).equalsIgnoreCase(key))
+                                 {
+                                     imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTOPESTMANAGEMENT2);
+                                     imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
+                                 }
+                                  if(getImageId(fca.getPhotopestmanagement3()).equalsIgnoreCase(key))
+                                 {
+                                     imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTOPESTMANAGEMENT3);
+                                     imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
+                                 }
                                  
+                                if(getImageId(fca.getPhotopestmanagement3()).equalsIgnoreCase(key))
+                                 {
+                                     imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTOPESTMANAGEMENT3);
+                                     imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
+                                 }
+                                 
+                                if(getImageId(fca.getPhotosoilfertility2()).equalsIgnoreCase(key))
+                                 {
+                                     imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTOSOILFERTILITY2);
+                                     imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
+                                 }
+                                if(getImageId(fca.getPhotosoilfertility2()).equalsIgnoreCase(key))
+                                 {
+                                     imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTOSOILFERTILITY2);
+                                     imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
+                                 }
                                   
-                                  
-                                  
+                                 if(getImageId(fca.getPhotosoilfertility3()).equalsIgnoreCase(key))
+                                 {
+                                     imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTOSOILFERTILITY3);
+                                     imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
+                                 }
+                                   
+                                if(getImageId(fca.getPhotoweedstatus2()).equalsIgnoreCase(key))
+                                 {
+                                     imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTO_WEED_MANAGEMENT_STATUS);
+                                     imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
+                                 }
                                   img = new CropAssessmentImage(imageNode);
                                  
                                  fca.setImage(img);
