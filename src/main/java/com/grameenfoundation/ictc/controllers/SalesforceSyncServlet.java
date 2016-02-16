@@ -113,8 +113,8 @@ public class SalesforceSyncServlet extends HttpServlet {
         
          try (PrintWriter out = response.getWriter()) {
              
-           // String theString = IOUtils.toString(request.getInputStream(), "UTF-8");
-           // System.out.println("Salesforce data/n " + theString);
+           String theString = IOUtils.toString(request.getInputStream(), "UTF-8");
+            System.out.println("Salesforce data/n " + theString);
             //gets request input stream
             InputStream in = request.getInputStream();
             InputSource input = null;
@@ -132,8 +132,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                 Map<String,String> update = new HashMap<>();
                 //is.setCharacterStream(new StringReader(theString));
                 System.out.println("After parsing XML");
-                //Document doc = db.parse(is);
-               Document doc = db.parse(xmlFile);   
+                Document doc = db.parse(is);
+              // Document doc = db.parse(xmlFile);   
                 System.out.println("Should be normalised now");
                 doc.getDocumentElement().normalize();
           
@@ -1066,22 +1066,13 @@ public class SalesforceSyncServlet extends HttpServlet {
                                      imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
                                  }
                                  
-                                if(getImageId(fca.getPhotopestmanagement3()).equalsIgnoreCase(key))
-                                 {
-                                     imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTOPESTMANAGEMENT3);
-                                     imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
-                                 }
-                                 
+                               
                                 if(getImageId(fca.getPhotosoilfertility2()).equalsIgnoreCase(key))
                                  {
                                      imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTOSOILFERTILITY2);
                                      imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
                                  }
-                                if(getImageId(fca.getPhotosoilfertility2()).equalsIgnoreCase(key))
-                                 {
-                                     imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTOSOILFERTILITY2);
-                                     imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
-                                 }
+                               
                                   
                                  if(getImageId(fca.getPhotosoilfertility3()).equalsIgnoreCase(key))
                                  {
@@ -1091,7 +1082,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                                    
                                 if(getImageId(fca.getPhotoweedstatus2()).equalsIgnoreCase(key))
                                  {
-                                     imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTO_WEED_MANAGEMENT_STATUS);
+                                     imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTOWEEDSTATUS2);
                                      imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
                                  }
                                   img = new CropAssessmentImage(imageNode);
