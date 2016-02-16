@@ -130,7 +130,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                 DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                 InputSource is = new InputSource();
                 Map<String,String> update = new HashMap<>();
-                //is.setCharacterStream(new StringReader(theString));
+                is.setCharacterStream(new StringReader(theString));
                 System.out.println("After parsing XML");
                 Document doc = db.parse(is);
               // Document doc = db.parse(xmlFile);   
