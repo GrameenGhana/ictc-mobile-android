@@ -647,15 +647,15 @@ public class Neo4jServices {
     }
 
     public static List<String> getIterativeString(String q) {
-        Iterator<String> n_column = null;
+        ResourceIterator<String> n_column = null;
         List<String> bdata = new ArrayList<>();
         List<BiodataWrapper> bdatac = new ArrayList<>();
-        ExecutionResult result = null;
+        Result result = null;
 
         try (Transaction tx = db.beginTx()) {
 //            ExecutionEngine engine = new ExecutionEngine(
 //                    ICTCDBUtil.getInstance().getGraphDB(), StringLogger.SYSTEM);
-            result = (ExecutionResult) db.execute(q);
+            result = db.execute(q);
 
             n_column = result.columnAs("l");
 
