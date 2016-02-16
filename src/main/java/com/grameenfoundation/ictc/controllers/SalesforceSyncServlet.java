@@ -1044,6 +1044,20 @@ public class SalesforceSyncServlet extends HttpServlet {
                                      imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTOCROPESTABLISMENT2);
                                      imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
                                  }
+                                   
+                                  if(getImageId(fca.getPhotodisease2()).equalsIgnoreCase(key))
+                                 {
+                                     imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTODISEASE2);
+                                     imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
+                                 }
+                                  if(getImageId(fca.getPhotodisease3()).equalsIgnoreCase(key))
+                                 {
+                                     imageNode.setProperty(CropAssessmentImage.TAG,FieldCropAssessment.PHOTODISEASE3);
+                                     imageNode.setProperty(CropAssessmentImage.IMAGE,value);   
+                                 }
+                                 
+                                  
+                                  
                                   
                                   img = new CropAssessmentImage(imageNode);
                                  
