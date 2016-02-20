@@ -112,8 +112,8 @@ public class AgentController extends HttpServlet {
              BufferedReader rd = new BufferedReader(new InputStreamReader(resp.getEntity().getContent()));
                 String line = "";
                 while ((line = rd.readLine()) != null) {
-                    //System.out.println(line);
-                   // out.println(line);
+                    System.out.println(line);
+                  // out.println(line);
                     serverResponse += line;
 
                 }
