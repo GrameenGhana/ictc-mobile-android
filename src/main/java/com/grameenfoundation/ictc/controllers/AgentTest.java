@@ -7,14 +7,31 @@ package com.grameenfoundation.ictc.controllers;
  */
 
 import com.grameenfoundation.ictc.models.AgentModel;
+import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringReader;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import org.apache.commons.io.IOUtils;
+import org.json.JSONObject;
+import org.neo4j.graphdb.Transaction;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -35,15 +52,42 @@ public class AgentTest extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter();Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             /* TODO output your page here. You may use following sample code. */
             AgentModel agentModel = new AgentModel();
             
-            String theString = IOUtils.toString(request.getInputStream(), "UTF-8");
+           String theString = IOUtils.toString(request.getInputStream(), "UTF-8");
             System.out.println("Salesforce data/n " + theString);
-            System.out.println(" " + request.getContentType());
+
+            
+               System.out.println(" " + request.getContentType());
+              //  File xmlFile = new File("/home/grameen/test.xml");
+                DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+                InputSource is = new InputSource();
+                Map<String,String> update = new HashMap<>();
+                is.setCharacterStream(new StringReader(theString));
+                System.out.println("After parsing XML");
+                Document doc = db.parse(is);
+              // Document doc = db.parse(xmlFile);   
+                System.out.println("Should be normalised now");
+                doc.getDocumentElement().normalize();
+          
+                Element ele = doc.getDocumentElement();
+                //System.out.println("Root element :" + doc.getDocumentElement());
+                Node node = doc.getDocumentElement();
+                JSONObject json = new JSONObject();
+                 //get fields from objects
+                NodeList sObject = doc.getElementsByTagName("sObject");
+                
+                
             
             
+            
+           tx.success();
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(AgentTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(AgentTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
