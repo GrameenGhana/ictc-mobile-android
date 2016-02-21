@@ -6,6 +6,7 @@ package com.grameenfoundation.ictc.controllers;
  * and open the template in the editor.
  */
 
+import com.grameenfoundation.ictc.domains.Agent;
 import com.grameenfoundation.ictc.models.AgentModel;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import java.io.IOException;
@@ -79,10 +80,30 @@ public class AgentTest extends HttpServlet {
                  //get fields from objects
                 NodeList sObject = doc.getElementsByTagName("sObject");
                 
-                
-            
-            
-            
+                  for (int j = 0; j < sObject.getLength(); j++) {
+                      
+                  Node rowNode = sObject.item(j);
+                    //  Map<String,String> m = (Map<String,String>) rowNode.getAttributes();
+                    String salesforceObj = rowNode.getAttributes().getNamedItem("xsi:type").getNodeValue();
+                    System.out.println(salesforceObj);
+                    
+                  
+                       if (salesforceObj.equalsIgnoreCase("sf:User"))
+                       {
+                           String agentId = getXmlNodeValue("sf:Id", ele);
+                           String username = getXmlNodeValue("sf:Username", ele);
+                           
+                           String user = username.substring(0, username.indexOf("@"));
+                          // agentModel.AgentUpdate(user, update)
+                           update.put(Agent.AGENTID,agentId);
+                        
+                           agentModel.AgentUpdate(user, update);
+                           
+                       }
+                    
+                    
+                  }
+             
            tx.success();
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(AgentTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -129,5 +150,17 @@ public class AgentTest extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    
+    
+     public String getXmlNodeValue(String node, Element element) {
+        NodeList nlist = element.getElementsByTagName(node).item(0).getChildNodes();
+        try {
+            Node nValue = (Node) nlist.item(0);
+            return nValue.getNodeValue();
+        } catch (Exception e) {
+            return "";
+        }
+       }
 
 }

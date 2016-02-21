@@ -205,6 +205,7 @@ public class AgentModel {
       
 
         Agent  ag  = getAgent(Agent.USERNAME, id);
+        System.out.println("ag " + ag.getPassword());
         boolean updated = false;
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             //If the setting is not null

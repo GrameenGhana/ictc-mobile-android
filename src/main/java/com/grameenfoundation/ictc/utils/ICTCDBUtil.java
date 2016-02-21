@@ -39,6 +39,7 @@ public class ICTCDBUtil {
     static final java.util.logging.Logger log = java.util.logging.Logger.getLogger(ICTCDBUtil.class.getName());
     
     static GraphDatabaseService database = null;
+    static  GraphDatabaseService graphdb = null;
     private static ICTCDBUtil instance = new ICTCDBUtil();
     private ICTCDBUtil() {}
     
@@ -54,7 +55,7 @@ public class ICTCDBUtil {
     
     public  GraphDatabaseService startDB()
     {
-        GraphDatabaseService graphdb = null;
+       
         
          ServerConfigurator config;
         
@@ -106,11 +107,11 @@ public class ICTCDBUtil {
         
           log.log(Level.INFO, "{0} Database ", graphdb.isAvailable(2));
         
-         database = graphdb;
+         //database = graphdb;
          
         
        
-        registerShutdownHook( graphdb );
+        registerShutdownHook(graphdb);
         //log.log(Level.INFO, "{0} Database test 2 done", graphdb.isAvailable(2));
 //          
 //         config = new ServerConfigurator((GraphDatabaseAPI) graphdb);
@@ -138,7 +139,8 @@ public class ICTCDBUtil {
      */
      public GraphDatabaseService getGraphDB() {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-        return database;
+        //return database;
+        return graphdb;
     }
     
       /**
@@ -154,7 +156,7 @@ public class ICTCDBUtil {
             @Override
             public void run() {
                 graphDb.shutdown();
-                srv.stop();
+                //srv.stop();
             }
         });
     }

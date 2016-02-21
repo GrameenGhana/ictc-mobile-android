@@ -88,25 +88,26 @@ public class ictc {
 //        System.out.println(f.substring(f.indexOf("=")+1));
         
         
-        String query = "match (n:FARMER)-[:HAS_POSTHARVEST]->(f) where n.firstname='Koi' return f";
+//        String query = "match (n:FARMER)-[:HAS_POSTHARVEST]->(f) where n.firstname='Koi' return f";
+//        
+//        GraphDatabaseService db =  ICTCDBUtil.getInstance().getGraphDB();
+//        
+//        
+//        try(Transaction tx = db.beginTx()) {
+//
+//            org.neo4j.graphdb.Node node;
+//            node = Neo4jServices.executeCypherQuerySingleResult(query,"f");
+//            
+//            
+//            System.out.println("post " + new PostHarvest(node).getId());
+//            
+//            
+//            
+//        } 
+//        
+        String user = "spo@ictc.org";
         
-        GraphDatabaseService db =  ICTCDBUtil.getInstance().getGraphDB();
-        
-        
-        try(Transaction tx = db.beginTx()) {
-
-            org.neo4j.graphdb.Node node;
-            node = Neo4jServices.executeCypherQuerySingleResult(query,"f");
-            
-            
-            System.out.println("post " + new PostHarvest(node).getId());
-            
-            
-            
-        } 
-        
-        
-        
+        System.out.println(user.substring(0, user.indexOf("@")));
 //       
           //System.out.println("3.josss".substring(0,1));       
                 
