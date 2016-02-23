@@ -6,14 +6,23 @@ package com.grameenfoundation.ictc.controllers;
  * and open the template in the editor.
  */
 
+import static com.grameenfoundation.ictc.controllers.SaleforceIntegrationController.getObjectFieldId;
+import static com.grameenfoundation.ictc.controllers.SaleforceIntegrationController.getObjectFieldName;
 import com.grameenfoundation.ictc.domains.Agent;
+import com.grameenfoundation.ictc.domains.Biodata;
 import com.grameenfoundation.ictc.models.AgentModel;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
+import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
+import com.grameenfoundation.ictc.utils.Labels;
+import com.grameenfoundation.ictc.utils.ParentNode;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringReader;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -41,6 +50,7 @@ import org.xml.sax.SAXException;
 @WebServlet(urlPatterns = {"/AgentTest"})
 public class AgentTest extends HttpServlet {
 
+      Logger log = Logger.getLogger(AgentTest.class.getName());
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -53,16 +63,17 @@ public class AgentTest extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter();Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            AgentModel agentModel = new AgentModel();
+          //  AgentModel agentModel = new AgentModel();
             
-           String theString = IOUtils.toString(request.getInputStream(), "UTF-8");
-            System.out.println("Salesforce data/n " + theString);
+          String theString = IOUtils.toString(request.getInputStream(), "UTF-8");
+          System.out.println("Salesforce data/n " + theString);
 
-            
+            try(Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx())
+            {
                System.out.println(" " + request.getContentType());
-              //  File xmlFile = new File("/home/grameen/test.xml");
+                //File xmlFile = new File("/home/grameen/test2.xml");
                 DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                 InputSource is = new InputSource();
                 Map<String,String> update = new HashMap<>();
@@ -79,7 +90,7 @@ public class AgentTest extends HttpServlet {
                 JSONObject json = new JSONObject();
                  //get fields from objects
                 NodeList sObject = doc.getElementsByTagName("sObject");
-                
+                Date now = new Date();
                   for (int j = 0; j < sObject.getLength(); j++) {
                       
                   Node rowNode = sObject.item(j);
@@ -87,24 +98,77 @@ public class AgentTest extends HttpServlet {
                     String salesforceObj = rowNode.getAttributes().getNamedItem("xsi:type").getNodeValue();
                     System.out.println(salesforceObj);
                     
-                  
+                   org.neo4j.graphdb.Node AgentParent = ICTCDBUtil.getInstance().getGraphDB().createNode();
                        if (salesforceObj.equalsIgnoreCase("sf:User"))
                        {
+                          
                            String agentId = getXmlNodeValue("sf:Id", ele);
                            String username = getXmlNodeValue("sf:Username", ele);
                            
                            String user = username.substring(0, username.indexOf("@"));
                           // agentModel.AgentUpdate(user, update)
-                           update.put(Agent.AGENTID,agentId);
+//                           if(null!=agentModel.findUser(user))
+//                           {
+////                            update.put(Agent.AGENTID,agentId);
+////                            agentModel.AgentUpdate(user, update);
+//                               System.out.println("user already exists");
+//                           }
+                           if(true)
+                           {
+                               org.neo4j.graphdb.Node biodataNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
+                               biodataNode.addLabel(Labels.AGENT);
+                               for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
+
+                                   // System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                                   if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") || rowNode.getChildNodes().item(k).getNodeName().equals("sf:CreatedById")) {
+                                       System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+
+                                       biodataNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                   }
+
+                                   if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && 
+                                           !rowNode.getChildNodes().item(k).getNodeName().equals("sf:CreatedById")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Username") ) {
+
+                                       System.out.println(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName().toLowerCase()));
+                                       biodataNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName().toLowerCase()), rowNode.getChildNodes().item(k).getTextContent());
+
+                                   }
+                                    // System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                                   if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Username")) {
+                                       System.out.println("username : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName().toLowerCase()));
+
+                                       biodataNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName().toLowerCase()),user);
+                                   }
+                                   
+                                   
+                        }
                         
-                           agentModel.AgentUpdate(user, update);
+                        biodataNode.setProperty(Biodata.LAST_MODIFIED,new Date().getTime());
+                        biodataNode.setProperty(Agent.PASSWORD,"test1234");
+                        biodataNode.setProperty(Agent.AGENTCODE,"AG"+now.toString().substring(2));
+                        biodataNode.setProperty(Agent.AGENTTYPE,"ACDIVOCA");
+                        
+                     //  AgentParent= ParentNode.AgentParentNode();
+                       AgentParent.createRelationshipTo(biodataNode, ICTCRelationshipTypes.AGENT);
+
+                        log.log(Level.INFO, "new node created {0}", biodataNode.getId() + " ");
+                      
+                        log.log(Level.INFO, "new node created {0}", new Agent(biodataNode).getAgentId() + " ");
+                        
+                        
+                       
+                         out.println(sendAck());
+                           }
                            
                        }
                     
                     
                   }
+                  
+                  tx.success();
+            }
              
-           tx.success();
+           
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(AgentTest.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {
@@ -162,5 +226,18 @@ public class AgentTest extends HttpServlet {
             return "";
         }
        }
+     
+     
+       public String sendAck() {
+        String ack = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n"
+                + "<soapenv:Body>\n"
+                + "<notificationsResponse xmlns=\"http://soap.sforce.com/2005/09/outbound\">\n"
+                + "<Ack>true</Ack>\n"
+                + "</notificationsResponse>\n"
+                + "</soapenv:Body>\n"
+                + "</soapenv:Envelope>";
+
+        return ack;
+    }
 
 }
