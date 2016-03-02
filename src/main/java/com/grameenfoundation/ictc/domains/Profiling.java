@@ -32,9 +32,9 @@ public class Profiling extends Status implements GeneralInterface {
     public static String REGFAMILYLABOR_NO = "regfamilylabor_no";
     public static String RISKDISPOSITIONBORROW = "riskdispositionborrow";
     public static String SOILFERTILITYPRACTICES = "soilfertilitypractices";
-    public static String SECOND_CONSTRAINT_AFTER_FARM_PLANNING="second_constraint_after_farm_planning";
-    public static String SECOND_CONSTRAINT_AFTER_MARKETING="second_constraint_after_marketing";
-    public static String SECOND_CONSTRAINT_AFTER_POST_HARVEST="second_constraint_after_post_harvest";
+    public static String SECOND_CONSTRAINT_AFTER_FARM_PLANNING="Second_constraint_after_farm_planning";
+    public static String SECOND_CONSTRAINT_AFTER_MARKETING="Second_constraint_after_marketing";
+    public static String SECOND_CONSTRAINT_AFTER_POST_HARVEST="Second_constraint_after_post_harvest";
     public static String MAIN_CONSTRAINT_FARMPLANNING="main_constraint_farmplanning";
     public static String MAIN_CONSTRAINT_FIELD_PRODUCTION="main_constraint_field_production";
     public static String MAIN_CONSTRAINT_GENERAL="main_constraint_general";
@@ -44,6 +44,22 @@ public class Profiling extends Status implements GeneralInterface {
     public static String OTHER_CONSTRAINT_FIELD_PRODUCTION="other_constraint_field_production";
     public static String OTHER_CONSTRAINT_MARKETING="other_constraint_marketing";
     public static String OTHER_CONSTRAINT_POST_HARVEST="other_constraint_post_harvest";
+    public static String SECOND_CONSTRAINT_AFTER_FIELD_PRODUCTION="Second_constraint_after_field_production";
+    
+    
+public void setSecond_constraint_after_field_production(String second_constraint_after_field_production) {
+underlyingNode.setProperty(SECOND_CONSTRAINT_AFTER_FIELD_PRODUCTION,second_constraint_after_field_production);
+}
+
+public String getSecond_constraint_after_field_production(){
+          try {
+          return (String) underlyingNode.getProperty(SECOND_CONSTRAINT_AFTER_FIELD_PRODUCTION);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
     
     
 public void setOther_constraint_post_harvest(String other_constraint_post_harvest) {

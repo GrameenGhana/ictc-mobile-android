@@ -740,6 +740,7 @@ public class APIController extends HttpServlet {
                             profiling.put(Profiling.SECOND_CONSTRAINT_AFTER_FARM_PLANNING, pr.getSecond_constraint_after_farm_planning());
                             profiling.put(Profiling.SECOND_CONSTRAINT_AFTER_MARKETING, pr.getSecond_constraint_after_marketing());
                             profiling.put(Profiling.SECOND_CONSTRAINT_AFTER_POST_HARVEST, pr.getSecond_constraint_after_post_harvest());
+                            profiling.put(Profiling.SECOND_CONSTRAINT_AFTER_FIELD_PRODUCTION, pr.getSecond_constraint_after_field_production());
                             profiling.put(Profiling.SOILFERTILITYPRACTICES, pr.getSoilfertilitypractices());
                         }
 

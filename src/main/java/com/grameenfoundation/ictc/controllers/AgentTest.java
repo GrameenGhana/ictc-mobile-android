@@ -157,12 +157,12 @@ public class AgentTest extends HttpServlet {
                         
                         
                        
-                         out.println(sendAck());
-                           }
+                       
+                       }
                            
                        }
                     
-                    
+                      out.println(sendAck());
                   }
                   
                   tx.success();

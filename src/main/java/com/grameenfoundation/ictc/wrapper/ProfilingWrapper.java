@@ -38,6 +38,17 @@ public class ProfilingWrapper {
     String other_constraint_field_production="other_constraint_field_production";
     String other_constraint_marketing="other_constraint_marketing";
     String other_constraint_post_harvest="other_constraint_post_harvest";
+    String Second_constraint_after_field_production="second_constraint_after_field_production";
+    
+    
+    
+ public  void setSecond_constraint_after_field_production(String Second_constraint_after_field_production) {
+      this.Second_constraint_after_field_production=Second_constraint_after_field_production;
+    }
+ public  String getSecond_constraint_after_field_production() {
+        return Second_constraint_after_field_production;
+
+    }
     
     
  public  void setOther_constraint_post_harvest(String other_constraint_post_harvest) {

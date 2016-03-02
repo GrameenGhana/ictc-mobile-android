@@ -7,6 +7,10 @@ package com.grameenfoundation.ictc.controllers;
 
 import static com.grameenfoundation.ictc.controllers.SaleforceIntegrationController.getObjectFieldId;
 import static com.grameenfoundation.ictc.controllers.SaleforceIntegrationController.getObjectFieldName;
+import com.grameenfoundation.ictc.domain.commons.Generalimpl;
+import com.grameenfoundation.ictc.domains.BaselinePostHarvest;
+import com.grameenfoundation.ictc.domains.BaselineProduction;
+import com.grameenfoundation.ictc.domains.BaselineProductionBudget;
 import com.grameenfoundation.ictc.domains.Biodata;
 import com.grameenfoundation.ictc.domains.CropAssessmentImage;
 import com.grameenfoundation.ictc.domains.FieldCropAssessment;
@@ -18,6 +22,7 @@ import com.grameenfoundation.ictc.domains.PostHarvest2;
 import com.grameenfoundation.ictc.domains.ProductionNew;
 import com.grameenfoundation.ictc.domains.ProductionUpdate;
 import com.grameenfoundation.ictc.domains.Profiling;
+import com.grameenfoundation.ictc.domains.TechnicalNeed;
 import com.grameenfoundation.ictc.models.BaselinePostHarvestBudgetModel;
 import com.grameenfoundation.ictc.models.BaselinePostHarvestModel;
 import com.grameenfoundation.ictc.models.BaselineProductionBudgetModel;
@@ -511,7 +516,7 @@ public class SalesforceSyncServlet extends HttpServlet {
 //                           if(modified(farmerID))
 //                                 System.out.println("Last modified done");
                            tx.success();
-                            }
+                         }
                       } 
                        else if(salesforceObj.equals("sf:TechnicalNeeds__c"))
                     {
@@ -544,6 +549,8 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                             }
                         }
+                        
+                        TNNode.setProperty(TechnicalNeed.LAST_MODIFIED,new Date().getTime());
 
                         TNParent = ParentNode.TechNeedParentNode();
                         TNParent.createRelationshipTo(TNNode, ICTCRelationshipTypes.TECHNICAL_NEED);
@@ -591,9 +598,11 @@ public class SalesforceSyncServlet extends HttpServlet {
                                 }
                             }
 
+                            BPBNode.setProperty(BaselineProductionBudget.LAST_MODIFIED,new Date().getTime());
+                            
                             BPBParent = ParentNode.BPBParentNode();
                             BPBParent.createRelationshipTo(BPBNode, ICTCRelationshipTypes.BASELINE_PRODUCTION_BUDGET);
-
+                             
                             log.log(Level.INFO, "new node created {0}", BPBNode.getId());
 
                             Biodata b = biodataModel.getBiodata("Id", farmerID);
@@ -635,6 +644,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                                 }
                             }
                             
+                            BPNode.setProperty(BaselineProduction.LAST_MODIFIED,new Date().getTime());
                             BPBParent = ParentNode.BPParentNode();
                             BPBParent.createRelationshipTo(BPNode, ICTCRelationshipTypes.BASELINE_PRODUCTION);
                             
@@ -724,6 +734,8 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                             }
                         }
+                        
+                        BPHNode.setProperty(BaselinePostHarvest.LAST_MODIFIED,new Date().getTime());
 
                         BPHParent = ParentNode.BPHParentNode();
                         BPHParent.createRelationshipTo(BPHNode, ICTCRelationshipTypes.BASELINE_POSTHARVEST);
@@ -951,7 +963,8 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                                  }
                              }
-
+                             
+                             FCANode.setProperty(FieldCropAssessment.LAST_MODIFIED, currentTimestamp());
                              FCAParent = ParentNode.FCAparentNode();
                              FCAParent.createRelationshipTo(FCANode, ICTCRelationshipTypes.FIELD_CROP_ASSESSMENT);
 
@@ -1313,6 +1326,11 @@ public class SalesforceSyncServlet extends HttpServlet {
     public String getImageId(String url)
     {
         return url.substring(url.indexOf("=")+1);
+    }
+    
+    public long currentTimestamp()
+    {
+        return new Date().getTime();
     }
 
 }
