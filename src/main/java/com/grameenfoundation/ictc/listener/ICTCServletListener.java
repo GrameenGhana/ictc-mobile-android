@@ -29,19 +29,12 @@ public class ICTCServletListener implements ServletContextListener {
               System.out.println("-----------------------------Starting Database-------------------------------------");
               db =  ICTCDBUtil.getInstance().startDB();
               
-//              if(null!=db)
-//              {
-//                  db = ICTCDBUtil.getInstance().startDB();
-//              }
-//              else
-//              {
-//                  System.out.println("Database Already exists");
-//                    ICTCDBUtil.getInstance().shutdown(db);
-//                  
-//              }
+             
+/***
+ * uncomment the following lines of code on first run to create ROOT node in db
+ * comment it out after first run and redeploy application.
+ **/
               
-              
-//                 
 //             try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 //                 Node node =ICTCDBUtil.getInstance().getGraphDB().createNode(DynamicLabel.label("root"));
 //                 node.setProperty("name", "ICTCROOT");
