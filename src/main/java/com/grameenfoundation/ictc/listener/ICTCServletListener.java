@@ -6,6 +6,7 @@
 package com.grameenfoundation.ictc.listener;
 
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
+import com.grameenfoundation.ictc.utils.Neo4jServices;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import org.neo4j.graphdb.DynamicLabel;
@@ -28,29 +29,30 @@ public class ICTCServletListener implements ServletContextListener {
        
               System.out.println("-----------------------------Starting Database-------------------------------------");
               db =  ICTCDBUtil.getInstance().startDB();
-              
-             
-/***
- * uncomment the following lines of code on first run to create ROOT node in db
- * comment it out after first run and redeploy application.
- **/
-              
-//             try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
-//                 Node node =ICTCDBUtil.getInstance().getGraphDB().createNode(DynamicLabel.label("root"));
-//                 node.setProperty("name", "ICTCROOT");
-//                 tx.success();
-//                 
-//                 System.out.println("Node Added");
-//                 
-//                 System.out.println("node Added" + node.getId());
-//                 System.out.println("node Added" + node.getProperty("name"));
-//                 
-//             } catch (Exception e) {
-//                 
-//                 System.out.println("Unable to create root node");
-//             }
-//             
+  //checks if root node exists            
+ try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+              if(Neo4jServices.getRootNode())
+              {
+                  System.out.println("Root Node Already Exists");
+              }
+              else
+              {
+                  
+                      Node node = ICTCDBUtil.getInstance().getGraphDB().createNode(DynamicLabel.label("root"));
+                      node.setProperty("name", "ICTCROOT");
+                      tx.success();
+
+                      System.out.println("Node Added");
+
+                      System.out.println("node Added" + node.getId());
+                      System.out.println("node Added" + node.getProperty("name"));
+
+              }
             
+              } catch (Exception e) {
+
+                      System.out.println("Unable to create root node");
+              }
              System.out.println("-----------------------------DB Started-------------------------------------");
              
     }
@@ -65,8 +67,8 @@ public class ICTCServletListener implements ServletContextListener {
             //log.info("Shut Down done");
              System.out.println(" Database Shut Down done");
         } catch (Exception e) {
-            System.out.println("Unable to Shut Down");
-
+            System.out.println("Unable to Shut Down" + e.getLocalizedMessage());
+            e.printStackTrace();
         }
     }
 }
