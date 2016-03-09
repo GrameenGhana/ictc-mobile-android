@@ -179,6 +179,25 @@ private List<FieldObject> fmpValues;
         return fmp;
     }
 
+    public BiodataWrapper() {
+       this.firstName = firstName;
+        this.lastName = lastName;
+        this.nickname = nickname;
+        this.community = community;
+        this.village = village;
+        this.district = district;
+        this.region = region;
+        this.age = age;
+        this.gender = gender;
+        this.maritalStatus = maritalStatus;
+        this.numberOfChildren = numberOfChildren;
+        this.numberOfDependants = numberOfDependants;
+        this.education = education; 
+        
+    }
+    
+    
+
     public void setFmp(FarmManagementPlanWrapper fmp) {
         this.fmp = fmp;
     }

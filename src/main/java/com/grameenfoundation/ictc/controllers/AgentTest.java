@@ -148,7 +148,7 @@ public class AgentTest extends HttpServlet {
                         biodataNode.setProperty(Agent.AGENTCODE,"AG"+now.toString().substring(2));
                         biodataNode.setProperty(Agent.AGENTTYPE,"ACDIVOCA");
                         
-                     //  AgentParent= ParentNode.AgentParentNode();
+                       AgentParent= ParentNode.AgentParentNode();
                        AgentParent.createRelationshipTo(biodataNode, ICTCRelationshipTypes.AGENT);
 
                         log.log(Level.INFO, "new node created {0}", biodataNode.getId() + " ");

@@ -412,9 +412,10 @@ public class SalesforceSyncServlet extends HttpServlet {
                               product.ProductionToUpdate(p, productionUpdateNode);
                                if(modified(farmerID))
                                  System.out.println("Last modified done");
-                              tx.success();
+                            
                               
                               out.println(sendAck());
+                                tx.success();
                         //  }
                       }
                   else if(salesforceObj.equalsIgnoreCase("sf:FMP_PostHarvest_update__c"))
@@ -1187,7 +1188,8 @@ public class SalesforceSyncServlet extends HttpServlet {
         String q10 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getSoilfertilitypractices()).getScore();
         String q11 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getPostharvestlosses()).getScore();
 
-        System.out.println("results" + q2 + " " + " " + q6 + " " + q5 + " " + q7 + " " + q8 + " " + q9 + " " + q10 + " " + q11);
+        System.out.println("results" + q2 + " " + " " + q6 + " " + q5 + " " + q7 + 
+                " " + q8 + " " + q9 + " " + q10 + " " + q11);
 
         score = Integer.valueOf(q2) + Integer.valueOf(q5) + Integer.valueOf(q6) + Integer.valueOf(q7)
                 + Integer.valueOf(q8) + Integer.valueOf(q9) + Integer.valueOf(q10) + Integer.valueOf(q11);
@@ -1219,7 +1221,7 @@ public class SalesforceSyncServlet extends HttpServlet {
         } 
         else if (score >=31 && score <=45) {
             return "2";
-        } else if (score >=16 && score <=20) {
+        } else if (score >=16 && score <=30) {
             return "3";
         }
         else {
