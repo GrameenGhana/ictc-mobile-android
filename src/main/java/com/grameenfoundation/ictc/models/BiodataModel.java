@@ -532,6 +532,72 @@ public class BiodataModel {
 
         return Neo4jServices.getAggregatedValue(" match (n:AGENT) RETURN count(n) as l");
     }
+    
+    
+     public Long getProfileCount() {
+
+        return Neo4jServices.getAggregatedValue(" match (n:PROFILE) RETURN count(n) as l");
+    }
+     
+     public Long getBaselineProductionCount() {
+
+        return Neo4jServices.getAggregatedValue(" match (n:BASELINE_PRODUCTION) RETURN count(n) as l");
+    }
+     
+    public Long getBaselineProductionBudgetCount() {
+
+        return Neo4jServices.getAggregatedValue(" match (n:BASELINE_PRODUCTION_BUDGET) RETURN count(n) as l");
+    }
+    
+     public Long getFMPProductionCount() {
+
+        return Neo4jServices.getAggregatedValue(" match (n:PRODUCTION) RETURN count(n) as l");
+    }
+    
+      public Long getFMPProductionBudgetCount() {
+
+        return Neo4jServices.getAggregatedValue(" match (n:FMP_PRODUCTION_BUDGET) RETURN count(n) as l");
+    }
+     
+    public Long getFMPProductionBudgetUpdateCount() {
+
+        return Neo4jServices.getAggregatedValue(" match (n:FMP_PRODUCTION_BUDGET_UPDATE) RETURN count(n) as l");
+    }
+      
+    public Long getFMPPostHarvestCount() {
+
+        return Neo4jServices.getAggregatedValue(" match (n:POSTHARVEST) RETURN count(n) as l");
+    }
+    
+    
+     public Long getBaselinePostHarvestCount() {
+
+        return Neo4jServices.getAggregatedValue(" match (n:BASELINE_POST_HARVEST) RETURN count(n) as l");
+    }
+     
+     public Long getBaselinePostHarvestBudgetCount() {
+
+        return Neo4jServices.getAggregatedValue(" match (n:BASELINE_POST_HARVEST_BUDGET) RETURN count(n) as l");
+    }
+    
+      public Long getFMPPostHarvestBudgetCount() {
+
+        return Neo4jServices.getAggregatedValue(" match (n:FMP_POSTHARVEST_BUDGET) RETURN count(n) as l");
+    }
+      
+    
+     public Long getUpdateCount() {
+
+        return Neo4jServices.getAggregatedValue(" match (n:UPDATE) RETURN count(n) as l");
+    }
+      
+      public Long getCropAssessmentCount() {
+
+        return Neo4jServices.getAggregatedValue(" match (n: FIELD_CROP_ASSESSMENT) RETURN count(n) as l");
+    }
+      
+    
+   
 
     public List<CommunityCounterWrapper> getCommunityWrapper() {
        List<CommunityCounterWrapper>  ccw= new ArrayList<>();

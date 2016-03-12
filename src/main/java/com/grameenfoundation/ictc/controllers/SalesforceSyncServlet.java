@@ -472,6 +472,9 @@ public class SalesforceSyncServlet extends HttpServlet {
                           farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
                          
                             if (null != new ProfilingModel().getProfile("Id", farmerID)) {
+                          update.put(Biodata.CLUSTER, getCluster(getUserScore(farmerID)));
+                          update.put(Biodata.LAST_MODIFIED,String.valueOf(new Date().getTime()));
+                          biodataModel.BiodataUpdate(farmerID, update);
                              out.println(sendAck());
                              System.out.println("Profiling already exist");
                          } else {
@@ -1099,6 +1102,58 @@ public class SalesforceSyncServlet extends HttpServlet {
                              tx.success();
                          }
                      }
+                     
+               else if(salesforceObj.equals("sf:FarmCreditPlan__c"))
+                    {
+                         farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
+                          if (null != new TechnicalNeedsModel().getTechnicalNeed("Id", farmerID)) {
+                             out.println(sendAck());
+                             System.out.println("Technical Needs already exist");
+                         } else {
+                        
+                        
+                        
+                        
+                        org.neo4j.graphdb.Node TNParent;
+                        org.neo4j.graphdb.Node TNNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.TECHNICAL_NEEDS);
+                        
+                       
+                        System.out.println("farmerid " + farmerID);
+                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
+
+                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
+                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                             TNNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                            }
+
+                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
+
+                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                               TNNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+
+                            }
+                        }
+                        
+                        TNNode.setProperty(TechnicalNeed.LAST_MODIFIED,new Date().getTime());
+
+                        TNParent = ParentNode.TechNeedParentNode();
+                        TNParent.createRelationshipTo(TNNode, ICTCRelationshipTypes.TECHNICAL_NEED);
+
+                        log.log(Level.INFO, "new node created {0}", TNNode.getId());
+
+                        Biodata b = biodataModel.getBiodata("Id", farmerID);
+
+                        biodataModel.BiodataToTechNeeds(b.getId(), TNNode);
+                       
+                         if(modified(farmerID))
+                                 System.out.println("Last modified done");
+                        out.println(sendAck());
+                    
+                       tx.success();
+                     
+                          }
+                    }
                     
                  }
                  
@@ -1187,12 +1242,13 @@ public class SalesforceSyncServlet extends HttpServlet {
         String q9 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getInnovativenessbytrying()).getScore();
         String q10 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getSoilfertilitypractices()).getScore();
         String q11 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getPostharvestlosses()).getScore();
+        String q6a = pm.getScoreByAnswer(Ouestion.ANSWER, p.getRegfamilylabor_No()).getScore(); 
 
-        System.out.println("results" + q2 + " " + " " + q6 + " " + q5 + " " + q7 + 
+        System.out.println("results" + q2 + " " + q6 + " "+q6a + q5 + " " + q7 + 
                 " " + q8 + " " + q9 + " " + q10 + " " + q11);
 
         score = Integer.valueOf(q2) + Integer.valueOf(q5) + Integer.valueOf(q6) + Integer.valueOf(q7)
-                + Integer.valueOf(q8) + Integer.valueOf(q9) + Integer.valueOf(q10) + Integer.valueOf(q11);
+                + Integer.valueOf(q8) + Integer.valueOf(q9) + Integer.valueOf(q10) + Integer.valueOf(q11)+Integer.valueOf(q6a);
 
         System.out.println("score" + score);
 

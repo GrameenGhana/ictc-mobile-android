@@ -112,9 +112,7 @@ public class AgentTest extends HttpServlet {
 ////                            update.put(Agent.AGENTID,agentId);
 ////                            agentModel.AgentUpdate(user, update);
 //                               System.out.println("user already exists");
-//                           }
-                           if(true)
-                           {
+//                      
                                org.neo4j.graphdb.Node biodataNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
                                biodataNode.addLabel(Labels.AGENT);
                                for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
@@ -155,14 +153,14 @@ public class AgentTest extends HttpServlet {
                       
                         log.log(Level.INFO, "new node created {0}", new Agent(biodataNode).getAgentId() + " ");
                         
-                        
+                         out.println(sendAck());
                        
                        
-                       }
+                       
                            
                        }
                     
-                      out.println(sendAck());
+                     
                   }
                   
                   tx.success();
