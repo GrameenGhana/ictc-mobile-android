@@ -69,8 +69,8 @@ public class AgentTest extends HttpServlet {
             
           String theString = IOUtils.toString(request.getInputStream(), "UTF-8");
           System.out.println("Salesforce data/n " + theString);
-
-            try(Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx())
+           Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
+           try
             {
                System.out.println(" " + request.getContentType());
                 //File xmlFile = new File("/home/grameen/test2.xml");
@@ -153,7 +153,7 @@ public class AgentTest extends HttpServlet {
                       
                         log.log(Level.INFO, "new node created {0}", new Agent(biodataNode).getAgentId() + " ");
                         
-                         out.println(sendAck());
+                         
                        
                        
                        
@@ -162,9 +162,13 @@ public class AgentTest extends HttpServlet {
                     
                      
                   }
-                  
+                  out.println(sendAck());
                   tx.success();
             }
+           finally
+           {
+               tx.close();
+           }
              
            
         } catch (ParserConfigurationException ex) {

@@ -42,7 +42,8 @@ public class AgentModel {
 
         Node AgentParent;
         GraphDatabaseService db = ICTCDBUtil.getInstance().getGraphDB();
-        try (Transaction trx = db.beginTx()) {
+        Transaction trx = db.beginTx();
+        try{
 
             Node agentNode = db.createNode(Labels.AGENT);
 
@@ -78,8 +79,13 @@ public class AgentModel {
             created = false;
             log.severe("Creation of Agent Failed");
             e.printStackTrace();
-           
+           trx.failure();
             
+        }
+        finally
+        {
+            trx.close();
+           
         }
 
         return created;

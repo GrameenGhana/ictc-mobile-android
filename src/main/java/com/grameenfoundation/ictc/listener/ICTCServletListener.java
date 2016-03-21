@@ -21,14 +21,14 @@ import org.neo4j.graphdb.Transaction;
  * @author grameen
  */
 public class ICTCServletListener implements ServletContextListener {
- GraphDatabaseService db = null;
+// GraphDatabaseService db = null;
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         
         
        
               System.out.println("-----------------------------Starting Database-------------------------------------");
-              db =  ICTCDBUtil.getInstance().startDB();
+               ICTCDBUtil.getInstance().startDB();
   //checks if root node exists            
  try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
               if(Neo4jServices.getRootNode())
@@ -40,18 +40,19 @@ public class ICTCServletListener implements ServletContextListener {
                   
                       Node node = ICTCDBUtil.getInstance().getGraphDB().createNode(DynamicLabel.label("root"));
                       node.setProperty("name", "ICTCROOT");
-                      tx.success();
+                     
 
                       System.out.println("Node Added");
 
                       System.out.println("node Added" + node.getId());
                       System.out.println("node Added" + node.getProperty("name"));
-
+                       tx.success();
               }
             
               } catch (Exception e) {
 
                       System.out.println("Unable to create root node");
+                      e.printStackTrace();
               }
              System.out.println("-----------------------------DB Started-------------------------------------");
              
@@ -63,7 +64,8 @@ public class ICTCServletListener implements ServletContextListener {
         try {
             System.out.println("Shut Down About to Start Started");
             //Shut Down the server on exit
-            ICTCDBUtil.getInstance().shutdown(db);
+            //ICTCDBUtil.getInstance().shutdown(ICTCDBUtil.getInstance().getGraphDB());
+           
             //log.info("Shut Down done");
              System.out.println(" Database Shut Down done");
         } catch (Exception e) {

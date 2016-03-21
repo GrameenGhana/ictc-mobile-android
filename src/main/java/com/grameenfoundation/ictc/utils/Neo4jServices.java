@@ -323,9 +323,10 @@ public class Neo4jServices {
             //tx.failure();
             log.warn("Error Executing Cypher Query : " + q);
             log.warn("Exception : " + e);
-        } finally {
-            //tx.finish();
-        }
+       }
+       // finally {
+//            //tx.finish();
+//        }
         //  log.warn("After Find");
 
         return nodeFromResult(result, column);
@@ -414,8 +415,9 @@ public class Neo4jServices {
             }
         }
              
-          tx.success();
+        
           System.out.println("none " + n);
+         tx.success();
           return n;
         }
         catch(Exception e)
@@ -553,12 +555,16 @@ public class Neo4jServices {
 //            result = engine.execute(q);
             result = db.execute(q);
             n_column = result.columnAs("l");
-            while (n_column.hasNext()) {
+            while (n_column.hasNext()) 
+            {
+                 tx.success();
                 return n_column.next();
             }
+            tx.success();
+           return 0l; 
         }
 
-        return 0l;
+       
     }
 
     public static long getSumValue(String q) {
@@ -582,14 +588,17 @@ public class Neo4jServices {
                 if (null == n_column.next()) {
                     return 0;
                 }
+                tx.success();
                 return n_column.next();
             }
+            tx.success();
+           return 0;
         } catch (Exception e) {
             System.out.println("Exception SUm Values  -> " + e.getLocalizedMessage());
             return 0;
         }
 
-        return 0;
+       
     }
 
     public static Object getAggregateItem(String q) {
@@ -608,6 +617,7 @@ public class Neo4jServices {
                 Map<String, Object> row = result.next();
                 for (String key : result.columns()) {
                     System.out.printf("%s = %s%n", key, row.get(key));
+                    tx.success();
                     return row.get(key);
                 }
             }
@@ -620,12 +630,13 @@ public class Neo4jServices {
 //                }
 //                rows += "\n";
 //            }
-
+                 tx.success();
         } catch (Exception e) {
             System.out.println("Exception SUm Values  -> " + e.getLocalizedMessage());
             return 0;
         }
 
+        
         return 0;
     }
 
@@ -692,7 +703,7 @@ public class Neo4jServices {
 //            ExecutionEngine engine = new ExecutionEngine(
 //                    ICTCDBUtil.getInstance().getGraphDB(), StringLogger.SYSTEM);
            Result result = executeCypherQuery(query);
-
+          tx.success();
         }
 
     }
@@ -706,9 +717,10 @@ public class Neo4jServices {
             // ExecutionResult result = (ExecutionResult) ICTCDBUtil.getInstance().getGraphDB().execute(query);
             ResourceIterator<Node> n = result.columnAs(returnItem);
             while (n.hasNext()) {
+                tx.success();
                 return n.next();
             }
-
+            tx.success();
             return null;
         }
 
@@ -727,9 +739,10 @@ public class Neo4jServices {
             Result result = executeCypherQuery(query);
             ResourceIterator<Node> n = result.columnAs(returnItem);
             while (n.hasNext()) {
+                tx.success();
                 return n.next();
             }
-
+            tx.success();
             return null;
         }
 

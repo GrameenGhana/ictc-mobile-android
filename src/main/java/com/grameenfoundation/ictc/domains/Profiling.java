@@ -29,7 +29,7 @@ public class Profiling extends Status implements GeneralInterface {
     public static String OPERATEBANKACCOUNT = "operatebankaccount";
     public static String POSTHARVESTLOSSES = "postharvestlosses";
     public static String PRODUCESOLDPROPORTION = "producesoldproportion";
-    public static String REGFAMILYLABOR_NO = " Regfamilylabor_No";
+    public static String REGFAMILYLABOR_NO = "Regfamilylabor_No";
     public static String RISKDISPOSITIONBORROW = "riskdispositionborrow";
     public static String SOILFERTILITYPRACTICES = "soilfertilitypractices";
     public static String SECOND_CONSTRAINT_AFTER_FARM_PLANNING="Second_constraint_after_farm_planning";

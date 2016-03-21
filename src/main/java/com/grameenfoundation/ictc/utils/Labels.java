@@ -48,5 +48,6 @@ public enum Labels implements Label {
     FIELD_CROP_ASSESSMENT,
     FARM_GPS,
     WEATHER,
-    IMAGE
+    IMAGE,
+    FARM_CREDIT_PLAN
 }

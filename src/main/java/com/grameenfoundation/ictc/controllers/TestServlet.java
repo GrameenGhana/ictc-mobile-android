@@ -336,7 +336,7 @@ public class TestServlet extends HttpServlet {
             QuestionWrapper q6d = new QuestionWrapper();
             q6d.setQuestion("familylabor");
             q6d.setAnswer("About 20% or less");
-            q6d.setScore("3");
+            q6d.setScore("7");
             qu.createQuestion(q6d);
             
             QuestionWrapper q6e = new QuestionWrapper();

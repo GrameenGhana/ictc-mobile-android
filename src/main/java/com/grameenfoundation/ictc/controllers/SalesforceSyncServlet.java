@@ -106,8 +106,8 @@ public class SalesforceSyncServlet extends HttpServlet {
         
          try (PrintWriter out = response.getWriter()) {
              
-           String theString = IOUtils.toString(request.getInputStream(), "UTF-8");
-            System.out.println("Salesforce data/n " + theString);
+        //  String theString = IOUtils.toString(request.getInputStream(), "UTF-8");
+          //  System.out.println("Salesforce data/n " + theString);
             //gets request input stream
             InputStream in = request.getInputStream();
             InputSource input = null;
@@ -119,14 +119,14 @@ public class SalesforceSyncServlet extends HttpServlet {
              try(Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
                 System.out.println(" " + request.getContentType());
-              //  File xmlFile = new File("/home/grameen/test.xml");
+               File xmlFile = new File("/home/grameen/test.xml");
                 DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                 InputSource is = new InputSource();
                 Map<String,String> update = new HashMap<>();
-                is.setCharacterStream(new StringReader(theString));
+               // is.setCharacterStream(new StringReader(theString));
                 System.out.println("After parsing XML");
-                Document doc = db.parse(is);
-              // Document doc = db.parse(xmlFile);   
+               // Document doc = db.parse(is);
+                Document doc = db.parse(xmlFile);   
                 System.out.println("Should be normalised now");
                 doc.getDocumentElement().normalize();
           
@@ -164,6 +164,10 @@ public class SalesforceSyncServlet extends HttpServlet {
                         }
                        else
                        {
+                        
+                           
+                       try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx())
+                       {
                         Map<String,String> imageUpdate = new HashMap<>();
                         org.neo4j.graphdb.Node biodataNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
                         biodataNode.addLabel(Labels.FARMER);
@@ -186,8 +190,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                         
                         biodataNode.setProperty(Biodata.LAST_MODIFIED,new Date().getTime());
                         
-                        FarmerParent = ParentNode.FarmerParentNode();
-                        FarmerParent.createRelationshipTo(biodataNode, ICTCRelationshipTypes.FARMER);
+//                        FarmerParent = ParentNode.FarmerParentNode();
+//                        FarmerParent.createRelationshipTo(biodataNode, ICTCRelationshipTypes.FARMER);
 
                         log.log(Level.INFO, "new node created {0}", biodataNode.getId());
                       
@@ -262,8 +266,10 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                         }
                         
-                        
+                        trx.success();
                        }
+                       }
+                        
                         
                       tx.success();
                      
@@ -311,10 +317,10 @@ public class SalesforceSyncServlet extends HttpServlet {
                              
                              if(modified(farmerID))
                                  System.out.println("Last modified done");
-                            
+                              out.println(sendAck());
                              tx.success();
 
-                             out.println(sendAck());
+                           
 
                          }
 
@@ -361,9 +367,11 @@ public class SalesforceSyncServlet extends HttpServlet {
                              biodataModel.BiodataToPostHarvest(b.getId(), postHarvestNewNode);
                               if(modified(farmerID))
                                  System.out.println("Last modified done");
+                              
+                              out.println(sendAck());
                              tx.success();
                              
-                             out.println(sendAck());
+                             
                          }
 
                          
@@ -461,9 +469,10 @@ public class SalesforceSyncServlet extends HttpServlet {
                             
                          if(modified(farmerID))
                             System.out.println("Last modified done");
+                        
+                        out.println(sendAck());
                          tx.success();
 
-                        out.println(sendAck());
                          // }
                          
                       }
@@ -472,12 +481,15 @@ public class SalesforceSyncServlet extends HttpServlet {
                           farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
                          
                             if (null != new ProfilingModel().getProfile("Id", farmerID)) {
-                          update.put(Biodata.CLUSTER, getCluster(getUserScore(farmerID)));
-                          update.put(Biodata.LAST_MODIFIED,String.valueOf(new Date().getTime()));
-                          biodataModel.BiodataUpdate(farmerID, update);
+//                          update.put(Biodata.CLUSTER, getCluster(getUserScore(farmerID)));
+//                          update.put(Biodata.LAST_MODIFIED,String.valueOf(new Date().getTime()));
+//                          biodataModel.BiodataUpdate(farmerID, update);
                              out.println(sendAck());
                              System.out.println("Profiling already exist");
                          } else {
+                                
+                         try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx())
+                          {
                           org.neo4j.graphdb.Node profilingNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.PROFILE);
                           
                          
@@ -519,8 +531,11 @@ public class SalesforceSyncServlet extends HttpServlet {
 //                          
 //                           if(modified(farmerID))
 //                                 System.out.println("Last modified done");
-                           tx.success();
+                           trx.success();
+                          }
                          }
+                            
+                        tx.success();
                       } 
                        else if(salesforceObj.equals("sf:TechnicalNeeds__c"))
                     {
@@ -581,6 +596,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                             System.out.println("Baseline Production Budget already exist");
                         } else {
 
+                            
+                            try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()){
                             org.neo4j.graphdb.Node BPBParent;
                             org.neo4j.graphdb.Node BPBNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.BASELINE_PRODUCTION_BUDGET);
 
@@ -616,8 +633,10 @@ public class SalesforceSyncServlet extends HttpServlet {
                             out.println(sendAck());
                             if(modified(farmerID))
                                  System.out.println("Last modified done");
-                            tx.success();
+                            trx.success();
+                            }
                         }
+                        tx.success();
                     }
                       else if(salesforceObj.equals("sf:BASELINE_PRODUCTION__c"))
                     {
@@ -628,6 +647,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                             out.println(sendAck());
                             System.out.println("Baseline Production already exist");
                         } else {
+                             try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()){
                             org.neo4j.graphdb.Node BPBParent;
                             org.neo4j.graphdb.Node BPNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.BASELINE_PRODUCTION);
                             
@@ -660,7 +680,9 @@ public class SalesforceSyncServlet extends HttpServlet {
                             
                             out.println(sendAck());
                              if(modified(farmerID))
-                                 System.out.println("Last modified done");
+                              System.out.println("Last modified done");
+                             trx.success();
+                             }
                             tx.success();
                         }
                     }
@@ -673,7 +695,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                             out.println(sendAck());
                             System.out.println("Baseline Post Harvest already exist");
                         } else {
-                        
+                         try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()){
                         org.neo4j.graphdb.Node BPHBParent;
                         org.neo4j.graphdb.Node BPHBNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.BASELINE_POST_HARVEST_BUDGET);
 
@@ -708,8 +730,11 @@ public class SalesforceSyncServlet extends HttpServlet {
                               if (modified(farmerID)) {
                                   System.out.println("Last modified done");
                               }
-                        tx.success();
+                              trx.success();
+                         }
+                        
                        }
+                     tx.success();
                     }  else if(salesforceObj.equals("sf:BASELINE_POST_HARVEST__c"))
                     {
                         
@@ -718,6 +743,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                             out.println(sendAck());
                             System.out.println("Baseline Post Harvest already exist");
                         } else {
+                              
+                         try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()){
                         org.neo4j.graphdb.Node BPHParent;
                         org.neo4j.graphdb.Node BPHNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.BASELINE_POST_HARVEST);
 
@@ -753,8 +780,12 @@ public class SalesforceSyncServlet extends HttpServlet {
                         out.println(sendAck());
                          if(modified(farmerID))
                                  System.out.println("Last modified done");
-                        tx.success();
+                         
+                         trx.success();
+                         }
+                        
                           }
+                          tx.success();
                     }
                else if(salesforceObj.equals("sf:FMP_PRODUCTION_BUDGET__c"))
                     {
@@ -1112,10 +1143,10 @@ public class SalesforceSyncServlet extends HttpServlet {
                          } else {
                         
                         
+                      //  try
                         
-                        
-                        org.neo4j.graphdb.Node TNParent;
-                        org.neo4j.graphdb.Node TNNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.TECHNICAL_NEEDS);
+                        org.neo4j.graphdb.Node FCParent;
+                        org.neo4j.graphdb.Node FCNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARM_CREDIT_PLAN);
                         
                        
                         System.out.println("farmerid " + farmerID);
@@ -1124,37 +1155,40 @@ public class SalesforceSyncServlet extends HttpServlet {
                             System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
                                 System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                             TNNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                            FCNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                             }
 
                             if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
 
                                 System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                               TNNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                              FCNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
 
                             }
                         }
                         
-                        TNNode.setProperty(TechnicalNeed.LAST_MODIFIED,new Date().getTime());
+                      FCNode.setProperty(TechnicalNeed.LAST_MODIFIED,new Date().getTime());
 
-                        TNParent = ParentNode.TechNeedParentNode();
-                        TNParent.createRelationshipTo(TNNode, ICTCRelationshipTypes.TECHNICAL_NEED);
+                       FCParent = ParentNode.TechNeedParentNode();
+                       FCParent.createRelationshipTo(FCNode, ICTCRelationshipTypes.TECHNICAL_NEED);
 
-                        log.log(Level.INFO, "new node created {0}", TNNode.getId());
+                        log.log(Level.INFO, "new node created {0}", FCNode.getId());
 
                         Biodata b = biodataModel.getBiodata("Id", farmerID);
 
-                        biodataModel.BiodataToTechNeeds(b.getId(), TNNode);
+                        biodataModel.BiodataToTechNeeds(b.getId(), FCNode);
                        
                          if(modified(farmerID))
                                  System.out.println("Last modified done");
                         out.println(sendAck());
                     
                        tx.success();
-                     
+                      
                           }
                     }
                     
+                     
+                     
+                  //tx.success();
                  }
                  
 
@@ -1164,12 +1198,12 @@ public class SalesforceSyncServlet extends HttpServlet {
             catch (Exception ex) {
               Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, ex);
                ex.printStackTrace();
-             // tx.failure();
+              ;
           }
 //           finally{
 //                 tx.finish();
 //             }
-         
+//         
          }
         
     }
@@ -1230,10 +1264,11 @@ public class SalesforceSyncServlet extends HttpServlet {
      public int getUserScore(String user) {
         ProfilingModel pm = new ProfilingModel();
         int score = 0;
-
+        String q6a = null;
         Profiling p = pm.getProfile("Id", user);
 
         System.out.println("Profile " + p.getFarmrecordkeepingstatus());
+         System.out.println("Family labor " +p.getRegfamilylabor_No() );
         String q2 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getFbomembership().toLowerCase()).getScore();
         String q6 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getFarmrecordkeepingstatus().toLowerCase()).getScore();
         String q5 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getOperatebankaccount().toLowerCase()).getScore();
@@ -1242,12 +1277,17 @@ public class SalesforceSyncServlet extends HttpServlet {
         String q9 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getInnovativenessbytrying()).getScore();
         String q10 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getSoilfertilitypractices()).getScore();
         String q11 = pm.getScoreByAnswer(Ouestion.ANSWER, p.getPostharvestlosses()).getScore();
-        String q6a = pm.getScoreByAnswer(Ouestion.ANSWER, p.getRegfamilylabor_No()).getScore(); 
+        if(p.getRegfamilylabor_No().trim().equals("About 20% or less".trim()))
+          q6a  ="7";
+        else
+         q6a = pm.getScoreByAnswer(Ouestion.ANSWER, p.getRegfamilylabor_No()).getScore(); 
 
-        System.out.println("results" + q2 + " " + q6 + " "+q6a + q5 + " " + q7 + 
+        System.out.println("results" + q2 + " " + q6 + " "+q6a +" "+ q5 + " " + 
+                q7 + 
                 " " + q8 + " " + q9 + " " + q10 + " " + q11);
 
-        score = Integer.valueOf(q2) + Integer.valueOf(q5) + Integer.valueOf(q6) + Integer.valueOf(q7)
+        score = Integer.valueOf(q2) + Integer.valueOf(q5) + Integer.valueOf(q6) 
+                + Integer.valueOf(q7)
                 + Integer.valueOf(q8) + Integer.valueOf(q9) + Integer.valueOf(q10) + Integer.valueOf(q11)+Integer.valueOf(q6a);
 
         System.out.println("score" + score);

@@ -119,14 +119,16 @@ public class BiodataModel {
     public Biodata getBiodata(String field, String value) {
         
         
-        String q = "Start root=node(0) "
-                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->p"
-                + " where p." + field + "='" + value + "'"
-                + " return p";
+//        String q = "Start root=node(0) "
+//                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->p"
+//                + " where p." + field + "='" + value + "'"
+//                + " return p";
+//        
+        String q = "match (l:FARMER) WHERE l." + field + "='" + value + "' return  l ";
 
         System.out.println("Query " + q);
         try {
-            Node node = Neo4jServices.executeCypherQuerySingleResult(q, "p");
+            Node node = Neo4jServices.executeCypherQuerySingleResult(q, "l");
             if (null != node) {
                 return new Biodata(node);
             }
@@ -410,12 +412,14 @@ public class BiodataModel {
 
                 b.setFarmerMeeting(meeting);
                 created = true;
-                trx.success();
+                
 
             }
+            trx.success();
         } catch (Exception e) {
             System.out.println("error");
             //created = false;
+            e.printStackTrace();
 
         }
 
@@ -434,9 +438,11 @@ public class BiodataModel {
 
                 b.setProduction(production);
                 created = true;
-                trx.success();
+               
 
             }
+            
+             trx.success();
         } catch (Exception e) {
             System.out.println("error");
             //created = false;
@@ -459,9 +465,11 @@ public class BiodataModel {
 
                 b.setProfiling(profile);
                 created = true;
-                trx.success();
+               
 
             }
+            
+             trx.success();
         } catch (Exception e) {
             System.out.println("error");
             //created = false;
@@ -670,11 +678,13 @@ public class BiodataModel {
              if (null != bio) {
 
                  bio.setLastModifiedDate(lastmodified);
-                 trx.success();
+                
                  updated = true;
                  log.log(Level.INFO, "Bio Data Successfully Updated with lastmodified date {0}", updated);
+                  trx.success();
              } else {
                   log.log(Level.INFO, "Farmer not available");
+                   trx.success();
              }
         }
          
@@ -729,10 +739,11 @@ public class BiodataModel {
                    
 
                 }
-                trx.success();
-
                 updated = true;
                 log.log(Level.INFO, "Bio Data Successfully Updated {0}", updated);
+                trx.success();
+
+                
 
             } else {
 

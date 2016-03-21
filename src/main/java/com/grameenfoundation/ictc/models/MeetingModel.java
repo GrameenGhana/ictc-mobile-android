@@ -47,7 +47,7 @@ public class MeetingModel {
                 log.info("meeting is invalid");
                 created = false;
             } else {
-                meetingParent = ParentNode.MeetingParentNode();
+               // meetingParent = ParentNode.MeetingParentNode();
                 meet.setType(mw.getType());
                 meet.setMeetingIndex(mw.getMeetingIndex());
                 meet.setSeason(mw.getSeason());
@@ -55,7 +55,7 @@ public class MeetingModel {
                 meet.setEnddate(mw.getEndDate());
                 meet.setAttended(mw.getAttended());
 
-                meetingParent.createRelationshipTo(stNode, ICTCRelationshipTypes.MEETING);
+               // meetingParent.createRelationshipTo(stNode, ICTCRelationshipTypes.MEETING);
 
                 log.log(Level.INFO, "new node created. {0}", meet.getUnderlyingNode().getId());
                 trx.success();
@@ -213,14 +213,16 @@ public class MeetingModel {
     }
 
     public Meeting getMeeting(String field, String value) {
-        String q = "Start root=node(0) "
-                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.MEETING + "]->p"
-                + " where p." + field + "='" + value + "'"
-                + " return p";
+//        String q = "Start root=node(0) "
+//                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.MEETING + "]->p"
+//                + " where p." + field + "='" + value + "'"
+//                + " return p";
+        
+        String q  = "match (l:MEETING) WHERE l." + field + "='" + value + "' return  l" ;
 
         System.out.println("Query " + q);
         try {
-            Node node = Neo4jServices.executeCypherQuerySingleResult(q, "p");
+            Node node = Neo4jServices.executeCypherQuerySingleResult(q, "l");
             if (null != node) {
                 return new Meeting(node);
             }

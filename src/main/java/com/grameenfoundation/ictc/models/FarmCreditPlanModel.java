@@ -13,5 +13,8 @@ package com.grameenfoundation.ictc.models;
  * description:
  */
 public class FarmCreditPlanModel {
+    
+    
+    
 
 }
