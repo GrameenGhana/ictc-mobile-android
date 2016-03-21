@@ -51,7 +51,7 @@ public class MobileTrackerModel {
                 log.info("tracker is invalid");
                 created = false;
             } else {
-                trackerParent = ParentNode.TrackerParentNode();
+               // trackerParent = ParentNode.TrackerParentNode();
                 meet.setBattery(mw.getBattery());
                 meet.setData(mw.getData());
                 meet.setEndDate(mw.getEndTime());
@@ -66,7 +66,7 @@ public class MobileTrackerModel {
                 meet.setTimeSpent(mw.getTimeSpent());
                 meet.setId(String.valueOf(stNode.getId()) + new Date().getTime());
                 
-                trackerParent.createRelationshipTo(stNode, ICTCRelationshipTypes.MOBILE_TRACKER);
+               // trackerParent.createRelationshipTo(stNode, ICTCRelationshipTypes.MOBILE_TRACKER);
                 
                 log.log(Level.INFO, "new node created tracker. {0}", meet.getUnderlyingNode().getId());
                 trx.success();

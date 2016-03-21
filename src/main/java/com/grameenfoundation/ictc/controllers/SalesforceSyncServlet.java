@@ -106,8 +106,8 @@ public class SalesforceSyncServlet extends HttpServlet {
         
          try (PrintWriter out = response.getWriter()) {
              
-        //  String theString = IOUtils.toString(request.getInputStream(), "UTF-8");
-          //  System.out.println("Salesforce data/n " + theString);
+        String theString = IOUtils.toString(request.getInputStream(), "UTF-8");
+          System.out.println("Salesforce data/n " + theString);
             //gets request input stream
             InputStream in = request.getInputStream();
             InputSource input = null;
@@ -119,14 +119,14 @@ public class SalesforceSyncServlet extends HttpServlet {
              try(Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
                 System.out.println(" " + request.getContentType());
-               File xmlFile = new File("/home/grameen/test.xml");
+               // File xmlFile = new File("/home/grameen/test.xml");
                 DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                 InputSource is = new InputSource();
                 Map<String,String> update = new HashMap<>();
-               // is.setCharacterStream(new StringReader(theString));
+                is.setCharacterStream(new StringReader(theString));
                 System.out.println("After parsing XML");
-               // Document doc = db.parse(is);
-                Document doc = db.parse(xmlFile);   
+                Document doc = db.parse(is);
+               // Document doc = db.parse(xmlFile);   
                 System.out.println("Should be normalised now");
                 doc.getDocumentElement().normalize();
           
