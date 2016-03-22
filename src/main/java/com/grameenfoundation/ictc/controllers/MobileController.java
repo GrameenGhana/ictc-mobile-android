@@ -5,17 +5,34 @@
  */
 package com.grameenfoundation.ictc.controllers;
 
+import com.grameenfoundation.ictc.domains.BaselinePostHarvest;
+import com.grameenfoundation.ictc.domains.BaselinePostHarvestBudget;
+import com.grameenfoundation.ictc.domains.BaselineProduction;
+import com.grameenfoundation.ictc.domains.BaselineProductionBudget;
 import com.grameenfoundation.ictc.domains.Biodata;
+import com.grameenfoundation.ictc.domains.FieldCropAssessment;
+import com.grameenfoundation.ictc.domains.FmpProductionBudget;
 import com.grameenfoundation.ictc.domains.Meeting;
 import com.grameenfoundation.ictc.domains.PostHarvest;
 import com.grameenfoundation.ictc.domains.PostHarvest2;
 import com.grameenfoundation.ictc.domains.ProductionNew;
+import com.grameenfoundation.ictc.domains.Profiling;
+import com.grameenfoundation.ictc.domains.TechnicalNeed;
 import com.grameenfoundation.ictc.models.AgentModel;
+import com.grameenfoundation.ictc.models.BaselinePostHarvestBudgetModel;
+import com.grameenfoundation.ictc.models.BaselinePostHarvestModel;
+import com.grameenfoundation.ictc.models.BaselineProductionBudgetModel;
+import com.grameenfoundation.ictc.models.BaselineProductionModel;
 import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.models.FarmerInputModel;
+import com.grameenfoundation.ictc.models.FieldCropAssessmentModel;
+import com.grameenfoundation.ictc.models.FmpPostHarvestBudgetModel;
+import com.grameenfoundation.ictc.models.FmpProductionBudgetModel;
 import com.grameenfoundation.ictc.models.MeetingModel;
 import com.grameenfoundation.ictc.models.PostHarvestModel;
 import com.grameenfoundation.ictc.models.ProductionModel;
+import com.grameenfoundation.ictc.models.ProfilingModel;
+import com.grameenfoundation.ictc.models.TechnicalNeedsModel;
 import com.grameenfoundation.ictc.models.UserModel;
 import com.grameenfoundation.ictc.utils.HTTPCommunicator;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
@@ -279,54 +296,178 @@ public class MobileController extends HttpServlet {
                  
                  List<BiodataWrapper> bw = new BiodataModel().getBioData("","");
                  System.out.println("Farmer count " + bw.size());
+                 System.out.println("Farmer count " + bw.size());
+                BiodataModel biodataModel = new BiodataModel();
+                ProductionModel productionModel = new ProductionModel();
+                PostHarvestModel postHarvestModel = new PostHarvestModel();
+                BaselineProductionModel baselineProductionModel = new BaselineProductionModel();
+                BaselineProductionBudgetModel baselineProductionBudgetModel = new BaselineProductionBudgetModel();
+                BaselinePostHarvestModel baselinePostHarvestModel = new BaselinePostHarvestModel();
+                BaselinePostHarvestBudgetModel baselinePostHarvestBudgetModel = new BaselinePostHarvestBudgetModel();
+                FmpProductionBudgetModel fmpProductionBudgetModel = new FmpProductionBudgetModel();
+                TechnicalNeedsModel technicalNeedsModel = new TechnicalNeedsModel();
+                ProfilingModel profilingModel = new ProfilingModel();
+                FieldCropAssessmentModel fieldCropAssessmentModel = new FieldCropAssessmentModel();
+                FmpPostHarvestBudgetModel fmpPostHarvestBudgetModel = new FmpPostHarvestBudgetModel();
                  
-                 
+                JSONArray fa = new JSONArray();
+                
+                
              if(null!=bw)
                {
                
+                
+                    JSONObject production = null;
+                    JSONObject postHarvest = null;
+                    JSONObject farmer = null;
+                    JSONObject details = null;
+                    JSONObject meetng = null;
+                    JSONObject baselineproduction = null;
+                    JSONObject baselineproductionbudget = null;
+                    JSONObject baselinepostharvest = null;
+                    JSONObject technicalNeeds = null;
+                    JSONObject profiling = null;
+                    JSONObject baselinepostharvestbudget = null;
+                    JSONObject fmpproductionbudget = null;
+                    JSONObject fieldcropassessment = null;
+                    JSONObject fmppostharvestbudget = null;
+                    Biodata b = null;
+                    JSONArray meetingArray = null;
+                    List<MeetingWrapper> meetings = null;
+                    List<FarmerInputReceivedWrapper> fi = null;
+                    JSONArray inputArray = null;
+                    ProductionNew p = null;
+                    PostHarvest2 ph = null;
+                    BaselineProduction bp = null;
+                    BaselineProductionBudget bpb = null;
+                    BaselinePostHarvest bph = null;
+                    TechnicalNeed techNeed = null;
+                    Profiling pr = null;
+                    BaselinePostHarvestBudget bphb = null;
+                    FmpProductionBudget fmppb = null;
+                    FieldCropAssessment fca = null;
+
                 for(BiodataWrapper bb :bw)
                 {
                     
-               
-                 JSONObject root = new JSONObject();
-                 JSONObject details = new JSONObject();
-                 JSONObject production = new JSONObject();
-                 JSONObject postHarvest = new JSONObject();
-                 JSONObject farmer = new JSONObject();
-                 JSONArray fa = new JSONArray();
-                 JSONArray pa = new JSONArray();
-                 JSONArray pha = new JSONArray();
+                        production = new JSONObject();
+                        postHarvest = new JSONObject();
+                        farmer = new JSONObject();
+                        details = new JSONObject();
+                        meetng = new JSONObject();
+                        baselineproduction = new JSONObject();
+                        baselineproductionbudget = new JSONObject();
+                        baselinepostharvest = new JSONObject();
+                        technicalNeeds = new JSONObject();
+                        profiling = new JSONObject();
+                        baselinepostharvestbudget = new JSONObject();
+                        fmpproductionbudget = new JSONObject();
+                        fieldcropassessment = new JSONObject();
+                        fmppostharvestbudget = new JSONObject();
+
                 
                  
                  //biodata
-                Biodata b = new BiodataModel().getBiodata("Id", bb.getFarmID());
+                 b = new BiodataModel().getBiodata("Id", bb.getFarmID());
                 
                 if(null!=b)
                 {
-              
-                farmer.put(Biodata.FIRST_NAME,b.getFirstname());
-                farmer.put(Biodata.LAST_NAME, b.getLastname());
-                farmer.put(Biodata.AGE,b.getAge());
-                farmer.put(Biodata.COMMUNITY,b.getCommunity());
-                farmer.put(Biodata.GENDER, b.getGender());
-                farmer.put(Biodata.EDUCATION,b.getEducation());
-                farmer.put(Biodata.FARMERID, b.getId());
-               // farmer.put(Biodata.FARM_AREA, b.getFarmarea());
-                farmer.put(Biodata.MAJOR_CROP,b.getMajorCrop());
-                farmer.put(Biodata.MARITAL_STATUS,b.getMaritalstatus());
-                farmer.put(Biodata.NICKNAME, b.getNickname());
-                farmer.put(Biodata.NUMBER_OF_CHILDREN,b.getNumberofchildren());
-                farmer.put(Biodata.NUMBER_OF_DEPENDANTS,b.getNumberofdependants());
-                farmer.put(Biodata.REGION,b.getRegion());
-                farmer.put(Biodata.VILLAGE,b.getVillage());
-                
+                            farmer.put(Biodata.FIRST_NAME, b.getFirstname());
+                            farmer.put(Biodata.LAST_NAME, b.getLastname());
+                            farmer.put(Biodata.AGE, b.getAge());
+                            farmer.put(Biodata.COMMUNITY, b.getCommunity());
+                            farmer.put(Biodata.GENDER, b.getGender());
+                            farmer.put(Biodata.EDUCATION, b.getEducation());
+                            farmer.put(Biodata.FARMERID, b.getId());
+                            farmer.put(Biodata.FARMERIMAGE, b.getFarmerimage());
+                            farmer.put(Biodata.MAJOR_CROP, b.getMajorCrop());
+                            farmer.put(Biodata.MARITAL_STATUS, b.getMaritalstatus());
+                            farmer.put(Biodata.NICKNAME, b.getNickname());
+                            farmer.put(Biodata.NUMBER_OF_CHILDREN, b.getNumberofchildren());
+                            farmer.put(Biodata.NUMBER_OF_DEPENDANTS, b.getNumberofdependants());
+                            farmer.put(Biodata.REGION, b.getRegion());
+                            farmer.put(Biodata.VILLAGE, b.getVillage());
+                            farmer.put(Biodata.CREATED_BY,b.getCreatedById());
+                            farmer.put(Biodata.TELEPHONENUMBER,b.getTelephonenumber());
+                            farmer.put(Biodata.IMAGE_URL,b.getImage_Url());
+                            
+                          
+                           if(null!=b.getDisrictresidenceash())
+                           {
+                               farmer.put(Biodata.DISRICTRESIDENCEASH,b.getDisrictresidenceash());
+                           }
+                           if(null!=b.getDistrictresidenceba())
+                           {
+                               farmer.put(Biodata.DISTRICTRESIDENCEBA,b.getDistrictresidenceba());
+                           }
+                           
+                         if(null!=b.getDistrictresidenceba())
+                           {
+                               farmer.put(Biodata.DISTRICTRESIDENCEBA,b.getDistrictresidenceba());
+                           }
+                         
+                          
+  
+                            if(null!=b.getDistricts_Ashanti())
+                            {
+                                farmer.put(Biodata.DISTRICTS_ASHANTI, b.getDistricts_Ashanti()); 
+                            }
+                            else if(null!=b.getDistricts_BrongAhafo())
+                            {
+                                farmer.put(Biodata.DISTRICTS_BRONGAHAFO, b.getDistricts_BrongAhafo()); 
+                            }
+                            else
+                            {
+                                farmer.put(Biodata.DISTRICTS_VOLTA, b.getDistricts_Volta()); 
+                            }
+
+                            farmer.put(Biodata.FARM_PERIMETER, b.getFarmperimeter());
+
+                            if (null != b.getCluster()) {
+                                farmer.put(Biodata.CLUSTER, b.getCluster());
+                            } else {
+                                farmer.put(Biodata.CLUSTER, "");
+                            }
+
+                            if (null != b.getFarmarea()) {
+                                farmer.put(Biodata.FARM_AREA, b.getCluster());
+                            } else {
+                                farmer.put(Biodata.FARM_AREA, "0");
+                            }
+
+
+                            
+                            
+                            
+                            meetingArray = new JSONArray();
+                            meetings = b.getMeetingDetails();
+                            for (MeetingWrapper meeting : meetings) {
+                                JSONObject meetingObj = new JSONObject();
+                                meetingObj.put("midx", meeting.getMeetingIndex());
+                                meetingObj.put("ty", meeting.getType());
+                                meetingObj.put("sea", meeting.getSeason());
+                                meetingObj.put("sd", meeting.getStartDate());
+                                meetingObj.put("ed", meeting.getEndDate());
+                                meetingObj.put("at", meeting.getAttended());
+                                meetingArray.put(meetingObj);
+                            }
+
+                            inputArray = new JSONArray();
+                            fi = b.getFarmInputs();
+                            for (FarmerInputReceivedWrapper f : fi) {
+                                JSONObject inputObj = new JSONObject();
+                                inputObj.put("nm", f.getName());
+                                inputObj.put("qty", f.getQty());
+                                inputObj.put("st", f.getStatus());
+                                inputArray.put(inputObj);
+                            }
                 }
                 
                 
                 //farmer.put
                 
                  //Production
-                ProductionNew  p =  new ProductionModel().getProduction("Id", bb.getFarmID());
+                 p =  b.getProduction();
                 
                 if(null!=p)
                 {
@@ -383,7 +524,7 @@ public class MobileController extends HttpServlet {
                  
                 
                 //Post Harvest
-                 PostHarvest2 ph = new PostHarvestModel().getPostHarvest("Id", bb.getFarmID());
+                 ph = new PostHarvestModel().getPostHarvest("Id", bb.getFarmID());
                  if(null!=ph)
                 {
                  System.out.println("Post Harvest " + ph.getApplicationrateofstoragechemical() + "farmer " + b.getFirstname());
@@ -426,26 +567,17 @@ public class MobileController extends HttpServlet {
                  
                  //farmer.put("production",production);
                  //farmer.put("postharvest",postHarvest);
-                 fa.put(farmer);
-                 pa.put(production);
-                 pha.put(postHarvest);
-                 
-                 
+                 details.put("farmer", farmer);
+
+                 fa.put(details);
                 
-                //details.put("farmer",fa);
-                 details.put("production", pa);
-                 details.put("postharvest", pha);
-                 details.put("biodata",fa);
                  
-                 root.put("farmer", details);
-                 
-                 jay.put(root);
                  
                 }
                  
                  tx.success();
                     
-                out.print(jay);
+                out.println(fa);
                  }
                  else
                  {

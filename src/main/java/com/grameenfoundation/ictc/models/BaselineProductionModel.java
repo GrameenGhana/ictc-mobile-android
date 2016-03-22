@@ -22,12 +22,17 @@ public class BaselineProductionModel {
     
     
         public BaselineProduction getProduction(String field, String value) {
-        String q = "Start root=node(0) "
-                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+ICTCRelationshipTypes.HAS_BASELINE_PRODUCTION+
-                "]->p"
-                + " where f." + field + "='" + value + "'"
-                + " return p";
+//        String q = "Start root=node(0) "
+//                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+ICTCRelationshipTypes.HAS_BASELINE_PRODUCTION+
+//                "]->p"
+//                + " where f." + field + "='" + value + "'"
+//                + " return p";
 
+        String q = "match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_BASELINE_PRODUCTION+"]->p"+ 
+                " where f." + field + "='" + value + "'"
+                + " return p";
+        
+        
         System.out.println("Query " + q);
         try {
             Node node = Neo4jServices.executeCypherQuerySingleResult(q, "p");

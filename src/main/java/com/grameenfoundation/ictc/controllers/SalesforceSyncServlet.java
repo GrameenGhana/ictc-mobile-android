@@ -305,9 +305,9 @@ public class SalesforceSyncServlet extends HttpServlet {
                              }
 
                              productionNewNode.setProperty(ProductionNew.LAST_MODIFIED, new Date().getTime());
-
-                             ProductionNewParent = ParentNode.ProductionParentNode();
-                             ProductionNewParent.createRelationshipTo(productionNewNode, ICTCRelationshipTypes.PRODUCTION);
+//
+//                             ProductionNewParent = ParentNode.ProductionParentNode();
+//                             ProductionNewParent.createRelationshipTo(productionNewNode, ICTCRelationshipTypes.PRODUCTION);
 
                              log.log(Level.INFO, "new node created {0}", productionNewNode.getId());
                             
@@ -356,9 +356,9 @@ public class SalesforceSyncServlet extends HttpServlet {
                              }
                              
                              postHarvestNewNode.setProperty(PostHarvest2.LAST_MODIFIED, new Date().getTime());
-                             
-                             PostHarvestNewParent = ParentNode.PostHarvestParentNode();
-                             PostHarvestNewParent.createRelationshipTo(postHarvestNewNode, ICTCRelationshipTypes.POST_HARVEST);
+//                             
+//                             PostHarvestNewParent = ParentNode.PostHarvestParentNode();
+//                             PostHarvestNewParent.createRelationshipTo(postHarvestNewNode, ICTCRelationshipTypes.POST_HARVEST);
                              
                              log.log(Level.INFO, "new node created {0}", postHarvestNewNode.getId());
                              
@@ -570,9 +570,9 @@ public class SalesforceSyncServlet extends HttpServlet {
                         }
                         
                         TNNode.setProperty(TechnicalNeed.LAST_MODIFIED,new Date().getTime());
-
-                        TNParent = ParentNode.TechNeedParentNode();
-                        TNParent.createRelationshipTo(TNNode, ICTCRelationshipTypes.TECHNICAL_NEED);
+//
+//                        TNParent = ParentNode.TechNeedParentNode();
+//                        TNParent.createRelationshipTo(TNNode, ICTCRelationshipTypes.TECHNICAL_NEED);
 
                         log.log(Level.INFO, "new node created {0}", TNNode.getId());
 
@@ -621,8 +621,8 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                             BPBNode.setProperty(BaselineProductionBudget.LAST_MODIFIED,new Date().getTime());
                             
-                            BPBParent = ParentNode.BPBParentNode();
-                            BPBParent.createRelationshipTo(BPBNode, ICTCRelationshipTypes.BASELINE_PRODUCTION_BUDGET);
+//                            BPBParent = ParentNode.BPBParentNode();
+//                            BPBParent.createRelationshipTo(BPBNode, ICTCRelationshipTypes.BASELINE_PRODUCTION_BUDGET);
                              
                             log.log(Level.INFO, "new node created {0}", BPBNode.getId());
 
@@ -669,8 +669,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                             }
                             
                             BPNode.setProperty(BaselineProduction.LAST_MODIFIED,new Date().getTime());
-                            BPBParent = ParentNode.BPParentNode();
-                            BPBParent.createRelationshipTo(BPNode, ICTCRelationshipTypes.BASELINE_PRODUCTION);
+//                            BPBParent = ParentNode.BPParentNode();
+//                            BPBParent.createRelationshipTo(BPNode, ICTCRelationshipTypes.BASELINE_PRODUCTION);
                             
                             log.log(Level.INFO, "new node created {0}", BPNode.getId());
                             
@@ -717,8 +717,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                             }
                         }
 
-                        BPHBParent = ParentNode.BPHBParentNode();
-                        BPHBParent.createRelationshipTo(BPHBNode, ICTCRelationshipTypes.BASELINE_POSTHARVEST_BUDGET);
+//                        BPHBParent = ParentNode.BPHBParentNode();
+//                        BPHBParent.createRelationshipTo(BPHBNode, ICTCRelationshipTypes.BASELINE_POSTHARVEST_BUDGET);
 
                         log.log(Level.INFO, "new node created {0}", BPHBNode.getId());
 
@@ -768,8 +768,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                         
                         BPHNode.setProperty(BaselinePostHarvest.LAST_MODIFIED,new Date().getTime());
 
-                        BPHParent = ParentNode.BPHParentNode();
-                        BPHParent.createRelationshipTo(BPHNode, ICTCRelationshipTypes.BASELINE_POSTHARVEST);
+//                        BPHParent = ParentNode.BPHParentNode();
+//                        BPHParent.createRelationshipTo(BPHNode, ICTCRelationshipTypes.BASELINE_POSTHARVEST);
 
                         log.log(Level.INFO, "new node created {0}", BPHNode.getId());
 
@@ -784,8 +784,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                          trx.success();
                          }
                         
-                          }
-                          tx.success();
+                      }
+                      tx.success();
                     }
                else if(salesforceObj.equals("sf:FMP_PRODUCTION_BUDGET__c"))
                     {
@@ -814,8 +814,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                                 }
                             }
                             
-                            FMPPBParent = ParentNode.FMPPBparentNode();
-                            FMPPBParent.createRelationshipTo(FMPPBNode, ICTCRelationshipTypes.FMP_PRODUCTION_BUDGET);
+//                            FMPPBParent = ParentNode.FMPPBparentNode();
+//                            FMPPBParent.createRelationshipTo(FMPPBNode, ICTCRelationshipTypes.FMP_PRODUCTION_BUDGET);
                             
                             log.log(Level.INFO, "new node created {0}", FMPPBNode.getId());
                             
@@ -904,8 +904,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                             }
                         }
 
-                        FMPPBHParent = ParentNode.FMPPHBparentNode();
-                        FMPPBHParent.createRelationshipTo(FMPPBHNode, ICTCRelationshipTypes.FMP_POSTHARVEST_BUDGET);
+//                        FMPPBHParent = ParentNode.FMPPHBparentNode();
+//                        FMPPBHParent.createRelationshipTo(FMPPBHNode, ICTCRelationshipTypes.FMP_POSTHARVEST_BUDGET);
 
                         log.log(Level.INFO, "new node created {0}", FMPPBHNode.getId());
 
@@ -1000,8 +1000,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                              }
                              
                              FCANode.setProperty(FieldCropAssessment.LAST_MODIFIED, currentTimestamp());
-                             FCAParent = ParentNode.FCAparentNode();
-                             FCAParent.createRelationshipTo(FCANode, ICTCRelationshipTypes.FIELD_CROP_ASSESSMENT);
+//                             FCAParent = ParentNode.FCAparentNode();
+//                             FCAParent.createRelationshipTo(FCANode, ICTCRelationshipTypes.FIELD_CROP_ASSESSMENT);
 
                              log.log(Level.INFO, "new node created {0}", FCANode.getId());
 
@@ -1010,7 +1010,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                              biodataModel.BiodataToFCA(b.getId(), FCANode);
                              
                              FieldCropAssessment fca = new FieldCropAssessment(FCANode);
-                              CropAssessmentImage img = null;
+                            CropAssessmentImage img = null;
                             JSONArray m = new JSONArray();
                             m.put(getImageId(fca.getPhoto_crop_establishment_status()));
                             m.put(getImageId(fca.getPhoto_disease_mangement_status()));

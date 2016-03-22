@@ -255,8 +255,7 @@ public class APIController extends HttpServlet {
                     BaselineProductionBudget bpb = null;
                     BaselinePostHarvest bph = null;
                     TechnicalNeed techNeed = null;
-                    Profiling pr
-                            = null;
+                    Profiling pr = null;
                     BaselinePostHarvestBudget bphb = null;
                     FmpProductionBudget fmppb = null;
                     FieldCropAssessment fca = null;

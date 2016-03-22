@@ -22,10 +22,15 @@ public class BaselinePostHarvestBudgetModel {
     
     
     public BaselinePostHarvestBudget getBaselinePostHarvestBudget(String field, String value) {
-        String q = "Start root=node(0) "
-                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST_BUDGET+
-                "]->p"
-                + " where f." + field + "='" + value + "'"
+//        String q = "Start root=node(0) "
+//                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST_BUDGET+
+//                "]->p"
+//                + " where f." + field + "='" + value + "'"
+//                + " return p";
+        
+        
+         String q = "match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST_BUDGET+"]->p"+ 
+                " where f." + field + "='" + value + "'"
                 + " return p";
 
         System.out.println("Query " + q);

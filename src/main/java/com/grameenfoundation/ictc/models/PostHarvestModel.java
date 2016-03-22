@@ -123,10 +123,15 @@ public class PostHarvestModel {
     
     
        public PostHarvest2 getPostHarvest(String field, String value) {
-        String q = "Start root=node(0) "
-                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+ICTCRelationshipTypes.HAS_POSTHARVEST+
-                "]->p"
-                + " where f." + field + "='" + value + "'"
+//        String q = "Start root=node(0) "
+//                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+ICTCRelationshipTypes.HAS_POSTHARVEST+
+//                "]->p"
+//                + " where f." + field + "='" + value + "'"
+//                + " return p";
+        
+        
+          String q = "match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_POSTHARVEST+"]->p"+ 
+                " where f." + field + "='" + value + "'"
                 + " return p";
 
         System.out.println("Query " + q);

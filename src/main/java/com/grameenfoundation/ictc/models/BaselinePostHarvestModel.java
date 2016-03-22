@@ -21,10 +21,15 @@ import org.neo4j.graphdb.Node;
 public class BaselinePostHarvestModel {
     
       public BaselinePostHarvest getBaselinePostHarvest(String field, String value) {
-        String q = "Start root=node(0) "
-                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST+
-                "]->p"
-                + " where f." + field + "='" + value + "'"
+//        String q = "Start root=node(0) "
+//                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST+
+//                "]->p"
+//                + " where f." + field + "='" + value + "'"
+//                + " return p";
+        
+        
+         String q = "match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST+"]->p"+ 
+                " where f." + field + "='" + value + "'"
                 + " return p";
 
         System.out.println("Query " + q);

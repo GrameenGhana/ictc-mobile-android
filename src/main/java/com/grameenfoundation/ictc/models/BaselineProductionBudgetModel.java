@@ -22,10 +22,14 @@ public class BaselineProductionBudgetModel {
     
     
       public BaselineProductionBudget getBaselineProductionBudget(String field, String value) {
-     String q = "Start root=node(0) "
-                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+ICTCRelationshipTypes.HAS_BASELINE_PRODUCTION_BUDGET+
-                "]->p"
-                + " where f." + field + "='" + value + "'"
+//      String q = "Start root=node(0) "
+//                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+ICTCRelationshipTypes.HAS_BASELINE_PRODUCTION_BUDGET+
+//                "]->p"
+//                + " where f." + field + "='" + value + "'"
+//                + " return p";
+      
+          String q = "match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_BASELINE_PRODUCTION_BUDGET+"]->p"+ 
+                " where f." + field + "='" + value + "'"
                 + " return p";
 
         System.out.println("Query " + q);
@@ -35,7 +39,8 @@ public class BaselineProductionBudgetModel {
                 return new BaselineProductionBudget(node);
             }
         } catch (Exception e) {
-            System.out.println("Unable to Find geofence");
+            System.out.println("Unable to Find Baseline Production Budget");
+            e.printStackTrace();
         }
 
         return null;

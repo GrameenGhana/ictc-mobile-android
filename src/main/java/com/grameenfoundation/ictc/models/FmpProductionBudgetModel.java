@@ -22,10 +22,14 @@ public class FmpProductionBudgetModel
 {
     
      public FmpProductionBudget getFmpProductionBudget(String field, String value) {
-        String q = "Start root=node(0) "
-                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+ICTCRelationshipTypes.HAS_PRODUCTION_BUDGET+
-                "]->p"
-                + " where f." + field + "='" + value + "'"
+//        String q = "Start root=node(0) "
+//                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+ICTCRelationshipTypes.HAS_PRODUCTION_BUDGET+
+//                "]->p"
+//                + " where f." + field + "='" + value + "'"
+//                + " return p";
+        
+         String q = "match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_PRODUCTION_BUDGET+"]->p"+ 
+                " where f." + field + "='" + value + "'"
                 + " return p";
 
         System.out.println("Query " + q);

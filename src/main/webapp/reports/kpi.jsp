@@ -33,6 +33,11 @@ BiodataModel bio = new BiodataModel();
                                     <th>Values</th>
                                 </tr>
                                
+                                  <tr>
+                                    <td>Farmers</td>
+                                    <td><%= bio.getFarmerCount()%></td>
+                                </tr>
+                                 
 
                                 <tr>
                                     <td>Profiling</td>
