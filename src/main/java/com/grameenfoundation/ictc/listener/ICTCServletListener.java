@@ -61,16 +61,6 @@ public class ICTCServletListener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
        System.out.println("-------------listener done-------------------");
-        try {
-            System.out.println("Shut Down About to Start Started");
-            //Shut Down the server on exit
-            //ICTCDBUtil.getInstance().shutdown(ICTCDBUtil.getInstance().getGraphDB());
-           
-            //log.info("Shut Down done");
-             System.out.println(" Database Shut Down done");
-        } catch (Exception e) {
-            System.out.println("Unable to Shut Down" + e.getLocalizedMessage());
-            e.printStackTrace();
-        }
+        
     }
 }

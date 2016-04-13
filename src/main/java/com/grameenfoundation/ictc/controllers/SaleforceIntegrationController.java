@@ -21,19 +21,26 @@ import com.grameenfoundation.ictc.models.OperationsModel;
 import com.grameenfoundation.ictc.models.StorageModel;
 import com.grameenfoundation.ictc.models.UserModel;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
+import com.grameenfoundation.ictc.utils.ICTCKonstants;
 import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
 import com.grameenfoundation.ictc.utils.Labels;
 import com.grameenfoundation.ictc.utils.MeetingSchedule;
 import com.grameenfoundation.ictc.utils.ParentNode;
 import com.grameenfoundation.ictc.wrapper.MeetingWrapper;
+import com.sun.jersey.core.util.Base64;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,6 +62,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import java.util.logging.Level;
+import org.json.JSONObject;
 import org.w3c.dom.Element;
 
 /**
@@ -80,10 +88,13 @@ public class SaleforceIntegrationController extends HttpServlet {
         BiodataModel biodataModel = new BiodataModel();
         MeetingSchedule meetingSchedule = new MeetingSchedule();
         MeetingModel  meetingModel = new MeetingModel();
+        Biodata bb = null;
         UserModel user = new UserModel();
         Map<String,MeetingWrapper> meetingMap = new HashMap<>();
-        
         String farmerID = null ;
+        String agentId = null;
+        
+        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
 
@@ -92,20 +103,21 @@ public class SaleforceIntegrationController extends HttpServlet {
             //gets request input stream
             InputStream in = request.getInputStream();
             InputSource input = null;
-            Transaction tx;
-            tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
-            org.neo4j.graphdb.Node FarmerParent;
+            Transaction tx = null;
+          
+           
 
             try {
 
                 System.out.println(" " + request.getContentType());
-
+              //  File xmlFile = new File("/home/grameen/test.xml");
                 DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
                 InputSource is = new InputSource();
                 Map<String,String> update = new HashMap<>();
-                is.setCharacterStream(new StringReader(theString));
+               is.setCharacterStream(new StringReader(theString));
                 System.out.println("After parsing XML");
-                Document doc = db.parse(is);       
+                Document doc = db.parse(is);  
+                // Document doc = db.parse(xmlFile);   
                 System.out.println("Should be normalised now");
                 doc.getDocumentElement().normalize();
           
@@ -114,10 +126,10 @@ public class SaleforceIntegrationController extends HttpServlet {
                 Node node = doc.getDocumentElement();
 
                 System.out.println("Root element " + doc.getDocumentElement());
-
+                JSONObject json = new JSONObject();
                 //get fields from objects
                 NodeList sObject = doc.getElementsByTagName("sObject");
-                
+                tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
                 for (int j = 0; j < sObject.getLength(); j++) {
 
                     Node rowNode = sObject.item(j);
@@ -125,43 +137,75 @@ public class SaleforceIntegrationController extends HttpServlet {
                     String salesforceObj = rowNode.getAttributes().getNamedItem("xsi:type").getNodeValue();
                     System.out.println(salesforceObj);
                     
-                    if (salesforceObj.equalsIgnoreCase("sf:Farmer_Biodata__c")) {
-                        String agentID = getXmlNodeValue("sf:Agent__c", ele);
-                        org.neo4j.graphdb.Node biodataNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARMER);
+                  if (salesforceObj.equalsIgnoreCase("sf:Farmer_Biodata__c")) {
+                        farmerID = getXmlNodeValue("sf:Id",ele);
+                        agentId = getXmlNodeValue("sf:CreatedById",ele);
+                        bb = biodataModel.getBiodata("Id", farmerID);
+                       
+                        
+                        if(null!=bb )
+                        {
+                            //update.put(Biodata.CREATED_BY,agentId);
+                            System.out.println("Farmer Already Exist Id " + farmerID);
+                            System.out.println("Agent Id" + agentId);
+                            //biodataModel.BiodataUpdate(bb.getFarmerID(), update);
+                            out.println(sendAck());
+                            
+                          
+                        }
+                       else
+                       {
+                        
+                        Map<String,String> imageUpdate = new HashMap<>();
+                        org.neo4j.graphdb.Node biodataNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
+                        biodataNode.addLabel(Labels.FARMER);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
                             
                            // System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
-                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
+                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") ||rowNode.getChildNodes().item(k).getNodeName().equals("sf:CreatedById") ) {
                                 System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+ 
                                 biodataNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                             }
 
-                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")) {
+                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:CreatedById")) {
 
-                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                 System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
                                 biodataNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
 
                             }
                         }
                         
+                        biodataNode.setProperty(Biodata.LAST_MODIFIED,new Date().getTime());
                         
-                        FarmerParent = ParentNode.FarmerParentNode();
-                        FarmerParent.createRelationshipTo(biodataNode, ICTCRelationshipTypes.FARMER);
+//                        FarmerParent = ParentNode.FarmerParentNode();
+//                        FarmerParent.createRelationshipTo(biodataNode, ICTCRelationshipTypes.FARMER);
 
                         log.log(Level.INFO, "new node created {0}", biodataNode.getId());
                       
                         
+                        
                        
                         out.println(sendAck());
                         
-                        user.AgentToPostFarmer(agentID,biodataNode);
+                       // user.AgentToPostFarmer(agentID,biodataNode);
                         
                         
                         String majorcrop = getXmlNodeValue("sf:majorcrop__c", ele);
                         Biodata farmer = new Biodata(biodataNode);
                         
+                        json.put("requestType","farmer");
+                        json.put("farmerId", farmer.getFarmerID());
                         
+                        //get farmer image from salesforce and saves it
+                       //
+                     String imageurl = getFarmerImage(farmer.getFarmerID(),ICTCKonstants.SALESFORCEURL_PRODUCTION+ICTCKonstants.GET_IMAGES,json.toString());
+                      //String image_url = getFarmerImage(farmer.getFarmerID(),ICTCKonstants.SALESFORCEURL_SANDBOX+ICTCKonstants.GET_IMAGES,json.toString());
                         
+                        imageUpdate.put(Biodata.IMAGE_URL,imageurl);
+                        biodataModel.BiodataUpdate(farmer.getFarmerID(),imageUpdate);
+                        
+                         
                         //create farmer meeting schedule
                         if (majorcrop.equalsIgnoreCase("Maize")) {
 
@@ -209,307 +253,17 @@ public class SaleforceIntegrationController extends HttpServlet {
                             }
 
                         }
-
-                        tx.success();
-                    }
-                    else if(salesforceObj.equals("sf:Agent__c"))
-                    {
-                        org.neo4j.graphdb.Node AgentParent;
-                        org.neo4j.graphdb.Node userNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.AGENT);
-                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
-
-                           // System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
-                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                                userNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
-                            }
-                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:agenttype")) {
-                                System.out.println("agent type : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                                userNode.setProperty(User.AGENT_TYPE, rowNode.getChildNodes().item(k).getTextContent());
-                            }
-                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:agentcode")) {
-                                System.out.println("agent code : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                                userNode.setProperty(User.USERNAME, rowNode.getChildNodes().item(k).getTextContent());
-                                userNode.setProperty(User.PASSWORD, rowNode.getChildNodes().item(k).getTextContent());
-                            }
-                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:agenttype")) {
-
-                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                                userNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
-
-                            }
-                        }
-
-                        AgentParent = ParentNode.AgentParentNode();
-                        AgentParent.createRelationshipTo(userNode, ICTCRelationshipTypes.AGENT);
-
-                        log.log(Level.INFO, "new node created {0}", userNode.getId());
-                        tx.success();
-
-                        out.println(sendAck());
-                    }
-                    else if(salesforceObj.equals("sf:Harvest__c"))
-                    {
-                        org.neo4j.graphdb.Node HarvestParent;
-                        org.neo4j.graphdb.Node harvestNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.HARVEST);
                         
-                       farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
-                        System.out.println("farmerid " + farmerID);
-                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
-
-                            //System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
-                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                               harvestNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
-                            }
-
-                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
-
-                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                               harvestNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
-
-                            }
-                        }
-
-                        HarvestParent = ParentNode.HarvestParentNode();
-                        HarvestParent.createRelationshipTo(harvestNode, ICTCRelationshipTypes.HARVEST);
-
-                        log.log(Level.INFO, "new node created {0}", harvestNode.getId());
-                        
-                        Biodata b = biodataModel.getBiodata("Id",farmerID);
-                        
-                        biodataModel.BiodataToHarvest(b.getId(),harvestNode);
-                        
-                        
-                        tx.success();
-
-                        out.println(sendAck());
-                    }
-                     else if(salesforceObj.equals("sf:FarmManagement__c"))
-                    {
-                        org.neo4j.graphdb.Node FarmManagementParent;
-                        org.neo4j.graphdb.Node FarmManagementNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARM_MANAGEMENT);
-                        
-                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
-                        System.out.println("farmerid " + farmerID);
-                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
-
-                            //System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
-                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                               FarmManagementNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
-                            }
-
-                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
-
-                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                               FarmManagementNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
-
-                            }
-                        }
-
-                       FarmManagementParent = ParentNode.FMParentNode();
-                       FarmManagementParent.createRelationshipTo( FarmManagementNode, ICTCRelationshipTypes.FARM_MANAGEMENT);
-
-                        log.log(Level.INFO, "new node created {0}", FarmManagementNode.getId());
-                        
-                        Biodata b = biodataModel.getBiodata("Id",farmerID);
-                        
-                        biodataModel.BiodataToFarmManagement(b.getId(), FarmManagementNode);
-                        
-                        
-                        tx.success();
-
-                        out.println(sendAck());
-                    }
-                     else if(salesforceObj.equals("sf:FarmOperations__c"))
-                    {
-                        org.neo4j.graphdb.Node FarmOperationParent;
-                        org.neo4j.graphdb.Node FarmOperationNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARM_OPERATION);
-                        
-                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
-                        System.out.println("farmerid " + farmerID);
-                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
-
-                            //System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
-                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                               FarmOperationNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
-                            }
-
-                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
-
-                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                               FarmOperationNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
-
-                            }
-                        }
-
-                       FarmOperationParent = ParentNode.OperationsParentNode();
-                      FarmOperationParent.createRelationshipTo( FarmOperationNode, ICTCRelationshipTypes.FARM_OPERATION);
-
-                        log.log(Level.INFO, "new node created {0}", FarmOperationNode.getId());
-                        
-                        Biodata b = biodataModel.getBiodata("Id",farmerID);
-                        
-                        biodataModel.BiodataToOperations(b.getId(), FarmOperationNode);
-                        
-                        
-                        tx.success();
-
-                        out.println(sendAck());
-                    }
-                     else if(salesforceObj.equals("sf:Marketing__c"))
-                    {
-                        org.neo4j.graphdb.Node MarketingParent;
-                        org.neo4j.graphdb.Node MarketingNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.MARKETING);
-                        
-                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
-                        System.out.println("farmerid " + farmerID);
-                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
-
-                            //System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
-                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                              MarketingNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
-                            }
-
-                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
-
-                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                               MarketingNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
-
-                            }
-                        }
-
-                       MarketingParent = ParentNode.MarketingParentNode();
-                       MarketingParent.createRelationshipTo( MarketingNode, ICTCRelationshipTypes.MARKETING);
-
-                        log.log(Level.INFO, "new node created {0}", MarketingNode.getId());
-                        
-                        Biodata b = biodataModel.getBiodata("Id",farmerID);
-                        
-                        biodataModel.BiodataToMarketing(b.getId(), MarketingNode);
-                        
-                        
-                        tx.success();
-
-                        out.println(sendAck());
-                    }
-                     else if(salesforceObj.equals("sf:PostHarvest__c"))
-                    {
-                        org.neo4j.graphdb.Node PostHarvestParent;
-                        org.neo4j.graphdb.Node PostHarvestNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.POSTHARVEST);
-                        
-                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
-                        System.out.println("farmerid " + farmerID);
-                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
-
-                           // System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
-                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                              PostHarvestNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
-                            }
-
-                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
-
-                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                               PostHarvestNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
-
-                            }
-                        }
-
-                      PostHarvestParent = ParentNode.PostHarvestParentNode();
-                       PostHarvestParent.createRelationshipTo( PostHarvestNode, ICTCRelationshipTypes.POST_HARVEST);
-
-                        log.log(Level.INFO, "new node created {0}", PostHarvestNode.getId());
-                        
-                        Biodata b = biodataModel.getBiodata("Id",farmerID);
-                        
-                        biodataModel.BiodataToPostHarvest(b.getId(), PostHarvestNode);
-                        
-                        
-                        tx.success();
-
-                        out.println(sendAck());
-                    }
-                     else if(salesforceObj.equals("sf:Storage__c"))
-                    {
-                        org.neo4j.graphdb.Node StorageParent;
-                        org.neo4j.graphdb.Node StorageNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.STORAGE);
-                        
-                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
-                        System.out.println("farmerid " + farmerID);
-                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
-
-                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
-                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                             StorageNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
-                            }
-
-                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
-
-                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                               StorageNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
-
-                            }
-                        }
-
-                       StorageParent = ParentNode.StorageParentNode();
-                       StorageParent.createRelationshipTo( StorageNode, ICTCRelationshipTypes.STORAGE);
-
-                        log.log(Level.INFO, "new node created {0}", StorageNode.getId());
-                        
-                        Biodata b = biodataModel.getBiodata("Id",farmerID);
-                        
-                        biodataModel.BiodataToStorage(b.getId(), StorageNode);
-                        
-                        
-                        tx.success();
-                        out.println(sendAck());
                        
+                       }
                         
-                    }
-                    
-                      else if(salesforceObj.equals("sf:TechnicalNeeds__c"))
-                    {
-                        org.neo4j.graphdb.Node TNParent;
-                        org.neo4j.graphdb.Node TNNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.TECHNICAL_NEEDS);
                         
-                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
-                        System.out.println("farmerid " + farmerID);
-                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
-
-                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
-                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                             TNNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
-                            }
-
-                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
-
-                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                               TNNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
-
-                            }
-                        }
-
-                        TNParent = ParentNode.TechNeedParentNode();
-                        TNParent.createRelationshipTo(TNNode, ICTCRelationshipTypes.TECHNICAL_NEED);
-
-                        log.log(Level.INFO, "new node created {0}", TNNode.getId());
-
-                        Biodata b = biodataModel.getBiodata("Id", farmerID);
-
-                        biodataModel.BiodataToTechNeeds(b.getId(), TNNode);
-                       
+                      tx.success();
                      
-                        out.println(sendAck());
-                       update.put(Biodata.CLUSTER, getCluster(getUserScore(farmerID)));
-                       biodataModel.BiodataUpdate(farmerID, update);
-                       tx.success();
-                    }
+                     }
+                   
+                  
+                    
                   
                 }
                 
@@ -519,7 +273,7 @@ public class SaleforceIntegrationController extends HttpServlet {
                 Logger.getLogger(SaleforceIntegrationController.class.getName()).log(Level.SEVERE, null, ex);
                 tx.failure();
             } finally {
-                tx.finish();
+                tx.close();
             }
 
         }
@@ -755,6 +509,47 @@ public class SaleforceIntegrationController extends HttpServlet {
         }
 
     }
+    
+    
+    
+       public String getFarmerImage(String farmer,String url,String detail)
+    {
+         String image_url =""; 
+         
+         Map<String, String> parameters = new HashMap<String, String>();
+
+            parameters.put("data", detail);
+
+            String result = SalesforceHttpClient.getSalesforceData(url, parameters);
+           // System.out.println(result);
+            JSONObject json = new JSONObject(result);
+
+            String res = json.getString("image");
+
+            String root = "com.sun.aas.instanceRoot";
+           
+            String path = "";
+
+            File f = new File(System.getProperty(root) + "/docroot/images");
+
+            if (!f.exists()) {
+                f.mkdirs();
+            } 
+            path = f.getPath() + File.separator +farmer +".jpg";
+            System.out.println("path " + path);
+            image_url = "/images"+File.separator +farmer +".jpg";
+            byte[] data = Base64.decode(res);
+            try (OutputStream stream = new FileOutputStream(path)) {
+                stream.write(data);
+            } catch (FileNotFoundException ex) {
+            Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+       return image_url;     
+    }
+    
         
     }
 

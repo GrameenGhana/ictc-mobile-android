@@ -85,7 +85,18 @@ public class BaselineProductionBudgetWrapper {
     String organicfertilizerqty="organicfertilizerqty";
     String orgfertilizerprice="orgfertilizerprice";
     String postplantherbicide2applicationcost="postplantherbicide2applicationcost";
+    String planting_labor_cost_base="planting_labor_cost_base";
     
+    
+    
+    
+ public  void setPlanting_labor_cost_base(String planting_labor_cost_base) {
+      this.planting_labor_cost_base=planting_labor_cost_base;
+    }
+ public  String getPlanting_labor_cost_base() {
+        return planting_labor_cost_base;
+
+    }
     
  public  void setPostplantherbicide2applicationcost(String postplantherbicide2applicationcost) {
       this.postplantherbicide2applicationcost=postplantherbicide2applicationcost;

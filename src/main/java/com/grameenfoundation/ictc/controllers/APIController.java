@@ -562,7 +562,7 @@ public class APIController extends HttpServlet {
                         bpb = b.getBPB();
 
                         if (bpb != null) {
-                            System.out.println("budget " + bpb.getBasal_fert_labor_period_base());
+                            System.out.println("budget " + bpb.getLand_rent_base());
                             baselineproductionbudget.put(BaselineProductionBudget.BASAL_FERTILIZER_APPL_LAB_BASE, bpb.getBasal_fertilizer_appl_lab_base());
                             baselineproductionbudget.put(BaselineProductionBudget.BASAL_FERT_LABOR_PERIOD_BASE, bpb.getBasal_fert_labor_period_base());
                             baselineproductionbudget.put(BaselineProductionBudget.COST_OF_APPLICATIONTOPDRESS_BASE, bpb.getCost_of_applicationtopdress_base());
@@ -610,6 +610,7 @@ public class APIController extends HttpServlet {
                             baselineproductionbudget.put(BaselineProductionBudget.PRICE_OF_BASAL_FERTILIZER_BASE, bpb.getPrice_of_basal_fertilizer_base());
                             baselineproductionbudget.put(BaselineProductionBudget.PRICE_OF_HERBICIDE_BASE, bpb.getPrice_of_herbicide_base());
                             baselineproductionbudget.put(BaselineProductionBudget.PRICE_OF_TOPDRESS_FERTILIZER_BASE, bpb.getPrice_of_topdress_fertilizer_base());
+                            baselineproductionbudget.put(BaselineProductionBudget.PLANTING_LABOR_COST_BASE, bpb.getPlanting_labor_cost_base());
                             baselineproductionbudget.put(BaselineProductionBudget.QUANTITY_OF_PREPLANT_HERBICIDE_BASE, bpb.getQuantity_of_preplant_herbicide_base());
                             baselineproductionbudget.put(BaselineProductionBudget.QTY_OF_BFERT_BASE, bpb.getQty_of_bfert_base());
                             baselineproductionbudget.put(BaselineProductionBudget.QTY_POSTPLANT_HERB_1, bpb.getQty_postplant_herb_1());
@@ -636,8 +637,8 @@ public class APIController extends HttpServlet {
                             baselineproductionbudget.put(BaselineProductionBudget.TOTAL_COST_THIRD_WEED_BASE, bpb.getTotal_cost_third_weed_base());
                             baselineproductionbudget.put(BaselineProductionBudget.TOTAL_NUMBER_OF_LABOR_TOPDRESS_BASE, bpb.getTotal_number_of_labor_topdress_base());
                             baselineproductionbudget.put(BaselineProductionBudget.UNIT_COST_HOE_PLOUGHING_BASE, bpb.getUnit_cost_hoe_ploughing_base());
-
-                            System.out.println("After Json : BaseProduction");
+                          
+                            System.out.println("After Json : BaseProduction Budge");
 
                         } else {
                             System.out.println("BaseProduction Budget null");
@@ -912,11 +913,19 @@ public class APIController extends HttpServlet {
                             fmppostharvestbudget.put(FmpPostHarvestBudget.LABOR_MANUAL_THRESHING, fmpphb.getLabor_manual_threshing());
                             fmppostharvestbudget.put(FmpPostHarvestBudget.LABOUR_FOR_BAGGING, fmpphb.getLabour_for_bagging());
                             fmppostharvestbudget.put(FmpPostHarvestBudget.LABOUR_WINNOWING, fmpphb.getLabour_winnowing());
+                            fmppostharvestbudget.put(FmpPostHarvestBudget.LABOR_PERIOD_DEHUSKING, fmpphb.getLabor_period_dehusking());
+                            fmppostharvestbudget.put(FmpPostHarvestBudget.REFERENCE_SEASON_CURRENT, fmpphb.getReference_season_current());
+                            fmppostharvestbudget.put(FmpPostHarvestBudget.REFERENCE_YEAR_CURRENT, fmpphb.getReference_year_current());
+                            fmppostharvestbudget.put(FmpPostHarvestBudget.PROCESSINGCOSTS1, fmpphb.getProcessingcosts1());
+                            
                             fmppostharvestbudget.put(FmpPostHarvestBudget.TIME_INTERVAL_FOR_COMPLETION_OF_BAGGING, fmpphb.getTime_interval_for_completion_of_bagging());
                             fmppostharvestbudget.put(FmpPostHarvestBudget.TIME_INTERVAL_FOR_WINNOWING, fmpphb.getTime_interval_for_winnowing());
                             fmppostharvestbudget.put(FmpPostHarvestBudget.TIME_PERIOD_LABOR_DRYING_GRAIN, fmpphb.getTime_period_labor_drying_grain());
                             fmppostharvestbudget.put(FmpPostHarvestBudget.UNIT_COST_MACHINE_THRESHING, fmpphb.getUnit_cost_machine_threshing());
                             fmppostharvestbudget.put(FmpPostHarvestBudget.UNIT_LABOR_COST_BAGGING, fmpphb.getUnit_labor_cost_bagging());
+                            fmppostharvestbudget.put(FmpPostHarvestBudget.UNIT_COST_OF_STORAGE_BAGS, fmpphb.getUnit_cost_of_storage_bags());
+                            fmppostharvestbudget.put(FmpPostHarvestBudget.UNIT_LABOR_COST_BAGGING, fmpphb.getUnit_labor_cost_bagging());
+                            
 
                         }
 

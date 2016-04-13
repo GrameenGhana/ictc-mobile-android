@@ -95,7 +95,22 @@ public class BaselineProductionBudget extends Status implements GeneralInterface
  public static String ORGANICFERTILIZERQTY="organicfertilizerqty";
  public static String ORGFERTILIZERPRICE="orgfertilizerprice";
  public static String POSTPLANTHERBICIDE2APPLICATIONCOST="postplantherbicide2applicationcost";
+ public static String PLANTING_LABOR_COST_BASE="planting_labor_cost_base";
  
+ 
+ 
+public void setPlanting_labor_cost_base(String planting_labor_cost_base) {
+underlyingNode.setProperty(PLANTING_LABOR_COST_BASE,planting_labor_cost_base);
+}
+
+public String getPlanting_labor_cost_base(){
+          try {
+          return (String) underlyingNode.getProperty(PLANTING_LABOR_COST_BASE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
  
 public void setPostplantherbicide2applicationcost(String postplantherbicide2applicationcost) {
 underlyingNode.setProperty(POSTPLANTHERBICIDE2APPLICATIONCOST,postplantherbicide2applicationcost);

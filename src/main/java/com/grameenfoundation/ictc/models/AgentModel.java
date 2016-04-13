@@ -125,6 +125,77 @@ public class AgentModel {
         return aglist;
     }
 
+    
+     public List<AgentWrapper> findAllMOFAAgents() {
+        List<AgentWrapper> aglist = new ArrayList<>();
+
+        String q = "match (l:AGENT) where l.agenttype='MOFA' return l";
+
+        try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            Result result = Neo4jServices.executeCypherQuery(q);
+
+            ResourceIterator<Node> n_column = result.columnAs("l");
+            while (n_column.hasNext()) {
+                // aglist.add(new Agent(n_column.next()));
+                Agent ag = new Agent(n_column.next());
+
+                AgentWrapper wrapper = new AgentWrapper();
+                wrapper.setAgentcode(ag.getAgentcode());
+                wrapper.setAgenttype(ag.getAgenttype());
+                wrapper.setEmail(ag.getEmail());
+                wrapper.setFirstname(ag.getFirstname());
+                wrapper.setLastname(ag.getLastname());
+                wrapper.setUsername(ag.getUsername());
+                wrapper.setAgentId(ag.getAgentId());
+                aglist.add(wrapper);
+
+            }
+            tx.success();
+        }
+//        } catch (Exception e) {
+//            log.log(Level.SEVERE,e.getMessage());
+//            e.printStackTrace();
+//        }
+
+        return aglist;
+    }
+     
+      public List<AgentWrapper> findAllACDIAgents() {
+        List<AgentWrapper> aglist = new ArrayList<>();
+
+        String q = "match (l:AGENT) where l.agenttype='ACDIVOCA' return l";
+
+        try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            Result result = Neo4jServices.executeCypherQuery(q);
+
+            ResourceIterator<Node> n_column = result.columnAs("l");
+            while (n_column.hasNext()) {
+                // aglist.add(new Agent(n_column.next()));
+                Agent ag = new Agent(n_column.next());
+
+                AgentWrapper wrapper = new AgentWrapper();
+                wrapper.setAgentcode(ag.getAgentcode());
+                wrapper.setAgenttype(ag.getAgenttype());
+                wrapper.setEmail(ag.getEmail());
+                wrapper.setFirstname(ag.getFirstname());
+                wrapper.setLastname(ag.getLastname());
+                wrapper.setUsername(ag.getUsername());
+                wrapper.setAgentId(ag.getAgentId());
+                aglist.add(wrapper);
+
+            }
+            tx.success();
+        }
+//        } catch (Exception e) {
+//            log.log(Level.SEVERE,e.getMessage());
+//            e.printStackTrace();
+//        }
+
+        return aglist;
+    }
+     
+     
+     
     public AgentWrapper findUser(String username, String password) {
         CryptoLibrary crypt = new CryptoLibrary();
         String q = "match (l:AGENT) WHERE l." + User.USERNAME + "= '" + username + "'  "
@@ -137,6 +208,9 @@ public class AgentModel {
         }
         return null;
     }
+    
+    
+    
     
      public AgentWrapper findUser(String username) {
        
@@ -153,28 +227,32 @@ public class AgentModel {
      
      
       public Agent getAgent(String field, String value) {
+        
           
-      try(Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx())
-      {
-        String q = "Start root=node(0) "
-                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.AGENT + "]->p"
-                + " where p." + field + "='" + value + "'"
-                + " return p";
+     
+//        String q = "Start root=node(0) "
+//                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.AGENT + "]->p"
+//                + " where p." + field + "='" + value + "'"
+//                + " return p";
+        
+        String q = "match (p:AGENT)"+" where p." + field + "='" + value + "'" +" return p";
 
         System.out.println("Query " + q);
         try {
             Node node = Neo4jServices.executeCypherQuerySingleResult(q, "p");
-            if (null != node) {
-                return new Agent(node);
-            }
+          if (null != node) {
+               return new Agent(node);
+           }
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Unable to Find Agent");
         }
         
-       tx.success();
-      }
+     
+       return null;
+      
 
-        return null;
+        
     }
     
 
@@ -230,16 +308,23 @@ public class AgentModel {
                             ag.setAgentId(fieldValue);
                         }
                     }
+                    if (fieldName.equalsIgnoreCase(Agent.AGENTTYPE)) {
+                        if (null != fieldValue) {
+                            ag.setAgenttype(fieldValue);
+                        }
+                    }
                     
                 }
-                trx.success();
+               
 
                 updated = true;
                 log.log(Level.INFO, "Bio Data Successfully Updated {0}", updated);
+                 trx.success();
                
             } else {
 
                 log.info("Unable to update Agent");
+                 trx.success();
             }
         }
         return updated;

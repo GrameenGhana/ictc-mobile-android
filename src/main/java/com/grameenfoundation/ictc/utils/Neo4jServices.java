@@ -344,6 +344,7 @@ public class Neo4jServices {
 
        
 //		@SuppressWarnings("unchecked")
+        
         ResourceIterator<Node> n_column = result.columnAs(column);
         while (n_column.hasNext()) {
             return n_column.next();
@@ -557,6 +558,7 @@ public class Neo4jServices {
             n_column = result.columnAs("l");
             while (n_column.hasNext()) 
             {
+               
                  tx.success();
                 return n_column.next();
             }

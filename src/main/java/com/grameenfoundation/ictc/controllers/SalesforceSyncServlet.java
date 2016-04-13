@@ -116,7 +116,7 @@ public class SalesforceSyncServlet extends HttpServlet {
             org.neo4j.graphdb.Node FarmerParent;
             
             
-             try(Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+     try(Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
                 System.out.println(" " + request.getContentType());
                // File xmlFile = new File("/home/grameen/test.xml");
@@ -1141,10 +1141,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                              out.println(sendAck());
                              System.out.println("Technical Needs already exist");
                          } else {
-                        
-                        
-                      //  try
-                        
+                         
                         org.neo4j.graphdb.Node FCParent;
                         org.neo4j.graphdb.Node FCNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARM_CREDIT_PLAN);
                         
@@ -1192,13 +1189,14 @@ public class SalesforceSyncServlet extends HttpServlet {
                  }
                  
 
-                System.out.println("Root element " + doc.getDocumentElement());
+                log.info("Root element " + doc.getDocumentElement());
+                tx.success();
                 
              }
             catch (Exception ex) {
               Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, ex);
                ex.printStackTrace();
-              ;
+              
           }
 //           finally{
 //                 tx.finish();

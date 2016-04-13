@@ -58,7 +58,7 @@ public class UserModel {
                 stg.setStatus("ACTIVE");
                 stg.setCreatedOn(new Date());
 
-                userParent.createRelationshipTo(stNode, ICTCRelationshipTypes.USER);
+               //userParent.createRelationshipTo(stNode, ICTCRelationshipTypes.USER);
 
                 log.log(Level.INFO, "new node created. {0}", stg.getUnderlyingNode().getId());
                 trx.success();

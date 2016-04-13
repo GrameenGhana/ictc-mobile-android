@@ -1,6 +1,6 @@
 <%-- 
-    Document   : view_agent
-    Created on : Nov 2, 2015, 10:47:02 AM
+    Document   : acdivoca_agent
+    Created on : Mar 30, 2016, 11:59:54 AM
     Author     : Joseph George Davis
 --%>
 
@@ -16,7 +16,7 @@
         <title>Agents</title>
         <%
             AgentModel agentModel = new AgentModel();
-            List<AgentWrapper> agents = agentModel.findAllAgents();
+            List<AgentWrapper> agents = agentModel.findAllACDIAgents();
         
         %>
     </head>
@@ -41,7 +41,7 @@
                 <td><%= ag.getUsername() %></td>
                 <td><%= ag.getAgenttype()%></td>
                 <td>
-                        <a href="<%=request.getContextPath() %>/farmer/search.jsp?type=CreatedById&q=<%=ag.getAgentId() %>" class=" btn btn-info">Farmers </a>
+                        <a href="<%=request.getContextPath() %>/farmer/search.jsp?type=CreatedById&q=<%=ag.getAgentId() %>" class=" btn label label-important">Farmers </a>
                 </td>
                 <td>
                     <a href="<%=request.getContextPath() %>/agent/agenttofarmer.jsp?type=CreatedById&q=<%=ag.getAgentId() %>" class="btn btn-info">Assign Farmer(s) </a>
