@@ -638,6 +638,19 @@ public String getDisrictresidenceash(){
         return getNodeList(Direction.OUTGOING, ICTCRelationshipTypes.HAS_MEETING);
 //          return  n;
     }
+    
+    public Node getUpdate(Node update)
+    {
+        try
+        {
+        return Neo4jServices.findNodeFromRelation(update, Direction.OUTGOING, ICTCRelationshipTypes.UPDATE);
+        }
+        catch(Exception ex)
+        {
+            //ex.printStackTrace();
+            return null;
+        }
+    }
 
     public List<FarmerInputReceivedWrapper> getFarmInputs() {
         List<Node> nodes = getNodeList(Direction.OUTGOING, ICTCRelationshipTypes.HAS_FARM_INPUT);
