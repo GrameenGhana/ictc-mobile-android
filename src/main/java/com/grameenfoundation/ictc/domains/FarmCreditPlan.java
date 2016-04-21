@@ -55,7 +55,143 @@ public class FarmCreditPlan extends Status implements GeneralInterface{
     public static String REFERENCECROPC="referencecropc";
     public static String REFERENCESEASONC="referenceseasonc";
     public static String REFERENCEYEARC="referenceyearc";
+    public static String PAYBACKCASHFERTILIZERPLAN="paybackcashfertilizerplan";
+    public static String PAYBACKCASHPKOUGHPLAN="paybackcashpkoughplan";
+    public static String PAYBACKCASHPOSTPLANTHERBPLAN="paybackcashpostplantherbplan";
+    public static String PAYBACKCASHPREPLANTHERBPLAN="paybackcashpreplantherbplan";
+    public static String PAYBACKCASHPROCESSINGPLAN="paybackcashprocessingplan";
+    public static String PAYBACKCASHSEEDPLAN="paybackcashseedplan";
+    public static String PAYBACKCASHSTORAGEPLAN="paybackcashstorageplan";
+    public static String PAYBACKCASHTRANSPORTPLAN="paybackcashtransportplan";
+    public static String PAYBACKDATEPLAN="paybackdateplan";
     
+    
+public void setPaybackdateplan(String paybackdateplan) {
+underlyingNode.setProperty(PAYBACKDATEPLAN,paybackdateplan);
+}
+
+public String getPaybackdateplan(){
+          try {
+          return (String) underlyingNode.getProperty(PAYBACKDATEPLAN);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+public void setPaybackcashtransportplan(String paybackcashtransportplan) {
+underlyingNode.setProperty(PAYBACKCASHTRANSPORTPLAN,paybackcashtransportplan);
+}
+
+public String getPaybackcashtransportplan(){
+          try {
+          return (String) underlyingNode.getProperty(PAYBACKCASHTRANSPORTPLAN);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+public void setPaybackcashstorageplan(String paybackcashstorageplan) {
+underlyingNode.setProperty(PAYBACKCASHSTORAGEPLAN,paybackcashstorageplan);
+}
+
+public String getPaybackcashstorageplan(){
+          try {
+          return (String) underlyingNode.getProperty(PAYBACKCASHSTORAGEPLAN);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+public void setPaybackcashseedplan(String paybackcashseedplan) {
+underlyingNode.setProperty(PAYBACKCASHSEEDPLAN,paybackcashseedplan);
+}
+
+public String getPaybackcashseedplan(){
+          try {
+          return (String) underlyingNode.getProperty(PAYBACKCASHSEEDPLAN);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+public void setPaybackcashprocessingplan(String paybackcashprocessingplan) {
+underlyingNode.setProperty(PAYBACKCASHPROCESSINGPLAN,paybackcashprocessingplan);
+}
+
+public String getPaybackcashprocessingplan(){
+          try {
+          return (String) underlyingNode.getProperty(PAYBACKCASHPROCESSINGPLAN);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+    
+    
+public void setPaybackcashpreplantherbplan(String paybackcashpreplantherbplan) {
+underlyingNode.setProperty(PAYBACKCASHPREPLANTHERBPLAN,paybackcashpreplantherbplan);
+}
+
+public String getPaybackcashpreplantherbplan(){
+          try {
+          return (String) underlyingNode.getProperty(PAYBACKCASHPREPLANTHERBPLAN);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+public void setPaybackcashpostplantherbplan(String paybackcashpostplantherbplan) {
+underlyingNode.setProperty(PAYBACKCASHPOSTPLANTHERBPLAN,paybackcashpostplantherbplan);
+}
+
+public String getPaybackcashpostplantherbplan(){
+          try {
+          return (String) underlyingNode.getProperty(PAYBACKCASHPOSTPLANTHERBPLAN);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setPaybackcashpkoughplan(String paybackcashpkoughplan) {
+underlyingNode.setProperty(PAYBACKCASHPKOUGHPLAN,paybackcashpkoughplan);
+}
+
+public String getPaybackcashpkoughplan(){
+          try {
+          return (String) underlyingNode.getProperty(PAYBACKCASHPKOUGHPLAN);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+public void setPaybackcashfertilizerplan(String paybackcashfertilizerplan) {
+underlyingNode.setProperty(PAYBACKCASHFERTILIZERPLAN,paybackcashfertilizerplan);
+}
+
+public String getPaybackcashfertilizerplan(){
+          try {
+          return (String) underlyingNode.getProperty(PAYBACKCASHFERTILIZERPLAN);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
     
 public void setReferenceyearc(String referenceyearc) {
 underlyingNode.setProperty(REFERENCEYEARC,referenceyearc);

@@ -47,7 +47,93 @@ public class FarmCreditPreviousWrapper {
     String referencecropp="referencecropp";
     String referenceseasonp="referenceseasonp";
     String referenceyearp="referenceyearp";
+    String paybackcashfertilizer="paybackcashfertilizer";
+    String paybackcashpkough="paybackcashpkough";
+    String paybackcashpostplantherb="paybackcashpostplantherb";
+    String paybackcashpreplantherb="paybackcashpreplantherb";
+    String paybackcashprocessing="paybackcashprocessing";
+    String paybackcashseed="paybackcashseed";
+    String paybackcashstorage="paybackcashstorage";
+    String paybackcashtransport="paybackcashtransport";
+    String paybackdate="paybackdate";
     
+    
+ public  void setPaybackdate(String paybackdate) {
+      this.paybackdate=paybackdate;
+    }
+ public  String getPaybackdate() {
+        return paybackdate;
+
+    }
+    
+ public  void setPaybackcashtransport(String paybackcashtransport) {
+      this.paybackcashtransport=paybackcashtransport;
+    }
+ public  String getPaybackcashtransport() {
+        return paybackcashtransport;
+
+    }
+    
+    
+ public  void setPaybackcashstorage(String paybackcashstorage) {
+      this.paybackcashstorage=paybackcashstorage;
+    }
+ public  String getPaybackcashstorage() {
+        return paybackcashstorage;
+
+    }
+    
+ public  void setPaybackcashseed(String paybackcashseed) {
+      this.paybackcashseed=paybackcashseed;
+    }
+ public  String getPaybackcashseed() {
+        return paybackcashseed;
+
+    }
+    
+    
+ public  void setPaybackcashprocessing(String paybackcashprocessing) {
+      this.paybackcashprocessing=paybackcashprocessing;
+    }
+ public  String getPaybackcashprocessing() {
+        return paybackcashprocessing;
+
+    }
+    
+ public  void setPaybackcashpreplantherb(String paybackcashpreplantherb) {
+      this.paybackcashpreplantherb=paybackcashpreplantherb;
+    }
+ public  String getPaybackcashpreplantherb() {
+        return paybackcashpreplantherb;
+
+    }
+    
+    
+ public  void setPaybackcashpostplantherb(String paybackcashpostplantherb) {
+      this.paybackcashpostplantherb=paybackcashpostplantherb;
+    }
+ public  String getPaybackcashpostplantherb() {
+        return paybackcashpostplantherb;
+
+    }
+    
+    
+ public  void setPaybackcashpkough(String paybackcashpkough) {
+      this.paybackcashpkough=paybackcashpkough;
+    }
+ public  String getPaybackcashpkough() {
+        return paybackcashpkough;
+
+    }
+    
+    
+ public  void setPaybackcashfertilizer(String paybackcashfertilizer) {
+      this.paybackcashfertilizer=paybackcashfertilizer;
+    }
+ public  String getPaybackcashfertilizer() {
+        return paybackcashfertilizer;
+
+    }
     
  public  void setReferenceyearp(String referenceyearp) {
       this.referenceyearp=referenceyearp;

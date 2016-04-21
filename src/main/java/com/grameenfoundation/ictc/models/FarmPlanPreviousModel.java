@@ -6,7 +6,7 @@
 
 package com.grameenfoundation.ictc.models;
 
-import com.grameenfoundation.ictc.domains.FarmCreditPlan;
+import com.grameenfoundation.ictc.domains.FarmCreditPrevious;
 import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
 import com.grameenfoundation.ictc.utils.Neo4jServices;
 import org.neo4j.graphdb.Node;
@@ -14,14 +14,16 @@ import org.neo4j.graphdb.Node;
 /**
  *
  * @author Joseph George Davis
- * @date Mar 11, 2016 4:08:07 PM
+ * @date Apr 21, 2016 3:45:17 PM
  * description:
  */
-public class FarmCreditPlanModel {
+public class FarmPlanPreviousModel {
     
-     public FarmCreditPlan getFarmCreditPlan(String field, String value) {
+    
        
-          String q = "match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN+"]->p"+ 
+     public FarmCreditPrevious getFarmCreditPlan(String field, String value) {
+       
+          String q = "match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_FARMCREDIT_PREVIOUS+"]->p"+ 
                 " where f." + field + "='" + value + "'"
                 + " return p";
 
@@ -30,10 +32,10 @@ public class FarmCreditPlanModel {
         try {
             Node node = Neo4jServices.executeCypherQuerySingleResult(q, "p");
             if (null != node) {
-                return new FarmCreditPlan(node);
+                return new FarmCreditPrevious(node);
             }
         } catch (Exception e) {
-            System.out.println("Unable to Farm Plan Credit");
+            System.out.println("Unable to Farm Plan Previous");
         }
 
         return null;

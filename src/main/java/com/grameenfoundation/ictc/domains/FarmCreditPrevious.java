@@ -58,7 +58,133 @@ public class FarmCreditPrevious extends Status implements GeneralInterface{
     public static String REFERENCECROPP="referencecropp";
     public static String REFERENCESEASONP="referenceseasonp";
     public static String REFERENCEYEARP="referenceyearp";
+    public static String PAYBACKCASHFERTILIZER="paybackcashfertilizer";
+    public static String PAYBACKCASHPKOUGH="paybackcashpkough";
+    public static String PAYBACKCASHPOSTPLANTHERB="paybackcashpostplantherb";
+    public static String PAYBACKCASHPREPLANTHERB="paybackcashpreplantherb";
+    public static String PAYBACKCASHPROCESSING="paybackcashprocessing";
+    public static String PAYBACKCASHSEED="paybackcashseed";
+    public static String PAYBACKCASHSTORAGE="paybackcashstorage";
+    public static String PAYBACKCASHTRANSPORT="paybackcashtransport";
     
+    
+    
+public void setPaybackcashtransport(String paybackcashtransport) {
+underlyingNode.setProperty(PAYBACKCASHTRANSPORT,paybackcashtransport);
+}
+
+public String getPaybackcashtransport(){
+          try {
+          return (String) underlyingNode.getProperty(PAYBACKCASHTRANSPORT);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setPaybackcashstorage(String paybackcashstorage) {
+underlyingNode.setProperty(PAYBACKCASHSTORAGE,paybackcashstorage);
+}
+
+public String getPaybackcashstorage(){
+          try {
+          return (String) underlyingNode.getProperty(PAYBACKCASHSTORAGE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+    
+public void setPaybackcashseed(String paybackcashseed) {
+underlyingNode.setProperty(PAYBACKCASHSEED,paybackcashseed);
+}
+
+public String getPaybackcashseed(){
+          try {
+          return (String) underlyingNode.getProperty(PAYBACKCASHSEED);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+    
+public void setPaybackcashprocessing(String paybackcashprocessing) {
+underlyingNode.setProperty(PAYBACKCASHPROCESSING,paybackcashprocessing);
+}
+
+public String getPaybackcashprocessing(){
+          try {
+          return (String) underlyingNode.getProperty(PAYBACKCASHPROCESSING);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setPaybackcashpreplantherb(String paybackcashpreplantherb) {
+underlyingNode.setProperty(PAYBACKCASHPREPLANTHERB,paybackcashpreplantherb);
+}
+
+public String getPaybackcashpreplantherb(){
+          try {
+          return (String) underlyingNode.getProperty(PAYBACKCASHPREPLANTHERB);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setPaybackcashpostplantherb(String paybackcashpostplantherb) {
+underlyingNode.setProperty(PAYBACKCASHPOSTPLANTHERB,paybackcashpostplantherb);
+}
+
+public String getPaybackcashpostplantherb(){
+          try {
+          return (String) underlyingNode.getProperty(PAYBACKCASHPOSTPLANTHERB);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+    
+public void setPaybackcashpkough(String paybackcashpkough) {
+underlyingNode.setProperty(PAYBACKCASHPKOUGH,paybackcashpkough);
+}
+
+public String getPaybackcashpkough(){
+          try {
+          return (String) underlyingNode.getProperty(PAYBACKCASHPKOUGH);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+    
+public void setPaybackcashfertilizer(String paybackcashfertilizer) {
+underlyingNode.setProperty(PAYBACKCASHFERTILIZER,paybackcashfertilizer);
+}
+
+public String getPaybackcashfertilizer(){
+          try {
+          return (String) underlyingNode.getProperty(PAYBACKCASHFERTILIZER);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
     
 public void setReferenceyearp(String referenceyearp) {
 underlyingNode.setProperty(REFERENCEYEARP,referenceyearp);

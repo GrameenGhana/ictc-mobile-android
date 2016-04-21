@@ -1152,6 +1152,8 @@ public class APIController extends HttpServlet {
                             postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.PROPORTION_STORED_WITH_CHEMICAL_UPDATE, phbu.getProportion_stored_with_chemical_update());
                             postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.REFERENCE_SEASON_UPDATE, phbu.getReference_season_update());
                             postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.REFERENCE_YEAR_UPDATE, phbu.getReference_year_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.TOTAL_REVENUE_UPDATE, phbu.getTotal_revenue_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.TOTAL_YIELD_UPDATE, phbu.getTotal_yield_update());
                             postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.TIME_COMPLETION_OF_BAGGING_UPDATE, phbu.getTime_completion_of_bagging_update());
                             postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.TIME_INTERVAL_WINNOWING_UPDATE, phbu.getTime_interval_winnowing_update());
                             postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.TIME_PERIOD_LABOR_DRYING_GRAIN_UPDATE, phbu.getTime_period_labor_drying_grain_update());
@@ -1161,6 +1163,7 @@ public class APIController extends HttpServlet {
                             postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.UNIT_COST_OF_WAREHOUSE_UPDATE, phbu.getUnit_cost_of_warehouse_update());
                             postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.UNIT_LABOR_COST_BAGGING_UPDATE, phbu.getUnit_labor_cost_bagging_update());
                             postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.UNIT_LABOR_COST_WINNOWING_UPDATE, phbu.getUnit_labor_cost_winnowing_update());
+                            postharvestbudgetupdate.put(FmpPostHarvestBudgetUpdate.UNIT_OF_CHEMICAL_APPLICATION, phbu.getUnit_of_chemical_application());
                         }
                         
                         
@@ -1191,6 +1194,7 @@ public class APIController extends HttpServlet {
                         farmer.put("productionupdate",productionupdate);
                         farmer.put("postharvestupdate",postharvestupdate);
                         farmer.put("productionbudgetupdate",productionbudgetupdate);
+                        farmer.put("postharvestbudgetupdate",postharvestbudgetupdate);
                         farmer.put("farmgps", farmGps);
 
 //                        if (meetingArray.length() > 0) {

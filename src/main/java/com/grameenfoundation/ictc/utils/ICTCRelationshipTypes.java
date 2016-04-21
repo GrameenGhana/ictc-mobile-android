@@ -67,6 +67,10 @@ public enum ICTCRelationshipTypes implements RelationshipType{
     HAS_POSTHARVEST_BUDGET,
     HAS_FARM_GPS,
     HAS_IMAGE,
+    HAS_FARMCREDIT_PLAN,
+    HAS_FARMCREDIT_PREVIOUS,
+    HAS_FARMCREDIT_UPDATE,
+    
     //L
     LAST_MODIFIED_BY,
     

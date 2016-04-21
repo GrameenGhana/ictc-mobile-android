@@ -13,6 +13,7 @@ import com.grameenfoundation.ictc.domains.BaselineProduction;
 import com.grameenfoundation.ictc.domains.BaselineProductionBudget;
 import com.grameenfoundation.ictc.domains.Biodata;
 import com.grameenfoundation.ictc.domains.CropAssessmentImage;
+import com.grameenfoundation.ictc.domains.FarmCreditPlan;
 import com.grameenfoundation.ictc.domains.FieldCropAssessment;
 import com.grameenfoundation.ictc.domains.FmpPostHarvestBudget;
 import com.grameenfoundation.ictc.domains.FmpProductionBudget;
@@ -28,6 +29,7 @@ import com.grameenfoundation.ictc.models.BaselinePostHarvestModel;
 import com.grameenfoundation.ictc.models.BaselineProductionBudgetModel;
 import com.grameenfoundation.ictc.models.BaselineProductionModel;
 import com.grameenfoundation.ictc.models.BiodataModel;
+import com.grameenfoundation.ictc.models.FarmCreditPlanModel;
 import com.grameenfoundation.ictc.models.FmpPostHarvestBudgetModel;
 import com.grameenfoundation.ictc.models.FmpProductionBudgetModel;
 import com.grameenfoundation.ictc.models.MeetingModel;
@@ -81,6 +83,8 @@ import org.xml.sax.InputSource;
 @WebServlet(name = "SalesforceSyncServlet", urlPatterns = {"/sf/SalesforceSyncServlet"})
 public class SalesforceSyncServlet extends HttpServlet {
 
+    Date now = new Date();
+    BiodataModel biodataModel = new BiodataModel();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -1137,9 +1141,9 @@ public class SalesforceSyncServlet extends HttpServlet {
                else if(salesforceObj.equals("sf:FarmCreditPlan__c"))
                     {
                          farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
-                          if (null != new TechnicalNeedsModel().getTechnicalNeed("Id", farmerID)) {
+                          if (null != new FarmCreditPlanModel().getFarmCreditPlan("Id", farmerID)) {
                              out.println(sendAck());
-                             System.out.println("Technical Needs already exist");
+                             System.out.println("Farm Credit Plan already exist");
                          } else {
                          
                         org.neo4j.graphdb.Node FCParent;
@@ -1163,33 +1167,35 @@ public class SalesforceSyncServlet extends HttpServlet {
                             }
                         }
                         
-                      FCNode.setProperty(TechnicalNeed.LAST_MODIFIED,new Date().getTime());
+                      FCNode.setProperty(FarmCreditPlan.LAST_MODIFIED,new Date().getTime());
 
                        FCParent = ParentNode.TechNeedParentNode();
-                       FCParent.createRelationshipTo(FCNode, ICTCRelationshipTypes.TECHNICAL_NEED);
+                       FCParent.createRelationshipTo(FCNode, ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN);
 
                         log.log(Level.INFO, "new node created {0}", FCNode.getId());
 
                         Biodata b = biodataModel.getBiodata("Id", farmerID);
 
-                        biodataModel.BiodataToTechNeeds(b.getId(), FCNode);
+                        biodataModel.BiodataToFarmCreditPlan(b, FCNode);
                        
                          if(modified(farmerID))
                                  System.out.println("Last modified done");
-                        out.println(sendAck());
+                         out.println(sendAck());
                     
                        tx.success();
                       
                           }
                     }
-                    
+                       else if(salesforceObj.equals("sf:FarmCreditPrevious__c"))
+                    {
                      
+                    }
                      
                   //tx.success();
                  }
                  
 
-                log.info("Root element " + doc.getDocumentElement());
+               // log.info("Root element " + doc.getDocumentElement());
                 tx.success();
                 
              }
@@ -1412,8 +1418,8 @@ public class SalesforceSyncServlet extends HttpServlet {
     
     
     public boolean modified(String farmerId){
-        Date now = new Date();
-        BiodataModel biodataModel = new BiodataModel();
+        //Date now = new Date();
+        //BiodataModel biodataModel = new BiodataModel();
        
        return  biodataModel.lastmodifiedUpdate(farmerId,now.getTime());
     }

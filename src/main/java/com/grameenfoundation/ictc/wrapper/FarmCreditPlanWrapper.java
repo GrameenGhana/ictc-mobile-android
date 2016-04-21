@@ -44,7 +44,92 @@ String plannedpaybackmode="plannedpaybackmode";
 String referencecropc="referencecropc";
 String referenceseasonc="referenceseasonc";
 String referenceyearc="referenceyearc";
+String paybackcashfertilizerplan="paybackcashfertilizerplan";
+String paybackcashpkoughplan="paybackcashpkoughplan";
+String paybackcashpostplantherbplan="paybackcashpostplantherbplan";
+String paybackcashpreplantherbplan="paybackcashpreplantherbplan";
+String paybackcashprocessingplan="paybackcashprocessingplan";
+String paybackcashseedplan="paybackcashseedplan";
+String paybackcashstorageplan="paybackcashstorageplan";
+String paybackcashtransportplan="paybackcashtransportplan";
+String paybackdateplan="paybackdateplan";
 
+
+ public  void setPaybackdateplan(String paybackdateplan) {
+      this.paybackdateplan=paybackdateplan;
+    }
+ public  String getPaybackdateplan() {
+        return paybackdateplan;
+
+    }
+
+ public  void setPaybackcashtransportplan(String paybackcashtransportplan) {
+      this.paybackcashtransportplan=paybackcashtransportplan;
+    }
+ public  String getPaybackcashtransportplan() {
+        return paybackcashtransportplan;
+
+    }
+
+ public  void setPaybackcashstorageplan(String paybackcashstorageplan) {
+      this.paybackcashstorageplan=paybackcashstorageplan;
+    }
+ public  String getPaybackcashstorageplan() {
+        return paybackcashstorageplan;
+
+    }
+
+ public  void setPaybackcashseedplan(String paybackcashseedplan) {
+      this.paybackcashseedplan=paybackcashseedplan;
+    }
+ public  String getPaybackcashseedplan() {
+        return paybackcashseedplan;
+
+    }
+
+ public  void setPaybackcashprocessingplan(String paybackcashprocessingplan) {
+      this.paybackcashprocessingplan=paybackcashprocessingplan;
+    }
+ public  String getPaybackcashprocessingplan() {
+        return paybackcashprocessingplan;
+
+    }
+
+
+ public  void setPaybackcashpreplantherbplan(String paybackcashpreplantherbplan) {
+      this.paybackcashpreplantherbplan=paybackcashpreplantherbplan;
+    }
+ public  String getPaybackcashpreplantherbplan() {
+        return paybackcashpreplantherbplan;
+
+    }
+
+ public  void setPaybackcashpostplantherbplan(String paybackcashpostplantherbplan) {
+      this.paybackcashpostplantherbplan=paybackcashpostplantherbplan;
+    }
+ public  String getPaybackcashpostplantherbplan() {
+        return paybackcashpostplantherbplan;
+
+    }
+
+ public  void setPaybackcashpkoughplan(String paybackcashpkoughplan) {
+      this.paybackcashpkoughplan=paybackcashpkoughplan;
+    }
+ public  String getPaybackcashpkoughplan() {
+        return paybackcashpkoughplan;
+
+    } 
+ 
+ 
+    
+    
+ public  void setPaybackcashfertilizerplan(String paybackcashfertilizerplan) {
+      this.paybackcashfertilizerplan=paybackcashfertilizerplan;
+    }
+ public  String getPaybackcashfertilizerplan() {
+        return paybackcashfertilizerplan;
+
+    }
 
  public  void setReferenceyearc(String referenceyearc) {
       this.referenceyearc=referenceyearc;
