@@ -76,7 +76,7 @@ public class UserModel {
         return null;
     }
     
-      public User getAgent(String field, String value) {
+      public User getUser(String field, String value) {
         String q = "Start root=node(0) "
                 + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.AGENT + "]->p"
                 + " where p." + field + "='" + value + "'"
@@ -156,7 +156,7 @@ List<UserWrapper> usrs = new ArrayList<>();
 
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
-             User user = new UserModel().getAgent(User.ID,agent);
+             User user = new UserModel().getUser(User.ID,agent);
 
             System.out.println("biodata :" + user.getUnderlyingNode().getId());
             if (null != user) {

@@ -49,5 +49,6 @@ public enum Labels implements Label {
     FARM_GPS,
     WEATHER,
     IMAGE,
-    FARM_CREDIT_PLAN
+    FARM_CREDIT_PLAN,
+    FARM_CREDIT_PREVIOUS
 }

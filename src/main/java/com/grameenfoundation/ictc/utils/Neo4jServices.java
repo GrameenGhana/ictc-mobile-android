@@ -641,6 +641,11 @@ public class Neo4jServices {
         
         return 0;
     }
+    
+    
+    
+    
+
 
     public static double getCollectionValue(String type, String label, String fieldName) {
         String q = " match(n:" + label + ") return " + type + "(toFloat(n." + fieldName + "))  as l ";

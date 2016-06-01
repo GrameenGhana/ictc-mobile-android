@@ -17,11 +17,11 @@ import org.neo4j.graphdb.Node;
  * @date Apr 21, 2016 3:45:17 PM
  * description:
  */
-public class FarmPlanPreviousModel {
+public class FarmCreditPreviousModel {
     
     
        
-     public FarmCreditPrevious getFarmCreditPlan(String field, String value) {
+     public FarmCreditPrevious getFarmCreditPrevious(String field, String value) {
        
           String q = "match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_FARMCREDIT_PREVIOUS+"]->p"+ 
                 " where f." + field + "='" + value + "'"

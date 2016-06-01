@@ -104,13 +104,18 @@
                         <li>
                             <a href="<%=request.getContextPath()%>">
                                 <i class="icon-dashboard"></i>
-                                <span>Dashboard</span>
+                                <span>General Dashboard</span>
                             </a>	    				
+                        </li>
+                          <li>
+                            <a href="<%=request.getContextPath()%>/dashboard/acdivoca.jsp">
+                                <i class="icon-list-alt"></i>
+                                <span>ACDIVOCA Dashboard</span>
+                            </a>    				
                         </li>
 
 
-
-                        <li>
+                    <!--    <li>
                             <a href="<%=request.getContextPath()%>/reports">
                                 <i class="icon-list-alt"></i>
                                 <span>Reports</span>
@@ -153,7 +158,7 @@
                                 <li><a href="<%=request.getContextPath()%>/category">Category</a></li>
 
                             </ul>    				
-                        </li>
+                        </li>-->
 
                     </ul>
 
@@ -273,7 +278,7 @@
                     <div class="row">
 
                         <div class="span12">
-                            &copy; 2015 <a href="http://www.egrappler.com/">ICTC - Powered by Grameen Foundation</a>.
+                            &copy; 2015 <a href="<%= request.getContextPath()%>">ICTC - Powered by Grameen Foundation</a>.
                         </div> <!-- /span12 -->
 
                     </div> <!-- /row -->

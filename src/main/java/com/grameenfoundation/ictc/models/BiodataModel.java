@@ -428,7 +428,29 @@ public class BiodataModel {
 
         return created;
     }
+  public boolean BiodataToFarmCreditPrevious(Biodata b, Node FCP) {
 
+        boolean created = false;
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+
+           // Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
+
+            System.out.println("biodata :" + b.getUnderlyingNode().getId());
+            if (null != b) {
+
+                b.setFarmCreditPlan(FCP);
+                created = true;
+                trx.success();
+
+            }
+        } catch (Exception e) {
+            System.out.println("error");
+            //created = false;
+
+        }
+
+        return created;
+    }
     public boolean BiodataToOperations(String biodata, Node operations) {
 
         boolean created = false;
@@ -630,7 +652,7 @@ public class BiodataModel {
     
     public Long getCommunityCount() {
 
-        return Neo4jServices.getAggregatedValue(" match (n:FARMER) RETURN count(DISTINCT n.community) as l");
+        return Neo4jServices.getAggregatedValue(" match (n:FARMER) RETURN count(DISTINCT n.village) as l");
     }
 
     public Long getAgentCount() {
@@ -1026,5 +1048,81 @@ public class BiodataModel {
 
         return created;
     }
+    
+    public Object getFarmerCountByAgent(String AgentId)
+    {
+        String q = " match (f:FARMER) where f.CreatedById='"+AgentId+"'"+
+                " return count(f)";
+        
+        return Neo4jServices.getAggregateItem(q);
+    }
+    
+    
+    public Object getFarmerBaselinProductionCountByAgent(String AgentId)
+    {
+       
+        String q = " match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_BASELINE_PRODUCTION+"]->p where f.CreatedById='"+AgentId+"'"+
+                " return count(f)"; 
+        
+        return Neo4jServices.getAggregateItem(q);
+    }
 
+    
+    public Object getFarmerProfileCountByAgent(String AgentId)
+    {
+       
+        String q = " match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_PROFILING+"]->p where f.CreatedById='"+AgentId+"'"+
+                " return count(f)"; 
+        
+        return Neo4jServices.getAggregateItem(q);
+    }
+    
+    public Object getFarmerBaselineProductionBudgetCountByAgent(String AgentId)
+    {
+       
+        String q = " match  (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_BASELINE_PRODUCTION_BUDGET+"]->p where f.CreatedById='"+AgentId+"'"+
+                " DISTINCT return count(f)"; 
+        
+        return Neo4jServices.getAggregateItem(q);
+    }
+    
+    public Object getFarmerBaselinePostHarvestCountByAgent(String AgentId)
+    {
+       
+        String q = " match DISTINCT (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST+"]->p where f.CreatedById='"+AgentId+"'"+
+                " DISTINCT return count(f)"; 
+        
+        return Neo4jServices.getAggregateItem(q);
+    }
+    
+    
+     public Object getFarmerBaselinePostHarvestBudgetCountByAgent(String AgentId)
+    {
+       
+        String q = " match DISTINCT (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST_BUDGET+"]->p where f.CreatedById='"+AgentId+"'"+
+                " DISTINCT return count(f)"; 
+        
+        return Neo4jServices.getAggregateItem(q);
+    }
+    
+     
+     public Object getFarmerFMPProductionCountByAgent(String AgentId)
+    {
+       
+        String q = " match DISTINCT (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_PRODUCTION+"]->p where f.CreatedById='"+AgentId+"'"+
+                " DISTINCT return count(f)"; 
+        
+        return Neo4jServices.getAggregateItem(q);
+    }
+    
+     
+      public Object getFarmerFMPPostHarvestCountByAgent(String AgentId)
+    {
+       
+        String q = " match DISTINCT (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_POSTHARVEST+"]->p where f.CreatedById='"+AgentId+"'"+
+                " DISTINCT return count(f)"; 
+        
+        return Neo4jServices.getAggregateItem(q);
+    }
+    
 }

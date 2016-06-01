@@ -28,7 +28,7 @@ public class User extends Status implements GeneralInterface{
     public static String AGENT_TYPE = "usertype";
     public static String ORGANISATION ="organisation";
     public static String AGENT_CODE = "usercode";
-      public static String USERNAME = "username";
+     public static String USERNAME = "username";
     public static String PASSWORD = "password";
    
     

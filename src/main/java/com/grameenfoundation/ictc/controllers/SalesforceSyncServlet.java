@@ -30,6 +30,7 @@ import com.grameenfoundation.ictc.models.BaselineProductionBudgetModel;
 import com.grameenfoundation.ictc.models.BaselineProductionModel;
 import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.models.FarmCreditPlanModel;
+import com.grameenfoundation.ictc.models.FarmCreditPreviousModel;
 import com.grameenfoundation.ictc.models.FmpPostHarvestBudgetModel;
 import com.grameenfoundation.ictc.models.FmpProductionBudgetModel;
 import com.grameenfoundation.ictc.models.MeetingModel;
@@ -1186,16 +1187,67 @@ public class SalesforceSyncServlet extends HttpServlet {
                       
                           }
                     }
-                       else if(salesforceObj.equals("sf:FarmCreditPrevious__c"))
+              else if(salesforceObj.equals("sf:FarmCreditPrevious__c"))
                     {
-                     
+                       
+                        
+                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
+                          if (null != new FarmCreditPreviousModel().getFarmCreditPrevious("Id", farmerID)) {
+                             out.println(sendAck());
+                             System.out.println("Farm Credit Previous already exist");
+                         } else {
+                              
+                               org.neo4j.graphdb.Node FCParent;
+                        org.neo4j.graphdb.Node FCNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARM_CREDIT_PREVIOUS);
+                        
+                       
+                        System.out.println("farmerid " + farmerID);
+                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
+
+                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
+                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                            FCNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                            }
+
+                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
+
+                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                              FCNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+
+                            }
+                        }
+                        
+                      FCNode.setProperty(FarmCreditPlan.LAST_MODIFIED,new Date().getTime());
+
+                       FCParent = ParentNode.TechNeedParentNode();
+                       FCParent.createRelationshipTo(FCNode, ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN);
+
+                        log.log(Level.INFO, "new node created {0}", FCNode.getId());
+
+                        Biodata b = biodataModel.getBiodata("Id", farmerID);
+
+                        biodataModel.BiodataToFarmCreditPlan(b, FCNode);
+                       
+                         if(modified(farmerID))
+                                 System.out.println("Last modified done");
+                         out.println(sendAck());
+                    
+                       tx.success();
+                      
+                              
+                          
+                          }
+                        
+                        
                     }
+                     
                      
                   //tx.success();
                  }
                  
 
-               // log.info("Root element " + doc.getDocumentElement());
+                log.info("Root element " + doc.getDocumentElement());
                 tx.success();
                 
              }
