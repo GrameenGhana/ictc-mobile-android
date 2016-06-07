@@ -174,7 +174,7 @@
 
             <div class="main-inner">
                 <div class="col-md-8">
-                    <div style="display: none" class="alert alert-danger-alt alert-dismissable" id="error">
+                    <div style="display:none" class="alert alert-danger-alt alert-dismissable" id="error">
                         <span class="glyphicon glyphicon-certificate"></span>
                         <button type="button" class="close" data-dismiss="alert">×</button>
                         <strong>${generalResponse.error}</strong>

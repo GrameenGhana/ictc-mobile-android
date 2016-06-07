@@ -1062,7 +1062,7 @@ public class BiodataModel {
     {
        
         String q = " match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_BASELINE_PRODUCTION+"]->p where f.CreatedById='"+AgentId+"'"+
-                " return count(f)"; 
+                " return   count(DISTINCT f)"; 
         
         return Neo4jServices.getAggregateItem(q);
     }
@@ -1072,7 +1072,7 @@ public class BiodataModel {
     {
        
         String q = " match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_PROFILING+"]->p where f.CreatedById='"+AgentId+"'"+
-                " return count(f)"; 
+                " return  count(DISTINCT f)"; 
         
         return Neo4jServices.getAggregateItem(q);
     }
@@ -1081,7 +1081,7 @@ public class BiodataModel {
     {
        
         String q = " match  (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_BASELINE_PRODUCTION_BUDGET+"]->p where f.CreatedById='"+AgentId+"'"+
-                " DISTINCT return count(f)"; 
+                " return count(DISTINCT f)"; 
         
         return Neo4jServices.getAggregateItem(q);
     }
@@ -1089,8 +1089,8 @@ public class BiodataModel {
     public Object getFarmerBaselinePostHarvestCountByAgent(String AgentId)
     {
        
-        String q = " match DISTINCT (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST+"]->p where f.CreatedById='"+AgentId+"'"+
-                " DISTINCT return count(f)"; 
+        String q = " match  (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST+"]->p where f.CreatedById='"+AgentId+"'"+
+                " return  count(DISTINCT f)"; 
         
         return Neo4jServices.getAggregateItem(q);
     }
@@ -1099,8 +1099,8 @@ public class BiodataModel {
      public Object getFarmerBaselinePostHarvestBudgetCountByAgent(String AgentId)
     {
        
-        String q = " match DISTINCT (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST_BUDGET+"]->p where f.CreatedById='"+AgentId+"'"+
-                " DISTINCT return count(f)"; 
+        String q = " match  (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST_BUDGET+"]->p where f.CreatedById='"+AgentId+"'"+
+                "  return count(DISTINCT f)"; 
         
         return Neo4jServices.getAggregateItem(q);
     }
@@ -1109,8 +1109,8 @@ public class BiodataModel {
      public Object getFarmerFMPProductionCountByAgent(String AgentId)
     {
        
-        String q = " match DISTINCT (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_PRODUCTION+"]->p where f.CreatedById='"+AgentId+"'"+
-                " DISTINCT return count(f)"; 
+        String q = " match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_PRODUCTION+"]->p where f.CreatedById='"+AgentId+"'"+
+                " return count(DISTINCT f)"; 
         
         return Neo4jServices.getAggregateItem(q);
     }
@@ -1119,8 +1119,8 @@ public class BiodataModel {
       public Object getFarmerFMPPostHarvestCountByAgent(String AgentId)
     {
        
-        String q = " match DISTINCT (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_POSTHARVEST+"]->p where f.CreatedById='"+AgentId+"'"+
-                " DISTINCT return count(f)"; 
+        String q = " match  (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_POSTHARVEST+"]->p where f.CreatedById='"+AgentId+"'"+
+                "  return count(DISTINCT f)"; 
         
         return Neo4jServices.getAggregateItem(q);
     }

@@ -53,7 +53,7 @@ public class AgentController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
            //String url = "http://sandbox-ictchallenge.cs80.force.com/AgentRequest";
-           String url ="http://ictchallenge.force.com/agentRequest";
+            String url ="http://ictchallenge.force.com/agentRequest";
             String firstname = request.getParameter("fn");
             String lastname = request.getParameter("ln");
             String email = request.getParameter("email");

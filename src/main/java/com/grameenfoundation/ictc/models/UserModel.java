@@ -44,7 +44,7 @@ public class UserModel {
             User stg = new User(stNode);
 
             if (null == st) {
-                log.info("storage is invalid");
+                log.info("user is invalid");
                 created = false;
             } else {
                 userParent = ParentNode.AgentParentNode();
@@ -54,8 +54,10 @@ public class UserModel {
                 stg.setAgentType(st.getAgentType());
                 stg.setFirstname(st.getFirstName());
                 stg.setLastname(st.getLastName());
+                stg.setUsername(st.getUsername());
+                stg.setPassword(st.getPassword());
 
-                stg.setStatus("ACTIVE");
+                stg.setStatus("Active");
                 stg.setCreatedOn(new Date());
 
                //userParent.createRelationshipTo(stNode, ICTCRelationshipTypes.USER);
@@ -77,10 +79,12 @@ public class UserModel {
     }
     
       public User getUser(String field, String value) {
-        String q = "Start root=node(0) "
-                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.AGENT + "]->p"
-                + " where p." + field + "='" + value + "'"
-                + " return p";
+//        String q = "Start root=node(0) "
+//                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.AGENT + "]->p"
+//                + " where p." + field + "='" + value + "'"
+//                + " return p";
+        
+         String q = "match (p:USER)"+" where p." + field + "='" + value + "'" +" return p";
 
         System.out.println("Query " + q);
         try {
@@ -89,7 +93,7 @@ public class UserModel {
                 return new User(node);
             }
         } catch (Exception e) {
-            System.out.println("Unable to Find geofence");
+            System.out.println("Unable to Find User");
         }
 
         return null;
@@ -100,22 +104,22 @@ public class UserModel {
 
     public List<UserWrapper> findAll() {
 
-        return userQuery("match (l:AGENT) return  l", "l");
+        return userQuery("match (l:USER) return  l", "l");
     }
 
     public List<UserWrapper> findByType(String userType) {
 
-        return userQuery("match (l:AGENT) where l." + User.AGENT_TYPE + "='" + userType + "' return  l", "l");
+        return userQuery("match (l:USER) where l." + User.AGENT_TYPE + "='" + userType + "' return  l", "l");
     }
 
     public List<UserWrapper> findByTypeStatus(String userType, String status) {
 
-        return userQuery("match (l:AGENT) where l." + User.AGENT_TYPE + "='" + userType + "' and l." + User.AGENT_TYPE + "='" + status + "' return  l", "l");
+        return userQuery("match (l:USER) where l." + User.AGENT_TYPE + "='" + userType + "' and l." + User.AGENT_TYPE + "='" + status + "' return  l", "l");
     }
 
     public UserWrapper findUser(String username, String password) {
         CryptoLibrary crypt = new CryptoLibrary();
-        String q = "match (l:AGENT) WHERE l." + User.USERNAME + "= '" + username + "'  "
+        String q = "match (l:USER) WHERE l." + User.USERNAME + "= '" + username + "'  "
                 //+ "and  l." + User.PASSWORD + "='" + (password) + "'"
                 + "  return l";
         System.out.println("login : "+q);
@@ -137,12 +141,13 @@ List<UserWrapper> usrs = new ArrayList<>();
                 wr.setAgentCode(u.getAgentCode());
                 wr.setAgentType(u.getAgenttype());
                 wr.setFirstName(u.getFirstname());
+                wr.setLastName(u.getLastname());
+                wr.setUsername(u.getUsername());
                 wr.setID(u.getAgentID());
-
                 wr.setOrganisation(u.getOrganisation());
                 usrs.add(wr);
                //todo Find relationship to farmer to replace
-                wr.setMyFarmers(Neo4jServices.findByLabel(Labels.FARMER, ICTCRelationshipTypes.USER, "id", wr.getID()));
+              //  wr.setMyFarmers(Neo4jServices.findByLabel(Labels.FARMER, ICTCRelationshipTypes.USER, "id", wr.getID()));
 //               wr.(u.getFirstname());
             }
            

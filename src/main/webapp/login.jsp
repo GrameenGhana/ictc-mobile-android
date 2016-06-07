@@ -70,7 +70,7 @@
 	
 	<div class="content clearfix">
 		
-		<form action="#" method="post">
+		<form action="<%=request.getContextPath()%>/users/login" method="post">
 		
 			<h1>Member Login</h1>		
 			
@@ -100,7 +100,7 @@
 				<button class="button btn btn-success btn-large">Sign In</button>
 				
 			</div> <!-- .actions -->
-			
+			<input type="hidden" id="login" name="action" value="login" />
 			
 			
 		</form>
