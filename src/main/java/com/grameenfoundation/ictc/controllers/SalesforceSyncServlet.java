@@ -14,6 +14,7 @@ import com.grameenfoundation.ictc.domains.BaselineProductionBudget;
 import com.grameenfoundation.ictc.domains.Biodata;
 import com.grameenfoundation.ictc.domains.CropAssessmentImage;
 import com.grameenfoundation.ictc.domains.FarmCreditPlan;
+import com.grameenfoundation.ictc.domains.FarmCreditUpdate;
 import com.grameenfoundation.ictc.domains.FieldCropAssessment;
 import com.grameenfoundation.ictc.domains.FmpPostHarvestBudget;
 import com.grameenfoundation.ictc.domains.FmpProductionBudget;
@@ -31,6 +32,7 @@ import com.grameenfoundation.ictc.models.BaselineProductionModel;
 import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.models.FarmCreditPlanModel;
 import com.grameenfoundation.ictc.models.FarmCreditPreviousModel;
+import com.grameenfoundation.ictc.models.FarmCreditUpdateModel;
 import com.grameenfoundation.ictc.models.FmpPostHarvestBudgetModel;
 import com.grameenfoundation.ictc.models.FmpProductionBudgetModel;
 import com.grameenfoundation.ictc.models.MeetingModel;
@@ -1147,31 +1149,31 @@ public class SalesforceSyncServlet extends HttpServlet {
                              System.out.println("Farm Credit Plan already exist");
                          } else {
                          
-                        org.neo4j.graphdb.Node FCParent;
+//                        org.neo4j.graphdb.Node FCParent;
                         org.neo4j.graphdb.Node FCNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARM_CREDIT_PLAN);
                         
                        
                         System.out.println("farmerid " + farmerID);
-                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
-
-                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
-                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                            FCNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
-                            }
-
-                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
-
-                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                              FCNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
-
-                            }
-                        }
+//                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
+//
+//                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+//                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
+//                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+//                            FCNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+//                            }
+//
+//                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
+//
+//                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+//                              FCNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+//
+//                            }
+//                        }
                         
                       FCNode.setProperty(FarmCreditPlan.LAST_MODIFIED,new Date().getTime());
 
-                       FCParent = ParentNode.TechNeedParentNode();
-                       FCParent.createRelationshipTo(FCNode, ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN);
+//                       FCParent = ParentNode.TechNeedParentNode();
+//                       FCParent.createRelationshipTo(FCNode, ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN);
 
                         log.log(Level.INFO, "new node created {0}", FCNode.getId());
 
@@ -1197,7 +1199,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                              System.out.println("Farm Credit Previous already exist");
                          } else {
                               
-                               org.neo4j.graphdb.Node FCParent;
+                            ///   org.neo4j.graphdb.Node FCParent;
                         org.neo4j.graphdb.Node FCNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARM_CREDIT_PREVIOUS);
                         
                        
@@ -1219,9 +1221,9 @@ public class SalesforceSyncServlet extends HttpServlet {
                         }
                         
                       FCNode.setProperty(FarmCreditPlan.LAST_MODIFIED,new Date().getTime());
-
-                       FCParent = ParentNode.TechNeedParentNode();
-                       FCParent.createRelationshipTo(FCNode, ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN);
+//
+//                       FCParent = ParentNode.TechNeedParentNode();
+//                       FCParent.createRelationshipTo(FCNode, ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN);
 
                         log.log(Level.INFO, "new node created {0}", FCNode.getId());
 
@@ -1241,7 +1243,59 @@ public class SalesforceSyncServlet extends HttpServlet {
                         
                         
                     }
-                     
+                        else if(salesforceObj.equals("sf:FarmCreditUpdate__c"))
+                    {
+                       
+                        
+                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
+                          if (null != new FarmCreditUpdateModel().getFarmCreditUpdate("Id", farmerID)) {
+                             out.println(sendAck());
+                             System.out.println("Farm Update already exist");
+                         } else {
+                              
+                            ///   org.neo4j.graphdb.Node FCParent;
+                        org.neo4j.graphdb.Node FCNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARM_CREDIT_UPDATE);
+                                               
+                        System.out.println("farmerid " + farmerID);
+                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
+
+                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
+                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                            FCNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                            }
+
+                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
+
+                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                              FCNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+
+                            }
+                        }
+                        
+                      FCNode.setProperty(FarmCreditUpdate.LAST_MODIFIED,new Date().getTime());
+//
+//                       FCParent = ParentNode.TechNeedParentNode();
+//                       FCParent.createRelationshipTo(FCNode, ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN);
+
+                        log.log(Level.INFO, "new node created {0}", FCNode.getId());
+
+                        Biodata b = biodataModel.getBiodata("Id", farmerID);
+
+                        biodataModel.BiodataToFarmCreditUpdate(b, FCNode);
+                       
+                         if(modified(farmerID))
+                                 System.out.println("Last modified done");
+                         out.println(sendAck());
+                    
+                       tx.success();
+                      
+                              
+                          
+                          }
+                        
+                        
+                    }
                      
                   //tx.success();
                  }
@@ -1315,7 +1369,27 @@ public class SalesforceSyncServlet extends HttpServlet {
         return ack;
     }
      
-     
+  public org.neo4j.graphdb.Node saveXMLtoDB(org.neo4j.graphdb.Node graphNode,Node xmlNode)
+  {
+      
+       for (int k = 0; k < xmlNode.getChildNodes().getLength(); k++) {
+
+          System.out.println("node: " + xmlNode.getChildNodes().item(k).getNodeName() + ": " + xmlNode.getChildNodes().item(k).getTextContent());
+          if (xmlNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
+              System.out.println("id : " + getObjectFieldId(xmlNode.getChildNodes().item(k).getNodeName()));
+              graphNode.setProperty(getObjectFieldId(xmlNode.getChildNodes().item(k).getNodeName()), xmlNode.getChildNodes().item(k).getTextContent());
+          }
+
+          if (!xmlNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !xmlNode.getChildNodes().item(k).getNodeName().equals("#text") && !xmlNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
+
+              System.out.println(getObjectFieldName(xmlNode.getChildNodes().item(k).getNodeName()));
+              graphNode.setProperty(getObjectFieldName(xmlNode.getChildNodes().item(k).getNodeName()), xmlNode.getChildNodes().item(k).getTextContent());
+          }
+
+      }
+      
+      return graphNode;
+  }
      
      public int getUserScore(String user) {
         ProfilingModel pm = new ProfilingModel();

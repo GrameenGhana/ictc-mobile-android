@@ -451,6 +451,31 @@ public class BiodataModel {
 
         return created;
     }
+  
+   public boolean BiodataToFarmCreditUpdate(Biodata b, Node FCP) {
+
+        boolean created = false;
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+
+           // Biodata b = new BiodataModel().getBiodata(Biodata.ID, biodata);
+
+            System.out.println("biodata :" + b.getUnderlyingNode().getId());
+            if (null != b) {
+
+                b.setFarmCreditUpdate(FCP);
+                created = true;
+                trx.success();
+
+            }
+        } catch (Exception e) {
+            System.out.println("error");
+            //created = false;
+
+        }
+
+        return created;
+    }
+
     public boolean BiodataToOperations(String biodata, Node operations) {
 
         boolean created = false;
