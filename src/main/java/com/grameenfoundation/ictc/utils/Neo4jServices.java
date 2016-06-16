@@ -668,5 +668,26 @@ public class Neo4jServices {
         return getIterativeNode(query);
 
     }
+    
+    
+      public static boolean getRootNode()
+    {
+        
+        String q = "match (n:root) return n";
+        System.out.println("Query : " + q);
+        
+          try {
+            Node node =executeCypherQuerySingleResult(q, "n");
+              System.out.println("node " + node.getProperty("name"));
+            if (null != node) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("Unable to Find Root Node " + e.getMessage());
+            e.printStackTrace();
+        }
+                 return false;
+    }
+
 
 }

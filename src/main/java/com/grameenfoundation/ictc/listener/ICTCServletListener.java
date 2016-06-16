@@ -6,6 +6,7 @@
 package com.grameenfoundation.ictc.listener;
 
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
+import com.grameenfoundation.ictc.utils.Neo4jServices;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import org.neo4j.graphdb.DynamicLabel;
@@ -29,34 +30,31 @@ public class ICTCServletListener implements ServletContextListener {
               System.out.println("-----------------------------Starting Database-------------------------------------");
               db =  ICTCDBUtil.getInstance().startDB();
               
-//              if(null!=db)
-//              {
-//                  db = ICTCDBUtil.getInstance().startDB();
-//              }
-//              else
-//              {
-//                  System.out.println("Database Already exists");
-//                    ICTCDBUtil.getInstance().shutdown(db);
-//                  
-//              }
-              
-              
-//                 
-//             try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
-//                 Node node =ICTCDBUtil.getInstance().getGraphDB().createNode(DynamicLabel.label("root"));
-//                 node.setProperty("name", "ICTCROOT");
-//                 tx.success();
-//                 
-//                 System.out.println("Node Added");
-//                 
-//                 System.out.println("node Added" + node.getId());
-//                 System.out.println("node Added" + node.getProperty("name"));
-//                 
-//             } catch (Exception e) {
-//                 
-//                 System.out.println("Unable to create root node");
-//             }
-//             
+try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+              if(Neo4jServices.getRootNode())
+              {
+                  System.out.println("Root Node Already Exists");
+              }
+              else
+              {
+                  
+                      Node node = ICTCDBUtil.getInstance().getGraphDB().createNode(DynamicLabel.label("root"));
+                      node.setProperty("name", "ICTCROOT");
+                     
+
+                      System.out.println("Node Added");
+
+                      System.out.println("node Added" + node.getId());
+                      System.out.println("node Added" + node.getProperty("name"));
+                       tx.success();
+              }
+            
+              } catch (Exception e) {
+
+                      System.out.println("Unable to create root node");
+                      e.printStackTrace();
+              }
+             System.out.println("-----------------------------DB Started-------------------------------------");
             
              System.out.println("-----------------------------DB Started-------------------------------------");
              
