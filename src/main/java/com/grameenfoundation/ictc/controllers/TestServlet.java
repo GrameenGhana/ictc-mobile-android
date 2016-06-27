@@ -545,7 +545,7 @@ public class TestServlet extends HttpServlet {
 //        }
 //     String serverResponse = "";
 //
-     String url = "http://sandbox-ictchallenge.cs80.force.com/getSearchRequest";
+     String url = "http://sandbox-ictchallenge.cs80.force.com/getMeasurement";
      
            JSONArray m = new JSONArray();
            
@@ -554,15 +554,17 @@ public class TestServlet extends HttpServlet {
           //m.put("00P25000000gLr1EAE");
      
             JSONObject j = new JSONObject();
-            j.put("requestType", "videos");
-            j.put("farmerId", "a0k25000000c1aZAAQ");
-            j.put("videoIds", m);
+            j.put("requestType", "measure");
+            j.put("farmerId", "a1O25000000B5gJEAS");
+            j.put("area","23.0987");
+            j.put("perimeter","180.0987");
             
             
             Map<String, String> parameters = new HashMap<String, String>();
+            System.out.println(j.toString());
 
             parameters.put("data", j.toString());
-            parameters.put("method","videos");
+            parameters.put("method","measurement");
 
             String result = SalesforceHttpClient.getSalesforceData(url, parameters);
             System.out.println(result);

@@ -183,8 +183,10 @@ public class APIController extends HttpServlet {
                 System.out.println("Perimeter " + perimeter);
                 
                 JSONArray ja = new JSONArray();
-                ja = (JSONArray) j.get("points");
+                ja = j.getJSONArray("points");
+                  
                 
+                Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
                 BiodataModel bdata = new BiodataModel();
                 Map<String, String> m = new HashMap<String, String>();
 
@@ -192,10 +194,18 @@ public class APIController extends HttpServlet {
                 m.put(Biodata.FARM_PERIMETER, String.valueOf(perimeter));
                 boolean updated = bdata.BiodataUpdate(farmer, m);
                 
+                
+                
                 if(updated)
                 {
                     System.out.println("Farmer update done " + updated);
-
+                      FarmerGPSModel gpsModel = new FarmerGPSModel();
+                            int l =  ja .length();
+                            for (int k = 0; k < l; k++) {
+                                JSONObject cord =  ja.getJSONObject(k);
+                                System.out.println("GPSItem : "+cord.getString("lat")+" <> "+cord.getString("lng" ));
+                                gpsModel.create(new FarmGPSLocationWrapper(cord.getString("lat"), cord.getString("lng"), farmer));
+                            }
                     JSONObject obj = new JSONObject();
                     obj.put("rc", "00");
                     out.print(obj);
@@ -205,6 +215,10 @@ public class APIController extends HttpServlet {
                 {
                     System.out.println("Update not done");
                 }
+                
+              
+                
+                tx.success();
             }
             else if (serviceCode.equalsIgnoreCase("sync")) {
                 String data = request.getParameter("data");
@@ -356,6 +370,7 @@ public class APIController extends HttpServlet {
                             farmer.put(Biodata.NUMBER_OF_DEPENDANTS, b.getNumberofdependants());
                             farmer.put(Biodata.REGION, b.getRegion());
                             farmer.put(Biodata.VILLAGE, b.getVillage());
+                            farmer.put(Biodata.TELEPHONENUMBER,b.getTelephonenumber());
                            
                             
                             if(null!=b.getDistricts_Ashanti())
@@ -370,8 +385,13 @@ public class APIController extends HttpServlet {
                             {
                                 farmer.put(Biodata.DISTRICT, b.getDistricts_Volta()); 
                             }
-
+                            
+                       if (null != b.getFarmperimeter()) {
                             farmer.put(Biodata.FARM_PERIMETER, b.getFarmperimeter());
+                       }else
+                       {
+                           farmer.put(Biodata.FARM_PERIMETER,"0");
+                       }
 
                             if (null != b.getCluster()) {
                                 farmer.put(Biodata.CLUSTER, b.getCluster());
@@ -380,7 +400,7 @@ public class APIController extends HttpServlet {
                             }
 
                             if (null != b.getFarmarea()) {
-                                farmer.put(Biodata.FARM_AREA, b.getCluster());
+                                farmer.put(Biodata.FARM_AREA, b.getFarmarea());
                             } else {
                                 farmer.put(Biodata.FARM_AREA, "0");
                             }

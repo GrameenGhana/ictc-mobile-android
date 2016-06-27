@@ -44,7 +44,7 @@
                         <a href="<%=request.getContextPath() %>/farmer/search.jsp?type=CreatedById&q=<%=ag.getAgentId() %>" class=" btn label label-important">Farmers </a>
                 </td>
                 <td>
-                    <a href="<%=request.getContextPath() %>/agent/agenttofarmer.jsp?type=CreatedById&q=<%=ag.getAgentId() %>" class="btn btn-info">Assign Farmer(s) </a>
+                    <a href="<%=request.getContextPath() %>/agent/editagent.jsp?type=CreatedById&q=<%=ag.getAgentId() %>" class="btn btn-info">Assign Farmer(s) </a>
                 </td>
             </tr>
             <% }%>

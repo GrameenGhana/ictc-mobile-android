@@ -101,7 +101,7 @@ public class Neo4jServices {
                 q = "start n=node(" + node.getId() + ") match n-[r:" + relations + "]->s"
                         + " delete r ";
             } else if (direct.equals(Direction.INCOMING)) {
-                q = "start n=node(" + node.getId() + ") match n<-[r:" + relations + "]-s"
+                q = "start n=node(" + node.getId() + ") match n<-[r:" + relations + "]->s"
                         + " delete r ";
 
             } else {

@@ -183,6 +183,7 @@ public class BiodataModel {
                 return new Biodata(node);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Unable to Find Biodata");
         }
        
@@ -688,7 +689,10 @@ public class BiodataModel {
     
      public Long getProfileCount() {
 
-        return Neo4jServices.getAggregatedValue(" match (n:PROFILE) RETURN count(n) as l");
+        //return Neo4jServices.getAggregatedValue(" match (n:PROFILE) RETURN count(n) as l");
+       
+               
+        return Neo4jServices.getAggregatedValue("match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_PROFILING+"]->p RETURN count(p) as l");
     }
      
      public Long getBaselineProductionCount() {
@@ -1077,7 +1081,7 @@ public class BiodataModel {
     public Object getFarmerCountByAgent(String AgentId)
     {
         String q = " match (f:FARMER) where f.CreatedById='"+AgentId+"'"+
-                " return count(f)";
+                " return count(DISTINCT f)";
         
         return Neo4jServices.getAggregateItem(q);
     }
@@ -1097,7 +1101,7 @@ public class BiodataModel {
     {
        
         String q = " match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_PROFILING+"]->p where f.CreatedById='"+AgentId+"'"+
-                " return  count(DISTINCT f)"; 
+                " return  count(DISTINCT p)"; 
         
         return Neo4jServices.getAggregateItem(q);
     }

@@ -107,15 +107,15 @@
                                 <span>General Dashboard</span>
                             </a>	    				
                         </li>
-                          <li>
+                         <!-- <li>
                             <a href="<%=request.getContextPath()%>/dashboard/acdivoca.jsp">
                                 <i class="icon-list-alt"></i>
                                 <span>ACDIVOCA Dashboard</span>
                             </a>    				
-                        </li>
+                        </li>-->
 
 
-                    <!--    <li>
+                       <li>
                             <a href="<%=request.getContextPath()%>/reports">
                                 <i class="icon-list-alt"></i>
                                 <span>Reports</span>
@@ -158,7 +158,7 @@
                                 <li><a href="<%=request.getContextPath()%>/category">Category</a></li>
 
                             </ul>    				
-                        </li>-->
+                        </li>
 
                     </ul>
 
