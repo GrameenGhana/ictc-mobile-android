@@ -5,8 +5,6 @@
  */
 package com.grameenfoundation.ictc.controllers;
 
-import static com.grameenfoundation.ictc.controllers.SaleforceIntegrationController.getObjectFieldId;
-import static com.grameenfoundation.ictc.controllers.SaleforceIntegrationController.getObjectFieldName;
 import com.grameenfoundation.ictc.domains.Biodata;
 import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;

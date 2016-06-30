@@ -55,8 +55,6 @@ public class ICTCDBUtil {
     
     public  GraphDatabaseService startDB()
     {
-       
-        
          ServerConfigurator config;
         
         String glassishinstanceRootPropertyName = "com.sun.aas.instanceRoot";
@@ -105,7 +103,7 @@ public class ICTCDBUtil {
 
         }
         
-          log.log(Level.INFO, "{0} Database ", graphdb.isAvailable(2));
+         //log.log(Level.INFO, "{0} Database ", graphdb.isAvailable(2));
         
          //database = graphdb;
          
