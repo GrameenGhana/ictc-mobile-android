@@ -31,7 +31,7 @@
         <!-- Include ActiveMQ -->
         <dependency>
             <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-all</artifactId>
+            <artifactId>activemq-client</artifactId>
             <version>5.13.3</version>
             <exclusions>
                 <exclusion>
@@ -59,14 +59,12 @@
             <version>2.3.2</version>
             <type>jar</type>
         </dependency>
-        <!--
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.13</version>
         </dependency>
-        -->
-              
+
          <dependency>
             <groupId>opensymphony</groupId>
             <artifactId>sitemesh</artifactId>

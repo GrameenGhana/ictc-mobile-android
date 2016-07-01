@@ -35,18 +35,14 @@ public class SalesforceMessageParser {
 
     public static void processXMLString(String theString) {
 
-        System.out.println("Salesforce data/n " + theString);
-
         try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
             // File xmlFile = new File("/home/grameen/test.xml");
             DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             InputSource is = new InputSource();
             is.setCharacterStream(new StringReader(theString));
-            System.out.println("After parsing XML");
 
             Document doc = db.parse(is);
-            System.out.println("Should be normalised now");
             doc.getDocumentElement().normalize();
 
             Element ele = doc.getDocumentElement();
@@ -57,7 +53,7 @@ public class SalesforceMessageParser {
 
                 Node rowNode = sObject.item(j);
                 String sfObj = rowNode.getAttributes().getNamedItem("xsi:type").getNodeValue();
-                System.out.println(sfObj);
+                //System.out.println(sfObj);
 
                 switch(sfObj) {
                     case "sf:Farmer_Biodata__c":
@@ -829,8 +825,8 @@ public class SalesforceMessageParser {
     }
 
     public static String getXmlNodeValue(String node, Element element) {
-        NodeList nList = element.getElementsByTagName(node).item(0).getChildNodes();
         try {
+            NodeList nList = element.getElementsByTagName(node).item(0).getChildNodes();
             Node nValue = nList.item(0);
             return nValue.getNodeValue();
         } catch (Exception e) {
