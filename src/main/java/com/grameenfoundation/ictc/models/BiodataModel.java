@@ -653,27 +653,27 @@ public class BiodataModel {
 
     public Long getFarmerCount() {
 
-        return Neo4jServices.getAggregatedValue(" match (n:FARMER) RETURN count(n) as l");
+        return Neo4jServices.getAggregatedValue(" match (n:FARMER) RETURN count(DISTINCT n.Id) as l");
     }
     
      public Long getMOFAAgentCount() {
 
-        return Neo4jServices.getAggregatedValue(" match (n:AGENT) where n.agenttype='MOFA' return count(n) as l");
+        return Neo4jServices.getAggregatedValue(" match (n:AGENT) where n.agenttype='MOFA' return count(n.Id) as l");
     }
 
     public Long getACDIVOCAAgentCount() {
 
-        return Neo4jServices.getAggregatedValue(" match (n:AGENT) where n.agenttype='ACDIVOCA' return count(n) as l");
+        return Neo4jServices.getAggregatedValue(" match (n:AGENT) where n.agenttype='ACDIVOCA' return count(DISTINCT n.Id) as l");
     }
     
     public Long getACDIVOCAFarmerCount() {
 
-        return Neo4jServices.getAggregatedValue(" match (n:AGENT) where n.agenttype='ACDIVOCA' WITH n match (f:FARMER) where f.CreatedById=n.Id return count(f) as l");
+        return Neo4jServices.getAggregatedValue(" match (n:AGENT) where n.agenttype='ACDIVOCA' WITH n match (f:FARMER) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
     }
     
     public Long getMOFAFarmerCount() {
 
-        return Neo4jServices.getAggregatedValue(" match (n:AGENT) where n.agenttype='MOFA' WITH n match (f:FARMER) where f.CreatedById=n.Id return count(f) as l");
+        return Neo4jServices.getAggregatedValue(" match (n:AGENT) where n.agenttype='MOFA' WITH n match (f:FARMER) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
     }
     
     public Long getCommunityCount() {
@@ -692,7 +692,7 @@ public class BiodataModel {
         //return Neo4jServices.getAggregatedValue(" match (n:PROFILE) RETURN count(n) as l");
        
                
-        return Neo4jServices.getAggregatedValue("match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_PROFILING+"]->p RETURN count(p) as l");
+        return Neo4jServices.getAggregatedValue("match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_PROFILING+"]->p RETURN count(DISTINCT f.Id) as l");
     }
      
      public Long getBaselineProductionCount() {
@@ -752,7 +752,15 @@ public class BiodataModel {
         return Neo4jServices.getAggregatedValue(" match (n: FIELD_CROP_ASSESSMENT) RETURN count(n) as l");
     }
       
-    
+    public Long getACDIVOCACountUpdateCount()
+    {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'ACDIVOCA' WITH n match (f:FARMER)-[]->(p)-[:UPDATE]->(u) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+      
+    public Long getMOFACountUpdateCount()
+    {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'MOFA' WITH n match (f:FARMER)-[]->(p)-[:UPDATE]->(u) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    } 
    
 
     public List<CommunityCounterWrapper> getCommunityWrapper() {
@@ -1081,7 +1089,7 @@ public class BiodataModel {
     public Object getFarmerCountByAgent(String AgentId)
     {
         String q = " match (f:FARMER) where f.CreatedById='"+AgentId+"'"+
-                " return count(DISTINCT f)";
+                " return count(DISTINCT f.Id)";
         
         return Neo4jServices.getAggregateItem(q);
     }
@@ -1101,7 +1109,7 @@ public class BiodataModel {
     {
        
         String q = " match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_PROFILING+"]->p where f.CreatedById='"+AgentId+"'"+
-                " return  count(DISTINCT p)"; 
+                " return  count(DISTINCT f.Id)"; 
         
         return Neo4jServices.getAggregateItem(q);
     }

@@ -71,5 +71,17 @@ public class ProductionModel {
 
         return null;
     }
+        
+        
+   public Long getMOFAFMPProductionCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'MOFA' WITH n match (f:FARMER)-[:HAS_PRODUCTION]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+
+    public Long getACDIVOCAFMPProductionCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'ACDIVOCA' WITH n match (f:FARMER)-[:HAS_PRODUCTION]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+
+   
+   
 
 }

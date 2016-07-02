@@ -11,6 +11,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%  BiodataModel biodataModel = new BiodataModel();
     List<BiodataWrapper> bioWrapper = biodataModel.getBioData("", "");
+    
+    System.out.print("Cluster  " + bioWrapper.get(0).getCluster());
 %>
 <!DOCTYPE html>
 <html>
@@ -27,7 +29,6 @@
                 <th>ID</th>
                 <th>Surname</th>
                 <th>Othernames</th>
-                <th>Community</th>
                 <th>Main Crop</th>
                 <th>Cluster</th>
                 <th>Village</th>
@@ -41,7 +42,6 @@
                 <td><%= bio.getFarmID()%></td>
                 <td><%= bio.getLastName()%></td>
                 <td><%= bio.getFirstName() %></td>
-                <td><%= bio.getCommunity() %></td>
                 <td><%= bio.getMajorCrop() %></td>
                 <td><%= bio.getCluster() %></td>
                 <td><%= bio.getVillage() %></td>

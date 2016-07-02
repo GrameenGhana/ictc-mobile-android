@@ -14,6 +14,7 @@ import com.grameenfoundation.ictc.domains.PostHarvest;
 import com.grameenfoundation.ictc.domains.Profiling;
 import com.grameenfoundation.ictc.domains.Storage;
 import com.grameenfoundation.ictc.domains.TechnicalNeed;
+import com.grameenfoundation.ictc.models.AgentModel;
 import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.models.FarmManagementModel;
 import com.grameenfoundation.ictc.models.HarvestModel;
@@ -25,6 +26,7 @@ import com.grameenfoundation.ictc.models.StorageModel;
 import com.grameenfoundation.ictc.models.TechnicalNeedsModel;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.utils.XMLParser;
+import com.grameenfoundation.ictc.wrapper.AgentWrapper;
 import com.grameenfoundation.ictc.wrapper.BiodataWrapper;
 import com.grameenfoundation.ictc.wrapper.FarmManagementWrapper;
 import com.grameenfoundation.ictc.wrapper.HarvestWrapper;
@@ -545,30 +547,30 @@ public class TestServlet extends HttpServlet {
 //        }
 //     String serverResponse = "";
 //
-     String url = "http://sandbox-ictchallenge.cs80.force.com/getMeasurement";
-     
-           JSONArray m = new JSONArray();
-           
-          m.put("00P25000000wJHJEA2");
-         // m.put("00P25000000gLqwEAE");
-          //m.put("00P25000000gLr1EAE");
-     
-            JSONObject j = new JSONObject();
-            j.put("requestType", "measure");
-            j.put("farmerId", "a1O25000000B5gJEAS");
-            j.put("area","23.0987");
-            j.put("perimeter","180.0987");
-            
-            
-            Map<String, String> parameters = new HashMap<String, String>();
-            System.out.println(j.toString());
-
-            parameters.put("data", j.toString());
-            parameters.put("method","measurement");
-
-            String result = SalesforceHttpClient.getSalesforceData(url, parameters);
-            System.out.println(result);
-            out.println(result);
+//     String url = "http://sandbox-ictchallenge.cs80.force.com/getMeasurement";
+//     
+//           JSONArray m = new JSONArray();
+//           
+//          m.put("00P25000000wJHJEA2");
+//         // m.put("00P25000000gLqwEAE");
+//          //m.put("00P25000000gLr1EAE");
+//     
+//            JSONObject j = new JSONObject();
+//            j.put("requestType", "measure");
+//            j.put("farmerId", "a1O25000000B5gJEAS");
+//            j.put("area","23.0987");
+//            j.put("perimeter","180.0987");
+//            
+//            
+//            Map<String, String> parameters = new HashMap<String, String>();
+//            System.out.println(j.toString());
+//
+//            parameters.put("data", j.toString());
+//            parameters.put("method","measurement");
+//
+//            String result = SalesforceHttpClient.getSalesforceData(url, parameters);
+//            System.out.println(result);
+//            out.println(result);
 
 //            JSONObject json = new JSONObject(result);
 //            
@@ -619,7 +621,35 @@ public class TestServlet extends HttpServlet {
 //            }
 //            
 //             System.out.println(serverResponse);
-    
+            
+             AgentModel agentModel = new AgentModel();
+            BiodataModel biodataModel = new BiodataModel();
+
+            Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
+            List<AgentWrapper> agent = agentModel.findAllAgents();
+            int sum = 0;
+            
+            
+              for (AgentWrapper a :agent) {
+
+            
+                  System.out.println(a.getFirstname() + " " +a.getLastname());  
+                  sum+= Integer.valueOf(String.valueOf( biodataModel.getFarmerCountByAgent(a.getAgentId()))).intValue();
+//                 biodataModel.getFarmerProfileCountByAgent(a.getAgentId());
+//                 biodataModel.getFarmerBaselinProductionCountByAgent(a.getAgentId()) 
+//                 biodataModel.getFarmerBaselineProductionBudgetCountByAgent(a.getAgentId())
+//                 biodataModel.getFarmerBaselinePostHarvestCountByAgent(a.getAgentId())
+//                 biodataModel.getFarmerBaselinePostHarvestBudgetCountByAgent(a.getAgentId())
+//                 biodataModel.getFarmerFMPProductionCountByAgent(a.getAgentId()) 
+//                 biodataModel.getFarmerFMPPostHarvestCountByAgent(a.getAgentId())
+                
+            
+             }
+            System.out.println("Sum farmer " + sum);
+            tx.success();
+            
+            
+
     
        }
      

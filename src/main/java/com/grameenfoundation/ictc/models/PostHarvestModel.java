@@ -141,7 +141,7 @@ public class PostHarvestModel {
                 return new PostHarvest2(node);
             }
         } catch (Exception e) {
-            System.out.println("Unable to Find geofence");
+            System.out.println("Unable to Find Post Harvest");
         }
 
         return null;
@@ -168,5 +168,16 @@ public class PostHarvestModel {
 
         return created;
     }
+  
+  
+  public Long getMOFAFMPPostHarvestCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'MOFA' WITH n match (f:FARMER)-[:HAS_POSTHARVEST]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+
+    public Long getACDIVOCAFMPPostHarvestCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'ACDIVOCA' WITH n match (f:FARMER)-[:HAS_POSTHARVEST]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
 
 }
+
+

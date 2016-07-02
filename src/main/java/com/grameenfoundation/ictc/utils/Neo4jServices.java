@@ -119,6 +119,30 @@ public class Neo4jServices {
 
         return false;
     }
+    
+    
+    
+    public static boolean deleteAgentNode(Node node)
+    {
+         // Begin the transaction
+        try (Transaction trx = db.beginTx()) {
+            // Deletes the relations of the node
+            String q = "";
+           
+             q = "start n=node(" + node.getId() + ") match n<-[r:" + ICTCRelationshipTypes.AGENT + "]->s"
+                        + " delete n,r ";
+          
+            log.info("Query : qu " + q);
+            executeCypherQuery(q);
+            trx.success();
+            return true;
+        } catch (Exception e) {
+            // When an error occurs
+            log.error("deleting node failed");
+        }
+
+        return false;
+    }
 
     /**
      *

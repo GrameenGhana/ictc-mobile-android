@@ -59,27 +59,44 @@ public class TempServlet extends HttpServlet {
            List<AgentWrapper> agg = ag.findAllACDIAgents();
            List<AgentWrapper> agm = ag.findAllMOFAAgents();
            String  ACDIVOCAProfiling =null;
+           String  ACDIVOCAFarmer = null;
+           String  MOFAFarmer = null;
            String  MOFAProfiling = null;
            int profileCount = 0;
            int mprofileCount = 0;
-           
-           
+           int farmerCount = 0;
+           int mfarmerCount = 0;
+          
+               System.out.println("Acdi count " + agg.size());
+               System.out.println("mofa count " + agm.size());
                for (AgentWrapper agg1 : agg) {
                    
                    ACDIVOCAProfiling = String.valueOf(b.getFarmerProfileCountByAgent(agg1.getAgentId()));
+                   ACDIVOCAFarmer = String.valueOf(b.getFarmerCountByAgent(agg1.getAgentId()));
+                   
+                   
                    profileCount+= Integer.valueOf(ACDIVOCAProfiling).intValue();
+                   farmerCount+= Integer.valueOf(ACDIVOCAFarmer).intValue();
+                   
                }
-               
+               System.out.println("end of ACDIVOCA");
                for (AgentWrapper agm1 : agm) {
                    
                     MOFAProfiling = String.valueOf(b.getFarmerProfileCountByAgent(agm1.getAgentId()));
-                   mprofileCount+= Integer.valueOf( MOFAProfiling).intValue();
-                   
+                    MOFAFarmer = String.valueOf(b.getFarmerCountByAgent(agm1.getAgentId()));
+                    
+                    
+                    mprofileCount+= Integer.valueOf( MOFAProfiling).intValue();
+                    mfarmerCount+= Integer.valueOf(MOFAFarmer).intValue();
                }
                
                
+               int profilesum  = mprofileCount + profileCount;
                System.out.println("Profiling " + profileCount);
                System.out.println("Profiling Mofa " + mprofileCount);
+               System.out.print(farmerCount);
+               System.out.println("Profile Count " + profilesum);
+               
            
 //            for(String agent : mofagents)
 //            {

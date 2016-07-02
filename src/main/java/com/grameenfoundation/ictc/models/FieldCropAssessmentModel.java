@@ -21,10 +21,16 @@ public class FieldCropAssessmentModel {
     
     
      public FieldCropAssessment getFieldCropAssessment(String field, String value) {
-        String q = "Start root=node(0) "
-                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+ICTCRelationshipTypes.HAS_FIELD_CROP_ASSESSMENT+
-                "]->p"
-                + " where f." + field + "='" + value + "'"
+//        String q = "Start root=node(0) "
+//                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+ICTCRelationshipTypes.HAS_FIELD_CROP_ASSESSMENT+
+//                "]->p"
+//                + " where f." + field + "='" + value + "'"
+//                + " return p";
+        
+        
+        
+          String q = "match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_FIELD_CROP_ASSESSMENT+"]->p"+ 
+                " where f." + field + "='" + value + "'"
                 + " return p";
 
         System.out.println("Query " + q);
@@ -38,6 +44,15 @@ public class FieldCropAssessmentModel {
         }
 
         return null;
+    }
+     
+     
+  public Long getMOFAFCPCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'MOFA' WITH n match (f:FARMER)-[:HAS_FIELD_CROP_ASSESSMENT]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+
+    public Long getACDIVOCAFCPCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'ACDIVOCA' WITH n match (f:FARMER)-[:HAS_FIELD_CROP_ASSESSMENT]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
     }
 
 }

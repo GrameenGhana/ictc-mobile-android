@@ -34,7 +34,7 @@
                             <div id="big_stats" class="cf">
                                 <div class="stat"> <i class="icon-anchor"></i>
                                     
-                                    <span class="value"><a href="<%=request.getContextPath() %>/farmer"><%=bioModel.getFarmerCount()%></a></span> 
+                                    <span class="value"><a href="<%=request.getContextPath() %>/farmer"><%=bioModel.getACDIVOCAFarmerCount().intValue() + bioModel.getMOFAFarmerCount() %></a></span> 
                                     <div>Total Farmers</div>
                                 </div>
                                 <!-- .stat -->

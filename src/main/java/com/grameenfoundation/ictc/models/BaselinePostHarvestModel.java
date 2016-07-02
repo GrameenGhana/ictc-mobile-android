@@ -39,10 +39,20 @@ public class BaselinePostHarvestModel {
                 return new BaselinePostHarvest(node);
             }
         } catch (Exception e) {
-            System.out.println("Unable to Find geofence");
+            System.out.println("Unable to Find node");
         }
 
         return null;
     }
+      
+      
+   public Long getMOFABaselinePostHarvestCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'MOFA' WITH n match (f:FARMER)-[:HAS_BASELINE_POSTHARVEST]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+
+    public Long getACDIVOCABaselinePostHarvestCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'ACDIVOCA' WITH n match (f:FARMER)-[:HAS_BASELINE_POSTHARVEST]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+
 
 }

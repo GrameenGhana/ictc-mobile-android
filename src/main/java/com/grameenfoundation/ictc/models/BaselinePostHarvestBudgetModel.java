@@ -45,5 +45,14 @@ public class BaselinePostHarvestBudgetModel {
 
         return null;
     }
+    
+    
+     public Long getMOFABaselinePostHarvestBudgetCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'MOFA' WITH n match (f:FARMER)-[:HAS_BASELINE_POSTHARVEST_BUDGET]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+
+    public Long getACDIVOCABaselinePostHarvestBudgetCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'ACDIVOCA' WITH n match (f:FARMER)-[:HAS_BASELINE_POSTHARVEST_BUDGET]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
 
 }

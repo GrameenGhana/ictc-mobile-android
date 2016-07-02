@@ -103,6 +103,14 @@ public class ProfilingModel {
         return null;
     }    
        
+    public Long getMOFAProfileCount()
+    {
+         return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'MOFA' WITH n match (f:FARMER)-[:HAS_PROFILING]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
     
+    public Long getACDIVOCAProfileCount()
+    {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'ACDIVOCA' WITH n match (f:FARMER)-[:HAS_PROFILING]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
 
 }

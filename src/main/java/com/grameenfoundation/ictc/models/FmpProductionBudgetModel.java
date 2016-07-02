@@ -67,4 +67,14 @@ public class FmpProductionBudgetModel
 
         return created;
     }
+      
+      
+      public Long getMOFAFMPProductionBudgetCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'MOFA' WITH n match (f:FARMER)-[:HAS_PRODUCTION_BUDGET]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+
+    public Long getACDIVOCAFMPProductionBudgetCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'ACDIVOCA' WITH n match (f:FARMER)-[:HAS_PRODUCTION_BUDGET]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+
 }
