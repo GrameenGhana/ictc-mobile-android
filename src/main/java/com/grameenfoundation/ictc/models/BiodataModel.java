@@ -752,12 +752,12 @@ public class BiodataModel {
         return Neo4jServices.getAggregatedValue(" match (n: FIELD_CROP_ASSESSMENT) RETURN count(n) as l");
     }
       
-    public Long getACDIVOCACountUpdateCount()
+    public Long getACDIVOCAUpdateCount()
     {
         return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'ACDIVOCA' WITH n match (f:FARMER)-[]->(p)-[:UPDATE]->(u) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
     }
       
-    public Long getMOFACountUpdateCount()
+    public Long getMOFAUpdateCount()
     {
         return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'MOFA' WITH n match (f:FARMER)-[]->(p)-[:UPDATE]->(u) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
     } 

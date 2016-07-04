@@ -28,6 +28,9 @@
           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <link href="<%= request.getContextPath()%>/public/js/datepicker/css/datepicker.css" rel="stylesheet" />
+        <script src="<%= request.getContextPath()%>/theme/egrap/js/jquery-1.11.0.min.js"></script>
+        <script src="<%= request.getContextPath()%>/theme/egrap/js/DataTables/media/js/jquery.js"></script>
+        
     </head>
 
     <body>
@@ -309,9 +312,13 @@
         <script src="<%= request.getContextPath()%>/theme/egrap/js/map.js"></script>
         <script type="text/javascript" src="<%= request.getContextPath()%>/public/js/datepicker/js/bootstrap-datepicker.js"></script>
 
-      <!-- <script src="<%= request.getContextPath()%>/theme/egrap/js/checklist.js"></script>->
+      <!-- <script src="<%= request.getContextPath()%>/theme/egrap/js/checklist.js"></script>-->
+        <script src="<%= request.getContextPath()%>/public/js/highcharts/highcharts.js"></script>
+        <script src="<%= request.getContextPath()%>/public/js/highcharts/highcharts-more.js"></script>
 
-
+        <script src="<%= request.getContextPath()%>/public/js/highcharts/solid-gauge.js"></script>
+        <script src="<%= request.getContextPath()%>/public/js/highcharts/highcharts-3d.js"></script>
+        <script src="<%= request.getContextPath()%>/public/js/highcharts/exporting.js"></script>
         <script type="text/javascript">
 
             $(function () {
@@ -327,6 +334,10 @@
                     $(".alert.alert-success-alt").css("display", "block");
 
             });
+
+            
+            
+
 
         </script>
 

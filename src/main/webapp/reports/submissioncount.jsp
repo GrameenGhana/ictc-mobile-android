@@ -131,7 +131,8 @@ FieldCropAssessmentModel fca = new FieldCropAssessmentModel();
                                 <tr>
                                     <td>Updates</td>
                                     <td><%= bio.getACDIVOCAUpdateCount() %></td>
-                                     <td><%= bio.getMOFAUpdateCount() %></td>
+                                    <td><%= bio.getMOFAUpdateCount() %></td>
+                                     <td><%= bio.getACDIVOCAUpdateCount().intValue() + bio.getMOFAUpdateCount().intValue()   %></td>
                                 </tr>
                                 
                             </table>
