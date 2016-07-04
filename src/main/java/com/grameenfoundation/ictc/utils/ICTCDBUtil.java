@@ -38,8 +38,8 @@ public class ICTCDBUtil {
     //Logger logger = (Logger) java.util.logging.Logger.getLogger(ICTCDBUtil.class.getName());
     static final java.util.logging.Logger log = java.util.logging.Logger.getLogger(ICTCDBUtil.class.getName());
     
-    static GraphDatabaseService database = null;
-    static  GraphDatabaseService graphdb = null;
+    //static GraphDatabaseService graphdb = null;
+   static GraphDatabaseService database = null;
     private static ICTCDBUtil instance = new ICTCDBUtil();
     private ICTCDBUtil() {}
     
@@ -56,7 +56,7 @@ public class ICTCDBUtil {
     public  GraphDatabaseService startDB()
     {
        
-        
+       GraphDatabaseService graphdb = null;
          ServerConfigurator config;
         
         String glassishinstanceRootPropertyName = "com.sun.aas.instanceRoot";
@@ -94,26 +94,28 @@ public class ICTCDBUtil {
         
             
         
-        graphdb = new GraphDatabaseFactory().setUserLogProvider(new Slf4jLogProvider())
+        graphdb = new GraphDatabaseFactory()
+                //.setUserLogProvider(new Slf4jLogProvider())
                 .newEmbeddedDatabaseBuilder(DATABASE_PATH)
-                .setConfig(GraphDatabaseSettings.allow_store_upgrade, dbProperties.getProperty("allow_store_upgrade"))
+              //  .setConfig(GraphDatabaseSettings.allow_store_upgrade, dbProperties.getProperty("allow_store_upgrade"))
                 .setConfig(GraphDatabaseSettings.pagecache_memory, dbProperties.getProperty("dbms.pagecache.memory"))
                 .newGraphDatabase();
         } catch (Exception e) {
             
             log.log(Level.SEVERE, "DS Error : {0}", e.getLocalizedMessage());
+            e.printStackTrace();
 
         }
         
           log.log(Level.INFO, "{0} Database ", graphdb.isAvailable(2));
         
-         //database = graphdb;
+         database = graphdb;
          
         
        
         registerShutdownHook(graphdb);
-        //log.log(Level.INFO, "{0} Database test 2 done", graphdb.isAvailable(2));
-//          
+//        log.log(Level.INFO, "{0} Database test 2 done", graphdb.isAvailable(2));
+          
 //         config = new ServerConfigurator((GraphDatabaseAPI) graphdb);
 //                 
 //         config.configuration().setProperty(
@@ -139,8 +141,8 @@ public class ICTCDBUtil {
      */
      public GraphDatabaseService getGraphDB() {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-        //return database;
-        return graphdb;
+        return database;
+       //return graphdb;
     }
     
       /**
@@ -155,8 +157,18 @@ public class ICTCDBUtil {
 
             @Override
             public void run() {
+                try{
+                log.info("shutting down my db");
+                // srv.stop();
                 graphDb.shutdown();
-                //srv.stop();
+                
+                }
+                catch(Exception e)
+                {
+                    System.out.println("    "+ e.getMessage());
+                    e.printStackTrace();
+                }
+               
             }
         });
     }
@@ -168,6 +180,7 @@ public class ICTCDBUtil {
             graphDb.shutdown();
         } catch (Exception e) {
             log.log(Level.WARNING, "Shut Down Thread {0}", e.getLocalizedMessage());
+            e.printStackTrace();
         }
       }
     
