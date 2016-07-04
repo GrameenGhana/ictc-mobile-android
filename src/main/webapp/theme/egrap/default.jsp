@@ -107,15 +107,15 @@
                                 <span>General Dashboard</span>
                             </a>	    				
                         </li>
-                          <li>
+                         <!-- <li>
                             <a href="<%=request.getContextPath()%>/dashboard/acdivoca.jsp">
                                 <i class="icon-list-alt"></i>
                                 <span>ACDIVOCA Dashboard</span>
                             </a>    				
-                        </li>
+                        </li>-->
 
 
-                    <!--    <li>
+                       <li>
                             <a href="<%=request.getContextPath()%>/reports">
                                 <i class="icon-list-alt"></i>
                                 <span>Reports</span>
@@ -158,7 +158,7 @@
                                 <li><a href="<%=request.getContextPath()%>/category">Category</a></li>
 
                             </ul>    				
-                        </li>-->
+                        </li>
 
                     </ul>
 
@@ -174,7 +174,7 @@
 
             <div class="main-inner">
                 <div class="col-md-8">
-                    <div style="display: none" class="alert alert-danger-alt alert-dismissable" id="error">
+                    <div style="display:none" class="alert alert-danger-alt alert-dismissable" id="error">
                         <span class="glyphicon glyphicon-certificate"></span>
                         <button type="button" class="close" data-dismiss="alert">×</button>
                         <strong>${generalResponse.error}</strong>

@@ -6,11 +6,15 @@
 package com.grameenfoundation.ictc.controllers;
 
 import com.grameenfoundation.ictc.domains.Agent;
+import com.grameenfoundation.ictc.domains.Biodata;
 import com.grameenfoundation.ictc.models.AgentModel;
+import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
+import com.grameenfoundation.ictc.wrapper.AgentWrapper;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -50,20 +54,45 @@ public class TempServlet extends HttpServlet {
             
            try(Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()){
             AgentModel ag = new AgentModel();
+            BiodataModel b = new BiodataModel();
             Agent age = null;
-            
-            for(String agent : mofagents)
-            {
-                Map<String,String> update = new HashMap<String,String>();
-                age = ag.getAgent(Agent.AGENTCODE, agent.trim());
-                
-                System.out.println("agent " +age.getLastname() );
-                update.put(Agent.AGENTTYPE,"MOFA");
-                
-                System.out.println(ag.AgentUpdate(age.getUsername(), update));
-                
-            }
-            
+           List<AgentWrapper> agg = ag.findAllACDIAgents();
+           List<AgentWrapper> agm = ag.findAllMOFAAgents();
+           String  ACDIVOCAProfiling =null;
+           String  MOFAProfiling = null;
+           int profileCount = 0;
+           int mprofileCount = 0;
+           
+           
+               for (AgentWrapper agg1 : agg) {
+                   
+                   ACDIVOCAProfiling = String.valueOf(b.getFarmerProfileCountByAgent(agg1.getAgentId()));
+                   profileCount+= Integer.valueOf(ACDIVOCAProfiling).intValue();
+               }
+               
+               for (AgentWrapper agm1 : agm) {
+                   
+                    MOFAProfiling = String.valueOf(b.getFarmerProfileCountByAgent(agm1.getAgentId()));
+                   mprofileCount+= Integer.valueOf( MOFAProfiling).intValue();
+                   
+               }
+               
+               
+               System.out.println("Profiling " + profileCount);
+               System.out.println("Profiling Mofa " + mprofileCount);
+           
+//            for(String agent : mofagents)
+//            {
+//                Map<String,String> update = new HashMap<String,String>();
+//                age = ag.getAgent(Agent.AGENTCODE, agent.trim());
+//                
+//                System.out.println("agent " +age.getLastname() );
+//                update.put(Agent.AGENTTYPE,"MOFA");
+//                
+//                System.out.println(ag.AgentUpdate(age.getUsername(), update));
+//                
+//            }
+//            
             
             tx.success();
            }

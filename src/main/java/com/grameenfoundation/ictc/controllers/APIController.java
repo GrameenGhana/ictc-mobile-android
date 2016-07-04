@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -55,7 +55,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -160,6 +162,64 @@ public class APIController extends HttpServlet {
                     out.print(jSONObject);
                 }
             } //</editor-fold>
+            else if("fmap".equalsIgnoreCase(serviceCode.trim()))
+            {
+                
+               
+                String res = request.getParameter("l");
+                String farmer = request.getParameter("fid");
+                
+                System.out.println("points " + res);
+                System.out.println("Farmer " + farmer);
+
+                JSONObject j = new JSONObject(res);
+
+               
+                double area = (double) j.get("area");
+                double perimeter = j.getDouble("perimeter");
+                
+                
+                System.out.println("Area " + area);
+                System.out.println("Perimeter " + perimeter);
+                
+                JSONArray ja = new JSONArray();
+                ja = j.getJSONArray("points");
+                  
+                
+                Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
+                BiodataModel bdata = new BiodataModel();
+                Map<String, String> m = new HashMap<String, String>();
+
+                m.put(Biodata.FARM_AREA, String.valueOf(area));
+                m.put(Biodata.FARM_PERIMETER, String.valueOf(perimeter));
+                boolean updated = bdata.BiodataUpdate(farmer, m);
+                
+                
+                
+                if(updated)
+                {
+                    System.out.println("Farmer update done " + updated);
+                      FarmerGPSModel gpsModel = new FarmerGPSModel();
+                            int l =  ja .length();
+                            for (int k = 0; k < l; k++) {
+                                JSONObject cord =  ja.getJSONObject(k);
+                                System.out.println("GPSItem : "+cord.getString("lat")+" <> "+cord.getString("lng" ));
+                                gpsModel.create(new FarmGPSLocationWrapper(cord.getString("lat"), cord.getString("lng"), farmer));
+                            }
+                    JSONObject obj = new JSONObject();
+                    obj.put("rc", "00");
+                    out.print(obj);
+                 
+                }
+                else
+                {
+                    System.out.println("Update not done");
+                }
+                
+              
+                
+                tx.success();
+            }
             else if (serviceCode.equalsIgnoreCase("sync")) {
                 String data = request.getParameter("data");
                 JSONArray jsonArray = new JSONArray(data);
@@ -310,6 +370,7 @@ public class APIController extends HttpServlet {
                             farmer.put(Biodata.NUMBER_OF_DEPENDANTS, b.getNumberofdependants());
                             farmer.put(Biodata.REGION, b.getRegion());
                             farmer.put(Biodata.VILLAGE, b.getVillage());
+                            farmer.put(Biodata.TELEPHONENUMBER,b.getTelephonenumber());
                            
                             
                             if(null!=b.getDistricts_Ashanti())
@@ -324,8 +385,13 @@ public class APIController extends HttpServlet {
                             {
                                 farmer.put(Biodata.DISTRICT, b.getDistricts_Volta()); 
                             }
-
+                            
+                       if (null != b.getFarmperimeter()) {
                             farmer.put(Biodata.FARM_PERIMETER, b.getFarmperimeter());
+                       }else
+                       {
+                           farmer.put(Biodata.FARM_PERIMETER,"0");
+                       }
 
                             if (null != b.getCluster()) {
                                 farmer.put(Biodata.CLUSTER, b.getCluster());
@@ -334,7 +400,7 @@ public class APIController extends HttpServlet {
                             }
 
                             if (null != b.getFarmarea()) {
-                                farmer.put(Biodata.FARM_AREA, b.getCluster());
+                                farmer.put(Biodata.FARM_AREA, b.getFarmarea());
                             } else {
                                 farmer.put(Biodata.FARM_AREA, "0");
                             }

@@ -26,6 +26,9 @@ public class UserWrapper {
      String agentType = "usertype";
      String organisation = "organisation";
      String agentCode = "usercode";
+     String username = "username";
+     String password = "password";
+     
 
      private List<BiodataWrapper> myFarmers = new ArrayList<>() ;
     public String getID() {
@@ -76,6 +79,24 @@ public class UserWrapper {
         this.agentCode = agentCode;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    
+    
     /**
      * @return the myFarmers
      */

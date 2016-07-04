@@ -112,7 +112,7 @@ public class Authenticator {
         loginUser.setIsLogin(true);
         loginUser.setUserId(subscriber.getAgentCode());
         loginUser.setUserScreenName(subscriber.getLastName() + ", " + subscriber.getFirstName());
-        loginUser.setUserType(SessionKeys.SUBSCRIBER_USER_TYPE);
+        loginUser.setUserType(subscriber.getAgentType());
         // loginUser.setSessionId(Long.parseLong(u.getId()));
 
 
@@ -144,7 +144,7 @@ public class Authenticator {
         LoginUser loginUser = new LoginUser();
         loginUser.setDateLogin(new Date());
         loginUser.setIsLogin(true);
-        loginUser.setUserId(user.getAgentCode());
+        loginUser.setUserId(user.getID());
         loginUser.setUserScreenName(user.getLastName() + ", " + user.getFirstName());
         loginUser.setUserType(SessionKeys.USER_USER_TYPE);
         // loginUser.setSessionId(Long.parseLong(u.getId()));

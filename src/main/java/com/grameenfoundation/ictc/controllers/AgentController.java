@@ -53,33 +53,41 @@ public class AgentController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
            //String url = "http://sandbox-ictchallenge.cs80.force.com/AgentRequest";
-           String url ="http://ictchallenge.force.com/agentRequest";
-            String firstname = request.getParameter("fn");
-            String lastname = request.getParameter("ln");
-            String email = request.getParameter("email");
-            String username = request.getParameter("un");
-            String agenttype = request.getParameter("at");
-            String phonenumber = request.getParameter("pn");
-            String agentcode = request.getParameter("ac");
-            String password = request.getParameter("password");
-            String formattedResponse = null;
-            String jsonformat = null;
-            String fullusername = null;
-            String userId = null;
-            Map<String, String> generalResponse = new HashMap<>();
-            AgentModel agentModel = new AgentModel();
             
-
-            AgentWrapper agentWrapper = new AgentWrapper();
             
+              String action = request.getParameter("action");
+               Map<String, String> generalResponse = new HashMap<>();
+                
+                AgentModel agentModel = new AgentModel();
+                
+         if (action.equalsIgnoreCase("add")) {
 
-            agentWrapper.setAgentcode(agentcode);
-            agentWrapper.setAgenttype(agenttype);
-            agentWrapper.setEmail(email);
-            agentWrapper.setFirstname(firstname);
-            agentWrapper.setLastname(lastname);
-            agentWrapper.setUsername(username);
+                String url = "http://ictchallenge.force.com/agentRequest";
+                String firstname = request.getParameter("fn");
+                String lastname = request.getParameter("ln");
+                String email = request.getParameter("email");
+                String username = request.getParameter("un");
+                String agenttype = request.getParameter("at");
+                String phonenumber = request.getParameter("pn");
+                String agentcode = request.getParameter("ac");
+                String password = request.getParameter("password");
+
+                String formattedResponse = null;
+                String jsonformat = null;
+                String fullusername = null;
+                String userId = null;
+              
+
+                AgentWrapper agentWrapper = new AgentWrapper();
+
+                agentWrapper.setAgentcode(agentcode);
+                agentWrapper.setAgenttype(agenttype);
+                agentWrapper.setEmail(email);
+                agentWrapper.setFirstname(firstname);
+                agentWrapper.setLastname(lastname);
+                agentWrapper.setUsername(username);
             agentWrapper.setPassword(password);
+            agentWrapper.setPhonenumber(phonenumber);
 
             boolean created = agentModel.createAgent(agentWrapper);
             System.out.println("created " + created);
@@ -164,6 +172,21 @@ public class AgentController extends HttpServlet {
                 generalResponse.put(ICTCUtil.ERROR, "Agent not created");
                 ICTCUtil.redirect(request, response,"/agent/add_agent.jsp", "");
             } 
+            }
+            if(action.equals("edit"))
+            {
+                String firstname = request.getParameter("fn");
+                String lastname = request.getParameter("ln");
+                String username = request.getParameter("un");
+                String agenttype = request.getParameter("at");
+                
+                Map<String,String> update = new HashMap<String,String>();
+                   update.put(Agent.AGENTTYPE,agenttype);
+                        
+                        agentModel.AgentUpate(agentWrapper.getUsername(),update);
+                        System.out.println("Agent updated");
+            }
+            
             
               request.setAttribute(ICTCUtil.GENERAL_RESPONSE, generalResponse);
               ICTCUtil.redirect(request, response,"/agent/view_agent.jsp");

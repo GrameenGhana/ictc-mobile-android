@@ -65,6 +65,7 @@ public class AgentModel {
                 ag.setUsername(agent.getUsername());
                 ag.setPassword(agent.getPassword());
                 ag.setAgentId(agent.getAgentId());
+                ag.setPhonenumber(agent.getPhonenumber());
 
                 AgentParent.createRelationshipTo(agentNode, ICTCRelationshipTypes.AGENT);
 
@@ -94,8 +95,8 @@ public class AgentModel {
     public List<AgentWrapper> findAllAgents() {
         List<AgentWrapper> aglist = new ArrayList<>();
 
-        String q = "match (l:AGENT) return l";
-
+        String q = "match (l:AGENT) return DISTINCT l";
+        System.out.println("query  " + q);
         try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             Result result = Neo4jServices.executeCypherQuery(q);
 
@@ -163,7 +164,7 @@ public class AgentModel {
       public List<AgentWrapper> findAllACDIAgents() {
         List<AgentWrapper> aglist = new ArrayList<>();
 
-        String q = "match (l:AGENT) where l.agenttype='ACDIVOCA' return l";
+        String q = "match (l:AGENT) where l.agenttype='ACDIVOCA' return DISTINCT l";
 
         try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             Result result = Neo4jServices.executeCypherQuery(q);
@@ -226,6 +227,20 @@ public class AgentModel {
     }
      
      
+     public AgentWrapper findAgent(String Id)
+     {
+        String q = "match (l:AGENT) WHERE l." + Agent.AGENTID + "= '" + Id + "'  "
+                //+ "and  l." + User.PASSWORD + "='" + (password) + "'"
+                + "  return l";
+        System.out.println("login : " + q);
+        List<AgentWrapper> usr = userQuery(q, "l");
+        if (null != usr && !usr.isEmpty()) {
+            return usr.get(0);
+        }
+        return null;
+     }
+     
+     
       public Agent getAgent(String field, String value) {
         
           
@@ -234,12 +249,13 @@ public class AgentModel {
 //                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.AGENT + "]->p"
 //                + " where p." + field + "='" + value + "'"
 //                + " return p";
+         
         
-        String q = "match (p:AGENT)"+" where p." + field + "='" + value + "'" +" return p";
+        String q = "match (l:AGENT)"+" where l." + field + "='" + value + "'" +" return l";
 
         System.out.println("Query " + q);
         try {
-            Node node = Neo4jServices.executeCypherQuerySingleResult(q, "p");
+            Node node = Neo4jServices.executeCypherQuerySingleResult(q, "l");
           if (null != node) {
                return new Agent(node);
            }
@@ -286,6 +302,7 @@ public class AgentModel {
     
     public boolean AgentUpdate(String id, Map<String, String> data) {
         
+        //Node agNode = null
       
 
         Agent  ag  = getAgent(Agent.USERNAME, id);

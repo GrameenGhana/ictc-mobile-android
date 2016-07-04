@@ -6,6 +6,8 @@
 
 package com.grameenfoundation.ictc.wrapper;
 
+import static com.grameenfoundation.ictc.domains.Agent.PHONENUMBER;
+
 /**
  *
  * @author Joseph George Davis
@@ -23,6 +25,7 @@ public class AgentWrapper {
     private String username = "username";
     private String agentcode = "agentcode";
     private String password = "password";
+    private String phonenumber = "phonenumber";
     
     
 
@@ -41,8 +44,16 @@ public class AgentWrapper {
         this.password = password;
     }
 
- 
     
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+   
     
     
     

@@ -5,6 +5,7 @@
  */
 package com.grameenfoundation.ictc.controllers;
 
+
 import com.grameenfoundation.ictc.utils.*;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,8 +27,8 @@ import org.xml.sax.InputSource;
  *
  * @author grameen
  */
-@WebServlet(name = "SalesforceSyncServlet", urlPatterns = {"/sf/SalesforceSyncServlet"})
-public class SalesforceSyncServlet extends HttpServlet {
+@WebServlet(name = "SalesforceSyncQueueServlet", urlPatterns = {"/sf/SalesforceSyncQueueServlet"})
+public class SalesforceSyncQueueServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -62,13 +63,11 @@ public class SalesforceSyncServlet extends HttpServlet {
                 qm.closeConnection();
                 out.println(sendAck());
             } catch (JMSException jmse) {
-                Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, jmse);
+                Logger.getLogger(SalesforceSyncQueueServlet.class.getName()).log(Level.SEVERE, null, jmse);
                 jmse.printStackTrace();
             }
-
-        } catch (Exception ex) {
-            Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, ex);
-            ex.printStackTrace();
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
         }
     }
 
@@ -120,9 +119,6 @@ public class SalesforceSyncServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }
-
     // </editor-fold>
-    
 }
-              
-                
+

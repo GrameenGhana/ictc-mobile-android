@@ -5,11 +5,14 @@
  */
 package com.grameenfoundation.ictc.controllers;
 
+import com.grameenfoundation.ictc.domains.User;
+import com.grameenfoundation.ictc.models.AgentModel;
+import com.grameenfoundation.ictc.models.UserModel;
 import com.grameenfoundation.ictc.utils.ICTCUtil;
-import com.grameenfoundation.ictc.utils.security.Authenticator;
 import com.grameenfoundation.ictc.wrapper.UserWrapper;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -20,10 +23,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author skwakwa
+ * @author grameen
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/users/login"})
-public class LoginController extends HttpServlet {
+@WebServlet(name = "UserController", urlPatterns = {"/user/add"})
+public class UserController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,22 +41,52 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           String action = request.getParameter("action");
-           if(action.equalsIgnoreCase("login")){
-               String username = request.getParameter("username");
-               String password = request.getParameter("password");
-               Map<String,String> errors = new HashMap<String, String>();
-               
-               UserWrapper wr =  new  Authenticator().loginUser(username, password, action, request);       
-               System.out.println("User logged in " + wr.getUsername());
-               if(null== wr){
-                   errors.put("login", "Invalid Credentials");
-                   ICTCUtil.doRedirect("/login.jsp", request, response, errors);
-               }else{
-                   //ICTCUtil.doSuccessRedirect("/index.jsp", request, response, errors);
-                    ICTCUtil.redirect(request, response,"/index.jsp", "");
-               }
-           }
+            /* TODO output your page here. You may use following sample code. */
+            String firstname = request.getParameter("fn");
+            String lastname = request.getParameter("ln");
+            String username = request.getParameter("un");
+            String agenttype = request.getParameter("at");
+            String agentcode = request.getParameter("ac");
+            String organisation = request.getParameter("org");
+            String password = request.getParameter("password");
+            
+            
+            Map<String, String> generalResponse = new HashMap<>();
+            UserModel userModel = new UserModel();
+            
+
+           UserWrapper userWrapper = new UserWrapper();
+            
+
+            userWrapper.setAgentType(agenttype);
+            userWrapper.setLastName(agenttype);
+            userWrapper.setFirstName(firstname);
+            userWrapper.setLastName(lastname);
+          //  userWrapper.setAgentCode(agentcode);
+            userWrapper.setOrganisation(organisation);
+            userWrapper.setUsername(username);
+            userWrapper.setPassword(password);
+            userWrapper.setID(String.valueOf(new Date().getTime()));
+            
+            
+            User user = userModel.create(userWrapper);
+            
+            if(null!= user)
+            {
+               System.out.println("User Created");
+                
+            }
+            else
+            {
+                System.out.println("Could not create User");
+                generalResponse.put(ICTCUtil.ERROR, "User not created");
+                ICTCUtil.redirect(request, response,"/users/adduser.jsp", "");
+            }
+            
+            
+               generalResponse.put(ICTCUtil.SUCCESS, "User Created"); 
+               ICTCUtil.redirect(request, response,"/users/viewuser.jsp", "");
+
         }
     }
 

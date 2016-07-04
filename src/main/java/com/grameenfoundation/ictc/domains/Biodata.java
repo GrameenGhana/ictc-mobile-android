@@ -643,6 +643,15 @@ public String getDisrictresidenceash(){
         return new FarmCreditPlan(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_FARMCREDIT_PREVIOUS));
     }
      
+       public void setFarmCreditUpdate(Node FCPNode) {
+        underlyingNode.createRelationshipTo(FCPNode, ICTCRelationshipTypes.HAS_FARMCREDIT_UPDATE);
+    }
+       
+       
+     public FarmCreditUpdate getFarmCreditUpdate() {
+    
+        return new FarmCreditUpdate(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_FARMCREDIT_UPDATE));
+    }
      
     public List<Node> getNodeList(Direction direction, ICTCRelationshipTypes relType) {
 //          List<Node> n= (Neo4jServices.findNodeFromRelations(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_MEETING));
