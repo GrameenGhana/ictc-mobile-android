@@ -285,6 +285,7 @@ public class AgentModel {
                 wr.setFirstname(u.getFirstname());
                 wr.setLastname(u.getLastname());
                 wr.setAgentId(u.getAgentId());
+                wr.setUsername(u.getUsername());
                 wr.setEmail(u.getEmail());
 
                 usrs.add(wr);
@@ -305,10 +306,12 @@ public class AgentModel {
         //Node agNode = null
       
 
-        Agent  ag  = getAgent(Agent.USERNAME, id);
-        System.out.println("ag " + ag.getPassword());
+        
         boolean updated = false;
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            
+            Agent  ag  = getAgent(Agent.USERNAME, id);
+            System.out.println("ag " + ag.getPassword());
             //If the setting is not null
             if (null != ag) {
 

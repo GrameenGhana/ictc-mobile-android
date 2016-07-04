@@ -7,7 +7,9 @@ package com.grameenfoundation.ictc.controllers;
 
 import com.grameenfoundation.ictc.domains.Agent;
 import com.grameenfoundation.ictc.models.AgentModel;
+import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.utils.ICTCUtil;
+import com.grameenfoundation.ictc.utils.Neo4jServices;
 import com.grameenfoundation.ictc.wrapper.AgentWrapper;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,6 +32,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
+import org.neo4j.graphdb.Transaction;
 
 /**
  *
@@ -80,14 +83,14 @@ public class AgentController extends HttpServlet {
 
                 AgentWrapper agentWrapper = new AgentWrapper();
 
-                agentWrapper.setAgentcode(agentcode);
-                agentWrapper.setAgenttype(agenttype);
-                agentWrapper.setEmail(email);
-                agentWrapper.setFirstname(firstname);
-                agentWrapper.setLastname(lastname);
-                agentWrapper.setUsername(username);
-            agentWrapper.setPassword(password);
-            agentWrapper.setPhonenumber(phonenumber);
+             agentWrapper.setAgentcode(agentcode);
+             agentWrapper.setAgenttype(agenttype);
+             agentWrapper.setEmail(email);
+             agentWrapper.setFirstname(firstname);
+             agentWrapper.setLastname(lastname);
+             agentWrapper.setUsername(username);
+             agentWrapper.setPassword(password);
+             agentWrapper.setPhonenumber(phonenumber);
 
             boolean created = agentModel.createAgent(agentWrapper);
             System.out.println("created " + created);
@@ -180,13 +183,35 @@ public class AgentController extends HttpServlet {
                 String username = request.getParameter("un");
                 String agenttype = request.getParameter("at");
                 
+                System.out.println("username " + username);
+                System.out.println("user type " + agenttype);
+                
                 Map<String,String> update = new HashMap<String,String>();
-                   update.put(Agent.AGENTTYPE,agenttype);
+                update.put(Agent.AGENTTYPE,agenttype);
                         
-                        agentModel.AgentUpate(agentWrapper.getUsername(),update);
+                        agentModel.AgentUpdate(username, update);
                         System.out.println("Agent updated");
             }
-            
+            if(action.equalsIgnoreCase("delete"))
+            {
+               try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+
+                 Agent  ag  = agentModel.getAgent(Agent.USERNAME, request.getParameter("un"));
+                 
+                 if(Neo4jServices.deleteAgentNode(ag.getUnderlyingNode()))
+                 {
+                     System.out.println("Node deleted");
+                 }
+                 else 
+                 {
+                     System.out.println("Node not deleted");
+                 }
+                 
+                 trx.success();
+               }
+                 
+                 
+            }
             
               request.setAttribute(ICTCUtil.GENERAL_RESPONSE, generalResponse);
               ICTCUtil.redirect(request, response,"/agent/view_agent.jsp");

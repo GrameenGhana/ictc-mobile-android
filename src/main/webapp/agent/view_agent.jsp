@@ -46,6 +46,9 @@
                 <td>
                     <a href="<%=request.getContextPath() %>/agent/editagent.jsp?type=CreatedById&q=<%=ag.getAgentId() %>" class="btn btn-info">Edit </a>
                 </td>
+                <td>
+                    <a href="<%=request.getContextPath() %>/agent/deleteagent.jsp?type=CreatedById&q=<%=ag.getAgentId() %>" class="btn btn-info">Delete </a>
+                </td>
             </tr>
             <% }%>
          </table>

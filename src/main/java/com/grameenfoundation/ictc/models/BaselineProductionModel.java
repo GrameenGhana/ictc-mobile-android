@@ -45,5 +45,13 @@ public class BaselineProductionModel {
 
         return null;
     }
+        
+       public Long getMOFABaselineProductionCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'MOFA' WITH n match (f:FARMER)-[:HAS_BASELINE_PRODUCTION]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+
+    public Long getACDIVOCABaselineProductionCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'ACDIVOCA' WITH n match (f:FARMER)-[:HAS_BASELINE_PRODUCTION]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
 
 }
