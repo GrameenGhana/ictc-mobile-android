@@ -58,6 +58,7 @@ public class ICTCServletListener implements ServletContextListener {
         }
         System.out.println("-----------------------------DB Started-------------------------------------");
 
+        /*
         System.out.println("-----------------------------Starting Queue Listener-------------------------------------");
         scheduler = Executors.newSingleThreadScheduledExecutor();
         Runnable ob =  (new Runnable() {
@@ -68,6 +69,7 @@ public class ICTCServletListener implements ServletContextListener {
                         });
         scheduler.scheduleAtFixedRate(ob, 10, 60, TimeUnit.SECONDS);
         System.out.println("-----------------------------Queue Listener Started-------------------------------------");
+        */
     }
 
     public void deQueue() {
@@ -93,7 +95,7 @@ public class ICTCServletListener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         try {
-            scheduler.shutdownNow();
+            //scheduler.shutdownNow();
         } catch (Exception e) {
             e.printStackTrace();
         }
