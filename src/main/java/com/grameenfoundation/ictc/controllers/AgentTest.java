@@ -6,8 +6,6 @@ package com.grameenfoundation.ictc.controllers;
  * and open the template in the editor.
  */
 
-import static com.grameenfoundation.ictc.controllers.SaleforceIntegrationController.getObjectFieldId;
-import static com.grameenfoundation.ictc.controllers.SaleforceIntegrationController.getObjectFieldName;
 import com.grameenfoundation.ictc.domains.Agent;
 import com.grameenfoundation.ictc.domains.Biodata;
 import com.grameenfoundation.ictc.models.AgentModel;
@@ -42,6 +40,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+
+import static com.grameenfoundation.ictc.utils.SalesforceMessageParser.getObjectFieldId;
 
 /**
  *

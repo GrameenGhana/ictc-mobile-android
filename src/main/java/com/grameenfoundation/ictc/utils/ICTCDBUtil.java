@@ -107,7 +107,7 @@ public class ICTCDBUtil {
 
         }
         
-          log.log(Level.INFO, "{0} Database ", graphdb.isAvailable(2));
+         //log.log(Level.INFO, "{0} Database ", graphdb.isAvailable(2));
         
          database = graphdb;
          

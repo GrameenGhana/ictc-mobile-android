@@ -5,9 +5,6 @@
  */
 package com.grameenfoundation.ictc.controllers;
 
-import static com.grameenfoundation.ictc.controllers.SaleforceIntegrationController.getObjectFieldId;
-import static com.grameenfoundation.ictc.controllers.SaleforceIntegrationController.getObjectFieldName;
-import com.grameenfoundation.ictc.domain.commons.Generalimpl;
 import com.grameenfoundation.ictc.domains.BaselinePostHarvest;
 import com.grameenfoundation.ictc.domains.BaselineProduction;
 import com.grameenfoundation.ictc.domains.BaselineProductionBudget;
@@ -41,12 +38,7 @@ import com.grameenfoundation.ictc.models.ProductionModel;
 import com.grameenfoundation.ictc.models.ProfilingModel;
 import com.grameenfoundation.ictc.models.TechnicalNeedsModel;
 import com.grameenfoundation.ictc.models.UserModel;
-import com.grameenfoundation.ictc.utils.ICTCDBUtil;
-import com.grameenfoundation.ictc.utils.ICTCKonstants;
-import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
-import com.grameenfoundation.ictc.utils.Labels;
-import com.grameenfoundation.ictc.utils.MeetingSchedule;
-import com.grameenfoundation.ictc.utils.ParentNode;
+import com.grameenfoundation.ictc.utils.*;
 import com.grameenfoundation.ictc.wrapper.MeetingWrapper;
 import com.sun.jersey.core.util.Base64;
 import java.io.File;
@@ -78,6 +70,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import com.grameenfoundation.ictc.utils.SalesforceMessageParser.*;
 
 /**
  *
@@ -182,15 +175,15 @@ public class SalesforceSyncServlet extends HttpServlet {
                             
                            // System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") ||rowNode.getChildNodes().item(k).getNodeName().equals("sf:CreatedById") ) {
-                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
  
-                                biodataNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                biodataNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                             }
 
                             if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:CreatedById")) {
 
-                                 System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                                biodataNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                 System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                biodataNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
 
                             }
                         }
@@ -299,14 +292,14 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                                  //System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                                  if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                     System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                                     productionNewNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                     System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                     productionNewNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                                  }
 
                                  if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
 
-                                     System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                                     productionNewNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                     System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                     productionNewNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
 
                                  }
                              }
@@ -350,14 +343,14 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                                  //System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                                  if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                     System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                                     postHarvestNewNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                     System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                     postHarvestNewNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                                  }
                                  
                                  if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
                                      
-                                     System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                                     postHarvestNewNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                     System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                     postHarvestNewNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                                      
                                  }
                              }
@@ -404,14 +397,14 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                                   //System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                                   if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                      System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                                      productionUpdateNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                      System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                      productionUpdateNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                                   }
                                   
                                   if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
                                       
-                                      System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                                      productionUpdateNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                      System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                      productionUpdateNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                                       
                                   }
                               }
@@ -452,14 +445,14 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                             //System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                                 postHarvestUpdateNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                 postHarvestUpdateNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                             }
 
                             if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
 
-                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                                postHarvestUpdateNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                postHarvestUpdateNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
 
                             }
                         }
@@ -506,14 +499,14 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                             //System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                                 profilingNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                 profilingNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                             }
 
                             if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
 
-                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                                profilingNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                profilingNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
 
                             }
                         }
@@ -564,14 +557,14 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                             System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                             TNNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                             TNNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                             }
 
                             if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
 
-                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                               TNNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                               TNNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
 
                             }
                         }
@@ -614,14 +607,14 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                                 System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                                 if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                    System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                                    BPBNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                    System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                    BPBNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                                 }
 
                                 if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
 
-                                    System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                                    BPBNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                    System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                    BPBNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
 
                                 }
                             }
@@ -663,14 +656,14 @@ public class SalesforceSyncServlet extends HttpServlet {
                                 
                                 System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                                 if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                    System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                                    BPNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                    System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                    BPNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                                 }
                                 
                                 if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
                                     
-                                    System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                                    BPNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                    System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                    BPNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                                     
                                 }
                             }
@@ -712,14 +705,14 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                             System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                                BPHBNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                BPHBNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                             }
 
                             if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
 
-                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                                BPHBNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                BPHBNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
 
                             }
                         }
@@ -761,14 +754,14 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                             System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                                BPHNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                BPHNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                             }
 
                             if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
 
-                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                                BPHNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                BPHNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
 
                             }
                         }
@@ -809,14 +802,14 @@ public class SalesforceSyncServlet extends HttpServlet {
                                 
                                 System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                                 if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                    System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                                    FMPPBNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                    System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                    FMPPBNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                                 }
                                 
                                 if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
                                     
-                                    System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                                    FMPPBNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                    System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                    FMPPBNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                                     
                                 }
                             }
@@ -854,14 +847,14 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                             System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                               FMPPBUNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                               FMPPBUNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                             }
 
                             if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
 
-                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                                FMPPBUNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                FMPPBUNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
 
                             }
                         }
@@ -899,14 +892,14 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                             System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                                FMPPBHNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                FMPPBHNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                             }
 
                             if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
 
-                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                                FMPPBHNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                FMPPBHNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
 
                             }
                         }
@@ -945,14 +938,14 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                             System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                              FMPPHBUNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                              FMPPHBUNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                             }
 
                             if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
 
-                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                               FMPPHBUNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                               FMPPHBUNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
 
                             }
                         }
@@ -994,14 +987,14 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                                  System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                                  if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                     System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                                     FCANode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                     System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                     FCANode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                                  }
 
                                  if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
 
-                                     System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                                     FCANode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                     System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                     FCANode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
 
                                  }
                              }
@@ -1158,14 +1151,14 @@ public class SalesforceSyncServlet extends HttpServlet {
 //
 //                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
 //                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-//                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-//                            FCNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+//                                System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+//                            FCNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
 //                            }
 //
 //                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
 //
-//                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-//                              FCNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+//                                System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+//                              FCNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
 //
 //                            }
 //                        }
@@ -1208,14 +1201,14 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                             System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                            FCNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                            FCNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                             }
 
                             if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
 
-                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                              FCNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                              FCNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
 
                             }
                         }
@@ -1261,14 +1254,14 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                             System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
                             if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-                                System.out.println("id : " + getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-                            FCNode.setProperty(getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                            FCNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
                             }
 
                             if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
 
-                                System.out.println(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-                              FCNode.setProperty(getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                                System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                              FCNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
 
                             }
                         }
@@ -1376,14 +1369,14 @@ public class SalesforceSyncServlet extends HttpServlet {
 
           System.out.println("node: " + xmlNode.getChildNodes().item(k).getNodeName() + ": " + xmlNode.getChildNodes().item(k).getTextContent());
           if (xmlNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-              System.out.println("id : " + getObjectFieldId(xmlNode.getChildNodes().item(k).getNodeName()));
-              graphNode.setProperty(getObjectFieldId(xmlNode.getChildNodes().item(k).getNodeName()), xmlNode.getChildNodes().item(k).getTextContent());
+              System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(xmlNode.getChildNodes().item(k).getNodeName()));
+              graphNode.setProperty(SalesforceMessageParser.getObjectFieldId(xmlNode.getChildNodes().item(k).getNodeName()), xmlNode.getChildNodes().item(k).getTextContent());
           }
 
           if (!xmlNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !xmlNode.getChildNodes().item(k).getNodeName().equals("#text") && !xmlNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
 
-              System.out.println(getObjectFieldName(xmlNode.getChildNodes().item(k).getNodeName()));
-              graphNode.setProperty(getObjectFieldName(xmlNode.getChildNodes().item(k).getNodeName()), xmlNode.getChildNodes().item(k).getTextContent());
+              System.out.println(SalesforceMessageParser.getObjectFieldName(xmlNode.getChildNodes().item(k).getNodeName()));
+              graphNode.setProperty(SalesforceMessageParser.getObjectFieldName(xmlNode.getChildNodes().item(k).getNodeName()), xmlNode.getChildNodes().item(k).getTextContent());
           }
 
       }
