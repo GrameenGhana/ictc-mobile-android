@@ -58,7 +58,7 @@ public class SalesforceSyncQueueServlet extends HttpServlet {
             try {
                 System.out.println("--- PUSHING item on QUEUE");
                 QueueManager qm = new QueueManager();
-                qm.createProducer("SalesforceSyncServlet");
+                qm.createProducer("SalesforceSyncQueueServlet");
                 qm.send(theString);
                 qm.closeConnection();
                 out.println(sendAck());

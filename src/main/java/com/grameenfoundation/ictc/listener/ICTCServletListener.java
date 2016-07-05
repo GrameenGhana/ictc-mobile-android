@@ -41,7 +41,7 @@ public class ICTCServletListener implements ServletContextListener {
         //checks if root node exists
         try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
               if(Neo4jServices.getRootNode()) {
-                  //System.out.println("Root Node Already Exists");
+                  System.out.println("Root Node Already Exists");
               }
               else
               {
