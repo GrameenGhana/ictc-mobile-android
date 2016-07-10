@@ -12,19 +12,20 @@
 <%  BiodataModel biodataModel = new BiodataModel();
     List<BiodataWrapper> bioWrapper = biodataModel.getBioData("", "");
     
-    System.out.print("Cluster  " + bioWrapper.get(0).getCluster());
+    //System.out.print("Cluster  " + bioWrapper.get(0).getCluster());
 %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>user Page</title>
+        <title>Farmer Page</title>
       
     </head>
     <body>
        
 
-        <table class="table table-striped table-bordered my-table">
+        <table class="table table-striped table-bordered myt-table">
+            <thead>
             <tr>
                 <th>ID</th>
                 <th>Surname</th>
@@ -34,8 +35,9 @@
                 <th>Village</th>
                 <th>Actions</th>
             </tr>
+            </thead>
 
-
+            <tbody>
             <% for (BiodataWrapper bio : bioWrapper) {%>
 
             <tr>
@@ -52,7 +54,10 @@
                 </td>
             </tr>
             <% }%>
-
+            </tbody>
         </table>
     </body>
+    
+    
+  
 </html>

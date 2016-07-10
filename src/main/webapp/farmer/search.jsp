@@ -25,7 +25,8 @@
     <body>
 
 
-        <table class="table table-striped table-bordered my-table">
+        <table class="table table-striped table-bordered myt-table">
+            <thead>
             <tr>
                 <th>ID</th>
                 <th>Surname</th>
@@ -36,8 +37,9 @@
                 <th>Village</th>
                 <th>Actions</th>
             </tr>
+            </thead>
 
-
+            <tbody>
             <% for (BiodataWrapper bio : bioWrapper) {%>
 
             <tr>
@@ -55,7 +57,7 @@
                 </td>
             </tr>
             <% }%>
-
+            </tbody>
         </table>
     </body>
 </html>

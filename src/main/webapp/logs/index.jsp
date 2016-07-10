@@ -86,7 +86,7 @@
             <% for (MobileTrackerWrapper mobileTracker : trackItems) {%>
             <tr>
                 <td><%= mobileTracker.getId()%></td>
-                <td><%= mobileTracker.getUserId()%></td>
+                <td><%= mobileTracker.getUserId()  %></td>
                 <td><%= mobileTracker.getModule()%></td>
                 <td><%= mobileTracker.getPage()%></td>
                 <td><%= mobileTracker.getSection()%></td>

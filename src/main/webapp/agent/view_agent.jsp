@@ -21,17 +21,23 @@
         %>
     </head>
     <body>
-         <table class="table table-striped table-bordered">
+         <table class="table table-striped table-bordered myt-table">
+             <thead>
             <tr>
                 <th>Agent Code</th>
                 <th>Surname</th>
                 <th>Othernames</th>
                 <th>Username</th>
                 <th>Agent Type</th>
-                <th></th>
+                <th>Action</th>
+                <th>Action</th>
+                 <th>Action</th>
+                  
+               
             </tr>
+             </thead>
 
-
+             <tbody>
             <% for (AgentWrapper ag : agents) {%>
 
             <tr>
@@ -51,6 +57,7 @@
                 </td>
             </tr>
             <% }%>
+             </tbody>
          </table>
     </body>
 </html>
