@@ -52,7 +52,7 @@
 
             <tr>
                 <td><%= a.getFirstname()  + " " + a.getLastname() %></td>
-                <td><%= biodataModel.getFarmerCountByAgent(a.getAgentId())  %><%int   %></td>
+                <td><%= biodataModel.getFarmerCountByAgent(a.getAgentId())  %></td>
                 <td><%= biodataModel.getFarmerProfileCountByAgent(a.getAgentId())  %></td>
                 <td><%= biodataModel.getFarmerBaselinProductionCountByAgent(a.getAgentId())  %></td>
                 <td><%= biodataModel.getFarmerBaselineProductionBudgetCountByAgent(a.getAgentId()) %></td>
