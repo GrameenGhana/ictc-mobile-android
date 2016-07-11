@@ -24,6 +24,7 @@ public enum Labels implements Label {
     MARKETING,
     POSTHARVEST,
     PRODUCTION,
+    PRODUCTION_UPDATE,
     PROFILE,
     STORAGE,
     TECHNICAL_NEEDS,

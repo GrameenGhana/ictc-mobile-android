@@ -250,14 +250,17 @@ public class SalesforceMessageParser {
 
         ProductionModel product = new ProductionModel();
         org.neo4j.graphdb.Node productionUpdateNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
-        productionUpdateNode.addLabel(Labels.UPDATE);
+        productionUpdateNode.addLabel(Labels.PRODUCTION_UPDATE);
         productionUpdateNode = setNodeProperty(rowNode, productionUpdateNode);
         productionUpdateNode.setProperty(ProductionUpdate.LAST_MODIFIED, new Date().getTime());
 
         log.log(Level.INFO, "new node created {0}", productionUpdateNode.getId());
 
-        ProductionNew p = product.getProduction("Id", farmerID);
-        product.ProductionToUpdate(p, productionUpdateNode);
+//        ProductionNew p = product.getProduction("Id", farmerID);
+//        product.ProductionToUpdate(p, productionUpdateNode);
+          Biodata b = biodataModel.getBiodata("Id", farmerID);
+                              //product.ProductionToUpdate(p, productionUpdateNode);
+           b.setProductionUpdate(productionUpdateNode);
 
         if (modified(biodataModel, farmerID))
             System.out.println("Last modified done");

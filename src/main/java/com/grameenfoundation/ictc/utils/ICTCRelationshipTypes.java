@@ -50,6 +50,7 @@ public enum ICTCRelationshipTypes implements RelationshipType{
     HAS_HARVEST,
     HAS_POSTHARVEST,
     HAS_PRODUCTION,
+    HAS_PRODUCTION_UPDATE,
     HAS_PROFILING,
     HAS_STORAGE,
     HAS_MARKETING,

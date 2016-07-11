@@ -557,7 +557,10 @@ public String getDisrictresidenceash(){
     public void setProduction(Node production) {
         underlyingNode.createRelationshipTo(production, ICTCRelationshipTypes.HAS_PRODUCTION);
     }
-
+    
+    public void setProductionUpdate(Node productionupdate) {
+        underlyingNode.createRelationshipTo(productionupdate, ICTCRelationshipTypes.HAS_PRODUCTION_UPDATE);
+    }
     public ProductionNew getProduction() {
         return new ProductionNew(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_PRODUCTION));
     }

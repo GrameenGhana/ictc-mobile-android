@@ -61,7 +61,7 @@
 	
 	<div class="content clearfix">
 		
-		<form action="#" method="post">
+		<form action="<%=request.getContextPath()%>/user/add" method="post">
 		
 			<h1>Signup ICTC User</h1>			
 			
@@ -83,7 +83,7 @@
 				<div class="field">
                                     <label for="organisation">Organisation:</label>
                                         <select id="org" name="org" class="login" >
-                                            <option value="select">------Select Organisation</option>
+                                            <option value="select">------Select Organisation------</option>
                                             <option value="GRAMEEN">GRAMEEN</option>
                                             <option value="ACDIVOCA">ACDIVOCA</option>
                                             <option value="MOFA">MOFA</option>
@@ -93,7 +93,7 @@
 					<label for="organisation">User type:</label>
 					
                                         <select id="at" name="at" class="login" >
-                                            <option value="select">------Select User Type</option>
+                                            <option value="select">------Select User Type--------</option>
                                             <option value="grameen_admin">Grameen admin</option>
                                             <option value="grameen_user">Grameen user</option>
                                             <option value="acdivoca_admin">ACDIVOCA admin</option>
@@ -104,17 +104,17 @@
                                 
                                 <div class="field">
 					<label for="username">Username:</label>	
-					<input type="text" id="un" name="un" value="" placeholder="Username" class="login" />
+                                        <input type="text" id="un" name="un" value="" placeholder="Username" class="login" required/>
 				</div> <!-- /field -->
 				
 				<div class="field">
 					<label for="password">Password:</label>
-					<input type="password" id="password" name="password" value="" placeholder="Password" class="login"/>
+                                        <input type="password" id="password" name="password" value="" placeholder="Password" class="login" required/>
 				</div> <!-- /field -->
 				
 				<div class="field">
 					<label for="confirm_password">Confirm Password:</label>
-					<input type="password" id="confirm_password" name="confirm_password" value="" placeholder="Confirm Password" class="login"/>
+                                        <input type="password" id="confirm_password" name="confirm_password" value="" placeholder="Confirm Password" class="login" required/>
 				</div> <!-- /field -->
 				
 			</div> <!-- /login-fields -->
