@@ -97,10 +97,10 @@ public class ICTCServletListener implements ServletContextListener {
         try {
             
           scheduler.shutdownNow();
-            
-            ICTCDBUtil.getInstance().shutdown(ICTCDBUtil.getInstance().getGraphDB());
+          ICTCDBUtil.getInstance().shutdown(ICTCDBUtil.getInstance().getGraphDB());
         } catch (Exception e) {
             e.printStackTrace();
+             ICTCDBUtil.getInstance().shutdown(ICTCDBUtil.getInstance().getGraphDB());
         }
         System.out.println("-------------listener done-------------------");
     }

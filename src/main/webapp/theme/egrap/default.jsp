@@ -21,6 +21,7 @@
 
         <link href="<%= request.getContextPath()%>/theme/egrap/css/style.css" rel="stylesheet">
         <link href="<%= request.getContextPath()%>/theme/egrap/css/pages/dashboard.css" rel="stylesheet">
+        <link href="<%= request.getContextPath()%>/theme/egrap/css/pages/signin.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<%= request.getContextPath()%>/theme/egrap/js/DataTables/media/css/jquery.dataTables.css">
        
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -30,6 +31,7 @@
         <link href="<%= request.getContextPath()%>/public/js/datepicker/css/datepicker.css" rel="stylesheet" />
         <script src="<%= request.getContextPath()%>/theme/egrap/js/jquery-1.11.0.min.js"></script>
         <script src="<%= request.getContextPath()%>/theme/egrap/js/DataTables/media/js/jquery.js"></script>
+        <script src="<%= request.getContextPath()%>/theme/egrap/js/signin.js"></script>
         
     </head>
 
@@ -294,8 +296,8 @@
 
 
 
-        <script src="<%= request.getContextPath()%>/theme/egrap/js/jquery-1.11.0.min.js"></script>
-        <script src="<%= request.getContextPath()%>/theme/egrap/js/DataTables/media/js/jquery.js"></script>
+        <!--<script src="<%= request.getContextPath()%>/theme/egrap/js/jquery-1.11.0.min.js"></script>
+        <script src="<%= request.getContextPath()%>/theme/egrap/js/DataTables/media/js/jquery.js"></script>-->
 
         <script type="text/javascript" language="javascript" src="<%= request.getContextPath()%>/theme/egrap/js/DataTables/media/js/jquery.dataTables.js"></script>
 

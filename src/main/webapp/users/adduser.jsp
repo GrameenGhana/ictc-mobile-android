@@ -12,7 +12,7 @@
         <title>Add User</title>
     </head>
     <body>
-          <!-- /widget-header -->
+          <!-- /widget-header 
             <div class="widget-content">
                 <div class="widget big-stats-container">
                     <div class="widget-content">
@@ -54,8 +54,93 @@
 
                     <!-- /widget-content --> 
 
-                </div>
-            </div>
+               <!-- </div>
+            </div>-->
+               
+     <div class="account-container register">
+	
+	<div class="content clearfix">
+		
+		<form action="#" method="post">
+		
+			<h1>Signup ICTC User</h1>			
+			
+			<div class="login-fields">
+				
+				<p>Enter User Details Below:</p>
+				
+				<div class="field">
+					<label for="firstname">First Name:</label>
+					<input type="text" id="fn" name="firstname" value="" placeholder="First Name" class="login" />
+				</div> <!-- /field -->
+				
+				<div class="field">
+					<label for="lastname">Last Name:</label>	
+					<input type="text" id="ln" name="lastname" value="" placeholder="Last Name" class="login" />
+				</div> <!-- /field -->
+				
+				
+				<div class="field">
+                                    <label for="organisation">Organisation:</label>
+                                        <select id="org" name="org" class="login" >
+                                            <option value="select">------Select Organisation</option>
+                                            <option value="GRAMEEN">GRAMEEN</option>
+                                            <option value="ACDIVOCA">ACDIVOCA</option>
+                                            <option value="MOFA">MOFA</option>
+                                        </select>
+				</div> <!-- /field -->
+                                <div class="field">
+					<label for="organisation">User type:</label>
+					
+                                        <select id="at" name="at" class="login" >
+                                            <option value="select">------Select User Type</option>
+                                            <option value="grameen_admin">Grameen admin</option>
+                                            <option value="grameen_user">Grameen user</option>
+                                            <option value="acdivoca_admin">ACDIVOCA admin</option>
+                                            <option value="acdivoca_ob">ACDIVOCA OB</option>
+                                            <option value="mofa_director">MOFA Director</option>
+                                        </select>
+				</div> <!-- /field -->
+                                
+                                <div class="field">
+					<label for="username">Username:</label>	
+					<input type="text" id="un" name="un" value="" placeholder="Username" class="login" />
+				</div> <!-- /field -->
+				
+				<div class="field">
+					<label for="password">Password:</label>
+					<input type="password" id="password" name="password" value="" placeholder="Password" class="login"/>
+				</div> <!-- /field -->
+				
+				<div class="field">
+					<label for="confirm_password">Confirm Password:</label>
+					<input type="password" id="confirm_password" name="confirm_password" value="" placeholder="Confirm Password" class="login"/>
+				</div> <!-- /field -->
+				
+			</div> <!-- /login-fields -->
+			
+			<div class="login-actions">
+				
+				<!--<span class="login-checkbox">
+					<input id="Field" name="Field" type="checkbox" class="field login-checkbox" value="First Choice" tabindex="4" />
+					<label class="choice" for="Field">Agree with the Terms & Conditions.</label>
+				</span>-->
+									
+				<button class="button btn btn-primary btn-large" >Register</button>
+				
+			</div> <!-- .actions -->
+			
+		</form>
+		
+	</div> <!-- /content -->
+	
+</div> <!-- /account-container -->
+
+
+<!-- Text Under Box -->
+<div class="login-extra">
+	Already have an account? <a href="login.html">Login to your account</a>
+</div> <!-- /login-extra -->
    
     </body>
 </html>
