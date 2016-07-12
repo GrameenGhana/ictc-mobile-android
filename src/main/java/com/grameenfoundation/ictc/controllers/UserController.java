@@ -46,7 +46,7 @@ public class UserController extends HttpServlet {
             String lastname = request.getParameter("ln");
             String username = request.getParameter("un");
             String agenttype = request.getParameter("at");
-            String agentcode = request.getParameter("ac");
+          //  String agentcode = request.getParameter("ac");
             String organisation = request.getParameter("org");
             String password = request.getParameter("password");
             

@@ -44,8 +44,8 @@ List<AgentWrapper> users = new AgentModel().findAllAgents();
                
                 <td>
                    
-                    <a href="farmers.jsp?id=<%=bio.get() %>" class="btn btn-success">Farmers</a>
-                   <a href="details.jsp?id=<%=bio.getID()%>" class="btn btn-info">Details</a>
+                   <a href="farmers.jsp?id=<%= bio.getAgentId()   %>" class="btn btn-success">Farmers</a>
+                   <a href="details.jsp?id=<%=bio.getAgentId()  %>" class="btn btn-info">Details</a>
                 </td>
             </tr>
             <% }%>

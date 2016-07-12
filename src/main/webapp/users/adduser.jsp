@@ -71,12 +71,12 @@
 				
 				<div class="field">
 					<label for="firstname">First Name:</label>
-					<input type="text" id="fn" name="firstname" value="" placeholder="First Name" class="login" />
+					<input type="text" id="fn" name="fn" value="" placeholder="First Name" class="login" />
 				</div> <!-- /field -->
 				
 				<div class="field">
 					<label for="lastname">Last Name:</label>	
-					<input type="text" id="ln" name="lastname" value="" placeholder="Last Name" class="login" />
+					<input type="text" id="ln" name="ln" value="" placeholder="Last Name" class="login" />
 				</div> <!-- /field -->
 				
 				
@@ -129,7 +129,7 @@
 				<button class="button btn btn-primary btn-large" >Register</button>
 				
 			</div> <!-- .actions -->
-			
+			 <input type="hidden" name="action" value="add" />
 		</form>
 		
 	</div> <!-- /content -->

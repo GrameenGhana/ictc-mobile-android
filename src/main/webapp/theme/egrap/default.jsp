@@ -55,7 +55,7 @@
 
                     <div class="nav-collapse">
                         <ul class="nav pull-right">
-                            <li class="dropdown">						
+                          <!--  <li class="dropdown">						
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="icon-cog"></i>
                                     Agent  Account
@@ -66,7 +66,7 @@
                                     <li><a href="javascript:;">Settings</a></li>
                                     <li><a href="javascript:;">Help</a></li>
                                 </ul>						
-                            </li>
+                            </li>-->
 
                             <li class="dropdown">						
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -76,8 +76,8 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    <li><a href="javascript:;">Profile</a></li>
-                                    <li><a href="javascript:;">Logout</a></li>
+                                    <!--<li><a href="javascript:;">Profile</a></li>-->
+                                    <li><a href="<%= request.getContextPath()%>/users/login?action=logout">Logout</a></li>
                                 </ul>						
                             </li>
                         </ul>

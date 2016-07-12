@@ -47,7 +47,7 @@ public class UserModel {
                 log.info("user is invalid");
                 created = false;
             } else {
-                userParent = ParentNode.AgentParentNode();
+               // userParent = ParentNode.AgentParentNode();
 
                 stg.setAgentCode(st.getAgentCode());
                 stg.setAgentID(st.getID());

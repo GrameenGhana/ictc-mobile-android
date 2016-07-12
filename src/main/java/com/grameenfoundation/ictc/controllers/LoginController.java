@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,6 +26,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "LoginController", urlPatterns = {"/users/login"})
 public class LoginController extends HttpServlet {
 
+      public static String TAG =  LoginController.class.getName();
+    public static Logger log = Logger.getLogger(TAG);
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,6 +39,7 @@ public class LoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
            String action = request.getParameter("action");
@@ -51,9 +55,38 @@ public class LoginController extends HttpServlet {
                    ICTCUtil.doRedirect("/login.jsp", request, response, errors);
                }else{
                    //ICTCUtil.doSuccessRedirect("/index.jsp", request, response, errors);
-                    ICTCUtil.redirect(request, response,"/index.jsp", "");
+                   switch(wr.getAgentType())
+                   {
+                       case "grameen_admin":
+                           log.info("Logged in as " + wr.getAgentType());
+                        ICTCUtil.redirect(request, response,"/index.jsp", "");
+                       case  "grameen_user":
+                             log.info("Logged in as " + wr.getAgentType());
+                        ICTCUtil.redirect(request, response,"/index.jsp", ""); 
+                       case  "acdivoca_admin":
+                            log.info("Logged in as " + wr.getAgentType());
+                               ICTCUtil.redirect(request, response,"/dashboard/acdivoca.jsp", ""); 
+                       case "acdivoca_ob":
+                            log.info("Logged in as " + wr.getAgentType());
+                               ICTCUtil.redirect(request, response,"/dashboard/acdivoca.jsp", ""); 
+                       case "mofa_director":
+                             log.info("Logged in as " + wr.getAgentType());
+                               ICTCUtil.redirect(request, response,"/dashboard/mofa.jsp", ""); 
+                       default:
+                       ICTCUtil.redirect(request, response,"/login.jsp", "");
+                   }
                }
            }
+           else if(action.equalsIgnoreCase("logout")){
+                
+               if(Authenticator.logoutClient(request))
+               {
+                   log.info("user logged out");
+                   ICTCUtil.redirect(request, response,"/login.jsp", "");
+               }
+            }
+           
+           
         }
     }
 

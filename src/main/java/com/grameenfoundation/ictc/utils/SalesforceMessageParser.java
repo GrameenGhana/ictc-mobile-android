@@ -57,12 +57,13 @@ public class SalesforceMessageParser {
 
                 switch(sfObj) {
                     case "sf:Farmer_Biodata__c":
+                        farmerID = getXmlNodeValue("sf:Id",ele);
                         String agentId = getXmlNodeValue("sf:CreatedById", ele);
                         String majorcrop = getXmlNodeValue("sf:majorcrop__c", ele);
                         if (processFarmer(rowNode, farmerID, agentId, majorcrop)) { tx.success(); }
                         break;
 
-                    case "sf:FMP_Production_New__c": if (processProduction(rowNode, farmerID)) { tx.success(); } break;
+                    case "sf:FMP_Production_New__c":getXmlNodeValue("sf:Farmer_Biodata__c", ele); if (processProduction(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:FMP_Production_Update__c": if (processProductionUpdate(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:FMP_PRODUCTION_BUDGET__c": if (processProductionBudget(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:FMP_PRODUCTION_BUDGET_UPDATE__c": if (processProductionBudgetUpdate(rowNode, farmerID)) { tx.success(); } break;
@@ -99,7 +100,7 @@ public class SalesforceMessageParser {
     //<editor-fold defaultstate="collapsed" desc="Object Processing Methods">
 
     public static boolean processFarmer(Node rowNode, String farmerID, String agentId, String majorcrop) {
-
+        System.out.println("Farmer " + farmerID);
         BiodataModel biodataModel = new BiodataModel();
         Biodata bb = biodataModel.getBiodata("Id", farmerID);
 
@@ -109,9 +110,13 @@ public class SalesforceMessageParser {
         Map<String, MeetingWrapper> meetingMap;
 
         if (null != bb) {
-            update.put(Biodata.CREATED_BY, agentId);
-            System.out.println("Agent Id" + agentId);
-            biodataModel.BiodataUpdate(bb.getFarmerID(), update);
+           
+            //update.put(Biodata.CREATED_BY, agentId);
+              System.out.println("Farmer Already Exist Id " + farmerID);
+              System.out.println("Agent Id" + agentId);
+            //System.out.println("Agent Id" + agentId);
+            
+           // biodataModel.BiodataUpdate(bb.getFarmerID(), update);
         } else {
             try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
                 Map<String, String> imageUpdate = new HashMap<>();
