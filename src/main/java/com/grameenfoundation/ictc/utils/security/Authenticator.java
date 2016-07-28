@@ -184,6 +184,7 @@ public class Authenticator {
             session.invalidate();
         } catch (Exception e) {
             System.out.println("Error with Session 1st End");
+            return false;
         }
 
         try {
@@ -203,6 +204,6 @@ public class Authenticator {
 
 
         log.info("Logout Successful");
-        return false;
+        return true;
     }
 }

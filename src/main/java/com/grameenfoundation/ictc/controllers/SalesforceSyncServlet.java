@@ -30,6 +30,7 @@ import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.models.FarmCreditPlanModel;
 import com.grameenfoundation.ictc.models.FarmCreditPreviousModel;
 import com.grameenfoundation.ictc.models.FarmCreditUpdateModel;
+import com.grameenfoundation.ictc.models.FieldCropAssessmentModel;
 import com.grameenfoundation.ictc.models.FmpPostHarvestBudgetModel;
 import com.grameenfoundation.ictc.models.FmpProductionBudgetModel;
 import com.grameenfoundation.ictc.models.MeetingModel;
@@ -71,6 +72,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import com.grameenfoundation.ictc.utils.SalesforceMessageParser.*;
+
 
 /**
  *
@@ -155,9 +157,11 @@ public class SalesforceSyncServlet extends HttpServlet {
                         
                         if(null!=bb )
                         {
-                            update.put(Biodata.CREATED_BY,agentId);
-                            System.out.println("Agent Id" + agentId);
-                            biodataModel.BiodataUpdate(bb.getFarmerID(), update);
+                           // update.put(Biodata.CREATED_BY,agentId);
+                            //System.out.println("Agent Id" + agentId);
+                           // biodataModel.BiodataUpdate(bb.getFarmerID(), update);
+                              System.out.println("Farmer Already Exist Id " + farmerID);
+                               System.out.println("Agent Id" + agentId);
                             out.println(sendAck());
                             
                           
@@ -273,6 +277,131 @@ public class SalesforceSyncServlet extends HttpServlet {
                         
                       tx.success();
                      
+                     }
+                     else if(salesforceObj.equalsIgnoreCase("sf:Farmer_Biodata_X__c"))
+                     {
+                        farmerID = getXmlNodeValue("sf:Id",ele);
+                        agentId = getXmlNodeValue("sf:CreatedById",ele);
+                        bb = biodataModel.getBiodata("Id", farmerID);
+                        
+                        
+                        if(null!=bb )
+                        {
+                            //update.put(Biodata.CREATED_BY,agentId);
+                            //System.out.println("Agent Id" + agentId);
+                            //biodataModel.BiodataUpdate(bb.getFarmerID(), update);
+                              System.out.println("Farmer Already Exist Id " + farmerID);
+                               System.out.println("Agent Id" + agentId);
+                            out.println(sendAck());
+                        }
+                          else
+                       {
+                        
+                           
+                       try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx())
+                       {
+                        Map<String,String> imageUpdate = new HashMap<>();
+                        org.neo4j.graphdb.Node biodataNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
+                        biodataNode.addLabel(Labels.FARMER);
+                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
+                            
+                           // System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") ||rowNode.getChildNodes().item(k).getNodeName().equals("sf:CreatedById") ) {
+                                System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+ 
+                                biodataNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                            }
+
+                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text") && !rowNode.getChildNodes().item(k).getNodeName().equals("sf:CreatedById")) {
+
+                                 System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                biodataNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+
+                            }
+                        }
+                        
+                        biodataNode.setProperty(Biodata.LAST_MODIFIED,new Date().getTime());
+                        
+//                        FarmerParent = ParentNode.FarmerParentNode();
+//                        FarmerParent.createRelationshipTo(biodataNode, ICTCRelationshipTypes.FARMER);
+
+                        log.log(Level.INFO, "new node created {0}", biodataNode.getId());
+                      
+                        
+                        
+                       
+                        out.println(sendAck());
+                        
+                       // user.AgentToPostFarmer(agentID,biodataNode);
+                        
+                        
+                        String majorcrop = getXmlNodeValue("sf:majorcrop__c", ele);
+                        Biodata farmer = new Biodata(biodataNode);
+                        
+                        json.put("requestType","farmerX");
+                        json.put("farmerId", farmer.getFarmerID());
+                        
+                        //get farmer image from salesforce and saves it
+                       //
+                     String imageurl = getFarmerImage(farmer.getFarmerID(),ICTCKonstants.SALESFORCEURL_PRODUCTION+ICTCKonstants.GET_IMAGES,json.toString());
+                      //String image_url = getFarmerImage(farmer.getFarmerID(),ICTCKonstants.SALESFORCEURL_SANDBOX+ICTCKonstants.GET_IMAGES,json.toString());
+                        
+                        imageUpdate.put(Biodata.IMAGE_URL,imageurl);
+                        biodataModel.BiodataUpdate(farmer.getFarmerID(),imageUpdate);
+                        
+                         
+                        //create farmer meeting schedule
+                        if (majorcrop.equalsIgnoreCase("Maize")) {
+
+                            meetingMap = meetingSchedule.maizeFarmerMeeting("1");
+                            for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
+
+                                MeetingWrapper value = entrySet.getValue();
+                                value.setAttended("0");
+
+                                biodataModel.BiodataToMeeting(farmer.getId(), meetingModel.create(value).getUnderlyingNode());
+                            }
+
+                        }
+                        if (majorcrop.equalsIgnoreCase("Yam")) {
+
+                            meetingMap = meetingSchedule.yamFarmerMeeting("1");
+                            for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
+
+                                MeetingWrapper value = entrySet.getValue();
+                                value.setAttended("0");
+                                biodataModel.BiodataToMeeting(farmer.getId(), meetingModel.create(value).getUnderlyingNode());
+                            }
+
+                        }
+                        if (majorcrop.equalsIgnoreCase("Rice")) {
+
+                            meetingMap = meetingSchedule.riceFarmerMeeting("1");
+                            for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
+
+                                MeetingWrapper value = entrySet.getValue();
+                                value.setAttended("0");
+                                biodataModel.BiodataToMeeting(farmer.getId(), meetingModel.create(value).getUnderlyingNode());
+                            }
+
+                        }
+
+                        if (majorcrop.equalsIgnoreCase("Cassava")) {
+
+                            meetingMap = meetingSchedule.cassavaFarmerMeeting("1");
+                            for (Map.Entry<String, MeetingWrapper> entrySet : meetingMap.entrySet()) {
+
+                                MeetingWrapper value = entrySet.getValue();
+                                  value.setAttended("0");
+                                biodataModel.BiodataToMeeting(farmer.getId(), meetingModel.create(value).getUnderlyingNode());
+                            }
+
+                        }
+                        
+                        trx.success();
+                       }
+                       }
+                       tx.success();
                      }
                     else if(salesforceObj.equalsIgnoreCase("sf:FMP_Production_New__c"))
                      {
@@ -538,6 +667,70 @@ public class SalesforceSyncServlet extends HttpServlet {
                             
                         tx.success();
                       } 
+                     
+                       else if(salesforceObj.equalsIgnoreCase("sf:Profiling_X__c"))
+                      {
+                         farmerID = getXmlNodeValue("sf:Farmer_Biodata_X__c",ele);
+                         
+                            if (null != new ProfilingModel().getProfile("Id", farmerID)) {
+//                          update.put(Biodata.CLUSTER, getCluster(getUserScore(farmerID)));
+//                          update.put(Biodata.LAST_MODIFIED,String.valueOf(new Date().getTime()));
+//                          biodataModel.BiodataUpdate(farmerID, update);
+                             out.println(sendAck());
+                             System.out.println("Profiling already exist");
+                         } else {
+                                
+                         try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx())
+                          {
+                          org.neo4j.graphdb.Node profilingNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.PROFILE);
+                          
+                         
+                          System.out.println("farmerid " + farmerID);
+                           
+                            for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
+
+                            //System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
+                                System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                                 profilingNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                            }
+
+                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata_X__c")) {
+
+                                System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                                profilingNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+
+                            }
+                        }
+                           
+                          profilingNode.setProperty(Profiling.LAST_MODIFIED, new Date().getTime());
+
+                          log.log(Level.INFO, "new node created {0}", profilingNode.getId());
+
+                          Biodata b = biodataModel.getBiodata("Id", farmerID);
+
+                          boolean created = biodataModel.BiodataToProfiling(b.getId(), profilingNode);
+
+                          System.out.println("link created " + created);
+
+                          
+
+                          out.println(sendAck());        
+                          
+                          update.put(Biodata.CLUSTER, getCluster(getUserScore(farmerID)));
+                          update.put(Biodata.LAST_MODIFIED,String.valueOf(new Date().getTime()));
+                          biodataModel.BiodataUpdate(farmerID, update);
+//                          
+//                           if(modified(farmerID))
+//                                 System.out.println("Last modified done");
+                           trx.success();
+                          }
+                         }
+                            
+                        tx.success(); 
+                     
+                      }
+                     
                        else if(salesforceObj.equals("sf:TechnicalNeeds__c"))
                     {
                          farmerID = getXmlNodeValue("sf:Farmer_Biodata__c",ele);
@@ -971,12 +1164,12 @@ public class SalesforceSyncServlet extends HttpServlet {
                         
                         farmerID = getXmlNodeValue("sf:Farmer_Biodata__c", ele);
                        
-//                         if (null != new FieldCropAssessmentModel().getFieldCropAssessment("Id", farmerID)) {
-//                             out.println(sendAck());
-//                             System.out.println("Field Crop Asessment already exist");
-//                         }
+                         if (null != new FieldCropAssessmentModel().getFieldCropAssessment("Id", farmerID)) {
+                             out.println(sendAck());
+                             System.out.println("Field Crop Asessment already exist");
+                         }
                          
-                         if(true) {
+                         else{
 
                              Map<String,String> images = new HashMap<String,String>();
                              
@@ -1010,7 +1203,7 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                              biodataModel.BiodataToFCA(b.getId(), FCANode);
                              
-                             FieldCropAssessment fca = new FieldCropAssessment(FCANode);
+                            FieldCropAssessment fca = new FieldCropAssessment(FCANode);
                             CropAssessmentImage img = null;
                             JSONArray m = new JSONArray();
                             m.put(getImageId(fca.getPhoto_crop_establishment_status()));
@@ -1148,21 +1341,21 @@ public class SalesforceSyncServlet extends HttpServlet {
                         
                        
                         System.out.println("farmerid " + farmerID);
-//                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
-//
-//                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
-//                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
-//                                System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
-//                            FCNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
-//                            }
-//
-//                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
-//
-//                                System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
-//                              FCNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
-//
-//                            }
-//                        }
+                        for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
+
+                            System.out.println("node: " + rowNode.getChildNodes().item(k).getNodeName() + ": " + rowNode.getChildNodes().item(k).getTextContent());
+                            if (rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id")) {
+                                System.out.println("id : " + SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()));
+                            FCNode.setProperty(SalesforceMessageParser.getObjectFieldId(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+                            }
+
+                            if (!rowNode.getChildNodes().item(k).getNodeName().equals("sf:Id") && !rowNode.getChildNodes().item(k).getNodeName().equals("#text")&& !rowNode.getChildNodes().item(k).getNodeName().equals("sf:Farmer_Biodata__c")) {
+
+                                System.out.println(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()));
+                              FCNode.setProperty(SalesforceMessageParser.getObjectFieldName(rowNode.getChildNodes().item(k).getNodeName()), rowNode.getChildNodes().item(k).getTextContent());
+
+                            }
+                        }
                         
                       FCNode.setProperty(FarmCreditPlan.LAST_MODIFIED,new Date().getTime());
 

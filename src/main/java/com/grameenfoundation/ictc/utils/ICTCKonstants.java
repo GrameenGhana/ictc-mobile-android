@@ -43,6 +43,7 @@ public class ICTCKonstants {
     
     //g
      public static final String GET_IMAGES = "/getImages";
+     public static final String GET_IMAGEX = "/getImagex";
       public static final String GET_ASSESSMENT = "/assessment";
     
      //h

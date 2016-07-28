@@ -56,14 +56,14 @@ public class SalesforceMessageParser {
                 //System.out.println(sfObj);
 
                 switch(sfObj) {
-                    case "sf:Farmer_Biodata__c":
+                    case "sf:Farmer_Biodata__c": case "sf:Farmer_Biodata_X__c":
                         farmerID = getXmlNodeValue("sf:Id",ele);
                         String agentId = getXmlNodeValue("sf:CreatedById", ele);
                         String majorcrop = getXmlNodeValue("sf:majorcrop__c", ele);
                         if (processFarmer(rowNode, farmerID, agentId, majorcrop)) { tx.success(); }
                         break;
 
-                    case "sf:FMP_Production_New__c":getXmlNodeValue("sf:Farmer_Biodata__c", ele); if (processProduction(rowNode, farmerID)) { tx.success(); } break;
+                    case "sf:FMP_Production_New__c": if (processProduction(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:FMP_Production_Update__c": if (processProductionUpdate(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:FMP_PRODUCTION_BUDGET__c": if (processProductionBudget(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:FMP_PRODUCTION_BUDGET_UPDATE__c": if (processProductionBudgetUpdate(rowNode, farmerID)) { tx.success(); } break;
@@ -78,6 +78,7 @@ public class SalesforceMessageParser {
                     case "sf:FIELD_CROP_ASSESSMENT__c": if (processFieldCropAssessment(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:FarmCreditPlan__c": if (processFarmCreditPlan(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:FarmCreditPrevious__c": if (processFarmCreditPrevious(rowNode, farmerID)) { tx.success(); } break;
+                    case "sf:FarmCreditUpdate__c": if (processFarmCreditPrevious(rowNode, farmerID)) { tx.success(); } break;
 
                     case "sf:BASELINE_PRODUCTION__c": if (processBaselineProduction(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:BASELINE_PRODUCTION_BUDGET__c": if (processBaselineProductionBudget(rowNode, farmerID)) { tx.success(); } break;
@@ -561,7 +562,13 @@ public class SalesforceMessageParser {
 
     public static boolean processFieldCropAssessment(Node rowNode, String farmerID) {
         BiodataModel biodataModel = new BiodataModel();
-
+         Boolean status = false;
+           if (null != new FieldCropAssessmentModel().getFieldCropAssessment("Id", farmerID)) {
+                            
+                             System.out.println("Field Crop Asessment already exist");
+          }
+           else
+           {
         org.neo4j.graphdb.Node FCANode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FIELD_CROP_ASSESSMENT);
         FCANode = setNodeProperty(rowNode, FCANode);
         FCANode.setProperty(FieldCropAssessment.LAST_MODIFIED, currentTimestamp());
@@ -666,8 +673,11 @@ public class SalesforceMessageParser {
 
         if (modified(biodataModel, farmerID))
             System.out.println("Last modified done");
+        
+         status = true;
+         }
 
-        return true;
+        return status;
     }
 
     public static boolean processFarmCreditPlan(Node rowNode, String farmerID) {
