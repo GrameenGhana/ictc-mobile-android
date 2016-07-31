@@ -72,6 +72,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import com.grameenfoundation.ictc.utils.SalesforceMessageParser.*;
+import static com.grameenfoundation.ictc.utils.SalesforceMessageParser.getXmlNodeValue;
 
 
 /**
@@ -338,12 +339,12 @@ public class SalesforceSyncServlet extends HttpServlet {
                         String majorcrop = getXmlNodeValue("sf:majorcrop__c", ele);
                         Biodata farmer = new Biodata(biodataNode);
                         
-                        json.put("requestType","farmerX");
+                        json.put("requestType","farmer");
                         json.put("farmerId", farmer.getFarmerID());
                         
                         //get farmer image from salesforce and saves it
                        //
-                     String imageurl = getFarmerImage(farmer.getFarmerID(),ICTCKonstants.SALESFORCEURL_PRODUCTION+ICTCKonstants.GET_IMAGES,json.toString());
+                     String imageurl = getFarmerImage(farmer.getFarmerID(),ICTCKonstants.SALESFORCEURL_PRODUCTION+ICTCKonstants.GET_IMAGESX,json.toString());
                       //String image_url = getFarmerImage(farmer.getFarmerID(),ICTCKonstants.SALESFORCEURL_SANDBOX+ICTCKonstants.GET_IMAGES,json.toString());
                         
                         imageUpdate.put(Biodata.IMAGE_URL,imageurl);
@@ -1159,10 +1160,16 @@ public class SalesforceSyncServlet extends HttpServlet {
                         tx.success();
                        //}
                     }
-                     else if(salesforceObj.equals("sf:FIELD_CROP_ASSESSMENT__c"))
+                     else if(salesforceObj.equals("sf:FIELD_CROP_ASSESSMENT__c")||salesforceObj.equals("sf:FIELD_CROP_ASSESSMENT_X__c") )
                     {
-                        
-                        farmerID = getXmlNodeValue("sf:Farmer_Biodata__c", ele);
+                        try {
+                             farmerID = getXmlNodeValue("sf:Farmer_Biodata__c", ele);
+                              if(null == farmerID)
+                                 farmerID = getXmlNodeValue("sf:Farmer_Biodata_X__c",ele);
+                        } catch (Exception e) {
+                            farmerID = getXmlNodeValue("sf:Farmer_Biodata_X__c", ele);
+                        }
+                       
                        
                          if (null != new FieldCropAssessmentModel().getFieldCropAssessment("Id", farmerID)) {
                              out.println(sendAck());

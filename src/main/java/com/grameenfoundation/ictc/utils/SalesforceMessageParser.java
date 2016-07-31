@@ -47,8 +47,22 @@ public class SalesforceMessageParser {
 
             Element ele = doc.getDocumentElement();
             NodeList sObject = doc.getElementsByTagName("sObject");
-            String farmerID = getXmlNodeValue("sf:Farmer_Biodata__c", ele);
-
+            String farmerID = null;
+            String imageurl = null;
+             
+            try {
+               farmerID = getXmlNodeValue("sf:Farmer_Biodata__c", ele);
+               imageurl = ICTCKonstants.GET_IMAGES;
+               if(null == farmerID)
+               {
+                  farmerID = getXmlNodeValue("sf:Farmer_Biodata_X__c",ele);  
+                  imageurl = ICTCKonstants.GET_IMAGESX;
+               }
+            } catch (Exception e) {
+              farmerID = getXmlNodeValue("sf:Farmer_Biodata_X__c",ele);
+                imageurl = ICTCKonstants.GET_IMAGESX;
+            }
+            
             for (int j = 0; j < sObject.getLength(); j++) {
 
                 Node rowNode = sObject.item(j);
@@ -60,7 +74,7 @@ public class SalesforceMessageParser {
                         farmerID = getXmlNodeValue("sf:Id",ele);
                         String agentId = getXmlNodeValue("sf:CreatedById", ele);
                         String majorcrop = getXmlNodeValue("sf:majorcrop__c", ele);
-                        if (processFarmer(rowNode, farmerID, agentId, majorcrop)) { tx.success(); }
+                        if (processFarmer(rowNode, farmerID, agentId, majorcrop,imageurl)) { tx.success(); }
                         break;
 
                     case "sf:FMP_Production_New__c": if (processProduction(rowNode, farmerID)) { tx.success(); } break;
@@ -73,9 +87,12 @@ public class SalesforceMessageParser {
                     case "sf:FMP_PH_Budget__c": if (processPostHarvestBudget(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:FMP_PH_Budget_update__c": if (processPostHarvestBudgetUpdate(rowNode, farmerID)) { tx.success(); } break;
 
-                    case "sf:Profiling__c": if (processProfile(rowNode, farmerID)) { tx.success(); } break;
+                    case "sf:Profiling__c" :case "sf:Profiling_X__c": if (processProfile(rowNode, farmerID)) { tx.success(); } break;
+                    
+                         
+                     
                     case "sf:TechnicalNeeds__c": if (processTechnicalNeeds(rowNode, farmerID)) { tx.success(); } break;
-                    case "sf:FIELD_CROP_ASSESSMENT__c": if (processFieldCropAssessment(rowNode, farmerID)) { tx.success(); } break;
+                    case "sf:FIELD_CROP_ASSESSMENT__c": case "sf:FIELD_CROP_ASSESSMENT_X__c":  if (processFieldCropAssessment(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:FarmCreditPlan__c": if (processFarmCreditPlan(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:FarmCreditPrevious__c": if (processFarmCreditPrevious(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:FarmCreditUpdate__c": if (processFarmCreditPrevious(rowNode, farmerID)) { tx.success(); } break;
@@ -100,7 +117,7 @@ public class SalesforceMessageParser {
 
     //<editor-fold defaultstate="collapsed" desc="Object Processing Methods">
 
-    public static boolean processFarmer(Node rowNode, String farmerID, String agentId, String majorcrop) {
+    public static boolean processFarmer(Node rowNode, String farmerID, String agentId, String majorcrop,String imageurl) {
         System.out.println("Farmer " + farmerID);
         BiodataModel biodataModel = new BiodataModel();
         Biodata bb = biodataModel.getBiodata("Id", farmerID);
@@ -565,7 +582,7 @@ public class SalesforceMessageParser {
          Boolean status = false;
            if (null != new FieldCropAssessmentModel().getFieldCropAssessment("Id", farmerID)) {
                             
-                             System.out.println("Field Crop Asessment already exist");
+                  System.out.println("Field Crop Asessment already exist");
           }
            else
            {
