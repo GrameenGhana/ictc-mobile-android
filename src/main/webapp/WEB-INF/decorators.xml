@@ -20,6 +20,8 @@
         <pattern>/Mobile*</pattern>
         <pattern>/sf/*</pattern>
         <pattern>/api/v1/*</pattern>  
+        <pattern>users/login?action=logout</pattern>  
+        
          <!-- <pattern>/gmap/*</pattern> 
          <pattern>/super/systemsetup/policytype/*</pattern>  -->
     </excludes>
