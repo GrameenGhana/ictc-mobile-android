@@ -94,10 +94,6 @@
 
         </div> <!-- /navbar -->
 
-
-
-
-
         <div class="subnavbar">
 
             <div class="subnavbar-inner">
@@ -172,8 +168,6 @@
             </div> <!-- /subnavbar-inner -->
 
         </div> <!-- /subnavbar -->
-
-
 
         <div class="main">
 

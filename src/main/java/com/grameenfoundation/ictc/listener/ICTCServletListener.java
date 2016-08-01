@@ -5,15 +5,12 @@
  */
 package com.grameenfoundation.ictc.listener;
 
-import com.grameenfoundation.ictc.utils.ICTCDBUtil;
-import com.grameenfoundation.ictc.utils.Neo4jServices;
+import com.grameenfoundation.ictc.utils.*;
 
 import javax.jms.JMSException;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import com.grameenfoundation.ictc.utils.QueueManager;
-import com.grameenfoundation.ictc.utils.SalesforceMessageParser;
 import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
@@ -58,7 +55,24 @@ public class ICTCServletListener implements ServletContextListener {
         }
         System.out.println("-----------------------------DB Started-------------------------------------");
 
-       
+
+        System.out.println("-----------------------------Initializing MySQL Database-------------------------------------");
+
+        try {
+            ICTCDBUtil.getInstance().startMysqlDB();
+
+            //if (!ICTCBIUtil.databaseExist()) { ICTCBIUtil.createDatabase(); }
+
+            if (!ICTCBIUtil.tablesExist()) {
+                 ICTCBIUtil.createTables(true);
+            }
+        } catch (Exception e) {
+            System.out.println("Unable to initialize MySQL DB");
+            e.printStackTrace();
+        }
+
+        System.out.println("-----------------------------MySQL Database Initialized-------------------------------------");
+
         System.out.println("-----------------------------Starting Queue Listener-------------------------------------");
         scheduler = Executors.newSingleThreadScheduledExecutor();
         Runnable ob =  (new Runnable() {
@@ -95,12 +109,12 @@ public class ICTCServletListener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         try {
-            
           scheduler.shutdownNow();
+          ICTCDBUtil.getInstance().closeMysqlConnection();
           ICTCDBUtil.getInstance().shutdown(ICTCDBUtil.getInstance().getGraphDB());
         } catch (Exception e) {
-            e.printStackTrace();
-             ICTCDBUtil.getInstance().shutdown(ICTCDBUtil.getInstance().getGraphDB());
+          e.printStackTrace();
+          ICTCDBUtil.getInstance().shutdown(ICTCDBUtil.getInstance().getGraphDB());
         }
         System.out.println("-------------listener done-------------------");
     }

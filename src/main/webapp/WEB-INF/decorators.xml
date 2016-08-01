@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>  
 <decorators defaultdir="/">  
-    <excludes> 
+    <excludes>
         <pattern>/auth/*</pattern>
         <pattern>/SaleforceIntegrationController*</pattern>
         <pattern>/FarmManagementPlanController*</pattern>
@@ -16,17 +16,35 @@
         <pattern>/account*</pattern> 
         <pattern>/lister*</pattern> 
         <pattern>/pages/in*</pattern> 
-        <pattern>/Mobile*</pattern>  
-        <pattern>/sf/*</pattern>  
+        <pattern>/Mobile*</pattern>
+        <pattern>/Mobile*</pattern>
+        <pattern>/sf/*</pattern>
         <pattern>/api/v1/*</pattern>  
          <!-- <pattern>/gmap/*</pattern> 
          <pattern>/super/systemsetup/policytype/*</pattern>  -->
-      
     </excludes>
-    <decorator name="default" page="theme/egrap/default.jsp">  
-        <pattern>*</pattern>  
-    </decorator>  
-<!--    	<decorator name="errors" page="/Public/Decorators/errors.jsp"> -->
-<!--    		<pattern>/ErrorPages/*</pattern> -->
-<!--    	</decorator> -->
-</decorators> 
+
+    <decorator name="default" page="theme/egrap/default.jsp">
+        <excludes>
+            <pattern>/v2/admin/login*</pattern>
+            <pattern>/ErrorPages/*</pattern>
+        </excludes>
+        <pattern>*</pattern>
+    </decorator>
+
+    <decorator name="v2" page="theme/gentelella/default.jsp">
+        <excludes>
+            <pattern>/v2/admin/login*</pattern>
+            <pattern>/ErrorPages/*</pattern>
+        </excludes>
+        <pattern>/v2/*</pattern>
+    </decorator>
+
+    <decorator name="v2login" page="theme/gentelella/login.jsp">
+        <pattern>/v2/admin/login*</pattern>
+    </decorator>
+
+    <decorator name="errors" page="theme/gentelella/errors.jsp">
+   	    <pattern>/ErrorPages/*</pattern>
+   	</decorator>
+</decorators>
