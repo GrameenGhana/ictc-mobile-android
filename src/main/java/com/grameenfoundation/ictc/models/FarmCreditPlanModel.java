@@ -7,9 +7,11 @@
 package com.grameenfoundation.ictc.models;
 
 import com.grameenfoundation.ictc.domains.FarmCreditPlan;
+import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
 import com.grameenfoundation.ictc.utils.Neo4jServices;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Transaction;
 
 /**
  *
@@ -37,6 +39,31 @@ public class FarmCreditPlanModel {
         }
 
         return null;
+    }
+     
+     
+      public boolean CreditPlanToUpdate(FarmCreditPlan fcp, Node update) {
+        boolean created = false;
+
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+
+         
+
+            System.out.println("biodata :" + fcp.getUnderlyingNode().getId());
+            if (null != fcp) {
+
+               fcp.setUpdate(update);
+                created = true;
+                trx.success();
+
+            }
+        } catch (Exception e) {
+            System.out.println("error");
+            //created = false;
+
+        }
+
+        return created;
     }
     
 

@@ -520,7 +520,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                               ProductionModel product = new ProductionModel();
                               
                               org.neo4j.graphdb.Node productionUpdateNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
-                              productionUpdateNode.addLabel(Labels.PRODUCTION_UPDATE);
+                              productionUpdateNode.addLabel(Labels.UPDATE);
                               
                               System.out.println("farmerid " + farmerID);
                               for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
@@ -545,10 +545,10 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                               log.log(Level.INFO, "new node created {0}", productionUpdateNode.getId());
                               
-                              //ProductionNew p = product.getProduction("Id", farmerID);
-                                Biodata b = biodataModel.getBiodata("Id", farmerID);
-                              //product.ProductionToUpdate(p, productionUpdateNode);
-                              b.setProductionUpdate(productionUpdateNode);
+                              ProductionNew p = product.getProduction("Id", farmerID);
+                                //Biodata b = biodataModel.getBiodata("Id", farmerID);
+                             product.ProductionToUpdate(p, productionUpdateNode);
+                            //  b.setProductionUpdate(productionUpdateNode);
                                if(modified(farmerID))
                                  System.out.println("Last modified done");
                             

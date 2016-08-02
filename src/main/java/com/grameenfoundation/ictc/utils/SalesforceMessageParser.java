@@ -381,17 +381,17 @@ public class SalesforceMessageParser {
 
         ProductionModel product = new ProductionModel();
         org.neo4j.graphdb.Node productionUpdateNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
-        productionUpdateNode.addLabel(Labels.PRODUCTION_UPDATE);
+        productionUpdateNode.addLabel(Labels.UPDATE);
         productionUpdateNode = setNodeProperty(rowNode, productionUpdateNode);
         productionUpdateNode.setProperty(ProductionUpdate.LAST_MODIFIED, new Date().getTime());
 
         log.log(Level.INFO, "new node created {0}", productionUpdateNode.getId());
 
-//        ProductionNew p = product.getProduction("Id", farmerID);
-//        product.ProductionToUpdate(p, productionUpdateNode);
-          Biodata b = biodataModel.getBiodata("Id", farmerID);
-                              //product.ProductionToUpdate(p, productionUpdateNode);
-           b.setProductionUpdate(productionUpdateNode);
+         ProductionNew p = product.getProduction("Id", farmerID);
+         product.ProductionToUpdate(p, productionUpdateNode);
+          //Biodata b = biodataModel.getBiodata("Id", farmerID);
+         //product.ProductionToUpdate(p, productionUpdateNode);
+          // b.setProductionUpdate(productionUpdateNode);
 
         if (modified(biodataModel, farmerID))
             System.out.println("Last modified done");
@@ -817,9 +817,9 @@ public class SalesforceMessageParser {
             FCNode = setNodeProperty(rowNode, FCNode);
             FCNode.setProperty(FarmCreditPlan.LAST_MODIFIED, new Date().getTime());
 
-            org.neo4j.graphdb.Node FCParent;
-            FCParent = ParentNode.TechNeedParentNode();
-            FCParent.createRelationshipTo(FCNode, ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN);
+           // org.neo4j.graphdb.Node FCParent;
+           // FCParent = ParentNode.TechNeedParentNode();
+           // FCParent.createRelationshipTo(FCNode, ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN);
 
             log.log(Level.INFO, "new node created {0}", FCNode.getId());
 
@@ -846,13 +846,48 @@ public class SalesforceMessageParser {
             FCNode.setProperty(FarmCreditPlan.LAST_MODIFIED, new Date().getTime());
 
             org.neo4j.graphdb.Node FCParent;
-            FCParent = ParentNode.TechNeedParentNode();
-            FCParent.createRelationshipTo(FCNode, ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN);
+          //  FCParent = ParentNode.TechNeedParentNode();
+           // FCParent.createRelationshipTo(FCNode, ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN);
 
             log.log(Level.INFO, "new node created {0}", FCNode.getId());
 
             Biodata b = biodataModel.getBiodata("Id", farmerID);
             biodataModel.BiodataToFarmCreditPlan(b, FCNode);
+
+            if (modified(biodataModel, farmerID))
+                System.out.println("Last modified done");
+
+            status = true;
+        }
+
+        return status;
+    }
+    
+    
+    
+      public static boolean processFarmCreditUpdate(Node rowNode, String farmerID) {
+        Boolean status = false;
+        FarmCreditPlanModel fm = new FarmCreditPlanModel();
+         BiodataModel biodataModel = new BiodataModel();
+
+        if (null != new FarmCreditPreviousModel().getFarmCreditPrevious("Id", farmerID)) {
+            System.out.println("Farm Credit Update already exist");
+        } else {
+            org.neo4j.graphdb.Node FCNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.UPDATE);
+            FCNode = setNodeProperty(rowNode, FCNode);
+            FCNode.setProperty(FarmCreditPlan.LAST_MODIFIED, new Date().getTime());
+
+         
+
+            log.log(Level.INFO, "new node created {0}", FCNode.getId());
+             
+            
+//            
+//            Biodata b = biodataModel.getBiodata("Id", farmerID);
+//            biodataModel.BiodataToFarmCreditUpdate(b, FCNode);
+            FarmCreditPlan fcp = fm.getFarmCreditPlan("Id", farmerID);
+            
+             System.out.println("updated" + fm.CreditPlanToUpdate(fcp, FCNode));
 
             if (modified(biodataModel, farmerID))
                 System.out.println("Last modified done");
