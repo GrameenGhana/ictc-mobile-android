@@ -28,8 +28,7 @@
 
     <decorator name="default" page="theme/egrap/default.jsp">
         <excludes>
-            <pattern>/v2/admin/login*</pattern>
-            <pattern>/ErrorPages/*</pattern>
+            <pattern>/v2*</pattern>
         </excludes>
         <pattern>*</pattern>
     </decorator>
@@ -37,7 +36,7 @@
     <decorator name="v2" page="theme/gentelella/default.jsp">
         <excludes>
             <pattern>/v2/admin/login*</pattern>
-            <pattern>/ErrorPages/*</pattern>
+            <pattern>/v2/errors*</pattern>
         </excludes>
         <pattern>/v2/*</pattern>
     </decorator>
@@ -47,6 +46,6 @@
     </decorator>
 
     <decorator name="errors" page="theme/gentelella/errors.jsp">
-   	    <pattern>/ErrorPages/*</pattern>
+   	    <pattern>/v2/errors*</pattern>
    	</decorator>
 </decorators>
