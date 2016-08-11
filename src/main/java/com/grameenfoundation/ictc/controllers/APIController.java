@@ -148,6 +148,9 @@ public class APIController extends HttpServlet {
                 String i = request.getParameter("indicator");
                 params.put("year", request.getParameter("year"));
                 params.put("season", request.getParameter("season"));
+                params.put("gender", request.getParameter("gender"));
+                params.put("location", request.getParameter("location"));
+                params.put("crop", request.getParameter("crop"));
                 jSONObject = getIndicator(i, params);
                 out.print(jSONObject);
 

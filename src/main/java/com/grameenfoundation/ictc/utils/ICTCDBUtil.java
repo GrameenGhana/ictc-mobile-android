@@ -79,6 +79,7 @@ public class ICTCDBUtil {
 
             graphdb = new GraphDatabaseFactory()
                 .newEmbeddedDatabaseBuilder(DATABASE_PATH)
+               .setConfig(GraphDatabaseSettings.allow_store_upgrade, dbProperties.getProperty("allow_store_upgrade"))
                 .setConfig(GraphDatabaseSettings.pagecache_memory, dbProperties.getProperty("dbms.pagecache.memory"))
                 .newGraphDatabase();
         } catch (Exception e) {

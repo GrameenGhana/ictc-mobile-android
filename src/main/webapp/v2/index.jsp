@@ -10,6 +10,11 @@
 <html lang="en">
 <head>
     <title>Welcome</title>
+
+    <content tag="stylesheets">
+        <!-- bootstrap-progressbar -->
+        <link href="<%= request.getContextPath()%>/theme/gentelella/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    </content>
 </head>
 
 <body>
@@ -54,51 +59,6 @@
                         <div id="echart_line" style="height:350px;"></div>
                     </div>
                 </div>
-
-                <!--
-                <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
-                    <div class="x_title" style="margin-top: 10px">
-                        <h2>Partner Registration Target Progress</h2>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="col-md-12 col-sm-12 col-xs-6">
-                        <div>
-                            <p>ACDI VOCA - <%= data.getFarmerRegistrationProgressForACDI() %>%</p>
-                            <div class="">
-                                <div class="progress progress_sm" style="width: 76%;">
-                                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="<%= data.getFarmerRegistrationProgressForACDI() %>"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <p>MOFA - <%= data.getFarmerRegistrationProgressForMOFA()%>% </p>
-                            <div class="">
-                                <div class="progress progress_sm" style="width: 76%;">
-                                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="<%= data.getFarmerRegistrationProgressForMOFA()%>"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-sm-12 col-xs-6">
-                        <div>
-                            <p>CIFCSF - <%= data.getFarmerRegistrationProgressForCIF() %>%</p>
-                            <div class="">
-                                <div class="progress progress_sm" style="width: 76%;">
-                                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="<%= data.getFarmerRegistrationProgressForCIF() %>"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <p>Grameen Foundation - <%= data.getFarmerRegistrationProgressForGF() %>%</p>
-                            <div class="">
-                                <div class="progress progress_sm" style="width: 76%;">
-                                    <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="<%= data.getFarmerRegistrationProgressForGF() %>"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                -->
                 <div class="clearfix"></div>
             </div>
         </div>
@@ -120,9 +80,9 @@
                         <div class="w_left w_55">
                             <div class="progress" >
                                 <%  barColor = (Integer.valueOf(data.getFarmerRegistrationProgressForACDI()) > 33)
-                                             ? (Integer.valueOf(data.getFarmerRegistrationProgressForACDI()) < 66 ? "bg-warning" : "bg-green") : "bg-red"; %>
+                                             ? (Integer.valueOf(data.getFarmerRegistrationProgressForACDI()) < 66 ? "progress-bar-warning" : "bg-green") : "bg-red"; %>
                                 <div class="progress-bar <%=barColor%>" role="progressbar" aria-valuenow="<%= data.getFarmerRegistrationProgressForACDI() %>"
-                                     aria-valuemin="0" aria-valuemax="100" style="width: <%= data.getFarmerRegistrationProgressForACDI() %>;">
+                                     aria-valuemin="0" aria-valuemax="100" style="width: <%= data.getFarmerRegistrationProgressForACDI() %>%;">
                                     <span class="sr-only"><%= data.getFarmerRegistrationProgressForACDI()%>% Complete</span>
                                 </div>
                             </div>
@@ -141,9 +101,9 @@
                         <div class="w_left w_55">
                             <div class="progress">
                                 <%  barColor = (Integer.valueOf(data.getFarmerRegistrationProgressForMOFA()) > 33)
-                                        ? (Integer.valueOf(data.getFarmerRegistrationProgressForMOFA()) < 66 ? "bg-warning" : "bg-green") : "bg-red"; %>
+                                        ? (Integer.valueOf(data.getFarmerRegistrationProgressForMOFA()) < 66 ? "progress-bar-warning" : "bg-green") : "bg-red"; %>
                                 <div class="progress-bar <%=barColor%>" role="progressbar" aria-valuenow="<%= data.getFarmerRegistrationProgressForMOFA() %>"
-                                     aria-valuemin="0" aria-valuemax="100" style="width: <%= data.getFarmerRegistrationProgressForMOFA() %>;">
+                                     aria-valuemin="0" aria-valuemax="100" style="width: <%= data.getFarmerRegistrationProgressForMOFA() %>%;">
                                     <span class="sr-only"><%= data.getFarmerRegistrationProgressForMOFA()%>% Complete</span>
                                 </div>
                             </div>
@@ -162,9 +122,9 @@
                         <div class="w_left w_55">
                             <div class="progress">
                                 <%  barColor = (Integer.valueOf(data.getFarmerRegistrationProgressForCIF()) > 33)
-                                        ? (Integer.valueOf(data.getFarmerRegistrationProgressForCIF()) < 66 ? "bg-warning" : "bg-green") : "bg-red"; %>
+                                        ? (Integer.valueOf(data.getFarmerRegistrationProgressForCIF()) < 66 ? "progress-bar-warning" : "bg-green") : "bg-red"; %>
                                 <div class="progress-bar <%=barColor%>" role="progressbar" aria-valuenow="<%= data.getFarmerRegistrationProgressForCIF() %>"
-                                    aria-valuemin="0" aria-valuemax="100" style="width: <%= data.getFarmerRegistrationProgressForCIF() %>;">
+                                    aria-valuemin="0" aria-valuemax="100" style="width: <%= data.getFarmerRegistrationProgressForCIF() %>%;">
                                     <span class="sr-only"><%= data.getFarmerRegistrationProgressForCIF()%>% Complete</span>
                                 </div>
                             </div>
@@ -183,9 +143,9 @@
                         <div class="w_left w_55">
                             <div class="progress">
                                 <%  barColor = (Integer.valueOf(data.getFarmerRegistrationProgressForGF()) > 33)
-                                        ? (Integer.valueOf(data.getFarmerRegistrationProgressForGF()) < 66 ? "bg-warning" : "bg-green") : "bg-red"; %>
+                                        ? (Integer.valueOf(data.getFarmerRegistrationProgressForGF()) < 66 ? "progress-bar-warning" : "bg-green") : "bg-red"; %>
                                 <div class="progress-bar <%=barColor%>" role="progressbar" aria-valuenow="<%= data.getFarmerRegistrationProgressForGF() %>"
-                                    aria-valuemin="0" aria-valuemax="100" style="width: <%= data.getFarmerRegistrationProgressForGF() %>;">
+                                    aria-valuemin="0" aria-valuemax="100" style="width: <%= data.getFarmerRegistrationProgressForGF() %>%;">
                                     <span class="sr-only"><%= data.getFarmerRegistrationProgressForGF()%>% Complete</span>
                                 </div>
                             </div>
@@ -445,9 +405,107 @@
 </body>
 
 <content tag="scripts">
+    <!-- Chart.js -->
+    <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- jQuery Sparklines -->
+    <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+    <!-- morris.js -->
+    <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/raphael/raphael.min.js"></script>
+    <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/morris.js/morris.min.js"></script>
+    <!-- gauge.js -->
+    <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/bernii/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- Skycons -->
+    <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/Flot/jquery.flot.js"></script>
+    <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/Flot/jquery.flot.time.js"></script>
+    <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="<%= request.getContextPath()%>/theme/gentelella/js/flot/jquery.flot.orderBars.js"></script>
+    <script src="<%= request.getContextPath()%>/theme/gentelella/js/flot/date.js"></script>
+    <script src="<%= request.getContextPath()%>/theme/gentelella/js/flot/jquery.flot.spline.js"></script>
+    <script src="<%= request.getContextPath()%>/theme/gentelella/js/flot/curvedLines.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="<%= request.getContextPath()%>/theme/gentelella/js/moment/moment.min.js"></script>
+    <script src="<%= request.getContextPath()%>/theme/gentelella/js/datepicker/daterangepicker.js"></script>
 
-<!-- eChart Line -->
-<script>
+    <!-- ECharts -->
+    <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/echarts/dist/echarts.min.js"></script>
+    <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/echarts/map/js/world.js"></script>
+
+    <script>
+        //color: [ '#26B99A', '#34495E', '#BDC3C7', '#3498DB', '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7' ],
+        var theme = {
+            color: [ '#639a9F', '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7', '#34495E', '#BDC3C7', '#3498DB'],
+            title: { itemGap: 8, textStyle: { fontWeight: 'normal', color: '#408829' } },
+            dataRange: { color: ['#1f610a', '#97b58d'] },
+            toolbox: { color: ['#408829', '#408829', '#408829', '#408829'] },
+            tooltip: {
+                backgroundColor: 'rgba(0,0,0,0.5)',
+                axisPointer: {
+                    type: 'line',
+                    lineStyle: { color: '#408829', type: 'dashed' },
+                    crossStyle: { color: '#408829' },
+                    shadowStyle: { color: 'rgba(200,200,200,0.3)' }
+                }
+            },
+            dataZoom: { dataBackgroundColor: '#eee', fillerColor: 'rgba(64,136,41,0.2)', handleColor: '#408829' },
+            grid: { borderWidth: 0 },
+            categoryAxis: {
+                axisLine: { lineStyle: { color: '#408829' } },
+                splitLine: { lineStyle: { color: ['#eee'] } }
+            },
+            valueAxis: {
+                axisLine: { lineStyle: { color: '#408829' } },
+                splitArea: { show: true, areaStyle: { color: ['rgba(250,250,250,0.1)', 'rgba(200,200,200,0.1)'] } },
+                splitLine: { lineStyle: { color: ['#eee'] } }
+            },
+            timeline: {
+                lineStyle: { color: '#408829' },
+                controlStyle: { normal: {color: '#408829'}, emphasis: {color: '#408829'} }
+            },
+
+            k: { itemStyle: { normal: { color: '#68a54a', color0: '#a9cba2', lineStyle: { width: 1, color: '#408829', color0: '#86b379' } } } },
+            map: {
+                itemStyle: {
+                    normal: { areaStyle: { color: '#ddd' }, label: { textStyle: { color: '#c12e34' } } },
+                    emphasis: { areaStyle: { color: '#99d2dd' }, label: { textStyle: { color: '#c12e34' } } }
+                }
+            },
+            force: { itemStyle: { normal: { linkStyle: { strokeColor: '#408829' } } } },
+            chord: {
+                padding: 4,
+                itemStyle: {
+                    normal: {
+                        lineStyle: { width: 1, color: 'rgba(128, 128, 128, 0.5)' },
+                        chordStyle: { lineStyle: { width: 1, color: 'rgba(128, 128, 128, 0.5)' } }
+                    },
+                    emphasis: {
+                        lineStyle: { width: 1, color: 'rgba(128, 128, 128, 0.5)' },
+                        chordStyle: { lineStyle: { width: 1, color: 'rgba(128, 128, 128, 0.5)' } }
+                    }
+                }
+            },
+            gauge: {
+                startAngle: 225, endAngle: -45,
+                axisLine: { show: true, lineStyle: { color: [[0.2, '#86b379'], [0.8, '#68a54a'], [1, '#408829']], width: 8 } },
+                axisTick: { splitNumber: 10, length: 12, lineStyle: { color: 'auto' } },
+                axisLabel: { textStyle: { color: 'auto' } },
+                splitLine: { length: 18, lineStyle: { color: 'auto' } },
+                pointer: { length: '90%', color: 'auto' },
+                title: { textStyle: { color: '#333' } },
+                detail: { textStyle: { color: 'auto' } }
+            },
+            textStyle: { fontFamily: 'Arial, Verdana, sans-serif' }
+        };
+    </script>
+
+    <!-- eChart Line -->
+    <script>
     $(document).ready(function() {
         var echartLine = echarts.init(document.getElementById('echart_line'), theme);
         echartLine.setOption({
@@ -489,11 +547,11 @@
             series: <%= data.getFarmerRegistrationEChartSeries() %>
         });
     });
-</script>
-<!-- /EChart -->
+    </script>
+    <!-- /EChart -->
 
-<!-- jQuery Sparklines -->
-<script>
+    <!-- jQuery Sparklines -->
+    <script>
     $(document).ready(function() {
         var options = {
             type: 'line',
@@ -520,11 +578,11 @@
         $(".sparkline_tc").sparkline([<%= data.getCommunityRegistrationSparkline() %>], options);
         $(".sparkline_ta").sparkline([<%= data.getAgentRegistrationSparkline() %>], options);
     });
-</script>
-<!-- /jQuery Sparklines -->
+    </script>
+    <!-- /jQuery Sparklines -->
 
-<!-- morris.js -->
-<script>
+    <!-- morris.js -->
+    <script>
     $(document).ready(function() {
         Morris.Bar({
             element: 'graph_bar1',
@@ -623,9 +681,8 @@
             $(window).resize();
         });
     });
-</script>
-<!-- /morris.js -->
-
+    </script>
+    <!-- /morris.js -->
 
 </content>
 
