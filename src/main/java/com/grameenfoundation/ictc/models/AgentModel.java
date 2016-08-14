@@ -333,6 +333,19 @@ public class AgentModel {
                             ag.setAgenttype(fieldValue);
                         }
                     }
+                    if (fieldName.equalsIgnoreCase(Agent.FIRSTNAME)) {
+                        if (null != fieldValue) {
+                            ag.setFirstname(fieldValue);
+                        }
+                    }
+                    
+                    if (fieldName.equalsIgnoreCase(Agent.LASTNAME)) {
+                        if (null != fieldValue) {
+                            ag.setLastname(fieldValue);
+                        }
+                    }
+                    
+                    
                     
                 }
                

@@ -24,8 +24,8 @@ public class QueueManager {
     private Queue queue;
     private MessageProducer messageProducer;
     private MessageConsumer messageConsumer;
-    //private String DEFAULT_BROKER_URL = "tcp://localhost:6616";
-    private String DEFAULT_BROKER_URL = "tcp://localhost:61616";
+   // private String DEFAULT_BROKER_URL = "tcp://localhost:6616";
+     private String DEFAULT_BROKER_URL = "tcp://localhost:61616";
 
     public QueueManager() { }
 

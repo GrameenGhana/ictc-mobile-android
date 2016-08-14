@@ -55,7 +55,7 @@ public class SalesforceMessageParser {
             try {
                   farmerID = getXmlNodeValue("sf:Farmer_Biodata__c", ele);
                   
-               if(null == farmerID)
+               if(null == farmerID || farmerID.isEmpty())
                {
                   farmerID = getXmlNodeValue("sf:Farmer_Biodata_X__c",ele);  
                   
@@ -86,9 +86,9 @@ public class SalesforceMessageParser {
                         if (processFarmerX(rowNode, farmerID, agentId, majorcrop)) { tx.success(); }
                         break;
 
-                    case "sf:FMP_Production_New__c": if (processProduction(rowNode, farmerID)) { tx.success(); } break;
+                    case "sf:FMP_Production_New__c": case "sf:FMP_Production_NewX__c": if (processProduction(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:FMP_Production_Update__c": if (processProductionUpdate(rowNode, farmerID)) { tx.success(); } break;
-                    case "sf:FMP_PRODUCTION_BUDGET__c": if (processProductionBudget(rowNode, farmerID)) { tx.success(); } break;
+                    case "sf:FMP_PRODUCTION_BUDGET__c": case "sf:FMP_PRODUCTION_BUDGET_X__c": if (processProductionBudget(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:FMP_PRODUCTION_BUDGET_UPDATE__c": if (processProductionBudgetUpdate(rowNode, farmerID)) { tx.success(); } break;
 
                     case "sf:FMP_PostHarvest_New__c": if (processPostHarvest(rowNode, farmerID)) { tx.success(); } break;
@@ -116,7 +116,7 @@ public class SalesforceMessageParser {
             }
 
             log.info("Root element " + doc.getDocumentElement());
-            tx.success();
+           // tx.success();
 
         } catch (Exception ex) {
             Logger.getLogger(TAG).log(Level.SEVERE, null, ex);
@@ -380,21 +380,26 @@ public class SalesforceMessageParser {
         BiodataModel biodataModel = new BiodataModel();
 
         ProductionModel product = new ProductionModel();
-        org.neo4j.graphdb.Node productionUpdateNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
-        productionUpdateNode.addLabel(Labels.UPDATE);
-        productionUpdateNode = setNodeProperty(rowNode, productionUpdateNode);
-        productionUpdateNode.setProperty(ProductionUpdate.LAST_MODIFIED, new Date().getTime());
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            org.neo4j.graphdb.Node productionUpdateNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
+            productionUpdateNode.addLabel(Labels.UPDATE);
+            productionUpdateNode = setNodeProperty(rowNode, productionUpdateNode);
+            productionUpdateNode.setProperty(ProductionUpdate.LAST_MODIFIED, new Date().getTime());
 
-        log.log(Level.INFO, "new node created {0}", productionUpdateNode.getId());
+            log.log(Level.INFO, "new node created {0}", productionUpdateNode.getId());
 
-         ProductionNew p = product.getProduction("Id", farmerID);
-         product.ProductionToUpdate(p, productionUpdateNode);
+            ProductionNew p = product.getProduction("Id", farmerID);
+            product.ProductionToUpdate(p, productionUpdateNode);
           //Biodata b = biodataModel.getBiodata("Id", farmerID);
-         //product.ProductionToUpdate(p, productionUpdateNode);
-          // b.setProductionUpdate(productionUpdateNode);
+            //product.ProductionToUpdate(p, productionUpdateNode);
+            // b.setProductionUpdate(productionUpdateNode);
 
-        if (modified(biodataModel, farmerID))
-            System.out.println("Last modified done");
+            if (modified(biodataModel, farmerID)) {
+                System.out.println("Last modified done");
+            }
+            
+            trx.success();
+        }
 
         return true;
     }
@@ -402,19 +407,21 @@ public class SalesforceMessageParser {
     public static boolean processPostHarvestUpdate(Node rowNode, String farmerID) {
         BiodataModel biodataModel = new BiodataModel();
         PostHarvestModel ph = new PostHarvestModel();
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            org.neo4j.graphdb.Node postHarvestUpdateNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
+            postHarvestUpdateNode.addLabel(Labels.UPDATE);
+            postHarvestUpdateNode = setNodeProperty(rowNode, postHarvestUpdateNode);
+            postHarvestUpdateNode.setProperty(PostHarvest2.LAST_MODIFIED, new Date().getTime());
 
-        org.neo4j.graphdb.Node postHarvestUpdateNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
-        postHarvestUpdateNode.addLabel(Labels.UPDATE);
-        postHarvestUpdateNode = setNodeProperty(rowNode, postHarvestUpdateNode);
-        postHarvestUpdateNode.setProperty(PostHarvest2.LAST_MODIFIED, new Date().getTime());
+            log.log(Level.INFO, "new node created {0}", postHarvestUpdateNode.getId());
 
-        log.log(Level.INFO, "new node created {0}", postHarvestUpdateNode.getId());
+            PostHarvest2 p = ph.getPostHarvest("Id", farmerID);
+            ph.PostHarvestToUpdate(p, postHarvestUpdateNode);
 
-        PostHarvest2 p = ph.getPostHarvest("Id", farmerID);
-        ph.PostHarvestToUpdate(p, postHarvestUpdateNode);
-
-        if (modified(biodataModel, farmerID))
-            System.out.println("Last modified done");
+            if (modified(biodataModel, farmerID)) {
+                System.out.println("Last modified done");
+            }
+        }
 
         return true;
     }
@@ -599,6 +606,7 @@ public class SalesforceMessageParser {
         if (null != new FmpProductionBudgetModel().getFmpProductionBudget("Id", farmerID)) {
             System.out.println("FMP Production Budget already exist");
         } else {
+            
             org.neo4j.graphdb.Node FMPPBNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FMP_PRODUCTION_BUDGET);
             FMPPBNode = setNodeProperty(rowNode, FMPPBNode);
 
@@ -666,6 +674,7 @@ public class SalesforceMessageParser {
     public static boolean processPostHarvestBudgetUpdate(Node rowNode, String farmerID) {
         BiodataModel biodataModel = new BiodataModel();
 
+          try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
         org.neo4j.graphdb.Node FMPPHBUNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.UPDATE);
         FmpPostHarvestBudgetModel fmp = new FmpPostHarvestBudgetModel();
 
@@ -681,7 +690,8 @@ public class SalesforceMessageParser {
 
         if (modified(biodataModel, farmerID))
             System.out.println("Last modified done");
-
+        trx.success();
+          }
         return true;
     }
 
@@ -812,6 +822,8 @@ public class SalesforceMessageParser {
         if (null != new FarmCreditPlanModel().getFarmCreditPlan("Id", farmerID)) {
             System.out.println("Farm Credit Plan already exist");
         } else {
+            
+           try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             org.neo4j.graphdb.Node FCNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARM_CREDIT_PLAN);
 
             FCNode = setNodeProperty(rowNode, FCNode);
@@ -830,6 +842,8 @@ public class SalesforceMessageParser {
                 System.out.println("Last modified done");
 
             status = true;
+            trx.success();
+              }
         }
         return status;
     }
@@ -870,9 +884,7 @@ public class SalesforceMessageParser {
         FarmCreditPlanModel fm = new FarmCreditPlanModel();
          BiodataModel biodataModel = new BiodataModel();
 
-        if (null != new FarmCreditPreviousModel().getFarmCreditPrevious("Id", farmerID)) {
-            System.out.println("Farm Credit Update already exist");
-        } else {
+      
             org.neo4j.graphdb.Node FCNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.UPDATE);
             FCNode = setNodeProperty(rowNode, FCNode);
             FCNode.setProperty(FarmCreditPlan.LAST_MODIFIED, new Date().getTime());
@@ -893,7 +905,7 @@ public class SalesforceMessageParser {
                 System.out.println("Last modified done");
 
             status = true;
-        }
+        
 
         return status;
     }
