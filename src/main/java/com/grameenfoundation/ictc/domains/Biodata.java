@@ -561,6 +561,12 @@ public String getDisrictresidenceash(){
     public void setProductionUpdate(Node productionupdate) {
         underlyingNode.createRelationshipTo(productionupdate, ICTCRelationshipTypes.HAS_PRODUCTION_UPDATE);
     }
+    
+    
+    public ProductionUpdate getProductionUpdate()
+    {
+          return new ProductionUpdate(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_PRODUCTION_UPDATE));
+    }
     public ProductionNew getProduction() {
         return new ProductionNew(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_PRODUCTION));
     }
@@ -655,6 +661,17 @@ public String getDisrictresidenceash(){
     
         return new FarmCreditUpdate(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_FARMCREDIT_UPDATE));
     }
+     
+     
+     public void setPostHarvestUpdate(Node PHUNode)
+     {
+         underlyingNode.createRelationshipTo(PHUNode,ICTCRelationshipTypes.HAS_POSTHARVEST_UPDATE);
+     }
+     
+     public PostHarvestUpdate getPostHarvestUpdate()
+     {
+         return new PostHarvestUpdate(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_POSTHARVEST_UPDATE));
+     }
      
     public List<Node> getNodeList(Direction direction, ICTCRelationshipTypes relType) {
 //          List<Node> n= (Neo4jServices.findNodeFromRelations(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_MEETING));

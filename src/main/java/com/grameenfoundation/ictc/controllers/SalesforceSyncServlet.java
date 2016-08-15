@@ -120,9 +120,9 @@ public class SalesforceSyncServlet extends HttpServlet {
            // tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
             org.neo4j.graphdb.Node FarmerParent;
             
-        Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx() ;  
-     //try(Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
-      try{
+      //  Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx() ;  
+     try(Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+     // try{
                 System.out.println(" " + request.getContentType());
              /// File xmlFile = new File("/home/grameen/test.xml");
                 DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -523,7 +523,7 @@ public class SalesforceSyncServlet extends HttpServlet {
                            ProductionModel product = new ProductionModel();
                            try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()){
                               org.neo4j.graphdb.Node productionUpdateNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
-                              productionUpdateNode.addLabel(Labels.UPDATE);
+                              productionUpdateNode.addLabel(Labels.PRODUCTION_UPDATE);
                               
                               System.out.println("farmerid " + farmerID);
                               for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
@@ -548,10 +548,10 @@ public class SalesforceSyncServlet extends HttpServlet {
 
                               log.log(Level.INFO, "new node created {0}", productionUpdateNode.getId());
                               
-                              ProductionNew p = product.getProduction("Id", farmerID);
-                                //Biodata b = biodataModel.getBiodata("Id", farmerID);
-                              product.ProductionToUpdate(p, productionUpdateNode);
-                            //  b.setProductionUpdate(productionUpdateNode);
+                           //   ProductionNew p = product.getProduction("Id", farmerID);
+                               Biodata b = biodataModel.getBiodata("Id", farmerID);
+                             // product.ProductionToUpdate(p, productionUpdateNode);
+                              b.setProductionUpdate(productionUpdateNode);
                                if(modified(farmerID))
                                  System.out.println("Last modified done");
                               out.println(sendAck());
@@ -576,7 +576,8 @@ public class SalesforceSyncServlet extends HttpServlet {
                     try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx())
                        { 
                         org.neo4j.graphdb.Node postHarvestUpdateNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
-                        postHarvestUpdateNode .addLabel(Labels.UPDATE);
+                        //postHarvestUpdateNode .addLabel(Labels.UPDATE);
+                        postHarvestUpdateNode.addLabel(Labels.POSTHARVEST_UPATE);
                       
                         System.out.println("farmerid " + farmerID);
                         for (int k = 0; k < rowNode.getChildNodes().getLength(); k++) {
@@ -602,8 +603,11 @@ public class SalesforceSyncServlet extends HttpServlet {
                         log.log(Level.INFO, "new node created {0}", postHarvestUpdateNode.getId());
                         
                         PostHarvest2 p   = ph.getPostHarvest("Id",farmerID);
+                        
+                         Biodata b = biodataModel.getBiodata("Id", farmerID);
                          
                          ph.PostHarvestToUpdate(p,postHarvestUpdateNode);
+                         
                             
                          if(modified(farmerID))
                             System.out.println("Last modified done");
@@ -1519,13 +1523,14 @@ public class SalesforceSyncServlet extends HttpServlet {
             catch (Exception ex) {
               Logger.getLogger(SalesforceSyncServlet.class.getName()).log(Level.SEVERE, null, ex);
                ex.printStackTrace();
-               tx.failure();
+              // tx.failure();
               
           }
-           finally{
-                 tx.finish();
-                 
-             }
+//           finally{
+//                 tx.finish();
+//                 tx.close();
+//                 
+//             }
          
          }
         

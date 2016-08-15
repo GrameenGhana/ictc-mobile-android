@@ -24,13 +24,17 @@ public class ProductionUpdateModel {
      public ProductionUpdate getProductionUpdate(String field, String value) {
          
          
-        String q = "match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_PRODUCTION+"]->(p)-[:"+ICTCRelationshipTypes.UPDATE+"]->m "
-                + " where f." + field + "='" + value + "'"
-                + " return m";
+//        String q = "match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_PRODUCTION+"]->(p)-[:"+ICTCRelationshipTypes.UPDATE+"]->m "
+//                + " where f." + field + "='" + value + "'"
+//                + " return m";
 
+  String q = "match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_PRODUCTION_UPDATE+"]->(p)"
+                + " where f." + field + "='" + value + "'"
+                + " return p";        
+        
         System.out.println("Query " + q);
         try {
-            Node node = Neo4jServices.executeCypherQuerySingleResult(q,"m");
+            Node node = Neo4jServices.executeCypherQuerySingleResult(q,"p");
             if (null != node) {
                 return new ProductionUpdate(node);
             }

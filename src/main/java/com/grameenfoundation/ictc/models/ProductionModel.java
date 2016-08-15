@@ -54,7 +54,7 @@ public class ProductionModel {
 //                + " where f." + field + "='" + value + "'"
 //                + " return p";
         
-         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
          String q = "match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_PRODUCTION+"]->p"+ 
                 " where f." + field + "='" + value + "'"
                 + " return p";
@@ -69,7 +69,7 @@ public class ProductionModel {
             System.out.println("Unable to Find Product");
         }
          trx.success();
-         }
+        }
         return null;
     }
         
