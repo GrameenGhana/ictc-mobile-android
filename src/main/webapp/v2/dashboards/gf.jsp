@@ -18,7 +18,6 @@
             <link href="<%= request.getContextPath()%>/theme/gentelella/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
             <link href="<%= request.getContextPath()%>/theme/gentelella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
             <link href="<%= request.getContextPath()%>/theme/gentelella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-            <link href="<%= request.getContextPath()%>/public/js/datepicker/css/datepicker.css" rel="stylesheet" />
 
         </content>
     </head>
@@ -66,7 +65,6 @@
                                             <% } %>
                                         </select>
                                     </div>
-                                    <button type="submit" name="Search" class="btn btn-info btn-sm">Go</button>
                                 </form>
                                 </li>
                             </ul>
@@ -120,7 +118,6 @@
                                             <% } %>
                                         </select>
                                     </div>
-                                        <button type="submit" name="Search" class="btn btn-sm btn-info">Go</button>
                                     </form>
                                 </li>
                             </ul>
@@ -131,10 +128,10 @@
                         <div class="x_content">
                             <table id="activity-table" class="table table-striped table-bordered jambo_table">
                                 <thead>
-                                <tr>
-                                    <th>Indicator</th>
-                                    <th>Number of Farmers</th>
-                                </tr>
+                                    <tr>
+                                        <th>Indicator</th>
+                                        <th>Number of Farmers</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                 </tbody>
@@ -345,6 +342,13 @@
         <!-- Datatables -->
         <script>
             $(document).ready(function() {
+                var getAjaxUrl = function(table) {
+                    return  "<%= request.getContextPath() %>/api/v1?action=get_indicator"
+                            + "&gender=" + $("#gender-"+table).val()
+                            + "&location=" + $("#location-"+table).val()
+                            + "&crop=" + $("#crop-"+table).val()
+                            + "&indicator=gf-get-" + table;
+                }
 
                 var options = {
                     dom: "Bfrtip",
@@ -360,45 +364,26 @@
                     searching: false
                 };
 
-                var getAjaxUrl = function(table) {
-                     return  "<%= request.getContextPath() %>/api/v1?action=get_indicator"
-                            + "&gender=" + $("#gender-"+table).val()
-                            + "&location=" + $("#location-"+table).val()
-                            + "&crop=" + $("#crop-"+table).val();
-                }
-
-                var loadTables = function(table) {
-                    if (table=="output-table") {
-                        options.ajax =  { url: getAjaxUrl(table) + "&indicator=gf-get-output-table" };
-                        options.columns = [ { "data": "indicator" }, { "data": "farmers" }, { "data": "area" } ];
-                        $('#output-table').DataTable(options);
-
-                    } else if (table=="activity-table") {
-                        options.ajax =  { url: getAjaxUrl(table) + "&indicator=gf-get-activity-table" };
-                        options.columns = [ { "data": "indicator" }, { "data": "farmers" } ];
-                        $('#activity-table').DataTable(options);
-                    } else {
-                        options.ajax =  { url: getAjaxUrl("output-table") + "&indicator=gf-get-output-table" };
-                        options.columns = [ { "data": "indicator" }, { "data": "farmers" }, { "data": "area" } ];
-                        $('#output-table').DataTable(options);
-
-                        options.ajax =  { url: getAjaxUrl("activity-table") + "&indicator=gf-get-activity-table" };
-                        options.columns = [ { "data": "indicator" }, { "data": "farmers" } ];
-                        $('#activity-table').DataTable(options);
-                    }
-                    options.ajax = null;
-                    options.columns = null;
-                }
-
                 $("#farmer-monitoring-table").DataTable(options);
                 $('#agent-monitoring-table').DataTable(options);
 
-                loadTables("");
+                var aajax =  {ajax: { url: getAjaxUrl("activity-table") } };
+                var acolumns = {columns: [ { "data": "indicator" }, { "data": "farmers" } ] };
+                var aopts = $.extend({}, options, aajax, acolumns);
+                var activityTable = $('#activity-table').DataTable(aopts);
 
-                $("#output-form").submit(function(e) {e.preventDefault();e.unbind(); loadTables("output-table"); });
-                $("#activity-form").submit(function(e) { e.preventDefault(); e.unbind(); loadTables("activity-table"); });
+                var oajax =  {ajax:{ url: getAjaxUrl("output-table")  }};
+                var ocolumns = {columns: [ { "data": "indicator" }, { "data": "farmers" }, { "data": "area" } ]};
+                var oopts = $.extend({}, options, oajax, ocolumns);
+                var outputTable = $('#output-table').DataTable(oopts);
 
-                TableManageButtons.init();
+                $("#gender-output-table").change(function() { console.log("changing"); outputTable.ajax.url(getAjaxUrl("output-table")).load(); });
+                $("#location-output-table").change(function() { outputTable.ajax.url(getAjaxUrl("output-table")).load(); });
+                $("#crop-output-table").change(function() { outputTable.ajax.url(getAjaxUrl("output-table")).load(); });
+
+                $("#gender-activity-table").change(function() { activityTable.ajax.url(getAjaxUrl("activity-table")).load(); });
+                $("#location-activity-table").change(function() { activityTable.ajax.url(getAjaxUrl("activity-table")).load(); });
+                $("#crop-activity-table").change(function() { activityTable.ajax.url(getAjaxUrl("activity-table")).load(); });
             });
         </script>
         <!-- /Datatables -->

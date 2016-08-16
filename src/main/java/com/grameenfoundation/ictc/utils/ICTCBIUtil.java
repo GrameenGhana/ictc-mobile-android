@@ -126,6 +126,9 @@ public class ICTCBIUtil {
                     x.getJSONObject("agents").getJSONObject("farms").put(p, IndicatorManager.getInstance(INDICATOR_AGENT).getPartnerFarmsData(p));
                 }
 
+            } else if (dashboard.equalsIgnoreCase("obo")) {
+                x.getJSONObject("farmers").getJSONObject("registration").put("chart_line", IndicatorManager.getInstance(INDICATOR_FARMER).getEChartLineDataByCommunityForPartner(PARTNER_ACDI));
+
             } else if (dashboard.equalsIgnoreCase("general")) {
                 x.getJSONObject("agents").getJSONObject("registration").put("sparkline", IndicatorManager.getInstance(INDICATOR_AGENT).getSparkLineData());
                 x.getJSONObject("farmers").getJSONObject("registration").put("sparkline", IndicatorManager.getInstance(INDICATOR_FARMER).getSparkLineData());
@@ -181,6 +184,48 @@ public class ICTCBIUtil {
 
             data.add("{ \"indicator\": \"Number of farmers receiving advice on marketing activities\", \"farmers\": \""+v+"\" }");
             data.add("{ \"indicator\": \"Number of farmers receiving advice on marketing activities (video)\", \"farmers\": \""+v+"\" }");
+
+        } else if (indicator.equals("obo-get-yield-table")) {
+            data.add("{ \"indicator\": \"Total area under registered farmers (acres)\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Largest area (acres)\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Smallest area cultivated (acres)\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Average area cultivated (acres)\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Average yield per acres\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total production from registered farmers\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Value of total production from registered farmers\", \"planned\": \"0\", \"actual\": \"0\" }");
+
+        } else if (indicator.equals("obo-get-ciob-table")) {
+            data.add("{ \"indicator\": \"Total number of farmers taking credit\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total number of farmers taking cash credit\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total number of farmers taking input credit from OB\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total amount of cash credit from OB\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total value of cash credit payback due to OB\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total quantity of produce as payback due to OB (bags)\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total number of farmers taking seed on credit from OB\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total number of farmers taking fertilizer on credit from OB\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total number of farmers taking pre-plant herbicide on credit from OB\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total number of farmers taking post-plant herbicide on credit from OB\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total number of farmers taking ploughing herbicide on credit from OB\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total number of farmers taking post-harvest handling services on credit from OB\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total number of farmers taking transport services on credit from OB\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total number of farmers taking warehouse storage services on credit from OB\", \"planned\": \"0\", \"actual\": \"0\" }");
+
+        } else if (indicator.equals("obo-get-cif-table")) {
+            data.add("{ \"indicator\": \"Total number of farmers taking credit\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total number of farmers taking cash credit\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total number of farmers taking input credit\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total amount of cash credit\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total value of cash credit payback\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total quantity of produce as payback (bags)\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total number of farmers taking seed on credit\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total number of farmers taking fertilizer on credit\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total number of farmers taking pre-plant herbicide on credit\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total number of farmers taking post-plant herbicide on credit\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total number of farmers taking ploughing herbicide on credit\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total number of farmers taking post-harvest handling services on credit\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total number of farmers taking transport services on credit\", \"planned\": \"0\", \"actual\": \"0\" }");
+            data.add("{ \"indicator\": \"Total number of farmers taking warehouse storage services on credit\", \"planned\": \"0\", \"actual\": \"0\" }");
+
         } else {
         }
 
@@ -550,6 +595,17 @@ public class ICTCBIUtil {
 
             return locations;
         }
+
+        public List<String> getYears() {
+            List<String> years = new ArrayList<>();
+            Calendar cal = Calendar.getInstance();
+            int year = cal.get(Calendar.YEAR);
+            for(int i=year; i >= START_YEAR; i--) {
+                years.add(String.valueOf(i));
+            }
+            return years;
+        }
+
         // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="Helpers">
@@ -758,10 +814,8 @@ public class ICTCBIUtil {
                         String partner = rs.getString(rs.findColumn("p"));
                         int year = rs.getInt(rs.findColumn("year"));
                         String[] d = series_data.get(partner);
-                        System.out.println("Feb for "+partner+" is currently "+ d[getYearMonthIdx(year, 2)]);
-                        System.out.println("Feb for "+partner+" is updating to "+rs.getString(rs.findColumn("Feb")));
                         d[getYearMonthIdx(year, 1)] = rs.getString(rs.findColumn("Jan"));
-                        //d[getYearMonthIdx(year, 2)] = rs.getString(rs.findColumn("Feb"));
+                        d[getYearMonthIdx(year, 2)] = rs.getString(rs.findColumn("Feb"));
                         d[getYearMonthIdx(year, 4)] = rs.getString(rs.findColumn("Mar"));
                         d[getYearMonthIdx(year, 5)] = rs.getString(rs.findColumn("Apr"));
                         d[getYearMonthIdx(year, 5)] = rs.getString(rs.findColumn("May"));
@@ -773,8 +827,6 @@ public class ICTCBIUtil {
                         d[getYearMonthIdx(year, 11)] = rs.getString(rs.findColumn("Nov"));
                         d[getYearMonthIdx(year, 12)] = rs.getString(rs.findColumn("Dec"));
                         series_data.put(partner, d);
-                        series_data.get(partner)[getYearMonthIdx(year, 2)] = rs.getString(rs.findColumn("Feb"));
-                        System.out.println("Feb for "+partner+" is now "+ (series_data.get(partner))[1]);
                 }
 
                 String series = "";
@@ -793,6 +845,60 @@ public class ICTCBIUtil {
 
             return x;
         }
+
+        public JSONObject getEChartLineDataByCommunityForPartner(String partner) throws Exception {
+            JSONObject x = new JSONObject();
+            x.put("legend", "[]");
+            x.put("xAxis", "[]");
+            x.put("series", "{}");
+
+            HashMap<String, List<String>> series_data = new HashMap<>();
+            String series_tpl = "{name: 'YEAR', type: 'bar', data: [DATA] },";
+
+            try {
+                List<String> years = getYears();
+                List<String> communities = new ArrayList<>();
+
+                for(String y : years) { series_data.put(y, new ArrayList()); }
+
+                String sql = "SELECT community, `year` y, sum(actual) s"
+                        + "     FROM " + getIndicatorTable(indicator)
+                        + "    WHERE partner = '"+partner+"'"
+                        + "    GROUP BY community, `year`"
+                        + "    ORDER BY community, `year`";
+                ResultSet rs = ICTCDBUtil.getInstance().runSQLSelect(sql);
+
+                while (rs.next()) {
+                    int sum = rs.getInt(rs.findColumn("s"));
+                    String year = String.valueOf(rs.getInt(rs.findColumn("y")));
+                    String c = WordUtils.capitalizeFully(rs.getString(rs.findColumn("community")));
+                    if (!communities.contains(c)) { communities.add(c); }
+                    List<String> d = series_data.get(year);
+                    d.add(String.valueOf(sum));
+                    series_data.put(year, d);
+                }
+
+                String series = "";
+                Iterator it = series_data.entrySet().iterator();
+                while(it.hasNext()) {
+                    Map.Entry pair = (Map.Entry) it.next();
+                    String year = (String) pair.getKey();
+                    List<String> d = (List<String>) pair.getValue();
+                    series += series_tpl.replace("YEAR", year).replace("DATA", String.join(",", d));
+                    it.remove();
+                }
+
+                x.put("legend", "['" + String.join("','",years)+"']");
+                x.put("xAxis", "['"+String.join("','", communities) +"']");
+                x.put("series", "[" + series + "]");
+            } catch(Exception e) {
+                throw(e);
+            }
+
+            return x;
+        }
+
+
 
         public String getSparkLineData() throws Exception {
             String data = "0,0,0,0,0,0,0,0,0,0,0,0";
@@ -852,7 +958,7 @@ public class ICTCBIUtil {
                 String cql = getUpdateCQL(updateKey);
 
                 if (cql.equals("")) {
-                    System.out.println("Error pulling data from Neo4j: invalid update Key name");
+                    System.out.println("Error pulling data from Neo4j: invalid update Key name: " + updateKey);
                     return false;
 
                 } else {
@@ -902,23 +1008,31 @@ public class ICTCBIUtil {
                                 farmers = updateHashMap(farmers, objFarmer.id(TABLE_FARMER),  objFarmer);
 
                                 SQLRowObj objFarms = new SQLRowObj();
-                                objFarms.year = yMS.get(0);
-                                objFarms.month = yMS.get(1);
-                                objFarms.season = row.planned_season; // season
-                                objFarms.farmer_id = row.farmerId;
                                 objFarms.acres_planned = row.planned_acres;
                                 objFarms.acres_actual = row.actual_acres;
                                 objFarms.yield_planned = row.planned_yield;
                                 objFarms.yield_actual = row.actual_yield;
-                                // TODO: get crop, year later
-                                // TODO: get age, gender for later
-                                // TODO: get lat, long later
+                                objFarms.crop = row.planned_crop;
+                                objFarms.year = yMS.get(0);
+                                objFarms.month = yMS.get(1);
+                                objFarms.season = row.planned_season;
+                                objFarms.partner = row.partner;
+                                objFarms.agent_id = row.agent;
+                                objFarms.farmer_id = row.farmerId;
+                                objFarms.latitude = row.actual_lat;
+                                objFarms.longitude = row.actual_long;
+                                objFarms.age = row.demo_age;
+                                objFarms.gender = row.demo_gender;
+                                objFarms.location = row.location;
+                                objFarms.pp = row.pp;
+                                objFarms.fmp = row.fmp;
+                                objFarms.fmp_update = row.fmp_update;
+                                objFarms.measured = row.measured;
+                                objFarms.assessed = row.assessed;
                                 farms.put(objFarms.id(TABLE_FARM), objFarms);
 
                                 count++;
 
-                            } else if (updateKey.equals(UPDATE_AGENT_INFO)) {
-                            } else if (updateKey.equals(UPDATE_COMMUNITY_INFO)) {
                             } else if (updateKey.equals(UPDATE_FINANCIAL_INFO)) {
                             }
                         }
@@ -1031,10 +1145,12 @@ public class ICTCBIUtil {
         }
 
         private String getUpdateCQL(String indicator) {
+            String cql;
+
             switch(indicator) {
-                case UPDATE_AGENT_INFO: return "MATCH (a:AGENT) return { code: a.agentcode, partner: a.agenttype, lmd: a.lastModifieddate} as info;";
-                case UPDATE_COMMUNITY_INFO: return "MATCH (f:FARMER) WITH lower(replace(f.village,\",\",\"\")) as v, MIN(f.lastModifieddate) as d RETURN { community: v, lmd: d} as info;";
-                case UPDATE_FARMER_INFO: return
+                case UPDATE_AGENT_INFO: cql = "MATCH (a:AGENT) return { code: a.agentcode, partner: a.agenttype, lmd: a.lastModifieddate} as info"; break;
+                case UPDATE_COMMUNITY_INFO: cql = "MATCH (f:FARMER) WITH lower(replace(f.village,\",\",\"\")) as v, MIN(f.lastModifieddate) as d RETURN { community: v, lmd: d} as info"; break;
+                case UPDATE_FARMER_INFO: cql =
                 "MATCH (f:FARMER) " +
                 "OPTIONAL MATCH (f)-[:HAS_PRODUCTION]-(pc) " +
                 "WITH f, MAX(pc.lastModifieddate) as maxp " +
@@ -1050,9 +1166,18 @@ public class ICTCBIUtil {
                 "OPTIONAL MATCH (h)-[:UPDATE]-(z) " +
                 "WITH f,p,u,h,MAX(z.lastModifieddate) as maxPHdate " +
                 "OPTIONAL MATCH (h)-[:UPDATE]-(z) WHERE z.lastModifieddate >= maxPHdate " +
-                "WITH f,p,u,h,z " +
+                "OPTIONAL MATCH (f)-[:HAS_BASELINE_PRODUCTION]-(pp) "+
+                "OPTIONAL MATCH (f)-[:HAS_BASELINE_PRODUCTION]-(pp) "+
+                "OPTIONAL MATCH (f)-[:HAS_FIELD_CROP_ASSESSMENT]-(aa) "+
+                "WITH f,p,u,h,z,pp,aa " +
                 "MATCH (a:AGENT) WHERE a.Id = f.CreatedById " +
                 "RETURN {  lmd: f.lastModifieddate " +
+                "        , location: f.region " +
+                "        , pp: CASE WHEN pp IS NOT NULL THEN 1 ELSE 0 END " +
+                "        , fmp: CASE WHEN p IS NOT NULL THEN 1 ELSE 0 END " +
+                "        , fmp_update: CASE WHEN u IS NOT NULL THEN 1 ELSE 0 END " +
+                "        , measured: CASE WHEN (p IS NOT NULL AND p.acresofland IS NOT NULL) THEN 1 ELSE 0 END " +
+                "        , assessed: CASE WHEN aa IS NOT NULL THEN 1 ELSE 0 END " +
                 "        , farmerId: f.Id " +
                 "        , demo: collect({gender: f.gender, age:f.age}) " +
                 "        , community: lower(replace(f.village,\",\",\"\")) " +
@@ -1071,10 +1196,12 @@ public class ICTCBIUtil {
                 "        , postharvest: CASE WHEN z IS NOT NULL THEN collect({ yield: z.total_yield_update }) " +
                 "                       ELSE NULL END " +
                 "} as info";
+                    break;
 
-                case UPDATE_FINANCIAL_INFO: return "";
-                default: return "";
+                case UPDATE_FINANCIAL_INFO: cql = ""; break;
+                default: cql = "";
             }
+            return cql;
         }
 
         private CQLAgentRowObj convertResultToCQLAgentObj(Object row) {
@@ -1123,9 +1250,18 @@ public class ICTCBIUtil {
                 y.actual_acres = getValue(x, "actual", "acres", "0");
                 y.actual_lat = getValue(x, "actual", "lat", "0");
                 y.actual_long = getValue(x, "actual", "long", "0");
+                y.location = getValue(x, "", "location", "0");
 
                 y.demo_age = getValue(x, "demo", "age", "0");
-                y.demo_gender = getValue(x, "demo", "gender", "");
+                y.demo_gender = getValue(x, "demo", "gender", "unknown");
+                if (!y.demo_gender.equals("unknown")) { y.demo_gender = (y.demo_gender.toLowerCase().contains("female")) ? "Female" : "Male"; }
+
+                y.pp = getValue(x, "", "pp", "0");
+                y.fmp = getValue(x, "", "fmp", "0");
+                y.fmp_update = getValue(x, "", "fmp_update", "0");
+                y.measured = getValue(x, "", "measured", "0");
+                y.assessed = getValue(x, "", "assessed", "0");
+
             }
 
             return y;
@@ -1230,6 +1366,16 @@ public class ICTCBIUtil {
             dates.add(cal.get(Calendar.MONTH));
             return dates;
         }
+
+        private List<String> getYears() {
+            List<String> years = new ArrayList<>();
+            Calendar cal = Calendar.getInstance();
+            int year = cal.get(Calendar.YEAR);
+            for(int i=year; i >= START_YEAR; i--) {
+                years.add(String.valueOf(i));
+            }
+            return years;
+        }
     }
 
     private static class CQLAgentRowObj {
@@ -1260,48 +1406,79 @@ public class ICTCBIUtil {
         public String actual_long;
         public String actual_acres;
         public String actual_yield;
+        public String location;
+        public String pp;
+        public String fmp;
+        public String fmp_update;
+        public String measured;
+        public String assessed;
     }
 
     private static class SQLRowObj {
+        // Common
         public int year;
         public int month;
         public long actual;
-        public String planned;
-        public String acres;
-        public String acres_planned;
-        public String acres_actual;
-        public String yield_actual;
-        public String yield_planned;
-        public String age;
-        public String farmer_id;
-        public String season;
-        public String gender;
+        public String partner;
+        public String community;
+
+        // Finance
         public String farmer_type;
         public String credit_type;
         public String credit_mode;
         public String payment_type;
         public String payment_mode;
-        public String partner;
-        public String community;
+
+        // Farm element
+        public String acres_planned;
+        public String acres_actual;
+        public String yield_actual;
+        public String yield_planned;
+        public String crop;
+        public String season;
+        public String agent_id;
+        public String farmer_id;
+        public String gender;
+        public String age;
+        public String latitude;
+        public String longitude;
+        public String location;
+        public String pp;
+        public String fmp;
+        public String fmp_update;
+        public String measured;
+        public String assessed;
 
         public String get_year() { return String.valueOf(year); }
         public String get_month() { return String.valueOf(month); }
-        public String get_season() { return String.valueOf(season); }
-        public String get_planned() { return String.valueOf(planned); }
         public String get_actual() { return String.valueOf(actual); }
-        public String get_acres() { return String.valueOf(acres); }
+        public String get_community() { return community; }
+        public String get_partner() { return partner; }
+
         public String get_acres_planned() { return String.valueOf(acres_planned); }
         public String get_acres_actual() { return String.valueOf(acres_actual); }
         public String get_yield_planned() { return String.valueOf(yield_planned); }
         public String get_yield_actual() { return String.valueOf(yield_actual); }
-        public String get_farmer_type() { return farmer_type; }
+        public String get_crop() { return String.valueOf(crop); }
+        public String get_season() { return String.valueOf(season); }
+        public String get_agent_id() { return String.valueOf(agent_id); }
         public String get_farmer_id() { return String.valueOf(farmer_id); }
+        public String get_gender() { return String.valueOf(gender); }
+        public String get_age() { return String.valueOf(age); }
+        public String get_latitude() { return String.valueOf(latitude); }
+        public String get_longitude() { return String.valueOf(longitude); }
+        public String get_location() { return String.valueOf(location); }
+        public String get_pp() { return String.valueOf(pp); }
+        public String get_fmp() { return String.valueOf(fmp); }
+        public String get_fmp_update() { return String.valueOf(fmp_update); }
+        public String get_measured() { return String.valueOf(measured); }
+        public String get_assessed() { return String.valueOf(assessed); }
+
+        public String get_farmer_type() { return farmer_type; }
         public String get_credit_type() { return credit_type; }
         public String get_credit_mode() { return credit_mode; }
         public String get_payment_type() { return payment_type; }
         public String get_payment_mode() { return payment_mode; }
-        public String get_community() { return community; }
-        public String get_partner() { return partner; }
 
         public String id(String tableName) {
             String id = "";
@@ -1343,16 +1520,18 @@ public class ICTCBIUtil {
             String community = ", community";
             String farmer = ", farmer_id";
             String season = ", season";
-            String acres = ", acres";
-            String finc = ", farmer_type, credit_type, credit_mode";
-            String finp = ", farmer_type, payment_type, payment_mode";
             String land = ", acres_planned, acres_actual";
             String yield = ", yield_planned, yield_actual";
+            String farmMeta = ", crop, gender, age, latitude, longitude, location, pp, fmp, fmp_update, measured, assessed";
+            String finc = ", farmer_type, credit_type, credit_mode";
+            String finp = ", farmer_type, payment_type, payment_mode";
+            String acres = ", acres";
+            String agent = ", agent_id";
 
             switch(tableName) {
                 case TABLE_AGENT: fields = fields + partner; break;
                 case TABLE_FARMER: fields = fields + partner + community; break;
-                case TABLE_FARM: fields = time + land + yield + season + farmer; break;
+                case TABLE_FARM: fields = time + land + yield + season + partner + agent + farmer + farmMeta; break;
                 case TABLE_FIN_COST: fields = fields + farmer + acres; break;
                 case TABLE_FIN_REVENUE: fields = fields + farmer + acres; break;
                 case TABLE_FIN_CREDIT: fields = fields + farmer + finc; break;
@@ -1419,7 +1598,7 @@ public class ICTCBIUtil {
             String acres = ", acres INTEGER";
             String land = ", acres_planned INTEGER, acres_actual INTEGER";
             String yield = ", yield_planned INTEGER, yield_actual INTEGER";
-            String farmMeta = ", `gender` VARCHAR(10) NULL , `age` INT NULL , `lat` VARCHAR(50) NULL , `long` VARCHAR(50) NULL , `district` VARCHAR(100) NULL , `pp` INT NOT NULL DEFAULT '0' , `fmp` INT NOT NULL DEFAULT '0' , `fmp_update` INT NOT NULL DEFAULT '0' , `measured` INT NOT NULL DEFAULT '0' , `assessed` INT NOT NULL DEFAULT '0'";
+            String farmMeta = ", `gender` VARCHAR(10) NULL , `age` INT NULL , `latitude` VARCHAR(50) NULL , `longitude` VARCHAR(50) NULL , `location` VARCHAR(100) NULL , `pp` INT NOT NULL DEFAULT '0' , `fmp` INT NOT NULL DEFAULT '0' , `fmp_update` INT NOT NULL DEFAULT '0' , `measured` INT NOT NULL DEFAULT '0' , `assessed` INT NOT NULL DEFAULT '0'";
 
             ICTCDBUtil.getInstance().createTable(TABLE_AGENT, fields + partner);
             ICTCDBUtil.getInstance().createTable(TABLE_COMMUNITY, fields);

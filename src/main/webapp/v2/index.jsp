@@ -44,7 +44,7 @@
 
     <br />
 
-    <div class="row">
+    <div class="row" style="margin:10px 0;">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="dashboard_graph">
 
