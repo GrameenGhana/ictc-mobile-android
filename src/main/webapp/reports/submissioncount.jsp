@@ -88,7 +88,7 @@ FieldCropAssessmentModel fca = new FieldCropAssessmentModel();
                                     <td>FMP Production</td>
                                     <td><%= prod.getACDIVOCAFMPProductionCount()   %></td>
                                      <td><%= prod.getMOFAFMPProductionCount()   %></td>
-                                     <td><%= prod.getMOFAFMPProductionCount().intValue() + prod.getMOFAFMPProductionCount().intValue() %></td>
+                                     <td><%= prod.getMOFAFMPProductionCount().intValue() + prod.getACDIVOCAFMPProductionCount().intValue() %></td>
                                 </tr>
                                 <!--<tr>
                                     <td>FMP Production Budget</td>

@@ -388,11 +388,11 @@ public class SalesforceMessageParser {
 
             log.log(Level.INFO, "new node created {0}", productionUpdateNode.getId());
 
-            ProductionNew p = product.getProduction("Id", farmerID);
-            product.ProductionToUpdate(p, productionUpdateNode);
-          //Biodata b = biodataModel.getBiodata("Id", farmerID);
-            //product.ProductionToUpdate(p, productionUpdateNode);
-            // b.setProductionUpdate(productionUpdateNode);
+           // ProductionNew p = product.getProduction("Id", farmerID);
+           // product.ProductionToUpdate(p, productionUpdateNode);
+             Biodata b = biodataModel.getBiodata("Id", farmerID);
+           // product.ProductionToUpdate(p, productionUpdateNode);
+             b.setProductionUpdate(productionUpdateNode);
 
             if (modified(biodataModel, farmerID)) {
                 System.out.println("Last modified done");
