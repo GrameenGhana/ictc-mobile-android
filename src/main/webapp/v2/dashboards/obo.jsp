@@ -37,7 +37,7 @@
 
                     <div class="row x_title">
                         <div class="col-md-6">
-                            <h3>Registered Farmers by Community<small>Total: <%= data.getFarmerRegistrationTotal() %><</small></h3>
+                            <h3>Registered Farmers by Community <small>Total: <%= data.getFarmerRegistrationTotalForACDI() %></small></h3>
                         </div>
                     </div>
 
