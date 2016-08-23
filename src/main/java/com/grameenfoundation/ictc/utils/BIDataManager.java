@@ -43,17 +43,11 @@ public class BIDataManager extends BIUtil {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Get data methods">
-    public String getTotalData() throws Exception { try { return getTotalData("","",""); } catch (Exception e) { throw(e); } }
-    public String getTotalData(String crop, String gender, String location) throws Exception {
+    public String getTotalData() throws Exception {
         String total = "0";
 
         try {
-            String where = "1=1";
-            where += (crop.equalsIgnoreCase("all")  || crop.equalsIgnoreCase("")) ? "" : " AND crop='"+crop+"'";
-            where += (gender.equalsIgnoreCase("all")  || gender.equalsIgnoreCase("")) ? "" : " AND gender='"+gender+"'";
-            where += (location.equalsIgnoreCase("all")  || location.equalsIgnoreCase("")) ? "" : " AND location='"+location+"'";
-
-            String sql = "SELECT SUM(actual) AS total FROM " + getIndicatorTable(data_set) + " WHERE " + where;
+            String sql = "SELECT SUM(actual) AS total FROM " + getIndicatorTable(data_set);
             ResultSet rs = ICTCDBUtil.getInstance().runSQLSelect(sql);
             rs.next();
             total =  rs.getString(rs.findColumn("total"));
@@ -326,7 +320,6 @@ public class BIDataManager extends BIUtil {
                     + "     , IFNULL((price_planned * SUM(acres_planned * yield_planned)),0) as vtp"
                     + "     , IFNULL((price_actual * SUM(acres_actual * yield_actual)),0) as vta"
                     + " FROM " + TABLE_FARM + " WHERE " + where;
-            System.out.println("SQL: "+ sql);
 
             ResultSet rs = ICTCDBUtil.getInstance().runSQLSelect(sql);
             rs.next();
@@ -384,7 +377,6 @@ public class BIDataManager extends BIUtil {
                     +"           IFNULL(SUM(transport_planned),0) as tp, IFNULL(SUM(transport_actual),0) as ta,"
                     +"           IFNULL(SUM(storage_planned),0) as stop, IFNULL(SUM(storage_actual),0) as stoa"
                     +"      FROM " + TABLE_FARM + " WHERE " + where;
-            System.out.println("SQL: "+ sql);
 
             ResultSet rs = ICTCDBUtil.getInstance().runSQLSelect(sql);
             rs.next();
@@ -421,7 +413,8 @@ public class BIDataManager extends BIUtil {
         x.put("pht", 0); x.put("pht_area", 0);
 
         try {
-            String where = (crop.equalsIgnoreCase("all")  || crop.equalsIgnoreCase("")) ? "" : " AND crop='"+crop+"'";
+            String where = "1=1";
+            where += (crop.equalsIgnoreCase("all")  || crop.equalsIgnoreCase("")) ? "" : " AND crop='"+crop+"'";
             where += (gender.equalsIgnoreCase("all")  || gender.equalsIgnoreCase("")) ? "" : " AND gender='"+gender+"'";
             where += (location.equalsIgnoreCase("all")  || location.equalsIgnoreCase("")) ? "" : " AND location='"+location+"'";
 
@@ -431,10 +424,8 @@ public class BIDataManager extends BIUtil {
 						+ "    , IFNULL(SUM(fertilizer_actual),0) as `if`, IFNULL(SUM(COALESCE(IF(fertilizer_actual=1,acres_actual,0))),0) as if_area"
 						+ "    , IFNULL(SUM(preplanh_actual),0) as `preh`, IFNULL(SUM(COALESCE(IF(preplanh_actual=1,acres_actual,0))),0) as preh_area"
 						+ "    , IFNULL(SUM(postplanh_actual),0) as `posth`, IFNULL(SUM(COALESCE(IF(postplanh_actual=1,acres_actual,0))),0) as posth_area"
-						+ "    , IFNULL(SUM(handling_actual),0) as `pht`, IFNULL(SUM(COALESCE(IF(handling_actual=1,acres_actual,0))),0) as pth_area"
+						+ "    , IFNULL(SUM(handling_actual),0) as `pht`, IFNULL(SUM(COALESCE(IF(handling_actual=1,acres_actual,0))),0) as pht_area"
                         + " FROM " + TABLE_FARM + " WHERE " + where;
-
-            System.out.println("SQL: "+ sql);
 
             ResultSet rs = ICTCDBUtil.getInstance().runSQLSelect(sql);
             rs.next();
@@ -469,11 +460,8 @@ public class BIDataManager extends BIUtil {
 
             String sql = "SELECT 0 as ipt, 0 as ipt_area"
                        + "  FROM " + TABLE_FARM + " WHERE " + where;
-            System.out.println("SQL: "+ sql);
             //ResultSet rs = ICTCDBUtil.getInstance().runSQLSelect(sql);
             // rs.next();
-
-            x.put("aa",BIDataManager.getInstance(DATA_SET_FARM).getTotalData(crop, gender, location));
 
         } catch(Exception e) {
             throw(e);

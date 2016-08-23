@@ -242,6 +242,7 @@ public class ICTCDBUtil {
 
     public int runSQLUpdate(String sql) throws SQLException {
         try {
+            System.out.println("SQL: "+sql);
             Statement stmt = getMysqlConnection().createStatement();
             return stmt.executeUpdate(sql);
         } catch(SQLException e) {
