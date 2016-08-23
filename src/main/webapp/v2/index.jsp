@@ -1,8 +1,7 @@
-<%@ page import="org.json.JSONObject" %>
-<%@ page import="com.grameenfoundation.ictc.utils.ICTCBIUtil" %>
+<%@ page import="com.grameenfoundation.ictc.utils.BIDashboard" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    ICTCBIUtil.DashboardData data = ICTCBIUtil.getDashboardDataAsObject("general");
+    BIDashboard data = new BIDashboard("general");
     String barColor = "bg-green";
 %>
 

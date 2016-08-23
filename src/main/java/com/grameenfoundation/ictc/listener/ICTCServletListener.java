@@ -57,20 +57,14 @@ public class ICTCServletListener implements ServletContextListener {
 
 
         System.out.println("-----------------------------Initializing MySQL Database-------------------------------------");
-
         try {
             ICTCDBUtil.getInstance().startMysqlDB();
-
-            //if (!ICTCBIUtil.databaseExist()) { ICTCBIUtil.createDatabase(); }
-
-            if (!ICTCBIUtil.tablesExist()) {
-                 ICTCBIUtil.createTables(true);
-            }
+            //if (!BIServices.databaseExist()) { BIServices.createDatabase(); }
+            if (!BIUtil.tablesExist()) { BIUtil.createTables(true); }
         } catch (Exception e) {
             System.out.println("Unable to initialize MySQL DB");
             e.printStackTrace();
         }
-
         System.out.println("-----------------------------MySQL Database Initialized-------------------------------------");
 
         System.out.println("-----------------------------Starting Queue Listener-------------------------------------");

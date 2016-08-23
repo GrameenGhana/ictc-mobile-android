@@ -1,8 +1,8 @@
 <%@page import="java.util.List" %>
-<%@page import="com.grameenfoundation.ictc.utils.ICTCBIUtil" %>
+<%@page import="com.grameenfoundation.ictc.utils.BIDashboard" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    ICTCBIUtil.DashboardData data = ICTCBIUtil.getDashboardDataAsObject("gf");
+    BIDashboard data = new BIDashboard("gf");
     List<String> crops = data.getCrops();
     List<String> locations = data.getLocations();
 %>
@@ -343,11 +343,11 @@
         <script>
             $(document).ready(function() {
                 var getAjaxUrl = function(table) {
-                    return  "<%= request.getContextPath() %>/api/v1?action=get_indicator"
+                    return  "<%= request.getContextPath() %>/api/v1?action=get_bi_data"
                             + "&gender=" + $("#gender-"+table).val()
                             + "&location=" + $("#location-"+table).val()
                             + "&crop=" + $("#crop-"+table).val()
-                            + "&indicator=gf-get-" + table;
+                            + "&data_set=gf-get-" + table;
                 }
 
                 var options = {

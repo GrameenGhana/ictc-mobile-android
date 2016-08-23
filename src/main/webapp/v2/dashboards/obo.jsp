@@ -1,8 +1,8 @@
 <%@page import="java.util.List" %>
-<%@page import="com.grameenfoundation.ictc.utils.ICTCBIUtil" %>
+<%@page import="com.grameenfoundation.ictc.utils.BIDashboard" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    ICTCBIUtil.DashboardData data = ICTCBIUtil.getDashboardDataAsObject("obo");
+    BIDashboard data = new BIDashboard("obo");
     List<String> years = data.getYears();
 %>
 <!DOCTYPE html>
@@ -37,7 +37,7 @@
 
                     <div class="row x_title">
                         <div class="col-md-6">
-                            <h3>Registered Farmers by Community <small>Total: <%= data.getFarmerRegistrationTotalForACDI() %></small></h3>
+                            <h2>Registered Farmers by Community <small>Total: <%= data.getFarmerRegistrationTotalForACDI() %></small></h2>
                         </div>
                     </div>
 
@@ -218,10 +218,10 @@
         <script>
             $(document).ready(function() {
                 var getAjaxUrl = function(table) {
-                    return  "<%= request.getContextPath() %>/api/v1?action=get_indicator"
+                    return  "<%= request.getContextPath() %>/api/v1?action=get_bi_data"
                             + "&year=" + $("#year-"+table).val()
                             + "&season=" + $("#season-"+table).val()
-                            + "&indicator=obo-get-" + table;
+                            + "&data_set=obo-get-" + table;
                 }
 
                 var options = {
@@ -231,7 +231,7 @@
                         { extend: "csv", className: "btn-sm" },
                         { extend: "excel", className: "btn-sm" },
                         { extend: "pdfHtml5", className: "btn-sm" },
-                        { extend: "print", className: "btn-sm" },
+                        { extend: "print", className: "btn-sm" }
                     ],
                     responsive: true,
                     paging: false,
@@ -253,14 +253,14 @@
                 var cifto = $.extend({}, options, ciftoa, ciftoc);
                 var cifTable = $('#cif-table').DataTable(cifto);
 
-                $("#year-yield-table").change(function() { console.log("changing"); yieldTable.ajax.url(getAjaxUrl("yield-table")).load(); });
-                $("#seasons-yield-table").change(function() { yieldTable.ajax.url(getAjaxUrl("yield-table")).load(); });
+                $("#year-yield-table").change(function() {   yieldTable.ajax.url(getAjaxUrl("yield-table")).load(); });
+                $("#season-yield-table").change(function() { yieldTable.ajax.url(getAjaxUrl("yield-table")).load(); });
 
-                $("#year-ciob-table").change(function() { console.log("changing"); ciobTable.ajax.url(getAjaxUrl("ciob-table")).load(); });
-                $("#seasons-ciob-table").change(function() { ciobTable.ajax.url(getAjaxUrl("ciob-table")).load(); });
+                $("#year-ciob-table").change(function() {   ciobTable.ajax.url(getAjaxUrl("ciob-table")).load(); });
+                $("#season-ciob-table").change(function() { ciobTable.ajax.url(getAjaxUrl("ciob-table")).load(); });
 
-                $("#year-cif-table").change(function() { console.log("changing"); cifTable.ajax.url(getAjaxUrl("cif-table")).load(); });
-                $("#seasons-cif-table").change(function() { cifTable.ajax.url(getAjaxUrl("cif-table")).load(); });
+                $("#year-cif-table").change(function() {   cifTable.ajax.url(getAjaxUrl("cif-table")).load(); });
+                $("#season-cif-table").change(function() { cifTable.ajax.url(getAjaxUrl("cif-table")).load(); });
             });
         </script>
         <!-- /Datatables -->
@@ -364,6 +364,7 @@
                     xAxis: [{
                         type: 'category',
                         boundaryGap: false,
+                        axisLabel: { rotate: 45 },
                         data:  <%= data.getFarmerRegistrationEChartAxis() %>
                     }],
                     yAxis: [{

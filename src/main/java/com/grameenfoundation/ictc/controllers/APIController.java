@@ -28,13 +28,11 @@ import com.grameenfoundation.ictc.models.BaselineProductionBudgetModel;
 import com.grameenfoundation.ictc.models.BaselineProductionModel;
 import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.models.FarmerGPSModel;
-import com.grameenfoundation.ictc.models.FarmerInputModel;
 import com.grameenfoundation.ictc.models.FieldCropAssessmentModel;
 import com.grameenfoundation.ictc.models.FmpPostHarvestBudgetModel;
 import com.grameenfoundation.ictc.models.FmpPostHarvestBudgetUpdateModel;
 import com.grameenfoundation.ictc.models.FmpProductionBudgetModel;
 import com.grameenfoundation.ictc.models.FmpProductionBudgetUpdateModel;
-import com.grameenfoundation.ictc.models.MeetingModel;
 import com.grameenfoundation.ictc.models.MeetingSettingModel;
 import com.grameenfoundation.ictc.models.MobileTrackerModel;
 import com.grameenfoundation.ictc.models.PostHarvestModel;
@@ -43,7 +41,8 @@ import com.grameenfoundation.ictc.models.ProductionModel;
 import com.grameenfoundation.ictc.models.ProductionUpdateModel;
 import com.grameenfoundation.ictc.models.ProfilingModel;
 import com.grameenfoundation.ictc.models.TechnicalNeedsModel;
-import com.grameenfoundation.ictc.utils.ICTCBIUtil;
+import com.grameenfoundation.ictc.utils.BIDashboard;
+import com.grameenfoundation.ictc.utils.BIDataManager;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.wrapper.BiodataWrapper;
 import com.grameenfoundation.ictc.wrapper.FarmGPSLocationWrapper;
@@ -59,6 +58,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -75,6 +76,8 @@ import org.neo4j.graphdb.Transaction;
  */
 @WebServlet(name = "APIController", urlPatterns = {"/api/v1"})
 public class APIController extends HttpServlet {
+
+    private final static String TAG = APIController.class.getName();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -138,20 +141,20 @@ public class APIController extends HttpServlet {
                     System.out.println("Output " + fa);
                 }
 
-            } else if ("update_indicator".equalsIgnoreCase(serviceCode)) {
-                String i = request.getParameter("indicator");
-                jSONObject = updateIndicators(i);
+            } else if ("update_bi_data".equalsIgnoreCase(serviceCode)) {
+                String i = request.getParameter("data_set");
+                jSONObject = updateDataSet(i);
                 out.print(jSONObject);
 
-            } else if ("get_indicator".equalsIgnoreCase(serviceCode)) {
+            } else if ("get_bi_data".equalsIgnoreCase(serviceCode)) {
                 HashMap<String, String> params = new HashMap<>();
-                String i = request.getParameter("indicator");
+                String i = request.getParameter("data_set");
                 params.put("year", request.getParameter("year"));
                 params.put("season", request.getParameter("season"));
                 params.put("gender", request.getParameter("gender"));
                 params.put("location", request.getParameter("location"));
                 params.put("crop", request.getParameter("crop"));
-                jSONObject = getIndicator(i, params);
+                jSONObject = getDataSet(i, params);
                 out.print(jSONObject);
 
             } else {
@@ -167,13 +170,27 @@ public class APIController extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="ICTC BI methods for Dashboard">
 
-    private JSONObject getIndicator(String indicator, HashMap params) {
-        return ICTCBIUtil.getIndicator(indicator, params);
+    private JSONObject getDataSet(String data_set, HashMap params) {
+        JSONObject response = new JSONObject();
+        try {
+            BIDashboard bid = new BIDashboard();
+            response = bid.getData(data_set, params);
+        } catch (Exception ex) {
+            Logger.getLogger(TAG).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        return response;
     }
 
-    private JSONObject updateIndicators(String indicator) {
-        HashMap<String, String> resp = ICTCBIUtil.updateIndicators(indicator);
-        return new JSONObject(resp);
+    private JSONObject updateDataSet(String data_set) {
+        HashMap<String, String> response = new HashMap<>();
+        try {
+            response = BIDataManager.getInstance(data_set).update();
+        } catch (Exception ex) {
+            Logger.getLogger(TAG).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+        return new JSONObject(response);
     }
 
     // </editor-fold>
