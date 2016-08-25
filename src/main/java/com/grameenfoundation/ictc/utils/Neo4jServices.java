@@ -53,6 +53,7 @@ public class Neo4jServices {
     private final static Logger log = Logger.getRootLogger();
     static GraphDatabaseService db =  ICTCDBUtil.getInstance().getGraphDB();
     static java.util.logging.Logger logg = java.util.logging.Logger.getLogger(Neo4jServices.class.getName());
+
     /**
      *
      * @param node
@@ -119,8 +120,6 @@ public class Neo4jServices {
 
         return false;
     }
-    
-    
     
     public static boolean deleteAgentNode(Node node)
     {
@@ -202,9 +201,8 @@ public class Neo4jServices {
         // let's execute a query now
         try (Transaction tx = db.beginTx()) {
             //ExecutionEngine engine = new ExecutionEngine(
-                   // ICTCDBUtil.getInstance().getGraphDB(), StringLogger.SYSTEM);
-            System.out.println("execute cypher query");
-            
+           // ICTCDBUtil.getInstance().getGraphDB(), StringLogger.SYSTEM);
+            //System.out.println("execute cypher query");
             result = db.execute(q);
             tx.success();
         } catch (Exception e) {
@@ -573,24 +571,27 @@ public class Neo4jServices {
        
         ResourceIterator<Long> n_column = null;
         Result result = null;
-        // let's execute a query now
+
+        db = ICTCDBUtil.getInstance().getGraphDB();
+
         try (Transaction tx = db.beginTx()) {
-//            ExecutionEngine engine = new ExecutionEngine(
-//                    ICTCDBUtil.getInstance().getGraphDB(), StringLogger.SYSTEM);
-//            result = engine.execute(q);
-            result = db.execute(q);
-            n_column = result.columnAs("l");
-            while (n_column.hasNext()) 
-            {
-               
-                 tx.success();
-                return n_column.next();
-            }
-            tx.success();
-           return 0l; 
+//           ExecutionEngine engine = new ExecutionEngine(
+//           ICTCDBUtil.getInstance().getGraphDB(), StringLogger.SYSTEM);
+//           result = engine.execute(q);
+             result = db.execute(q);
+             n_column = result.columnAs("l");
+             while (n_column.hasNext())
+             {
+                    tx.success();
+                   return n_column.next();
+             }
+             tx.success();
+            return 0l;
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
         }
 
-       
+        return 00;
     }
 
     public static long getSumValue(String q) {
@@ -666,11 +667,6 @@ public class Neo4jServices {
         return 0;
     }
     
-    
-    
-    
-
-
     public static double getCollectionValue(String type, String label, String fieldName) {
         String q = " match(n:" + label + ") return " + type + "(toFloat(n." + fieldName + "))  as l ";
         System.out.println("Query : " + q);
