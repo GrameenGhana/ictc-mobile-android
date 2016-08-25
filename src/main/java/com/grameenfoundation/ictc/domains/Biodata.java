@@ -567,8 +567,21 @@ public String getDisrictresidenceash(){
     {
           return new ProductionUpdate(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_PRODUCTION_UPDATE));
     }
+    
+    
+    
     public ProductionNew getProduction() {
         return new ProductionNew(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_PRODUCTION));
+    }
+    
+    public void setProductionBudgetUpdate(Node productionBudgetUpdate)
+    {
+         underlyingNode.createRelationshipTo(productionBudgetUpdate, ICTCRelationshipTypes.HAS_PRODUCTION_BUDGET_UPDATE);
+    }
+    
+    public FmpProductionBudgetUpdate getProductionBudgetUpdate()
+    {
+        return new FmpProductionBudgetUpdate(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_PRODUCTION_BUDGET_UPDATE));
     }
 
     public void setProfiling(Node profiling) {
@@ -671,6 +684,11 @@ public String getDisrictresidenceash(){
      public PostHarvestUpdate getPostHarvestUpdate()
      {
          return new PostHarvestUpdate(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_POSTHARVEST_UPDATE));
+     }
+     
+     public void setPostHarvestBudgetUpdate(Node PHBUNode)
+     {
+         underlyingNode.createRelationshipTo(PHBUNode,ICTCRelationshipTypes.HAS_POSTHARVEST_BUDGET_UPDATE);
      }
      
     public List<Node> getNodeList(Direction direction, ICTCRelationshipTypes relType) {

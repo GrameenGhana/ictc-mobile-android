@@ -25,6 +25,7 @@ import java.util.logging.Logger;
 
 /**
  * Created by David on 6/9/2016.
+ * @edited by Davis 
  *
  * Parses the Salesforce XML object and saves data in NEO JS
  */
@@ -116,9 +117,11 @@ public class SalesforceMessageParser {
             }
 
             log.info("Root element " + doc.getDocumentElement());
-           // tx.success();
+            log.info("-----------------Transaction Completed-------------------------");
+          //  tx.success();
 
         } catch (Exception ex) {
+            
             Logger.getLogger(TAG).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
         }
@@ -382,7 +385,7 @@ public class SalesforceMessageParser {
         ProductionModel product = new ProductionModel();
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             org.neo4j.graphdb.Node productionUpdateNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
-            productionUpdateNode.addLabel(Labels.UPDATE);
+            productionUpdateNode.addLabel(Labels.PRODUCTION_UPDATE);
             productionUpdateNode = setNodeProperty(rowNode, productionUpdateNode);
             productionUpdateNode.setProperty(ProductionUpdate.LAST_MODIFIED, new Date().getTime());
 
@@ -409,7 +412,7 @@ public class SalesforceMessageParser {
         PostHarvestModel ph = new PostHarvestModel();
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             org.neo4j.graphdb.Node postHarvestUpdateNode = ICTCDBUtil.getInstance().getGraphDB().createNode();
-            postHarvestUpdateNode.addLabel(Labels.UPDATE);
+            postHarvestUpdateNode.addLabel(Labels.POSTHARVEST_UPATE);
             postHarvestUpdateNode = setNodeProperty(rowNode, postHarvestUpdateNode);
             postHarvestUpdateNode.setProperty(PostHarvest2.LAST_MODIFIED, new Date().getTime());
 
@@ -630,7 +633,7 @@ public class SalesforceMessageParser {
     public static boolean processProductionBudgetUpdate(Node rowNode, String farmerID) {
         BiodataModel biodataModel = new BiodataModel();
 
-        org.neo4j.graphdb.Node FMPPBUNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.UPDATE);
+        org.neo4j.graphdb.Node FMPPBUNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.PRODUCTION_BUDGET_UPDATE);
         FmpProductionBudgetModel fmp = new FmpProductionBudgetModel();
 
         System.out.println("farmerid " + farmerID);
@@ -675,7 +678,7 @@ public class SalesforceMessageParser {
         BiodataModel biodataModel = new BiodataModel();
 
           try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
-        org.neo4j.graphdb.Node FMPPHBUNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.UPDATE);
+        org.neo4j.graphdb.Node FMPPHBUNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.POSTHARVEST_BUDGET_UPDATE);
         FmpPostHarvestBudgetModel fmp = new FmpPostHarvestBudgetModel();
 
         System.out.println("farmerid " + farmerID);
@@ -842,8 +845,9 @@ public class SalesforceMessageParser {
                 System.out.println("Last modified done");
 
             status = true;
-            trx.success();
+              trx.success();
               }
+         
         }
         return status;
     }
@@ -881,11 +885,11 @@ public class SalesforceMessageParser {
     
       public static boolean processFarmCreditUpdate(Node rowNode, String farmerID) {
         Boolean status = false;
-        FarmCreditPlanModel fm = new FarmCreditPlanModel();
+      //  FarmCreditPlanModel fm = new FarmCreditPlanModel();
          BiodataModel biodataModel = new BiodataModel();
 
       
-            org.neo4j.graphdb.Node FCNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.UPDATE);
+            org.neo4j.graphdb.Node FCNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARM_CREDIT_UPDATE);
             FCNode = setNodeProperty(rowNode, FCNode);
             FCNode.setProperty(FarmCreditPlan.LAST_MODIFIED, new Date().getTime());
 
@@ -895,11 +899,11 @@ public class SalesforceMessageParser {
              
             
 //            
-//            Biodata b = biodataModel.getBiodata("Id", farmerID);
-//            biodataModel.BiodataToFarmCreditUpdate(b, FCNode);
-            FarmCreditPlan fcp = fm.getFarmCreditPlan("Id", farmerID);
+              Biodata b = biodataModel.getBiodata("Id", farmerID);
+              biodataModel.BiodataToFarmCreditUpdate(b, FCNode);
+           // FarmCreditPlan fcp = fm.getFarmCreditPlan("Id", farmerID);
             
-             System.out.println("updated" + fm.CreditPlanToUpdate(fcp, FCNode));
+            // System.out.println("updated" + fm.CreditPlanToUpdate(fcp, FCNode));
 
             if (modified(biodataModel, farmerID))
                 System.out.println("Last modified done");

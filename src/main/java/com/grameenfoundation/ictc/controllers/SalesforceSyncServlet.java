@@ -164,8 +164,27 @@ public class SalesforceSyncServlet extends HttpServlet {
                             //System.out.println("Agent Id" + agentId);
                            // biodataModel.BiodataUpdate(bb.getFarmerID(), update);
                               System.out.println("Farmer Already Exist Id " + farmerID);
-                               System.out.println("Agent Id" + agentId);
-                            out.println(sendAck());
+                              System.out.println("Agent Id" + agentId);
+                              if(null==bb.getFarmarea()|| bb.getFarmarea().isEmpty())
+                              {
+                                  log.info("Area does not exist");
+                                  if(!getXmlNodeValue("sf:farm_area__c", ele).isEmpty())
+                                  {
+                                      update.put(Biodata.FARM_AREA,getXmlNodeValue("sf:farm_area__c", ele));
+                                      update.put(Biodata.FARM_PERIMETER,getXmlNodeValue("sf:farmperimeter__c", ele));
+                                      biodataModel.BiodataUpdate(bb.getFarmerID(), update);
+                                      log.info("Area Update done");
+                                  }
+                                  else
+                                  {
+                                      log.info("Could not farmer Area");
+                                  }
+                              }
+                              else
+                              {
+                                  log.info("Area is Available");
+                              }
+                              out.println(sendAck());
                             
                           
                         }
@@ -600,13 +619,14 @@ public class SalesforceSyncServlet extends HttpServlet {
                          // PostHarvestUpdateParent = ParentNode.PostHarvestParentNode();
                          // PostHarvestUpdateParent.createRelationshipTo(postHarvestUpdateNode, ICTCRelationshipTypes.UPDATE);
 
-                        log.log(Level.INFO, "new node created {0}", postHarvestUpdateNode.getId());
+                         log.log(Level.INFO, "new node created {0}", postHarvestUpdateNode.getId());
                         
-                        PostHarvest2 p   = ph.getPostHarvest("Id",farmerID);
+                         //PostHarvest2 p   = ph.getPostHarvest("Id",farmerID);
                         
                          Biodata b = biodataModel.getBiodata("Id", farmerID);
+                         b.setPostHarvestUpdate(postHarvestUpdateNode);
                          
-                         ph.PostHarvestToUpdate(p,postHarvestUpdateNode);
+                         //ph.PostHarvestToUpdate(p,postHarvestUpdateNode);
                          
                             
                          if(modified(farmerID))
@@ -1047,8 +1067,8 @@ public class SalesforceSyncServlet extends HttpServlet {
 //                            out.println(sendAck());
 //                            System.out.println("Fmp Production budget already exist");
 //                        } else {
-                        org.neo4j.graphdb.Node FMPPBUNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.UPDATE);
-                        
+                        //org.neo4j.graphdb.Node FMPPBUNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.UPDATE);
+                        org.neo4j.graphdb.Node FMPPBUNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.PRODUCTION_BUDGET_UPDATE);
                         FmpProductionBudgetModel fmp = new FmpProductionBudgetModel();
                         
                         
@@ -1073,11 +1093,15 @@ public class SalesforceSyncServlet extends HttpServlet {
 
 
                         log.log(Level.INFO, "new node created {0}",FMPPBUNode.getId());
+                        
+                        
 
-                        FmpProductionBudget  p  = fmp.getFmpProductionBudget("Id", farmerID);
+                        //FmpProductionBudget  p  = fmp.getFmpProductionBudget("Id", farmerID);
                          
-                        System.out.println("updated" + fmp.FmpProductionBudgetToUpdate(p, FMPPBUNode) ); 
-
+                       // System.out.println("updated" + fmp.FmpProductionBudgetToUpdate(p, FMPPBUNode) ); 
+                         Biodata b = biodataModel.getBiodata("Id", farmerID);
+                         
+                         b.setProductionBudgetUpdate(FMPPBUNode);
                         out.println(sendAck());
                          if(modified(farmerID))
                                  System.out.println("Last modified done");
@@ -1139,7 +1163,8 @@ public class SalesforceSyncServlet extends HttpServlet {
 //                            System.out.println("Baseline Post Harvest Budget Update already exist");
 //                        } else {
                         
-                        org.neo4j.graphdb.Node FMPPHBUNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.UPDATE);
+                      //  org.neo4j.graphdb.Node FMPPHBUNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.UPDATE);
+                    org.neo4j.graphdb.Node FMPPHBUNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.POSTHARVEST_BUDGET_UPDATE);
                         
                         FmpPostHarvestBudgetModel fmp = new FmpPostHarvestBudgetModel();
                         
@@ -1168,7 +1193,12 @@ public class SalesforceSyncServlet extends HttpServlet {
                         FmpPostHarvestBudget  p  = fmp.getFmpPostHarvestBudget("Id", farmerID);
                          
                         System.out.println("updated" + fmp.FmpPostHarvestBudgetToUpdate(p, FMPPHBUNode) ); 
+                        
+                        
+                        Biodata b = biodataModel.getBiodata("Id", farmerID);
 
+                     //   biodataModel.BiodataToFMPPHB(b.getId(), FMPPBHNode);
+                          b.setPostHarvestBudgetUpdate(FMPPHBUNode);
                         out.println(sendAck());
                          if(modified(farmerID))
                              System.out.println("Last modified done");
