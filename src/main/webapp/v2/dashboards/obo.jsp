@@ -1,9 +1,18 @@
+<%@page import="com.grameenfoundation.ictc.utils.security.SessionKeys"%>
+<%@page import="com.grameenfoundation.ictc.wrapper.LoginUser"%>
 <%@page import="java.util.List" %>
 <%@page import="com.grameenfoundation.ictc.utils.BIDashboard" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    
     BIDashboard data = new BIDashboard("obo");
     List<String> years = data.getYears();
+    
+    LoginUser user = (LoginUser)session.getAttribute(SessionKeys.LOGIN_USER);
+    
+    System.out.println("user " + user.getUserScreenName());
+    
+    
 %>
 <!DOCTYPE html>
 <html>
