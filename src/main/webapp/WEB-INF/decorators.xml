@@ -12,6 +12,7 @@
         <pattern>/servicemanager*</pattern>
         <pattern>/recoverpassword*</pattern>
         <pattern>/login*</pattern>
+        <pattern>/v2/login*</pattern>
         <pattern>/register*</pattern>
         <pattern>/account*</pattern> 
         <pattern>/lister*</pattern> 
@@ -19,21 +20,21 @@
         <pattern>/Mobile*</pattern>
         <pattern>/Mobile*</pattern>
         <pattern>/sf/*</pattern>
-        <pattern>/api/v1/*</pattern>  
+        <pattern>/api/v1/*</pattern> 
         <pattern>users/login?action=logout</pattern>  
         
          <!-- <pattern>/gmap/*</pattern> 
          <pattern>/super/systemsetup/policytype/*</pattern>  -->
     </excludes>
 
-    <decorator name="default" page="theme/egrap/default.jsp">
+    <decorator name="v2" page="theme/egrap/default.jsp">
         <excludes>
             <pattern>/v2*</pattern>
         </excludes>
         <pattern>*</pattern>
     </decorator>
 
-    <decorator name="v2" page="theme/gentelella/default.jsp">
+    <decorator name="default" page="theme/gentelella/default.jsp">
         <excludes>
             <pattern>/v2/admin/login*</pattern>
             <pattern>/v2/errors*</pattern>

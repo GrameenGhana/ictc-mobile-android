@@ -88,6 +88,24 @@ public class Authenticator {
             return startUserSession(u, request);
         }
     }
+    
+    
+    /**
+     *This function returns the user who has login
+     *@return LoginUser 
+     */
+    public static LoginUser loginUser(HttpSession session) {
+        try {
+
+            LoginUser user = (LoginUser) session.getAttribute(SessionKeys.LOGIN_USER);
+
+            // UserSessionModel().userSessionFind(user.getSessionId());
+            return user;
+        } catch (Exception e) {
+        }
+        //Return null if no user is found
+        return null;
+    }
 
     public UserWrapper loginUser(String username, String password, String xtraLoginInfo, HttpServletRequest request) {
         UserWrapper u = new UserModel().findUser(username, password);

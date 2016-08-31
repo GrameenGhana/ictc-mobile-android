@@ -1,7 +1,14 @@
+<%@page import="com.grameenfoundation.ictc.utils.security.Authenticator"%>
+<%@page import="com.grameenfoundation.ictc.wrapper.LoginUser"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator"%>
 <%@ include file="/public/security.jsp"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<% 
+    LoginUser user =  Authenticator.loginUser(session);
+    System.out.println("user " + user.getUserScreenName());
+     
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -77,6 +84,8 @@
                         </ul>
                     </div>
 
+                                
+               <% if(user.getUserType().equalsIgnoreCase("") ) {%>              
                     <div class="menu_section">
                         <h3>System Management</h3>
                         <ul class="nav side-menu">
@@ -117,7 +126,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <img src="<%=request.getContextPath()%>/theme/gentelella/images/img.jpg" alt=""><%= username %>
+                                <img src="<%=request.getContextPath()%>/theme/gentelella/images/img.jpg" alt=""><%= user.getUserScreenName() %>
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">

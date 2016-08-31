@@ -68,7 +68,8 @@ public class LoginController extends HttpServlet {
                                ICTCUtil.redirect(request, response,"/dashboard/acdivoca.jsp", ""); 
                        case "acdivoca_ob":
                             log.info("Logged in as " + wr.getAgentType());
-                               ICTCUtil.redirect(request, response,"v2/dashboard/obo.jsp", ""); 
+                               //ICTCUtil.redirect(request, response,"/v2/dashboards/obo.jsp", ""); 
+                               response.sendRedirect(request.getContextPath()+"/v2/dashboards/obo.jsp");
                        case "mofa_director":
                              log.info("Logged in as " + wr.getAgentType());
                                ICTCUtil.redirect(request, response,"/dashboard/mofa.jsp", ""); 
