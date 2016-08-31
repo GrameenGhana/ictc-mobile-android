@@ -169,7 +169,7 @@ public class Authenticator {
         loginUser.setIsLogin(true);
         loginUser.setUserId(user.getID());
         loginUser.setUserScreenName(user.getLastName() + ", " + user.getFirstName());
-        loginUser.setUserType(SessionKeys.USER_USER_TYPE);
+        loginUser.setUserType(user.getAgentType());
         // loginUser.setSessionId(Long.parseLong(u.getId()));
         //Get user actions
 //        List<ActionImpl> acts = user.actionDetails();

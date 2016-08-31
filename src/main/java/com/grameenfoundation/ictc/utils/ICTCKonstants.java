@@ -15,14 +15,16 @@ package com.grameenfoundation.ictc.utils;
 public class ICTCKonstants {
     
     //a
-     public static final String AGENT = "agent";
+      public static final String AGENT = "agent";
       public static final String GET_AGENT = "/agentRequest";
+      public static final String ACDIVOCA_USER = "acdivoca_admin";
+      public static final String ACDIVOCA_OB = "acdivoca_ob";
      
      //b
-      public static final String BASELINE_PRODUCTION_BUDGET = "baselineproductionbudget";
-      public static final String BASELINE_PRODUCTION = "baselineproduction";
-       public static final String BASELINE_POST_HARVEST_BUDGET = "baselinepostharvestbudget";
-       public static final String BASELINE_POST_HARVEST = "baselinepostharvest";
+     public static final String BASELINE_PRODUCTION_BUDGET = "baselineproductionbudget";
+     public static final String BASELINE_PRODUCTION = "baselineproduction";
+     public static final String BASELINE_POST_HARVEST_BUDGET = "baselinepostharvestbudget";
+     public static final String BASELINE_POST_HARVEST = "baselinepostharvest";
     //c
     public static final String CREATED_ON = "creationDate";
     public static final String CREATED_BY = "createdBy";
@@ -44,7 +46,9 @@ public class ICTCKonstants {
     //g
      public static final String GET_IMAGES = "/getImages";
      public static final String GET_IMAGESX = "/getImagesx";
-      public static final String GET_ASSESSMENT = "/assessment";
+     public static final String GET_ASSESSMENT = "/assessment";
+     public static  final String GRAMEEN_ADMIN ="grameen_admin";
+     public static  final String GRAMEEN_USER ="grameen_user";
     
      //h
       public static final String HARVEST = "harvest";
