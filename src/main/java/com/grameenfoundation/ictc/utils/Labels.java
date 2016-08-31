@@ -25,6 +25,8 @@ public enum Labels implements Label {
     POSTHARVEST,
     PRODUCTION,
     PRODUCTION_UPDATE,
+    POSTHARVEST_UPATE,
+    POSTHARVEST_BUDGET_UPDATE,
     PROFILE,
     STORAGE,
     TECHNICAL_NEEDS,
@@ -52,5 +54,7 @@ public enum Labels implements Label {
     IMAGE,
     FARM_CREDIT_PLAN,
     FARM_CREDIT_PREVIOUS,
-    FARM_CREDIT_UPDATE
+    FARM_CREDIT_UPDATE,
+    PRODUCTION_BUDGET_UPDATE
+    
 }

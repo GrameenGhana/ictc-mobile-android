@@ -31,11 +31,11 @@ public class ProductionModel {
 
             System.out.println("biodata :" + p.getUnderlyingNode().getId());
             if (null != p) {
-
-               p.setUpdate(update);
+                System.out.println("in production update");
+                p.setUpdate(update);
                 created = true;
                 trx.success();
-
+                return created;
             }
         } catch (Exception e) {
             System.out.println("error");
@@ -54,7 +54,7 @@ public class ProductionModel {
 //                + " where f." + field + "='" + value + "'"
 //                + " return p";
         
-        
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
          String q = "match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_PRODUCTION+"]->p"+ 
                 " where f." + field + "='" + value + "'"
                 + " return p";
@@ -68,7 +68,8 @@ public class ProductionModel {
         } catch (Exception e) {
             System.out.println("Unable to Find Product");
         }
-
+         trx.success();
+        }
         return null;
     }
         

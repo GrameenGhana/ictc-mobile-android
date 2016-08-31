@@ -87,8 +87,8 @@ public class TrackerController extends HttpServlet {
             MobileTrackerModel trackerModel = new MobileTrackerModel();
             for (int i = 0; i < length; i++) {
                 JSONObject j = jsonArray.getJSONObject(i);
-               // String userId = j.getString("user_id");
-                String userId ="user";
+                String userId = j.getString("user_id");
+               // String userId ="user";
                 String id = j.getString("id");
                 long startTime = j.getLong("start_time");
                 long endTime = j.getLong("end_time");

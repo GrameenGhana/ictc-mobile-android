@@ -59,21 +59,30 @@ public class LoginController extends HttpServlet {
                    {
                        case "grameen_admin":
                            log.info("Logged in as " + wr.getAgentType());
-                        ICTCUtil.redirect(request, response,"/index.jsp", "");
+                        //ICTCUtil.redirect(request, response,"/index.jsp", "");
+                          response.sendRedirect(request.getContextPath()+"/v2/index.jsp");
+                           break;
                        case  "grameen_user":
                              log.info("Logged in as " + wr.getAgentType());
-                        ICTCUtil.redirect(request, response,"/index.jsp", ""); 
+                        //ICTCUtil.redirect(request, response,"/index.jsp", ""); 
+                             response.sendRedirect(request.getContextPath()+"/v2/index.jsp");
+                           break;
                        case  "acdivoca_admin":
                             log.info("Logged in as " + wr.getAgentType());
                                ICTCUtil.redirect(request, response,"/dashboard/acdivoca.jsp", ""); 
+                           break;
                        case "acdivoca_ob":
                             log.info("Logged in as " + wr.getAgentType());
-                               ICTCUtil.redirect(request, response,"/dashboard/acdivoca.jsp", ""); 
+                               //ICTCUtil.redirect(request, response,"/v2/dashboards/obo.jsp", ""); 
+                               response.sendRedirect(request.getContextPath()+"/v2/dashboards/obo.jsp");
+                           break;
                        case "mofa_director":
                              log.info("Logged in as " + wr.getAgentType());
-                               ICTCUtil.redirect(request, response,"/dashboard/mofa.jsp", ""); 
+                              ICTCUtil.redirect(request, response,"/dashboard/mofa.jsp", ""); 
+                             break;
                        default:
-                       ICTCUtil.redirect(request, response,"/login.jsp", "");
+                       //ICTCUtil.redirect(request, response,"/login.jsp", "");
+                            response.sendRedirect(request.getContextPath()+"/v2/login.jsp");
                    }
                }
            }
@@ -82,7 +91,8 @@ public class LoginController extends HttpServlet {
                if(Authenticator.logoutClient(request))
                {
                    log.info("user logged out");
-                   ICTCUtil.redirect(request, response,"/login.jsp", "");
+                  // ICTCUtil.redirect(request, response,"/login.jsp", "");
+                   response.sendRedirect(request.getContextPath()+"/v2/login.jsp");
                }
             }
            

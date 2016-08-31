@@ -1,7 +1,16 @@
+<%@page import="com.grameenfoundation.ictc.utils.ICTCKonstants"%>
+<%@page import="com.grameenfoundation.ictc.utils.security.Authenticator"%>
+<%@page import="com.grameenfoundation.ictc.wrapper.LoginUser"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator"%>
 <%@ include file="/public/security.jsp"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<% 
+    LoginUser user =  Authenticator.loginUser(session);
+    System.out.println("user " + user.getUserScreenName());
+    System.out.println("usertype  " + user.getUserType());
+     
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,6 +58,7 @@
                     <div class="menu_section">
                         <h3>General</h3>
                         <ul class="nav side-menu">
+                            <% if(user.getUserType().equalsIgnoreCase(ICTCKonstants.GRAMEEN_ADMIN)|| user.getUserType().equals(ICTCKonstants.GRAMEEN_USER) ) {%>      
                             <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="<%=request.getContextPath()%>/v2/index.jsp">General Dashboard</a></li>
@@ -58,6 +68,22 @@
                                     <li><a href="<%= request.getContextPath()%>/v2/dashboards/obo.jsp">OBO Dashboard</a></li>
                                 </ul>
                             </li>
+                            <%}%>
+                            <% if(user.getUserType().equalsIgnoreCase(ICTCKonstants.ACDIVOCA_USER)) {%>
+                             <li><a><i class="fa fa-user"></i>ACDIVOCA <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="<%= request.getContextPath()%>/v2/dashboards/acdivoca.jsp">ACDIVOCA Dashboard </a></li>
+                                </ul>
+                            </li>
+                            <% } %>
+                            <% if(user.getUserType().equalsIgnoreCase(ICTCKonstants.ACDIVOCA_OB)) { %>
+                             <li><a><i class="fa fa-user"></i>OutGrower Owner <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="<%= request.getContextPath()%>/v2/dashboards/obo.jsp">OB Dashboard </a></li>
+                                </ul>
+                            </li>
+                            <% } %>
+                            <% if(user.getUserType().equalsIgnoreCase(ICTCKonstants.GRAMEEN_ADMIN)|| user.getUserType().equals(ICTCKonstants.GRAMEEN_USER) ) {%>
                             <li><a><i class="fa fa-bar-chart-o"></i> Reports <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="<%= request.getContextPath()%>/v2/reports/adoptation.jsp">Adoptation Report</a></li>
@@ -68,6 +94,9 @@
                                     <li><a href="<%= request.getContextPath()%>/v2/reports/training.jsp">Training Report</a></li>
                                 </ul>
                             </li>
+                            <%}%>
+                            
+                            
                             <li><a><i class="fa fa-users"></i> People <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="<%= request.getContextPath()%>/v2/agents/index.jsp">Agents</a></li>
@@ -77,6 +106,8 @@
                         </ul>
                     </div>
 
+                                
+              <% if(user.getUserType().equalsIgnoreCase(ICTCKonstants.GRAMEEN_ADMIN) ) {%>              
                     <div class="menu_section">
                         <h3>System Management</h3>
                         <ul class="nav side-menu">
@@ -99,10 +130,10 @@
                             </li>
                         </ul>
                     </div>
-
+                    <%}%>
                 </div>
                 <!-- /sidebar menu -->
-
+               
             </div>
         </div>
 
@@ -117,13 +148,13 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <img src="<%=request.getContextPath()%>/theme/gentelella/images/img.jpg" alt=""><%= username %>
+                                <img src="<%=request.getContextPath()%>/theme/gentelella/images/img.jpg" alt=""><%= user.getUserScreenName() %>
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
                                 <li><a href="<%= request.getContextPath()%>/v2/profile.jsp"><i class="fa fa-user pull-right"></i> Profile</a></li>
                                 <li><a href="<%= request.getContextPath()%>/v2/help.jsp"><i class="fa fa-question-circle pull-right"></i> Help</a></li>
-                                <li><a href="<%= request.getContextPath()%>/v2/login.jsp"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                <li><a href="<%= request.getContextPath()%>/users/login?action=logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                             </ul>
                         </li>
                     </ul>

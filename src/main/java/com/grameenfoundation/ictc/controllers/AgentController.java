@@ -188,8 +188,10 @@ public class AgentController extends HttpServlet {
                 
                 Map<String,String> update = new HashMap<String,String>();
                 update.put(Agent.AGENTTYPE,agenttype);
+                update.put(Agent.FIRSTNAME,firstname);
+                update.put(Agent.LASTNAME, lastname);
                         
-                        agentModel.AgentUpdate(username, update);
+                 agentModel.AgentUpdate(username, update);
                         System.out.println("Agent updated");
             }
             if(action.equalsIgnoreCase("delete"))
