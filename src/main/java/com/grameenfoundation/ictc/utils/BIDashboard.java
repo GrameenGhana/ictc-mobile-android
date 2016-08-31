@@ -29,8 +29,9 @@ public class BIDashboard extends BIUtil {
                 String crop = (String) params.get("crop");
                 String gender = (String) params.get("gender");
                 String location = (String) params.get("location");
+                String partner = (String) params.get("partner");
 
-                JSONObject x = BIDataManager.getInstance().getBehaviourChangeInfo(crop, gender, location);
+                JSONObject x = BIDataManager.getInstance().getBehaviourChangeInfo(crop, gender, location, partner);
 
                 data.add("{ \"indicator\": \"Using improved practices and technologies\", \"farmers\": \""+x.get("ipt")+"\", \"area\": \""+x.get("ipt_area")+"\" }");
                 data.add("{ \"indicator\": \"Using improved seed\", \"farmers\": \""+x.get("is")+"\", \"area\": \""+x.get("is_area")+"\" }");
@@ -509,7 +510,7 @@ public class BIDashboard extends BIUtil {
                 data.getJSONObject("agents").getJSONObject("registration").put(p, BIDataManager.getInstance(DATA_SET_AGENT).getPartnerRegistrationData(p));
             }
 
-            if (dashboard.equalsIgnoreCase("gf")) {
+            if (dashboard.equalsIgnoreCase("gf") || dashboard.equalsIgnoreCase("acdivoca") || dashboard.equalsIgnoreCase("mofa")) {
                 data.getJSONObject("farmers").put("previous_performance", new JSONObject());
                 data.getJSONObject("farmers").put("fmp", new JSONObject());
                 data.getJSONObject("farmers").put("fmp_update", new JSONObject());

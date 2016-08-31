@@ -154,6 +154,7 @@ public class APIController extends HttpServlet {
                 params.put("gender", request.getParameter("gender"));
                 params.put("location", request.getParameter("location"));
                 params.put("crop", request.getParameter("crop"));
+                params.put("partner", request.getParameter("partner"));
                 jSONObject = getDataSet(i, params);
                 out.print(jSONObject);
 
