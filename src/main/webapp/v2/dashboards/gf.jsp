@@ -87,7 +87,7 @@
                     </div>
             </div>
 
-            <!-- Activity Indicators -->
+            <!-- Activity Indicators
             <div style="margin-bottom: 30px" class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
@@ -139,6 +139,7 @@
                         </div>
                     </div>
                 </div>
+            -->
 
             <!-- Farmer Monitoring -->
             <div style="margin-bottom: 30px" class="col-md-12 col-sm-12 col-xs-12">
@@ -343,7 +344,7 @@
         <script>
             $(document).ready(function() {
                 var getAjaxUrl = function(table) {
-                    return  "<%= request.getContextPath() %>/api/v1?action=get_bi_data"
+                    return  "<%= request.getContextPath() %>/api/v1?action=get_bi_data&partner=all"
                             + "&gender=" + $("#gender-"+table).val()
                             + "&location=" + $("#location-"+table).val()
                             + "&crop=" + $("#crop-"+table).val()
@@ -367,11 +368,6 @@
                 $("#farmer-monitoring-table").DataTable(options);
                 $('#agent-monitoring-table').DataTable(options);
 
-                var aajax =  {ajax: { url: getAjaxUrl("activity-table") } };
-                var acolumns = {columns: [ { "data": "indicator" }, { "data": "farmers" } ] };
-                var aopts = $.extend({}, options, aajax, acolumns);
-                var activityTable = $('#activity-table').DataTable(aopts);
-
                 var oajax =  {ajax:{ url: getAjaxUrl("output-table")  }};
                 var ocolumns = {columns: [ { "data": "indicator" }, { "data": "farmers" }, { "data": "area" } ]};
                 var oopts = $.extend({}, options, oajax, ocolumns);
@@ -381,9 +377,13 @@
                 $("#location-output-table").change(function() { outputTable.ajax.url(getAjaxUrl("output-table")).load(); });
                 $("#crop-output-table").change(function() { outputTable.ajax.url(getAjaxUrl("output-table")).load(); });
 
-                $("#gender-activity-table").change(function() { activityTable.ajax.url(getAjaxUrl("activity-table")).load(); });
-                $("#location-activity-table").change(function() { activityTable.ajax.url(getAjaxUrl("activity-table")).load(); });
-                $("#crop-activity-table").change(function() { activityTable.ajax.url(getAjaxUrl("activity-table")).load(); });
+                //var aajax =  {ajax: { url: getAjaxUrl("activity-table") } };
+                //var acolumns = {columns: [ { "data": "indicator" }, { "data": "farmers" } ] };
+                //var aopts = $.extend({}, options, aajax, acolumns);
+                //var activityTable = $('#activity-table').DataTable(aopts);
+                //$("#gender-activity-table").change(function() { activityTable.ajax.url(getAjaxUrl("activity-table")).load(); });
+                //$("#location-activity-table").change(function() { activityTable.ajax.url(getAjaxUrl("activity-table")).load(); });
+                //$("#crop-activity-table").change(function() { activityTable.ajax.url(getAjaxUrl("activity-table")).load(); });
             });
         </script>
         <!-- /Datatables -->

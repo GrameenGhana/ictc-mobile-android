@@ -402,7 +402,7 @@ public class BIDataManager extends BIUtil {
         return x;
     }
 
-    public JSONObject getBehaviourChangeInfo(String crop, String gender, String location) throws Exception {
+    public JSONObject getBehaviourChangeInfo(String crop, String gender, String location, String partner) throws Exception {
         JSONObject x = new JSONObject();
         x.put("ipt", 0); x.put("ipt_area", 0);
         x.put("is", 0); x.put("is_area", 0);
@@ -417,16 +417,23 @@ public class BIDataManager extends BIUtil {
             where += (crop.equalsIgnoreCase("all")  || crop.equalsIgnoreCase("")) ? "" : " AND crop='"+crop+"'";
             where += (gender.equalsIgnoreCase("all")  || gender.equalsIgnoreCase("")) ? "" : " AND gender='"+gender+"'";
             where += (location.equalsIgnoreCase("all")  || location.equalsIgnoreCase("")) ? "" : " AND location='"+location+"'";
+            where += (partner.equalsIgnoreCase("all")  || partner.equalsIgnoreCase("")) ? "" : " AND partner='"+partner+"'";
 
-            String sql = "SELECT 0 as ipt, 0 as ipt_area"
-						+ "    , IFNULL(SUM(seed_actual),0) as `is`, IFNULL(SUM(COALESCE(IF(seed_actual=1,acres_actual,0))),0) as is_area"
-						+ "    , 0 as cda, 0 as cda_area"
-						+ "    , IFNULL(SUM(fertilizer_actual),0) as `if`, IFNULL(SUM(COALESCE(IF(fertilizer_actual=1,acres_actual,0))),0) as if_area"
-						+ "    , IFNULL(SUM(preplanh_actual),0) as `preh`, IFNULL(SUM(COALESCE(IF(preplanh_actual=1,acres_actual,0))),0) as preh_area"
-						+ "    , IFNULL(SUM(postplanh_actual),0) as `posth`, IFNULL(SUM(COALESCE(IF(postplanh_actual=1,acres_actual,0))),0) as posth_area"
-						+ "    , IFNULL(SUM(handling_actual),0) as `pht`, IFNULL(SUM(COALESCE(IF(handling_actual=1,acres_actual,0))),0) as pht_area"
-                        + " FROM " + TABLE_FARM + " WHERE " + where;
-
+            String sql = "SELECT IFNULL(SUM(COALESCE(IF(trial>0 OR rc>0 OR inorg>0 or preph>0 or postph>0 or thresh>0,1,0))),0) as ipt " +
+                         "      , IFNULL(SUM(COALESCE(IF(trial>0 OR rc>0 OR inorg>0 or preph>0 or postph>0,acres_actual,0))),0) as ipt_area " +
+                         "      , IFNULL(SUM(COALESCE(IF(trial>0,1,0))),0) as `is` " +
+                         "      , IFNULL(SUM(COALESCE(IF(trial>0,acres_actual,0))),0) as is_area " +
+                         "      , IFNULL(SUM(COALESCE(IF(rc>0,1,0))),0) as `cda` " +
+                         "      , IFNULL(SUM(COALESCE(IF(rc>0,acres_actual,0))),0) as cda_area " +
+                         "      , IFNULL(SUM(COALESCE(IF(inorg>0,1,0))),0) as `if` " +
+                         "      , IFNULL(SUM(COALESCE(IF(inorg>0,acres_actual,0))),0) as if_area " +
+                         "      , IFNULL(SUM(COALESCE(IF(preph>0,1,0))),0) as `preh` " +
+                         "      , IFNULL(SUM(COALESCE(IF(preph>0,acres_actual,0))),0) as preh_area " +
+                         "      , IFNULL(SUM(COALESCE(IF(postph>0,1,0))),0) as `posth` " +
+                         "      , IFNULL(SUM(COALESCE(IF(postph>0,acres_actual,0))),0) as posth_area " +
+                         "      , IFNULL(SUM(COALESCE(IF(thresh>0,1,0))),0) as `pht` " +
+                         "      , IFNULL(SUM(COALESCE(IF(thresh>0,yield_actual,0))),0) as pht_area " +
+                         " FROM " + TABLE_FARM + " WHERE " + where;
             ResultSet rs = ICTCDBUtil.getInstance().runSQLSelect(sql);
             rs.next();
             x.put("ipt", rs.getString(rs.findColumn("ipt"))); x.put("ipt_area", rs.getString(rs.findColumn("ipt_area")));
@@ -643,23 +650,56 @@ public class BIDataManager extends BIUtil {
             case DATA_SET_COMMUNITY: cql = "MATCH (f:FARMER) WITH lower(replace(f.village,\",\",\"\")) as v, MIN(f.lastModifieddate) as d RETURN { community: v, lmd: d} as info"; break;
             case DATA_SET_FARMER:
                 StringBuilder sb = new StringBuilder();
-                sb.append("MATCH (f:FARMER) ");
-                sb.append("OPTIONAL MATCH (f)-[:HAS_PRODUCTION]-(pc)  ");
-                sb.append("WITH f, MAX(pc.lastModifieddate) as maxp  ");
-                sb.append("OPTIONAL MATCH (f)-[:HAS_PRODUCTION]-(p) WHERE p.lastModifieddate >= maxp  ");
-                sb.append("WITH f,p  ");
-                sb.append("OPTIONAL MATCH (f)-[:HAS_PRODUCTION_UPDATE]-(u)  ");
-                sb.append("WITH f,p,MAX(u.lastModifieddate) as maxPUpdate  ");
-                sb.append("OPTIONAL MATCH (f)-[:HAS_PRODUCTION_UPDATE]-(u) WHERE u.lastModifieddate >= maxPUpdate  ");
-                sb.append("WITH f,p,u  ");
-                sb.append("OPTIONAL MATCH (f)-[:HAS_POSTHARVEST]-(h)  ");
-                sb.append("WITH f,p,u,MAX(h.lastModifieddate) as maxPH  ");
-                sb.append("OPTIONAL MATCH (f)-[:HAS_POSTHARVEST]-(h) WHERE h.lastModifieddate >= maxPH  ");
-                sb.append("WITH f,p,u,h  ");
-                sb.append("OPTIONAL MATCH (f)-[:HAS_POSTHARVEST_UPDATE]-(z)  ");
-                sb.append("WITH f,p,u,h,MAX(z.lastModifieddate) as maxPHdate  ");
-                sb.append("OPTIONAL MATCH (f)-[:HAS_POSTHARVEST_UPDATE]-(z) WHERE z.lastModifieddate >= maxPHdate  ");
-                sb.append("WITH f,p,u,h,z  ");
+                sb.append("MATCH (fff:FARMER) ");
+                sb.append("OPTIONAL MATCH (fff)-[:HAS_PRODUCTION]-(pc)  ");
+                sb.append("WITH fff, MAX(pc.lastModifieddate) as maxp  ");
+                sb.append("OPTIONAL MATCH (ffff)-[:HAS_PRODUCTION]-(p) WHERE p.lastModifieddate >= maxp  ");
+                sb.append("WITH fff,p  ");
+                sb.append("OPTIONAL MATCH (fff)-[:HAS_PRODUCTION_UPDATE]-(u)  ");
+                sb.append("WITH fff,p,MAX(u.lastModifieddate) as maxPUpdate  ");
+                sb.append("OPTIONAL MATCH (fff)-[:HAS_PRODUCTION_UPDATE]-(u) WHERE u.lastModifieddate >= maxPUpdate  ");
+                sb.append("WITH fff,p,u, (SUM(CASE u.nameofvarietymz WHEN NULL THEN 0 ");
+				sb.append("                                          WHEN \"local variety\" THEN 0 ");
+				sb.append("                                          WHEN \"other\" THEN 0 ELSE 1 END) + ");
+				sb.append("               SUM(CASE u.nameofvarietyrice WHEN NULL THEN 0 ");
+				sb.append("                                            WHEN \"local variety\" THEN 0 ");
+				sb.append("                                            WHEN \"other\" THEN 0 ELSE 1 END) + ");
+				sb.append("               SUM(CASE u.nameofvarietysoya WHEN NULL THEN 0 ");
+				sb.append("                                            WHEN \"local variety\" THEN 0 ");
+				sb.append("                                            WHEN \"other\" THEN 0 ELSE 1 END)) as trial, ");
+				sb.append("              (SUM(CASE u.croparrangeupdate WHEN NULL THEN 0 ");
+				sb.append("                                            WHEN \"Arranged rows with specific distance between rows and also between plants\" THEN 1 ");
+				sb.append("                                            ELSE 0 END)) as rc, ");
+				sb.append("              (SUM(CASE u.methodoflandclearing WHEN NULL THEN 0 WHEN 0 THEN 0 ");
+				sb.append("                                               WHEN \"Herbicide application\" THEN 1 ");
+				sb.append("                                               WHEN \"Slashing and application of herbicide\" THEN 1 ");
+				sb.append("                                               ELSE 0 END)) as preph, ");
+				sb.append("              (SUM(CASE u.postplantherbicidefrequency WHEN NULL THEN 0 ");
+				sb.append("                                                      WHEN 0 THEN 0 ELSE 1 END)) as postph, ");
+				sb.append("              (SUM(CASE u.applicationofbasalfertilizer WHEN \"YES\" THEN 1 ");
+				sb.append("                                                       WHEN NULL THEN 0 ELSE 0 END) + ");
+				sb.append("               SUM(CASE u.applicationoftopdressfertilizer WHEN NULL THEN 0 ");
+				sb.append("                                                          WHEN \"YES\" THEN 1 ELSE 0 END)) as inorg ");
+				sb.append("MERGE (ff:FARMER {Id: fff.Id}) ON MATCH SET ff.trial = trial, ff.rc = rc, ff.pph = preph, ff.postph = postph, ff.inorg = inorg ");
+				sb.append("WITH ff,p,u ");
+                sb.append("OPTIONAL MATCH (ff)-[:HAS_POSTHARVEST]-(h)  ");
+                sb.append("WITH ff,p,u,MAX(h.lastModifieddate) as maxPH  ");
+                sb.append("OPTIONAL MATCH (ff)-[:HAS_POSTHARVEST]-(h) WHERE h.lastModifieddate >= maxPH  ");
+                sb.append("WITH ff,p,u,h  ");
+                sb.append("OPTIONAL MATCH (ff)-[:HAS_POSTHARVEST_UPDATE]-(z)  ");
+                sb.append("WITH ff,p,u,h,MAX(z.lastModifieddate) as maxPHdate  ");
+                sb.append("OPTIONAL MATCH (ff)-[:HAS_POSTHARVEST_UPDATE]-(z) WHERE z.lastModifieddate >= maxPHdate  ");
+                sb.append("WITH ff,p,u,h,z  ");
+				sb.append("    , (SUM(CASE z.processingcombinationupdate WHEN \"All by one machine at once\" THEN 1 ");
+				sb.append("                    ELSE 0 END) + ");
+				sb.append("       SUM(CASE z.threshingmethodupdate WHEN \"Answer is \\\"Motorized sheller\\\"\" THEN 1 ");
+				sb.append("                            ELSE 0 END) + ");
+				sb.append("       SUM(CASE z.shellingmethodupdate WHEN \"Answer is \\\"Motorized sheller\\\"\" THEN 1 ");
+				sb.append("                            WHEN \"combined harvester\" THEN 1 ELSE 0 END) + ");
+				sb.append("       SUM(CASE z.winnowing WHEN \"Answer is \\\"Mechanical thresher/winnower\\\"\" THEN 1 ");
+				sb.append("                            WHEN \"combined harvester\" THEN 1 ELSE 0 END)) as thresh ");
+				sb.append("MERGE (f:FARMER {Id: ff.Id}) ON MATCH SET f.thresh = thresh ");
+				sb.append("WITH f,p,u,h,z ");
                 sb.append("OPTIONAL MATCH (f)-[:HAS_BASELINE_PRODUCTION]-(pp) ");
                 sb.append("OPTIONAL MATCH (f)-[:HAS_FIELD_CROP_ASSESSMENT]-(aa) ");
                 sb.append("OPTIONAL MATCH (f)-[:HAS_FARMCREDIT_PLAN]-(fcp)  ");
@@ -671,6 +711,7 @@ public class BIDataManager extends BIUtil {
                 sb.append("RETURN { farmerId: f.Id  ");
                 sb.append("        , agent: a.Id   ");
                 sb.append("        , partner: a.agenttype   ");
+                sb.append("        , bc: collect({ trial: f.trial, rc: f.rc, preph: f.pph, postph: f.postph, inorg:f.inorg, thresh: f.thresh}) ");
                 sb.append("        , demo: collect({gender: f.gender, age:f.age, location: f.region, community: lower(replace(f.village,\",\",\"\"))  })  ");
                 sb.append("        , time: collect ({  lmd: f.lastModifieddate ");
                 sb.append("                            , season: CASE WHEN p IS NOT NULL THEN p.reference_season_current ELSE NULL END ");
@@ -767,6 +808,13 @@ public class BIDataManager extends BIUtil {
                 y.farmer_id = getJSONValue(x, "", "farmerId","");
                 y.agent_id = getJSONValue(x, "", "agent","");
                 y.partner = getJSONValue(x, "", "partner","");
+
+                y.trial = getJSONValue(x, "bc", "trial","0");
+                y.rc = getJSONValue(x, "bc", "rc","0");
+                y.preph = getJSONValue(x, "bc", "preph","0");
+                y.postph = getJSONValue(x, "bc", "postph","0");
+                y.inorg = getJSONValue(x, "bc", "inorg","0");
+                y.thresh = getJSONValue(x, "bc", "thresh","0");
 
                 y.age = getJSONValue(x, "demo", "age", "0");
                 y.gender = getJSONValue(x, "demo", "gender", "unknown");
@@ -1000,11 +1048,26 @@ public class BIDataManager extends BIUtil {
 	    public String measured;
 	    public String assessed;
 
+        // Behaviour change
+        public String trial;
+        public String rc;
+        public String preph;
+        public String postph;
+        public String inorg;
+        public String thresh;
+
 	    public String get_year() { return String.valueOf(year); }
 	    public String get_month() { return String.valueOf(month); }
 	    public String get_actual() { return String.valueOf(actual); }
 	    public String get_community() { return community; }
 	    public String get_partner() { return partner; }
+
+        public String get_trial() { return String.valueOf(trial); }
+        public String get_rc() { return String.valueOf(rc); }
+        public String get_preph() { return String.valueOf(preph); }
+        public String get_postph() { return String.valueOf(postph); }
+        public String get_inorg() { return String.valueOf(inorg); }
+        public String get_thresh() { return String.valueOf(thresh); }
 
 	    public String get_acres_planned() { return String.valueOf(acres_planned); }
 	    public String get_acres_actual() { return String.valueOf(acres_actual); }
@@ -1101,7 +1164,8 @@ public class BIDataManager extends BIUtil {
 	                + ", cash_payback_planned, cash_payback_actual, input_planned , input_actual , input_payback_planned, input_payback_actual"
 	                + ", seed_planned, seed_actual, fertilizer_planned, fertilizer_actual, preplanh_planned, preplanh_actual"
 	                + ", postplanh_planned, postplanh_actual, plough_planned, plough_actual, handling_planned, handling_actual"
-	                + ", transport_planned, transport_actual, storage_planned, storage_actual";
+	                + ", transport_planned, transport_actual, storage_planned, storage_actual"
+                    + ", trial, rc, preph, postph, inorg, thresh";
 
 	        String fields = common;
 
