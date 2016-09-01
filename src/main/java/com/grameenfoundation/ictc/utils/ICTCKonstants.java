@@ -67,6 +67,7 @@ public class ICTCKonstants {
       public static final String MEETING_SETTING="meeting_setting";
       public static final String MEETING_ACTIVITY ="meeting_activity";
       public static final String MOBILE_TRACKER ="mobile_tracker";
+      public static final String MOFA_USER ="mobile_tracker";
       
     //n
     public static final String NAME ="name";

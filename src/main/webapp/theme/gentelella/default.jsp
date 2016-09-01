@@ -83,6 +83,13 @@
                                 </ul>
                             </li>
                             <% } %>
+                            <% if(user.getUserType().equalsIgnoreCase(ICTCKonstants.ACDIVOCA_OB)) { %>
+                             <li><a><i class="fa fa-user"></i>OutGrower Owner <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="<%= request.getContextPath()%>/v2/dashboards/obo.jsp">OB Dashboard </a></li>
+                                </ul>
+                            </li>
+                            <% } %>
                             <% if(user.getUserType().equalsIgnoreCase(ICTCKonstants.GRAMEEN_ADMIN)|| user.getUserType().equals(ICTCKonstants.GRAMEEN_USER) ) {%>
                             <li><a><i class="fa fa-bar-chart-o"></i> Reports <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
