@@ -569,6 +569,7 @@ public class BIDataManager extends BIUtil {
             ex.printStackTrace();
         }
 
+        System.out.println(response.toString());
         return response;
     }
 

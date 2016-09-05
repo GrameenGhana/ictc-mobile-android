@@ -15,6 +15,7 @@ import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
 
+import java.util.HashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -26,7 +27,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class ICTCServletListener implements ServletContextListener {
 
-    private ScheduledExecutorService scheduler;
+    private ScheduledExecutorService queueScheduler;
+    private ScheduledExecutorService biUpdaterScheduler;
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -68,16 +70,27 @@ public class ICTCServletListener implements ServletContextListener {
         System.out.println("-----------------------------MySQL Database Initialized-------------------------------------");
 
         System.out.println("-----------------------------Starting Queue Listener-------------------------------------");
-        scheduler = Executors.newSingleThreadScheduledExecutor();
+        queueScheduler = Executors.newSingleThreadScheduledExecutor();
         Runnable ob =  (new Runnable() {
                              @Override
                              public void run() {
                                 deQueue();
                              }
                         });
-        scheduler.scheduleAtFixedRate(ob, 10, 60, TimeUnit.SECONDS);
+        queueScheduler.scheduleAtFixedRate(ob, 10, 60, TimeUnit.SECONDS);
         System.out.println("-----------------------------Queue Listener Started-------------------------------------");
-        
+
+
+        System.out.println("-----------------------------Starting BI table Updater-------------------------------------");
+        biUpdaterScheduler = Executors.newSingleThreadScheduledExecutor();
+        Runnable o =  (new Runnable() {
+            @Override
+            public void run() {
+                updateBITables();
+            }
+        });
+        biUpdaterScheduler.scheduleAtFixedRate(o, 10, 86400, TimeUnit.SECONDS);
+        System.out.println("-----------------------------BI table Updater Started-------------------------------------");
     }
 
     public void deQueue() {
@@ -100,16 +113,24 @@ public class ICTCServletListener implements ServletContextListener {
         }
     }
 
+    public void updateBITables() {
+        try {
+            BIDataManager.getInstance("all").update();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         try {
-          scheduler.shutdownNow();
+          queueScheduler.shutdownNow();
+          biUpdaterScheduler.shutdownNow();
           ICTCDBUtil.getInstance().closeMysqlConnection();
           ICTCDBUtil.getInstance().shutdown(ICTCDBUtil.getInstance().getGraphDB());
         } catch (Exception e) {
           e.printStackTrace();
           ICTCDBUtil.getInstance().shutdown(ICTCDBUtil.getInstance().getGraphDB());
         }
-        System.out.println("-------------listener done-------------------");
     }
 }
