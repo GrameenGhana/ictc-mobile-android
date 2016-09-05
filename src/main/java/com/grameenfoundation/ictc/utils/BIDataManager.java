@@ -51,6 +51,7 @@ public class BIDataManager extends BIUtil {
             ResultSet rs = ICTCDBUtil.getInstance().runSQLSelect(sql);
             rs.next();
             total =  rs.getString(rs.findColumn("total"));
+            System.out.println("Total " + total);
         } catch (Exception e) {
             throw(e);
         }
@@ -477,7 +478,8 @@ public class BIDataManager extends BIUtil {
     }
 
     public List<String> getCrops() {
-        String cql = "MATCH (f:FARMER) MATCH (f)-[:HAS_PRODUCTION]-(p) RETURN DISTINCT p.crop_to_cultivate_current AS c ORDER BY c";
+       // String cql = "MATCH (f:FARMER) MATCH (f)-[:HAS_PRODUCTION]-(p) RETURN DISTINCT p.crop_to_cultivate_current AS c ORDER BY c";
+        String cql = "MATCH (f:FARMER)  RETURN DISTINCT f.majorcrop AS c ORDER BY c";
         List<String> crops = new ArrayList<>();
 
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
