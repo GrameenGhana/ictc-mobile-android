@@ -79,17 +79,20 @@ public class ICTCServletListener implements ServletContextListener {
                         });
         queueScheduler.scheduleAtFixedRate(ob, 10, 60, TimeUnit.SECONDS);
         System.out.println("-----------------------------Queue Listener Started-------------------------------------");
-
+    
+        
+        
 
         System.out.println("-----------------------------Starting BI table Updater-------------------------------------");
         biUpdaterScheduler = Executors.newSingleThreadScheduledExecutor();
         Runnable o =  (new Runnable() {
             @Override
             public void run() {
-                updateBITables();
+               updateBITables();
             }
         });
         biUpdaterScheduler.scheduleAtFixedRate(o, 10, 86400, TimeUnit.SECONDS);
+        
         System.out.println("-----------------------------BI table Updater Started-------------------------------------");
     }
 

@@ -557,9 +557,12 @@ public class BIDataManager extends BIUtil {
 
         try {
             if (data_set.equals("all")) {
+                System.out.println("doing the update");
+               
                 response.put(DATA_SET_AGENT, ((updateTables(DATA_SET_AGENT) ? OK : FAILED)));
                 response.put(DATA_SET_COMMUNITY, ((updateTables(DATA_SET_COMMUNITY) ? OK : FAILED)));
                 response.put(DATA_SET_FARMER, ((updateTables(DATA_SET_FARMER) ? OK : FAILED)));
+                
             } else {
                 response.put(data_set, ((updateTables(data_set) ? OK : FAILED)));
             }
@@ -576,8 +579,10 @@ public class BIDataManager extends BIUtil {
     private boolean updateTables(String data_set) {
 
         try {
-            String cql = getCQL(data_set);
-
+            
+           String cql = getCQL(data_set);
+           
+           // System.out.println("Data set " + data_set + " -------" + cql);
             if (cql.equals("")) {
                 System.out.println("Error pulling data from Neo4j: invalid data set name: " + data_set);
                 return false;
@@ -587,30 +592,40 @@ public class BIDataManager extends BIUtil {
                 HashMap<String, SQLRowObj> agents = new HashMap<>();
                 HashMap<String, SQLRowObj> communities = new HashMap<>();
                 HashMap<String, SQLRowObj> farms = new HashMap<>();
-
+              
                 try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+                    System.out.println("Before cypher Farmer Execution");
                     Result result = Neo4jServices.executeCypherQuery(cql);
+                   
                     ResourceIterator ri = result.columnAs("info");
-
+                   
                     int count = 0;
                     while (ri.hasNext()) {
 
                         if (data_set.equals(DATA_SET_AGENT)) {
+                             System.out.println("In agent data set ");
                             SQLRowObj objAgents = getSQLRowObj(DATA_SET_AGENT, ri.next(), count);
+                           
                             if (objAgents != null)
                                 agents = updateHashMap(agents, objAgents.id(TABLE_AGENT), objAgents);
 
                         } else if (data_set.equals(DATA_SET_COMMUNITY)) {
+                             System.out.println("In Community data set ");
                             SQLRowObj objComms = getSQLRowObj(DATA_SET_COMMUNITY, ri.next(), count);
+                            
                             if (objComms != null)
                                 communities = updateHashMap(communities, objComms.id(TABLE_COMMUNITY), objComms);
 
                         } else if (data_set.equals(DATA_SET_FARMER)) {
+                           //if (true) {
+                            System.out.println("In Farmer data set ");
                             Object row = ri.next();
+                            System.out.println("getting row  data" + row.toString());
                             SQLRowObj objFarmer = getSQLRowObj(DATA_SET_FARMER, row, count);
                             if (objFarmer != null)
                                 farmers = updateHashMap(farmers, objFarmer.id(TABLE_FARMER),  objFarmer);
 
+                            System.out.println("farmer size " + farmers.size());
                             count++;
                             SQLRowObj objFarms = getSQLRowObj(DATA_SET_FARM, row, count);
                             if (objFarms != null)
@@ -620,12 +635,13 @@ public class BIDataManager extends BIUtil {
                     }
                     trx.success();
                 } catch (Exception e) {
-                    System.out.println("Error pulling data from Neo4j: " + e.getMessage());
+                    System.out.println("Error pulling data from Neo4j: " + e.getMessage() + " " + e.getLocalizedMessage());
                     e.printStackTrace();
                 }
 
                 // Insert data into MySQL
                 if (data_set.equals(DATA_SET_FARMER)) {
+                    System.out.println("inserting into farmer table");
                     runUpdates(TABLE_FARMER, farmers);
                     runUpdates(TABLE_FARM, farms);
                 } else if (data_set.equals(DATA_SET_AGENT)) {
@@ -652,11 +668,12 @@ public class BIDataManager extends BIUtil {
             case DATA_SET_AGENT: cql = "MATCH (a:AGENT) return { code: a.agentcode, partner: a.agenttype, lmd: a.lastModifieddate} as info"; break;
             case DATA_SET_COMMUNITY: cql = "MATCH (f:FARMER) WITH lower(replace(f.village,\",\",\"\")) as v, MIN(f.lastModifieddate) as d RETURN { community: v, lmd: d} as info"; break;
             case DATA_SET_FARMER:
+                System.out.println("getting farmer data");
                 StringBuilder sb = new StringBuilder();
                 sb.append("MATCH (fff:FARMER) ");
                 sb.append("OPTIONAL MATCH (fff)-[:HAS_PRODUCTION]-(pc)  ");
                 sb.append("WITH fff, MAX(pc.lastModifieddate) as maxp  ");
-                sb.append("OPTIONAL MATCH (ffff)-[:HAS_PRODUCTION]-(p) WHERE p.lastModifieddate >= maxp  ");
+                sb.append("OPTIONAL MATCH (fff)-[:HAS_PRODUCTION]-(p) WHERE p.lastModifieddate >= maxp  ");
                 sb.append("WITH fff,p  ");
                 sb.append("OPTIONAL MATCH (fff)-[:HAS_PRODUCTION_UPDATE]-(u)  ");
                 sb.append("WITH fff,p,MAX(u.lastModifieddate) as maxPUpdate  ");
@@ -983,8 +1000,11 @@ public class BIDataManager extends BIUtil {
                 }
             }
         } catch (SQLException e) {
-            throw(e);
+           
+            e.printStackTrace();
+             throw(e);
         } catch (Exception e) {
+            e.printStackTrace();
             throw(e);
         }
     }

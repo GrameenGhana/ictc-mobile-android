@@ -34,8 +34,8 @@ public class ICTCDBUtil {
     private final static String MYSQL_PORT = "3306";
     private final static String MYSQL_HOST = "localhost";
     private final static String MYSQL_USER = "root";
-   // private final static String MYSQL_PASS = "password";
-    private final static String MYSQL_PASS = "spomega";
+    private final static String MYSQL_PASS = "password";
+   /// private final static String MYSQL_PASS = "spomega";
     private final static String MYSQL_DSN = "jdbc:mysql://"+MYSQL_HOST+":"+MYSQL_PORT+"/"+MYSQL_DB;
     private static Connection connection = null;
 
