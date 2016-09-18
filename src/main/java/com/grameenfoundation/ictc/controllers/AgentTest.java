@@ -144,7 +144,7 @@ public class AgentTest extends HttpServlet {
                         biodataNode.setProperty(Biodata.LAST_MODIFIED,new Date().getTime());
                         biodataNode.setProperty(Agent.PASSWORD,"test1234");
                         biodataNode.setProperty(Agent.AGENTCODE,"AG"+now.toString().substring(2));
-                        biodataNode.setProperty(Agent.AGENTTYPE,"ACDIVOCA");
+                        biodataNode.setProperty(Agent.AGENTTYPE,"CSFCIRF");
                         
                        AgentParent= ParentNode.AgentParentNode();
                        AgentParent.createRelationshipTo(biodataNode, ICTCRelationshipTypes.AGENT);
@@ -154,15 +154,15 @@ public class AgentTest extends HttpServlet {
                         log.log(Level.INFO, "new node created {0}", new Agent(biodataNode).getAgentId() + " ");
                         
                          
-                       
-                       
+                           System.out.println("Sending Ack");
+                        out.println(sendAck());
                        
                            
                        }
                     
                      
                   }
-                  out.println(sendAck());
+                  //out.println(sendAck());
                   tx.success();
             }
            finally

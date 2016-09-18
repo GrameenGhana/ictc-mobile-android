@@ -13,6 +13,7 @@ import com.grameenfoundation.ictc.models.FarmerInputModel;
 import com.grameenfoundation.ictc.models.MeetingModel;
 import com.grameenfoundation.ictc.models.MobileTrackerModel;
 import com.grameenfoundation.ictc.utils.HTTPCommunicator;
+import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.wrapper.BiodataWrapper;
 import com.grameenfoundation.ictc.wrapper.FarmGPSLocationWrapper;
 import com.grameenfoundation.ictc.wrapper.FarmManagementWrapper;
@@ -34,6 +35,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.neo4j.graphdb.Transaction;
 
 /**
  *
@@ -202,7 +204,8 @@ public class TrackerController extends HttpServlet {
                         }
                     } else if (mobileTracker.getPage().equalsIgnoreCase("Farm Map Input")) 
                         {
-                        
+                         try(Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx())
+                       {
                         if (data.contains("perimeter")) {
                             System.out.println("TrackerLog farm mapping");
 
@@ -236,7 +239,9 @@ public class TrackerController extends HttpServlet {
                                 gpsModel.create(new FarmGPSLocationWrapper(cord.getString("x"), cord.getString("y"), farmerId));
                             }
                         }
+                        trx.success();
                     }
+                        }
                 }
 
                 boolean tkr = trackerModel.create(mobileTracker);

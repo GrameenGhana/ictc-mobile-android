@@ -88,7 +88,7 @@ public class ICTCServletListener implements ServletContextListener {
         Runnable o =  (new Runnable() {
             @Override
             public void run() {
-               updateBITables();
+              updateBITables();
             }
         });
         biUpdaterScheduler.scheduleAtFixedRate(o, 10, 86400, TimeUnit.SECONDS);

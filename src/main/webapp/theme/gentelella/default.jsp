@@ -116,7 +116,7 @@
                              <% if(user.getUserType().equalsIgnoreCase(ICTCKonstants.ACDIVOCA_USER)) {%>
                              <li><a><i class="fa fa-users"></i> People <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="<%= request.getContextPath()%>/v2/agents/acdivoca_agent.jsp">Agents</a></li>
+                                    <li><a href="<%= request.getContextPath()%>/v2/agent/acdivoca_agent.jsp">Agents</a></li>
                                    <!-- <li><a href="<%= request.getContextPath()%>/v2/farmers/index.jsp">Farmers</a></li>-->
                                 </ul>
                             </li>

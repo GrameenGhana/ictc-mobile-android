@@ -81,7 +81,7 @@ public class AgentController extends HttpServlet {
                 String userId = null;
               
 
-                AgentWrapper agentWrapper = new AgentWrapper();
+              AgentWrapper agentWrapper = new AgentWrapper();
 
              agentWrapper.setAgentcode(agentcode);
              agentWrapper.setAgenttype(agenttype);
