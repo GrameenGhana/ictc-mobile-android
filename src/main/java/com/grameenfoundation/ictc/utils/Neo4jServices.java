@@ -575,6 +575,7 @@ public class Neo4jServices {
         db = ICTCDBUtil.getInstance().getGraphDB();
 
         try (Transaction tx = db.beginTx()) {
+            //Neo4j 1.1.* implemention commented out
 //           ExecutionEngine engine = new ExecutionEngine(
 //           ICTCDBUtil.getInstance().getGraphDB(), StringLogger.SYSTEM);
 //           result = engine.execute(q);
@@ -601,6 +602,8 @@ public class Neo4jServices {
        
         // let's execute a query now
         try (Transaction tx = db.beginTx()) {
+            
+              //Neo4j 1.1.* implemention commented out
 //            ExecutionEngine engine = new ExecutionEngine(
 //                    ICTCDBUtil.getInstance().getGraphDB(), StringLogger.SYSTEM);
 //            result = engine.execute(q);

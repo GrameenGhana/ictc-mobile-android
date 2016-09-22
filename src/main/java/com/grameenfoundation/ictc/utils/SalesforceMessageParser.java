@@ -418,9 +418,10 @@ public class SalesforceMessageParser {
 
             log.log(Level.INFO, "new node created {0}", postHarvestUpdateNode.getId());
 
-            PostHarvest2 p = ph.getPostHarvest("Id", farmerID);
-            ph.PostHarvestToUpdate(p, postHarvestUpdateNode);
-
+//            PostHarvest2 p = ph.getPostHarvest("Id", farmerID);
+//            ph.PostHarvestToUpdate(p, postHarvestUpdateNode);
+              Biodata b = biodataModel.getBiodata("Id", farmerID);
+                         b.setPostHarvestUpdate(postHarvestUpdateNode);
             if (modified(biodataModel, farmerID)) {
                 System.out.println("Last modified done");
             }
@@ -641,9 +642,10 @@ public class SalesforceMessageParser {
         FMPPBUNode.setProperty(FmpProductionBudgetUpdate.LAST_MODIFIED, new Date().getTime());
 
         log.log(Level.INFO, "new node created {0}", FMPPBUNode.getId());
-        FmpProductionBudget p = fmp.getFmpProductionBudget("Id", farmerID);
-        System.out.println("updated" + fmp.FmpProductionBudgetToUpdate(p, FMPPBUNode));
-
+//        FmpProductionBudget p = fmp.getFmpProductionBudget("Id", farmerID);
+//        System.out.println("updated" + fmp.FmpProductionBudgetToUpdate(p, FMPPBUNode));
+          Biodata b = biodataModel.getBiodata("Id", farmerID);           
+         b.setProductionBudgetUpdate(FMPPBUNode);
         if (modified(biodataModel, farmerID))
             System.out.println("Last modified done");
 
@@ -687,9 +689,11 @@ public class SalesforceMessageParser {
 
         log.log(Level.INFO, "new node created {0}", FMPPHBUNode.getId());
 
-        FmpPostHarvestBudget p = fmp.getFmpPostHarvestBudget("Id", farmerID);
+        //FmpPostHarvestBudget p = fmp.getFmpPostHarvestBudget("Id", farmerID);
 
-        System.out.println("updated" + fmp.FmpPostHarvestBudgetToUpdate(p, FMPPHBUNode));
+        //System.out.println("updated" + fmp.FmpPostHarvestBudgetToUpdate(p, FMPPHBUNode));
+          Biodata b = biodataModel.getBiodata("Id", farmerID);
+         b.setPostHarvestBudgetUpdate(FMPPHBUNode);
 
         if (modified(biodataModel, farmerID))
             System.out.println("Last modified done");

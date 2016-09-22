@@ -157,6 +157,7 @@ public class APIController extends HttpServlet {
                 params.put("crop", request.getParameter("crop"));
                 params.put("partner", request.getParameter("partner"));
                 jSONObject = getDataSet(i, params);
+                System.out.println("bi_data " + jSONObject);
                 out.print(jSONObject);
 
             } else {

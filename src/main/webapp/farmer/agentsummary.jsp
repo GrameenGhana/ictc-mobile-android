@@ -41,6 +41,7 @@
                 <th>Baseline Post Harvest Budget</th>
                 <th>FMP Production</th>
                 <th>FMP Post Harvest</th>
+                <th>Crop Assessment</th>
                 
                 
               
@@ -60,7 +61,7 @@
                 <td><%= biodataModel.getFarmerBaselinePostHarvestBudgetCountByAgent(a.getAgentId()) %></td>
                 <td><%= biodataModel.getFarmerFMPProductionCountByAgent(a.getAgentId()) %></td>
                 <td><%= biodataModel.getFarmerFMPPostHarvestCountByAgent(a.getAgentId()) %></td>
-                
+                <td><%= biodataModel.getFarmerCropAssessment(a.getAgentId()) %></td>
             </tr>
             <% }
             

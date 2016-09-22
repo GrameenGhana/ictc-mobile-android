@@ -1,3 +1,7 @@
+
+<%@page import="com.grameenfoundation.ictc.models.BiodataModel"%>
+<%@page import="org.json.JSONObject"%>
+<%@page import="com.grameenfoundation.ictc.utils.TempReport"%>
 <%@page import="java.util.List" %>
 <%@page import="com.grameenfoundation.ictc.utils.BIDashboard" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -5,6 +9,10 @@
     BIDashboard data = new BIDashboard("acdivoca");
     List<String> crops = data.getCrops();
     List<String> locations = data.getLocations();
+    JSONObject  x = data.getACDIVOCADATA();
+    TempReport temp = new TempReport();
+    BiodataModel bio = new BiodataModel();
+   
 %>
 <!DOCTYPE html>
 <html>
@@ -41,7 +49,7 @@
                             <h2>Output Indicators <small></small></h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li>
-                                <form id="output-form" class="form-inline" method="get">
+                               <!-- <form id="output-form" class="form-inline" method="get">
                                     <div class="form-group">
                                         <select id="gender-output-table" class="form-control">
                                             <option value="all">Gender: All</option>
@@ -65,7 +73,7 @@
                                             <% } %>
                                         </select>
                                     </div>
-                                </form>
+                                </form>-->
                                 </li>
                             </ul>
                             <div class="clearfix"></div>
@@ -81,6 +89,41 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                     <tr>
+                                        <td>Using improved practices and technologies</td>
+                                        <td><%= TempReport.getImprovedTechnologies() %></td>
+                                        <td><%= x.getString("ipt_area")%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Using improved seed</td>
+                                        <td><%= TempReport.getImprovedSeedACDIVOCA()%></td>
+                                        <td><%= x.getString("is_area")%></td>
+                                    </tr>
+                                      <tr>
+                                        <td>Using recommended crop density and arrangement</td>
+                                        <td><%= TempReport.getCropDensityACDIVOCA()   %></td>
+                                        <td><%= x.getString("cda_area")%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Using pre-plant herbicide</td>
+                                        <td><%= TempReport.getPrePlantHerbiceideACDIVOCA()%></td>
+                                        <td><%= x.getString("preh_area")%></td>
+                                    </tr>
+                                     <tr>
+                                        <td>Using post-plant herbicide</td>
+                                        <td><%= TempReport.getPostPlantHerbiceideACDIVOCA() %></td>
+                                        <td><%= x.getString("posth_area")%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Using inorganic fertilizer</td>
+                                        <td><%= TempReport.getOrganicFertilizerACDIVOCA()  %></td>
+                                        <td><%= x.getString("if_area")%></td>
+                                    </tr>
+                                     <tr>
+                                        <td>Using post-harvest thresher</td>
+                                        <td><%= TempReport.getPostHarvestThresherACDIVOCA() %></td>
+                                        <td><%= x.getString("pht_area")%></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -105,28 +148,62 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Farmers Registered (% of target)</td>
-                                    <td><%= data.getFarmerRegistrationTotalForACDI() %> / <%= data.getFarmerRegistrationTargetForACDI() %> (<%= data.getFarmerRegistrationProgressForACDI()%>%)</td>
+                                    <td>Number of farmers with access to Agent (registered)(% of target)</td>
+                                    <!--<td><%= data.getFarmerRegistrationTotalForACDI() %> / <%= data.getFarmerRegistrationTargetForACDI() %> (<%= data.getFarmerRegistrationProgressForACDI()%>%)</td>-->
+                                    <td><%= bio.getACDIVOCAFarmerCount()%> / <%= data.getFarmerRegistrationTargetForACDI() %> (<%= temp.getFarmerRegistrationProgressForACDI()  %>%)</td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance (Production, Post-harvest, Credit)</td>
-                                    <td><%= data.getFarmerPPTotalForACDI() %> (<%= data.getFarmerPPProgressForACDI() %>%)</td>
+                                    <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance Production</td>
+                                   <!-- <td><%= data.getFarmerPPTotalForACDI() %> (<%= data.getFarmerPPProgressForACDI() %>%)</td>-->
+                                    <td><%= bio.getACDIVOCABaselineProductionCount() %> (<%= temp.getFarmerPPProgressForACDI() %>%)</td> 
                                 </tr>
                                 <tr>
-                                    <td style="width: 20%">Number of farmers (% of target) taken through FMP (Production, Post-harvest, Credit)</td>
-                                    <td><%= data.getFarmerFMPTotalForACDI() %> (<%= data.getFarmerFMPProgressForACDI() %>%)</td>
+                                    <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance PostHarvest</td>
+                                   <!-- <td><%= data.getFarmerPPTotalForACDI() %> (<%= data.getFarmerPPProgressForACDI() %>%)</td>-->
+                                    <td><%= bio.getACDIVOCABaselinePostHarvestCount() %> (<%= temp.getFarmerPHProgressForACDI() %>%)</td> 
                                 </tr>
                                 <tr>
-                                    <td style="width: 20%">Number of farmers (% of target) taken through FMP Update (Production, Harvest, Post-harvest, Marketing, Credit)</td>
-                                    <td><%= data.getFarmerFMPUpdateTotalForACDI() %> (<%= data.getFarmerFMPUpdateProgressForACDI() %>%)</td>
+                                    <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance Credit</td>
+                                   <!-- <td><%= data.getFarmerPPTotalForACDI() %> (<%= data.getFarmerPPProgressForACDI() %>%)</td>-->
+                                    <td><%= bio.getACDIVOCABaselinePostHarvestCount() %> (<%= temp.getFarmerPHProgressForACDI() %>%)</td> 
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Number of farmers (% of target)  coached to produce Farm Management Plan on Production</td>
+                                    <!--<td><%= data.getFarmerFMPTotalForACDI() %> (<%= data.getFarmerFMPProgressForACDI() %>%)</td>-->
+                                     <td><%= bio.getACDIVOCAFMPProductionCount() %> (<%= temp.getFarmerFMPPProgressForACDI() %>%)</td>
+                                </tr>
+                                 <tr>
+                                    <td style="width: 20%">Number of farmers (% of target)  coached to produce Farm Management Plan on PostHarvest</td>
+                                    <!--<td><%= data.getFarmerFMPTotalForACDI() %> (<%= data.getFarmerFMPProgressForACDI() %>%)</td>-->
+                                     <td><%= bio.getACDIVOCAFMPPostHarvestCount() %> (<%= temp.getFarmerFMPPHProgressForACDI() %>%)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Number of farmers (% of target)  coached to produce Farm Management Plan on Credit</td>
+                                    <!--<td><%= data.getFarmerFMPTotalForACDI() %> (<%= data.getFarmerFMPProgressForACDI() %>%)</td>-->
+                                     <td><%= bio.getACDIVOCAFFarmCreditPlanCount() %> (<%= temp.getFarmerFCPPHProgressForACDI() %>%)</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farms (% of target) measured</td>
-                                    <td><%= data.getFarmerFarmsMeasuredTotalForACDI() %> (<%= data.getFarmerFarmsMeasuredProgressForACDI() %>%)</td>
+                                   <!-- <td><%= bio.getACDIVOCAFFMPProductionUpdateCount()%> (<%= data.getFarmerFarmsMeasuredProgressForACDI() %>%)</td>-->
+                                    <td><%= bio.getACDIVOCAFFMPProductionUpdateCount() %> (<%= temp.getFarmerPUProgressForACDI() %>%)</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farms (% of target) assessed</td>
-                                    <td><%= data.getFarmerFarmsAssessedTotalForACDI() %> (<%= data.getFarmerFarmsAssessedProgressForACDI() %>%)</td>
+                                    <!--<td><%= data.getFarmerFarmsAssessedTotalForACDI() %> (<%= data.getFarmerFarmsAssessedProgressForACDI() %>%)</td>-->
+                                    <td><%= bio.getACDIVOCAFCPCount() %> (<%= temp.getFarmerFCAProgressForACDI()  %>%)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Number of farmers (% of target) taken through FMP Update Production</td>
+                                   <!--<td><%= data.getFarmerFMPUpdateTotalForACDI() %> (<%= data.getFarmerFMPUpdateProgressForACDI() %>%)</td>-->
+                                     <td><%= bio.getACDIVOCAFFMPProductionUpdateCount() %> (<%= temp.getFarmerPUProgressForACDI() %>%)</td>
+                                </tr>
+                                <tr>
+                                   <td style="width: 20%">Number of farmers (% of target) taken through FMP Update Post Harvest</td>
+                                    <td><%= bio.getACDIVOCAPostHarvestUpdateCount() %> (<%= temp.getFarmerPHUProgressForACDI() %>%)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Number of farmers (% of target) taken through FMP Update Post Harvest</td>
+                                    <td><%= bio.getACDIVOCAFarmCreditUpdateCount() %> (<%= temp.getFarmerFCUProgressForACDI() %>%)</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -151,7 +228,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
+                            <!--<tr>
                                 <td>Agents Registered (% of target)</td>
                                 <td><%= data.getAgentRegistrationTotalForACDI() %> / <%= data.getAgentRegistrationTargetForACDI() %> (<%= data.getAgentRegistrationProgressForACDI()%>%)</td>
                             </tr>
@@ -174,7 +251,65 @@
                             <tr>
                                 <td style="width: 20%">Number of agents (% of target) who have assessed more than 50 farms</td>
                                 <td><%= data.getAgentFarmsAssessedTotalForACDI() %> (<%= data.getAgentFarmsAssessedProgressForACDI() %>%)</td>
-                            </tr>
+                            </tr>-->
+                              <tr>
+                                    <td>Number of farmers with access to Agent (registered)(% of target)</td>
+                                    <!--<td><%= data.getFarmerRegistrationTotalForACDI() %> / <%= data.getFarmerRegistrationTargetForACDI() %> (<%= data.getFarmerRegistrationProgressForACDI()%>%)</td>-->
+                                    <td><%= bio.getACDIVOCAFarmerCount()%> / <%= data.getFarmerRegistrationTargetForACDI() %> (<%= temp.getFarmerRegistrationProgressForACDI()  %>%)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Number of farmers(% of target) taken through Previous performance (Production) by Agent </td>
+                                   <!-- <td><%= data.getFarmerPPTotalForACDI() %> (<%= data.getFarmerPPProgressForACDI() %>%)</td>-->
+                                    <td><%= bio.getACDIVOCABaselineProductionCount() %> (<%= temp.getFarmerPPProgressForACDI() %>%)</td> 
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Number of farmers (% of target) taken through Previous performance (Post-harvest) by Agent</td>
+                                   <!-- <td><%= data.getFarmerPPTotalForACDI() %> (<%= data.getFarmerPPProgressForACDI() %>%)</td>-->
+                                    <td><%= bio.getACDIVOCABaselinePostHarvestCount() %> (<%= temp.getFarmerPHProgressForACDI() %>%)</td> 
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Number of farmers (% of target) taken through Previous performance (Credit) by Agent</td>
+                                   <!-- <td><%= data.getFarmerPPTotalForACDI() %> (<%= data.getFarmerPPProgressForACDI() %>%)</td>-->
+                                    <td><%= bio.getACDIVOCABaselinePostHarvestCount() %> (<%= temp.getFarmerPHProgressForACDI() %>%)</td> 
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Number of farmers (% of target) coached to produce Farm Management Plan on Production by Agent</td>
+                                    <!--<td><%= data.getFarmerFMPTotalForACDI() %> (<%= data.getFarmerFMPProgressForACDI() %>%)</td>-->
+                                     <td><%= bio.getFMPProductionCount() %> (<%= temp.getFarmerFMPPProgressForACDI() %>%)</td>
+                                </tr>
+                                 <tr>
+                                    <td style="width: 20%">Number of farmers (% of target) coached to produce Farm Management Plan on Post-harvest by Agent</td>
+                                    <!--<td><%= data.getFarmerFMPTotalForACDI() %> (<%= data.getFarmerFMPProgressForACDI() %>%)</td>-->
+                                     <td><%= bio.getACDIVOCAFMPPostHarvestCount() %> (<%= temp.getFarmerFMPPProgressForACDI() %>%)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Number of farmers (% of target) coached to produce Farm Management Plan on Farm Credit by Agent</td>
+                                    <!--<td><%= data.getFarmerFMPTotalForACDI() %> (<%= data.getFarmerFMPProgressForACDI() %>%)</td>-->
+                                     <td><%= bio.getACDIVOCAFFarmCreditPlanCount() %> (<%= temp.getFarmerFMPPProgressForACDI() %>%)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Number of farms (% of target) measured by Agent</td>
+                                   <!-- <td><%= bio.getACDIVOCAFFMPProductionUpdateCount()%> (<%= data.getFarmerFarmsMeasuredProgressForACDI() %>%)</td>-->
+                                    <td><%= bio.getACDIVOCAFFMPProductionUpdateCount() %> (<%= temp.getFarmerPUProgressForACDI() %>%)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Number of farms (% of target) assessed by Agent</td>
+                                    <!--<td><%= data.getFarmerFarmsAssessedTotalForACDI() %> (<%= data.getFarmerFarmsAssessedProgressForACDI() %>%)</td>-->
+                                    <td><%= bio.getACDIVOCAFCPCount() %> (<%= temp.getFarmerFCAProgressForACDI()  %>%)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Number of Updated records(% of target) [FMP production] by Agent</td>
+                                   <!--<td><%= data.getFarmerFMPUpdateTotalForACDI() %> (<%= data.getFarmerFMPUpdateProgressForACDI() %>%)</td>-->
+                                     <td><%= bio.getACDIVOCAFFMPProductionUpdateCount() %> (<%= temp.getFarmerPUProgressForACDI() %>%)</td>
+                                </tr>
+                                <tr>
+                                   <td style="width: 20%">Number of Updated records (% of target) [FMP Post-harvest / Marketing,] by Agent</td>
+                                    <td><%= bio.getACDIVOCAPostHarvestUpdateCount() %> (<%= temp.getFarmerPHUProgressForACDI() %>%)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Number of Updated records (% of target) [Credit] by Agent</td>
+                                    <td><%= bio.getACDIVOCAFarmCreditUpdateCount() %> (<%= temp.getFarmerFCUProgressForACDI() %>%)</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -205,13 +340,13 @@
         <!-- Datatables -->
         <script>
             $(document).ready(function() {
-                var getAjaxUrl = function(table) {
+              /**  var getAjaxUrl = function(table) {
                     return  "<%= request.getContextPath() %>/api/v1?action=get_bi_data&partner=ACDIVOCA"
                             + "&gender=" + $("#gender-"+table).val()
                             + "&location=" + $("#location-"+table).val()
                             + "&crop=" + $("#crop-"+table).val()
                             + "&data_set=gf-get-" + table;
-                }
+                }**/
 
                 var options = {
                     dom: "Bfrtip",

@@ -754,14 +754,51 @@ public class BiodataModel {
       
     public Long getACDIVOCAUpdateCount()
     {
-        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'ACDIVOCA' WITH n match (f:FARMER)-[]->(p)-[:UPDATE]->(u) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype='ACDIVOCA' WITH n match (f:FARMER)-[]->(p)-[:UPDATE]->(u) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+     public Long getACDIVOCABaselineProductionCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype='ACDIVOCA' WITH n match (f:FARMER)-[:HAS_BASELINE_PRODUCTION]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+     
+     public Long getACDIVOCABaselinePostHarvestCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype='ACDIVOCA' WITH n match (f:FARMER)-[:HAS_FARMCREDIT_PREVIOUS]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+
+     public Long getACDIVOCAFarmCreditPreviousCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype='ACDIVOCA' WITH n match (f:FARMER)-[:HAS_BASELINE_POSTHARVEST]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+     
+    public Long getACDIVOCAFMPProductionCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'ACDIVOCA' WITH n match (f:FARMER)-[:HAS_PRODUCTION]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
     }
       
+     public Long getACDIVOCAFMPPostHarvestCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'ACDIVOCA' WITH n match (f:FARMER)-[:HAS_POSTHARVEST]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+     public Long getACDIVOCAFFarmCreditPlanCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'ACDIVOCA' WITH n match (f:FARMER)-[:HAS_FARMCREDIT_PLAN]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+     
+   public Long getACDIVOCAFFMPProductionUpdateCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'ACDIVOCA' WITH n match (f:FARMER)-[:HAS_PRODUCTION_UPDATE]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
     public Long getMOFAUpdateCount()
     {
         return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'MOFA' WITH n match (f:FARMER)-[]->(p)-[:UPDATE]->(u) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
     } 
+    
+      public Long getACDIVOCAFCPCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'ACDIVOCA' WITH n match (f:FARMER)-[:HAS_FIELD_CROP_ASSESSMENT]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
    
+    public Long getACDIVOCAPostHarvestUpdateCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'ACDIVOCA' WITH n match (f:FARMER)-[:HAS_POSTHARVEST_UPDATE]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+    
+    public Long getACDIVOCAFarmCreditUpdateCount() {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'ACDIVOCA' WITH n match (f:FARMER)-[:HAS_FARMCREDIT_UPDATE]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+    
 
     public List<CommunityCounterWrapper> getCommunityWrapper() {
        List<CommunityCounterWrapper>  ccw= new ArrayList<>();
@@ -1161,5 +1198,18 @@ public class BiodataModel {
         
         return Neo4jServices.getAggregateItem(q);
     }
+      
+      
+      public Object getFarmerCropAssessment(String AgentId)
+    {
+       
+        String q = " match  (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_FIELD_CROP_ASSESSMENT+"]->p where f.CreatedById='"+AgentId+"'"+
+                "  return count(DISTINCT f)"; 
+        
+        return Neo4jServices.getAggregateItem(q);
+    }
+      
+      
+     
     
 }

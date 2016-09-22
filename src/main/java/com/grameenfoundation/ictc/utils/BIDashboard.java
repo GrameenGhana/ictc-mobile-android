@@ -552,5 +552,19 @@ public class BIDashboard extends BIUtil {
             ex.printStackTrace();
         }
     }
+    
+    
+    
+    public JSONObject getACDIVOCADATA()
+    {
+        JSONObject  x = new JSONObject();
+        try {
+             x=  BIDataManager.getInstance().getBehaviourChangeInfo("","","",PARTNER_ACDI);
+        } catch (Exception ex) {
+            Logger.getLogger(BIDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return x;
+    }
 
 }

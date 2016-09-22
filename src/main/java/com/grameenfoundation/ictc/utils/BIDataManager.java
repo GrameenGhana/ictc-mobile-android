@@ -563,6 +563,7 @@ public class BIDataManager extends BIUtil {
                 response.put(DATA_SET_COMMUNITY, ((updateTables(DATA_SET_COMMUNITY) ? OK : FAILED)));
                 response.put(DATA_SET_FARMER, ((updateTables(DATA_SET_FARMER) ? OK : FAILED)));
                 
+                
             } else {
                 response.put(data_set, ((updateTables(data_set) ? OK : FAILED)));
             }
@@ -572,7 +573,7 @@ public class BIDataManager extends BIUtil {
             ex.printStackTrace();
         }
 
-        System.out.println(response.toString());
+        System.out.println("response ---------------------" +response.toString());
         return response;
     }
 
@@ -686,7 +687,7 @@ public class BIDataManager extends BIUtil {
 				sb.append("                                            WHEN \"other\" THEN 0 ELSE 1 END) + ");
 				sb.append("               SUM(CASE u.nameofvarietysoya WHEN NULL THEN 0 ");
 				sb.append("                                            WHEN \"local variety\" THEN 0 ");
-				sb.append("                                            WHEN \"other\" THEN 0 ELSE 1 END)) as trial, ");
+				sb.append("                                            WHEN \"other\" THEN 0 ELSE 1 END) + SUM(CASE u.nameofhybridmz WHEN NULL THEN 0  WHEN \"local variety\" THEN 0 WHEN \"other\" THEN 0 ELSE 1 END)) as trial, ");
 				sb.append("              (SUM(CASE u.croparrangeupdate WHEN NULL THEN 0 ");
 				sb.append("                                            WHEN \"Arranged rows with specific distance between rows and also between plants\" THEN 1 ");
 				sb.append("                                            ELSE 0 END)) as rc, ");

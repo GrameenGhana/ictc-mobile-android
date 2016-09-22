@@ -95,6 +95,7 @@ public class ICTCKonstants {
      public static final String SALESFORCEURL_SANDBOX = "http://sandbox-ictchallenge.cs80.force.com"; 
      //t
      public static final String TECHNICAL_NEED = "technicalneed";
+     public static final double ACDIVOCA_TARGET =4000;
      
      //u
      public static final String USER = "user";
