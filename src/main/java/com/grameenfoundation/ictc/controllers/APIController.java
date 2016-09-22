@@ -609,7 +609,7 @@ public class APIController extends HttpServlet {
         FieldCropAssessmentModel fieldCropAssessmentModel = new FieldCropAssessmentModel();
         FmpPostHarvestBudgetModel fmpPostHarvestBudgetModel = new FmpPostHarvestBudgetModel();
 
-        JSONArray fa = null;
+        JSONArray fa = new JSONArray();
 
         if (null != bw) {
 
@@ -651,6 +651,7 @@ public class APIController extends HttpServlet {
             FmpPostHarvestBudget fmpphb = null;
             List<FarmGPSLocationWrapper> wr = null;
             JSONArray farmGps = null;
+            System.out.println("farmer count " + bw.size());
             for (BiodataWrapper bb : bw) {
 
                 production = new JSONObject();
@@ -1574,7 +1575,7 @@ public class APIController extends HttpServlet {
 
                 details.put("farmer", farmer);
 
-                fa = new JSONArray();
+                //fa = new JSONArray();
                 fa.put(details);
             }
             tx.success();
