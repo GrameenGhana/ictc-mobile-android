@@ -1,5 +1,8 @@
 package com.grameenfoundation.ictc.utils;
 
+import com.grameenfoundation.ictc.models.AgentModel;
+import com.grameenfoundation.ictc.models.BiodataModel;
+import com.grameenfoundation.ictc.wrapper.AgentWrapper;
 import org.apache.commons.lang.WordUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,6 +16,8 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.JSONArray;
+
 
 /**
  * Created by David on 8/19/2016.
@@ -548,6 +553,46 @@ public class BIDataManager extends BIUtil {
         }
 
         return x;
+    }
+    
+    public JSONObject getACDIVOCAAgentActivity()
+    {
+        BiodataModel biodataModel = new BiodataModel();
+        AgentModel agentModel = new AgentModel();
+
+        Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
+     
+        List<AgentWrapper> agent = agentModel.findAllACDIAgents();
+
+        JSONObject xy = new JSONObject();
+        JSONArray agents = new JSONArray();
+
+        for (AgentWrapper a : agent) {
+            JSONObject y = new JSONObject();
+
+            y.put("name", a.getFirstname() + " " + a.getLastname());
+            y.put("farmers", biodataModel.getFarmerCountByAgent(a.getAgentId()));
+            y.put("blproduction", biodataModel.getFarmerBaselinProductionCountByAgent(a.getAgentId()));
+            y.put("blpostharvest", biodataModel.getFarmerBaselinePostHarvestCountByAgent(a.getAgentId()));
+            y.put("blcredit", biodataModel.getFarmerCreditPreviousCountByAgent(a.getAgentId()));
+            y.put("fmpproduction", biodataModel.getFarmerFMPProductionCountByAgent(a.getAgentId()));
+            y.put("fmppostharvest", biodataModel.getFarmerFMPPostHarvestCountByAgent(a.getAgentId()));
+            y.put("fmpcredit", biodataModel.getFarmerCreditByAgent(a.getAgentId()));
+            y.put("measured", biodataModel.getFarmerProductionUpdateByAgent(a.getAgentId()));
+            y.put("assessed", biodataModel.getFarmerCropAssessment(a.getAgentId()));
+            y.put("productionupdate", biodataModel.getFarmerProductionUpdateByAgent(a.getAgentId()));
+            y.put("postharvestupdate", biodataModel.getFarmerPostHarvestUpdateByAgent(a.getAgentId()));
+            y.put("creditupdate", biodataModel.getFarmerBaselinePostHarvestCountByAgent(a.getAgentId()));
+
+            agents.put(y);
+        }
+   
+        tx.success();
+       
+        xy.put("agentactivity", agents);
+
+        return xy;
+         
     }
     // </editor-fold>
 

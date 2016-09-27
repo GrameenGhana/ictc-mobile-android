@@ -13,6 +13,7 @@ import com.grameenfoundation.ictc.utils.Labels;
 import com.grameenfoundation.ictc.utils.Neo4jServices;
 import static com.grameenfoundation.ictc.utils.Neo4jServices.getIterativeNode;
 import com.grameenfoundation.ictc.utils.ParentNode;
+import com.grameenfoundation.ictc.wrapper.AgentWrapper;
 import com.grameenfoundation.ictc.wrapper.BiodataWrapper;
 import com.grameenfoundation.ictc.wrapper.CommunityCounterWrapper;
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.neo4j.cypher.ExecutionEngine;
 import org.neo4j.cypher.ExecutionResult;
 import org.neo4j.graphdb.Label;
@@ -1155,7 +1158,7 @@ public class BiodataModel {
     {
        
         String q = " match  (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_BASELINE_PRODUCTION_BUDGET+"]->p where f.CreatedById='"+AgentId+"'"+
-                " return count(DISTINCT f)"; 
+                " return count(DISTINCT f.Id)"; 
         
         return Neo4jServices.getAggregateItem(q);
     }
@@ -1164,7 +1167,7 @@ public class BiodataModel {
     {
        
         String q = " match  (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST+"]->p where f.CreatedById='"+AgentId+"'"+
-                " return  count(DISTINCT f)"; 
+                " return  count(DISTINCT f.Id)"; 
         
         return Neo4jServices.getAggregateItem(q);
     }
@@ -1174,7 +1177,16 @@ public class BiodataModel {
     {
        
         String q = " match  (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST_BUDGET+"]->p where f.CreatedById='"+AgentId+"'"+
-                "  return count(DISTINCT f)"; 
+                "  return count(DISTINCT f.Id)"; 
+        
+        return Neo4jServices.getAggregateItem(q);
+    }
+     
+     public Object getFarmerCreditPreviousCountByAgent(String AgentId)
+    {
+       
+        String q = " match  (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_FARMCREDIT_PREVIOUS+"]->p where f.CreatedById='"+AgentId+"'"+
+                "  return count(DISTINCT f.Id)"; 
         
         return Neo4jServices.getAggregateItem(q);
     }
@@ -1184,7 +1196,7 @@ public class BiodataModel {
     {
        
         String q = " match (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_PRODUCTION+"]->p where f.CreatedById='"+AgentId+"'"+
-                " return count(DISTINCT f)"; 
+                " return count(DISTINCT f.Id)"; 
         
         return Neo4jServices.getAggregateItem(q);
     }
@@ -1194,7 +1206,7 @@ public class BiodataModel {
     {
        
         String q = " match  (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_POSTHARVEST+"]->p where f.CreatedById='"+AgentId+"'"+
-                "  return count(DISTINCT f)"; 
+                "  return count(DISTINCT f.Id)"; 
         
         return Neo4jServices.getAggregateItem(q);
     }
@@ -1204,12 +1216,85 @@ public class BiodataModel {
     {
        
         String q = " match  (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_FIELD_CROP_ASSESSMENT+"]->p where f.CreatedById='"+AgentId+"'"+
-                "  return count(DISTINCT f)"; 
+                "  return count(DISTINCT f.Id)"; 
         
         return Neo4jServices.getAggregateItem(q);
     }
-      
-      
+    
+    public Object getFarmerCreditByAgent(String AgentId)
+    {
+       
+        String q = " match  (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN+"]->p where f.CreatedById='"+AgentId+"'"+
+                "  return count(DISTINCT f.Id)"; 
+        
+        return Neo4jServices.getAggregateItem(q);
+    }
+     public Object getFarmerProductionUpdateByAgent(String AgentId)
+    {
+       
+        String q = " match  (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_PRODUCTION_UPDATE+"]->p where f.CreatedById='"+AgentId+"'"+
+                "  return count(DISTINCT f.Id)"; 
+        
+        return Neo4jServices.getAggregateItem(q);
+    }
+    
+    public Object getFarmerPostHarvestUpdateByAgent(String AgentId)
+    {
+       
+        String q = " match  (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_POSTHARVEST_UPDATE+"]->p where f.CreatedById='"+AgentId+"'"+
+                "  return count(DISTINCT f.Id)"; 
+        
+        return Neo4jServices.getAggregateItem(q);
+    }
+    
+    
+    public Object getFarmerCreditUpdateByAgent(String AgentId)
+    {
+       
+        String q = " match  (f:FARMER)-[:"+ICTCRelationshipTypes.HAS_FARMCREDIT_UPDATE+"]->p where f.CreatedById='"+AgentId+"'"+
+                "  return count(DISTINCT f.Id)"; 
+        
+        return Neo4jServices.getAggregateItem(q);
+    }
+    
+     public JSONObject getACDIVOCAAgentActivity()
+    {
+        BiodataModel biodataModel = new BiodataModel();
+        AgentModel agentModel = new AgentModel();
+
+        Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
      
+        List<AgentWrapper> agent = agentModel.findAllACDIAgents();
+
+        JSONObject xy = new JSONObject();
+        JSONArray agents = new JSONArray();
+
+        for (AgentWrapper a : agent) {
+            JSONObject y = new JSONObject();
+
+            y.put("name", a.getFirstname() + " " + a.getLastname());
+            y.put("farmers", biodataModel.getFarmerCountByAgent(a.getAgentId()));
+            y.put("blproduction", biodataModel.getFarmerBaselinProductionCountByAgent(a.getAgentId()));
+            y.put("blpostharvest", biodataModel.getFarmerBaselinePostHarvestCountByAgent(a.getAgentId()));
+            y.put("blcredit", biodataModel.getFarmerCreditPreviousCountByAgent(a.getAgentId()));
+            y.put("fmpproduction", biodataModel.getFarmerFMPProductionCountByAgent(a.getAgentId()));
+            y.put("fmppostharvest", biodataModel.getFarmerFMPPostHarvestCountByAgent(a.getAgentId()));
+            y.put("fmpcredit", biodataModel.getFarmerCreditByAgent(a.getAgentId()));
+            y.put("measured", biodataModel.getFarmerProductionUpdateByAgent(a.getAgentId()));
+            y.put("assessed", biodataModel.getFarmerCropAssessment(a.getAgentId()));
+            y.put("productionupdate", biodataModel.getFarmerProductionUpdateByAgent(a.getAgentId()));
+            y.put("postharvetupdate", biodataModel.getFarmerPostHarvestUpdateByAgent(a.getAgentId()));
+            y.put("creditupdate", biodataModel.getFarmerBaselinePostHarvestCountByAgent(a.getAgentId()));
+
+            agents.put(y);
+        }
+   
+        tx.success();
+        System.out.println("agents " + agents);
+        xy.put("agentactivity", agent);
+
+        return xy;
+         
+    }
     
 }

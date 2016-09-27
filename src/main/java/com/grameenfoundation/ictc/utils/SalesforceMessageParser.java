@@ -88,14 +88,14 @@ public class SalesforceMessageParser {
                         break;
 
                     case "sf:FMP_Production_New__c": case "sf:FMP_Production_NewX__c": if (processProduction(rowNode, farmerID)) { tx.success(); } break;
-                    case "sf:FMP_Production_Update__c": if (processProductionUpdate(rowNode, farmerID)) { tx.success(); } break;
+                    case "sf:FMP_Production_Update__c": case "sf:FMP_Production_Update_X__c": if (processProductionUpdate(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:FMP_PRODUCTION_BUDGET__c": case "sf:FMP_PRODUCTION_BUDGET_X__c": if (processProductionBudget(rowNode, farmerID)) { tx.success(); } break;
-                    case "sf:FMP_PRODUCTION_BUDGET_UPDATE__c": if (processProductionBudgetUpdate(rowNode, farmerID)) { tx.success(); } break;
+                    case "sf:FMP_PRODUCTION_BUDGET_UPDATE__c": case "sf:FMP_PRODUCTION_BUDGET_UPDATE_X__c": if (processProductionBudgetUpdate(rowNode, farmerID)) { tx.success(); } break;
 
-                    case "sf:FMP_PostHarvest_New__c": if (processPostHarvest(rowNode, farmerID)) { tx.success(); } break;
-                    case "sf:FMP_PostHarvest_update__c": if (processPostHarvestUpdate(rowNode, farmerID)) { tx.success(); } break;
-                    case "sf:FMP_PH_Budget__c": if (processPostHarvestBudget(rowNode, farmerID)) { tx.success(); } break;
-                    case "sf:FMP_PH_Budget_update__c": if (processPostHarvestBudgetUpdate(rowNode, farmerID)) { tx.success(); } break;
+                    case "sf:FMP_PostHarvest_New__c": case "FMP_PostHarvest_New_X__c":if (processPostHarvest(rowNode, farmerID)) { tx.success(); } break;
+                    case "sf:FMP_PostHarvest_update__c": case "FMP_PostHarvest_update_X__c": if (processPostHarvestUpdate(rowNode, farmerID)) { tx.success(); } break;
+                    case "sf:FMP_PH_Budget__c": case "FMP_PH_Budget_X__c": if (processPostHarvestBudget(rowNode, farmerID)) { tx.success(); } break;
+                    case "sf:FMP_PH_Budget_update__c": case "FMP_PH_Budget_update_X__c":if (processPostHarvestBudgetUpdate(rowNode, farmerID)) { tx.success(); } break;
 
                     case "sf:Profiling__c" :case "sf:Profiling_X__c": if (processProfile(rowNode, farmerID)) { tx.success(); } break;
                     
@@ -103,9 +103,9 @@ public class SalesforceMessageParser {
                      
                     case "sf:TechnicalNeeds__c": if (processTechnicalNeeds(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:FIELD_CROP_ASSESSMENT__c": case "sf:FIELD_CROP_ASSESSMENT_X__c":  if (processFieldCropAssessment(rowNode, farmerID)) { tx.success(); } break;
-                    case "sf:FarmCreditPlan__c": if (processFarmCreditPlan(rowNode, farmerID)) { tx.success(); } break;
-                    case "sf:FarmCreditPrevious__c": if (processFarmCreditPrevious(rowNode, farmerID)) { tx.success(); } break;
-                    case "sf:FarmCreditUpdate__c": if (processFarmCreditPrevious(rowNode, farmerID)) { tx.success(); } break;
+                    case "sf:FarmCreditPlan__c": case "FarmCreditPlan_X__c": if (processFarmCreditPlan(rowNode, farmerID)) { tx.success(); } break;
+                    case "sf:FarmCreditPrevious__c": case "farmcreditprevious_X__c": if (processFarmCreditPrevious(rowNode, farmerID)) { tx.success(); } break;
+                    case "sf:FarmCreditUpdate__c": case "FarmCreditUpdate_X__c":if (processFarmCreditPrevious(rowNode, farmerID)) { tx.success(); } break;
 
                     case "sf:BASELINE_PRODUCTION__c": if (processBaselineProduction(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:BASELINE_PRODUCTION_BUDGET__c": if (processBaselineProductionBudget(rowNode, farmerID)) { tx.success(); } break;

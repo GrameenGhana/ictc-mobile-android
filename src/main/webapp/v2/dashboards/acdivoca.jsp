@@ -1,17 +1,34 @@
 
+<%@page import="com.grameenfoundation.ictc.utils.BIDataManager"%>
+<%@page import="org.neo4j.graphdb.Transaction"%>
+<%@page import="com.grameenfoundation.ictc.utils.ICTCDBUtil"%>
+<%@page import="com.grameenfoundation.ictc.models.AgentModel"%>
+<%@page import="com.grameenfoundation.ictc.wrapper.AgentWrapper"%>
 <%@page import="com.grameenfoundation.ictc.models.BiodataModel"%>
-<%@page import="org.json.JSONObject"%>
+<%@page import="org.json.*"%>
 <%@page import="com.grameenfoundation.ictc.utils.TempReport"%>
 <%@page import="java.util.List" %>
 <%@page import="com.grameenfoundation.ictc.utils.BIDashboard" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+  
+    
+   
+   // AgentModel agentModel = new AgentModel();
     BIDashboard data = new BIDashboard("acdivoca");
+    BiodataModel bio = new BiodataModel();
+    BIDataManager bi = BIDataManager.getInstance();
     List<String> crops = data.getCrops();
     List<String> locations = data.getLocations();
     JSONObject  x = data.getACDIVOCADATA();
     TempReport temp = new TempReport();
-    BiodataModel bio = new BiodataModel();
+    JSONObject y = bi.getACDIVOCAAgentActivity();
+    JSONArray ja = y.getJSONArray("agentactivity");
+    JSONObject b = new JSONObject();
+   // Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
+   
+   // List<AgentWrapper> agent = agentModel.findAllACDIAgents() ;
+    
    
 %>
 <!DOCTYPE html>
@@ -223,8 +240,20 @@
                         <table id="agent-monitoring-table" class="table table-striped table-bordered jambo_table">
                             <thead>
                             <tr>
-                                <th>Indicator</th>
-                                <th>ICTC-ACDI/VOCA</th>
+                                <th>Agent</th>
+                                <th>No farmers with access to Agent</th>
+                                <th>No farmers taken through Previous performance (Production)</th>
+                                <th>No farmers taken through Previous performance (Post-harvest)</th>
+                                <th>No farmers taken through Previous performance (Credit)</th>
+                                <th>No farmers coached to produce Farm Management Plan on Production</th>
+                                <th>No farmers coached to produce Farm Management Plan on Post-harvest</th>
+                                <th>No farmers coached to produce Farm Management Plan on Farm Credit</th>
+                                <th>No farms measured by Agent</th>
+                                <th>No farms accessed by Agent</th>
+                                <th>No of Updated records [FMP production]</th>
+                                <th>No of Updated records [FMP Post-harvest / Marketing] </th>
+                                <th>Number of Updated records [Credit]</th>
+                                
                             </tr>
                             </thead>
                             <tbody>
@@ -252,64 +281,26 @@
                                 <td style="width: 20%">Number of agents (% of target) who have assessed more than 50 farms</td>
                                 <td><%= data.getAgentFarmsAssessedTotalForACDI() %> (<%= data.getAgentFarmsAssessedProgressForACDI() %>%)</td>
                             </tr>-->
-                              <tr>
-                                    <td>Number of farmers with access to Agent (registered)(% of target)</td>
-                                    <!--<td><%= data.getFarmerRegistrationTotalForACDI() %> / <%= data.getFarmerRegistrationTargetForACDI() %> (<%= data.getFarmerRegistrationProgressForACDI()%>%)</td>-->
-                                    <td><%= bio.getACDIVOCAFarmerCount()%> / <%= data.getFarmerRegistrationTargetForACDI() %> (<%= temp.getFarmerRegistrationProgressForACDI()  %>%)</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 20%">Number of farmers(% of target) taken through Previous performance (Production) by Agent </td>
-                                   <!-- <td><%= data.getFarmerPPTotalForACDI() %> (<%= data.getFarmerPPProgressForACDI() %>%)</td>-->
-                                    <td><%= bio.getACDIVOCABaselineProductionCount() %> (<%= temp.getFarmerPPProgressForACDI() %>%)</td> 
-                                </tr>
-                                <tr>
-                                    <td style="width: 20%">Number of farmers (% of target) taken through Previous performance (Post-harvest) by Agent</td>
-                                   <!-- <td><%= data.getFarmerPPTotalForACDI() %> (<%= data.getFarmerPPProgressForACDI() %>%)</td>-->
-                                    <td><%= bio.getACDIVOCABaselinePostHarvestCount() %> (<%= temp.getFarmerPHProgressForACDI() %>%)</td> 
-                                </tr>
-                                <tr>
-                                    <td style="width: 20%">Number of farmers (% of target) taken through Previous performance (Credit) by Agent</td>
-                                   <!-- <td><%= data.getFarmerPPTotalForACDI() %> (<%= data.getFarmerPPProgressForACDI() %>%)</td>-->
-                                    <td><%= bio.getACDIVOCABaselinePostHarvestCount() %> (<%= temp.getFarmerPHProgressForACDI() %>%)</td> 
-                                </tr>
-                                <tr>
-                                    <td style="width: 20%">Number of farmers (% of target) coached to produce Farm Management Plan on Production by Agent</td>
-                                    <!--<td><%= data.getFarmerFMPTotalForACDI() %> (<%= data.getFarmerFMPProgressForACDI() %>%)</td>-->
-                                     <td><%= bio.getFMPProductionCount() %> (<%= temp.getFarmerFMPPProgressForACDI() %>%)</td>
-                                </tr>
-                                 <tr>
-                                    <td style="width: 20%">Number of farmers (% of target) coached to produce Farm Management Plan on Post-harvest by Agent</td>
-                                    <!--<td><%= data.getFarmerFMPTotalForACDI() %> (<%= data.getFarmerFMPProgressForACDI() %>%)</td>-->
-                                     <td><%= bio.getACDIVOCAFMPPostHarvestCount() %> (<%= temp.getFarmerFMPPProgressForACDI() %>%)</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 20%">Number of farmers (% of target) coached to produce Farm Management Plan on Farm Credit by Agent</td>
-                                    <!--<td><%= data.getFarmerFMPTotalForACDI() %> (<%= data.getFarmerFMPProgressForACDI() %>%)</td>-->
-                                     <td><%= bio.getACDIVOCAFFarmCreditPlanCount() %> (<%= temp.getFarmerFMPPProgressForACDI() %>%)</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 20%">Number of farms (% of target) measured by Agent</td>
-                                   <!-- <td><%= bio.getACDIVOCAFFMPProductionUpdateCount()%> (<%= data.getFarmerFarmsMeasuredProgressForACDI() %>%)</td>-->
-                                    <td><%= bio.getACDIVOCAFFMPProductionUpdateCount() %> (<%= temp.getFarmerPUProgressForACDI() %>%)</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 20%">Number of farms (% of target) assessed by Agent</td>
-                                    <!--<td><%= data.getFarmerFarmsAssessedTotalForACDI() %> (<%= data.getFarmerFarmsAssessedProgressForACDI() %>%)</td>-->
-                                    <td><%= bio.getACDIVOCAFCPCount() %> (<%= temp.getFarmerFCAProgressForACDI()  %>%)</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 20%">Number of Updated records(% of target) [FMP production] by Agent</td>
-                                   <!--<td><%= data.getFarmerFMPUpdateTotalForACDI() %> (<%= data.getFarmerFMPUpdateProgressForACDI() %>%)</td>-->
-                                     <td><%= bio.getACDIVOCAFFMPProductionUpdateCount() %> (<%= temp.getFarmerPUProgressForACDI() %>%)</td>
-                                </tr>
-                                <tr>
-                                   <td style="width: 20%">Number of Updated records (% of target) [FMP Post-harvest / Marketing,] by Agent</td>
-                                    <td><%= bio.getACDIVOCAPostHarvestUpdateCount() %> (<%= temp.getFarmerPHUProgressForACDI() %>%)</td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 20%">Number of Updated records (% of target) [Credit] by Agent</td>
-                                    <td><%= bio.getACDIVOCAFarmCreditUpdateCount() %> (<%= temp.getFarmerFCUProgressForACDI() %>%)</td>
-                                </tr>
+                            <% for (int i =0;i<ja.length();i++) { b = ja.getJSONObject(i);%>
+                               
+                            <tr>
+                                <td><%= b.getString("name") %></td>
+                                <td><%= b.get("farmers") %></td>
+                                <td><%= b.get("blproduction") %></td>
+                                <td><%= b.get("blpostharvest")%></td>
+                                <td><%= b.get("blcredit")%></td>
+                                <td><%= b.get("fmpproduction")%></td>
+                                <td><%= b.get("fmppostharvest")%></td>
+                                <td><%= b.get("fmpcredit")%></td>
+                                <td><%= b.get("measured")%></td>
+                                <td><%= b.get("assessed")%></td>
+                                <td><%= b.get("productionupdate") %></td>
+                                <td><%= b.get("postharvestupdate") %></td>
+                                <td><%= b.get("creditupdate")  %></td>
+                            </tr>
+                            <% }%>
+                            
+                            
                             </tbody>
                         </table>
                     </div>
