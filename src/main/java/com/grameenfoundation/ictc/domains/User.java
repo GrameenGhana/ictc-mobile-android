@@ -166,4 +166,15 @@ public class User extends Status implements GeneralInterface{
    {
        return new Biodata(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_FARMER));
    }
+     
+    public void setAgent(Node agent)
+   {
+       underlyingNode.createRelationshipTo(agent, ICTCRelationshipTypes.HAS_AGENT);
+   }
+    
+    
+      public Agent getAgent()
+   {
+       return new Agent(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_AGENT));
+   }
 }

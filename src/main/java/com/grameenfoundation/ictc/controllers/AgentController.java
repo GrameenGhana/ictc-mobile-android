@@ -7,6 +7,7 @@ package com.grameenfoundation.ictc.controllers;
 
 import com.grameenfoundation.ictc.domains.Agent;
 import com.grameenfoundation.ictc.models.AgentModel;
+import com.grameenfoundation.ictc.models.UserModel;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.utils.ICTCUtil;
 import com.grameenfoundation.ictc.utils.Neo4jServices;
@@ -213,6 +214,28 @@ public class AgentController extends HttpServlet {
                }
                  
                  
+            }
+            if(action.equals("ob"))
+            {
+                UserModel user = new UserModel();
+                
+              
+                String ob = request.getParameter("ob");
+                Agent  ag  = agentModel.getAgent(Agent.AGENTID, request.getParameter("at"));
+                
+                if(null!=ag)
+                {
+                    System.out.println("ob attached to agent " + user.ObToAggent(ob,ag.getUnderlyingNode())); 
+                }
+                else
+                {
+                    System.out.println("Agent not Available");
+                }
+                
+              
+                
+                
+                
             }
             
               request.setAttribute(ICTCUtil.GENERAL_RESPONSE, generalResponse);

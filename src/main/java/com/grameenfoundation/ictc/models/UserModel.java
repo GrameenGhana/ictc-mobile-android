@@ -13,10 +13,11 @@ import com.grameenfoundation.ictc.utils.Labels;
 import com.grameenfoundation.ictc.utils.Neo4jServices;
 import com.grameenfoundation.ictc.utils.ParentNode;
 import com.grameenfoundation.ictc.utils.security.CryptoLibrary;
+import com.grameenfoundation.ictc.wrapper.AgentWrapper;
 import com.grameenfoundation.ictc.wrapper.StorageWrapper;
 import com.grameenfoundation.ictc.wrapper.UserWrapper;
 import java.util.ArrayList;
-import org.json.JSONObject;
+import org.json.*;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,7 +25,6 @@ import java.util.logging.Logger;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
-import org.neo4j.shell.util.json.JSONArray;
 import scala.collection.Iterator;
 
 /**
@@ -183,7 +183,29 @@ List<UserWrapper> usrs = new ArrayList<>();
         return created;
     }
  
- 
+ public boolean ObToAggent(String ob, Node agent) {
+        boolean created = false;
+
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+
+             User user = new UserModel().getUser(User.ID,ob);
+
+            System.out.println("biodata :" + user.getUnderlyingNode().getId());
+            if (null != user) {
+
+               user.setAgent(agent);
+                created = true;
+                trx.success();
+
+            }
+        } catch (Exception e) {
+            System.out.println("error");
+            //created = false;
+
+        }
+
+        return created;
+    }
  
  public JSONObject  getOb()
    {
@@ -197,17 +219,39 @@ List<UserWrapper> usrs = new ArrayList<>();
            JSONObject y = new JSONObject();
            
            y.put("ob",ob1.getID());
-           y.put("name",ob1.getUsername());
+           y.put("name",ob1.getFirstName() + " "+ ob1.getLastName());
            
            ja.put(y);
        }
       
-      x.put("obs",ja);
-      
+        x.put("obs",ja);
+      // System.out.println("json " + x);
       return x;
       
       
        
              
    }
+ 
+ public JSONObject getAgent()
+ {
+     JSONObject x = new JSONObject();
+      JSONArray ja = new JSONArray();
+      
+      
+      List<AgentWrapper> ags = new AgentModel().findAllACDIAgents();
+      
+       for (AgentWrapper ag : ags) {
+           JSONObject y = new JSONObject();
+           
+           y.put("ag",ag.getAgentId());
+           y.put("name",ag.getFirstname() + " " + ag.getLastname());
+           
+           ja.put(y);
+       }
+      
+      x.put("ags",ja);
+       // System.out.println("json " + x);
+      return x; 
+ }
 }
