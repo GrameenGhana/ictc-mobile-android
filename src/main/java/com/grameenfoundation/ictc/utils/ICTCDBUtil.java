@@ -34,8 +34,8 @@ public class ICTCDBUtil {
     private final static String MYSQL_PORT = "3306";
     private final static String MYSQL_HOST = "localhost";
     private final static String MYSQL_USER = "root";
-    private final static String MYSQL_PASS = "password";
-    //private final static String MYSQL_PASS = "spomega";
+    //private final static String MYSQL_PASS = "password";
+    private final static String MYSQL_PASS = "spomega";
     private final static String MYSQL_DSN = "jdbc:mysql://"+MYSQL_HOST+":"+MYSQL_PORT+"/"+MYSQL_DB;
     private static Connection connection = null;
 
@@ -182,6 +182,8 @@ public class ICTCDBUtil {
     }
 
     public void createTable(String tableName, String fields) throws SQLException {
+        
+        System.out.println("Create Table " + tableName);
         try {
            String sql = "CREATE TABLE IF NOT EXISTS " + tableName + "(id int(11) NOT NULL AUTO_INCREMENT, "
                         + fields + ", PRIMARY KEY (`id`))";

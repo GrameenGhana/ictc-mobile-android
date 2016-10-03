@@ -60,7 +60,8 @@ public class LoginController extends HttpServlet {
                        case "grameen_admin":
                            log.info("Logged in as " + wr.getAgentType());
                         //ICTCUtil.redirect(request, response,"/index.jsp", "");
-                          response.sendRedirect(request.getContextPath()+"/v2/index.jsp");
+                         // response.sendRedirect(request.getContextPath()+"/v2/index.jsp");
+                          response.sendRedirect(request.getContextPath()+"/v2/dashboards/gf.jsp");
                            break;
                        case  "grameen_user":
                              log.info("Logged in as " + wr.getAgentType());

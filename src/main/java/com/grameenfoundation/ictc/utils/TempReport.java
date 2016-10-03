@@ -7,6 +7,7 @@
 package com.grameenfoundation.ictc.utils;
 
 import com.grameenfoundation.ictc.models.BiodataModel;
+import java.text.DecimalFormat;
 import java.util.logging.Logger;
 
 /**
@@ -15,16 +16,16 @@ import java.util.logging.Logger;
  * @date Sep 20, 2016 11:56:12 AM
  * description:
  */
-public class TempReport {
+public class TempReport extends BIUtil{
     
       Logger log = Logger.getLogger(TempReport.class.getName());
       BiodataModel bio = new BiodataModel();
       
-      
-   public static Object getImprovedSeedACDIVOCA()
+ //<editor-fold defaultstate="collapsed" desc="ACDIVOCA Dashboard ">    
+   public static Object getImprovedSeed(String partner)
     {
        
-        String q = "match (n:AGENT) where n.agenttype ='ACDIVOCA' WITH n match (f:FARMER)-[HAS_PRODUCTION_UPDATE]-(u) where f.CreatedById=n.Id return SUM(CASE u.nameofvarietymz WHEN NULL THEN 0  "
+        String q = "match (n:AGENT) where n.agenttype ='"+partner+"' WITH n match (f:FARMER)-[:HAS_PRODUCTION_UPDATE]->(u) where f.CreatedById=n.Id return SUM(CASE u.nameofvarietymz WHEN NULL THEN 0  "
                 + " WHEN \"local variety\" THEN 0 WHEN \"other\" THEN 0 ELSE 1 END) +"
                 + " SUM(CASE u.nameofhybridmz WHEN NULL THEN 0    WHEN \"local variety\" THEN 0  WHEN \"other\" THEN 0 ELSE 1 END)+"
                 + "SUM(CASE u.nameofvarietyrice WHEN NULL THEN 0 WHEN \"local variety\" THEN 0  WHEN \"other\" THEN 0 ELSE 1 END) as l"; 
@@ -32,113 +33,171 @@ public class TempReport {
         return Neo4jServices.getAggregateItem(q);
     }
    
-   public static Object getCropDensityACDIVOCA()
+   public static Object getCropDensity(String partner)
    {
-        String q = "match (n:AGENT) where n.agenttype = 'ACDIVOCA' WITH n match (f:FARMER)-[HAS_PRODUCTION_UPDATE]-(u) where f.CreatedById=n.Id return "
+        String q = "match (n:AGENT) where n.agenttype ='"+partner+"' WITH n match (f:FARMER)-[:HAS_PRODUCTION_UPDATE]->(u) where f.CreatedById=n.Id return "
                 + "SUM(CASE u.croparrangeupdate WHEN NULL THEN 0 "
                 + "WHEN \"Arranged rows with specific ditance between rows and also between plants\" THEN 1  END)  as l"; 
         
         return Neo4jServices.getAggregateItem(q); 
    }
    
-   public static Object getPrePlantHerbiceideACDIVOCA()
+   public static Object getPrePlantHerbiceide(String partner)
    {
-       String q = "match (n:AGENT) where n.agenttype ='ACDIVOCA' WITH n match (f:FARMER)-[HAS_PRODUCTION_UPDATE]-(u) where f.CreatedById=n.Id return "
+       String q = "match (n:AGENT) where n.agenttype ='"+partner+"' WITH n match (f:FARMER)-[:HAS_PRODUCTION_UPDATE]->(u) where f.CreatedById=n.Id return "
                + "SUM(CASE u.methodoflandclearing WHEN NULL THEN 0"
                + " WHEN \"Slashing and application of herbicide\" THEN 1 WHEN \"Herbicide application\" THEN 1  END)  as l"; 
         
         return Neo4jServices.getAggregateItem(q); 
    }
    
-    public static Object getPostPlantHerbiceideACDIVOCA()
+    public static Object getPostPlantHerbiceide(String partner)
    {
-       String q = "match (n:AGENT) where n.agenttype =~ 'ACDIVOCA' WITH n match (f:FARMER)-[:HAS_PRODUCTION_UPDATE]->(u)"
+       String q = "match (n:AGENT) where n.agenttype ='"+partner+"' WITH n match (f:FARMER)-[:HAS_PRODUCTION_UPDATE]->(u)"
                + " where f.CreatedById=n.Id return SUM(CASE u.postplantherbicidefrequency WHEN NULL THEN 0"
                + "   WHEN '0' THEN 0 ELSE 1  END)  as l"; 
         
         return Neo4jServices.getAggregateItem(q); 
    }
 
-     public static Object getOrganicFertilizerACDIVOCA()
+     public static Object getOrganicFertilizer(String partner)
    {
-       String q = "match (n:AGENT) where n.agenttype =~ 'ACDIVOCA' WITH n match (f:FARMER)-[:HAS_PRODUCTION_UPDATE]->(u) "
+       String q = "match (n:AGENT) where n.agenttype ='"+partner+"' WITH n match (f:FARMER)-[:HAS_PRODUCTION_UPDATE]->(u) "
                + "where f.CreatedById=n.Id return SUM(CASE u.applicationofbasalfertilizer WHEN NULL THEN 0 WHEN 'NO' THEN 0 ELSE 1  END) + "
                + "SUM(CASE u.applicationoftopdressfertilizer WHEN NULL THEN 0 WHEN 'NO' THEN 0 ELSE 1  END)  as l"; 
         
         return Neo4jServices.getAggregateItem(q); 
    }
      
-       public static Object getPostHarvestThresherACDIVOCA()
+       public static Object getPostHarvestThresher(String partner)
    {
-       String q = "match (n:AGENT) where n.agenttype =~ 'ACDIVOCA' WITH n match (f:FARMER)-[:HAS_PRODUCTION_UPDATE]->(u) "
+       String q = "match (n:AGENT) where n.agenttype ='"+partner+"' WITH n match (f:FARMER)-[:HAS_PRODUCTION_UPDATE]->(u) "
                + "where f.CreatedById=n.Id return SUM(CASE u.applicationofbasalfertilizer WHEN NULL THEN 0 "
                + "WHEN 'NO' THEN 0 ELSE 1  END) + SUM(CASE u.applicationoftopdressfertilizer WHEN NULL THEN 0 WHEN 'NO' THEN 0 ELSE 1  END)  as l"; 
         
         return Neo4jServices.getAggregateItem(q); 
    }
      
-    public static Long getImprovedTechnologies()
+    public static Long getImprovedTechnologies(String partner)
     {
-        long sum = Long.valueOf((long) getCropDensityACDIVOCA())+Long.valueOf((long) getImprovedSeedACDIVOCA() +Long.valueOf((long) getOrganicFertilizerACDIVOCA()))
-                   +Long.valueOf((long) getPostHarvestThresherACDIVOCA())+ Long.valueOf((long) getPostPlantHerbiceideACDIVOCA()+Long.valueOf((long) getPrePlantHerbiceideACDIVOCA()));
+        long sum = Long.valueOf((long)getCropDensity(partner))+Long.valueOf((long) getImprovedSeed(partner) +Long.valueOf((long) getOrganicFertilizer(partner)))
+                   +Long.valueOf((long) getPostHarvestThresher(partner))+ Long.valueOf((long) getPostPlantHerbiceide(partner)+Long.valueOf((long) getPrePlantHerbiceide(partner)));
         return sum;
     }
     
-    public double getFarmerRegistrationProgressForACDI()
+    public String getFarmerRegistrationProgressForACDI()
     {
-        return (bio.getACDIVOCAFarmerCount()/ICTCKonstants.ACDIVOCA_TARGET)*100;
+        return toTwoDecimalPlaces((bio.getACDIVOCAFarmerCount()/ICTCKonstants.ACDIVOCA_TARGET)*100);
     }
     
-    public double getFarmerPPProgressForACDI()
+    public String getFarmerPPProgressForACDI()
     {
-        return (bio.getACDIVOCABaselineProductionCount()/ICTCKonstants.ACDIVOCA_TARGET)*100;
+        return toTwoDecimalPlaces((bio.getACDIVOCABaselineProductionCount()/ICTCKonstants.ACDIVOCA_TARGET)*100);
     }
     
-    public double getFarmerPHProgressForACDI()
+    public String getFarmerPHProgressForACDI()
     {
-        return (bio.getACDIVOCABaselinePostHarvestCount()/ICTCKonstants.ACDIVOCA_TARGET)*100;
+        return toTwoDecimalPlaces((bio.getACDIVOCABaselinePostHarvestCount()/ICTCKonstants.ACDIVOCA_TARGET)*100);
     }
     
-     public double getFarmerCRProgressForACDI()
+     public String getFarmerCRProgressForACDI()
     {
-        return (bio.getACDIVOCAFarmCreditPreviousCount()/ICTCKonstants.ACDIVOCA_TARGET)*100;
+        return toTwoDecimalPlaces((bio.getACDIVOCAFarmCreditPreviousCount()/ICTCKonstants.ACDIVOCA_TARGET)*100);
     }
      
      
-    public double getFarmerFMPPProgressForACDI()
+    public String getFarmerFMPPProgressForACDI()
     {
-       return (bio.getACDIVOCAFMPProductionCount()/ICTCKonstants.ACDIVOCA_TARGET)*100;
+       return toTwoDecimalPlaces((bio.getACDIVOCAFMPProductionCount()/ICTCKonstants.ACDIVOCA_TARGET)*100);
     }
     
-     public double getFarmerFMPPHProgressForACDI()
+     public String getFarmerFMPPHProgressForACDI()
     {
-       return (bio.getACDIVOCAFMPPostHarvestCount()/ICTCKonstants.ACDIVOCA_TARGET)*100;
+       return toTwoDecimalPlaces((bio.getACDIVOCAFMPPostHarvestCount()/ICTCKonstants.ACDIVOCA_TARGET)*100);
     }
      
-     public double getFarmerFCPPHProgressForACDI()
+     public String getFarmerFCPPHProgressForACDI()
     {
-       return (bio.getACDIVOCAFFarmCreditPlanCount()/ICTCKonstants.ACDIVOCA_TARGET)*100;
+       return toTwoDecimalPlaces((bio.getACDIVOCAFFarmCreditPlanCount()/ICTCKonstants.ACDIVOCA_TARGET)*100);
     } 
-     public double getFarmerPUProgressForACDI()
+     public String getFarmerPUProgressForACDI()
     {
-       return (bio.getACDIVOCAFFMPProductionUpdateCount()/ICTCKonstants.ACDIVOCA_TARGET)*100;
-    } 
-     
-    public double getFarmerFCAProgressForACDI()
-    {
-       return (bio.getACDIVOCAFCPCount()/ICTCKonstants.ACDIVOCA_TARGET)*100;
+       return toTwoDecimalPlaces((bio.getACDIVOCAFFMPProductionUpdateCount()/ICTCKonstants.ACDIVOCA_TARGET)*100);
     } 
      
-     public double getFarmerPHUProgressForACDI()
+    public String getFarmerFCAProgressForACDI()
     {
-       return (bio.getACDIVOCAPostHarvestUpdateCount()/ICTCKonstants.ACDIVOCA_TARGET)*100;
+       return toTwoDecimalPlaces((bio.getACDIVOCAFCPCount()/ICTCKonstants.ACDIVOCA_TARGET)*100);
     } 
      
-     
-      public double getFarmerFCUProgressForACDI()
+     public String getFarmerPHUProgressForACDI()
     {
-       return (bio.getACDIVOCAFarmCreditUpdateCount()/ICTCKonstants.ACDIVOCA_TARGET)*100;
+       return toTwoDecimalPlaces((bio.getACDIVOCAPostHarvestUpdateCount()/ICTCKonstants.ACDIVOCA_TARGET)*100);
     } 
      
      
+      public String getFarmerFCUProgressForACDI()
+    {
+       return toTwoDecimalPlaces((bio.getACDIVOCAFarmCreditUpdateCount()/ICTCKonstants.ACDIVOCA_TARGET)*100);
+    } 
+     //</editor-fold>
+      
+ //<editor-fold defaultstate="collapsed" desc="GF Dashboard ">    
+      
+      public static Object getImprovedSeedGF()
+    {
+       
+        String q = "match (n:AGENT) where n.agenttype =~'MOFA' WITH n match (f:FARMER)-[HAS_PRODUCTION_UPDATE]-(u) where f.CreatedById=n.Id "
+                + "return SUM(CASE u.nameofvarietymz WHEN NULL THEN 0 "
+                + " WHEN \"local variety\" THEN 0 WHEN \"other\" THEN 0 ELSE 1 END) + "
+                + "SUM(CASE u.nameofhybridmz WHEN NULL THEN 0    WHEN \"local variety\" THEN 0  WHEN \"other\" THEN 0 ELSE 1 END)"
+                + "+SUM(CASE u.nameofvarietyrice WHEN NULL THEN 0 WHEN \"local variety\" THEN 0  WHEN \"other\" THEN 0 ELSE 1 END) as l"; 
+        
+        return Neo4jServices.getAggregateItem(q);
+    }
+      
+    
+      
+      
+      
+      
+      
+   // </editor-fold>  
+  //<editor-fold defaultstate="collapsed" desc=" MOFA Dashboard ">    
+     
+        public static Object getCropDensityMOFA()
+   {
+        String q = "match (n:AGENT) where n.agenttype = 'MOFA' WITH n match (f:FARMER)-[HAS_PRODUCTION_UPDATE]-(u) where f.CreatedById=n.Id return "
+                + "SUM(CASE u.croparrangeupdate WHEN NULL THEN 0 "
+                + "WHEN \"Arranged rows with specific ditance between rows and also between plants\" THEN 1  END)  as l"; 
+        
+        return Neo4jServices.getAggregateItem(q); 
+   }
+        
+  public static Object getPrePlantHerbiceideMOFA()
+   {
+       String q = "match (n:AGENT) where n.agenttype ='MOFA' WITH n match (f:FARMER)-[:HAS_PRODUCTION_UPDATE]->(u) where f.CreatedById=n.Id return "
+               + "SUM(CASE u.methodoflandclearing WHEN NULL THEN 0"
+               + " WHEN \"Slashing and application of herbicide\" THEN 1 WHEN \"Herbicide application\" THEN 1  END)  as l"; 
+        
+        return Neo4jServices.getAggregateItem(q); 
+   }   
+        
+ 
+   public static Object getPostPlantHerbiceideMOFA()
+   {
+       String q = "match (n:AGENT) where n.agenttype ='MOFA WITH n match (f:FARMER)-[:HAS_PRODUCTION_UPDATE]->(u)"
+               + " where f.CreatedById=n.Id return SUM(CASE u.postplantherbicidefrequency WHEN NULL THEN 0"
+               + "   WHEN '0' THEN 0 ELSE 1  END)  as l"; 
+        
+        return Neo4jServices.getAggregateItem(q); 
+   }  
+    
+      // </editor-fold> 
+   
+   private String toTwoDecimalPlaces(double value)
+   {
+       DecimalFormat df = new DecimalFormat("#.##");
+       return df.format(value);
+   }
 }

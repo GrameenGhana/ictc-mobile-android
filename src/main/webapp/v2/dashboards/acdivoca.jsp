@@ -14,21 +14,20 @@
   
     
    
-   // AgentModel agentModel = new AgentModel();
+   
     BIDashboard data = new BIDashboard("acdivoca");
     BiodataModel bio = new BiodataModel();
     BIDataManager bi = BIDataManager.getInstance();
     List<String> crops = data.getCrops();
     List<String> locations = data.getLocations();
     JSONObject  x = data.getACDIVOCADATA();
+    JSONObject  in = bi.getIndicatorInfo("ACDIVOCA");
     TempReport temp = new TempReport();
     JSONObject y = bi.getACDIVOCAAgentActivity();
     JSONArray ja = y.getJSONArray("agentactivity");
     JSONObject b = new JSONObject();
-   // Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
-   
-   // List<AgentWrapper> agent = agentModel.findAllACDIAgents() ;
     
+   
    
 %>
 <!DOCTYPE html>
@@ -102,44 +101,44 @@
                                     <tr>
                                         <th>Indicator</th>
                                         <th>Number of Farmers</th>
-                                        <th>Land Area/Quantity</th>
+                                        <!--<th>Land Area/Quantity</th>-->
                                     </tr>
                                 </thead>
                                 <tbody>
                                      <tr>
                                         <td>Using improved practices and technologies</td>
-                                        <td><%= TempReport.getImprovedTechnologies() %></td>
-                                        <td><%= x.getString("ipt_area")%></td>
+                                        <td><%= in.get("ipt")  %></td>
+                                        <!--<td><%= x.getString("ipt_area")%></td>-->
                                     </tr>
                                     <tr>
                                         <td>Using improved seed</td>
-                                        <td><%= TempReport.getImprovedSeedACDIVOCA()%></td>
-                                        <td><%= x.getString("is_area")%></td>
+                                        <td><%= in.get("is")   %></td>
+                                        <!--<td><%= x.getString("is_area")%></td>-->
                                     </tr>
                                       <tr>
                                         <td>Using recommended crop density and arrangement</td>
-                                        <td><%= TempReport.getCropDensityACDIVOCA()   %></td>
-                                        <td><%= x.getString("cda_area")%></td>
+                                        <td><%= in.get("cda") %></td>
+                                        <!--<td><%= x.getString("cda_area")%></td>-->
                                     </tr>
                                     <tr>
                                         <td>Using pre-plant herbicide</td>
-                                        <td><%= TempReport.getPrePlantHerbiceideACDIVOCA()%></td>
-                                        <td><%= x.getString("preh_area")%></td>
+                                        <td><%= in.get("preh") %></td>
+                                        <!--<td><%= x.getString("preh_area")%></td>-->
                                     </tr>
                                      <tr>
                                         <td>Using post-plant herbicide</td>
-                                        <td><%= TempReport.getPostPlantHerbiceideACDIVOCA() %></td>
-                                        <td><%= x.getString("posth_area")%></td>
+                                        <td><%= in.get("posth")  %></td>
+                                        <!--<td><%= x.getString("posth_area")%></td>-->
                                     </tr>
                                     <tr>
                                         <td>Using inorganic fertilizer</td>
-                                        <td><%= TempReport.getOrganicFertilizerACDIVOCA()  %></td>
-                                        <td><%= x.getString("if_area")%></td>
+                                        <td><%= in.get("if")   %></td>
+                                        <!--<td><%= x.getString("if_area")%></td>-->
                                     </tr>
                                      <tr>
                                         <td>Using post-harvest thresher</td>
-                                        <td><%= TempReport.getPostHarvestThresherACDIVOCA() %></td>
-                                        <td><%= x.getString("pht_area")%></td>
+                                        <td><%= in.get("pht")  %></td>
+                                       <!-- <td><%= x.getString("pht_area")%></td>-->
                                     </tr>
                                 </tbody>
                             </table>

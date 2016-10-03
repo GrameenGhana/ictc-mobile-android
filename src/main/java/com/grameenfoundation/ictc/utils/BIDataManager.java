@@ -17,10 +17,12 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONArray;
+import sun.security.krb5.internal.PAData;
 
 
 /**
  * Created by David on 8/19/2016.
+ * @Edited by Joseph George Davis
  * Main interface file to Neo4j and MySQL data stores
  */
 public class BIDataManager extends BIUtil {
@@ -594,6 +596,127 @@ public class BIDataManager extends BIUtil {
         return xy;
          
     }
+    
+    
+    public  JSONObject getIndicatorInfo(String partner)
+    {
+        JSONObject x = new JSONObject();
+        switch(partner)
+        {
+            case PARTNER_ACDI : 
+                x.put("is", TempReport.getImprovedSeed(PARTNER_ACDI));
+                x.put("cda", TempReport.getCropDensity(PARTNER_ACDI));
+                x.put("preh",TempReport.getPrePlantHerbiceide(PARTNER_ACDI));
+                x.put("posth", TempReport.getPostPlantHerbiceide(PARTNER_ACDI));
+                x.put("if", TempReport.getOrganicFertilizer(PARTNER_ACDI));
+                x.put("pht", TempReport.getPostHarvestThresher(PARTNER_ACDI));
+                x.put("ipt", TempReport.getImprovedTechnologies(PARTNER_ACDI));
+                break;  
+            case PARTNER_MOFA:
+                x.put("is", TempReport.getImprovedSeed(PARTNER_MOFA));
+                x.put("cda", TempReport.getCropDensity(PARTNER_MOFA));
+                x.put("preh",TempReport.getPrePlantHerbiceide(PARTNER_MOFA));
+                x.put("posth", TempReport.getPostPlantHerbiceide(PARTNER_MOFA));
+                x.put("if", TempReport.getOrganicFertilizer(PARTNER_MOFA));
+                x.put("pht", TempReport.getPostHarvestThresher(PARTNER_MOFA));
+                x.put("ipt", TempReport.getImprovedTechnologies(PARTNER_MOFA));
+                break;  
+            case PARTNER_GF:
+                Map<String,String> partners = new HashMap<>();
+                partners.put("acdi",PARTNER_ACDI);
+                partners.put("mofa",PARTNER_MOFA);
+               // partners.put("cif",PARTNER_CIF);
+                
+                
+                long allImprovedSeed = gfAggregate("is", partners);
+                long allCropDensity = gfAggregate("cda", partners);
+                long allPrePlantHerbicide = gfAggregate("preh", partners);
+                long allPostPlantHerbicide = gfAggregate("posth", partners);
+                long allInorganicFertilizer = gfAggregate("if", partners);
+                long allPostHarvestThresher = gfAggregate("ipt", partners);
+                long allImprovedTechnologies = allImprovedSeed+allCropDensity+allPrePlantHerbicide+allPostPlantHerbicide
+                        +allInorganicFertilizer+allPostHarvestThresher;
+                        
+                
+                x.put("is", allImprovedSeed);
+                x.put("cda", allCropDensity);
+                x.put("preh",allPrePlantHerbicide);
+                x.put("posth", allPostPlantHerbicide);
+                x.put("if", allInorganicFertilizer);
+                x.put("pht",allPostHarvestThresher);
+                x.put("ipt", allImprovedTechnologies);
+                break;  
+        }
+        
+        System.out.println("Tech " + x);
+        return x;
+    }
+    
+    private  long gfAggregate(String indicator,Map<String,String> partners)
+    {
+        long sum = 0l;
+        
+        switch(indicator)
+        {
+            case "is":
+                for (Map.Entry<String, String> entrySet : partners.entrySet()) {
+                    String key = entrySet.getKey();
+                    String value = entrySet.getValue();
+                    System.out.println("Partner improved seed " + value);
+                    sum += (long)TempReport.getImprovedSeed(value) ;   
+                }
+               break;
+            case "cda":
+                for (Map.Entry<String, String> entrySet : partners.entrySet()) {
+                    String key = entrySet.getKey();
+                    String value = entrySet.getValue();
+                    System.out.println("Partner Crop Density" + value);
+                    sum += (long)TempReport.getCropDensity(value) ;   
+                }
+            break;
+            case "preh":
+                  for (Map.Entry<String, String> entrySet : partners.entrySet()) {
+                    String key = entrySet.getKey();
+                    String value = entrySet.getValue();
+                    System.out.println("Partner Preplant Herbicide" + value);
+                    sum += (long)TempReport.getPrePlantHerbiceide(value) ;   
+                }   
+               break;
+             case "posth":
+                  for (Map.Entry<String, String> entrySet : partners.entrySet()) {
+                    String key = entrySet.getKey();
+                    String value = entrySet.getValue();
+                    System.out.println("Partner Post Plant " + value);
+                    sum += (long)TempReport.getPostPlantHerbiceide(value) ;   
+                } 
+             break;
+             case "if":
+                 for (Map.Entry<String, String> entrySet : partners.entrySet()) {
+                    String key = entrySet.getKey();
+                    String value = entrySet.getValue();
+                    System.out.println("Partner inoganic fertilizer " + value);
+                    sum += (long)TempReport.getOrganicFertilizer(value) ;   
+                } 
+             break;
+             case "pht":
+                   for (Map.Entry<String, String> entrySet : partners.entrySet()) {
+                    String key = entrySet.getKey();
+                    String value = entrySet.getValue();
+                    System.out.println("Partner Post harvest " + value);
+                    sum += (long)TempReport.getPostHarvestThresher(value) ;   
+                } 
+             break;
+        }
+        
+        return sum;
+        
+    }
+    
+    
+    
+    
+    
+    
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Update data methods">
@@ -628,7 +751,7 @@ public class BIDataManager extends BIUtil {
             
            String cql = getCQL(data_set);
            
-           // System.out.println("Data set " + data_set + " -------" + cql);
+           System.out.println("Data set " + data_set + " -------" + cql);
             if (cql.equals("")) {
                 System.out.println("Error pulling data from Neo4j: invalid data set name: " + data_set);
                 return false;
@@ -640,7 +763,7 @@ public class BIDataManager extends BIUtil {
                 HashMap<String, SQLRowObj> farms = new HashMap<>();
               
                 try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
-                    System.out.println("Before cypher Farmer Execution");
+                   
                     Result result = Neo4jServices.executeCypherQuery(cql);
                    
                     ResourceIterator ri = result.columnAs("info");
@@ -778,11 +901,12 @@ public class BIDataManager extends BIUtil {
                 sb.append("        , agent: a.Id   ");
                 sb.append("        , partner: a.agenttype   ");
                 sb.append("        , bc: collect({ trial: f.trial, rc: f.rc, preph: f.pph, postph: f.postph, inorg:f.inorg, thresh: f.thresh}) ");
+                sb.append("        , ind: collect({ trial: trial, rc: rc, preph:pph, postph:postph, inorg:inorg, thresh:thresh}) ");
                 sb.append("        , demo: collect({gender: f.gender, age:f.age, location: f.region, community: lower(replace(f.village,\",\",\"\"))  })  ");
                 sb.append("        , time: collect ({  lmd: f.lastModifieddate ");
                 sb.append("                            , season: CASE WHEN p IS NOT NULL THEN p.reference_season_current ELSE NULL END ");
                 sb.append("                            , year: CASE WHEN p IS NOT NULL THEN p.reference_year_current ELSE NULL END }) ");
-                sb.append("        , crop: collect({ crop: CASE WHEN p IS NOT NULL THEN p.crop_to_cultivate_current ELSE NULL END  ");
+                sb.append("        , crop: collect({ crop: CASE WHEN f IS NOT NULL THEN f.majorcrop ELSE NULL END  ");
                 sb.append("                          , yield_planned: CASE WHEN p IS NOT NULL THEN p.targetyieldperacre ELSE 0 END ");
                 sb.append("                          , price_planned: CASE WHEN h IS NOT NULL THEN h.priceatmostsaledate ELSE 0 END  ");
                 sb.append("                          , yield_actual: CASE WHEN z IS NOT NULL THEN z.total_yield_update ELSE 0 END ");

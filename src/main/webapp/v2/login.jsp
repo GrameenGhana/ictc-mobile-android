@@ -28,7 +28,7 @@
         <div class="animate form login_form">
             <section class="login_content">
                 <form action="<%=request.getContextPath()%>/users/login" method="post">
-                    <h1>Login Form</h1>
+                    <h1>Login</h1>
                     <div>
                         <input type="text" class="form-control" placeholder="Username" id="username" name="username" required />
                     </div>

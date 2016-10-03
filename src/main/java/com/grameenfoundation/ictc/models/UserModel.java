@@ -16,6 +16,7 @@ import com.grameenfoundation.ictc.utils.security.CryptoLibrary;
 import com.grameenfoundation.ictc.wrapper.StorageWrapper;
 import com.grameenfoundation.ictc.wrapper.UserWrapper;
 import java.util.ArrayList;
+import org.json.JSONObject;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,11 +24,13 @@ import java.util.logging.Logger;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
+import org.neo4j.shell.util.json.JSONArray;
 import scala.collection.Iterator;
 
 /**
  *
  * @author skwakwa
+ * @Edited Joseph George Davis
  */
 public class UserModel {
 
@@ -179,4 +182,32 @@ List<UserWrapper> usrs = new ArrayList<>();
 
         return created;
     }
+ 
+ 
+ 
+ public JSONObject  getOb()
+   {
+      JSONObject x = new JSONObject();
+      JSONArray ja = new JSONArray();
+      
+      
+      List<UserWrapper> ob = new UserModel().findByType("acdivoca_ob");
+      
+       for (UserWrapper ob1 : ob) {
+           JSONObject y = new JSONObject();
+           
+           y.put("ob",ob1.getID());
+           y.put("name",ob1.getUsername());
+           
+           ja.put(y);
+       }
+      
+      x.put("obs",ja);
+      
+      return x;
+      
+      
+       
+             
+   }
 }

@@ -23,6 +23,7 @@ public class BIUtil {
     protected final static String TABLE_FARMER = "bi_farmer";
     protected final static String TABLE_FARM = "bi_farm";
     protected final static String TABLE_INFO = "bi_info";
+    protected  final static String TABLE_OUTPUT_INDICATORS ="bi_output_indicatior";
     protected final static ArrayList<String> TABLES = new ArrayList<>(Arrays.asList(TABLE_AGENT , TABLE_COMMUNITY , TABLE_FARMER, TABLE_FARM, TABLE_INFO));
     // </editor-fold>
 
@@ -31,13 +32,15 @@ public class BIUtil {
     protected final static String DATA_SET_COMMUNITY = "community_data";
     protected final static String DATA_SET_FARMER = "farmer_data";
     protected final static String DATA_SET_FARM = "farm_data";
-
+    protected final static String DATA_SET_INDICATOR = "indicator_data";
+    
     protected String getIndicatorTable(String data_set) throws Exception {
         switch (data_set) {
             case DATA_SET_AGENT: return TABLE_AGENT;
             case DATA_SET_COMMUNITY: return TABLE_COMMUNITY;
             case DATA_SET_FARMER: return TABLE_FARMER;
             case DATA_SET_FARM: return TABLE_FARM;
+            case DATA_SET_INDICATOR: return TABLE_OUTPUT_INDICATORS;
             default:
                 throw new Exception("Invalid data set");
         }
@@ -166,12 +169,16 @@ public class BIUtil {
                     + ", `trial` INT NOT NULL DEFAULT '0', `rc` INT NOT NULL DEFAULT '0', `preph` INT NOT NULL DEFAULT '0', `postph` INT NOT NULL DEFAULT '0', `inorg` INT NOT NULL DEFAULT '0' , `thresh` INT NOT NULL DEFAULT '0'";
 
             String info = " `property` varchar(255) NOT NULL, `description` text NOT NULL, `value` varchar(255) NOT NULL, `modified_by` int(11) NOT NULL, `created_at` timestamp NOT NULL, `updated_at` timestamp NOT NULL";
-
+            String outputIndicator = "`indicator` text NOT NULL, `gf` varchar(255) NOT NULL,`acdivoca` varchar(255) NOT NULL, `mofa` varchar(255) NOT NULL,   `cifcsf` varchar(255) NOT NULL";
+            
             ICTCDBUtil.getInstance().createTable(TABLE_AGENT, common + partner);
             ICTCDBUtil.getInstance().createTable(TABLE_COMMUNITY, common);
             ICTCDBUtil.getInstance().createTable(TABLE_FARMER, common + partner + community);
             ICTCDBUtil.getInstance().createTable(TABLE_FARM, time + farmMeta);
+            ICTCDBUtil.getInstance().createTable(TABLE_OUTPUT_INDICATORS, outputIndicator);
             ICTCDBUtil.getInstance().createTable(TABLE_INFO, info);
+         
+            
 
 
             String sql = "INSERT INTO "+TABLE_INFO+" (`id`, `property`, `description`, `value`, `modified_by`, `created_at`, `updated_at`) VALUES "

@@ -1,10 +1,19 @@
+<%@page import="com.grameenfoundation.ictc.utils.BIDataManager"%>
 <%@page import="java.util.List" %>
 <%@page import="com.grameenfoundation.ictc.utils.BIDashboard" %>
+<%@page import="org.json.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     BIDashboard data = new BIDashboard("gf");
+    BIDataManager bi = BIDataManager.getInstance();
     List<String> crops = data.getCrops();
     List<String> locations = data.getLocations();
+    
+    JSONObject  x = data.getACDIVOCADATA();
+    JSONObject  in = bi.getIndicatorInfo("GRAMEEN");
+    System.out.println(in.toString());
+    
+    
 %>
 <!DOCTYPE html>
 <html>
@@ -40,7 +49,7 @@
                         <div class="x_title">
                             <h2>Output Indicators <small></small></h2>
                             <ul class="nav navbar-right panel_toolbox">
-                                <li>
+                               <!-- <li>
                                 <form id="output-form" class="form-inline" method="get">
                                     <div class="form-group">
                                         <select id="gender-output-table" class="form-control">
@@ -66,7 +75,7 @@
                                         </select>
                                     </div>
                                 </form>
-                                </li>
+                                </li>-->
                             </ul>
                             <div class="clearfix"></div>
                         </div>
@@ -77,10 +86,45 @@
                                     <tr>
                                         <th>Indicator</th>
                                         <th>Number of Farmers</th>
-                                        <th>Land Area/Quantity</th>
+                                       <!-- <th>Land Area/Quantity</th>-->
                                     </tr>
                                 </thead>
                                 <tbody>
+                                     <tr>
+                                        <td>Using improved practices and technologies</td>
+                                        <td><%= in.get("ipt")  %></td>
+                                        <!--<td><%= x.getString("ipt_area")%></td>-->
+                                    </tr>
+                                    <tr>
+                                        <td>Using improved seed</td>
+                                        <td><%= in.get("is")   %></td>
+                                        <!--<td><%= x.getString("is_area")%></td>-->
+                                    </tr>
+                                      <tr>
+                                        <td>Using recommended crop density and arrangement</td>
+                                        <td><%= in.get("cda") %></td>
+                                        <!--<td><%= x.getString("cda_area")%></td>-->
+                                    </tr>
+                                    <tr>
+                                        <td>Using pre-plant herbicide</td>
+                                        <td><%= in.get("preh") %></td>
+                                        <!--<td><%= x.getString("preh_area")%></td>-->
+                                    </tr>
+                                     <tr>
+                                        <td>Using post-plant herbicide</td>
+                                        <td><%= in.get("posth")  %></td>
+                                        <!--<td><%= x.getString("posth_area")%></td>-->
+                                    </tr>
+                                    <tr>
+                                        <td>Using inorganic fertilizer</td>
+                                        <td><%= in.get("if")   %></td>
+                                        <!--<td><%= x.getString("if_area")%></td>-->
+                                    </tr>
+                                     <tr>
+                                        <td>Using post-harvest thresher</td>
+                                        <td><%= in.get("pht")  %></td>
+                                       <!-- <td><%= x.getString("pht_area")%></td>-->
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -343,14 +387,14 @@
         <!-- Datatables -->
         <script>
             $(document).ready(function() {
-                var getAjaxUrl = function(table) {
-                    return  "<%= request.getContextPath() %>/api/v1?action=get_bi_data&partner=all"
+                 /**var getAjaxUrl = function(table) {
+                  return  "<%= request.getContextPath() %>/api/v1?action=get_bi_data&partner=all"
                             + "&gender=" + $("#gender-"+table).val()
                             + "&location=" + $("#location-"+table).val()
                             + "&crop=" + $("#crop-"+table).val()
-                            + "&data_set=gf-get-" + table;
+                            + "&data_set=gf-get-" + table; 
                 }
-
+                 **/
                 var options = {
                     dom: "Bfrtip",
                     buttons: [
@@ -368,14 +412,14 @@
                 $("#farmer-monitoring-table").DataTable(options);
                 $('#agent-monitoring-table').DataTable(options);
 
-                var oajax =  {ajax:{ url: getAjaxUrl("output-table")  }};
-                var ocolumns = {columns: [ { "data": "indicator" }, { "data": "farmers" }, { "data": "area" } ]};
-                var oopts = $.extend({}, options, oajax, ocolumns);
-                var outputTable = $('#output-table').DataTable(oopts);
+               // var oajax =  {ajax:{ url: getAjaxUrl("output-table")  }};
+               // var ocolumns = {columns: [ { "data": "indicator" }, { "data": "farmers" }, { "data": "area" } ]};
+               // var oopts = $.extend({}, options, oajax, ocolumns);
+                //var outputTable = $('#output-table').DataTable(oopts);
 
-                $("#gender-output-table").change(function() { console.log("changing"); outputTable.ajax.url(getAjaxUrl("output-table")).load(); });
-                $("#location-output-table").change(function() { outputTable.ajax.url(getAjaxUrl("output-table")).load(); });
-                $("#crop-output-table").change(function() { outputTable.ajax.url(getAjaxUrl("output-table")).load(); });
+              //  $("#gender-output-table").change(function() { console.log("changing"); outputTable.ajax.url(getAjaxUrl("output-table")).load(); });
+               // $("#location-output-table").change(function() { outputTable.ajax.url(getAjaxUrl("output-table")).load(); });
+               // $("#crop-output-table").change(function() { outputTable.ajax.url(getAjaxUrl("output-table")).load(); });
 
                 //var aajax =  {ajax: { url: getAjaxUrl("activity-table") } };
                 //var acolumns = {columns: [ { "data": "indicator" }, { "data": "farmers" } ] };
