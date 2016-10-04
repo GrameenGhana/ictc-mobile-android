@@ -462,6 +462,8 @@ public class Neo4jServices {
     }
 
     public static Node findNodeFromRelation(Node underlyingNode, Direction direction, ICTCRelationshipTypes relationType) {
+        
+         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
         Iterable<Relationship> relationships = underlyingNode.getRelationships(direction, relationType);
         for (Relationship relationshp : relationships) {
             if (direction.equals(Direction.OUTGOING)) {
@@ -470,6 +472,8 @@ public class Neo4jServices {
                 return relationshp.getStartNode();
             }
         }
+        trx.success();
+         }
         return null;
     }
 

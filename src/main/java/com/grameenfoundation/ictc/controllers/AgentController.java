@@ -226,6 +226,7 @@ public class AgentController extends HttpServlet {
                 if(null!=ag)
                 {
                     System.out.println("ob attached to agent " + user.ObToAggent(ob,ag.getUnderlyingNode())); 
+                     ICTCUtil.redirect(request, response,"/users/viewobtoag.jsp");
                 }
                 else
                 {

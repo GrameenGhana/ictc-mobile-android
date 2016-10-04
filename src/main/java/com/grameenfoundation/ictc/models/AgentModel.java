@@ -250,7 +250,7 @@ public class AgentModel {
 //                + " where p." + field + "='" + value + "'"
 //                + " return p";
          
-        
+       try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) { 
         String q = "match (l:AGENT)"+" where l." + field + "='" + value + "'" +" return l";
 
         System.out.println("Query " + q);
@@ -264,7 +264,8 @@ public class AgentModel {
             System.out.println("Unable to Find Agent");
         }
         
-     
+        trx.success();
+         }
        return null;
       
 

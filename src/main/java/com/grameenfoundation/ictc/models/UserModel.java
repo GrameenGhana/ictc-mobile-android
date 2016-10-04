@@ -5,6 +5,7 @@
  */
 package com.grameenfoundation.ictc.models;
 
+import com.grameenfoundation.ictc.domains.Agent;
 import com.grameenfoundation.ictc.domains.Storage;
 import com.grameenfoundation.ictc.domains.User;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
@@ -24,6 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.ResourceIterator;
+import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 import scala.collection.Iterator;
 
@@ -102,13 +104,86 @@ public class UserModel {
         return null;
     }
     
+       public List<User> findAllUsers() {
+        List<User> aglist = new ArrayList<>();
+
+        String q = "match (l:USER) where l.usertype='acdivoca_ob' return  l";
+
+        try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            Result result = Neo4jServices.executeCypherQuery(q);
+
+            ResourceIterator<Node> n_column = result.columnAs("l");
+            while (n_column.hasNext()) {
+                // aglist.add(new Agent(n_column.next()));
+               User b = new User(n_column.next());
+
+                aglist.add(b);
+                tx.success();
+
+            }
+            tx.success();
+        }
+        
+        
+        return aglist;
+     }
+       
+     
+     private List<Agent> getObAgent(String userId)
+     {
+         List<Agent> aglist = new ArrayList<>();
+         
+         String q ="match (f:USER)-[:HAS_AGENT]->(l) where f.Id='"+userId+"' return l";
+         
+           try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            Result result = Neo4jServices.executeCypherQuery(q);
+
+            ResourceIterator<Node> n_column = result.columnAs("l");
+            while (n_column.hasNext()) {
+                // aglist.add(new Agent(n_column.next()));
+               Agent b = new Agent(n_column.next());
+
+                aglist.add(b);
+
+            }
+            tx.success();
+        }
+        
+        
+        return aglist;
+         
+         
+     }
     
-    
+     public List<User> findUserAgents() {
+        List<User> aglist = new ArrayList<>();
+
+        String q = "match (l:USER)-{:HAS_AGENT]->(l) where l.usertype='acdivoca_ob' return  l";
+
+        try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            Result result = Neo4jServices.executeCypherQuery(q);
+
+            ResourceIterator<Node> n_column = result.columnAs("l");
+            while (n_column.hasNext()) {
+                // aglist.add(new Agent(n_column.next()));
+               User b = new User(n_column.next());
+
+                aglist.add(b);
+
+            }
+            tx.success();
+        }
+        
+        
+        return aglist;
+     }
 
     public List<UserWrapper> findAll() {
 
         return userQuery("match (l:USER) return  l", "l");
     }
+    
+    
 
     public List<UserWrapper> findByType(String userType) {
 
@@ -233,6 +308,49 @@ List<UserWrapper> usrs = new ArrayList<>();
              
    }
  
+ 
+ public JSONObject getObUser()
+ {
+      JSONObject x = new JSONObject();
+      JSONArray ja = new JSONArray();
+      Agent a = null;
+     
+     List<Agent> agg = new ArrayList<>();
+     Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
+     try {
+         List<User> users = findAllUsers();
+         System.out.print("user " + users.size());
+
+         for (User ag : users) {
+              agg = getObAgent(ag.getAgentID());
+        for (Agent at : agg) {
+              JSONObject y = new JSONObject();
+             
+                 y.put("ob", ag.getFirstname() + " " + ag.getLastname());
+                 y.put("ag", at.getFirstname() + " " + at.getLastname());
+             
+
+             ja.put(y); 
+             }
+            
+         }
+
+         tx.success();
+
+ }
+  catch( Exception ex)
+  {
+      ex.printStackTrace();
+      tx.failure();
+  }
+  finally
+  {
+      tx.finish();
+  }
+    x.put("obagent",ja);
+    System.out.println("json " + x);
+    return x;
+ }
  public JSONObject getAgent()
  {
      JSONObject x = new JSONObject();

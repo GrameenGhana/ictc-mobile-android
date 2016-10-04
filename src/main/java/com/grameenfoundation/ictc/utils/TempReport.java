@@ -195,6 +195,79 @@ public class TempReport extends BIUtil{
     
       // </editor-fold> 
    
+   //<editor-fold defaultstate="collapsed" desc=" OB Dashboard ">  
+   
+   public Object getOBPlanTotalAcres(String agentId) 
+   {
+    String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION]-(pc) WHERE f.CreatedById='"+agentId+"' return sum(toInt(pc.acresofland))  as l"; 
+        
+        return Neo4jServices.getAggregateItem(q); 
+   
+   }
+   
+   
+  public Object getOBActualTotalAcres(String agentId) 
+   {
+    String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' return sum(toInt(pc.landareacultivaredupdate))  as l"; 
+        
+        return Neo4jServices.getAggregateItem(q); 
+   
+   }
+  
+  
+   public Object getOBPlanMaxAcres(String agentId) 
+   {
+    String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION]-(pc) WHERE f.CreatedById='"+agentId+"' return max(pc.acresofland)  as l"; 
+        
+        return Neo4jServices.getAggregateItem(q); 
+   
+   }
+   
+  
+  public Object getOBActualMaxAcres(String agentId) 
+   {
+    String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' return max(pc.landareacultivaredupdate)  as l"; 
+        
+        return Neo4jServices.getAggregateItem(q); 
+   
+   }
+  
+   public Object getOBPlanMinAcres(String agentId) 
+   {
+    String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION]-(pc) WHERE f.CreatedById='"+agentId+"' return min(pc.acresofland)  as l"; 
+        
+        return Neo4jServices.getAggregateItem(q); 
+   
+   }
+   
+    public Object getOBActualMinAcres(String agentId) 
+   {
+    String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' return min(pc.landareacultivaredupdate)  as l"; 
+        
+        return Neo4jServices.getAggregateItem(q); 
+   
+   }
+    
+    
+    public Object getOBPlanAvgAcres(String agentId) 
+   {
+    String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION]-(pc) WHERE f.CreatedById='"+agentId+"' return avg(toInt(pc.acresofland))  as l"; 
+        
+        return Neo4jServices.getAggregateItem(q); 
+   
+   }
+   
+    
+   public Object getOBActualAvgAcres(String agentId) 
+   {
+    String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' return avg(toInt(pc.landareacultivaredupdate))  as l"; 
+        
+        return Neo4jServices.getAggregateItem(q); 
+   
+   }
+   //</editor-fold>
+   
+   
    private String toTwoDecimalPlaces(double value)
    {
        DecimalFormat df = new DecimalFormat("#.##");
