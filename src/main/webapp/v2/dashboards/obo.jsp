@@ -1,3 +1,4 @@
+<%@page import="com.grameenfoundation.ictc.utils.BIDataManager"%>
 <%@page import="com.grameenfoundation.ictc.utils.security.Authenticator"%>
 <%@page import="com.grameenfoundation.ictc.utils.security.SessionKeys"%>
 <%@page import="com.grameenfoundation.ictc.wrapper.LoginUser"%>
@@ -8,6 +9,10 @@
     
     BIDashboard data = new BIDashboard("obo");
     List<String> years = data.getYears();
+    BIDataManager bi = BIDataManager.getInstance();
+    
+    
+    
     
     
     
@@ -68,7 +73,7 @@
                         <div class="x_title">
                             <h2>Land Usage and Yield Indicators <small></small></h2>
                             <ul class="nav navbar-right panel_toolbox">
-                                <li>
+                               <!-- <li>
                                 <form id="yield-form" class="form-inline" method="get">
                                     <div class="form-group">
                                         <select id="year-yield-table" class="form-control">
@@ -86,7 +91,7 @@
                                         </select>
                                     </div>
                                 </form>
-                                </li>
+                                </li>-->
                             </ul>
                             <div class="clearfix"></div>
                         </div>
@@ -101,6 +106,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                     <tr>
+                                        <td>Total area (acres) under registered farmers</td>
+                                        <td><%= in.get("ipt")  %></td>
+                                        <!--<td><%= x.getString("ipt_area")%></td>-->
+                                    </tr>
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -224,12 +235,12 @@
         <!-- Datatables -->
         <script>
             $(document).ready(function() {
-                var getAjaxUrl = function(table) {
+               /** var getAjaxUrl = function(table) {
                     return  "<%= request.getContextPath() %>/api/v1?action=get_bi_data"
                             + "&year=" + $("#year-"+table).val()
                             + "&season=" + $("#season-"+table).val()
                             + "&data_set=obo-get-" + table;
-                }
+                } **/
 
                 var options = {
                     dom: "Bfrtip",
@@ -245,17 +256,17 @@
                     searching: false
                 };
 
-                var ytoa = {ajax:  { url: getAjaxUrl("yield-table") } };
+               // var ytoa = {ajax:  { url: getAjaxUrl("yield-table") } };
                 var ytoc = {columns : [ { "data": "indicator" }, { "data": "planned" }, { "data": "actual" } ] };
                 var yto = $.extend({}, options, ytoa, ytoc);
                 var yieldTable = $('#yield-table').DataTable(yto);
 
-                var ciobtoa =  {ajax: { url: getAjaxUrl("ciob-table") } };
+              // ciobtoa =  {ajax: { url: getAjaxUrl("ciob-table") } };
                 var ciobtoc = {columns: [ { "data": "indicator" }, { "data": "planned" }, { "data": "actual" } ] };
                 var ciobto = $.extend({}, options, ciobtoa, ciobtoc);
                 var ciobTable = $('#ciob-table').DataTable(ciobto);
 
-                var ciftoa =  {ajax: { url: getAjaxUrl("cif-table") }};
+               // var ciftoa =  {ajax: { url: getAjaxUrl("cif-table") }};
                 var ciftoc = {columns:[ { "data": "indicator" }, { "data": "planned" }, { "data": "actual" } ]};
                 var cifto = $.extend({}, options, ciftoa, ciftoc);
                 var cifTable = $('#cif-table').DataTable(cifto);

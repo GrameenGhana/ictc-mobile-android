@@ -49,6 +49,7 @@ public class BIUtil {
 
     // <editor-fold defaultstate="collapsed" desc="Partner Names">
     protected final static String PARTNER_ACDI = "ACDIVOCA";
+    protected final static String PARTNER_OB = "OB";
     protected final static String PARTNER_MOFA = "MOFA";
     protected final static String PARTNER_GF = "GRAMEEN";
     protected final static String PARTNER_CIF = "CIFCSF";

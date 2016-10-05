@@ -163,7 +163,8 @@ public class TempReport extends BIUtil{
       
       
    // </editor-fold>  
-  //<editor-fold defaultstate="collapsed" desc=" MOFA Dashboard ">    
+      
+ //<editor-fold defaultstate="collapsed" desc=" MOFA Dashboard ">    
      
         public static Object getCropDensityMOFA()
    {
@@ -197,7 +198,7 @@ public class TempReport extends BIUtil{
    
    //<editor-fold defaultstate="collapsed" desc=" OB Dashboard ">  
    
-   public Object getOBPlanTotalAcres(String agentId) 
+   public static Object getOBPlanTotalAcres(String agentId) 
    {
     String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION]-(pc) WHERE f.CreatedById='"+agentId+"' return sum(toInt(pc.acresofland))  as l"; 
         
@@ -206,7 +207,7 @@ public class TempReport extends BIUtil{
    }
    
    
-  public Object getOBActualTotalAcres(String agentId) 
+  public static Object getOBActualTotalAcres(String agentId) 
    {
     String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' return sum(toInt(pc.landareacultivaredupdate))  as l"; 
         
@@ -215,7 +216,7 @@ public class TempReport extends BIUtil{
    }
   
   
-   public Object getOBPlanMaxAcres(String agentId) 
+   public static Object getOBPlanMaxAcres(String agentId) 
    {
     String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION]-(pc) WHERE f.CreatedById='"+agentId+"' return max(pc.acresofland)  as l"; 
         
@@ -224,7 +225,7 @@ public class TempReport extends BIUtil{
    }
    
   
-  public Object getOBActualMaxAcres(String agentId) 
+  public static Object getOBActualMaxAcres(String agentId) 
    {
     String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' return max(pc.landareacultivaredupdate)  as l"; 
         
@@ -232,7 +233,7 @@ public class TempReport extends BIUtil{
    
    }
   
-   public Object getOBPlanMinAcres(String agentId) 
+   public static Object getOBPlanMinAcres(String agentId) 
    {
     String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION]-(pc) WHERE f.CreatedById='"+agentId+"' return min(pc.acresofland)  as l"; 
         
@@ -240,7 +241,7 @@ public class TempReport extends BIUtil{
    
    }
    
-    public Object getOBActualMinAcres(String agentId) 
+    public static Object getOBActualMinAcres(String agentId) 
    {
     String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' return min(pc.landareacultivaredupdate)  as l"; 
         
@@ -249,7 +250,7 @@ public class TempReport extends BIUtil{
    }
     
     
-    public Object getOBPlanAvgAcres(String agentId) 
+    public static Object getOBPlanAvgAcres(String agentId) 
    {
     String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION]-(pc) WHERE f.CreatedById='"+agentId+"' return avg(toInt(pc.acresofland))  as l"; 
         
@@ -258,13 +259,53 @@ public class TempReport extends BIUtil{
    }
    
     
-   public Object getOBActualAvgAcres(String agentId) 
+   public static Object getOBActualAvgAcres(String agentId) 
    {
     String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' return avg(toInt(pc.landareacultivaredupdate))  as l"; 
         
         return Neo4jServices.getAggregateItem(q); 
    
    }
+   
+   
+    public static Object getOBPlanAvgYieldAcre(String agentId) 
+   {
+    String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION]-(pc) WHERE f.CreatedById='"+agentId+"' return avg(toInt(pc.targetyieldperacre)) as l"; 
+        
+        return Neo4jServices.getAggregateItem(q); 
+   
+   }
+   
+    
+  public static Object getOBActualAvgYieldAcre(String agentId) 
+   {
+    String q = "MATCH (f:FARMER)-[:HAS_POSTHARVEST_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' return avg(toInt(pc.total_yield_update)) as l"; 
+        
+        return Neo4jServices.getAggregateItem(q); 
+   
+   }
+   
+   public static Object getOBPlanTotalProduction(String agentId) 
+   {
+    String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION]-(pc) WHERE f.CreatedById='"+agentId+"'"
+            + " return sum(toInt(pc.targetyieldperacre) * toInt(pc.acresofland)) as l"; 
+        
+        return Neo4jServices.getAggregateItem(q); 
+   
+   }
+   
+     public static Object getOBActualTotalProduction(String agentId) 
+   {
+       String q = "MATCH (f:FARMER)-[:HAS_POSTHARVEST_UPDATE]-(pc) WHERE f.CreatedById='" + agentId + "'"
+               + " return sum(toInt(pc.landareacultivaredupdate) * toInt(pc.total_yield_update)) as l";
+
+       return Neo4jServices.getAggregateItem(q);
+
+   }
+   
+   
+   
+   
    //</editor-fold>
    
    

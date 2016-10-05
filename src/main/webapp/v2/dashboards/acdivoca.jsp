@@ -355,14 +355,14 @@
                 $("#farmer-monitoring-table").DataTable(options);
                 $('#agent-monitoring-table').DataTable(options);
 
-                var oajax =  {ajax:{ url: getAjaxUrl("output-table")  }};
+              /**  var oajax =  {ajax:{ url: getAjaxUrl("output-table")  }};
                 var ocolumns = {columns: [ { "data": "indicator" }, { "data": "farmers" }, { "data": "area" } ]};
                 var oopts = $.extend({}, options, oajax, ocolumns);
                 var outputTable = $('#output-table').DataTable(oopts);
 
                 $("#gender-output-table").change(function() { console.log("changing"); outputTable.ajax.url(getAjaxUrl("output-table")).load(); });
                 $("#location-output-table").change(function() { outputTable.ajax.url(getAjaxUrl("output-table")).load(); });
-                $("#crop-output-table").change(function() { outputTable.ajax.url(getAjaxUrl("output-table")).load(); });
+                $("#crop-output-table").change(function() { outputTable.ajax.url(getAjaxUrl("output-table")).load(); });**/
             });
         </script>
         <!-- /Datatables -->

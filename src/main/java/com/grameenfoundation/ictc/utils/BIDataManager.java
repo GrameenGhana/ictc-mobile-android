@@ -646,6 +646,7 @@ public class BIDataManager extends BIUtil {
                 x.put("pht",allPostHarvestThresher);
                 x.put("ipt", allImprovedTechnologies);
                 break;  
+           
         }
         
         System.out.println("Tech " + x);
@@ -713,7 +714,20 @@ public class BIDataManager extends BIUtil {
     }
     
     
-    
+    public JSONObject GetOBData(String agentId)
+    {
+        JSONObject x = new JSONObject();
+        
+        x.put("tap",TempReport.getOBPlanTotalAcres(agentId));
+        x.put("tac",TempReport.getOBActualTotalAcres(agentId));
+        
+        
+         
+        System.out.println("Tech " + x);
+        
+        return x;
+        
+    }
     
     
     
