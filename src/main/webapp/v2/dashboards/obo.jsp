@@ -1,9 +1,13 @@
+<%@page import="com.grameenfoundation.ictc.domains.Agent"%>
+<%@page import="com.grameenfoundation.ictc.domains.User"%>
+<%@page import="com.grameenfoundation.ictc.models.UserModel"%>
 <%@page import="com.grameenfoundation.ictc.utils.BIDataManager"%>
 <%@page import="com.grameenfoundation.ictc.utils.security.Authenticator"%>
 <%@page import="com.grameenfoundation.ictc.utils.security.SessionKeys"%>
 <%@page import="com.grameenfoundation.ictc.wrapper.LoginUser"%>
 <%@page import="java.util.List" %>
 <%@page import="com.grameenfoundation.ictc.utils.BIDashboard" %>
+  <%@page import="org.json.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     
@@ -11,6 +15,15 @@
     List<String> years = data.getYears();
     BIDataManager bi = BIDataManager.getInstance();
     
+    LoginUser u = Authenticator.loginUser(session);
+    System.out.println(u.getUserId());
+    //Agent a = new UserModel()
+    List<String> ags = new UserModel().getAgents(u.getUserId());
+    
+    System.out.print("agent " + ags.size()+ " " + ags.get(0));
+    
+    JSONObject x = bi.GetOBData(ags.get(0));
+  
     
     
     
@@ -43,7 +56,7 @@
         <div class="clearfix"></div>
 
 
-        <div class="row" style="margin:10px 0;">
+       <!-- <div class="row" style="margin:10px 0;">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="dashboard_graph">
 
@@ -61,7 +74,7 @@
                     <div class="clearfix"></div>
                 </div>
             </div>
-        </div>
+        </div>-->
 
         <br/>
 
@@ -97,7 +110,8 @@
                         </div>
 
                         <div class="x_content">
-                            <table id="yield-table" class="table table-striped table-bordered jambo_table">
+                           <!-- <table id="yield-table" class="table table-striped table-bordered jambo_table">-->
+                            <table class="table table-striped table-bordered jambo_table">
                                 <thead>
                                     <tr>
                                         <th>Indicator</th>
@@ -108,10 +122,34 @@
                                 <tbody>
                                      <tr>
                                         <td>Total area (acres) under registered farmers</td>
-                                        <td><%= in.get("ipt")  %></td>
-                                        <!--<td><%= x.getString("ipt_area")%></td>-->
+                                        <td><%= x.get("tap")  %></td>
+                                        <td><%= x.get("tac")%></td>
                                     </tr>
-                                    
+                                    <tr>
+                                        <td>Largest area (acres)</td>
+                                        <td><%= x.get("lap")%></td>
+                                        <td><%= x.get("lac")%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Smallest area (acres)</td>
+                                        <td><%= x.get("sap") %></td>
+                                        <td><%= x.get("sac")%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Average area cultivated</td>
+                                        <td><%= x.get("avap") %></td>
+                                        <td><%= x.get("avac")%></td>
+                                    </tr>
+                                     <tr>
+                                        <td>Average yield per acre</td>
+                                        <td><%= x.get("ayap") %></td>
+                                        <td><%= x.get("ayac")%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total production from registered farmers</td>
+                                        <td><%= x.get("tpp") %></td>
+                                        <td><%= x.get("tpc")%></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -235,12 +273,12 @@
         <!-- Datatables -->
         <script>
             $(document).ready(function() {
-               /** var getAjaxUrl = function(table) {
+                var getAjaxUrl = function(table) {
                     return  "<%= request.getContextPath() %>/api/v1?action=get_bi_data"
                             + "&year=" + $("#year-"+table).val()
                             + "&season=" + $("#season-"+table).val()
                             + "&data_set=obo-get-" + table;
-                } **/
+                } 
 
                 var options = {
                     dom: "Bfrtip",
@@ -256,17 +294,17 @@
                     searching: false
                 };
 
-               // var ytoa = {ajax:  { url: getAjaxUrl("yield-table") } };
+                var ytoa = {ajax:  { url: getAjaxUrl("yield-table") } };
                 var ytoc = {columns : [ { "data": "indicator" }, { "data": "planned" }, { "data": "actual" } ] };
                 var yto = $.extend({}, options, ytoa, ytoc);
                 var yieldTable = $('#yield-table').DataTable(yto);
 
-              // ciobtoa =  {ajax: { url: getAjaxUrl("ciob-table") } };
+               ciobtoa =  {ajax: { url: getAjaxUrl("ciob-table") } };
                 var ciobtoc = {columns: [ { "data": "indicator" }, { "data": "planned" }, { "data": "actual" } ] };
                 var ciobto = $.extend({}, options, ciobtoa, ciobtoc);
                 var ciobTable = $('#ciob-table').DataTable(ciobto);
 
-               // var ciftoa =  {ajax: { url: getAjaxUrl("cif-table") }};
+              var ciftoa =  {ajax: { url: getAjaxUrl("cif-table") }};
                 var ciftoc = {columns:[ { "data": "indicator" }, { "data": "planned" }, { "data": "actual" } ]};
                 var cifto = $.extend({}, options, ciftoa, ciftoc);
                 var cifTable = $('#cif-table').DataTable(cifto);
@@ -286,7 +324,7 @@
         <!-- eChart Line -->
         <script>
             //color: [ '#26B99A', '#34495E', '#BDC3C7', '#3498DB', '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7' ],
-            var theme = {
+           /** var theme = {
                 color: [ '#639a9F', '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7', '#34495E', '#BDC3C7', '#3498DB'],
                 title: { itemGap: 8, textStyle: { fontWeight: 'normal', color: '#408829' } },
                 dataRange: { color: ['#1f610a', '#97b58d'] },
@@ -390,7 +428,7 @@
                     }],
                     series: <%= data.getFarmerRegistrationEChartSeries() %>
                 });
-            });
+            }); **/
         </script>
         <!-- /EChart -->
 

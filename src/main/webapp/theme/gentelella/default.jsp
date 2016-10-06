@@ -166,7 +166,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <img src="<%=request.getContextPath()%>/theme/gentelella/images/img.jpg" alt=""><%= user.getUserScreenName() %>
+                                <img src="" alt=""><%= user.getUserScreenName() %>
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">

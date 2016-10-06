@@ -596,7 +596,7 @@ public class Neo4jServices {
             System.out.println(e.getLocalizedMessage());
         }
 
-        return 00;
+        return 0;
     }
 
     public static long getSumValue(String q) {

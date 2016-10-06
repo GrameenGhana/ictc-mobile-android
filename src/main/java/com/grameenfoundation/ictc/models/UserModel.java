@@ -129,9 +129,10 @@ public class UserModel {
      }
        
      
-     private List<Agent> getObAgent(String userId)
+     public List<AgentWrapper> getObAgent(String userId)
      {
-         List<Agent> aglist = new ArrayList<>();
+         //System.out.println("obId  " + userId);
+         List<AgentWrapper> aglist = new ArrayList<>();
          
          String q ="match (f:USER)-[:HAS_AGENT]->(l) where f.Id='"+userId+"' return l";
          
@@ -142,14 +143,20 @@ public class UserModel {
             while (n_column.hasNext()) {
                 // aglist.add(new Agent(n_column.next()));
                Agent b = new Agent(n_column.next());
-
-                aglist.add(b);
+                AgentWrapper wr = new AgentWrapper();
+             
+                wr.setAgentId(b.getAgentId());
+                wr.setAgentcode(b.getAgentcode());
+                wr.setFirstname(b.getFirstname());
+                wr.setLastname(b.getLastname());
+                
+               aglist.add(wr);
 
             }
             tx.success();
         }
         
-        
+         System.out.println("agli " + aglist.get(0).getFirstname());
         return aglist;
          
          
@@ -158,7 +165,7 @@ public class UserModel {
      public List<User> findUserAgents() {
         List<User> aglist = new ArrayList<>();
 
-        String q = "match (l:USER)-{:HAS_AGENT]->(l) where l.usertype='acdivoca_ob' return  l";
+        String q = "match (u:USER)-[:HAS_AGENT]->(l) where l.usertype='acdivoca_ob' return  l";
 
         try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             Result result = Neo4jServices.executeCypherQuery(q);
@@ -315,7 +322,7 @@ List<UserWrapper> usrs = new ArrayList<>();
       JSONArray ja = new JSONArray();
       Agent a = null;
      
-     List<Agent> agg = new ArrayList<>();
+     List<AgentWrapper> agg = new ArrayList<>();
      Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
      try {
          List<User> users = findAllUsers();
@@ -323,7 +330,7 @@ List<UserWrapper> usrs = new ArrayList<>();
 
          for (User ag : users) {
               agg = getObAgent(ag.getAgentID());
-        for (Agent at : agg) {
+        for (AgentWrapper at : agg) {
               JSONObject y = new JSONObject();
              
                  y.put("ob", ag.getFirstname() + " " + ag.getLastname());
@@ -372,4 +379,25 @@ List<UserWrapper> usrs = new ArrayList<>();
        // System.out.println("json " + x);
       return x; 
  }
+ 
+ 
+ public List<String> getAgents(String user)
+ {
+     
+
+     List<AgentWrapper> ags = new ArrayList<>();
+          ags= new UserModel().getObAgent(user);
+     
+     List<String> agents = new ArrayList<>();
+     
+     for (AgentWrapper agent : new UserModel().getObAgent(user)) {
+        agents.add(agent.getAgentId());
+     }
+     
+     
+    return agents; 
+ }
+ 
+ 
+ 
 }

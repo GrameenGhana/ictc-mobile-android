@@ -716,11 +716,21 @@ public class BIDataManager extends BIUtil {
     
     public JSONObject GetOBData(String agentId)
     {
+        System.out.println("Agent " + agentId);
         JSONObject x = new JSONObject();
         
         x.put("tap",TempReport.getOBPlanTotalAcres(agentId));
         x.put("tac",TempReport.getOBActualTotalAcres(agentId));
-        
+        x.put("lap",TempReport.getOBPlanMaxAcres(agentId));
+        x.put("lac",TempReport.getOBActualMaxAcres(agentId));
+        x.put("sap", TempReport.getOBPlanMinAcres(agentId));
+        x.put("sac", TempReport.getOBActualMinAcres(agentId));
+        x.put("avap",TempReport.getOBPlanAvgAcres(agentId));
+        x.put("avac",TempReport.getOBActualAvgAcres(agentId));
+        x.put("ayap", TempReport.toTwoDecimalPlaces(TempReport.getOBPlanAvgYieldAcre(agentId)));
+        x.put("ayac", TempReport.toTwoDecimalPlaces(TempReport.getOBActualAvgYieldAcre(agentId)));
+        x.put("tpp", TempReport.getOBPlanTotalProduction(agentId));
+        x.put("tpc", TempReport.getOBActualTotalProduction(agentId));
         
          
         System.out.println("Tech " + x);

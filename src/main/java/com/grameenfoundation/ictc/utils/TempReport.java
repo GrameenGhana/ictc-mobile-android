@@ -202,114 +202,322 @@ public class TempReport extends BIUtil{
    {
     String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION]-(pc) WHERE f.CreatedById='"+agentId+"' return sum(toInt(pc.acresofland))  as l"; 
         
-        return Neo4jServices.getAggregateItem(q); 
+       return Neo4jServices.getAggregateItem(q); 
+//      String value= "0";
+//       System.out.println("value " + Neo4jServices.getAggregateItem(q));
+//       try{
+//          if(null==Neo4jServices.getAggregateItem(q))
+//            value ="0";
+//        else
+//            value = (String)Neo4jServices.getAggregateItem(q);
+//              
+//       } 
+//       catch(Exception e )
+//       {
+//           value="0";
+//             e.printStackTrace();
+//       }
+//       
+//        return value; 
    
    }
    
    
-  public static Object getOBActualTotalAcres(String agentId) 
+  public static int getOBActualTotalAcres(String agentId) 
    {
+       
+       
     String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' return sum(toInt(pc.landareacultivaredupdate))  as l"; 
-        
-        return Neo4jServices.getAggregateItem(q); 
+    System.out.println("value " + Neo4jServices.getAggregateItem(q));
+       int value= 0;
+       System.out.println("value " + Neo4jServices.getAggregateItem(q));
+       try{
+          if(null==Neo4jServices.getAggregateItem(q))
+            value =0;
+        else
+            value = (int)Neo4jServices.getAggregateItem(q);
+              
+       } 
+       catch(Exception e )
+       {
+           value=0;
+             e.printStackTrace();
+       }
+       
+        return value; 
    
    }
   
   
-   public static Object getOBPlanMaxAcres(String agentId) 
+   public static String getOBPlanMaxAcres(String agentId) 
    {
     String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION]-(pc) WHERE f.CreatedById='"+agentId+"' return max(pc.acresofland)  as l"; 
         
-        return Neo4jServices.getAggregateItem(q); 
+       // return  (long)Neo4jServices.getAggregatedValue(q); 
+       String value= "0";
+       System.out.println("value " + Neo4jServices.getAggregateItem(q));
+       try{
+          if(null==Neo4jServices.getAggregateItem(q))
+            value ="0";
+        else
+            value = (String)Neo4jServices.getAggregateItem(q);
+              
+       } 
+       catch(Exception e )
+       {
+           value="0";
+             e.printStackTrace();
+       }
+       
+        return value; 
    
    }
    
   
-  public static Object getOBActualMaxAcres(String agentId) 
+  public static String getOBActualMaxAcres(String agentId) 
    {
     String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' return max(pc.landareacultivaredupdate)  as l"; 
         
-        return Neo4jServices.getAggregateItem(q); 
+        //return Neo4jServices.getAggregatedValue(q); 
+     
+      String value= "0";
+       System.out.println("value " + Neo4jServices.getAggregateItem(q));
+       try{
+          if(null==Neo4jServices.getAggregateItem(q))
+            value ="0";
+        else
+            value = (String)Neo4jServices.getAggregateItem(q);
+              
+       } 
+       catch(Exception e )
+       {
+           value="0";
+             e.printStackTrace();
+       }
+       
+        return value; 
+   
    
    }
   
-   public static Object getOBPlanMinAcres(String agentId) 
+   public static String getOBPlanMinAcres(String agentId) 
    {
     String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION]-(pc) WHERE f.CreatedById='"+agentId+"' return min(pc.acresofland)  as l"; 
         
-        return Neo4jServices.getAggregateItem(q); 
+        // return Neo4jServices.getAggregatedValue(q); 
+     String value= "0";
+       System.out.println("value " + Neo4jServices.getAggregateItem(q));
+       try{
+          if(null==Neo4jServices.getAggregateItem(q))
+            value ="0";
+        else
+            value = (String)Neo4jServices.getAggregateItem(q);
+              
+       } 
+       catch(Exception e )
+       {
+           value="0";
+             e.printStackTrace();
+       }
+       
+        return value; 
    
    }
    
-    public static Object getOBActualMinAcres(String agentId) 
+    public static String getOBActualMinAcres(String agentId) 
    {
     String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' return min(pc.landareacultivaredupdate)  as l"; 
         
-        return Neo4jServices.getAggregateItem(q); 
+        //return Neo4jServices.getAggregateItem(q); 
+      String value= "0";
+       System.out.println("value " + Neo4jServices.getAggregateItem(q));
+       try{
+          if(null==Neo4jServices.getAggregateItem(q))
+            value ="0";
+        else
+            value = (String)Neo4jServices.getAggregateItem(q);
+              
+       } 
+       catch(Exception e )
+       {
+           value="0";
+             e.printStackTrace();
+       }
+       
+        return value; 
    
    }
     
     
-    public static Object getOBPlanAvgAcres(String agentId) 
+    public static double getOBPlanAvgAcres(String agentId) 
    {
     String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION]-(pc) WHERE f.CreatedById='"+agentId+"' return avg(toInt(pc.acresofland))  as l"; 
         
-        return Neo4jServices.getAggregateItem(q); 
+       // return Neo4jServices.getAggregateItem(q); 
+      double value= 0;
+       System.out.println("value " + Neo4jServices.getAggregateItem(q));
+       try{
+          if(null==Neo4jServices.getAggregateItem(q))
+            value =0;
+        else
+            value = (double)Neo4jServices.getAggregateItem(q);
+              
+       } 
+       catch(Exception e )
+       {
+           value=0;
+             e.printStackTrace();
+       }
+       
+        return value; 
    
    }
    
     
-   public static Object getOBActualAvgAcres(String agentId) 
+   public static String getOBActualAvgAcres(String agentId) 
    {
     String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' return avg(toInt(pc.landareacultivaredupdate))  as l"; 
         
-        return Neo4jServices.getAggregateItem(q); 
-   
+        //return Neo4jServices.getAggregateItem(q); 
+     String value= "0";
+       System.out.println("value " + Neo4jServices.getAggregateItem(q));
+       try{
+          if(null==Neo4jServices.getAggregateItem(q))
+            value ="0";
+        else
+            value = (String)Neo4jServices.getAggregateItem(q);
+              
+       } 
+       catch(Exception e )
+       {
+           value="0";
+             e.printStackTrace();
+       }
+       
+        return value; 
    }
    
    
-    public static Object getOBPlanAvgYieldAcre(String agentId) 
+    public static double getOBPlanAvgYieldAcre(String agentId) 
    {
     String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION]-(pc) WHERE f.CreatedById='"+agentId+"' return avg(toInt(pc.targetyieldperacre)) as l"; 
         
-        return Neo4jServices.getAggregateItem(q); 
+        //return Neo4jServices.getAggregateItem(q); 
+     double value= 0;
+       System.out.println("value " + Neo4jServices.getAggregateItem(q));
+       try{
+          if(null==Neo4jServices.getAggregateItem(q))
+            value =0;
+        else
+            value = (double)Neo4jServices.getAggregateItem(q);
+              
+       } 
+       catch(Exception e )
+       {
+           value=0;
+             e.printStackTrace();
+       }
+       
+        return value; 
    
    }
    
     
-  public static Object getOBActualAvgYieldAcre(String agentId) 
+  public static double getOBActualAvgYieldAcre(String agentId) 
    {
     String q = "MATCH (f:FARMER)-[:HAS_POSTHARVEST_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' return avg(toInt(pc.total_yield_update)) as l"; 
         
-        return Neo4jServices.getAggregateItem(q); 
+       // return Neo4jServices.getAggregateItem(q); 
+     double value= 0;
+       System.out.println("value " + Neo4jServices.getAggregateItem(q));
+       try{
+          if(null==Neo4jServices.getAggregateItem(q))
+            value =0;
+        else
+            value = (double)Neo4jServices.getAggregateItem(q);
+              
+       } 
+       catch(Exception e )
+       {
+           value=0;
+             e.printStackTrace();
+       }
+       
+        return value; 
    
    }
    
-   public static Object getOBPlanTotalProduction(String agentId) 
+   public static long  getOBPlanTotalProduction(String agentId) 
    {
     String q = "MATCH (f:FARMER)-[:HAS_PRODUCTION]-(pc) WHERE f.CreatedById='"+agentId+"'"
             + " return sum(toInt(pc.targetyieldperacre) * toInt(pc.acresofland)) as l"; 
         
-        return Neo4jServices.getAggregateItem(q); 
+        //return Neo4jServices.getAggregateItem(q); 
+     long value= 0;
+       System.out.println("value " + Neo4jServices.getAggregateItem(q));
+       try{
+          if(null==Neo4jServices.getAggregateItem(q))
+            value =0;
+        else
+            value = (long)Neo4jServices.getAggregateItem(q);
+              
+       } 
+       catch(Exception e )
+       {
+           value=0;
+             e.printStackTrace();
+       }
+       
+        return value; 
    
    }
    
-     public static Object getOBActualTotalProduction(String agentId) 
+     public static long  getOBActualTotalProduction(String agentId) 
    {
        String q = "MATCH (f:FARMER)-[:HAS_POSTHARVEST_UPDATE]-(pc) WHERE f.CreatedById='" + agentId + "'"
                + " return sum(toInt(pc.landareacultivaredupdate) * toInt(pc.total_yield_update)) as l";
 
-       return Neo4jServices.getAggregateItem(q);
+       //return Neo4jServices.getAggregateItem(q);
+       long value= 0;
+       System.out.println("value " + Neo4jServices.getAggregateItem(q));
+       try{
+          if(null==Neo4jServices.getAggregateItem(q))
+            value =0;
+        else
+            value = (long)Neo4jServices.getAggregateItem(q);
+              
+       } 
+       catch(Exception e )
+       {
+           value=0;
+             e.printStackTrace();
+       }
+       
+        return value; 
+   
+              
 
    }
+     
+     
+   //Farm Credit Plan
+     public static Object getOBPlanFarmersCredit(String agentId)
+     {
+         String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_PLAN]-(pc) WHERE f.CreatedById='" + agentId + "' "
+                 + " return SUM(CASE pc.credittypec  WHEN NULL THEN 0 WHEN 'Regular produce buyer' THEN 1 WHEN 'Regular buyer and others' THEN 1  END) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+     }
    
+     
+  
    
    
    
    //</editor-fold>
    
    
-   private String toTwoDecimalPlaces(double value)
+   public static String toTwoDecimalPlaces(double value)
    {
        DecimalFormat df = new DecimalFormat("#.##");
        return df.format(value);
