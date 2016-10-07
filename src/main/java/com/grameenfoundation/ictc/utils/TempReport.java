@@ -504,15 +504,72 @@ public class TempReport extends BIUtil{
      public static Object getOBPlanFarmersCredit(String agentId)
      {
          String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_PLAN]-(pc) WHERE f.CreatedById='" + agentId + "' "
-                 + " return SUM(CASE pc.credittypec  WHEN NULL THEN 0 WHEN 'Regular produce buyer' THEN 1 WHEN 'Regular buyer and others' THEN 1  END) as l";
+                 + " return SUM(CASE pc.credittypec  WHEN NULL THEN 0 WHEN 'Regular produce buyer' THEN 1 WHEN 'Regular buyer and others' THEN 1 ELSE 0  END) as l";
 
          return Neo4jServices.getAggregateItem(q);
      }
    
-     
+     public static Object getOBActualFarmersCredit(String agentId)
+     {
+         String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' "
+                 + " return SUM(CASE pc.creditortypeupdate  WHEN NULL THEN 0 WHEN 'Regular produce buyer' THEN 1 WHEN 'Regular produce buyer and other creditors' THEN 1 ELSE 0  END) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+     }
   
+     
+   public static Object getOBPlanCashCredit(String agentId)
+     {
+         String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_PLAN]-(pc) "
+                 + "WHERE f.CreatedById='"+agentId +"' AND (pc.credittypec='Regular produce buyer' OR pc.credittypec='Regular buyer and others') "
+                 + " return SUM(CASE pc.creditmodec  WHEN NULL THEN 0 WHEN 'Cash only' THEN 1 WHEN 'Cash and inputs only' THEN 1 WHEN 'Cash and services only' THEN 1 WHEN 'Cash,inputs and services' THEN 1 ELSE 0  END) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+     }
    
    
+    public static Object getOBActualCashCredit(String agentId)
+     {
+         String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_UPDATE]-(pc) "
+                 + "WHERE f.CreatedById='"+agentId+"' AND (pc.creditortypeupdate='Regular produce buyer' OR pc.creditortypeupdate='Regular produce buyer and other creditors') "
+                 + " return SUM(CASE pc.creditmodeupdate  WHEN NULL THEN 0 WHEN 'Cash only' THEN 1 WHEN 'Cash and inputs only' THEN 1 WHEN 'Cash and services only' THEN 1 WHEN 'Cash,inputs and services' THEN 1 ELSE 0  END) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+     }
+   
+   public static Object getOBPlanInputCredit(String agentId)
+     {
+         String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_PLAN]-(pc)"
+                 + " WHERE f.CreatedById='"+agentId+"' AND (pc.credittypec='Regular produce buyer' OR pc.credittypec='Regular buyer and others') "
+                 + " return SUM(CASE pc.creditmodec  WHEN NULL THEN 0 WHEN 'Input only' THEN 1 WHEN 'Cash and inputs only' THEN 1 WHEN 'Input and services only' THEN 1 WHEN 'Cash,inputs and services' THEN 1 ELSE 0  END) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+     }
+    
+    public static Object getOBActualInputCredit(String agentId)
+     {
+         String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_UPDATE]-(pc)"
+                 + " WHERE f.CreatedById='"+agentId+"' AND (pc.creditortypeupdate='Regular produce buyer' OR pc.creditortypeupdate='Regular produce buyer and other creditors') "
+                 + " return SUM(CASE  pc.creditmodeupdate  WHEN NULL THEN 0 WHEN 'Input only' THEN 1 WHEN 'Cash and inputs only' THEN 1 WHEN 'Input and services only' THEN 1 WHEN 'Cash,inputs and services' THEN 1 ELSE 0  END) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+     }
+   
+     public static Object getOBPlanTotalCashCredit(String agentId)
+     {
+         String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_PLAN]-(pc) WHERE f.CreatedById='"+agentId+"' "
+                 + " return SUM(toInt(pc.creditcashrecievedquantumc)) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+     }
+     
+      public static Object getOBActualTotalCashCredit(String agentId)
+     {
+         String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"'  "
+                 + "return SUM(toInt(pc.creditcashreceivedquantum)) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+     }
    
    //</editor-fold>
    

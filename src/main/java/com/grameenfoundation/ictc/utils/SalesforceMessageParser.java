@@ -105,7 +105,7 @@ public class SalesforceMessageParser {
                     case "sf:FIELD_CROP_ASSESSMENT__c": case "sf:FIELD_CROP_ASSESSMENT_X__c":  if (processFieldCropAssessment(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:FarmCreditPlan__c": case "FarmCreditPlan_X__c": if (processFarmCreditPlan(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:FarmCreditPrevious__c": case "farmcreditprevious_X__c": if (processFarmCreditPrevious(rowNode, farmerID)) { tx.success(); } break;
-                    case "sf:FarmCreditUpdate__c": case "FarmCreditUpdate_X__c":if (processFarmCreditPrevious(rowNode, farmerID)) { tx.success(); } break;
+                    case "sf:FarmCreditUpdate__c": case "FarmCreditUpdate_X__c":if (processFarmCreditUpdate(rowNode, farmerID)) { tx.success(); } break;
 
                     case "sf:BASELINE_PRODUCTION__c": if (processBaselineProduction(rowNode, farmerID)) { tx.success(); } break;
                     case "sf:BASELINE_PRODUCTION_BUDGET__c": if (processBaselineProductionBudget(rowNode, farmerID)) { tx.success(); } break;
