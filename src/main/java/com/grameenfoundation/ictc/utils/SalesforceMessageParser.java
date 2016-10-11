@@ -425,6 +425,8 @@ public class SalesforceMessageParser {
             if (modified(biodataModel, farmerID)) {
                 System.out.println("Last modified done");
             }
+            
+            trx.success();
         }
 
         return true;
@@ -659,6 +661,7 @@ public class SalesforceMessageParser {
         if (null != new FmpPostHarvestBudgetModel().getFmpPostHarvestBudget("Id", farmerID)) {
             System.out.println("Baseline Post Harvest Budget already exist");
         } else {
+            
             org.neo4j.graphdb.Node FMPPBHNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FMP_POSTHARVEST_BUDGET);
 
             System.out.println("farmerid " + farmerID);
@@ -863,6 +866,7 @@ public class SalesforceMessageParser {
         if (null != new FarmCreditPreviousModel().getFarmCreditPrevious("Id", farmerID)) {
             System.out.println("Farm Credit Previous already exist");
         } else {
+              try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             org.neo4j.graphdb.Node FCNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARM_CREDIT_PREVIOUS);
             FCNode = setNodeProperty(rowNode, FCNode);
             FCNode.setProperty(FarmCreditPlan.LAST_MODIFIED, new Date().getTime());
@@ -880,6 +884,8 @@ public class SalesforceMessageParser {
                 System.out.println("Last modified done");
 
             status = true;
+            trx.success();
+              }
         }
 
         return status;
@@ -891,11 +897,13 @@ public class SalesforceMessageParser {
         Boolean status = false;
       //  FarmCreditPlanModel fm = new FarmCreditPlanModel();
          BiodataModel biodataModel = new BiodataModel();
-
-      
+    if (null != new FarmCreditUpdateModel().getFarmCreditUpdate("Id", farmerID)) {
+            System.out.println("Farm Credit Update already exist");
+        } else {
+       try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             org.neo4j.graphdb.Node FCNode = ICTCDBUtil.getInstance().getGraphDB().createNode(Labels.FARM_CREDIT_UPDATE);
             FCNode = setNodeProperty(rowNode, FCNode);
-            FCNode.setProperty(FarmCreditPlan.LAST_MODIFIED, new Date().getTime());
+            FCNode.setProperty(FarmCreditUpdate.LAST_MODIFIED, new Date().getTime());
 
          
 
@@ -904,7 +912,8 @@ public class SalesforceMessageParser {
             
 //            
               Biodata b = biodataModel.getBiodata("Id", farmerID);
-              biodataModel.BiodataToFarmCreditUpdate(b, FCNode);
+              b.setFarmCreditUpdate(FCNode);
+             // biodataModel.BiodataToFarmCreditUpdate(b, FCNode);
            // FarmCreditPlan fcp = fm.getFarmCreditPlan("Id", farmerID);
             
             // System.out.println("updated" + fm.CreditPlanToUpdate(fcp, FCNode));
@@ -913,8 +922,9 @@ public class SalesforceMessageParser {
                 System.out.println("Last modified done");
 
             status = true;
-        
-
+           trx.success();
+       }
+    }
         return status;
     }
 

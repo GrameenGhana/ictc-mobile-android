@@ -20,9 +20,9 @@
     //Agent a = new UserModel()
     List<String> ags = new UserModel().getAgents(u.getUserId());
     
-    System.out.print("agent " + ags.size()+ " " + ags.get(0));
+    System.out.print("agent " + ags.size()+ " " + ags.get(1));
     
-    JSONObject x = bi.GetOBData(ags.get(0));
+    JSONObject x = bi.GetOBData(ags.get(1));
   
     
     

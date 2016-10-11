@@ -196,7 +196,7 @@ public class TempReport extends BIUtil{
     
       // </editor-fold> 
    
-   //<editor-fold defaultstate="collapsed" desc=" OB Dashboard ">  
+ //<editor-fold defaultstate="collapsed" desc=" OB Dashboard ">  
    
    public static Object getOBPlanTotalAcres(String agentId) 
    {
@@ -570,6 +570,25 @@ public class TempReport extends BIUtil{
 
          return Neo4jServices.getAggregateItem(q);
      }
+      
+      public static Object getOBPlanTotalCashCreditBack(String agentId)
+      {
+          String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_PLAN]-(pc) WHERE f.CreatedById='"+agentId+"' "
+                  + "AND (pc.credittypec='Regular produce buyer' OR pc.credittypec='Regular buyer and others')  "
+                  + "return SUM(toInt(pc.creditcashpaybackexpectedc)) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+      }
+      
+      public static Object getOBActualTotalCashCreditBack(String agentId)
+      {
+          String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' "
+                  + "AND (pc.creditortypeupdate='Regular produce buyer' OR pc.pc.creditortypeupdate='Regular produce buyer and other creditors')  "
+                  + "return SUM(toInt(pc.creditcashpaybackexpectedc)) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+      }
+      
    
    //</editor-fold>
    
