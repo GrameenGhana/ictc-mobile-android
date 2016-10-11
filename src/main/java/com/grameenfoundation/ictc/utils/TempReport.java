@@ -644,7 +644,23 @@ public class TempReport extends BIUtil{
          return Neo4jServices.getAggregateItem(q);
       } 
       
+      public static Object getOBPlanPrePHerbicideOnCredit(String agentId)
+      {
+       String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_PLAN]-(pc) WHERE f.CreatedById='"+agentId+"' "
+               + "AND (pc.credittypec='Regular produce buyer' OR pc.credittypec='Regular buyer and others') "
+               + " return SUM(toInt(pc.creditpreplantherbicidec)) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+      } 
       
+      public static Object getOBActualPrePHerbicideOnCredit(String agentId)
+      {
+       String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"'"
+               + " AND (pc.creditortypeupdate='Regular produce buyer' OR pc.creditortypeupdate='Regular produce buyer and other creditors') "
+               + " return SUM(toInt(pc.creditinorganicfertilizer)) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+      } 
         
    //</editor-fold>
    
