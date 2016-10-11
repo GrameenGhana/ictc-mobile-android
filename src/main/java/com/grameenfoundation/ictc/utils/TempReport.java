@@ -582,14 +582,70 @@ public class TempReport extends BIUtil{
       
       public static Object getOBActualTotalCashCreditBack(String agentId)
       {
-          String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' "
-                  + "AND (pc.creditortypeupdate='Regular produce buyer' OR pc.pc.creditortypeupdate='Regular produce buyer and other creditors')  "
-                  + "return SUM(toInt(pc.creditcashpaybackexpectedc)) as l";
+          String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"'"
+                  + " AND (pc.creditortypeupdate='Regular produce buyer' OR pc.creditortypeupdate='Regular produce buyer and other creditors') "
+                  + " return SUM(pc.creditcashpaybackactualu) as l";
 
          return Neo4jServices.getAggregateItem(q);
       }
       
+      
+      public static Object getOBPlanTotalQtyProduceBack(String agentId)
+      {
+          String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_PLAN]-(pc) WHERE f.CreatedById='"+agentId+"' "
+                  + "AND (pc.credittypec='Regular produce buyer' OR pc.credittypec='Regular buyer and others')  "
+                  + "return SUM(toInt(pc.creditproducepaybackexpectedc)) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+      }
+      
+        public static Object getOBActualTotalQtyProduceBack(String agentId)
+      {
+          String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' "
+                  + "AND (pc.creditortypeupdate='Regular produce buyer' OR pc.creditortypeupdate='Regular produce buyer and other creditors') "
+                  + " return SUM(toInt(pc.creditproducepaybackquantumu)) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+      }
+        
+       public static Object getOBPlanSeedOnCredit(String agentId)
+      {
+       String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_PLAN]-(pc) WHERE f.CreatedById='"+agentId+"'"
+               + " AND (pc.credittypec='Regular produce buyer' OR pc.credittypec='Regular buyer and others') "
+               + " return SUM(toInt(pc.creditseedc)) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+      } 
+      
+        public static Object getOBActualSeedOnCredit(String agentId)
+      {
+       String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' "
+               + "AND (pc.creditortypeupdate='Regular produce buyer' OR pc.creditortypeupdate='Regular produce buyer and other creditors') "
+               + " return SUM(toInt(pc.creditseedu)) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+      } 
    
+      public static Object getOBPlanFertilizerOnCredit(String agentId)
+      {
+       String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_PLAN]-(pc) WHERE f.CreatedById='"+agentId+"' "
+               + "AND (pc.credittypec='Regular produce buyer' OR pc.credittypec='Regular buyer and others')"
+               + "  return SUM(toInt(pc.creditinorganicfertilizerc)) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+      } 
+      
+      public static Object getOBActualFertilizereOnCredit(String agentId)
+      {
+       String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"'"
+               + " AND (pc.creditortypeupdate='Regular produce buyer' OR pc.creditortypeupdate='Regular produce buyer and other creditors')"
+               + " return SUM(toInt(pc.creditinorganicfertilizer)) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+      } 
+      
+      
+        
    //</editor-fold>
    
    
