@@ -657,11 +657,104 @@ public class TempReport extends BIUtil{
       {
        String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"'"
                + " AND (pc.creditortypeupdate='Regular produce buyer' OR pc.creditortypeupdate='Regular produce buyer and other creditors') "
-               + " return SUM(toInt(pc.creditinorganicfertilizer)) as l";
+               + " return SUM(toInt(pc.creditpreplantherbicide)) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+      } 
+      
+       public static Object getOBPlanPostPHerbicideOnCredit(String agentId)
+      {
+       String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_PLAN]-(pc) WHERE f.CreatedById='"+agentId+"' "
+               + "AND (pc.credittypec='Regular produce buyer' OR pc.credittypec='Regular buyer and others') "
+               + " return SUM(CASE pc.creditpostplantherbicidec WHEN NULL THEN 0 WHEN 'Yes' THEN 1 ELSE 0 END ) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+      } 
+      
+       public static Object getOBActualPostPHerbicideOnCredit(String agentId)
+      {
+       String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' "
+               + "AND (pc.creditortypeupdate='Regular produce buyer' OR pc.creditortypeupdate='Regular produce buyer and other creditors')  "
+               + "return SUM(CASE pc.creditpostplantherbicideu WHEN NULL THEN 0 WHEN 'Yes' THEN 1 ELSE 0 END) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+      } 
+       
+        public static Object getOBPlanPloughingOnCredit(String agentId)
+      {
+       String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_PLAN]-(pc) WHERE f.CreatedById='"+agentId+"'"
+               + " AND (pc.credittypec='Regular produce buyer' OR pc.credittypec='Regular buyer and others') "
+               + " return SUM(CASE pc.creditploughingc WHEN NULL THEN 0 WHEN 'Yes' THEN 1 ELSE 0 END ) as l";
 
          return Neo4jServices.getAggregateItem(q);
       } 
         
+        public static Object getOBActualPloughingOnCredit(String agentId)
+      {
+       String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' "
+               + "AND (pc.creditortypeupdate='Regular produce buyer' OR pc.creditortypeupdate='Regular produce buyer and other creditors')  "
+               + "return SUM(CASE pc.creditploughing WHEN NULL THEN 0 WHEN 'Yes' THEN 1 ELSE 0 END) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+      } 
+        
+       public static Object getOBPlanThreshingOnCredit(String agentId)
+      {
+       String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_PLAN]-(pc) WHERE f.CreatedById='"+agentId+"' "
+               + "AND (pc.credittypec='Regular produce buyer' OR pc.credittypec='Regular buyer and others')  "
+               + "return SUM(CASE pc.creditthreshingc WHEN NULL THEN 0 WHEN 'Yes' THEN 1 ELSE 0 END ) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+      }   
+        
+       
+        public static Object getOBActualThreshingOnCredit(String agentId)
+      {
+       String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' "
+               + "AND (pc.creditortypeupdate='Regular produce buyer' OR pc.creditortypeupdate='Regular produce buyer and other creditors') "
+               + " return SUM(CASE pc.creditthreshing WHEN NULL THEN 0 WHEN 'Yes' THEN 1 ELSE 0 END) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+      }
+        
+         public static Object getOBPlanTransportOnCredit(String agentId)
+      {
+       String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_PLAN]-(pc) WHERE f.CreatedById='"+agentId+"' AND"
+               + " (pc.credittypec='Regular produce buyer' OR pc.credittypec='Regular buyer and others') "
+               + " return SUM(CASE pc.credittransportc WHEN NULL THEN 0 WHEN 'Yes' THEN 1 ELSE 0 END ) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+      }   
+         
+       public static Object getOBActualTransportOnCredit(String agentId)
+      {
+       String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' "
+               + "AND (pc.creditortypeupdate='Regular produce buyer' OR pc.creditortypeupdate='Regular produce buyer and other creditors') "
+               + " return SUM(CASE pc.credittransportupdate WHEN NULL THEN 0 WHEN 'Yes' THEN 1 ELSE 0 END) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+      }   
+      
+       
+       
+       public static Object getOBPlanStorageOnCredit(String agentId)
+      {
+       String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_PLAN]-(pc) WHERE f.CreatedById='"+agentId+"' "
+               + "AND (pc.credittypec='Regular produce buyer' OR pc.credittypec='Regular buyer and others')  "
+               + "return SUM(CASE pc.creditproducestoragec WHEN NULL THEN 0 WHEN 'Yes' THEN 1 ELSE 0 END ) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+      } 
+       
+       public static Object getOBActualStorageOnCredit(String agentId)
+      {
+       String q = "MATCH (f:FARMER)-[:HAS_FARMCREDIT_UPDATE]-(pc) WHERE f.CreatedById='"+agentId+"' "
+               + "AND (pc.creditortypeupdate='Regular produce buyer' OR pc.creditortypeupdate='Regular produce buyer and other creditors') "
+               + " return SUM(CASE pc.creditproducestorage WHEN NULL THEN 0 WHEN 'Yes' THEN 1 ELSE 0 END) as l";
+
+         return Neo4jServices.getAggregateItem(q);
+      }  
+       
    //</editor-fold>
    
    

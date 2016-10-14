@@ -156,7 +156,7 @@ public class UserModel {
             tx.success();
         }
         
-         System.out.println("agli " + aglist.get(0).getFirstname());
+         System.out.println("agli " + aglist.size());
         return aglist;
          
          

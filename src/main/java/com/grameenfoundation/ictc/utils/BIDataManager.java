@@ -716,6 +716,7 @@ public class BIDataManager extends BIUtil {
     
     public JSONObject GetOBData(String agentId)
     {
+        BiodataModel bio = new BiodataModel();
         System.out.println("Agent " + agentId);
         JSONObject x = new JSONObject();
         
@@ -731,8 +732,23 @@ public class BIDataManager extends BIUtil {
         x.put("ayac", TempReport.toTwoDecimalPlaces(TempReport.getOBActualAvgYieldAcre(agentId)));
         x.put("tpp", TempReport.getOBPlanTotalProduction(agentId));
         x.put("tpc", TempReport.getOBActualTotalProduction(agentId));
-        
-         
+        x.put("farmers",bio.getFarmerCountByAgent(agentId));
+        x.put("tfcp",TempReport.getOBPlanFarmersCredit(agentId));
+        x.put("tfca",TempReport.getOBActualFarmersCredit(agentId));
+        x.put("tccp",TempReport.getOBPlanCashCredit(agentId));
+        x.put("tcca",TempReport.getOBActualCashCredit(agentId));
+        x.put("ticp",TempReport.getOBPlanInputCredit(agentId));
+        x.put("tica",TempReport.getOBActualFarmersCredit(agentId));
+        x.put("taccp",TempReport.getOBPlanTotalCashCredit(agentId));
+        x.put("tacca",TempReport.getOBActualTotalCashCredit(agentId));
+        x.put("tqpbp",TempReport.getOBPlanTotalQtyProduceBack(agentId));
+        x.put("tqpba",TempReport.getOBActualTotalQtyProduceBack(agentId)); 
+        x.put("nscp",TempReport.getOBPlanSeedOnCredit(agentId));
+        x.put("nsca",TempReport.getOBActualSeedOnCredit(agentId)); 
+        x.put("nfcp",TempReport.getOBPlanSeedOnCredit(agentId));
+        x.put("nfca",TempReport.getOBActualSeedOnCredit(agentId)); 
+        x.put("npcp",TempReport.getOBPlanPrePHerbicideOnCredit(agentId));
+        x.put("npca",TempReport.getOBActualPrePHerbicideOnCredit(agentId)); 
         System.out.println("Tech " + x);
         
         return x;

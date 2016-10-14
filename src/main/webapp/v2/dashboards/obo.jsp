@@ -42,6 +42,7 @@
             <link href="<%= request.getContextPath()%>/theme/gentelella/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
             <link href="<%= request.getContextPath()%>/theme/gentelella/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
             <link href="<%= request.getContextPath()%>/theme/gentelella/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+            
         </content>
     </head>
 
@@ -75,6 +76,16 @@
                 </div>
             </div>
         </div>-->
+        <div class="row top_tiles" style="margin: 10px 0;">
+        <div class="col-md-4 col-sm-4 col-xs-8 tile">
+            <span>Total Farmers</span>
+            <h2><%= x.get("farmers") %></h2>
+            <span class="sparkline_tf" style="height: 160px;">
+                <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+            </span>
+        </div>
+     
+    </div>
 
         <br/>
 
@@ -162,7 +173,7 @@
                         <div class="x_title">
                             <h2>Credit Indicators <small>for credit provision by OB</small></h2>
                             <ul class="nav navbar-right panel_toolbox">
-                                <li>
+                             <!--   <li>
                                     <form id="ciob-form" class="form-inline" method="get">
                                         <div class="form-group">
                                             <select id="year-ciob-table" class="form-control">
@@ -180,14 +191,15 @@
                                             </select>
                                         </div>
                                     </form>
-                                </li>
+                                </li>-->
                             </ul>
 
                             <div class="clearfix"></div>
                         </div>
 
                         <div class="x_content">
-                            <table id="ciob-table" class="table table-striped table-bordered jambo_table">
+                           <!-- <table id="ciob-table" class="table table-striped table-bordered jambo_table">-->
+                           <table  class="table table-striped table-bordered jambo_table">
                                 <thead>
                                     <tr>
                                         <th>Indicator</th>
@@ -196,6 +208,51 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                      <tr>
+                                        <td>Total number of farmers taking credit from OB</td>
+                                        <td><%= x.get("tfcp")  %></td>
+                                        <td><%= x.get("tfca")%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total number of farmers taking cash credit from OB</td>
+                                        <td><%= x.get("tccp")  %></td>
+                                        <td><%= x.get("tcca")%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total number of farmers taking input credit from OB</td>
+                                        <td><%= x.get("tccp")  %></td>
+                                        <td><%= x.get("tcca")%></td>
+                                    </tr>
+                                      <tr>
+                                        <td>Total amount of cash credit  from OB</td>
+                                        <td><%= x.get("taccp")  %></td>
+                                        <td><%= x.get("tacca")%></td>
+                                    </tr>
+                                      <tr>
+                                        <td>Total value of cash credit payback (due or paid) OB</td>
+                                        <td><%= x.get("tcpbp")  %></td>
+                                        <td><%= x.get("tcpba")%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total quantity of produce as payback (no of bags of produce) due to OB</td>
+                                        <td><%= x.get("tqpbp")  %></td>
+                                        <td><%= x.get("tqpba")%></td>
+                                    </tr>
+                                     <tr>
+                                        <td>Number of farmers taking seed on credit from OB</td>
+                                        <td><%= x.get("nscp")  %></td>
+                                        <td><%= x.get("nsca")%></td>
+                                    </tr>
+                                     <tr>
+                                        <td>Number of farmers taking fertilizer on credit from OB</td>
+                                        <td><%= x.get("nfcp")  %></td>
+                                        <td><%= x.get("nfca")%></td>
+                                    </tr>
+                                     <tr>
+                                        <td>Number of farmers taking pre-plant herbicide on credit from OB</td>
+                                        <td><%= x.get("nfcp")  %></td>
+                                        <td><%= x.get("nfca")%></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -242,6 +299,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                                
                             </tbody>
                         </table>
                     </div>
