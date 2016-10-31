@@ -96,7 +96,7 @@ public class ICTCKonstants {
      //t
      public static final String TECHNICAL_NEED = "technicalneed";
      public static final double ACDIVOCA_TARGET =4000;
-     
+     public static final double MOFA_TARGET =1000;
      //u
      public static final String USER = "user";
    

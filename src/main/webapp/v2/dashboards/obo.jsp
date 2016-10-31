@@ -20,9 +20,9 @@
     //Agent a = new UserModel()
     List<String> ags = new UserModel().getAgents(u.getUserId());
     
-    System.out.print("agent " + ags.size()+ " " + ags.get(1));
+    System.out.print("agent " + ags.size()+ " " + ags.get(0));
     
-    JSONObject x = bi.GetOBData(ags.get(1));
+    JSONObject x = bi.GetOBData(ags.get(0));
   
     
     
@@ -250,8 +250,35 @@
                                     </tr>
                                      <tr>
                                         <td>Number of farmers taking pre-plant herbicide on credit from OB</td>
-                                        <td><%= x.get("nfcp")  %></td>
-                                        <td><%= x.get("nfca")%></td>
+                                        <td><%= x.get("npcp")  %></td>
+                                        <td><%= x.get("npca")%></td>
+                                    </tr>
+                                    
+                                     <tr>
+                                        <td>Number of farmers taking post-plant herbicide on credit from OB</td>
+                                        <td><%= x.get("nppp")  %></td>
+                                        <td><%= x.get("nppa")%></td>
+                                    </tr>
+                                    
+                                     <tr>
+                                        <td>Number of farmers taking ploughing services on credit from OB</td>
+                                        <td><%= x.get("npsp")  %></td>
+                                        <td><%= x.get("npsa")%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Number of farmers taking post-harvest handling services on credit from OB</td>
+                                        <td><%= x.get("nphp")  %></td>
+                                        <td><%= x.get("npha")%></td>
+                                    </tr>
+                                     <tr>
+                                        <td>Number of farmers taking transport services on credit from OB</td>
+                                        <td><%= x.get("ntsp")  %></td>
+                                        <td><%= x.get("ntsa")%></td>
+                                    </tr>
+                                     <tr>
+                                        <td>Number of farmers taking warehouse storage services on credit from OB</td>
+                                        <td><%= x.get("nwsp")  %></td>
+                                        <td><%= x.get("nwsa")%></td>
                                     </tr>
                                 </tbody>
                             </table>

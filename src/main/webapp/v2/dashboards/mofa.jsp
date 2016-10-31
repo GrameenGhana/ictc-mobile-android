@@ -1,10 +1,25 @@
+<%@page import="com.grameenfoundation.ictc.utils.ICTCRelationshipTypes"%>
+<%@page import="com.grameenfoundation.ictc.utils.TempReport"%>
+<%@page import="com.grameenfoundation.ictc.utils.BIDataManager"%>
+<%@page import="com.grameenfoundation.ictc.models.BiodataModel"%>
 <%@page import="java.util.List" %>
+<%@page import="org.json.*"%>
 <%@page import="com.grameenfoundation.ictc.utils.BIDashboard" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     BIDashboard data = new BIDashboard("mofa");
+    BIDataManager bi = BIDataManager.getInstance();
     List<String> crops = data.getCrops();
     List<String> locations = data.getLocations();
+    BiodataModel bio = new BiodataModel();
+    JSONObject  x = data.getACDIVOCADATA();
+    JSONObject  mn = bi.getFarmerActivitMonitoring("MOFA");
+    JSONObject  mnp = bi.getFarmerActivitMonitoringProgress("MOFA");
+    TempReport temp = new TempReport();
+   
+    JSONObject  in = bi.getIndicatorInfo("MOFA");
+    
+    
 %>
 <!DOCTYPE html>
 <html>
@@ -41,7 +56,7 @@
                             <h2>Output Indicators <small></small></h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li>
-                                <form id="output-form" class="form-inline" method="get">
+                               <!-- <form id="output-form" class="form-inline" method="get">
                                     <div class="form-group">
                                         <select id="gender-output-table" class="form-control">
                                             <option value="all">Gender: All</option>
@@ -65,7 +80,7 @@
                                             <% } %>
                                         </select>
                                     </div>
-                                </form>
+                                </form>-->
                                 </li>
                             </ul>
                             <div class="clearfix"></div>
@@ -77,10 +92,45 @@
                                     <tr>
                                         <th>Indicator</th>
                                         <th>Number of Farmers</th>
-                                        <th>Land Area/Quantity</th>
+                                        <!--<th>Land Area/Quantity</th>-->
                                     </tr>
                                 </thead>
                                 <tbody>
+                                       <tr>
+                                        <td>Using improved practices and technologies</td>
+                                        <td><%= in.get("ipt")  %></td>
+                                        <!--<td><%= x.getString("ipt_area")%></td>-->
+                                    </tr>
+                                    <tr>
+                                        <td>Using improved seed</td>
+                                        <td><%= in.get("is")   %></td>
+                                        <!--<td><%= x.getString("is_area")%></td>-->
+                                    </tr>
+                                      <tr>
+                                        <td>Using recommended crop density and arrangement</td>
+                                        <td><%= in.get("cda") %></td>
+                                        <!--<td><%= x.getString("cda_area")%></td>-->
+                                    </tr>
+                                    <tr>
+                                        <td>Using pre-plant herbicide</td>
+                                        <td><%= in.get("preh") %></td>
+                                        <!--<td><%= x.getString("preh_area")%></td>-->
+                                    </tr>
+                                     <tr>
+                                        <td>Using post-plant herbicide</td>
+                                        <td><%= in.get("posth")  %></td>
+                                        <!--<td><%= x.getString("posth_area")%></td>-->
+                                    </tr>
+                                    <tr>
+                                        <td>Using inorganic fertilizer</td>
+                                        <td><%= in.get("if")   %></td>
+                                        <!--<td><%= x.getString("if_area")%></td>-->
+                                    </tr>
+                                     <tr>
+                                        <td>Using post-harvest thresher</td>
+                                        <td><%= in.get("pht")  %></td>
+                                       <!-- <td><%= x.getString("pht_area")%></td>-->
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -104,29 +154,63 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Farmers Registered (% of target)</td>
-                                    <td><%= data.getFarmerRegistrationTotalForMOFA() %> / <%= data.getFarmerRegistrationTargetForMOFA() %> (<%= data.getFarmerRegistrationProgressForMOFA()%>%)</td>
+                               <tr>
+                                    <td>Number of farmers with access to Agent (registered)(% of target)</td>
+                                    <!--<td><%= data.getFarmerRegistrationTotalForACDI() %> / <%= data.getFarmerRegistrationTargetForACDI() %> (<%= data.getFarmerRegistrationProgressForACDI()%>%)</td>-->
+                                    <td><%= bio.getMOFAFarmerCount() %> / <%= data.getFarmerRegistrationTargetForMOFA() %> (<%= temp.getFarmerRegistrationProgressForMOFA()  %>%)</td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance (Production, Post-harvest, Credit)</td>
-                                    <td><%= data.getFarmerPPTotalForMOFA() %> (<%= data.getFarmerPPProgressForMOFA() %>%)</td>
+                                    <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance Production</td>
+                                   <!-- <td><%= data.getFarmerPPTotalForACDI() %> (<%= data.getFarmerPPProgressForACDI() %>%)</td>-->
+                                    <td><%= mn.get("ppp") %> (<%= mnp.get("pppp") %>%)</td> 
                                 </tr>
                                 <tr>
-                                    <td style="width: 20%">Number of farmers (% of target) taken through FMP (Production, Post-harvest, Credit)</td>
-                                    <td><%= data.getFarmerFMPTotalForMOFA() %> (<%= data.getFarmerFMPProgressForMOFA() %>%)</td>
+                                    <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance PostHarvest</td>
+                                   <!-- <td><%= data.getFarmerPPTotalForACDI() %> (<%= data.getFarmerPPProgressForACDI() %>%)</td>-->
+                                    <td><%= mn.get("pph") %> (<%= mnp.get("pphp")  %>%)</td> 
                                 </tr>
                                 <tr>
-                                    <td style="width: 20%">Number of farmers (% of target) taken through FMP Update (Production, Harvest, Post-harvest, Marketing, Credit)</td>
-                                    <td><%= data.getFarmerFMPUpdateTotalForMOFA() %> (<%= data.getFarmerFMPUpdateProgressForMOFA() %>%)</td>
+                                    <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance Credit</td>
+                                   <!-- <td><%= data.getFarmerPPTotalForACDI() %> (<%= data.getFarmerPPProgressForACDI() %>%)</td>-->
+                                    <td><%= mn.get("fcp") %> (<%= mnp.getString("fcpp") %>%)</td> 
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Number of farmers (% of target)  coached to produce Farm Management Plan on Production</td>
+                                    <!--<td><%= data.getFarmerFMPTotalForACDI() %> (<%= data.getFarmerFMPProgressForACDI() %>%)</td>-->
+                                     <td><%= mn.get("fmp") %> (<%= mnp.getString("fmpp") %>%)</td>
+                                </tr>
+                                 <tr>
+                                    <td style="width: 20%">Number of farmers (% of target)  coached to produce Farm Management Plan on PostHarvest</td>
+                                    <!--<td><%= data.getFarmerFMPTotalForACDI() %> (<%= data.getFarmerFMPProgressForACDI() %>%)</td>-->
+                                     <td><%= mn.get("fmph") %> (<%= mnp.getString("fmphp") %>%)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Number of farmers (% of target)  coached to produce Farm Management Plan on Credit</td>
+                                    <!--<td><%= data.getFarmerFMPTotalForACDI() %> (<%= data.getFarmerFMPProgressForACDI() %>%)</td>-->
+                                     <td><%= mn.get("fmpc")%> (<%= mnp.getString("fmpcp") %>%)</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farms (% of target) measured</td>
-                                    <td><%= data.getFarmerFarmsMeasuredTotalForMOFA() %> (<%= data.getFarmerFarmsMeasuredProgressForMOFA() %>%)</td>
+                                   <!-- <td><%= bio.getACDIVOCAFFMPProductionUpdateCount()%> (<%= data.getFarmerFarmsMeasuredProgressForACDI() %>%)</td>-->
+                                    <td><%= mn.get("fm") %> (<%= mnp.getString("fmp") %>%)</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farms (% of target) assessed</td>
-                                    <td><%= data.getFarmerFarmsAssessedTotalForMOFA() %> (<%= data.getFarmerFarmsAssessedProgressForMOFA() %>%)</td>
+                                    <!--<td><%= data.getFarmerFarmsAssessedTotalForACDI() %> (<%= data.getFarmerFarmsAssessedProgressForACDI() %>%)</td>-->
+                                    <td><%= mn.get("fa") %> (<%= mnp.getString("fap")  %>%)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Number of farmers (% of target) taken through FMP Update Production</td>
+                                   <!--<td><%= data.getFarmerFMPUpdateTotalForACDI() %> (<%= data.getFarmerFMPUpdateProgressForACDI() %>%)</td>-->
+                                     <td><%= mn.get("fm") %> (<%= mnp.getString("fmp") %>%)</td>
+                                </tr>
+                                <tr>
+                                   <td style="width: 20%">Number of farmers (% of target) taken through FMP Update Post Harvest</td>
+                                    <td><%= mn.get("fphu") %> (<%= mnp.getString("fphup") %>%)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Number of farmers (% of target) taken through FMP Update Credit</td>
+                                    <td><%= mn.get("fcu") %> (<%= mnp.getString("fcup") %>%)</td>
                                 </tr>
                             </tbody>
                         </table>

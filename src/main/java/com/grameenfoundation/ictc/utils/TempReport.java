@@ -85,9 +85,19 @@ public class TempReport extends BIUtil{
         return sum;
     }
     
+    public String getProgress(Long indicatorCount,double target)
+    {
+        return toTwoDecimalPlaces((indicatorCount/target)*100);
+    }
+    
     public String getFarmerRegistrationProgressForACDI()
     {
         return toTwoDecimalPlaces((bio.getACDIVOCAFarmerCount()/ICTCKonstants.ACDIVOCA_TARGET)*100);
+    }
+    
+     public String getFarmerRegistrationProgressForMOFA()
+    {
+        return toTwoDecimalPlaces((bio.getMOFAFarmerCount()/ICTCKonstants.MOFA_TARGET)*100);
     }
     
     public String getFarmerPPProgressForACDI()

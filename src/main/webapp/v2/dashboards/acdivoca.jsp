@@ -181,7 +181,7 @@
                                 <tr>
                                     <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance Credit</td>
                                    <!-- <td><%= data.getFarmerPPTotalForACDI() %> (<%= data.getFarmerPPProgressForACDI() %>%)</td>-->
-                                    <td><%= bio.getACDIVOCABaselinePostHarvestCount() %> (<%= temp.getFarmerPHProgressForACDI() %>%)</td> 
+                                    <td><%= bio.getACDIVOCAFarmCreditPreviousCount() %> (<%= temp.getFarmerFCPPHProgressForACDI() %>%)</td> 
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farmers (% of target)  coached to produce Farm Management Plan on Production</td>
@@ -218,7 +218,7 @@
                                     <td><%= bio.getACDIVOCAPostHarvestUpdateCount() %> (<%= temp.getFarmerPHUProgressForACDI() %>%)</td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 20%">Number of farmers (% of target) taken through FMP Update Post Harvest</td>
+                                    <td style="width: 20%">Number of farmers (% of target) taken through FMP Update Credit</td>
                                     <td><%= bio.getACDIVOCAFarmCreditUpdateCount() %> (<%= temp.getFarmerFCUProgressForACDI() %>%)</td>
                                 </tr>
                             </tbody>

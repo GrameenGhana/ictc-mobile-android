@@ -653,6 +653,98 @@ public class BIDataManager extends BIUtil {
         return x;
     }
     
+    
+     public  JSONObject getFarmerActivitMonitoring(String partner)
+    {
+        JSONObject x = new JSONObject();
+         BiodataModel bio = new BiodataModel();
+        switch(partner)
+        {
+            case PARTNER_ACDI : 
+                x.put("is", TempReport.getImprovedSeed(PARTNER_ACDI));
+                x.put("cda", TempReport.getCropDensity(PARTNER_ACDI));
+                x.put("preh",TempReport.getPrePlantHerbiceide(PARTNER_ACDI));
+                x.put("posth", TempReport.getPostPlantHerbiceide(PARTNER_ACDI));
+                x.put("if", TempReport.getOrganicFertilizer(PARTNER_ACDI));
+                x.put("pht", TempReport.getPostHarvestThresher(PARTNER_ACDI));
+                x.put("ipt", TempReport.getImprovedTechnologies(PARTNER_ACDI));
+                break;  
+            case PARTNER_MOFA:
+                x.put("ppp",  bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_BASELINE_PRODUCTION));
+                x.put("pph",  bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST));
+                x.put("fcp",  bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_FARMCREDIT_PREVIOUS));
+                x.put("fmp",  bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_PRODUCTION));
+                x.put("fmph", bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_POSTHARVEST));
+                x.put("fmpc", bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN));
+                x.put("fm", bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_PRODUCTION_UPDATE));
+                x.put("fa", bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_FIELD_CROP_ASSESSMENT));
+                x.put("fphu", bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_POSTHARVEST_UPDATE));
+               // x.put("fphu", bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_POSTHARVEST_UPDATE));
+                x.put("fcu", bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_FARMCREDIT_UPDATE));
+                break;  
+            case PARTNER_GF:
+                Map<String,String> partners = new HashMap<>();
+                partners.put("acdi",PARTNER_ACDI);
+                partners.put("mofa",PARTNER_MOFA);
+               // partners.put("cif",PARTNER_CIF);
+                
+                
+                long allImprovedSeed = gfAggregate("is", partners);
+                long allCropDensity = gfAggregate("cda", partners);
+                long allPrePlantHerbicide = gfAggregate("preh", partners);
+                long allPostPlantHerbicide = gfAggregate("posth", partners);
+                long allInorganicFertilizer = gfAggregate("if", partners);
+                long allPostHarvestThresher = gfAggregate("ipt", partners);
+                long allImprovedTechnologies = allImprovedSeed+allCropDensity+allPrePlantHerbicide+allPostPlantHerbicide
+                        +allInorganicFertilizer+allPostHarvestThresher;
+                        
+                
+                x.put("is", allImprovedSeed);
+                x.put("cda", allCropDensity);
+                x.put("preh",allPrePlantHerbicide);
+                x.put("posth", allPostPlantHerbicide);
+                x.put("if", allInorganicFertilizer);
+                x.put("pht",allPostHarvestThresher);
+                x.put("ipt", allImprovedTechnologies);
+                break;  
+           
+        }
+        
+        System.out.println("Tech " + x);
+        return x;
+    }
+    
+     public  JSONObject getFarmerActivitMonitoringProgress(String partner)
+    {
+        JSONObject x = new JSONObject();
+        BiodataModel bio = new BiodataModel();
+        TempReport temp = new TempReport();
+         
+        
+        
+        switch(partner)
+        {
+             case PARTNER_MOFA:
+                 x.put("pppp",temp.getProgress(bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_BASELINE_PRODUCTION),ICTCKonstants.MOFA_TARGET));
+                 x.put("pphp",temp.getProgress(bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST),ICTCKonstants.MOFA_TARGET));
+                 x.put("fcpp",temp.getProgress(bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_FARMCREDIT_PREVIOUS),ICTCKonstants.MOFA_TARGET));
+                 x.put("fmpp",temp.getProgress(bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_PRODUCTION),ICTCKonstants.MOFA_TARGET));
+                 x.put("fmphp",temp.getProgress(bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_POSTHARVEST),ICTCKonstants.MOFA_TARGET));
+                 x.put("fmpcp",temp.getProgress(bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN),ICTCKonstants.MOFA_TARGET));
+                 x.put("fmp",temp.getProgress(bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_PRODUCTION_UPDATE),ICTCKonstants.MOFA_TARGET));
+                 x.put("fap",temp.getProgress(bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_FIELD_CROP_ASSESSMENT),ICTCKonstants.MOFA_TARGET));
+                 x.put("fphup",temp.getProgress(bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_POSTHARVEST_UPDATE),ICTCKonstants.MOFA_TARGET));
+                 x.put("fcup",temp.getProgress(bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_FARMCREDIT_UPDATE),ICTCKonstants.MOFA_TARGET));
+                 
+                 break;
+        
+        }
+        
+        System.out.println("Tech " + x);
+        return x;
+    }
+    
+    
     private  long gfAggregate(String indicator,Map<String,String> partners)
     {
         long sum = 0l;
@@ -741,14 +833,27 @@ public class BIDataManager extends BIUtil {
         x.put("tica",TempReport.getOBActualFarmersCredit(agentId));
         x.put("taccp",TempReport.getOBPlanTotalCashCredit(agentId));
         x.put("tacca",TempReport.getOBActualTotalCashCredit(agentId));
+        x.put("tcpbp",TempReport.getOBPlanTotalCashCreditBack(agentId));
+        x.put("tcpba",TempReport.getOBActualTotalCashCreditBack(agentId));
         x.put("tqpbp",TempReport.getOBPlanTotalQtyProduceBack(agentId));
         x.put("tqpba",TempReport.getOBActualTotalQtyProduceBack(agentId)); 
+        x.put("nphp",TempReport.getOBPlanThreshingOnCredit(agentId));
+        x.put("npha",TempReport.getOBActualThreshingOnCredit(agentId)); 
         x.put("nscp",TempReport.getOBPlanSeedOnCredit(agentId));
         x.put("nsca",TempReport.getOBActualSeedOnCredit(agentId)); 
-        x.put("nfcp",TempReport.getOBPlanSeedOnCredit(agentId));
-        x.put("nfca",TempReport.getOBActualSeedOnCredit(agentId)); 
+        x.put("nfcp",TempReport.getOBPlanFertilizerOnCredit(agentId));
+        x.put("nfca",TempReport.getOBActualFertilizereOnCredit(agentId)); 
         x.put("npcp",TempReport.getOBPlanPrePHerbicideOnCredit(agentId));
         x.put("npca",TempReport.getOBActualPrePHerbicideOnCredit(agentId)); 
+        x.put("nppp",TempReport.getOBPlanPostPHerbicideOnCredit(agentId));
+        x.put("nppa",TempReport.getOBActualPostPHerbicideOnCredit(agentId)); 
+        x.put("npsp",TempReport.getOBPlanPloughingOnCredit(agentId));
+        x.put("npsa",TempReport.getOBActualPloughingOnCredit(agentId)); 
+        x.put("ntsp",TempReport.getOBPlanTransportOnCredit(agentId));
+        x.put("ntsa",TempReport.getOBActualTransportOnCredit(agentId)); 
+        x.put("nwsp",TempReport.getOBPlanStorageOnCredit(agentId));
+        x.put("nwsa",TempReport.getOBActualStorageOnCredit(agentId)); 
+        
         System.out.println("Tech " + x);
         
         return x;
