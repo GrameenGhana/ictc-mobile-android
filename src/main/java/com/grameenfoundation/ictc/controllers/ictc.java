@@ -10,8 +10,10 @@ import com.grameenfoundation.ictc.domains.PostHarvest;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.utils.Neo4jServices;
 import com.grameenfoundation.ictc.wrapper.OperationsWrapper;
+import java.io.BufferedReader;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
@@ -55,22 +57,22 @@ public class ictc {
 //            genGraphCode(input);
 //       }
 
-        String codefrom = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n" +
-"Info:   <html>\n" +
-"Info:   <head>\n" +
-"Info:   <meta HTTP-EQUIV=\"PRAGMA\" CONTENT=\"NO-CACHE\">\n" +
-"Info:   <script>\n" +
-"Info:   if (this.SfdcApp && this.SfdcApp.projectOneNavigator) { SfdcApp.projectOneNavigator.handleRedirect('{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }'); }  else\n" +
-"Info:   if (window.location.replace){\n" +
-"Info:   window.location.replace('{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }');\n" +
-"Info:   } else {;\n" +
-"Info:   window.location.href ='{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }';\n" +
-"Info:   }\n" +
-"Info:   </script>\n" +
-"Info:   </head>\n" +
-"Info:   </html>\n" +
-"Info:   <!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\"><html><head>    <meta HTTP-EQUIV=\"PRAGMA\" CONTENT=\"NO-CACHE\"><script>if (this.SfdcApp && this.SfdcApp.projectOneNavigator) { SfdcApp.projectOneNavigator.handleRedirect('{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }'); }  else if (window.location.replace){ window.location.replace('{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }');} else {;window.location.href ='{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }';} </script></head></html>\n" +
-"Info:   Agent Created";
+//        String codefrom = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n" +
+//"Info:   <html>\n" +
+//"Info:   <head>\n" +
+//"Info:   <meta HTTP-EQUIV=\"PRAGMA\" CONTENT=\"NO-CACHE\">\n" +
+//"Info:   <script>\n" +
+//"Info:   if (this.SfdcApp && this.SfdcApp.projectOneNavigator) { SfdcApp.projectOneNavigator.handleRedirect('{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }'); }  else\n" +
+//"Info:   if (window.location.replace){\n" +
+//"Info:   window.location.replace('{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }');\n" +
+//"Info:   } else {;\n" +
+//"Info:   window.location.href ='{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }';\n" +
+//"Info:   }\n" +
+//"Info:   </script>\n" +
+//"Info:   </head>\n" +
+//"Info:   </html>\n" +
+//"Info:   <!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\"><html><head>    <meta HTTP-EQUIV=\"PRAGMA\" CONTENT=\"NO-CACHE\"><script>if (this.SfdcApp && this.SfdcApp.projectOneNavigator) { SfdcApp.projectOneNavigator.handleRedirect('{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }'); }  else if (window.location.replace){ window.location.replace('{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }');} else {;window.location.href ='{   username : konetyme@ictc.org,   userId : 00525000000xaRRAAY,   responseCode : 00 }';} </script></head></html>\n" +
+//"Info:   Agent Created";
         
 //        String u = "konetyme@ictc.org";
 //        
@@ -105,9 +107,9 @@ public class ictc {
 //            
 //        } 
 //        
-        String user = "spo@ictc.org";
-        
-        System.out.println(user.substring(0, user.indexOf("@")));
+//        String user = "spo@ictc.org";
+//        
+//        System.out.println(user.substring(0, user.indexOf("@")));
 //       
           //System.out.println("3.josss".substring(0,1));       
                 
@@ -181,6 +183,47 @@ public class ictc {
         
 
             //}
+        
+        try (BufferedReader br = new BufferedReader(new FileReader("/home/grameen/acdivoca/data.a2")))
+		{
+
+			String sCurrentLine;
+                        String tag[] = new String[50];
+                        String json = null;
+                        int i =0;
+
+			while ((sCurrentLine = br.readLine()) != null) {
+				//System.out.println(sCurrentLine+";");
+// 
+                           // sCurrentLine+=";";
+//                                tag = sCurrentLine.split(";");
+//                                 for (int j = 0; j < tag.length; j++) {
+//                                   json =tag[j].replace("~", "\":\"").replace("\t","\",\"");
+//                                     System.out.println("{\""+json+"\"}");
+//                                
+//                                      }
+                             if(sCurrentLine.contains("DATASET"))
+                             {
+                                  sCurrentLine = sCurrentLine.replace("~", "\":\"").replace("\t","\",\"");
+                                  sCurrentLine +="\"" ;
+                             }
+                             else
+                             {
+                                sCurrentLine = sCurrentLine.replace("~", "\":\"").replace("\t","\",\"");
+                                sCurrentLine = sCurrentLine.substring(0, sCurrentLine.lastIndexOf(","));
+                                
+                             }
+                                  // System.out.println(sCurrentLine);
+                                 System.out.println("{\""+sCurrentLine+"}");
+                              //  break;
+                              
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+        
     }
     
     

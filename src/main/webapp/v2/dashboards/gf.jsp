@@ -1,3 +1,5 @@
+<%@page import="com.grameenfoundation.ictc.utils.TempReport"%>
+<%@page import="com.grameenfoundation.ictc.models.BiodataModel"%>
 <%@page import="com.grameenfoundation.ictc.utils.BIDataManager"%>
 <%@page import="java.util.List" %>
 <%@page import="com.grameenfoundation.ictc.utils.BIDashboard" %>
@@ -8,9 +10,15 @@
     BIDataManager bi = BIDataManager.getInstance();
     List<String> crops = data.getCrops();
     List<String> locations = data.getLocations();
-    
+    BiodataModel bio = new BiodataModel();
+    TempReport temp = new TempReport();
     JSONObject  x = data.getACDIVOCADATA();
     JSONObject  in = bi.getIndicatorInfo("GRAMEEN");
+    JSONObject  mn = bi.getFarmerActivitMonitoring("MOFA");
+    JSONObject  mnp = bi.getFarmerActivitMonitoringProgress("MOFA");
+    JSONObject y = bi.getAllAgentActivity();
+    JSONArray ja = y.getJSONArray("agentactivity");
+    JSONObject b = new JSONObject();
     System.out.println(in.toString());
     
     
@@ -200,73 +208,78 @@
                                 <th>Indicator</th>
                                 <th>ICTC-ACDI/VOCA</th>
                                 <th>ICTC-MOFA</th>
-                                <th>AIS-BA</th>
+                                <!--<th>AIS-BA</th>
                                 <th>AIS-UE</th>
                                 <th>AIS-UW</th>
                                 <th>AIS-NR</th>
-                                <th>AIS-VR</th>
+                                <th>AIS-VR</th-->
                             </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Farmers Registered (% of target)</td>
-                                    <td><%= data.getFarmerRegistrationTotalForACDI() %> / <%= data.getFarmerRegistrationTargetForACDI() %> (<%= data.getFarmerRegistrationProgressForACDI()%>%)</td>
-                                    <td><%= data.getFarmerRegistrationTotalForMOFA() %> / <%= data.getFarmerRegistrationTargetForMOFA() %> (<%= data.getFarmerRegistrationProgressForMOFA()%>%)</td>
-                                    <td><%= data.getFarmerRegistrationTotalForAISBA() %> / <%= data.getFarmerRegistrationTargetForAISBA() %> (<%= data.getFarmerRegistrationProgressForAISBA()%>%)</td>
-                                    <td><%= data.getFarmerRegistrationTotalForAISUE() %> / <%= data.getFarmerRegistrationTargetForAISUE() %> (<%= data.getFarmerRegistrationProgressForAISUE()%>%)</td>
-                                    <td><%= data.getFarmerRegistrationTotalForAISUW() %> / <%= data.getFarmerRegistrationTargetForAISUW() %> (<%= data.getFarmerRegistrationProgressForAISUW()%>%)</td>
-                                    <td><%= data.getFarmerRegistrationTotalForAISNR() %> / <%= data.getFarmerRegistrationTargetForAISNR() %> (<%= data.getFarmerRegistrationProgressForAISNR()%>%)</td>
-                                    <td><%= data.getFarmerRegistrationTotalForAISVR() %> / <%= data.getFarmerRegistrationTargetForAISVR() %> (<%= data.getFarmerRegistrationProgressForAISVR()%>%)</td>
+                                    <td>Number of farmers with access to Agent (registered)(% of target)</td>
+                                    <td><%= bio.getACDIVOCAFarmerCount()%> / <%= data.getFarmerRegistrationTargetForACDI() %> (<%= temp.getFarmerRegistrationProgressForACDI()  %>%)</td>
+                                    <td><%= bio.getMOFAFarmerCount() %> / <%= data.getFarmerRegistrationTargetForMOFA() %> (<%= temp.getFarmerRegistrationProgressForMOFA()  %>%)</td>
+                                    
                                 </tr>
                                 <tr>
-                                    <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance (Production, Post-harvest, Credit)</td>
-                                    <td><%= data.getFarmerPPTotalForACDI() %> (<%= data.getFarmerPPProgressForACDI() %>%)</td>
-                                    <td><%= data.getFarmerPPTotalForMOFA() %> (<%= data.getFarmerPPProgressForMOFA() %>%)</td>
-                                    <td><%= data.getFarmerPPTotalForAISBA() %> (<%= data.getFarmerPPProgressForAISBA() %>%)</td>
-                                    <td><%= data.getFarmerPPTotalForAISUE() %> (<%= data.getFarmerPPProgressForAISUE() %>%)</td>
-                                    <td><%= data.getFarmerPPTotalForAISUW() %> (<%= data.getFarmerPPProgressForAISUW() %>%)</td>
-                                    <td><%= data.getFarmerPPTotalForAISNR() %> (<%= data.getFarmerPPProgressForAISNR() %>%)</td>
-                                    <td><%= data.getFarmerPPTotalForAISVR() %> (<%= data.getFarmerPPProgressForAISVR() %>%)</td>
+                                    <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance Production</td>
+                                    <td><%= bio.getACDIVOCABaselineProductionCount() %> (<%= temp.getFarmerPPProgressForACDI() %>%)</td>
+                                     <td><%= mn.get("ppp") %> (<%= mnp.get("pppp") %>%)</td> 
+                                    
                                 </tr>
                                 <tr>
-                                    <td style="width: 20%">Number of farmers (% of target) taken through FMP (Production, Post-harvest, Credit)</td>
-                                    <td><%= data.getFarmerFMPTotalForACDI() %> (<%= data.getFarmerFMPProgressForACDI() %>%)</td>
-                                    <td><%= data.getFarmerFMPTotalForMOFA() %> (<%= data.getFarmerFMPProgressForMOFA() %>%)</td>
-                                    <td><%= data.getFarmerFMPTotalForAISBA() %> (<%= data.getFarmerFMPProgressForAISBA() %>%)</td>
-                                    <td><%= data.getFarmerFMPTotalForAISUE() %> (<%= data.getFarmerFMPProgressForAISUE() %>%)</td>
-                                    <td><%= data.getFarmerFMPTotalForAISUW() %> (<%= data.getFarmerFMPProgressForAISUW() %>%)</td>
-                                    <td><%= data.getFarmerFMPTotalForAISNR() %> (<%= data.getFarmerFMPProgressForAISNR() %>%)</td>
-                                    <td><%= data.getFarmerFMPTotalForAISVR() %> (<%= data.getFarmerFMPProgressForAISVR() %>%)</td>
+                                    <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance PostHarvest)</td>
+                                   <td><%= bio.getACDIVOCABaselinePostHarvestCount() %> (<%= temp.getFarmerPHProgressForACDI() %>%)</td> 
+                                     <td><%= mn.get("pph") %> (<%= mnp.get("pphp")  %>%)</td> 
+                                   
                                 </tr>
                                 <tr>
-                                    <td style="width: 20%">Number of farmers (% of target) taken through FMP Update (Production, Harvest, Post-harvest, Marketing, Credit)</td>
-                                    <td><%= data.getFarmerFMPUpdateTotalForACDI() %> (<%= data.getFarmerFMPUpdateProgressForACDI() %>%)</td>
-                                    <td><%= data.getFarmerFMPUpdateTotalForMOFA() %> (<%= data.getFarmerFMPUpdateProgressForMOFA() %>%)</td>
-                                    <td><%= data.getFarmerFMPUpdateTotalForAISBA() %> (<%= data.getFarmerFMPUpdateProgressForAISBA() %>%)</td>
-                                    <td><%= data.getFarmerFMPUpdateTotalForAISUE() %> (<%= data.getFarmerFMPUpdateProgressForAISUE() %>%)</td>
-                                    <td><%= data.getFarmerFMPUpdateTotalForAISUW() %> (<%= data.getFarmerFMPUpdateProgressForAISUW() %>%)</td>
-                                    <td><%= data.getFarmerFMPUpdateTotalForAISNR() %> (<%= data.getFarmerFMPUpdateProgressForAISNR() %>%)</td>
-                                    <td><%= data.getFarmerFMPUpdateTotalForAISVR() %> (<%= data.getFarmerFMPUpdateProgressForAISVR() %>%)</td>
+                                    <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance Credit</td>
+                                      <td><%= bio.getACDIVOCAFarmCreditPreviousCount() %> (<%= temp.getFarmerFCPPHProgressForACDI() %>%)</td> 
+                                      <td><%= mn.get("fcp") %> (<%= mnp.getString("fcpp") %>%)</td> 
                                 </tr>
                                 <tr>
-                                    <td style="width: 20%">Number of farms (% of target) measured</td>
-                                    <td><%= data.getFarmerFarmsMeasuredTotalForACDI() %> (<%= data.getFarmerFarmsMeasuredProgressForACDI() %>%)</td>
-                                    <td><%= data.getFarmerFarmsMeasuredTotalForMOFA() %> (<%= data.getFarmerFarmsMeasuredProgressForMOFA() %>%)</td>
-                                    <td><%= data.getFarmerFarmsMeasuredTotalForAISBA() %> (<%= data.getFarmerFarmsMeasuredProgressForAISBA() %>%)</td>
-                                    <td><%= data.getFarmerFarmsMeasuredTotalForAISUE() %> (<%= data.getFarmerFarmsMeasuredProgressForAISUE() %>%)</td>
-                                    <td><%= data.getFarmerFarmsMeasuredTotalForAISUW() %> (<%= data.getFarmerFarmsMeasuredProgressForAISUW() %>%)</td>
-                                    <td><%= data.getFarmerFarmsMeasuredTotalForAISNR() %> (<%= data.getFarmerFarmsMeasuredProgressForAISNR() %>%)</td>
-                                    <td><%= data.getFarmerFarmsMeasuredTotalForAISVR() %> (<%= data.getFarmerFarmsMeasuredProgressForAISVR() %>%)</td>
+                                    <td style="width: 20%">Number of farmers (% of target)  coached to produce Farm Management Plan on Production</td>
+                                     <td><%= bio.getACDIVOCAFMPProductionCount() %> (<%= temp.getFarmerFMPPProgressForACDI() %>%)</td>
+                                     <td><%= mn.get("fmp") %> (<%= mnp.getString("fmpp") %>%)</td>
                                 </tr>
                                 <tr>
+                                    <td style="width: 20%">Number of farmers (% of target)  coached to produce Farm Management Plan on PostHarvest</td>
+                                     <td><%= bio.getACDIVOCAFMPPostHarvestCount() %> (<%= temp.getFarmerFMPPHProgressForACDI() %>%)</td>
+                                      <td><%= mn.get("fmph") %> (<%= mnp.getString("fmphp") %>%)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Number of farmers (% of target)  coached to produce Farm Management Plan on Credit</td>
+            
+                                     <td><%= bio.getACDIVOCAFFarmCreditPlanCount() %> (<%= temp.getFarmerFCPPHProgressForACDI() %>%)</td>
+                                     <td><%= mn.get("fmpc")%> (<%= mnp.getString("fmpcp") %>%)</td>
+                                </tr>
+                               <tr>
+                                   <td style="width: 20%">Number of farms (% of target) measured</td>
+                                    <td><%= bio.getACDIVOCAFFMPProductionUpdateCount() %> (<%= temp.getFarmerPUProgressForACDI() %>%)</td>
+                                    <td><%= mn.get("fm") %> (<%= mnp.getString("fmp") %>%)</td>
+                                </tr>
+                                 <tr>
                                     <td style="width: 20%">Number of farms (% of target) assessed</td>
-                                    <td><%= data.getFarmerFarmsAssessedTotalForACDI() %> (<%= data.getFarmerFarmsAssessedProgressForACDI() %>%)</td>
-                                    <td><%= data.getFarmerFarmsAssessedTotalForMOFA() %> (<%= data.getFarmerFarmsAssessedProgressForMOFA() %>%)</td>
-                                    <td><%= data.getFarmerFarmsAssessedTotalForAISBA() %> (<%= data.getFarmerFarmsAssessedProgressForAISBA() %>%)</td>
-                                    <td><%= data.getFarmerFarmsAssessedTotalForAISUE() %> (<%= data.getFarmerFarmsAssessedProgressForAISUE() %>%)</td>
-                                    <td><%= data.getFarmerFarmsAssessedTotalForAISUW() %> (<%= data.getFarmerFarmsAssessedProgressForAISUW() %>%)</td>
-                                    <td><%= data.getFarmerFarmsAssessedTotalForAISNR() %> (<%= data.getFarmerFarmsAssessedProgressForAISNR() %>%)</td>
-                                    <td><%= data.getFarmerFarmsAssessedTotalForAISVR() %> (<%= data.getFarmerFarmsAssessedProgressForAISVR() %>%)</td>
+                                  
+                                    <td><%= bio.getACDIVOCAFCPCount() %> (<%= temp.getFarmerFCAProgressForACDI()  %>%)</td>
+                                     <td><%= mn.get("fa") %> (<%= mnp.getString("fap")  %>%)</td>
+                                </tr>
+                                 <tr>
+                                    <td style="width: 20%">Number of farmers (% of target) taken through FMP Update Production</td>
+                                      <td><%= bio.getACDIVOCAFFMPProductionUpdateCount() %> (<%= temp.getFarmerPUProgressForACDI() %>%)</td>
+                                     <td><%= mn.get("fm") %> (<%= mnp.getString("fmp") %>%)</td>
+                                </tr>
+                                <tr>
+                                   <td style="width: 20%">Number of farmers (% of target) taken through FMP Update Post Harvest</td>
+                                    <td><%= bio.getACDIVOCAPostHarvestUpdateCount() %> (<%= temp.getFarmerPHUProgressForACDI() %>%)</td>
+                                    <td><%= mn.get("fphu") %> (<%= mnp.getString("fphup") %>%)</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 20%">Number of farmers (% of target) taken through FMP Update Credit</td>
+                                    <td><%= bio.getACDIVOCAFarmCreditUpdateCount() %> (<%= temp.getFarmerFCUProgressForACDI() %>%)</td>
+                                    <td><%= mn.get("fcu") %> (<%= mnp.getString("fcup") %>%)</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -285,78 +298,44 @@
                     <div class="x_content">
                         <table id="agent-monitoring-table" class="table table-striped table-bordered jambo_table">
                             <thead>
-                            <tr>
-                                <th>Indicator</th>
-                                <th>ICTC-ACDI/VOCA</th>
-                                <th>ICTC-MOFA</th>
-                                <th>AIS-BA</th>
-                                <th>AIS-UE</th>
-                                <th>AIS-UW</th>
-                                <th>AIS-NR</th>
-                                <th>AIS-VR</th>
+                            
+                             <tr>
+                                <th>Agent</th>
+                                <th>No farmers with access to Agent</th>
+                                <th>No farmers taken through Previous performance (Production)</th>
+                                <th>No farmers taken through Previous performance (Post-harvest)</th>
+                                <th>No farmers taken through Previous performance (Credit)</th>
+                                <th>No farmers coached to produce Farm Management Plan on Production</th>
+                                <th>No farmers coached to produce Farm Management Plan on Post-harvest</th>
+                                <th>No farmers coached to produce Farm Management Plan on Farm Credit</th>
+                                <th>No farms measured by Agent</th>
+                                <th>No farms accessed by Agent</th>
+                                <th>No of Updated records [FMP production]</th>
+                                <th>No of Updated records [FMP Post-harvest / Marketing] </th>
+                                <th>Number of Updated records [Credit]</th>
+                                
                             </tr>
+                           
                             </thead>
                             <tbody>
+                             <% for (int i =0;i<ja.length();i++) { b = ja.getJSONObject(i);%>
+                               
                             <tr>
-                                <td>Agents Registered (% of target)</td>
-                                <td><%= data.getAgentRegistrationTotalForACDI() %> / <%= data.getAgentRegistrationTargetForACDI() %> (<%= data.getAgentRegistrationProgressForACDI()%>%)</td>
-                                <td><%= data.getAgentRegistrationTotalForMOFA() %> / <%= data.getAgentRegistrationTargetForMOFA() %> (<%= data.getAgentRegistrationProgressForMOFA()%>%)</td>
-                                <td><%= data.getAgentRegistrationTotalForAISBA() %> / <%= data.getAgentRegistrationTargetForAISBA() %> (<%= data.getAgentRegistrationProgressForAISBA()%>%)</td>
-                                <td><%= data.getAgentRegistrationTotalForAISUE() %> / <%= data.getAgentRegistrationTargetForAISUE() %> (<%= data.getAgentRegistrationProgressForAISUE()%>%)</td>
-                                <td><%= data.getAgentRegistrationTotalForAISUW() %> / <%= data.getAgentRegistrationTargetForAISUW() %> (<%= data.getAgentRegistrationProgressForAISUW()%>%)</td>
-                                <td><%= data.getAgentRegistrationTotalForAISNR() %> / <%= data.getAgentRegistrationTargetForAISNR() %> (<%= data.getAgentRegistrationProgressForAISNR()%>%)</td>
-                                <td><%= data.getAgentRegistrationTotalForAISVR() %> / <%= data.getAgentRegistrationTargetForAISVR() %> (<%= data.getAgentRegistrationProgressForAISVR()%>%)</td>
+                                <td><%= b.getString("name") %></td>
+                                <td><%= b.get("farmers") %></td>
+                                <td><%= b.get("blproduction") %></td>
+                                <td><%= b.get("blpostharvest")%></td>
+                                <td><%= b.get("blcredit")%></td>
+                                <td><%= b.get("fmpproduction")%></td>
+                                <td><%= b.get("fmppostharvest")%></td>
+                                <td><%= b.get("fmpcredit")%></td>
+                                <td><%= b.get("measured")%></td>
+                                <td><%= b.get("assessed")%></td>
+                                <td><%= b.get("productionupdate") %></td>
+                                <td><%= b.get("postharvestupdate") %></td>
+                                <td><%= b.get("creditupdate")  %></td>
                             </tr>
-                            <tr>
-                                <td style="width: 20%">Number of agents (% of target) with more than 50 Previous Performance surveys (Production, Post-harvest, Credit) completed</td>
-                                <td><%= data.getAgentPPTotalForACDI() %> (<%= data.getAgentPPProgressForACDI() %>%)</td>
-                                <td><%= data.getAgentPPTotalForMOFA() %> (<%= data.getAgentPPProgressForMOFA() %>%)</td>
-                                <td><%= data.getAgentPPTotalForAISBA() %> (<%= data.getAgentPPProgressForAISBA() %>%)</td>
-                                <td><%= data.getAgentPPTotalForAISUE() %> (<%= data.getAgentPPProgressForAISUE() %>%)</td>
-                                <td><%= data.getAgentPPTotalForAISUW() %> (<%= data.getAgentPPProgressForAISUW() %>%)</td>
-                                <td><%= data.getAgentPPTotalForAISNR() %> (<%= data.getAgentPPProgressForAISNR() %>%)</td>
-                                <td><%= data.getAgentPPTotalForAISVR() %> (<%= data.getAgentPPProgressForAISVR() %>%)</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%">Number of agents (% of target) with more than 50 FMP (Production, Post-harvest, Credit) completed</td>
-                                <td><%= data.getAgentFMPTotalForACDI() %> (<%= data.getAgentFMPProgressForACDI() %>%)</td>
-                                <td><%= data.getAgentFMPTotalForMOFA() %> (<%= data.getAgentFMPProgressForMOFA() %>%)</td>
-                                <td><%= data.getAgentFMPTotalForAISBA() %> (<%= data.getAgentFMPProgressForAISBA() %>%)</td>
-                                <td><%= data.getAgentFMPTotalForAISUE() %> (<%= data.getAgentFMPProgressForAISUE() %>%)</td>
-                                <td><%= data.getAgentFMPTotalForAISUW() %> (<%= data.getAgentFMPProgressForAISUW() %>%)</td>
-                                <td><%= data.getAgentFMPTotalForAISNR() %> (<%= data.getAgentFMPProgressForAISNR() %>%)</td>
-                                <td><%= data.getAgentFMPTotalForAISVR() %> (<%= data.getAgentFMPProgressForAISVR() %>%)</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%">Number of agents (% of target) with more than 50 FMP Update (Production, Harvest, Post-harvest, Marketing, Credit) completed</td>
-                                <td><%= data.getAgentFMPUpdateTotalForACDI() %> (<%= data.getAgentFMPUpdateProgressForACDI() %>%)</td>
-                                <td><%= data.getAgentFMPUpdateTotalForMOFA() %> (<%= data.getAgentFMPUpdateProgressForMOFA() %>%)</td>
-                                <td><%= data.getAgentFMPUpdateTotalForAISBA() %> (<%= data.getAgentFMPUpdateProgressForAISBA() %>%)</td>
-                                <td><%= data.getAgentFMPUpdateTotalForAISUE() %> (<%= data.getAgentFMPUpdateProgressForAISUE() %>%)</td>
-                                <td><%= data.getAgentFMPUpdateTotalForAISUW() %> (<%= data.getAgentFMPUpdateProgressForAISUW() %>%)</td>
-                                <td><%= data.getAgentFMPUpdateTotalForAISNR() %> (<%= data.getAgentFMPUpdateProgressForAISNR() %>%)</td>
-                                <td><%= data.getAgentFMPUpdateTotalForAISVR() %> (<%= data.getAgentFMPUpdateProgressForAISVR() %>%)</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%">Number of agents (% of target) who have measured more than 50 farms</td>
-                                <td><%= data.getAgentFarmsMeasuredTotalForACDI() %> (<%= data.getAgentFarmsMeasuredProgressForACDI() %>%)</td>
-                                <td><%= data.getAgentFarmsMeasuredTotalForMOFA() %> (<%= data.getAgentFarmsMeasuredProgressForMOFA() %>%)</td>
-                                <td><%= data.getAgentFarmsMeasuredTotalForAISBA() %> (<%= data.getAgentFarmsMeasuredProgressForAISBA() %>%)</td>
-                                <td><%= data.getAgentFarmsMeasuredTotalForAISUE() %> (<%= data.getAgentFarmsMeasuredProgressForAISUE() %>%)</td>
-                                <td><%= data.getAgentFarmsMeasuredTotalForAISUW() %> (<%= data.getAgentFarmsMeasuredProgressForAISUW() %>%)</td>
-                                <td><%= data.getAgentFarmsMeasuredTotalForAISNR() %> (<%= data.getAgentFarmsMeasuredProgressForAISNR() %>%)</td>
-                                <td><%= data.getAgentFarmsMeasuredTotalForAISVR() %> (<%= data.getAgentFarmsMeasuredProgressForAISVR() %>%)</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%">Number of agents (% of target) who have assessed more than 50 farms</td>
-                                <td><%= data.getAgentFarmsAssessedTotalForACDI() %> (<%= data.getAgentFarmsAssessedProgressForACDI() %>%)</td>
-                                <td><%= data.getAgentFarmsAssessedTotalForMOFA() %> (<%= data.getAgentFarmsAssessedProgressForMOFA() %>%)</td>
-                                <td><%= data.getAgentFarmsAssessedTotalForAISBA() %> (<%= data.getAgentFarmsAssessedProgressForAISBA() %>%)</td>
-                                <td><%= data.getAgentFarmsAssessedTotalForAISUE() %> (<%= data.getAgentFarmsAssessedProgressForAISUE() %>%)</td>
-                                <td><%= data.getAgentFarmsAssessedTotalForAISUW() %> (<%= data.getAgentFarmsAssessedProgressForAISUW() %>%)</td>
-                                <td><%= data.getAgentFarmsAssessedTotalForAISNR() %> (<%= data.getAgentFarmsAssessedProgressForAISNR() %>%)</td>
-                                <td><%= data.getAgentFarmsAssessedTotalForAISVR() %> (<%= data.getAgentFarmsAssessedProgressForAISVR() %>%)</td>
-                            </tr>
+                            <% }%>
                             </tbody>
                         </table>
                     </div>

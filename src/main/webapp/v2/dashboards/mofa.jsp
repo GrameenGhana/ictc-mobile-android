@@ -16,7 +16,9 @@
     JSONObject  mn = bi.getFarmerActivitMonitoring("MOFA");
     JSONObject  mnp = bi.getFarmerActivitMonitoringProgress("MOFA");
     TempReport temp = new TempReport();
-   
+    JSONObject y = bi.getMOFAAgentActivity();
+    JSONArray ja = y.getJSONArray("agentactivity");
+    JSONObject b = new JSONObject();
     JSONObject  in = bi.getIndicatorInfo("MOFA");
     
     
@@ -228,37 +230,43 @@
 
                     <div class="x_content">
                         <table id="agent-monitoring-table" class="table table-striped table-bordered jambo_table">
-                            <thead>
+                             <thead>
                             <tr>
-                                <th>Indicator</th>
-                                <th>ICTC-MOFA</th>
+                                <th>Agent</th>
+                                <th>No farmers with access to Agent</th>
+                                <th>No farmers taken through Previous performance (Production)</th>
+                                <th>No farmers taken through Previous performance (Post-harvest)</th>
+                                <th>No farmers taken through Previous performance (Credit)</th>
+                                <th>No farmers coached to produce Farm Management Plan on Production</th>
+                                <th>No farmers coached to produce Farm Management Plan on Post-harvest</th>
+                                <th>No farmers coached to produce Farm Management Plan on Farm Credit</th>
+                                <th>No farms measured by Agent</th>
+                                <th>No farms accessed by Agent</th>
+                                <th>No of Updated records [FMP production]</th>
+                                <th>No of Updated records [FMP Post-harvest / Marketing] </th>
+                                <th>Number of Updated records [Credit]</th>
+                                
                             </tr>
                             </thead>
                             <tbody>
+                               <% for (int i =0;i<ja.length();i++) { b = ja.getJSONObject(i);%>
+                               
                             <tr>
-                                <td>Agents Registered (% of target)</td>
-                                <td><%= data.getAgentRegistrationTotalForMOFA() %> / <%= data.getAgentRegistrationTargetForMOFA() %> (<%= data.getAgentRegistrationProgressForMOFA()%>%)</td>
+                                <td><%= b.getString("name") %></td>
+                                <td><%= b.get("farmers") %></td>
+                                <td><%= b.get("blproduction") %></td>
+                                <td><%= b.get("blpostharvest")%></td>
+                                <td><%= b.get("blcredit")%></td>
+                                <td><%= b.get("fmpproduction")%></td>
+                                <td><%= b.get("fmppostharvest")%></td>
+                                <td><%= b.get("fmpcredit")%></td>
+                                <td><%= b.get("measured")%></td>
+                                <td><%= b.get("assessed")%></td>
+                                <td><%= b.get("productionupdate") %></td>
+                                <td><%= b.get("postharvestupdate") %></td>
+                                <td><%= b.get("creditupdate")  %></td>
                             </tr>
-                            <tr>
-                                <td style="width: 20%">Number of agents (% of target) with more than 50 Previous Performance surveys (Production, Post-harvest, Credit) completed</td>
-                                <td><%= data.getAgentPPTotalForMOFA() %> (<%= data.getAgentPPProgressForMOFA() %>%)</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%">Number of agents (% of target) with more than 50 FMP (Production, Post-harvest, Credit) completed</td>
-                                <td><%= data.getAgentFMPTotalForMOFA() %> (<%= data.getAgentFMPProgressForMOFA() %>%)</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%">Number of agents (% of target) with more than 50 FMP Update (Production, Harvest, Post-harvest, Marketing, Credit) completed</td>
-                                <td><%= data.getAgentFMPUpdateTotalForMOFA() %> (<%= data.getAgentFMPUpdateProgressForMOFA() %>%)</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%">Number of agents (% of target) who have measured more than 50 farms</td>
-                                <td><%= data.getAgentFarmsMeasuredTotalForMOFA() %> (<%= data.getAgentFarmsMeasuredProgressForMOFA() %>%)</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%">Number of agents (% of target) who have assessed more than 50 farms</td>
-                                <td><%= data.getAgentFarmsAssessedTotalForMOFA() %> (<%= data.getAgentFarmsAssessedProgressForMOFA() %>%)</td>
-                            </tr>
+                            <% }%>
                             </tbody>
                         </table>
                     </div>

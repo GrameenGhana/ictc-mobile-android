@@ -597,6 +597,84 @@ public class BIDataManager extends BIUtil {
          
     }
     
+      public JSONObject getMOFAAgentActivity()
+    {
+         BiodataModel biodataModel = new BiodataModel();
+        AgentModel agentModel = new AgentModel();
+
+        Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
+     
+        List<AgentWrapper> agent = agentModel.findAllMOFAAgents();
+
+        JSONObject xy = new JSONObject();
+        JSONArray agents = new JSONArray();
+
+        for (AgentWrapper a : agent) {
+            JSONObject y = new JSONObject();
+
+            y.put("name", a.getFirstname() + " " + a.getLastname());
+            y.put("farmers", biodataModel.getFarmerCountByAgent(a.getAgentId()));
+            y.put("blproduction", biodataModel.getFarmerBaselinProductionCountByAgent(a.getAgentId()));
+            y.put("blpostharvest", biodataModel.getFarmerBaselinePostHarvestCountByAgent(a.getAgentId()));
+            y.put("blcredit", biodataModel.getFarmerCreditPreviousCountByAgent(a.getAgentId()));
+            y.put("fmpproduction", biodataModel.getFarmerFMPProductionCountByAgent(a.getAgentId()));
+            y.put("fmppostharvest", biodataModel.getFarmerFMPPostHarvestCountByAgent(a.getAgentId()));
+            y.put("fmpcredit", biodataModel.getFarmerCreditByAgent(a.getAgentId()));
+            y.put("measured", biodataModel.getFarmerProductionUpdateByAgent(a.getAgentId()));
+            y.put("assessed", biodataModel.getFarmerCropAssessment(a.getAgentId()));
+            y.put("productionupdate", biodataModel.getFarmerProductionUpdateByAgent(a.getAgentId()));
+            y.put("postharvestupdate", biodataModel.getFarmerPostHarvestUpdateByAgent(a.getAgentId()));
+            y.put("creditupdate", biodataModel.getFarmerBaselinePostHarvestCountByAgent(a.getAgentId()));
+
+            agents.put(y);
+        }
+   
+        tx.success();
+       
+        xy.put("agentactivity", agents);
+
+        return xy;
+    }
+    
+        public JSONObject getAllAgentActivity()
+    {
+         BiodataModel biodataModel = new BiodataModel();
+        AgentModel agentModel = new AgentModel();
+
+        Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
+     
+        List<AgentWrapper> agent = agentModel.findAllAgents();
+
+        JSONObject xy = new JSONObject();
+        JSONArray agents = new JSONArray();
+
+        for (AgentWrapper a : agent) {
+            JSONObject y = new JSONObject();
+
+            y.put("name", a.getFirstname() + " " + a.getLastname());
+            y.put("farmers", biodataModel.getFarmerCountByAgent(a.getAgentId()));
+            y.put("blproduction", biodataModel.getFarmerBaselinProductionCountByAgent(a.getAgentId()));
+            y.put("blpostharvest", biodataModel.getFarmerBaselinePostHarvestCountByAgent(a.getAgentId()));
+            y.put("blcredit", biodataModel.getFarmerCreditPreviousCountByAgent(a.getAgentId()));
+            y.put("fmpproduction", biodataModel.getFarmerFMPProductionCountByAgent(a.getAgentId()));
+            y.put("fmppostharvest", biodataModel.getFarmerFMPPostHarvestCountByAgent(a.getAgentId()));
+            y.put("fmpcredit", biodataModel.getFarmerCreditByAgent(a.getAgentId()));
+            y.put("measured", biodataModel.getFarmerProductionUpdateByAgent(a.getAgentId()));
+            y.put("assessed", biodataModel.getFarmerCropAssessment(a.getAgentId()));
+            y.put("productionupdate", biodataModel.getFarmerProductionUpdateByAgent(a.getAgentId()));
+            y.put("postharvestupdate", biodataModel.getFarmerPostHarvestUpdateByAgent(a.getAgentId()));
+            y.put("creditupdate", biodataModel.getFarmerBaselinePostHarvestCountByAgent(a.getAgentId()));
+
+            agents.put(y);
+        }
+   
+        tx.success();
+       
+        xy.put("agentactivity", agents);
+
+        return xy;
+    }
+    
     
     public  JSONObject getIndicatorInfo(String partner)
     {
