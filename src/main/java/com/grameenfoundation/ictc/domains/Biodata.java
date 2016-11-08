@@ -57,7 +57,406 @@ public class Biodata extends Status implements GeneralInterface {
     public static String NUMBEROFDEPENDANTSMALE="numberofdependantsmale";
     public static String NUMBEROFDEPENDENTSFEMALE="numberofdependentsfemale";
     public static String REGIONRESIDENCE="regionresidence";
+    public static String DATACOLLECTEDBY="DataCollectedBy";
+    public static String ACDIVOCAFARMERID="ACDIVOCAFARMERID";
+    public static String MAIDENAME="maidename";
+    public static String FAMER_TYPE="Famer_type";
+    public static String MARRIAGE_NAME="marriage_name";
+    public static String WORKINGWITHLIST="WorkingWithList";
+    public static String DATEOFBIRTH="dateofbirth";
+    public static String NOMALEEMPLOYEES="NoMaleEmployees";
+    public static String NOFEMALEEMPLOYEES="NoFemaleEmployees";
+    public static String MSMETYPE="MSMEType";
+    public static String FKFARMERHHPROFILE="fkFarmerHHProfile";
+    public static String ISWITHFBO="isWithFBO";
+    public static String FKFBOPROFILE="fkFBOProfile";
+    public static String FBOPOSITION="FBOPosition";
+    public static String ISOUTGROWER="isOutGrower";
+    public static String FKNUCLEUSFARMERPROFILE="fkNucleusFarmerProfile";
+    public static String FKAGGREGATORPROFILE="fkAggregatorProfile";
+    public static String OUTGROWERGROUPNAME="OutgrowerGroupName";
+    public static String ISWITHPA="isWithPA";
+    public static String PANAME="PAName";
+    public static String PAOFFICE="PAOffice";
+    public static String REMARKS="Remarks";
+    public static String DATACOLLCETEDBY="DataCollcetedBy";
+    public static String DATAREVIEWEDBY="DataReviewedBy";
+    public static String DATECOLLECTED="DateCollected";
+    public static String DATEREVIEWED="DateReviewed";
+    public static String FKFYNAME="fkFYName";
     
+    
+public void setFkFYName(String fkfyname) {
+underlyingNode.setProperty(FKFYNAME,fkfyname);
+}
+
+public String getFkFYName(){
+          try {
+          return (String) underlyingNode.getProperty(FKFYNAME);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setDateReviewed(String datereviewed) {
+underlyingNode.setProperty(DATEREVIEWED,datereviewed);
+}
+
+public String getDateReviewed(){
+          try {
+          return (String) underlyingNode.getProperty(DATEREVIEWED);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setDateCollected(String datecollected) {
+underlyingNode.setProperty(DATECOLLECTED,datecollected);
+}
+
+public String getDateCollected(){
+          try {
+          return (String) underlyingNode.getProperty(DATECOLLECTED);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setDataReviewedBy(String datareviewedby) {
+underlyingNode.setProperty(DATAREVIEWEDBY,datareviewedby);
+}
+
+public String getDataReviewedBy(){
+          try {
+          return (String) underlyingNode.getProperty(DATAREVIEWEDBY);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setDataCollcetedBy(String datacollcetedby) {
+underlyingNode.setProperty(DATACOLLCETEDBY,datacollcetedby);
+}
+
+public String getDataCollcetedBy(){
+          try {
+          return (String) underlyingNode.getProperty(DATACOLLCETEDBY);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+public void setRemarks(String remarks) {
+underlyingNode.setProperty(REMARKS,remarks);
+}
+
+public String getRemarks(){
+          try {
+          return (String) underlyingNode.getProperty(REMARKS);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+public void setPAOffice(String paoffice) {
+underlyingNode.setProperty(PAOFFICE,paoffice);
+}
+
+public String getPAOffice(){
+          try {
+          return (String) underlyingNode.getProperty(PAOFFICE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    public void setPAName(String paname) {
+        underlyingNode.setProperty(PANAME, paname);
+    }
+
+    public String getPAName() {
+        try {
+            return (String) underlyingNode.getProperty(PANAME);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setIsWithPA(String iswithpa) {
+underlyingNode.setProperty(ISWITHPA,iswithpa);
+}
+
+public String getIsWithPA(){
+          try {
+          return (String) underlyingNode.getProperty(ISWITHPA);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setOutgrowerGroupName(String outgrowergroupname) {
+underlyingNode.setProperty(OUTGROWERGROUPNAME,outgrowergroupname);
+}
+
+public String getOutgrowerGroupName(){
+          try {
+          return (String) underlyingNode.getProperty(OUTGROWERGROUPNAME);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setFkAggregatorProfile(String fkaggregatorprofile) {
+underlyingNode.setProperty(FKAGGREGATORPROFILE,fkaggregatorprofile);
+}
+
+public String getFkAggregatorProfile(){
+          try {
+          return (String) underlyingNode.getProperty(FKAGGREGATORPROFILE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+public void setFkNucleusFarmerProfile(String fknucleusfarmerprofile) {
+underlyingNode.setProperty(FKNUCLEUSFARMERPROFILE,fknucleusfarmerprofile);
+}
+
+public String getFkNucleusFarmerProfile(){
+          try {
+          return (String) underlyingNode.getProperty(FKNUCLEUSFARMERPROFILE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+public void setIsOutGrower(String isoutgrower) {
+underlyingNode.setProperty(ISOUTGROWER,isoutgrower);
+}
+
+public String getIsOutGrower(){
+          try {
+          return (String) underlyingNode.getProperty(ISOUTGROWER);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setFBOPosition(String fboposition) {
+underlyingNode.setProperty(FBOPOSITION,fboposition);
+}
+
+public String getFBOPosition(){
+          try {
+          return (String) underlyingNode.getProperty(FBOPOSITION);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setFkFBOProfile(String fkfboprofile) {
+underlyingNode.setProperty(FKFBOPROFILE,fkfboprofile);
+}
+
+public String getFkFBOProfile(){
+          try {
+          return (String) underlyingNode.getProperty(FKFBOPROFILE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setIsWithFBO(String iswithfbo) {
+underlyingNode.setProperty(ISWITHFBO,iswithfbo);
+}
+
+public String getIsWithFBO(){
+          try {
+          return (String) underlyingNode.getProperty(ISWITHFBO);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+    
+public void setFkFarmerHHProfile(String fkfarmerhhprofile) {
+underlyingNode.setProperty(FKFARMERHHPROFILE,fkfarmerhhprofile);
+}
+
+public String getFkFarmerHHProfile(){
+          try {
+          return (String) underlyingNode.getProperty(FKFARMERHHPROFILE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+public void setMSMEType(String msmetype) {
+underlyingNode.setProperty(MSMETYPE,msmetype);
+}
+
+public String getMSMEType(){
+          try {
+          return (String) underlyingNode.getProperty(MSMETYPE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+public void setNoFemaleEmployees(String nofemaleemployees) {
+underlyingNode.setProperty(NOFEMALEEMPLOYEES,nofemaleemployees);
+}
+
+public String getNoFemaleEmployees(){
+          try {
+          return (String) underlyingNode.getProperty(NOFEMALEEMPLOYEES);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setNoMaleEmployees(String nomaleemployees) {
+underlyingNode.setProperty(NOMALEEMPLOYEES,nomaleemployees);
+}
+
+public String getNoMaleEmployees(){
+          try {
+          return (String) underlyingNode.getProperty(NOMALEEMPLOYEES);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setDateofbirth(String dateofbirth) {
+underlyingNode.setProperty(DATEOFBIRTH,dateofbirth);
+}
+
+public String getDateofbirth(){
+          try {
+          return (String) underlyingNode.getProperty(DATEOFBIRTH);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setWorkingWithList(String workingwithlist) {
+underlyingNode.setProperty(WORKINGWITHLIST,workingwithlist);
+}
+
+public String getWorkingWithList(){
+          try {
+          return (String) underlyingNode.getProperty(WORKINGWITHLIST);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+    
+public void setMarriage_name(String marriage_name) {
+underlyingNode.setProperty(MARRIAGE_NAME,marriage_name);
+}
+
+public String getMarriage_name(){
+          try {
+          return (String) underlyingNode.getProperty(MARRIAGE_NAME);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+public void setFamer_type(String famer_type) {
+underlyingNode.setProperty(FAMER_TYPE,famer_type);
+}
+
+public String getFamer_type(){
+          try {
+          return (String) underlyingNode.getProperty(FAMER_TYPE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setMaidename(String maidename) {
+underlyingNode.setProperty(MAIDENAME,maidename);
+}
+
+public String getMaidename(){
+          try {
+          return (String) underlyingNode.getProperty(MAIDENAME);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+    
+    
+public void setACDIVOCAFARMERID(String acdivocafarmerid) {
+underlyingNode.setProperty(ACDIVOCAFARMERID,acdivocafarmerid);
+}
+
+public String getACDIVOCAFARMERID(){
+          try {
+          return (String) underlyingNode.getProperty(ACDIVOCAFARMERID);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    
+    
+    
+    
+    
+public void setDataCollectedBy(String datacollectedby) {
+underlyingNode.setProperty(DATACOLLECTEDBY,datacollectedby);
+}
+
+public String getDataCollectedBy(){
+          try {
+          return (String) underlyingNode.getProperty(DATACOLLECTEDBY);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
     
     
 public void setRegionresidence(String regionresidence) {

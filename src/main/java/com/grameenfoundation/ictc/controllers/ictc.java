@@ -47,15 +47,15 @@ public class ictc {
                 
                 //genCode("firstName");
 //                 //genWrapperCode("firstName");
-//        Scanner sc = new Scanner(System.in);
-//        String input = "";
-//        while (!sc.next().equals("exit")) {
-//            System.out.println("Enter Variabe name");
-//
-//            input = sc.next();
-//            genWrapperCode(input);
-//            genGraphCode(input);
-//       }
+        Scanner sc = new Scanner(System.in);
+        String input = "";
+        while (!sc.next().equals("exit")) {
+            System.out.println("Enter Variabe name");
+
+            input = sc.next();
+            genWrapperCode(input);
+            genGraphCode(input);
+       }
 
 //        String codefrom = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n" +
 //"Info:   <html>\n" +
@@ -184,44 +184,44 @@ public class ictc {
 
             //}
         
-        try (BufferedReader br = new BufferedReader(new FileReader("/home/grameen/acdivoca/data.a2")))
-		{
-
-			String sCurrentLine;
-                        String tag[] = new String[50];
-                        String json = null;
-                        int i =0;
-
-			while ((sCurrentLine = br.readLine()) != null) {
-				//System.out.println(sCurrentLine+";");
-// 
-                           // sCurrentLine+=";";
-//                                tag = sCurrentLine.split(";");
-//                                 for (int j = 0; j < tag.length; j++) {
-//                                   json =tag[j].replace("~", "\":\"").replace("\t","\",\"");
-//                                     System.out.println("{\""+json+"\"}");
+//        try (BufferedReader br = new BufferedReader(new FileReader("/home/grameen/acdivoca/data.a2")))
+//		{
+//
+//			String sCurrentLine;
+//                        String tag[] = new String[50];
+//                        String json = null;
+//                        int i =0;
+//
+//			while ((sCurrentLine = br.readLine()) != null) {
+//				//System.out.println(sCurrentLine+";");
+//// 
+//                           // sCurrentLine+=";";
+////                                tag = sCurrentLine.split(";");
+////                                 for (int j = 0; j < tag.length; j++) {
+////                                   json =tag[j].replace("~", "\":\"").replace("\t","\",\"");
+////                                     System.out.println("{\""+json+"\"}");
+////                                
+////                                      }
+//                             if(sCurrentLine.contains("DATASET"))
+//                             {
+//                                  sCurrentLine = sCurrentLine.replace("~", "\":\"").replace("\t","\",\"");
+//                                  sCurrentLine +="\"" ;
+//                             }
+//                             else
+//                             {
+//                                sCurrentLine = sCurrentLine.replace("~", "\":\"").replace("\t","\",\"");
+//                                sCurrentLine = sCurrentLine.substring(0, sCurrentLine.lastIndexOf(","));
 //                                
-//                                      }
-                             if(sCurrentLine.contains("DATASET"))
-                             {
-                                  sCurrentLine = sCurrentLine.replace("~", "\":\"").replace("\t","\",\"");
-                                  sCurrentLine +="\"" ;
-                             }
-                             else
-                             {
-                                sCurrentLine = sCurrentLine.replace("~", "\":\"").replace("\t","\",\"");
-                                sCurrentLine = sCurrentLine.substring(0, sCurrentLine.lastIndexOf(","));
-                                
-                             }
-                                  // System.out.println(sCurrentLine);
-                                 System.out.println("{\""+sCurrentLine+"}");
-                              //  break;
-                              
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//                             }
+//                                  // System.out.println(sCurrentLine);
+//                                 System.out.println("{\""+sCurrentLine+"}");
+//                              //  break;
+//                              
+//			}
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 
         
     }

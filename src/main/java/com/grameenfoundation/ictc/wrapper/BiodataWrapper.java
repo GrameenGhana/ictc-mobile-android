@@ -45,6 +45,264 @@ public class BiodataWrapper {
     String numberofdependantsmale="numberofdependantsmale";
     String numberofdependentsfemale="numberofdependentsfemale";
     String regionresidence="regionresidence";
+    String DataCollectedBy=" DataCollectedBy";
+    String acdivocafarmerid="ACDIVOCAFARMERID";
+    String maidename="maidename";
+    String Famer_type="Famer_type";
+    String marriage_name="marriage_name";
+    String WorkingWithList="WorkingWithList";
+    String dateofbirth="dateofbirth";
+    String NoMaleEmployees="NoMaleEmployees";
+    String NoFemaleEmployees="nofemaleemployees";
+    String MSMEType="MSMEType";
+    String fkFarmerHHProfile="fkFarmerHHProfile";
+    String isWithFBO="isWithFBO";
+    String fkFBOProfile="fkFBOProfile";
+    String FBOPosition="FBOPosition";
+    String isOutGrower="isOutGrower";
+    String fkNucleusFarmerProfile="fkNucleusFarmerProfile";
+    String isWithPA="isWithPA";
+    String PAName="PAName";
+    String PAOffice="PAOffice";
+    String Remarks="Remarks";
+    String Status="Status";
+    String DataCollcetedBy="DataCollcetedBy";
+    String DataReviewedBy="DataReviewedBy";
+    String DateCollected="DateCollected";
+    String DateReviewed="DateReviewed";
+    String fkFYName="fkFYName";
+ public  void setFkFYName(String fkFYName) {
+      this.fkFYName=fkFYName;
+    }
+ public  String getFkFYName() {
+        return fkFYName;
+
+    }
+    
+ public  void setDateReviewed(String DateReviewed) {
+      this.DateReviewed=DateReviewed;
+    }
+ public  String getDateReviewed() {
+        return DateReviewed;
+
+    }
+    
+ public  void setDateCollected(String DateCollected) {
+      this.DateCollected=DateCollected;
+    }
+ public  String getDateCollected() {
+        return DateCollected;
+
+    }
+    
+ public  void setDataReviewedBy(String DataReviewedBy) {
+      this.DataReviewedBy=DataReviewedBy;
+    }
+ public  String getDataReviewedBy() {
+        return DataReviewedBy;
+
+    }
+    
+ public  void setDataCollcetedBy(String DataCollcetedBy) {
+      this.DataCollcetedBy=DataCollcetedBy;
+    }
+ public  String getDataCollcetedBy() {
+        return DataCollcetedBy;
+
+    }
+    
+ public  void setStatus(String Status) {
+      this.Status=Status;
+    }
+ public  String getStatus() {
+        return Status;
+
+    }
+    
+ public  void setRemarks(String Remarks) {
+      this.Remarks=Remarks;
+    }
+ public  String getRemarks() {
+        return Remarks;
+
+    }
+ public  void setPAOffice(String PAOffice) {
+      this.PAOffice=PAOffice;
+    }
+ public  String getPAOffice() {
+        return PAOffice;
+
+    }
+    
+    
+    
+ public  void setPAName(String PAName) {
+      this.PAName=PAName;
+    }
+ public  String getPAName() {
+        return PAName;
+
+    }
+    
+    
+    
+ public  void setIsWithPA(String isWithPA) {
+      this.isWithPA=isWithPA;
+    }
+ public  String getIsWithPA() {
+        return isWithPA;
+
+    }
+ String fkAggregatorProfile="fkAggregatorProfile";
+    String OutgrowerGroupName="OutgrowerGroupName";
+    
+    
+ public  void setOutgrowerGroupName(String OutgrowerGroupName) {
+      this.OutgrowerGroupName=OutgrowerGroupName;
+    }
+ public  String getOutgrowerGroupName() {
+        return OutgrowerGroupName;
+
+    }
+ public  void setFkAggregatorProfile(String fkAggregatorProfile) {
+      this.fkAggregatorProfile=fkAggregatorProfile;
+    }
+ public  String getFkAggregatorProfile() {
+        return fkAggregatorProfile;
+
+    }
+    
+    
+ public  void setFkNucleusFarmerProfile(String fkNucleusFarmerProfile) {
+      this.fkNucleusFarmerProfile=fkNucleusFarmerProfile;
+    }
+ public  String getFkNucleusFarmerProfile() {
+        return fkNucleusFarmerProfile;
+
+    }
+ public  void setIsOutGrower(String isOutGrower) {
+      this.isOutGrower=isOutGrower;
+    }
+ public  String getIsOutGrower() {
+        return isOutGrower;
+
+    }
+    
+ public  void setFBOPosition(String FBOPosition) {
+      this.FBOPosition=FBOPosition;
+    }
+ public  String getFBOPosition() {
+        return FBOPosition;
+
+    }
+ public  void setFkFBOProfile(String fkFBOProfile) {
+      this.fkFBOProfile=fkFBOProfile;
+    }
+ public  String getFkFBOProfile() {
+        return fkFBOProfile;
+
+    }
+    
+ public  void setIsWithFBO(String isWithFBO) {
+      this.isWithFBO=isWithFBO;
+    }
+ public  String getIsWithFBO() {
+        return isWithFBO;
+
+    }
+    
+ public  void setFkFarmerHHProfile(String fkFarmerHHProfile) {
+      this.fkFarmerHHProfile=fkFarmerHHProfile;
+    }
+ public  String getFkFarmerHHProfile() {
+        return fkFarmerHHProfile;
+
+    }
+    
+ public  void setMSMEType(String MSMEType) {
+      this.MSMEType=MSMEType;
+    }
+ public  String getMSMEType() {
+        return MSMEType;
+
+    }
+    
+    
+ public  void setNoFemaleEmployees(String NoFemaleEmployees) {
+      this.NoFemaleEmployees=NoFemaleEmployees;
+    }
+ public  String getNoFemaleEmployees() {
+        return NoFemaleEmployees;
+
+    }
+    
+ public  void setNoMaleEmployees(String NoMaleEmployees) {
+      this.NoMaleEmployees=NoMaleEmployees;
+    }
+ public  String getNoMaleEmployees() {
+        return NoMaleEmployees;
+
+    }
+    
+ public  void setDateofbirth(String dateofbirth) {
+      this.dateofbirth=dateofbirth;
+    }
+ public  String getDateofbirth() {
+        return dateofbirth;
+
+    }
+    
+ public  void setWorkingWithList(String WorkingWithList) {
+      this.WorkingWithList=WorkingWithList;
+    }
+ public  String getWorkingWithList() {
+        return WorkingWithList;
+
+    }
+    
+    
+ public  void setMarriage_name(String marriage_name) {
+      this.marriage_name=marriage_name;
+    }
+ public  String getMarriage_name() {
+        return marriage_name;
+
+    }
+    
+    
+ public  void setFamer_type(String Famer_type) {
+      this.Famer_type=Famer_type;
+    }
+ public  String getFamer_type() {
+        return Famer_type;
+
+    }
+    
+ public  void setMaidename(String maidename) {
+      this.maidename=maidename;
+    }
+ public  String getMaidename() {
+        return maidename;
+
+    }
+    
+ public  void setACDIVOCAFARMERID(String acdivocafarmerid) {
+      this.acdivocafarmerid=acdivocafarmerid;
+    }
+ public  String getACDIVOCAFARMERID() {
+        return acdivocafarmerid;
+
+    }
+    
+    
+    
+ public  void setDataCollectedBy(String DataCollectedBy) {
+      this.DataCollectedBy=DataCollectedBy;
+    }
+ public  String getDataCollectedBy() {
+        return DataCollectedBy;
+
+    }
     
     
  public  void setRegionresidence(String regionresidence) {
