@@ -53,7 +53,7 @@
                 <td><%= bio.getVillage() %></td>
                 <td>
                    
-                        <a href="acdidetails.jsp?id=<%=bio.getFarmerID() %>" class="btn btn-info">View</a>
+                        <a href="detail.jsp?id=<%=bio.getFarmerID() %>" class="btn btn-info">View</a>
                    
                 </td>
             </tr>

@@ -71,6 +71,24 @@ public class BiodataWrapper {
     String DateCollected="DateCollected";
     String DateReviewed="DateReviewed";
     String fkFYName="fkFYName";
+    String SubOffice="SubOffice";
+    String Sync="Sync";
+    
+    
+ public  void setSync(String Sync) {
+      this.Sync=Sync;
+    }
+ public  String getSync() {
+        return Sync;
+
+    }
+ public  void setSubOffice(String SubOffice) {
+      this.SubOffice=SubOffice;
+    }
+ public  String getSubOffice() {
+        return SubOffice;
+
+    }
  public  void setFkFYName(String fkFYName) {
       this.fkFYName=fkFYName;
     }
@@ -475,7 +493,8 @@ private List<FieldObject> fmpValues;
         this.education = education;
     }
 
-    public BiodataWrapper(String firstName, String lastName, String nickname, String community, String village, String district, String region, String age, String gender, String maritalStatus, String numberOfChildren, String numberOfDependants, String education, String cluster, String farmID, String majorCrop) {
+    public BiodataWrapper(String firstName, String lastName, String nickname, String community, String village, String district, String region, String age, String gender, String maritalStatus, String numberOfChildren, String numberOfDependants,
+            String education, String cluster, String farmID, String majorCrop,String dateOfBirth,String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nickname = nickname;
@@ -492,7 +511,8 @@ private List<FieldObject> fmpValues;
         this.cluster = cluster;
         this.farmID = farmID;
         this.majorCrop = majorCrop;
-        
+        this.dateofbirth = dateOfBirth;
+        this.telephonenumber = phoneNumber;
         this.marketing =  new MarketingWrapper();
         this.operation = new OperationsWrapper();
         this.farmManagement = new FarmManagementWrapper();

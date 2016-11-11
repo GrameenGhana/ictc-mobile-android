@@ -1,26 +1,20 @@
 <%-- 
-    Document   : detail
-    Created on : Aug 13, 2015, 2:32:20 PM
-    Author     : skwakwa
+    Document   : acdidetails
+    Created on : Nov 11, 2016, 2:23:37 PM
+    Author     : Joseph George Davis
 --%>
 
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.grameenfoundation.ictc.utils.ICTCUtil"%>
 <%@page import="java.util.List"%>
 <%@page import="com.grameenfoundation.ictc.wrapper.FieldObject"%>
 <%@page import="com.grameenfoundation.ictc.domains.Biodata"%>
 <%@page import="com.grameenfoundation.ictc.wrapper.BiodataWrapper"%>
 <%@page import="com.grameenfoundation.ictc.models.BiodataModel"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     BiodataModel bioModel = new BiodataModel();
-    BiodataWrapper wrapper = bioModel.getBiodataByFieldValue(Biodata.ACDIVOCAFARMERID, request.getParameter("id"));
-    String c =  wrapper.getCommunity();
-    c=c.replace("|", "-");
-    String[] com =c.split("-");
-             for (String retval: wrapper.getCommunity().split("|")) {
-                 System.out.println(retval);
-      }
+    BiodataWrapper wrapper = bioModel.getBiodataByFieldValue(Biodata.ID, request.getParameter("id"));
+    
     
 %>
 <!DOCTYPE html>
@@ -53,9 +47,9 @@
                     <td><%=wrapper.getGender()%></td>
                 </tr>
                 <tr>
-                    <td>Date Of Birth</td>
+                    <td>Age</td>
 
-                    <td><%=wrapper.getDateofbirth() %></td>
+                    <td><%=wrapper.getAge() %></td>
                 </tr>
                 <tr>
                     <td>Education</td>
@@ -63,16 +57,12 @@
                     <td><%=wrapper.getEducation()%></td>
                 </tr>
 
-                <tr>
-                    <td>Community</td>
-                    <td><%=wrapper.getCommunity()%></td>
-                </tr>
 
-               <!-- <tr>
+                <tr>
                     <td>Village</td>
 
                     <td><%=wrapper.getVillage()%></td>
-                </tr>-->
+                </tr>
 
 
                 <tr>
@@ -102,15 +92,15 @@
             <table class="table table-striped table-bordered">
                 <tr>
                     <td>Region</td>
-                    <td><%=com[0]%></td>
+                    <td><%= wrapper.getRegion() %></td>
                 </tr>
                 <tr>
                     <td>District</td>
-                    <td><%=com[1]%></td>
+                    <td><%= wrapper.getDistrict()  %></td>
                 </tr>
                 <tr>
                     <td>Community</td>
-                    <td><%=com[2]%></td>
+                    <td><%= wrapper.getVillage() %></td>
                 </tr>
             </table>
             <h3>Farm Details Details</h3>
@@ -167,20 +157,4 @@
         </div>
                         <% } %>
     </body>
-    <script type="text/javascript">
-        //    alert('mapping')
-         
-    </script>
-     <% if(wrapper != null) {%>
-    
-    <content tag="scripts">
-       <script type="text/javascript">  <%
-        String location ="";
-        if(location.isEmpty()) location="5.569313, -0.171332";
-        %>
-        loadGoogleMap("mmapview", '<%= location %>', "<%=wrapper.getFirstName() + " " + wrapper.getLastName()%>'s Farm")
-                </script>
-        </content>
-
-        <% }%>
 </html>

@@ -61,7 +61,7 @@ public class BiodataModel {
                 log.info("Biodata is invalid");
                 created = false;
             } else {
-                FarmerParent = ParentNode.FarmerParentNode();
+              //  FarmerParent = ParentNode.FarmerParentNode();
 
                 biodata.setFirstname(biodataWrapper.getFirstName());
                 biodata.setLastname(biodataWrapper.getLastName());
@@ -75,9 +75,33 @@ public class BiodataModel {
                 biodata.setNumberofchildren(biodataWrapper.getNumberOfChildren());
                 biodata.setNumberofdependants(biodataWrapper.getNumberOfDependants());
                 biodata.setEducation(biodataWrapper.getEducation());
+                biodata.setACDIVOCAFARMERID(biodataWrapper.getACDIVOCAFARMERID());
+               
+                biodata.setDataCollcetedBy(biodataWrapper.getDataCollcetedBy());
+                biodata.setDataReviewedBy(biodataWrapper.getDataReviewedBy());
+                biodata.setDateCollected(biodataWrapper.getDateCollected());
+                biodata.setDateReviewed(biodataWrapper.getDateReviewed());
+                biodata.setDateofbirth(biodataWrapper.getDateofbirth());
+                biodata.setDistrict("");
+               
+                biodata.setFBOPosition(biodataWrapper.getFBOPosition());
+                biodata.setFamer_type(biodataWrapper.getFamer_type());
+                biodata.setFkAggregatorProfile(biodataWrapper.getFkAggregatorProfile());
+                biodata.setFkFBOProfile(biodataWrapper.getFkFBOProfile());
+                biodata.setFkFYName(biodataWrapper.getFkFYName());
+                biodata.setFkFarmerHHProfile(biodataWrapper.getFkFarmerHHProfile());
+                biodata.setFkNucleusFarmerProfile(biodataWrapper.getFkNucleusFarmerProfile());
+                
+                biodata.setImage_url(biodataWrapper.getImage_url());
+                biodata.setIsOutGrower(biodataWrapper.getIsOutGrower());
+                biodata.setIsWithFBO(biodataWrapper.getIsWithFBO());
+                biodata.setIsWithPA(biodataWrapper.getIsWithPA());
+                biodata.setTelephonenumber(biodataWrapper.getTelephonenumber());
+                biodata.setNoMaleEmployees(biodataWrapper.getNoMaleEmployees());
+                biodata.setNoFemaleEmployees(biodataWrapper.getNoFemaleEmployees());
                 biodata.setLastModifiedDate(new Date());
 
-                FarmerParent.createRelationshipTo(farmerNode, ICTCRelationshipTypes.FARMER);
+              //  FarmerParent.createRelationshipTo(farmerNode, ICTCRelationshipTypes.FARMER);
 
                 log.log(Level.INFO, "new node created {0}", biodata.getUnderlyingNode().getId());
                 trx.success();
@@ -126,6 +150,29 @@ public class BiodataModel {
         List<Biodata> aglist = new ArrayList<>();
 
         String q = "match (n:AGENT) where n.agenttype='ACDIVOCA' WITH n match (l:FARMER) where l.CreatedById=n.Id return l";
+
+        try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            Result result = Neo4jServices.executeCypherQuery(q);
+
+            ResourceIterator<Node> n_column = result.columnAs("l");
+            while (n_column.hasNext()) {
+                // aglist.add(new Agent(n_column.next()));
+                Biodata b = new Biodata(n_column.next());
+
+                aglist.add(b);
+
+            }
+            tx.success();
+        }
+        
+        
+        return aglist;
+     }
+     
+      public List<Biodata> findAllACDIVOCA() {
+        List<Biodata> aglist = new ArrayList<>();
+
+        String q = "MATCH (l:FARMER) WHERE EXISTS(l.ACDIVOCAFARMERID)  return l";
 
         try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             Result result = Neo4jServices.executeCypherQuery(q);

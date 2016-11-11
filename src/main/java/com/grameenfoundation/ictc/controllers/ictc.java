@@ -31,6 +31,7 @@ import org.json.JSONObject;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
+import org.neo4j.shell.util.json.JSONArray;
 
 /**
  *
@@ -47,15 +48,21 @@ public class ictc {
                 
                 //genCode("firstName");
 //                 //genWrapperCode("firstName");
-        Scanner sc = new Scanner(System.in);
-        String input = "";
-        while (!sc.next().equals("exit")) {
-            System.out.println("Enter Variabe name");
-
-            input = sc.next();
-            genWrapperCode(input);
-            genGraphCode(input);
-       }
+//        Scanner sc = new Scanner(System.in);
+//        String input = "";
+//        while (!sc.next().equals("exit")) {
+//            System.out.println("Enter Variabe name");
+//
+//            input = sc.next();
+//            genWrapperCode(input);
+//            genGraphCode(input);
+//       }
+        
+     String s = "ASHANTI|EJURA SEKYEREDUMASE|EJURA";
+   s=  s.replace("|","-");
+      for (String retval: s.split("-")) {
+         System.out.println(retval);
+      }
 
 //        String codefrom = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n" +
 //"Info:   <html>\n" +
@@ -188,8 +195,12 @@ public class ictc {
 //		{
 //
 //			String sCurrentLine;
-//                        String tag[] = new String[50];
-//                        String json = null;
+//                     
+//                        JSONArray ja = new JSONArray();
+//                        JSONObject x = null;
+//                        JSONObject y = null;
+//                        String json ="";
+//                        String replace = null;
 //                        int i =0;
 //
 //			while ((sCurrentLine = br.readLine()) != null) {
@@ -206,21 +217,40 @@ public class ictc {
 //                             {
 //                                  sCurrentLine = sCurrentLine.replace("~", "\":\"").replace("\t","\",\"");
 //                                  sCurrentLine +="\"" ;
+//                                 sCurrentLine ="{\""+sCurrentLine+"}";
+//                                  x = new JSONObject(sCurrentLine);
+//                                  ja.put(x);
 //                             }
 //                             else
 //                             {
 //                                sCurrentLine = sCurrentLine.replace("~", "\":\"").replace("\t","\",\"");
+//                               // sCurrentLine = sCurrentLine.replace("\\", "\\\\");
 //                                sCurrentLine = sCurrentLine.substring(0, sCurrentLine.lastIndexOf(","));
+//                               // sCurrentLine ="{\""+sCurrentLine+"}";
+//                              //  y = new JSONObject(sCurrentLine);
+//                              //  ja.put(y);
 //                                
 //                             }
-//                                  // System.out.println(sCurrentLine);
-//                                 System.out.println("{\""+sCurrentLine+"}");
-//                              //  break;
+//                                  // Ssoystem.out.println(sCurrentLine);
+//                             //System.out.println("{\""+sCurrentLine+"}");
+//                            //   json += "{\""+sCurrentLine+"}";
+//                             
+//                              //  System.out.println("taaaal "+json);
+//                            //  break;
 //                              
 //			}
+//                        
+//                        //  replace = json.replace("\\", "\\\\");
+//                      //  System.out.println("json all-----------------------------------------------\n " + json);
+//                       // JSONObject x= new JSONObject(json);
+//                   
+//                     System.out.println("data :" +ja.toString());
 //
-//		} catch (IOException e) {
-//			e.printStackTrace();
+//		} catch (Exception e) {
+//                         
+//                    System.out.println("ththh " + e.getMessage());
+//	             e.printStackTrace();
+//                        
 //		}
 
         

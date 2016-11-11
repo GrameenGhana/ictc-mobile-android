@@ -4,7 +4,6 @@
     Author     : skwakwa
 --%>
 
-
 <%@page import="com.grameenfoundation.ictc.utils.ICTCUtil"%>
 <%@page import="java.util.List"%>
 <%@page import="com.grameenfoundation.ictc.wrapper.FieldObject"%>

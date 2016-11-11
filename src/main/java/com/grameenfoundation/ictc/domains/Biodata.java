@@ -84,7 +84,50 @@ public class Biodata extends Status implements GeneralInterface {
     public static String DATECOLLECTED="DateCollected";
     public static String DATEREVIEWED="DateReviewed";
     public static String FKFYNAME="fkFYName";
+    public static String SUBOFFICE="SubOffice";
+    public static String SYNC="Sync";
     
+     public String getImage_url() {
+          try {
+          return (String) underlyingNode.getProperty(IMAGE_URL);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public void setImage_url(String image_url) {
+       underlyingNode.setProperty(IMAGE_URL,image_url);
+    }
+    
+    
+    
+public void setSync(String sync) {
+underlyingNode.setProperty(SYNC,sync);
+}
+
+public String getSync(){
+          try {
+          return (String) underlyingNode.getProperty(SYNC);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+    
+public void setSubOffice(String suboffice) {
+underlyingNode.setProperty(SUBOFFICE,suboffice);
+}
+
+public String getSubOffice(){
+          try {
+          return (String) underlyingNode.getProperty(SUBOFFICE);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
     
 public void setFkFYName(String fkfyname) {
 underlyingNode.setProperty(FKFYNAME,fkfyname);

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : acdivocafarmer.jsp
-    Created on : Mar 30, 2016, 2:23:31 PM
+    Document   : mofafarmer
+    Created on : Mar 30, 2016, 4:00:04 PM
     Author     : Joseph George Davis
 --%>
 
@@ -11,10 +11,11 @@
 <%@page import="com.grameenfoundation.ictc.wrapper.BiodataWrapper"%>
 <%@page import="com.grameenfoundation.ictc.domains.Biodata"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%  BiodataModel biodataModel = new BiodataModel();
+<%  
+   BiodataModel biodataModel = new BiodataModel();
    Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
   
-    List<Biodata> bioWrapper = biodataModel.findAllACDIVOCAFarmers();
+    List<Biodata> bioWrapper = biodataModel.findAllMOFAFarmers();
     
     
 %>
@@ -53,7 +54,7 @@
                 <td><%= bio.getVillage() %></td>
                 <td>
                    
-                        <a href="acdidetails.jsp?id=<%=bio.getFarmerID() %>" class="btn btn-info">View</a>
+                        <a href="detail.jsp?id=<%=bio.getFarmerID() %>" class="btn btn-info">View</a>
                    
                 </td>
             </tr>

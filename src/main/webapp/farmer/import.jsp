@@ -1,6 +1,6 @@
 <%-- 
-    Document   : acdivocafarmer.jsp
-    Created on : Mar 30, 2016, 2:23:31 PM
+    Document   : import
+    Created on : Nov 10, 2016, 10:31:50 AM
     Author     : Joseph George Davis
 --%>
 
@@ -11,58 +11,62 @@
 <%@page import="com.grameenfoundation.ictc.wrapper.BiodataWrapper"%>
 <%@page import="com.grameenfoundation.ictc.domains.Biodata"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%  BiodataModel biodataModel = new BiodataModel();
-   Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
-  
-    List<Biodata> bioWrapper = biodataModel.findAllACDIVOCAFarmers();
+<% 
+    BiodataModel biodataModel = null;
+     List<Biodata> bioWrapper = null;
+     Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx();
+ 
+     biodataModel = new BiodataModel();
+     bioWrapper = biodataModel.findAllACDIVOCA();
+    tx.success();
+     
     
-    
+    //System.out.print("Cluster  " + bioWrapper.get(0).getCluster());
 %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>user Page</title>
+        <title>Farmer Page</title>
       
     </head>
     <body>
        
 
-        <table class="table table-striped table-bordered my-table">
+        <table class="table table-striped table-bordered myt-table">
+            <thead>
             <tr>
                 <th>ID</th>
                 <th>Surname</th>
                 <th>Othernames</th>
+                <th>Age</th>
+                <th>Farmer Typer</th>
                 <th>Community</th>
-                <th>Main Crop</th>
-                <th>Cluster</th>
-                <th>Village</th>
                 <th>Actions</th>
             </tr>
+            </thead>
 
-
+            <tbody>
             <% for (Biodata bio : bioWrapper) {%>
 
             <tr>
-                <td><%= bio.getFarmerID() %></td>
-                <td><%= bio.getLastname()%></td>
-                <td><%= bio.getFirstname()  %></td>
+                <td><%= bio.getACDIVOCAFARMERID()  %></td>
+                <td><%= bio.getLastname()  %></td>
+                <td><%= bio.getFirstname() %></td>
+                <td><%= bio.getAge() %></td>
+                <td><%= bio.getFamer_type() %></td>
                 <td><%= bio.getCommunity() %></td>
-                <td><%= bio.getMajorCrop() %></td>
-                <td><%= bio.getCluster() %></td>
-                <td><%= bio.getVillage() %></td>
                 <td>
                    
-                        <a href="acdidetails.jsp?id=<%=bio.getFarmerID() %>" class="btn btn-info">View</a>
+                        <a href="detail.jsp?id=<%=bio.getACDIVOCAFARMERID()  %>" class="btn btn-info">View</a>
                    
                 </td>
             </tr>
-            <% }
-            
-            tx.success();
-            
-            %>
-
+            <% }%>
+            </tbody>
         </table>
     </body>
+    
+    
+  
 </html>

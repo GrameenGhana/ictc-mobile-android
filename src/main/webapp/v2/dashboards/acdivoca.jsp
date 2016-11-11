@@ -53,11 +53,38 @@
                 <h3>ACDI VOCA Dashboard <small>indicators</small></h3>
             </div>
         </div>
+      
 
         <div class="clearfix"></div>
 
         <div class="row">
+            
+            
+       <div class="row top_tiles" style="margin: 10px 0;">
+        <div class="col-md-4 col-sm-4 col-xs-8 tile">
+            <span><a href="<%=request.getContextPath() %>/v2/farmer/acdivocafarmer.jsp">ICTC</a></span>
+            <h2><a href="<%=request.getContextPath() %>/v2/farmer/acdivocafarmer.jsp"><%=bio.getACDIVOCAFarmerCount()%> </a></h2>
+            <span class="sparkline_tf" style="height: 160px;">
+                <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+            </span>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-8 tile">
+            <span><a href="#">AIS</a></span>
+            <h2><a href="#">500</a></h2>
+            <span class="sparkline_tc" style="height: 160px;">
+                <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+            </span>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-8 tile">
+            <span><a href="<%=request.getContextPath() %>/v2/farmer/import.jsp">ADVANCE</a></span>
+            <h2><a href="<%=request.getContextPath() %>/v2/farmer/import.jsp">1000</a></h2>
+            <span class="sparkline_ta" style="height: 160px;">
+                  <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
+            </span>
+        </div>
+    </div>
 
+    <br />
             <!-- Output Indicators -->
             <div style="margin-bottom: 30px; margin-top:30px" class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
@@ -323,6 +350,7 @@
         <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
         <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
         <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+        <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
         <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/jszip/dist/jszip.min.js"></script>
         <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/pdfmake/build/pdfmake.min.js"></script>
         <script src="<%= request.getContextPath()%>/theme/gentelella/vendors/pdfmake/build/vfs_fonts.js"></script>
@@ -366,6 +394,36 @@
             });
         </script>
         <!-- /Datatables -->
+         <!-- jQuery Sparklines -->
+    <script>
+    $(document).ready(function() {
+        var options = {
+            type: 'line',
+            width: '200',
+            height: '40',
+            lineColor: '#26B99A',
+            fillColor: 'rgba(223, 223, 223, 0.57)',
+            lineWidth: 2,
+            spotColor: '#26B99A',
+            minSpotColor: '#26B99A'
+        };
+
+        $(".sparkline_line").sparkline([2, 4, 3, 4, 5, 4, 5, 4, 3, 4, 5, 6, 4, 5, 6, 3, 5], {
+            type: 'line',
+            lineColor: '#26B99A',
+            fillColor: '#ffffff',
+            width: 85,
+            spotColor: '#34495E',
+            minSpotColor: '#34495E'
+        });
+
+
+        $(".sparkline_tf").sparkline([300],options);
+        $(".sparkline_tc").sparkline([300], options);
+        $(".sparkline_ta").sparkline([300], options);
+    });
+    </script>
+    <!-- /jQuery Sparklines -->
 
     </content>
 </html>
