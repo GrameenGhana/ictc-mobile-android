@@ -28,12 +28,12 @@
     </head>
     <body>
          <table class="table table-striped table-bordered">
-            <thead>
+            <tr>
                 <th>OutGrower Bussiness Owner</th>
                 <th>Agent</th>   
-            </thead>
+            </tr>
 
-            <tbody>
+
             <% for (int i=0;i<ob.length();i++) {
                  JSONObject b = ob.getJSONObject(i);
             %>
@@ -45,7 +45,6 @@
                 
             </tr>
             <% } %>
-            </tbody>
          </table>
     </body>
 </html>
