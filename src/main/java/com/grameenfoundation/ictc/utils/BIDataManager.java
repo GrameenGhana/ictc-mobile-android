@@ -834,7 +834,8 @@ public class BIDataManager extends BIUtil {
                     String key = entrySet.getKey();
                     String value = entrySet.getValue();
                     System.out.println("Partner improved seed " + value);
-                    sum += (long)TempReport.getImprovedSeed(value) ;   
+                    sum += (long)TempReport.getImprovedSeed(value) ;
+                    System.out.println("sum " + sum);
                 }
                break;
             case "cda":

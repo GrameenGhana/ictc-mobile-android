@@ -80,8 +80,15 @@ public class TempReport extends BIUtil{
      
     public static Long getImprovedTechnologies(String partner)
     {
-        long sum = Long.valueOf((long)getCropDensity(partner))+Long.valueOf((long) getImprovedSeed(partner) +Long.valueOf((long) getOrganicFertilizer(partner)))
+       long sum = 0l;
+        try{
+        sum = Long.valueOf((long)getCropDensity(partner))+Long.valueOf((long) getImprovedSeed(partner) +Long.valueOf((long) getOrganicFertilizer(partner)))
                    +Long.valueOf((long) getPostHarvestThresher(partner))+ Long.valueOf((long) getPostPlantHerbiceide(partner)+Long.valueOf((long) getPrePlantHerbiceide(partner)));
+        }
+        catch(Exception e)
+        {
+           return  sum;
+        }
         return sum;
     }
     

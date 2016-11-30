@@ -4,7 +4,20 @@
     Author     : Joseph George Davis
 --%>
 
+<%@page import="com.grameenfoundation.ictc.models.UserModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="org.json.*"%>
+<%
+   UserModel userModel = new UserModel();
+   
+    JSONObject x = new JSONObject();
+     JSONObject y = new JSONObject();
+     x = userModel.getOb();
+     
+     JSONArray ja = x.getJSONArray("obs");
+   
+
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -43,7 +56,7 @@
                                 <div class="icon"><a href="<%=request.getContextPath()%>/v2/farmer/acdivocafarmer.jsp"><i class="fa fa-caret-square-o-right"></i></a>
                                 </div>
                                 <div class="count">ICTC</div>
-                                <h3><a href="<%=request.getContextPath()%>/v2/users/viewobtoag.jsp">OB(s)-40</a></h3>
+                                <h3><a href="<%=request.getContextPath()%>/v2/users/viewobtoag.jsp">OB(s)-<%= ja.length()%></a></h3>
                                 <h3><a href="<%=request.getContextPath()%>/v2/farmer/acdivocafarmer.jsp">Farmer(s)-2792</a></h3>
 
                             </div>

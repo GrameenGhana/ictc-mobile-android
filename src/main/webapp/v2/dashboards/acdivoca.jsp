@@ -59,31 +59,7 @@
 
         <div class="row">
             
-            
-       <div class="row top_tiles" style="margin: 10px 0;">
-        <div class="col-md-4 col-sm-4 col-xs-8 tile">
-            <span><a href="<%=request.getContextPath() %>/v2/farmer/acdivocafarmer.jsp">ICTC</a></span>
-            <h2><a href="<%=request.getContextPath() %>/v2/farmer/acdivocafarmer.jsp"><%=bio.getACDIVOCAFarmerCount()%> </a></h2>
-            <span class="sparkline_tf" style="height: 160px;">
-                <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
-            </span>
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-8 tile">
-            <span><a href="#">AIS</a></span>
-            <h2><a href="#">500</a></h2>
-            <span class="sparkline_tc" style="height: 160px;">
-                <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
-            </span>
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-8 tile">
-            <span><a href="<%=request.getContextPath() %>/v2/farmer/import.jsp">ADVANCE</a></span>
-            <h2><a href="<%=request.getContextPath() %>/v2/farmer/import.jsp">1000</a></h2>
-            <span class="sparkline_ta" style="height: 160px;">
-                  <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
-            </span>
-        </div>
-        
-    </div>
+     
 
     <br />
             <!-- Output Indicators -->

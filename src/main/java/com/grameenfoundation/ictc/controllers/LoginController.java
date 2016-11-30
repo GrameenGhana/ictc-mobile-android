@@ -70,7 +70,7 @@ public class LoginController extends HttpServlet {
                            break;
                        case  "acdivoca_admin":
                             log.info("Logged in as " + wr.getAgentType());
-                             response.sendRedirect(request.getContextPath()+"/v2/dashboards/acdivoca.jsp");
+                             response.sendRedirect(request.getContextPath()+"/v2/top.jsp");
                              //  ICTCUtil.redirect(request, response,"/dashboard/acdivoca.jsp", ""); 
                            break;
                        case "acdivoca_ob":
