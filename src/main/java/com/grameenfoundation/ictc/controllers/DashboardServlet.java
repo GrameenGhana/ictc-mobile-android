@@ -49,9 +49,9 @@ public class DashboardServlet extends HttpServlet {
     JSONObject  x = data.getACDIVOCADATA();
     JSONObject  in = bi.getIndicatorInfo("ACDIVOCA");
     TempReport temp = new TempReport();
-    JSONObject y = bi.getACDIVOCAAgentActivity();
+   
     JSONObject fam = new JSONObject();
-    JSONArray ja = y.getJSONArray("agentactivity");
+   
     JSONObject b = new JSONObject();
     
     if(action.equalsIgnoreCase("outputindicator"))
@@ -74,9 +74,12 @@ public class DashboardServlet extends HttpServlet {
       b.put("farmmonitoring", fam);
     }
     if(action.equalsIgnoreCase("agentactivity"))
-        b.put("agentactivity", ja);
+    {
+         JSONObject y = bi.getACDIVOCAAgentActivity();
+         JSONArray ja = y.getJSONArray("agentactivity");
+           b.put("agentactivity", ja);
      
-    
+    }
     
          out.print(b);
     

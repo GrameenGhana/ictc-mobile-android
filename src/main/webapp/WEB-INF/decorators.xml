@@ -3,6 +3,7 @@
     <excludes>
         <pattern>/auth/*</pattern>
         <pattern>/SaleforceIntegrationController*</pattern>
+        <pattern>/DashboardServlet*</pattern>
         <pattern>/FarmManagementPlanController*</pattern>
         <pattern>/theme/*</pattern>
         <pattern>/security/*</pattern>

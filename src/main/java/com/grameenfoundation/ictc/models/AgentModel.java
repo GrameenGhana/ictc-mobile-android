@@ -198,7 +198,7 @@ public class AgentModel {
      
      
     public AgentWrapper findUser(String username, String password) {
-        CryptoLibrary crypt = new CryptoLibrary();
+        
         String q = "match (l:AGENT) WHERE l." + User.USERNAME + "= '" + username + "'  "
                 //+ "and  l." + User.PASSWORD + "='" + (password) + "'"
                 + "  return l";
