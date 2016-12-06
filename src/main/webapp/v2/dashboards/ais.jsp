@@ -191,32 +191,27 @@
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance Production</td>
-                                    <td><%= f.get("") %></td> 
+                                    <td><%= f.get("baselineproduction") %></td> 
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance PostHarvest</td>
-                                   <!-- <td><%= data.getFarmerPPTotalForACDI() %> (<%= data.getFarmerPPProgressForACDI() %>%)</td>-->
-                                    <td><%= bio.getACDIVOCABaselinePostHarvestCount() %> (<%= temp.getFarmerPHProgressForACDI() %>%)</td> 
+                                    <td><%= f.get("baselinepostharvest") %></td> 
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance Credit</td>
-                                   <!-- <td><%= data.getFarmerPPTotalForACDI() %> (<%= data.getFarmerPPProgressForACDI() %>%)</td>-->
-                                    <td><%= bio.getACDIVOCAFarmCreditPreviousCount() %> (<%= temp.getFarmerFCPPHProgressForACDI() %>%)</td> 
+                                    <td><%= f.get("farmcreditprevious") %></td> 
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farmers (% of target)  coached to produce Farm Management Plan on Production</td>
-                                    <!--<td><%= data.getFarmerFMPTotalForACDI() %> (<%= data.getFarmerFMPProgressForACDI() %>%)</td>-->
-                                     <td><%= bio.getACDIVOCAFMPProductionCount() %> (<%= temp.getFarmerFMPPProgressForACDI() %>%)</td>
+                                    <td><%= f.get("fmpproduction") %>)</td>
                                 </tr>
                                  <tr>
                                     <td style="width: 20%">Number of farmers (% of target)  coached to produce Farm Management Plan on PostHarvest</td>
-                                    <!--<td><%= data.getFarmerFMPTotalForACDI() %> (<%= data.getFarmerFMPProgressForACDI() %>%)</td>-->
-                                     <td><%= bio.getACDIVOCAFMPPostHarvestCount() %> (<%= temp.getFarmerFMPPHProgressForACDI() %>%)</td>
+                                    <td><%= f.get("fmppostharvest") %>)</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farmers (% of target)  coached to produce Farm Management Plan on Credit</td>
-                                    <!--<td><%= data.getFarmerFMPTotalForACDI() %> (<%= data.getFarmerFMPProgressForACDI() %>%)</td>-->
-                                     <td><%= bio.getACDIVOCAFFarmCreditPlanCount() %> (<%= temp.getFarmerFCPPHProgressForACDI() %>%)</td>
+                                    <td><%= f.get("farmcreditplan") %></td>
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farms (% of target) measured</td>
