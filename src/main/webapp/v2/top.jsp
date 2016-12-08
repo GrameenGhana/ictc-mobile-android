@@ -55,7 +55,7 @@
                             <div class="tile-stats">
                                 <div class="icon"><a href="<%=request.getContextPath()%>/v2/farmer/acdivocafarmer.jsp"><i class="fa fa-caret-square-o-right"></i></a>
                                 </div>
-                                <div class="count">ICTC</div>
+                                <div class="count">SOUTH(ICTC)</div>
                                 <h3><a href="<%=request.getContextPath()%>/v2/users/viewobtoag.jsp">OB(s)-<%= ja.length()%></a></h3>
                                 <h3><a href="<%=request.getContextPath()%>/v2/farmer/acdivocafarmer.jsp">Farmer(s)-2792</a></h3>
 
@@ -65,8 +65,8 @@
                             <div class="tile-stats">
                                 <div class="icon"><a href="#"><i class="fa fa-caret-square-o-right"></i></a>
                                 </div>
-                                <div class="count">AIS</div>
-                                <h3>OB(s)-120</h3>
+                                <div class="count">NORTH(AIS)</div>
+                                <h3>OB(s)-0</h3>
                                 <h3><a href="#">Farmer(s)-300</a></h3>
 
                             </div>
@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="count">ADVANCE</div>
                                 <h3>OB(s)-100</h3>
-                                <h3><a href="<%=request.getContextPath()%>/v2/farmer/import.jsp">Farmer(s)-123</a></h3>
+                                <h3><a href="<%=request.getContextPath()%>/v2/farmer/import.jsp">Farmer(s)-0</a></h3>
 
                             </div>
                         </div>
@@ -100,10 +100,10 @@
                             <div class="x_content">
                                 <div class="buttons">
                                     <!-- Standard button -->
-                                    <a href="<%=request.getContextPath()%>/v2/dashboards/outputindicators.jsp"><button type="button"  class="btn btn-default btn-lg" style="width: 150px" >ICTC</button></a>
+                                    <a href="<%=request.getContextPath()%>/v2/dashboards/outputindicators.jsp"><button type="button"  class="btn btn-default btn-lg" style="width: 150px" >SOUTH(ICTC)</button></a>
                                     <br>
 
-                                    <button type="button" class="btn btn-success btn-lg" style="width: 150px" >AIS</button>
+                                    <a href="<%=request.getContextPath()%>/v2/dashboards/aisoutputindicators.jsp"><button type="button" class="btn btn-success btn-lg" style="width: 150px" >NORTH(AIS)</button></a>
 
                                     <br>
 
@@ -127,10 +127,10 @@
                             <div class="x_content">
                                 <div class="buttons">
                                     <!-- Standard button -->
-                                    <a href="<%=request.getContextPath()%>/v2/dashboards/farmermonitoring.jsp"> <button type="button" class="btn btn-default btn-lg" style="width: 150px" >ICTC</button></a>
+                                    <a href="<%=request.getContextPath()%>/v2/dashboards/farmermonitoring.jsp"> <button type="button" class="btn btn-default btn-lg" style="width: 150px" >SOUTH(ICTC)</button></a>
                                     <br>
 
-                                    <button type="button" class="btn btn-success btn-lg" style="width: 150px" >AIS</button>
+                                    <a href="<%=request.getContextPath()%>/v2/dashboards/aisfarmermonitoring.jsp"><button type="button" class="btn btn-success btn-lg" style="width: 150px" >NORTH(AIS)</button></a>
 
                                     <br>
 
@@ -154,10 +154,10 @@
                             <div class="x_content">
                                 <div class="buttons">
                                     <!-- Standard button -->
-                                    <a href="<%=request.getContextPath()%>/v2/dashboards/agentmonitoring.jsp"> <button type="button" class="btn btn-default btn-lg" style="width: 150px" >ICTC</button></a>
+                                    <a href="<%=request.getContextPath()%>/v2/dashboards/agentmonitoring.jsp"><button type="button" class="btn btn-default btn-lg" style="width: 150px" >SOUTH(ICTC)</button></a>
                                     <br>
 
-                                    <button type="button" class="btn btn-success btn-lg" style="width: 150px" >AIS</button>
+                                    <a href="<%=request.getContextPath()%>/v2/dashboards/aisagentmonitoring.jsp"><button type="button" class="btn btn-success btn-lg" style="width: 150px" >NORTH(AIS)</button></a>
 
                                     <br>
 

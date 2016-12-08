@@ -81,7 +81,7 @@
                                 <ul class="nav child_menu">
                                     <li><a href="<%= request.getContextPath()%>/v2/top.jsp">ACDIVOCA Dashboard </a></li>
                                     <li><a href="<%= request.getContextPath()%>/v2/dashboards/acdivoca.jsp">ICTC Summary </a></li>
-                                    <li><a href="#">AIS Summary </a></li>
+                                    <li><a href="<%= request.getContextPath()%>/v2/dashboards/ais.jsp">AIS Summary </a></li>
                                     <li><a href="#">ADVANCE Summary </a></li>
                                 </ul>
                             </li>

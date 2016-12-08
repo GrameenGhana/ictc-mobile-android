@@ -70,7 +70,7 @@ public class DashboardServlet extends HttpServlet {
     fam.put("fmpproductionupdate", bio.getACDIVOCAFFMPProductionUpdateCount());
     fam.put("fmppostharvestupdate", bio.getACDIVOCAPostHarvestUpdateCount());
     fam.put("fieldcropassessment", bio.getACDIVOCAFCPCount());
-    //fam.put("fieldcropassessment", bio.getACDIVOCAFCPCount());
+    fam.put("farmcreditupdate", bio.getACDIVOCAFarmCreditUpdateCount());
       b.put("farmmonitoring", fam);
     }
     if(action.equalsIgnoreCase("agentactivity"))
