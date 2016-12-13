@@ -34,7 +34,7 @@
     JSONObject  in = x.getJSONObject("outindicators");
     JSONObject  fact =  new JSONObject(ais.getIndicatorWrapper(Aisdashboard.TYPE,farm).getData());
     JSONObject  f = fact.getJSONObject(farm);
-    JSONObject y = new JSONObject(ais.getIndicatorWrapper(Aisdashboard.TYPE,agent).getData());;
+    JSONObject y = new JSONObject(ais.getIndicatorWrapper(Aisdashboard.TYPE,agent).getData());
     JSONArray ja = y.getJSONArray("agentactivity");
     JSONObject b = new JSONObject();
     

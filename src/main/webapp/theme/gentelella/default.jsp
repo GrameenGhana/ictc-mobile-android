@@ -80,8 +80,8 @@
                              <li><a><i class="fa fa-user"></i>ACDIVOCA <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="<%= request.getContextPath()%>/v2/top.jsp">ACDIVOCA Dashboard </a></li>
-                                    <li><a href="<%= request.getContextPath()%>/v2/dashboards/acdivoca.jsp">ICTC Summary </a></li>
-                                    <li><a href="<%= request.getContextPath()%>/v2/dashboards/ais.jsp">AIS Summary </a></li>
+                                    <li><a href="<%= request.getContextPath()%>/v2/dashboards/acdivoca.jsp">SOUTH(ICTC) Summary </a></li>
+                                    <li><a href="<%= request.getContextPath()%>/v2/dashboards/ais.jsp">NORTH(AIS) Summary </a></li>
                                     <li><a href="#">ADVANCE Summary </a></li>
                                 </ul>
                             </li>

@@ -4,6 +4,8 @@
     Author     : Joseph George Davis
 --%>
 
+<%@page import="com.grameenfoundation.ictc.domains.Aisdashboard"%>
+<%@page import="com.grameenfoundation.ictc.models.AisDashboardModel"%>
 <<%-- 
     Document   : agentmonitoring
     Created on : Nov 15, 2016, 4:03:45 PM
@@ -15,9 +17,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="org.json.*"%>
 <%
-     BIDashboard data = new BIDashboard("acdivoca");
-     BIDataManager bi = BIDataManager.getInstance();
-    JSONObject y = bi.getACDIVOCAAgentActivity();
+     String agent = "agentactivity";
+    AisDashboardModel  ais  = new AisDashboardModel(); 
+    BIDataManager bi = BIDataManager.getInstance();
+    JSONObject y =new JSONObject(ais.getIndicatorWrapper(Aisdashboard.TYPE,agent).getData());
     JSONArray ja = y.getJSONArray("agentactivity");
     JSONObject b = new JSONObject();
     

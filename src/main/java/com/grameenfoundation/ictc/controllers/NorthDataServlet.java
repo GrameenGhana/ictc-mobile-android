@@ -101,7 +101,7 @@ public class NorthDataServlet extends HttpServlet {
            
             
            // trx.success();
-           }
+           } 
             out.println(result);
          //JSONObject json = new JSONObject(result);
         }
@@ -117,7 +117,7 @@ public class NorthDataServlet extends HttpServlet {
 
         parameters.put("action", parameter);
 
-        result = SalesforceHttpClient.getSalesforceData("http://localhost:8080/ictc-webappbapptest/DashboardServlet", parameters);
+        result = SalesforceHttpClient.getSalesforceData("http://188.166.30.140:8080/ICTC/DashboardServlet", parameters);
 
         return result;
     }
