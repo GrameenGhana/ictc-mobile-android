@@ -28,6 +28,7 @@
                 <th>Surname</th>
                 <th>Othernames</th>
                 <th>Username</th>
+                <th>Region</th>
                 <th>Agent Type</th>
                 <th>Action</th>
                 <th>Action</th>
@@ -45,6 +46,7 @@
                 <td><%= ag.getFirstname() %></td>
                 <td><%= ag.getLastname() %></td>
                 <td><%= ag.getUsername() %></td>
+                 <td><%= ag.getRegion() %></td>
                 <td><%= ag.getAgenttype()%></td>
                 <td>
                         <a href="<%=request.getContextPath() %>/farmer/search.jsp?type=CreatedById&q=<%=ag.getAgentId() %>" class=" btn btn-info">Farmers </a>

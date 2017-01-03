@@ -97,7 +97,8 @@
                                             <option value="grameen_admin">Grameen admin</option>
                                             <option value="grameen_user">Grameen user</option>
                                             <option value="acdivoca_admin">ACDIVOCA admin</option>
-                                            <option value="acdivoca_ob">ACDIVOCA OB</option>
+                                             <option value="acdivoca_ob">ACDIVOCA OB</option>
+                                            <option value="acdivoca_apo">ACDIVOCA APO</option>
                                             <option value="mofa_director">MOFA Director</option>
                                         </select>
 				</div> <!-- /field -->

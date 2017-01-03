@@ -82,7 +82,7 @@
                                     <li><a href="<%= request.getContextPath()%>/v2/top.jsp">ACDIVOCA Dashboard </a></li>
                                     <li><a href="<%= request.getContextPath()%>/v2/dashboards/acdivoca.jsp">SOUTH(ICTC) Summary </a></li>
                                     <li><a href="<%= request.getContextPath()%>/v2/dashboards/ais.jsp">NORTH(AIS) Summary </a></li>
-                                    <li><a href="#">ADVANCE Summary </a></li>
+                                   
                                 </ul>
                             </li>
                             <% } %>

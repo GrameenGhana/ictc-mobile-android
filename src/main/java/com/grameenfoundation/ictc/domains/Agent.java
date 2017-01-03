@@ -33,6 +33,23 @@ public class Agent extends Status implements GeneralInterface {
     public static String PASSWORD = "password";
     public static String ORGANISATION = "organisation";
     public static String PHONENUMBER = "phonenumber";
+    public static String REGION = "region";
+    public static String APO    = "sapo";
+    
+    
+    
+     public void setRegion(String region) {
+        underlyingNode.setProperty(REGION,region);
+    }
+
+    public String getRegion() {
+        try {
+            return (String) underlyingNode.getProperty(REGION);
+
+        } catch (Exception e) {
+        }
+        return "";
+    }
 
     public void setPassword(String agentcode) {
         underlyingNode.setProperty(PASSWORD, agentcode);

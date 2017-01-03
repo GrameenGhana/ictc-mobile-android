@@ -4,6 +4,7 @@
     Author     : Joseph George Davis
 --%>
 
+<%@page import="com.grameenfoundation.ictc.models.BiodataModel"%>
 <%@page import="com.grameenfoundation.ictc.models.AisDashboardModel"%>
 <%@page import="com.grameenfoundation.ictc.domains.Aisdashboard"%>
 <%@page import="com.grameenfoundation.ictc.models.UserModel"%>
@@ -12,6 +13,8 @@
 <%
    UserModel userModel = new UserModel();
    AisDashboardModel  ais  = new AisDashboardModel(); 
+   BiodataModel bio = new BiodataModel();
+    
     String farm = "farmmonitoring";
     JSONObject x = new JSONObject();
      JSONObject y = new JSONObject();
@@ -21,6 +24,7 @@
      JSONObject  fact =  new JSONObject(ais.getIndicatorWrapper(Aisdashboard.TYPE,farm).getData());
      JSONObject  f = fact.getJSONObject(farm);
    
+     
 
 %>
 <!DOCTYPE html>
@@ -30,7 +34,7 @@
         <title>ACDIVOCA-Main</title>
     <content tag="stylesheets">
         <!-- bootstrap-progressbar -->
-        <link href="<%= request.getContextPath()%>/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+        <link href="<%= request.getContextPath()%>/theme/gentelella/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     </content>
 </head>
 <body>
@@ -39,7 +43,7 @@
             <h3>Dashboard</h3>
         </div>
 
-        <div class="title_right">
+      <!--  <div class="title_right">
             <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for...">
@@ -48,7 +52,7 @@
                     </span>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 
     <div class="row">
@@ -62,7 +66,7 @@
                                 </div>
                                 <div class="count">SOUTH(ICTC)</div>
                                 <h3><a href="<%=request.getContextPath()%>/v2/users/viewobtoag.jsp">OB(s)-<%= ja.length()%></a></h3>
-                                <h3><a href="<%=request.getContextPath()%>/v2/farmer/acdivocafarmer.jsp">Farmer(s)-2792</a></h3>
+                                <h3><a href="<%=request.getContextPath()%>/v2/farmer/acdivocafarmer.jsp">Farmer(s)-<%= bio.getACDIVOCAFarmerCount() %></a></h3>
 
                             </div>
                         </div>
@@ -105,13 +109,13 @@
                             <div class="x_content">
                                 <div class="buttons">
                                     <!-- Standard button -->
-                                    <a href="<%=request.getContextPath()%>/v2/dashboards/outputindicators.jsp"><button type="button"  class="btn btn-default btn-lg" style="width: 150px" >Output Indicators</button></a>
+                                    <a href="<%=request.getContextPath()%>/v2/dashboards/outputindicators.jsp"><button type="button"  class="btn btn-default btn-lg" style="width: 160px" >Output Indicator</button></a>
                                     
                                     <br>
-                                    <a href="<%=request.getContextPath()%>/v2/dashboards/farmermonitoring.jsp"> <button type="button" class="btn btn-default btn-lg" style="width: 150px" >Farmer Activity Monitoring</button></a>
+                                    <a href="<%=request.getContextPath()%>/v2/dashboards/farmermonitoring.jsp"> <button type="button" class="btn btn-success btn-lg" style="width: 160px" >Farmer Activity</button></a>
                                     <br>
                                     
-                                   <a href="<%=request.getContextPath()%>/v2/dashboards/agentmonitoring.jsp"><button type="button" class="btn btn-default btn-lg" style="width: 150px" >Agent Activity Monitoring</button></a>
+                                   <a href="<%=request.getContextPath()%>/v2/dashboards/agentmonitoring.jsp"><button type="button" class="btn btn-info btn-lg" style="width: 160px" >Agent Activity</button></a>
                                     <br>
 
                                    <!-- <button type="button" class="btn btn-info btn-lg" style="width: 150px" >ADVANCE</button>
@@ -134,11 +138,16 @@
                             <div class="x_content">
                                 <div class="buttons">
                                     <!-- Standard button -->
-                                     <a href="<%=request.getContextPath()%>/v2/dashboards/aisoutputindicators.jsp"><button type="button" class="btn btn-success btn-lg" style="width: 150px" >NORTH(AIS)</button></a>
+                                     <a href="<%=request.getContextPath()%>/v2/dashboards/aisoutputindicators.jsp"><button type="button" class="btn btn-default btn-lg" style="width: 160px" >Output Indicator</button></a>
 
                                     <br>
 
-                                    <a href="<%=request.getContextPath()%>/v2/dashboards/aisfarmermonitoring.jsp"><button type="button" class="btn btn-success btn-lg" style="width: 150px" >NORTH(AIS)</button></a>
+                                    <a href="<%=request.getContextPath()%>/v2/dashboards/aisfarmermonitoring.jsp"><button type="button" class="btn btn-success btn-lg" style="width: 160px" >Farmer Activity</button></a>
+
+                                    <br>
+                                    
+                                    
+                                    <a href="<%=request.getContextPath()%>/v2/dashboards/aisagentmonitoring.jsp"><button type="button" class="btn btn-info btn-lg" style="width: 160px" >Agent Activity</button></a>
 
                                     <br>
 
@@ -151,7 +160,7 @@
                         </div>
                     </div> 
                 </div>  
-                <div>
+            <!--    <div>
                     <div class="col-md-3">
 
                         <div class="x_panel">
@@ -161,7 +170,7 @@
                             </div>
                             <div class="x_content">
                                 <div class="buttons">
-                                    <!-- Standard button -->
+                                    <!-- Standard button 
                                     <a href="<%=request.getContextPath()%>/v2/dashboards/agentmonitoring.jsp"><button type="button" class="btn btn-default btn-lg" style="width: 150px" >SOUTH(ICTC)</button></a>
                                     <br>
 
@@ -177,7 +186,7 @@
 
                         </div>
                     </div> 
-                </div>  
+                </div>  -->
             </div>
         </div>
     </div>

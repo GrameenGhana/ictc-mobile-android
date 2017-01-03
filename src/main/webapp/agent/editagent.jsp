@@ -54,6 +54,22 @@
                              <div class="span5">
                                 <input type="text" value="<%= agent.getAgenttype()   %>"  placeholder="Agent Type" name="at"/>
                             </div>
+                            
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="region">Region <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select id="rg" name="rg" class="form-control" >
+                                <option value="select">------Select Region--------</option>
+                                <option value="Upper East">Upper East</option>
+                                <option value="Upper West">Upper West</option>
+                                <option value="Northern">Northern</option>
+                                <option value="Ashanti">Ashanti</option>
+                                <option value="Brong Ahafo">Brong Ahafo</option>
+                                <option value="Volta">Volta</option>
+                            </select>
+                        </div>
+                      </div>
                           
                             <input type="hidden" name="action" value="edit" />
                            

@@ -48,6 +48,20 @@
                              <div class="span5">
                                 <input type="text" value=""  placeholder="Agent Type" name="at"/>
                             </div>
+                            <div class="span5">
+                             <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select id="rg" name="rg" class="form-control" >
+                                <option value="select">------Select Region--------</option>
+                                <option value="Northern">Northern</option>
+                                <option value="Upper West">Upper West</option>
+                                <option value="Upper East">Upper East</option>
+                                <option value="Brong Ahafo">Brong Ahafo</option>
+                                <option value="Ashanti">Ashanti</option>
+                                <option value="Volta">Volta</option>
+                            </select>
+                             </div>
+                            </div>
+                            
                           
                             <input type="hidden" name="action" value="add" />
                             <div>

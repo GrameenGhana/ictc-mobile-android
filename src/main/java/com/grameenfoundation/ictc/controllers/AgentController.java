@@ -75,6 +75,7 @@ public class AgentController extends HttpServlet {
                 String phonenumber = request.getParameter("pn");
                 String agentcode = request.getParameter("ac");
                 String password = request.getParameter("password");
+                String region = request.getParameter("rg");
 
                 String formattedResponse = null;
                 String jsonformat = null;
@@ -92,6 +93,7 @@ public class AgentController extends HttpServlet {
              agentWrapper.setUsername(username);
              agentWrapper.setPassword(password);
              agentWrapper.setPhonenumber(phonenumber);
+             agentWrapper.setRegion(region);
 
             boolean created = agentModel.createAgent(agentWrapper);
             System.out.println("created " + created);
@@ -183,6 +185,7 @@ public class AgentController extends HttpServlet {
                 String lastname = request.getParameter("ln");
                 String username = request.getParameter("un");
                 String agenttype = request.getParameter("at");
+                String region = request.getParameter("rg");
                 
                 System.out.println("username " + username);
                 System.out.println("user type " + agenttype);
@@ -191,6 +194,7 @@ public class AgentController extends HttpServlet {
                 update.put(Agent.AGENTTYPE,agenttype);
                 update.put(Agent.FIRSTNAME,firstname);
                 update.put(Agent.LASTNAME, lastname);
+                update.put(Agent.REGION, region);
                         
                  agentModel.AgentUpdate(username, update);
                         System.out.println("Agent updated");

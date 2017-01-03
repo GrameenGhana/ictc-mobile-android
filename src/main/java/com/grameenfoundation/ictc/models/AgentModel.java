@@ -113,6 +113,7 @@ public class AgentModel {
                 wrapper.setLastname(ag.getLastname());
                 wrapper.setUsername(ag.getUsername());
                 wrapper.setAgentId(ag.getAgentId());
+                wrapper.setRegion(ag.getRegion());
                 aglist.add(wrapper);
 
             }
@@ -306,13 +307,13 @@ public class AgentModel {
         
         //Node agNode = null
       
-
+          Agent  ag  = getAgent(Agent.USERNAME, id);
+            System.out.println("ag " + ag.getPassword());
         
         boolean updated = false;
         try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
             
-            Agent  ag  = getAgent(Agent.USERNAME, id);
-            System.out.println("ag " + ag.getPassword());
+          
             //If the setting is not null
             if (null != ag) {
 
@@ -346,7 +347,11 @@ public class AgentModel {
                         }
                     }
                     
-                    
+                       if (fieldName.equalsIgnoreCase(Agent.REGION)) {
+                        if (null != fieldValue) {
+                            ag.setRegion(fieldValue);
+                        }
+                    }
                     
                 }
                

@@ -26,7 +26,17 @@ public class AgentWrapper {
     private String agentcode = "agentcode";
     private String password = "password";
     private String phonenumber = "phonenumber";
+    private String region = "region";
     
+    
+     
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
     
 
     public String getAgentId() {
