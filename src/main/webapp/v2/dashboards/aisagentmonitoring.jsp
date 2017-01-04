@@ -6,18 +6,12 @@
 
 <%@page import="com.grameenfoundation.ictc.domains.Aisdashboard"%>
 <%@page import="com.grameenfoundation.ictc.models.AisDashboardModel"%>
-<<%-- 
-    Document   : agentmonitoring
-    Created on : Nov 15, 2016, 4:03:45 PM
-    Author     : Joseph George Davis
---%>
-
 <%@page import="com.grameenfoundation.ictc.utils.BIDashboard"%>
 <%@page import="com.grameenfoundation.ictc.utils.BIDataManager"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="org.json.*"%>
 <%
-     String agent = "agentactivity";
+    String agent = "agentactivity";
     AisDashboardModel  ais  = new AisDashboardModel(); 
     BIDataManager bi = BIDataManager.getInstance();
     JSONObject y =new JSONObject(ais.getIndicatorWrapper(Aisdashboard.TYPE,agent).getData());
@@ -55,6 +49,7 @@
                             <thead>
                             <tr>
                                 <th>Agent</th>
+                                <th>Region</th>
                                 <th>No farmers with access to Agent</th>
                                 <th>No farmers taken through Previous performance (Production)</th>
                                 <th>No farmers taken through Previous performance (Post-harvest)</th>
@@ -76,6 +71,7 @@
                                
                             <tr>
                                 <td><%= b.getString("name") %></td>
+                                <td><%= b.getString("region") %></td>
                                 <td><%= b.get("farmers") %></td>
                                 <td><%= b.get("blproduction") %></td>
                                 <td><%= b.get("blpostharvest")%></td>

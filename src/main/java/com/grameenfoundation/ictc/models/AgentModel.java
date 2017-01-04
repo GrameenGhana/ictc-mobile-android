@@ -183,6 +183,7 @@ public class AgentModel {
                 wrapper.setLastname(ag.getLastname());
                 wrapper.setUsername(ag.getUsername());
                 wrapper.setAgentId(ag.getAgentId());
+                wrapper.setRegion(ag.getRegion());
                 aglist.add(wrapper);
 
             }

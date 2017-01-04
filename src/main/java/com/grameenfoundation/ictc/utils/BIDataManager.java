@@ -574,6 +574,7 @@ public class BIDataManager extends BIUtil {
 
             y.put("name", a.getFirstname() + " " + a.getLastname());
             y.put("farmers", biodataModel.getFarmerCountByAgent(a.getAgentId()));
+            y.put("region" ,a.getRegion());
             y.put("blproduction", biodataModel.getFarmerBaselinProductionCountByAgent(a.getAgentId()));
             y.put("blpostharvest", biodataModel.getFarmerBaselinePostHarvestCountByAgent(a.getAgentId()));
             y.put("blcredit", biodataModel.getFarmerCreditPreviousCountByAgent(a.getAgentId()));

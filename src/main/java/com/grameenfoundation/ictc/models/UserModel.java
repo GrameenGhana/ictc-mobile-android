@@ -316,6 +316,29 @@ List<UserWrapper> usrs = new ArrayList<>();
    }
  
  
+ public JSONObject getAPO()
+ {
+      JSONObject x = new JSONObject();
+      JSONArray ja = new JSONArray();
+      
+      
+      List<UserWrapper> ob = new UserModel().findByType("acdivoca_apo");
+      
+       for (UserWrapper ob1 : ob) {
+           JSONObject y = new JSONObject();
+           
+           y.put("apo",ob1.getID());
+           y.put("name",ob1.getFirstName() + " "+ ob1.getLastName());
+           
+           ja.put(y);
+       }
+      
+        x.put("obs",ja);
+      // System.out.println("json " + x);
+      return x;
+ }
+ 
+ 
  public JSONObject getObUser()
  {
       JSONObject x = new JSONObject();

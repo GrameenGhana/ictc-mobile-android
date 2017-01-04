@@ -68,8 +68,6 @@ public class NorthDataServlet extends HttpServlet {
             }
          
             
-            
-           
            
             result = getIndicator(farm);
            if(null==ais.getIndicator(Aisdashboard.TYPE,farm))
@@ -118,6 +116,7 @@ public class NorthDataServlet extends HttpServlet {
         parameters.put("action", parameter);
 
         result = SalesforceHttpClient.getSalesforceData("http://188.166.30.140:8080/ICTC/DashboardServlet", parameters);
+      //  result = SalesforceHttpClient.getSalesforceData("http://localhost:8080/ictc-webappbapptest/DashboardServlet", parameters);
 
         return result;
     }
