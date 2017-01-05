@@ -27,6 +27,15 @@ public class AgentWrapper {
     private String password = "password";
     private String phonenumber = "phonenumber";
     private String region = "region";
+    private String apo = "sapo";
+
+    public String getApo() {
+        return apo;
+    }
+
+    public void setApo(String apo) {
+        this.apo = apo;
+    }
     
     
      

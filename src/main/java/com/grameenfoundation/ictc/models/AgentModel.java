@@ -184,6 +184,7 @@ public class AgentModel {
                 wrapper.setUsername(ag.getUsername());
                 wrapper.setAgentId(ag.getAgentId());
                 wrapper.setRegion(ag.getRegion());
+                wrapper.setApo(ag.getAPO());
                 aglist.add(wrapper);
 
             }

@@ -50,6 +50,7 @@
                             <tr>
                                 <th>Agent</th>
                                 <th>Region</th>
+                                <th>SAPO</th>
                                 <th>No farmers with access to Agent</th>
                                 <th>No farmers taken through Previous performance (Production)</th>
                                 <th>No farmers taken through Previous performance (Post-harvest)</th>
@@ -72,6 +73,7 @@
                             <tr>
                                 <td><%= b.getString("name") %></td>
                                 <td><%= b.getString("region") %></td>
+                                <td><%= b.getString("sapo") %></td>
                                 <td><%= b.get("farmers") %></td>
                                 <td><%= b.get("blproduction") %></td>
                                 <td><%= b.get("blpostharvest")%></td>

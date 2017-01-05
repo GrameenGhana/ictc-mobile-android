@@ -245,7 +245,21 @@ public class AgentController extends HttpServlet {
             
             if(action.equals("sapo"))
             {
+                  UserModel user = new UserModel();
                 
+              
+                String ob = request.getParameter("apo");
+                Agent  ag  = agentModel.getAgent(Agent.AGENTID, request.getParameter("at"));
+                
+                if(null!=ag)
+                {
+                    System.out.println("apo attached to agent " + user.APOToAggent(ob,ag.getUnderlyingNode())); 
+                     ICTCUtil.redirect(request, response,"/v2/users/viewapotoag.jsp");
+                }
+                else
+                {
+                    System.out.println("Agent not Available");
+                }
                 
             }
               request.setAttribute(ICTCUtil.GENERAL_RESPONSE, generalResponse);

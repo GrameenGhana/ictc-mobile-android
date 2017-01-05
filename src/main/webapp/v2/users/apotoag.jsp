@@ -43,7 +43,7 @@
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ob">Select OutGrower Bussiness Owner<span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <select id="ob" name="ob" class="form-control" >
+                                        <select id="apo" name="apo" class="form-control" >
                                             <% for (int i = 0; i < apo.length(); i++) {
                                           JSONObject b = apo.getJSONObject(i);%>
                                             <option value="<%= b.getString("apo")%>"> <%= b.getString("name")%></option>

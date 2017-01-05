@@ -162,6 +162,42 @@ public class UserModel {
          
      }
     
+     
+        public List<AgentWrapper> getAPOAgent(String userId)
+     {
+         //System.out.println("obId  " + userId);
+         List<AgentWrapper> aglist = new ArrayList<>();
+         
+         String q ="match (f:USER)-[:"+ICTCRelationshipTypes.MANAGES+"]->(l) where f.Id='"+userId+"' return l";
+         
+         System.out.println("query " + q );
+         
+           try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            Result result = Neo4jServices.executeCypherQuery(q);
+
+            ResourceIterator<Node> n_column = result.columnAs("l");
+            while (n_column.hasNext()) {
+                // aglist.add(new Agent(n_column.next()));
+               Agent b = new Agent(n_column.next());
+                AgentWrapper wr = new AgentWrapper();
+             
+                wr.setAgentId(b.getAgentId());
+                wr.setAgentcode(b.getAgentcode());
+                wr.setFirstname(b.getFirstname());
+                wr.setLastname(b.getLastname());
+                
+               aglist.add(wr);
+
+            }
+            tx.success();
+        }
+        
+         System.out.println("agli " + aglist.size());
+        return aglist;
+         
+         
+     }
+    
      public List<User> findUserAgents() {
         List<User> aglist = new ArrayList<>();
 
@@ -289,6 +325,34 @@ List<UserWrapper> usrs = new ArrayList<>();
         return created;
     }
  
+ 
+ public boolean APOToAggent(String ob, Node agent) {
+        boolean created = false;
+       ;
+        try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+
+            User user = new UserModel().getUser(User.ID,ob);
+
+            System.out.println("biodata :" + user.getUnderlyingNode().getId());
+            if (null != user) {
+
+                agent.setProperty(Agent.APO, user.getFirstname()+ " " + user.getLastname());
+                agent.setProperty("sapoId", user.getAgentID());
+                created = true;
+                
+                trx.success();
+
+            }
+        } catch (Exception e) {
+            System.out.println("error");
+            //created = false;
+
+        }
+
+      
+        return created;
+    }
+ 
  public JSONObject  getOb()
    {
       JSONObject x = new JSONObject();
@@ -333,7 +397,7 @@ List<UserWrapper> usrs = new ArrayList<>();
            ja.put(y);
        }
       
-        x.put("obs",ja);
+        x.put("apo",ja);
       // System.out.println("json " + x);
       return x;
  }
@@ -381,6 +445,35 @@ List<UserWrapper> usrs = new ArrayList<>();
     System.out.println("json " + x);
     return x;
  }
+ 
+ public JSONObject getApoUser()
+ {JSONObject x = new JSONObject();
+      JSONArray ja = new JSONArray();
+      
+      
+      List<AgentWrapper> ags = new AgentModel().findAllACDIAgents();
+      
+       for (AgentWrapper ag : ags) {
+           JSONObject y = new JSONObject();
+           
+          
+           y.put("ag",ag.getAgentId());
+           y.put("name",ag.getFirstname() + " " + ag.getLastname());
+           y.put("sapo", ag.getApo());
+          
+           
+           ja.put(y);
+       }
+      
+      x.put("apoagent",ja);
+       // System.out.println("json " + x);
+      return x; 
+
+ 
+  
+    
+ }
+ 
  public JSONObject getAgent()
  {
      JSONObject x = new JSONObject();

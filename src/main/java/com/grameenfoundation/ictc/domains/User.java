@@ -177,4 +177,14 @@ public class User extends Status implements GeneralInterface{
    {
        return new Agent(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.HAS_AGENT));
    }
+      
+     public void setAPO(Node agent)
+   {
+       underlyingNode.createRelationshipTo(agent, ICTCRelationshipTypes.MANAGES);
+   }  
+     
+     public Agent getAPO()
+   {
+       return new Agent(Neo4jServices.findNodeFromRelation(underlyingNode, Direction.OUTGOING, ICTCRelationshipTypes.MANAGES));
+   }
 }

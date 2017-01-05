@@ -86,6 +86,7 @@ public enum ICTCRelationshipTypes implements RelationshipType{
     MEETING_SETTING,
     MEETING_ACTIVITY,
     MOBILE_TRACKER,
+    MANAGES,
     //P
     POST_HARVEST,
     PRODUCTION,

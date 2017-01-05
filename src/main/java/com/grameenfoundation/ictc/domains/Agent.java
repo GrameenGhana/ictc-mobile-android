@@ -36,7 +36,18 @@ public class Agent extends Status implements GeneralInterface {
     public static String REGION = "region";
     public static String APO    = "sapo";
     
-    
+      public void setAP0(String region) {
+        underlyingNode.setProperty(APO,region);
+    }
+
+    public String getAPO() {
+        try {
+            return (String) underlyingNode.getProperty(APO);
+
+        } catch (Exception e) {
+        }
+        return "";
+    }
     
      public void setRegion(String region) {
         underlyingNode.setProperty(REGION,region);

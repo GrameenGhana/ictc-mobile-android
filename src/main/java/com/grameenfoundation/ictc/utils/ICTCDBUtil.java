@@ -15,6 +15,10 @@ import java.util.logging.Level;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.factory.GraphDatabaseSettings;
+import org.neo4j.kernel.GraphDatabaseAPI;
+import org.neo4j.server.WrappingNeoServerBootstrapper;
+import org.neo4j.server.configuration.Configurator;
+import org.neo4j.server.configuration.ServerConfigurator;
 
 
 /**
@@ -29,7 +33,9 @@ public class ICTCDBUtil {
     protected static String PORT = null;
     protected static String DATABASE_PATH = null;
     protected static GraphDatabaseService database = null;
-
+     static WrappingNeoServerBootstrapper srv;
+      static String SERVER_HOSTNAME = "0.0.0.0";
+    
     private final static String MYSQL_DB = "ictc_bi";
     private final static String MYSQL_PORT = "3306";
     private final static String MYSQL_HOST = "localhost";
@@ -54,7 +60,7 @@ public class ICTCDBUtil {
         String glassishinstanceRootPropertyName = "com.sun.aas.instanceRoot";
         String configFile =  System.getProperty(glassishinstanceRootPropertyName)+"/config/new.conf";
         System.out.println("File " + configFile);
-      
+          ServerConfigurator config = null;
         Properties dbProperties = new Properties();
         
         try(InputStream inputStream = new FileInputStream(configFile))
@@ -91,7 +97,7 @@ public class ICTCDBUtil {
         database = graphdb;
 
         registerShutdownHook(graphdb);
-//        log.log(Level.INFO, "{0} Database test 2 done", graphdb.isAvailable(2));
+   //log.log(Level.INFO, "{0} Database test 2 done", graphdb.isAvailable(2));
           
 //         config = new ServerConfigurator((GraphDatabaseAPI) graphdb);
 //                 
