@@ -201,9 +201,10 @@ public class AgentController extends HttpServlet {
             }
             if(action.equalsIgnoreCase("delete"))
             {
+                 Agent  ag  = agentModel.getAgent(Agent.USERNAME, request.getParameter("un"));
                try (Transaction trx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
 
-                 Agent  ag  = agentModel.getAgent(Agent.USERNAME, request.getParameter("un"));
+                
                  
                  if(Neo4jServices.deleteAgentNode(ag.getUnderlyingNode()))
                  {

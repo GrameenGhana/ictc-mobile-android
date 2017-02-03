@@ -77,7 +77,7 @@ public class DashboardServlet extends HttpServlet {
     {
          JSONObject y = bi.getACDIVOCAAgentActivity();
          JSONArray ja = y.getJSONArray("agentactivity");
-           b.put("agentactivity", ja);
+         b.put("agentactivity", ja);
      
     }
     

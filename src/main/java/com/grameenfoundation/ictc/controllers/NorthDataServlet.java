@@ -48,6 +48,7 @@ public class NorthDataServlet extends HttpServlet {
            
             AisDashboardModel ais = new AisDashboardModel();
             String result = null;
+            String tracker = null;
             String action = request.getParameter("action");
        
             if(action.equalsIgnoreCase("all"))
@@ -55,6 +56,7 @@ public class NorthDataServlet extends HttpServlet {
             
           
             result = getIndicator(output);
+            tracker=result;
             if(null==ais.getIndicator(Aisdashboard.TYPE,output))
                 ais.createIndicator(result,output);
             else
@@ -70,6 +72,7 @@ public class NorthDataServlet extends HttpServlet {
             
            
             result = getIndicator(farm);
+            tracker+=result;
            if(null==ais.getIndicator(Aisdashboard.TYPE,farm))
             ais.createIndicator(result,farm);
             else
@@ -82,6 +85,7 @@ public class NorthDataServlet extends HttpServlet {
             }
           
             result = getIndicator(agent);
+            tracker+=result;
             if(null==ais.getIndicator(Aisdashboard.TYPE,agent))
             ais.createIndicator(result,agent);
             else
@@ -93,14 +97,14 @@ public class NorthDataServlet extends HttpServlet {
                 
             }
 //           
-          System.out.println("result " + result);
+             System.out.println("result " + result);
 //   
           
            
             
            // trx.success();
            } 
-            out.println(result);
+            out.println(tracker);
          //JSONObject json = new JSONObject(result);
         }
         
@@ -115,8 +119,8 @@ public class NorthDataServlet extends HttpServlet {
 
         parameters.put("action", parameter);
 
-       // result = SalesforceHttpClient.getSalesforceData("http://188.166.30.140:8080/ICTC/DashboardServlet", parameters);
-      result = SalesforceHttpClient.getSalesforceData("http://localhost:8080/ictc-webappbapptest/DashboardServlet", parameters);
+        result = SalesforceHttpClient.getSalesforceData("http://188.166.30.140:8080/ICTC/DashboardServlet", parameters);
+     // result = SalesforceHttpClient.getSalesforceData("http://localhost:8080/ictc-webappbapptest/DashboardServlet", parameters);
 
         return result;
     }
