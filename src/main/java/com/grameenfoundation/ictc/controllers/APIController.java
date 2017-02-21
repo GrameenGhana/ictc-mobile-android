@@ -131,7 +131,7 @@ public class APIController extends HttpServlet {
                     obj.put("msg", "Invalid Action");
                     out.print(obj);
                 } else {
-                    System.out.println("Data sent to client " + fa);
+                    //System.out.println("Data sent to client " + fa);
                     out.print(fa);
                 }
 
