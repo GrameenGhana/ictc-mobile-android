@@ -279,7 +279,8 @@ public class BiodataModel {
     public List<BiodataWrapper>  getBioDataSearch( String value, long lastModified){
         
         //String q=" match(l:FARMER) WHERE l."+Biodata.CREATED_BY+" ='"+value+"' and l."+Biodata.LAST_MODIFIED+" >= "+lastModified+" return  l";
-         String q=" match(l:FARMER) WHERE l."+Biodata.CREATED_BY+" ='"+value+"' and l."+Biodata.LAST_MODIFIED+" <= "+lastModified+" return  l";
+         //String q=" match(l:FARMER) WHERE l."+Biodata.CREATED_BY+" ='"+value+"' and l."+Biodata.LAST_MODIFIED+" <= "+lastModified+" return  l";
+         String q=" match(l:FARMER) WHERE l."+Biodata.CREATED_BY+" ='"+value+"' return  l";
         System.out.println(q);
         return Neo4jServices.getIterativeNode(q);
     

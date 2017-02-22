@@ -239,7 +239,7 @@ public class Neo4jServices {
 
                     BiodataWrapper bw = (new BiodataWrapper(b.getFirstname(), b.getLastname(), b.getNickname(), b.getCommunity(), b.getVillage(), b.getDistrict(), b.getRegion(), b.getAge(), b.getGender(),
                             b.getMaritalstatus(), b.getNumberofchildren(), b.getNumberofdependants(), b.getEducation(), b.getCluster(), (b.getId()), b.getMajorCrop(),b.getDateofbirth(),b.getTelephonenumber()));
-//                    System.out.println("After Here");
+                 
                    String imgUrl =b.getImage_Url();
                    if(null != imgUrl){
                        imgUrl = imgUrl.replace("/home/jdavis/glassfish-4.1/glassfish/domains/domain1/docroot", "");

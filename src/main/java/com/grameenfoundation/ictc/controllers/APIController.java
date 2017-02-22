@@ -693,7 +693,10 @@ public class APIController extends HttpServlet {
                     farmer.put(Biodata.NUMBER_OF_DEPENDANTS, b.getNumberofdependants());
                     farmer.put(Biodata.REGION, b.getRegion());
                     farmer.put(Biodata.VILLAGE, b.getVillage());
-                    farmer.put(Biodata.TELEPHONENUMBER, b.getTelephonenumber());
+                    if(null!=b.getTelephonenumber())
+                         farmer.put(Biodata.TELEPHONENUMBER, b.getTelephonenumber());
+                    else
+                        farmer.put(Biodata.TELEPHONENUMBER, 0);
 
 
                     if (null != b.getDistricts_Ashanti()) {
@@ -1580,6 +1583,7 @@ public class APIController extends HttpServlet {
             }
             tx.success();
         }
+        System.out.println("total farmer data sent " + fa.length());
         return fa;
     }
 
