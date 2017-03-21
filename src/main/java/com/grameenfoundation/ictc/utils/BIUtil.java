@@ -169,7 +169,7 @@ public class BIUtil {
                     + ", `credit_planned` INT NOT NULL DEFAULT '0' , `credit_actual` INT NOT NULL DEFAULT '0', `credit_type` VARCHAR(255) NOT NULL , `ob` INT NOT NULL DEFAULT '0' , `cash_planned` INT NOT NULL DEFAULT '0' , `cash_actual` INT NOT NULL DEFAULT '0' , `cash_amount_planned` FLOAT NOT NULL , `cash_amount_actual` FLOAT NOT NULL , `cash_payback_planned` FLOAT NOT NULL , `cash_payback_actual` FLOAT NOT NULL , `input_planned` INT NOT NULL DEFAULT '0' , `input_actual` INT NOT NULL DEFAULT '0' , `input_payback_planned` FLOAT NOT NULL , `input_payback_actual` FLOAT NOT NULL , `seed_planned` INT NOT NULL DEFAULT '0' , `seed_actual` INT NOT NULL DEFAULT '0' , `fertilizer_planned` INT NOT NULL DEFAULT '0' , `fertilizer_actual` INT NOT NULL DEFAULT '0' , `preplanh_planned` INT NOT NULL DEFAULT '0' , `preplanh_actual` INT NOT NULL DEFAULT '0' , `postplanh_planned` INT NOT NULL DEFAULT '0' , `postplanh_actual` INT NOT NULL DEFAULT '0' , `plough_planned` INT NOT NULL DEFAULT '0' , `plough_actual` INT NOT NULL DEFAULT '0' , `handling_planned` INT NOT NULL DEFAULT '0' , `handling_actual` INT NOT NULL DEFAULT '0' , `transport_planned` INT NOT NULL DEFAULT '0' , `transport_actual` INT NOT NULL DEFAULT '0' , `storage_planned` INT NOT NULL DEFAULT '0' , `storage_actual` INT NOT NULL DEFAULT '0'"
                     + ", `trial` INT NOT NULL DEFAULT '0', `rc` INT NOT NULL DEFAULT '0', `preph` INT NOT NULL DEFAULT '0', `postph` INT NOT NULL DEFAULT '0', `inorg` INT NOT NULL DEFAULT '0' , `thresh` INT NOT NULL DEFAULT '0'";
 
-            String info = " `property` varchar(255) NOT NULL, `description` text NOT NULL, `value` varchar(255) NOT NULL, `modified_by` int(11) NOT NULL, `created_at` timestamp NOT NULL, `updated_at` timestamp NOT NULL";
+            String info = " `property` varchar(255) NOT NULL, `description` text NOT NULL, `value` varchar(255) NOT NULL, `modified_by` int(11) NOT NULL, `created_at` timestamp NOT NULL, `updated_at` date NOT NULL";
             String outputIndicator = "`indicator` text NOT NULL, `gf` varchar(255) NOT NULL,`acdivoca` varchar(255) NOT NULL, `mofa` varchar(255) NOT NULL,   `cifcsf` varchar(255) NOT NULL";
             
             ICTCDBUtil.getInstance().createTable(TABLE_AGENT, common + partner);
@@ -204,7 +204,7 @@ public class BIUtil {
 
             ICTCDBUtil.getInstance().runSQLUpdate(sql);
 
-            if (fillTables) { BIDataManager.getInstance().update(); }
+//            if (fillTables) { BIDataManager.getInstance().update(); }
         } catch (SQLException e) {
             throw(e);
         } catch (Exception e) {

@@ -178,9 +178,9 @@ public class BIDataManager extends BIUtil {
                 d[getYearMonthIdx(year, 7)] = rs.getString(rs.findColumn("Jul"));
                 d[getYearMonthIdx(year, 8)] = rs.getString(rs.findColumn("Aug"));
                 d[getYearMonthIdx(year, 9)] = rs.getString(rs.findColumn("Sep"));
-                d[getYearMonthIdx(year, 10)] = rs.getString(rs.findColumn("Oct"));
-                d[getYearMonthIdx(year, 11)] = rs.getString(rs.findColumn("Nov"));
-                d[getYearMonthIdx(year, 12)] = rs.getString(rs.findColumn("Dec"));
+                d[getYearMonthIdx(year, 10)]= rs.getString(rs.findColumn("Oct"));
+                d[getYearMonthIdx(year, 11)]= rs.getString(rs.findColumn("Nov"));
+                d[getYearMonthIdx(year, 12)]= rs.getString(rs.findColumn("Dec"));
                 series_data.put(partner, d);
             }
 

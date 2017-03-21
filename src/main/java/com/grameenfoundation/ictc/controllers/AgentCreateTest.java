@@ -5,8 +5,12 @@
  */
 package com.grameenfoundation.ictc.controllers;
 
+import com.grameenfoundation.ictc.models.BiodataModel;
+import com.grameenfoundation.ictc.wrapper.BiodataWrapper;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +38,19 @@ public class AgentCreateTest extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-           
+            BiodataModel bio = new BiodataModel();
+            
+            List<BiodataWrapper> bw = new ArrayList<BiodataWrapper>();
+            
+            bw = bio.getBioData("","");
+            
+            for (BiodataWrapper biodataWrapper : bw) {
+                
+                System.out.println("data " + biodataWrapper);
+            }
+            
+            
+            
             
             
         }

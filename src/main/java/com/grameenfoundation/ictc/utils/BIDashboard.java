@@ -447,7 +447,8 @@ public class BIDashboard extends BIUtil {
         return (String) data.getJSONObject(o).getJSONObject("registration").get("total");
     }
     private String getRegistrationTotal(String o, String partner) {
-        return (String) data.getJSONObject(o).getJSONObject("registration").getJSONObject(partner).get("total");
+        //return (String) data.getJSONObject(o).getJSONObject("registration").getJSONObject(partner).get("total");
+        return "0";
     }
     private String getRegistrationProgress(String o, String partner) {
         return (String) data.getJSONObject(o).getJSONObject("registration").getJSONObject(partner).get("progress");
@@ -459,7 +460,8 @@ public class BIDashboard extends BIUtil {
         return (String) data.getJSONObject(o).getJSONObject("registration").get("sparkline");
     }
     private String getRegistrationEChartLineData(String o, String attr) {
-        return (String) data.getJSONObject(o).getJSONObject("registration").getJSONObject("chart_line").get(attr);
+        //return (String) data.getJSONObject(o).getJSONObject("registration").getJSONObject("chart_line").get(attr);
+        return "0";
     }
 
     private String getPPTotal(String o, String partner) {

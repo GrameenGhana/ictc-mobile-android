@@ -239,6 +239,8 @@ public class Neo4jServices {
 
                     BiodataWrapper bw = (new BiodataWrapper(b.getFirstname(), b.getLastname(), b.getNickname(), b.getCommunity(), b.getVillage(), b.getDistrict(), b.getRegion(), b.getAge(), b.getGender(),
                             b.getMaritalstatus(), b.getNumberofchildren(), b.getNumberofdependants(), b.getEducation(), b.getCluster(), (b.getId()), b.getMajorCrop(),b.getDateofbirth(),b.getTelephonenumber()));
+                    
+                    bw.setLastmodifield(b.getLastModifiedDate());
                  
                    String imgUrl =b.getImage_Url();
                    if(null != imgUrl){

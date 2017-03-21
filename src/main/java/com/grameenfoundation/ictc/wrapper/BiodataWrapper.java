@@ -6,6 +6,7 @@
 package com.grameenfoundation.ictc.wrapper;
 
 import com.grameenfoundation.ictc.domains.FarmManagementPlan;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -73,6 +74,15 @@ public class BiodataWrapper {
     String fkFYName="fkFYName";
     String SubOffice="SubOffice";
     String Sync="Sync";
+    Date lastmodifield;
+
+    public Date getLastmodifield() {
+        return lastmodifield;
+    }
+
+    public void setLastmodifield(Date lastmodifield) {
+        this.lastmodifield = lastmodifield;
+    }
     
     
  public  void setSync(String Sync) {
