@@ -1,6 +1,8 @@
 package com.grameenfoundation.ictc.utils;
 
+import com.grameenfoundation.ictc.domains.Aisdashboard;
 import com.grameenfoundation.ictc.models.AgentModel;
+import com.grameenfoundation.ictc.models.AisDashboardModel;
 import com.grameenfoundation.ictc.models.BiodataModel;
 import com.grameenfoundation.ictc.wrapper.AgentWrapper;
 import org.apache.commons.lang.WordUtils;
@@ -17,7 +19,6 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONArray;
-import sun.security.krb5.internal.PAData;
 
 
 /**
@@ -32,6 +33,8 @@ public class BIDataManager extends BIUtil {
     private String data_set;
 
     public static BIDataManager instance;
+    
+    BiodataModel bio = new BiodataModel();
 
     // <editor-fold defaultstate="collapsed" desc="Constructors">
     public static BIDataManager getInstance() {
@@ -942,6 +945,19 @@ public class BIDataManager extends BIUtil {
     }
     
     
+    
+    public JSONObject getGFSummary()
+    {
+       AisDashboardModel  ais  = new AisDashboardModel();   
+     JSONObject  fact =  new JSONObject(ais.getIndicatorWrapper(Aisdashboard.TYPE,"farmmonitoring").getData());
+     JSONObject  f = fact.getJSONObject("farmmonitoring");
+      
+     long farmerCount = bio.getFarmerCountByAgentType(PARTNER_ACDI) + bio.getFarmerCountByAgentType(PARTNER_MOFA)+ 
+     bio.getFarmerCountByAgentType(PARTNER_CIF)+ bio.getFarmerCountByAgentType(PARTNER_LASOREX) + bio.getFarmerCountByAgentType(PARTNER_CARD);
+      
+      
+      
+    }
     
     // </editor-fold>
 

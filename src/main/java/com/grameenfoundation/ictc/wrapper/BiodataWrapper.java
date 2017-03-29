@@ -504,7 +504,7 @@ private List<FieldObject> fmpValues;
     }
 
     public BiodataWrapper(String firstName, String lastName, String nickname, String community, String village, String district, String region, String age, String gender, String maritalStatus, String numberOfChildren, String numberOfDependants,
-            String education, String cluster, String farmID, String majorCrop,String dateOfBirth,String phoneNumber) {
+            String education, String cluster, String farmID, String majorCrop,String dateOfBirth,String phoneNumber,Date lastmodified) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nickname = nickname;
@@ -529,6 +529,7 @@ private List<FieldObject> fmpValues;
         this.marketing = new MarketingWrapper();
         this.storage = new StorageWrapper();
         this.fmp = new FarmManagementPlanWrapper();
+        this.lastmodifield = lastmodified;
     }
 
     public String getFirstName() {

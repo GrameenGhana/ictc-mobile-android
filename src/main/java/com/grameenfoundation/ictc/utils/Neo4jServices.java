@@ -238,9 +238,9 @@ public class Neo4jServices {
 //                 String maritalStatus, String numberOfChildren, String numberOfDependants, String education/
 
                     BiodataWrapper bw = (new BiodataWrapper(b.getFirstname(), b.getLastname(), b.getNickname(), b.getCommunity(), b.getVillage(), b.getDistrict(), b.getRegion(), b.getAge(), b.getGender(),
-                            b.getMaritalstatus(), b.getNumberofchildren(), b.getNumberofdependants(), b.getEducation(), b.getCluster(), (b.getId()), b.getMajorCrop(),b.getDateofbirth(),b.getTelephonenumber()));
+                            b.getMaritalstatus(), b.getNumberofchildren(), b.getNumberofdependants(), b.getEducation(), b.getCluster(), (b.getId()), b.getMajorCrop(),b.getDateofbirth(),b.getTelephonenumber(),b.getLastModifiedDate()));
                     
-                    bw.setLastmodifield(b.getLastModifiedDate());
+                   // bw.setLastmodifield(b.getLastModifiedDate());
                  
                    String imgUrl =b.getImage_Url();
                    if(null != imgUrl){

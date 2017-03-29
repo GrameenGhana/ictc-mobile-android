@@ -52,12 +52,14 @@ public class BIUtil {
     protected final static String PARTNER_OB = "OB";
     protected final static String PARTNER_MOFA = "MOFA";
     protected final static String PARTNER_GF = "GRAMEEN";
-    protected final static String PARTNER_CIF = "CIFCSF";
+    protected final static String PARTNER_CIF = "CSFCIRF";
     protected final static String PARTNER_AIS_BA = "AIS_BA";
     protected final static String PARTNER_AIS_UE = "AIS_UE";
     protected final static String PARTNER_AIS_UW = "AIS_UW";
     protected final static String PARTNER_AIS_NR = "AIS_NR";
     protected final static String PARTNER_AIS_VR = "AIS_VR";
+    protected final static String PARTNER_CARD = "CARD";
+    protected final static String PARTNER_LASOREX = "LASOREX";
     protected final static String[] PARTNERS = {PARTNER_ACDI, PARTNER_MOFA, PARTNER_CIF, PARTNER_GF,
                                                 PARTNER_AIS_BA, PARTNER_AIS_UE, PARTNER_AIS_UW,
                                                 PARTNER_AIS_NR, PARTNER_AIS_VR};

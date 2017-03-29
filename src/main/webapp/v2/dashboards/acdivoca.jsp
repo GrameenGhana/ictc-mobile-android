@@ -14,18 +14,17 @@
   
     
    
-   
-    BIDashboard data = new BIDashboard("acdivoca");
-    BiodataModel bio = new BiodataModel();
-    BIDataManager bi = BIDataManager.getInstance();
-    List<String> crops = data.getCrops();
-    List<String> locations = data.getLocations();
-    JSONObject  x = data.getACDIVOCADATA();
-    JSONObject  in = bi.getIndicatorInfo("ACDIVOCA");
-    TempReport temp = new TempReport();
-    JSONObject y = bi.getACDIVOCAAgentActivity();
-    JSONArray ja = y.getJSONArray("agentactivity");
-    JSONObject b = new JSONObject();
+      // BIDashboard data = new BIDashboard("acdivoca");
+       BiodataModel bio = new BiodataModel();
+       BIDataManager bi = BIDataManager.getInstance();
+      // List<String> crops = data.getCrops();
+      // List<String> locations = data.getLocations();
+      // JSONObject x = data.getACDIVOCADATA();
+       JSONObject in = bi.getIndicatorInfo("ACDIVOCA");
+       TempReport temp = new TempReport();
+       JSONObject y = bi.getACDIVOCAAgentActivity();
+       JSONArray ja = y.getJSONArray("agentactivity");
+       JSONObject b = new JSONObject();
     
    
    
@@ -80,17 +79,13 @@
                                     <div class="form-group">
                                         <select id="location-output-table" class="form-control">
                                             <option value="all">Location: All</option>
-                                            <% for(String l : locations ) { %>
-                                                <option value="<%=l%>"><%=l%></option>
-                                            <% } %>
+                                        
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <select id="crop-output-table" class="form-control">
                                             <option value="all">Crops: All</option>
-                                            <% for(String c : crops ) { %>
-                                            <option value="<%=c%>"><%=c%></option>
-                                            <% } %>
+                                          
                                         </select>
                                     </div>
                                 </form>-->
@@ -112,37 +107,37 @@
                                      <tr>
                                         <td>Using improved practices and technologies</td>
                                         <td><%= in.get("ipt")  %></td>
-                                        <!--<td><%= x.getString("ipt_area")%></td>-->
+                                       
                                     </tr>
                                     <tr>
                                         <td>Using improved seed</td>
                                         <td><%= in.get("is")   %></td>
-                                        <!--<td><%= x.getString("is_area")%></td>-->
+                                        
                                     </tr>
                                       <tr>
                                         <td>Using recommended crop density and arrangement</td>
                                         <td><%= in.get("cda") %></td>
-                                        <!--<td><%= x.getString("cda_area")%></td>-->
+                                       
                                     </tr>
                                     <tr>
                                         <td>Using pre-plant herbicide</td>
                                         <td><%= in.get("preh") %></td>
-                                        <!--<td><%= x.getString("preh_area")%></td>-->
+                                     
                                     </tr>
                                      <tr>
                                         <td>Using post-plant herbicide</td>
                                         <td><%= in.get("posth")  %></td>
-                                        <!--<td><%= x.getString("posth_area")%></td>-->
+                                      
                                     </tr>
                                     <tr>
                                         <td>Using inorganic fertilizer</td>
                                         <td><%= in.get("if")   %></td>
-                                        <!--<td><%= x.getString("if_area")%></td>-->
+                                      
                                     </tr>
                                      <tr>
                                         <td>Using post-harvest thresher</td>
                                         <td><%= in.get("pht")  %></td>
-                                       <!-- <td><%= x.getString("pht_area")%></td>-->
+                                      
                                     </tr>
                                 </tbody>
                             </table>
@@ -169,52 +164,52 @@
                             <tbody>
                                 <tr>
                                     <td>Number of farmers with access to Agent (registered)(% of target)</td>
-                                    <!--<td><%= data.getFarmerRegistrationTotalForACDI() %> / <%= data.getFarmerRegistrationTargetForACDI() %> (<%= data.getFarmerRegistrationProgressForACDI()%>%)</td>-->
-                                    <td><%= bio.getACDIVOCAFarmerCount()%> / <%= data.getFarmerRegistrationTargetForACDI() %> (<%= temp.getFarmerRegistrationProgressForACDI()  %>%)</td>
+                                 
+                                    <td><%= bio.getACDIVOCAFarmerCount()%> /5000 (<%= temp.getFarmerRegistrationProgressForACDI()  %>%)</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance Production</td>
-                                   <!-- <td><%= data.getFarmerPPTotalForACDI() %> (<%= data.getFarmerPPProgressForACDI() %>%)</td>-->
+                                 
                                     <td><%= bio.getACDIVOCABaselineProductionCount() %> (<%= temp.getFarmerPPProgressForACDI() %>%)</td> 
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance PostHarvest</td>
-                                   <!-- <td><%= data.getFarmerPPTotalForACDI() %> (<%= data.getFarmerPPProgressForACDI() %>%)</td>-->
+                                 
                                     <td><%= bio.getACDIVOCABaselinePostHarvestCount() %> (<%= temp.getFarmerPHProgressForACDI() %>%)</td> 
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance Credit</td>
-                                   <!-- <td><%= data.getFarmerPPTotalForACDI() %> (<%= data.getFarmerPPProgressForACDI() %>%)</td>-->
+                                  
                                     <td><%= bio.getACDIVOCAFarmCreditPreviousCount() %> (<%= temp.getFarmerFCPPHProgressForACDI() %>%)</td> 
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farmers (% of target)  coached to produce Farm Management Plan on Production</td>
-                                    <!--<td><%= data.getFarmerFMPTotalForACDI() %> (<%= data.getFarmerFMPProgressForACDI() %>%)</td>-->
+                                    
                                      <td><%= bio.getACDIVOCAFMPProductionCount() %> (<%= temp.getFarmerFMPPProgressForACDI() %>%)</td>
                                 </tr>
                                  <tr>
                                     <td style="width: 20%">Number of farmers (% of target)  coached to produce Farm Management Plan on PostHarvest</td>
-                                    <!--<td><%= data.getFarmerFMPTotalForACDI() %> (<%= data.getFarmerFMPProgressForACDI() %>%)</td>-->
+                                  
                                      <td><%= bio.getACDIVOCAFMPPostHarvestCount() %> (<%= temp.getFarmerFMPPHProgressForACDI() %>%)</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farmers (% of target)  coached to produce Farm Management Plan on Credit</td>
-                                    <!--<td><%= data.getFarmerFMPTotalForACDI() %> (<%= data.getFarmerFMPProgressForACDI() %>%)</td>-->
+                                   
                                      <td><%= bio.getACDIVOCAFFarmCreditPlanCount() %> (<%= temp.getFarmerFCPPHProgressForACDI() %>%)</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farms (% of target) measured</td>
-                                   <!-- <td><%= bio.getACDIVOCAFFMPProductionUpdateCount()%> (<%= data.getFarmerFarmsMeasuredProgressForACDI() %>%)</td>-->
+                                  
                                     <td><%= bio.getACDIVOCAFFMPProductionUpdateCount() %> (<%= temp.getFarmerPUProgressForACDI() %>%)</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farms (% of target) assessed</td>
-                                    <!--<td><%= data.getFarmerFarmsAssessedTotalForACDI() %> (<%= data.getFarmerFarmsAssessedProgressForACDI() %>%)</td>-->
+                                   
                                     <td><%= bio.getACDIVOCAFCPCount() %> (<%= temp.getFarmerFCAProgressForACDI()  %>%)</td>
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farmers (% of target) taken through FMP Update Production</td>
-                                   <!--<td><%= data.getFarmerFMPUpdateTotalForACDI() %> (<%= data.getFarmerFMPUpdateProgressForACDI() %>%)</td>-->
+                                 
                                      <td><%= bio.getACDIVOCAFFMPProductionUpdateCount() %> (<%= temp.getFarmerPUProgressForACDI() %>%)</td>
                                 </tr>
                                 <tr>
@@ -260,30 +255,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <!--<tr>
-                                <td>Agents Registered (% of target)</td>
-                                <td><%= data.getAgentRegistrationTotalForACDI() %> / <%= data.getAgentRegistrationTargetForACDI() %> (<%= data.getAgentRegistrationProgressForACDI()%>%)</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%">Number of agents (% of target) with more than 50 Previous Performance surveys (Production, Post-harvest, Credit) completed</td>
-                                <td><%= data.getAgentPPTotalForACDI() %> (<%= data.getAgentPPProgressForACDI() %>%)</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%">Number of agents (% of target) with more than 50 FMP (Production, Post-harvest, Credit) completed</td>
-                                <td><%= data.getAgentFMPTotalForACDI() %> (<%= data.getAgentFMPProgressForACDI() %>%)</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%">Number of agents (% of target) with more than 50 FMP Update (Production, Harvest, Post-harvest, Marketing, Credit) completed</td>
-                                <td><%= data.getAgentFMPUpdateTotalForACDI() %> (<%= data.getAgentFMPUpdateProgressForACDI() %>%)</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%">Number of agents (% of target) who have measured more than 50 farms</td>
-                                <td><%= data.getAgentFarmsMeasuredTotalForACDI() %> (<%= data.getAgentFarmsMeasuredProgressForACDI() %>%)</td>
-                            </tr>
-                            <tr>
-                                <td style="width: 20%">Number of agents (% of target) who have assessed more than 50 farms</td>
-                                <td><%= data.getAgentFarmsAssessedTotalForACDI() %> (<%= data.getAgentFarmsAssessedProgressForACDI() %>%)</td>
-                            </tr>-->
+                         
                             <% for (int i =0;i<ja.length();i++) { b = ja.getJSONObject(i);%>
                                
                             <tr>

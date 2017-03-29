@@ -216,6 +216,29 @@ public class BiodataModel {
         return aglist;
      }
      
+     
+       public List<Biodata> findFarmerByAgentType(String agent) {
+        List<Biodata> aglist = new ArrayList<>();
+
+        String q = "match (n:AGENT) where n.agenttype='"+agent+"' WITH n match (l:FARMER) where l.CreatedById=n.Id return l";
+
+        try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            Result result = Neo4jServices.executeCypherQuery(q);
+
+            ResourceIterator<Node> n_column = result.columnAs("l");
+            while (n_column.hasNext()) {
+                // aglist.add(new Agent(n_column.next()));
+                Biodata b = new Biodata(n_column.next());
+
+                aglist.add(b);
+
+            }
+            tx.success();
+        }
+        
+        
+        return aglist;
+     }
 
     public Biodata getBiodata(String field, String value) {
         
@@ -728,6 +751,10 @@ public class BiodataModel {
     public Long getMOFAFarmerCount() {
 
         return Neo4jServices.getAggregatedValue(" match (n:AGENT) where n.agenttype='MOFA' WITH n match (f:FARMER) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+     public Long getFarmerCountByAgentType(String agent) {
+
+        return Neo4jServices.getAggregatedValue(" match (n:AGENT) where n.agenttype='"+agent+"' WITH n match (f:FARMER) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
     }
     
     public Long getCommunityCount() {
