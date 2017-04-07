@@ -951,11 +951,78 @@ public class BIDataManager extends BIUtil {
        AisDashboardModel  ais  = new AisDashboardModel();   
      JSONObject  fact =  new JSONObject(ais.getIndicatorWrapper(Aisdashboard.TYPE,"farmmonitoring").getData());
      JSONObject  f = fact.getJSONObject("farmmonitoring");
+     
+     long ACDIVOCA = bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PROFILING, PARTNER_ACDI);
+     long MOFA =  bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PROFILING, PARTNER_MOFA);
+     long CIF =  bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PROFILING, PARTNER_CIF);
+     long LASOREX =  bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PROFILING, PARTNER_LASOREX);
+     long CARD = bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PROFILING, PARTNER_CARD);
+     long ACDIVOCA_NORTH = f.getLong("farmercount");
+     
+        System.out.println("details " + ACDIVOCA +" "+ MOFA +" "+ CIF + " " +LASOREX+ " "+CARD + " "+ ACDIVOCA_NORTH);
       
      long farmerCount = bio.getFarmerCountByAgentType(PARTNER_ACDI) + bio.getFarmerCountByAgentType(PARTNER_MOFA)+ 
-     bio.getFarmerCountByAgentType(PARTNER_CIF)+ bio.getFarmerCountByAgentType(PARTNER_LASOREX) + bio.getFarmerCountByAgentType(PARTNER_CARD);
+     bio.getFarmerCountByAgentType(PARTNER_CIF)+ bio.getFarmerCountByAgentType(PARTNER_LASOREX) + bio.getFarmerCountByAgentType(PARTNER_CARD)+ ACDIVOCA_NORTH;
+     long profileCount = bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PROFILING, PARTNER_ACDI)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PROFILING, PARTNER_MOFA)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PROFILING, PARTNER_CIF) +
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PROFILING, PARTNER_LASOREX)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PROFILING, PARTNER_CARD);
+     long fmpCount = bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PRODUCTION, PARTNER_ACDI)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PRODUCTION, PARTNER_MOFA)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PRODUCTION, PARTNER_CIF) +
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PRODUCTION, PARTNER_LASOREX)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PRODUCTION, PARTNER_CARD);
+     
+     long fmpPhCount = bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_POSTHARVEST, PARTNER_ACDI)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_POSTHARVEST, PARTNER_MOFA)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_POSTHARVEST, PARTNER_CIF) +
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_POSTHARVEST, PARTNER_LASOREX)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_POSTHARVEST, PARTNER_CARD);
+     
+     long creditCount =  bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN, PARTNER_ACDI)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN, PARTNER_MOFA)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN, PARTNER_CIF) +
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN, PARTNER_LASOREX)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN, PARTNER_CARD);
+     
+     
+     long farmMeasurementCount = bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PRODUCTION_UPDATE, PARTNER_ACDI)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PRODUCTION_UPDATE, PARTNER_MOFA)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PRODUCTION_UPDATE, PARTNER_CIF) +
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PRODUCTION_UPDATE, PARTNER_LASOREX)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PRODUCTION_UPDATE, PARTNER_CARD);
+     
+     
+     long creditUpdateCount = bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_FARMCREDIT_UPDATE, PARTNER_ACDI)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_FARMCREDIT_UPDATE, PARTNER_MOFA)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_FARMCREDIT_UPDATE, PARTNER_CIF) +
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_FARMCREDIT_UPDATE, PARTNER_LASOREX)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_FARMCREDIT_UPDATE, PARTNER_CARD);
+     
+      long postHarvestUpdateCount = bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_POSTHARVEST_UPDATE, PARTNER_ACDI)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_POSTHARVEST_UPDATE, PARTNER_MOFA)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_POSTHARVEST_UPDATE, PARTNER_CIF) +
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_POSTHARVEST_UPDATE, PARTNER_LASOREX)+
+          bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_POSTHARVEST_UPDATE, PARTNER_CARD);
+     
+     
+     
+      
+      JSONObject data = new JSONObject();
+      data.put("farmers",farmerCount);
+      data.put("profiling",profileCount);
+      data.put("fmp",fmpCount);
+      data.put("fmph",fmpPhCount);
+      data.put("credit",creditCount);
+      data.put("measurement",farmMeasurementCount);
+      data.put("creditupdate",creditUpdateCount);
+      data.put("postharvestupdate",postHarvestUpdateCount);
       
       
+      
+      
+      return data;
       
     }
     

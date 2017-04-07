@@ -68,7 +68,7 @@
                             <% if(user.getUserType().equalsIgnoreCase(ICTCKonstants.GRAMEEN_ADMIN)|| user.getUserType().equals(ICTCKonstants.GRAMEEN_USER) ) {%>      
                             <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="<%=request.getContextPath()%>/v2/index.jsp">General Dashboard</a></li>
+                                    <li><a href="<%=request.getContextPath()%>/v2/dashboards/gfsummary.jsp">General Dashboard</a></li>
                                     <li><a href="<%= request.getContextPath()%>/v2/dashboards/gf.jsp">GF Dashboard</a></li>
                                     <li><a href="<%= request.getContextPath()%>/v2/dashboards/acdivoca.jsp">ACDIVOCA Dashboard </a></li>
                                     <li><a href="<%= request.getContextPath()%>/v2/dashboards/mofa.jsp">MOFA Dashboard</a></li>

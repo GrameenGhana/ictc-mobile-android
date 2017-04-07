@@ -30,6 +30,7 @@ import org.neo4j.cypher.ExecutionResult;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
@@ -883,6 +884,10 @@ public class BiodataModel {
     
     public Long getACDIVOCAFarmCreditUpdateCount() {
         return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'ACDIVOCA' WITH n match (f:FARMER)-[:HAS_FARMCREDIT_UPDATE]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
+    }
+    
+    public Long getParameterCountByAgentType(ICTCRelationshipTypes relationship,String partner) {
+        return Neo4jServices.getAggregatedValue("match (n:AGENT) where n.agenttype=~'"+partner+"' WITH n match (f:FARMER)-[:"+relationship+"]->(p) where f.CreatedById=n.Id return count(DISTINCT f.Id) as l");
     }
     
 

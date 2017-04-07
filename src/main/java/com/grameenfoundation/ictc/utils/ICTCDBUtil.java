@@ -15,9 +15,7 @@ import java.util.logging.Level;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.factory.GraphDatabaseSettings;
-import org.neo4j.kernel.GraphDatabaseAPI;
 import org.neo4j.server.WrappingNeoServerBootstrapper;
-import org.neo4j.server.configuration.Configurator;
 import org.neo4j.server.configuration.ServerConfigurator;
 
 
@@ -40,8 +38,8 @@ public class ICTCDBUtil {
     private final static String MYSQL_PORT = "3306";
     private final static String MYSQL_HOST = "localhost";
     private final static String MYSQL_USER = "root";
-   // private final static String MYSQL_PASS = "password";
-   private final static String MYSQL_PASS = "spomega";
+    private final static String MYSQL_PASS = "password";
+  // private final static String MYSQL_PASS = "spomega";
     //private final static String MYSQL_PASS = "321.gf.GH";
     private final static String MYSQL_DSN = "jdbc:mysql://"+MYSQL_HOST+":"+MYSQL_PORT+"/"+MYSQL_DB;
     private static Connection connection = null;
