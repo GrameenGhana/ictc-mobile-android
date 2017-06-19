@@ -147,6 +147,29 @@ public class BiodataModel {
     }
     
     
+     public List<Biodata> findAllFarmersByActivity(Enum relationship) {
+        List<Biodata> aglist = new ArrayList<>();
+
+        String q = " match (f:FARMER)-[:"+relationship+"]->p return  DISTINCT f"; 
+
+        try (Transaction tx = ICTCDBUtil.getInstance().getGraphDB().beginTx()) {
+            Result result = Neo4jServices.executeCypherQuery(q);
+
+            ResourceIterator<Node> n_column = result.columnAs("f");
+            while (n_column.hasNext()) {
+                // aglist.add(new Agent(n_column.next()));
+                Biodata b = new Biodata(n_column.next());
+
+                aglist.add(b);
+
+            }
+            tx.success();
+        }
+        
+        
+        return aglist;
+     }
+    
      public List<Biodata> findAllACDIVOCAFarmers() {
         List<Biodata> aglist = new ArrayList<>();
 

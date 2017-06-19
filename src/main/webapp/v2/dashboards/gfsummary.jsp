@@ -85,13 +85,7 @@
             </span>
         </div>
             
-         <div class="col-md-4 col-sm-4 col-xs-8 tile">
-            <span>Updated Production information </span>
-            <h2><%=data.get("measurement")%></h2>
-            <span class="sparkline_ta" style="height: 160px;">
-                  <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
-            </span>
-        </div>
+         
     </div>
     </body>
 </html>

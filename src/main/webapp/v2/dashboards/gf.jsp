@@ -16,6 +16,7 @@
     JSONObject  in = bi.getIndicatorInfo("GRAMEEN");
     JSONObject  mn = bi.getFarmerActivitMonitoring("MOFA");
     JSONObject  mnp = bi.getFarmerActivitMonitoringProgress("MOFA");
+    JSONObject  cif = bi.getFarmerActivitMonitoring("CSFCIRF");
     JSONObject y = bi.getAllAgentActivity();
     JSONArray ja = y.getJSONArray("agentactivity");
     JSONObject b = new JSONObject();
@@ -208,6 +209,7 @@
                                 <th>Indicator</th>
                                 <th>ICTC-ACDI/VOCA</th>
                                 <th>ICTC-MOFA</th>
+                                 <th>CIFSRF</th>
                                 <!--<th>AIS-BA</th>
                                 <th>AIS-UE</th>
                                 <th>AIS-UW</th>
@@ -220,66 +222,75 @@
                                     <td>Number of farmers with access to Agent (registered)(% of target)</td>
                                     <td><%= bio.getACDIVOCAFarmerCount()%> / <%= data.getFarmerRegistrationTargetForACDI() %> (<%= temp.getFarmerRegistrationProgressForACDI()  %>%)</td>
                                     <td><%= bio.getMOFAFarmerCount() %> / <%= data.getFarmerRegistrationTargetForMOFA() %> (<%= temp.getFarmerRegistrationProgressForMOFA()  %>%)</td>
-                                    
+                                    <td><%= bio.getFarmerCountByAgentType("CSFCIRF") %></td>
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance Production</td>
                                     <td><%= bio.getACDIVOCABaselineProductionCount() %> (<%= temp.getFarmerPPProgressForACDI() %>%)</td>
                                      <td><%= mn.get("ppp") %> (<%= mnp.get("pppp") %>%)</td> 
-                                    
+                                     <td><%= cif.get("ppp") %></td> 
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance PostHarvest)</td>
                                    <td><%= bio.getACDIVOCABaselinePostHarvestCount() %> (<%= temp.getFarmerPHProgressForACDI() %>%)</td> 
                                      <td><%= mn.get("pph") %> (<%= mnp.get("pphp")  %>%)</td> 
-                                   
+                                    <td><%= cif.get("pph") %></td> 
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farmers (% of target) taken through Previous Performance Credit</td>
                                       <td><%= bio.getACDIVOCAFarmCreditPreviousCount() %> (<%= temp.getFarmerFCPPHProgressForACDI() %>%)</td> 
                                       <td><%= mn.get("fcp") %> (<%= mnp.getString("fcpp") %>%)</td> 
+                                      <td><%= cif.get("fcp") %></td> 
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farmers (% of target)  coached to produce Farm Management Plan on Production</td>
                                      <td><%= bio.getACDIVOCAFMPProductionCount() %> (<%= temp.getFarmerFMPPProgressForACDI() %>%)</td>
                                      <td><%= mn.get("fmp") %> (<%= mnp.getString("fmpp") %>%)</td>
+                                      <td><%= cif.get("fmp") %></td>
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farmers (% of target)  coached to produce Farm Management Plan on PostHarvest</td>
                                      <td><%= bio.getACDIVOCAFMPPostHarvestCount() %> (<%= temp.getFarmerFMPPHProgressForACDI() %>%)</td>
                                       <td><%= mn.get("fmph") %> (<%= mnp.getString("fmphp") %>%)</td>
+                                       <td><%= cif.get("fmph") %></td>
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farmers (% of target)  coached to produce Farm Management Plan on Credit</td>
             
                                      <td><%= bio.getACDIVOCAFFarmCreditPlanCount() %> (<%= temp.getFarmerFCPPHProgressForACDI() %>%)</td>
                                      <td><%= mn.get("fmpc")%> (<%= mnp.getString("fmpcp") %>%)</td>
+                                      <td><%= cif.get("fmpc")%></td>
                                 </tr>
                                <tr>
                                    <td style="width: 20%">Number of farms (% of target) measured</td>
                                     <td><%= bio.getACDIVOCAFFMPProductionUpdateCount() %> (<%= temp.getFarmerPUProgressForACDI() %>%)</td>
                                     <td><%= mn.get("fm") %> (<%= mnp.getString("fmp") %>%)</td>
+                                    <td><%= cif.get("fm") %> (<%= mnp.getString("fmp") %>%)</td>
                                 </tr>
                                  <tr>
                                     <td style="width: 20%">Number of farms (% of target) assessed</td>
                                   
                                     <td><%= bio.getACDIVOCAFCPCount() %> (<%= temp.getFarmerFCAProgressForACDI()  %>%)</td>
                                      <td><%= mn.get("fa") %> (<%= mnp.getString("fap")  %>%)</td>
+                                     <td><%= cif.get("fa") %></td>
                                 </tr>
                                  <tr>
                                     <td style="width: 20%">Number of farmers (% of target) taken through FMP Update Production</td>
                                       <td><%= bio.getACDIVOCAFFMPProductionUpdateCount() %> (<%= temp.getFarmerPUProgressForACDI() %>%)</td>
                                      <td><%= mn.get("fm") %> (<%= mnp.getString("fmp") %>%)</td>
+                                      <td><%= cif.get("fm") %></td>
                                 </tr>
                                 <tr>
                                    <td style="width: 20%">Number of farmers (% of target) taken through FMP Update Post Harvest</td>
                                     <td><%= bio.getACDIVOCAPostHarvestUpdateCount() %> (<%= temp.getFarmerPHUProgressForACDI() %>%)</td>
                                     <td><%= mn.get("fphu") %> (<%= mnp.getString("fphup") %>%)</td>
+                                     <td><%= cif.get("fphu") %></td>
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">Number of farmers (% of target) taken through FMP Update Credit</td>
                                     <td><%= bio.getACDIVOCAFarmCreditUpdateCount() %> (<%= temp.getFarmerFCUProgressForACDI() %>%)</td>
                                     <td><%= mn.get("fcu") %> (<%= mnp.getString("fcup") %>%)</td>
+                                     <td><%= cif.get("fcu") %></td>
                                 </tr>
                             </tbody>
                         </table>

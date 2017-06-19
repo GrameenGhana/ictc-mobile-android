@@ -144,7 +144,7 @@ public class AgentTest extends HttpServlet {
                         biodataNode.setProperty(Biodata.LAST_MODIFIED,new Date().getTime());
                         biodataNode.setProperty(Agent.PASSWORD,"test1234");
                         biodataNode.setProperty(Agent.AGENTCODE,"AG"+now.toString().substring(2));
-                        biodataNode.setProperty(Agent.AGENTTYPE,"ACDIVOCA");
+                        biodataNode.setProperty(Agent.AGENTTYPE,"LASOREX");
                         
                        AgentParent= ParentNode.AgentParentNode();
                        AgentParent.createRelationshipTo(biodataNode, ICTCRelationshipTypes.AGENT);

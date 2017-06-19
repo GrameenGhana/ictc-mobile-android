@@ -790,6 +790,20 @@ public class BIDataManager extends BIUtil {
                 x.put("pht",allPostHarvestThresher);
                 x.put("ipt", allImprovedTechnologies);
                 break;  
+                
+            case PARTNER_CIF:
+                x.put("ppp",  bio.getFarmerActivityMonitoring(PARTNER_CIF,ICTCRelationshipTypes.HAS_BASELINE_PRODUCTION));
+                x.put("pph",  bio.getFarmerActivityMonitoring(PARTNER_CIF,ICTCRelationshipTypes.HAS_BASELINE_POSTHARVEST));
+                x.put("fcp",  bio.getFarmerActivityMonitoring(PARTNER_CIF,ICTCRelationshipTypes.HAS_FARMCREDIT_PREVIOUS));
+                x.put("fmp",  bio.getFarmerActivityMonitoring(PARTNER_CIF,ICTCRelationshipTypes.HAS_PRODUCTION));
+                x.put("fmph", bio.getFarmerActivityMonitoring(PARTNER_CIF,ICTCRelationshipTypes.HAS_POSTHARVEST));
+                x.put("fmpc", bio.getFarmerActivityMonitoring(PARTNER_CIF,ICTCRelationshipTypes.HAS_FARMCREDIT_PLAN));
+                x.put("fm", bio.getFarmerActivityMonitoring(PARTNER_CIF,ICTCRelationshipTypes.HAS_PRODUCTION_UPDATE));
+                x.put("fa", bio.getFarmerActivityMonitoring(PARTNER_CIF,ICTCRelationshipTypes.HAS_FIELD_CROP_ASSESSMENT));
+                x.put("fphu", bio.getFarmerActivityMonitoring(PARTNER_CIF,ICTCRelationshipTypes.HAS_POSTHARVEST_UPDATE));
+               // x.put("fphu", bio.getFarmerActivityMonitoring("MOFA",ICTCRelationshipTypes.HAS_POSTHARVEST_UPDATE));
+                x.put("fcu", bio.getFarmerActivityMonitoring(PARTNER_CIF,ICTCRelationshipTypes.HAS_FARMCREDIT_UPDATE));
+                break;  
            
         }
         
@@ -948,7 +962,7 @@ public class BIDataManager extends BIUtil {
     
     public JSONObject getGFSummary()
     {
-       AisDashboardModel  ais  = new AisDashboardModel();   
+     AisDashboardModel  ais  = new AisDashboardModel();   
      JSONObject  fact =  new JSONObject(ais.getIndicatorWrapper(Aisdashboard.TYPE,"farmmonitoring").getData());
      JSONObject  f = fact.getJSONObject("farmmonitoring");
      
@@ -963,6 +977,8 @@ public class BIDataManager extends BIUtil {
       
      long farmerCount = bio.getFarmerCountByAgentType(PARTNER_ACDI) + bio.getFarmerCountByAgentType(PARTNER_MOFA)+ 
      bio.getFarmerCountByAgentType(PARTNER_CIF)+ bio.getFarmerCountByAgentType(PARTNER_LASOREX) + bio.getFarmerCountByAgentType(PARTNER_CARD)+ ACDIVOCA_NORTH;
+     
+     
      long profileCount = bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PROFILING, PARTNER_ACDI)+
           bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PROFILING, PARTNER_MOFA)+
           bio.getParameterCountByAgentType(ICTCRelationshipTypes.HAS_PROFILING, PARTNER_CIF) +
