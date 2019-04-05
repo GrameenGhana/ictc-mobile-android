@@ -37,9 +37,9 @@ public class XMLParser {
 	        //is.setCharacterStream(new StringReader(data));
 	    
 	       
-	        //File f = new File("/home/nii-amon/Documents/cardlessXML/XMLFile.xml");
+	        
 	        File f = new File(requestType);
-	        //File f = new File("/home/nii-amon/Documents/cardlessXML/txnType.xml");
+	       
 	        Document doc = db.parse(f);
 	        // normalize text representation
 	        doc.getDocumentElement().normalize();

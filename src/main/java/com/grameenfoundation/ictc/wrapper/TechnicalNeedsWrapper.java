@@ -3,68 +3,129 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.grameenfoundation.ictc.wrapper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Joseph George Davis
- * @date Jul 22, 2015 5:03:56 PM
- * description:
+ * @date Jul 22, 2015 5:03:56 PM description:
  */
 public class TechnicalNeedsWrapper {
+
+    private String farmPlanning = "farmplanning";
+    private String cropVarietyAndSeed = "cropvarietyandseed";
+    private String weedControl = "weedcontrol";
+    private String cropEstablishment = "cropestablishment";
+    private String integratedSoilFertilityManagement = "integratedsoilfertilitymanagement";
+    private String HarvestAndPostHarvest = "harvestandpostharvest";
+    String cropvarietyandseedcassava="cropvarietyandseedcassava";
+    String crovarietyandseedsyam="crovarietyandseedsyam";
     
-    String farmPlanning="farmplanning";
-    String cropVarietyAndSeed="cropvarietyandseed";
-    String weedControl="weedcontrol";
-    String cropEstablishment="cropestablishment";
-    String integratedSoilFertilityManagement="integratedsoilfertilitymanagement";
-    String HarvestAndPostHarvest="harvestandpostharvest";
     
     
- public  void setHarvestAndPostHarvest(String HarvestAndPostHarvest) {
-      this.HarvestAndPostHarvest=HarvestAndPostHarvest;
+ public  void setCrovarietyandseedsyam(String crovarietyandseedsyam) {
+      this.crovarietyandseedsyam=crovarietyandseedsyam;
     }
- public  String getHarvestAndPostHarvest() {
+ public  String getCrovarietyandseedsyam() {
+        return crovarietyandseedsyam;
+
+    }
+    
+    
+    
+ public  void setCropvarietyandseedcassava(String cropvarietyandseedcassava) {
+      this.cropvarietyandseedcassava=cropvarietyandseedcassava;
+    }
+ public  String getCropvarietyandseedcassava() {
+        return cropvarietyandseedcassava;
+
+    }
+
+    public TechnicalNeedsWrapper(String fm, String variety, String weedControl, String cropEst, String intsol, String harvesAnsPst) {
+        this.farmPlanning = fm;
+        this.cropVarietyAndSeed = variety;
+        this.weedControl = weedControl;
+        this.cropEstablishment = cropEst;
+        this.integratedSoilFertilityManagement = intsol;
+        this.HarvestAndPostHarvest = harvesAnsPst;
+    }
+
+    public List<String> getInterest() {
+        List<String> interest = new ArrayList<String>();
+        if (!farmPlanning.equalsIgnoreCase("farmplanning")) {
+            interest.add(farmPlanning);
+        }
+        if (!HarvestAndPostHarvest.equalsIgnoreCase("HarvestAndPostHarvest")) {
+            interest.add(HarvestAndPostHarvest);
+        }
+        if (!integratedSoilFertilityManagement.equalsIgnoreCase("integratedSoilFertilityManagement")) {
+            interest.add(integratedSoilFertilityManagement);
+        }
+        if (!cropEstablishment.equalsIgnoreCase("cropEstablishment")) {
+            interest.add(cropEstablishment);
+        }
+        if (!cropVarietyAndSeed.equalsIgnoreCase("cropVarietyAndSeed")) {
+            interest.add(cropVarietyAndSeed);
+        }
+        if (!weedControl.equalsIgnoreCase("weedControl")) {
+            interest.add(weedControl);
+        }
+        return interest;
+    }
+
+    public void setHarvestAndPostHarvest(String HarvestAndPostHarvest) {
+        this.HarvestAndPostHarvest = HarvestAndPostHarvest;
+    }
+
+    public String getHarvestAndPostHarvest() {
         return HarvestAndPostHarvest;
 
     }
-    
- public  void setIntegratedSoilFertilityManagement(String integratedSoilFertilityManagement) {
-      this.integratedSoilFertilityManagement=integratedSoilFertilityManagement;
+
+    public void setIntegratedSoilFertilityManagement(String integratedSoilFertilityManagement) {
+        this.integratedSoilFertilityManagement = integratedSoilFertilityManagement;
     }
- public  String getIntegratedSoilFertilityManagement() {
+
+    public String getIntegratedSoilFertilityManagement() {
         return integratedSoilFertilityManagement;
 
     }
-    
- public  void setCropEstablishment(String cropEstablishment) {
-      this.cropEstablishment=cropEstablishment;
+
+    public void setCropEstablishment(String cropEstablishment) {
+        this.cropEstablishment = cropEstablishment;
     }
- public  String getCropEstablishment() {
+
+    public String getCropEstablishment() {
         return cropEstablishment;
 
     }
-    
- public  void setWeedControl(String weedControl) {
-      this.weedControl=weedControl;
+
+    public void setWeedControl(String weedControl) {
+        this.weedControl = weedControl;
     }
- public  String getWeedControl() {
+
+    public String getWeedControl() {
         return weedControl;
 
     }
-    
- public  void setCropVarietyAndSeed(String cropVarietyAndSeed) {
-      this.cropVarietyAndSeed=cropVarietyAndSeed;
+
+    public void setCropVarietyAndSeed(String cropVarietyAndSeed) {
+        this.cropVarietyAndSeed = cropVarietyAndSeed;
     }
- public  String getCropVarietyAndSeed() {
+
+    public String getCropVarietyAndSeed() {
         return cropVarietyAndSeed;
 
     }
- public  void setFarmPlanning(String farmPlanning) {
-      this.farmPlanning=farmPlanning;
+
+    public void setFarmPlanning(String farmPlanning) {
+        this.farmPlanning = farmPlanning;
     }
- public  String getFarmPlanning() {
+
+    public String getFarmPlanning() {
         return farmPlanning;
 
     }

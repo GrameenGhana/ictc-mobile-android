@@ -10,6 +10,7 @@ import com.grameenfoundation.ictc.domains.Storage;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
 import com.grameenfoundation.ictc.utils.Labels;
+import com.grameenfoundation.ictc.utils.Neo4jServices;
 import com.grameenfoundation.ictc.utils.ParentNode;
 import com.grameenfoundation.ictc.wrapper.StorageWrapper;
 import java.util.logging.Level;
@@ -79,6 +80,27 @@ public class StorageModel {
             e.printStackTrace();
         }
         
+        return null;
+    }
+    
+    
+     public Storage getUserStorage(String userId) {
+        String q = "Start root=node(0) "
+                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+
+                ICTCRelationshipTypes.HAS_STORAGE+"]->p"
+                + " where f.Id="+ "'" + userId + "'"
+                + " return p";
+
+        System.out.println("Query " + q);
+        try {
+            Node node = Neo4jServices.executeCypherQuerySingleResult(q, "p");
+            if (null != node) {
+                return new Storage(node);
+            }
+        } catch (Exception e) {
+            System.out.println("Unable to Find Farm managent");
+        }
+
         return null;
     }
 

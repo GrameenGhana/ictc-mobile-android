@@ -31,7 +31,7 @@ public class Operations extends Status implements GeneralInterface {
     public static String WEIGHTOFSEED = "weightofseed";
     public static String QUANTITYOFPLANTINGMATERIAL = "quantityofplantingmaterial";
     public static String LANDCLEARANCE = "landclearance";
-    public static String HERBICIDEUSE = "herbicideuse";
+    public static String HERBICIDEUSE = "herbicideueslandpreparationandplanting";
     public static String LANDCLEARANCEHERBICIDE = "landclearanceherbicide";
     public static String QUANTITYOFHERBICIDE = "quantityofherbicide";
     public static String PRICEOFHERBICIDE = "priceofherbicide";
@@ -123,6 +123,22 @@ public class Operations extends Status implements GeneralInterface {
     public static String FAMLABOURFIFTHWEEDCONTROL = "famlabourfifthweedcontrol";
     public static String NOHIREDLABOURFIFTHWEEDCONTROL = "nohiredlabourfifthweedcontrol";
     public static String COSTHIREDLABOURFIFTHWEEDCONTROL = "costhiredlabourfifthweedcontrol";
+    public static String MAINTENANCEOFSOILFERTILITY="landsfertileandproductive";
+    public static String REGULARAPPINORGANICFERTILIZER="regularapplicationofinorganicfert";
+    
+    
+    public void setRegularappinorganicfertilizer(String regularappinorganicfertilizer) {
+        underlyingNode.setProperty(REGULARAPPINORGANICFERTILIZER, regularappinorganicfertilizer);
+    }
+
+    public String getRegularappinorganicfertilizer() {
+        try {
+            return (String) underlyingNode.getProperty(REGULARAPPINORGANICFERTILIZER);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
     public void setCostHiredLabourFifthWeedControl(String costhiredlabourfifthweedcontrol) {
         underlyingNode.setProperty(COSTHIREDLABOURFIFTHWEEDCONTROL, costhiredlabourfifthweedcontrol);
@@ -1518,6 +1534,20 @@ public class Operations extends Status implements GeneralInterface {
         }
         return null;
     }
+    
+    public void setMaintenanceofsoilfertility(String maintenanceofsoilfertility) {
+        underlyingNode.setProperty(MAINTENANCEOFSOILFERTILITY, maintenanceofsoilfertility);
+    }
+
+    public String getMaintenanceofsoilfertility() {
+        try {
+            return (String) underlyingNode.getProperty(MAINTENANCEOFSOILFERTILITY);
+
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
 
     public Operations(Node underlyingNode) {
         super(underlyingNode);

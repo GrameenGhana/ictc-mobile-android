@@ -9,15 +9,15 @@ package com.grameenfoundation.ictc.utils;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.sql.*;
 import java.util.Properties;
 import java.util.logging.Level;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.factory.GraphDatabaseSettings;
-import org.neo4j.kernel.GraphDatabaseAPI;
 import org.neo4j.server.WrappingNeoServerBootstrapper;
-import org.neo4j.server.configuration.Configurator;
 import org.neo4j.server.configuration.ServerConfigurator;
+
 
 /**
  *
@@ -26,47 +26,46 @@ import org.neo4j.server.configuration.ServerConfigurator;
  * description:
  */
 public class ICTCDBUtil {
-     static String DATABASE_PATH = null;
-    static String PORT = null;
-    static String SERVER_HOSTNAME = "0.0.0.0";
-    static WrappingNeoServerBootstrapper srv;
-    static java.util.logging.Logger log = java.util.logging.Logger.getLogger(ICTCDBUtil.class.getName());
-    static GraphDatabaseService database = null;
+    protected static final java.util.logging.Logger log = java.util.logging.Logger.getLogger(ICTCDBUtil.class.getName());
+
+    protected static String PORT = null;
+    protected static String DATABASE_PATH = null;
+    protected static GraphDatabaseService database = null;
+     static WrappingNeoServerBootstrapper srv;
+      static String SERVER_HOSTNAME = "0.0.0.0";
+    
+    private final static String MYSQL_DB = "ictc_bi";
+    private final static String MYSQL_PORT = "3306";
+    private final static String MYSQL_HOST = "localhost";
+    private final static String MYSQL_USER = "root";
+    //private final static String MYSQL_PASS = "password";
+   // private final static String MYSQL_PASS = "spomega";
+    private final static String MYSQL_PASS = "321.gf.GH";
+    private final static String MYSQL_DSN = "jdbc:mysql://"+MYSQL_HOST+":"+MYSQL_PORT+"/"+MYSQL_DB;
+    private static Connection connection = null;
+
     private static ICTCDBUtil instance = new ICTCDBUtil();
+
     private ICTCDBUtil() {}
-    
-    /**
-     * 
-     * @return GraphDatabaseService
-     */
-    
-     public static ICTCDBUtil getInstance(){
+
+    public static ICTCDBUtil getInstance(){
       return instance;
    }
     
-    
-    public  GraphDatabaseService startDB()
-    {
+    // <editor-fold defaultstate="collapsed" desc="Neo4j DB Methods">
+
+    public GraphDatabaseService startDB() {
         GraphDatabaseService graphdb = null;
-        
-         ServerConfigurator config;
-      
-        
         String glassishinstanceRootPropertyName = "com.sun.aas.instanceRoot";
-        //get path to db config file
-        String configFile =  System.getProperty(glassishinstanceRootPropertyName)+ ICTCKonstants.PROPERTIES_FILE;
+        String configFile =  System.getProperty(glassishinstanceRootPropertyName)+"/config/new.conf";
         System.out.println("File " + configFile);
-      
-        
-        //properties object to load properties file
+          ServerConfigurator config = null;
         Properties dbProperties = new Properties();
         
-        //using a try with resources to open a input stream to file
         try(InputStream inputStream = new FileInputStream(configFile))
         {
             //load properties file
             dbProperties.load(inputStream);
-            
         } catch (FileNotFoundException ex) {
            //Logger.getLogger(DatabaseUtil.class.getName()).log(Level.ERROR, null, ex);
             System.out.println("File not found " + ex.getLocalizedMessage());
@@ -75,95 +74,190 @@ public class ICTCDBUtil {
         catch(Exception ex)
         {
           System.out.println("File not found " + ex.getLocalizedMessage());
-           ex.printStackTrace(); 
+          ex.printStackTrace();
         }
         
         try {
-        DATABASE_PATH = dbProperties.getProperty("graphdb.location");
-        PORT = dbProperties.getProperty("graphdb.port");
-        
-        log.log(Level.INFO, "DB Path - :{0}", DATABASE_PATH);
-        log.log(Level.INFO, "DB Port - :{0}", PORT);
-        
-       // System.out.println("DB Path - :" + DATABASE_PATH);
-       // System.out.println("DB Path - :" + PORT);
-        //creating a graphdatabase using settings in properties file
-        graphdb =  new GraphDatabaseFactory().newEmbeddedDatabaseBuilder(DATABASE_PATH).
-                setConfig(GraphDatabaseSettings.node_keys_indexable,  dbProperties.getProperty("node_keys_indexable")).
-                setConfig(GraphDatabaseSettings.node_auto_indexing,  dbProperties.getProperty("node_auto_indexing")).
-                setConfig(GraphDatabaseSettings.cache_type,  dbProperties.getProperty("cache_type")).
-               //setConfig(GraphDatabaseSettings.allow_store_upgrade,  dbProperties.getProperty("allow_store_upgrade")).
-                setConfig(GraphDatabaseSettings.nodestore_propertystore_mapped_memory_size,  dbProperties.getProperty("nodestore_propertystore_mapped_memory_size")).
-                setConfig(GraphDatabaseSettings.nodestore_mapped_memory_size, dbProperties.getProperty("nodestore_mapped_memory_size")).
-                setConfig(GraphDatabaseSettings.relationshipstore_mapped_memory_size,  dbProperties.getProperty("relationshipstore_mapped_memory_size")).
-                setConfig(GraphDatabaseSettings.strings_mapped_memory_size, dbProperties.getProperty("strings_mapped_memory_size")).
-                setConfig(GraphDatabaseSettings.nodestore_mapped_memory_size, dbProperties.getProperty("nodestore_mapped_memory_size")).
-                setConfig(GraphDatabaseSettings.relationship_auto_indexing, dbProperties.getProperty("relationship_auto_indexing")).
-                //setConfig( GraphDatabaseSettings., "true" ).
-                newGraphDatabase();
-        
-           log.log(Level.INFO, "{0} Database ", graphdb.isAvailable(2));
-       
-       config = new ServerConfigurator((GraphDatabaseAPI) graphdb);
-                 
-         config.configuration().setProperty(
-         Configurator.WEBSERVER_PORT_PROPERTY_KEY,PORT);
-         config.configuration().setProperty(
-         Configurator.WEBSERVER_ADDRESS_PROPERTY_KEY, SERVER_HOSTNAME);
+            DATABASE_PATH = dbProperties.getProperty("graphdb.location");
+            PORT = dbProperties.getProperty("graphdb.port");
+            log.log(Level.INFO, "DB Path - :{0}", DATABASE_PATH);
+            log.log(Level.INFO, "DB Port - :{0}", PORT);
 
-            srv = new WrappingNeoServerBootstrapper((GraphDatabaseAPI) graphdb, config);
-            
-            database = graphdb;
-           
-            srv.start();
+            graphdb = new GraphDatabaseFactory()
+                .newEmbeddedDatabaseBuilder(DATABASE_PATH)
+               .setConfig(GraphDatabaseSettings.allow_store_upgrade, dbProperties.getProperty("allow_store_upgrade"))
+                .setConfig(GraphDatabaseSettings.pagecache_memory, dbProperties.getProperty("dbms.pagecache.memory"))
+                .newGraphDatabase();
         } catch (Exception e) {
             log.log(Level.SEVERE, "DS Error : {0}", e.getLocalizedMessage());
-
-              e.printStackTrace();
+            e.printStackTrace();
         }
-   
+        
+        database = graphdb;
+
         registerShutdownHook(graphdb);
-        return graphdb;
+   //log.log(Level.INFO, "{0} Database test 2 done", graphdb.isAvailable(2));
+          
+//         config = new ServerConfigurator((GraphDatabaseAPI) graphdb);
+//                 
+//         config.configuration().setProperty(
+//         Configurator.WEBSERVER_PORT_PROPERTY_KEY,PORT);
+//         config.configuration().setProperty(
+//         Configurator.WEBSERVER_ADDRESS_PROPERTY_KEY, SERVER_HOSTNAME);
+//         config.configuration().setProperty(Configurator.HTTP_LOGGING,true);
+//         config.configuration().setProperty(Configurator.HTTP_CONTENT_LOGGING,true);
+//         
+//
+//          srv = new WrappingNeoServerBootstrapper((GraphDatabaseAPI) graphdb, config);
+//        
+//         srv.start();
+//         log.log(Level.INFO,"i am alive here");
+       return  graphdb;
+    }
+
+    public GraphDatabaseService getGraphDB() {
+        return (database==null) ? startDB() : database;
     }
     
-    
-     /**
-     * returns created database
-     * @return 
-     */
-     public GraphDatabaseService getGraphDB() {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-        return database;
-    }
-    
-      /**
-     * <pre>
-     * Registers a shutdown hook for the Neo4j instance so that it
-     * shuts down nicely when the VM exits (even if you "Ctrl-C" the  running example before it's completed)
-     * @param GraphDatabaseService graphDb
-     * </pre>
-     */
     private static void registerShutdownHook(final GraphDatabaseService graphDb) {
         Runtime.getRuntime().addShutdownHook(new Thread() {
 
             @Override
             public void run() {
-                graphDb.shutdown();
-                srv.stop();
+                try {
+                    log.info("shutting down my db");
+                    graphDb.shutdown();
+                }
+                catch(Exception e)
+                {
+                    System.out.println("    "+ e.getMessage());
+                    e.printStackTrace();
+                }
             }
         });
     }
     
-    
-      public void shutdown(final GraphDatabaseService graphDb) {
-
+    public void shutdown(final GraphDatabaseService graphDb) {
         try {
             graphDb.shutdown();
         } catch (Exception e) {
             log.log(Level.WARNING, "Shut Down Thread {0}", e.getLocalizedMessage());
+            e.printStackTrace();
         }
-      }
-    
-    
+    }
 
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Mysql DB Methods">
+
+    public void startMysqlDB() throws SQLException {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection(MYSQL_DSN,MYSQL_USER, MYSQL_PASS);
+        } catch (ClassNotFoundException e) {
+            System.out.println("Connection Failed! Class com.mysql.jdbc.Driver not found");
+            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println("Connection Failed! Check output console");
+            e.printStackTrace();
+            throw(e);
+        }
+    }
+
+    public Connection getMysqlConnection() throws SQLException {
+        try {
+            if (connection==null) {
+                startMysqlDB();
+            }
+            return connection;
+        } catch (SQLException e) {
+            throw(e);
+        }
+    }
+
+    public void closeMysqlConnection() {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (Exception e) {
+            System.out.println("Closing connection Failed! Check output console");
+            e.printStackTrace();
+        }
+    }
+
+    public void createTable(String tableName, String fields) throws SQLException {
+        
+        System.out.println("Create Table " + tableName);
+        try {
+           String sql = "CREATE TABLE IF NOT EXISTS " + tableName + "(id int(11) NOT NULL AUTO_INCREMENT, "
+                        + fields + ", PRIMARY KEY (`id`))";
+            Statement stmt = getMysqlConnection().createStatement();
+            stmt.execute(sql);
+        } catch (SQLException e) {
+           System.out.println("Error creating table "+tableName);
+           throw(e);
+        }
+    }
+
+    public void emptyTable(String tableName) throws SQLException {
+        try {
+            runSQLUpdate("TRUNCATE TABLE " + tableName);
+        } catch (SQLException e) {
+            System.out.println("Error emptying table "+tableName);
+            throw(e);
+        }
+    }
+
+    public boolean checkDBExists(String dbName) throws SQLException {
+        try{
+            dbName = (dbName==null) ? MYSQL_DB : dbName;
+            ResultSet resultSet = getMysqlConnection().getMetaData().getCatalogs();
+            while (resultSet.next()) {
+                String databaseName = resultSet.getString(1);
+                if(databaseName.equals(dbName)){
+                    return true;
+                }
+            }
+            resultSet.close();
+        }
+        catch(SQLException e){
+            throw(e);
+        }
+
+        return false;
+    }
+
+    public void createDatabase(String name) throws SQLException {
+        try {
+            name = (name==null) ? MYSQL_DB : name;
+            String sql = "CREATE DATABASE " + name;
+            Statement stmt = getMysqlConnection().createStatement();
+            stmt.execute(sql);
+        } catch(SQLException e) {
+            throw(e);
+        }
+    }
+
+    public ResultSet runSQLSelect(String sql) throws SQLException {
+        try {
+            Statement stmt = getMysqlConnection().createStatement();
+            return stmt.executeQuery(sql);
+        } catch(SQLException e) {
+            throw(e);
+        }
+    }
+
+    public int runSQLUpdate(String sql) throws SQLException {
+        try {
+            System.out.println("SQL: "+sql);
+            Statement stmt = getMysqlConnection().createStatement();
+            return stmt.executeUpdate(sql);
+        } catch(SQLException e) {
+            throw(e);
+        }
+    }
+
+
+    // </editor-fold>
 }

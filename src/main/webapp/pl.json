@@ -1,0 +1,17 @@
+{
+    "labor_period_drying_cobs_base": "2",
+    "time_completion_of_bagging_base": "2",
+    "cost_of_storage_chemical_base": "3.0",
+    "unit_cost_of_storage_bags_base": "2",
+    "labor_hands_dryingcobs_base": "2",
+    "labour_winnowing_base": "6",
+    "bags_for_storage_base": "5",
+    "grain_drying_cost_base": "6.0",
+    "unit_labor_cost_bagging_base": "1.0",
+    "labor_cost_dehuskingpeeling_base": "20.0",
+    "dehuskingpeeling_labor_base": "1",
+    "labor_cost_drying_of_cobs_base": "5.0",
+    "unit_cost_machine_threshing_base": "15.0",
+    "period_to_complete_dehusking_base": "3.0",
+    "time_interval_winnowing_base": "2"
+}

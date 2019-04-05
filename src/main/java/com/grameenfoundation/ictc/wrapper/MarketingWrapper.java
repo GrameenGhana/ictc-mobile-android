@@ -27,6 +27,43 @@ public class MarketingWrapper {
   String priceMostDriedChipsChunksSold="pricemostdriedchipschunkssold";
   String monthLastBatchDriedChipChunksSold="monthlastbatchdriedchipchunkssold";
   String priceFinalBatchDriedChipsChunksSold="pricefinalbatchdriedchipschunkssold";
+
+    public MarketingWrapper() {
+    }
+
+  
+    public MarketingWrapper(
+    String mainPointOfContact,
+  String monthSellingBegins,
+  String priceOfFirstHarvestProduce,
+  String monthMostHarvestProduceSold,
+  String priceMostHarvestProduceSold,
+  String monthFinalBatchSold,  String priceFinalBatchSold,
+  String monthSellingDriedChipChicks,
+  String priceFirstDriedChipChunk,
+  String monthMostDriedChipsChunksSold,
+  String priceMostDriedChipsChunksSold,
+  String monthLastBatchDriedChipChunksSold,
+  String priceFinalBatchDriedChipsChunksSold) {
+        
+        this.mainPointOfContact = mainPointOfContact;
+        this.monthSellingBegins = monthSellingBegins;
+        this.priceOfFirstHarvestProduce = priceOfFirstHarvestProduce;
+        this.monthMostHarvestProduceSold = monthMostHarvestProduceSold;
+        this.priceMostHarvestProduceSold = priceMostHarvestProduceSold;
+        this.monthFinalBatchSold = monthFinalBatchSold;
+        this.priceFinalBatchSold = priceFinalBatchSold;
+        
+        
+        this.monthSellingDriedChipChicks = monthSellingDriedChipChicks;
+        this.priceFirstDriedChipChunk = priceFirstDriedChipChunk;
+        this.monthMostDriedChipsChunksSold = monthMostDriedChipsChunksSold;
+        this.priceMostDriedChipsChunksSold = priceMostDriedChipsChunksSold;
+        this.monthLastBatchDriedChipChunksSold = monthLastBatchDriedChipChunksSold;
+        this.priceFinalBatchDriedChipsChunksSold = priceFinalBatchDriedChipsChunksSold;
+    }
+  
+  
   
   
  public  void setPriceFinalBatchDriedChipsChunksSold(String priceFinalBatchDriedChipsChunksSold) {

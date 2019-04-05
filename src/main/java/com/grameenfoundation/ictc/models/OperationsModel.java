@@ -10,8 +10,11 @@ import com.grameenfoundation.ictc.domains.Operations;
 import com.grameenfoundation.ictc.utils.ICTCDBUtil;
 import com.grameenfoundation.ictc.utils.ICTCRelationshipTypes;
 import com.grameenfoundation.ictc.utils.Labels;
+import com.grameenfoundation.ictc.utils.Neo4jServices;
 import com.grameenfoundation.ictc.utils.ParentNode;
 import com.grameenfoundation.ictc.wrapper.OperationsWrapper;
+import java.util.Date;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.neo4j.graphdb.Node;
@@ -111,7 +114,29 @@ public class OperationsModel {
     }
      
   
-     
+   public Operations getUserOperations(String userId) {
+        String q = "Start root=node(0) "
+                + " MATCH root-[:" + ICTCRelationshipTypes.ENTITY + "]->parent-[:" + ICTCRelationshipTypes.FARMER + "]->f-[:"+
+                ICTCRelationshipTypes.HAS_FARM_OPERATION+"]->p"
+                + " where f.Id="+ "'" + userId + "'"
+                + " return p";
+
+        System.out.println("Query " + q);
+        try {
+            Node node = Neo4jServices.executeCypherQuerySingleResult(q, "p");
+            if (null != node) {
+                return new Operations(node);
+            }
+        } catch (Exception e) {
+            System.out.println("Unable to Find Farm managent");
+        }
+
+        return null;
+    }
+   
+   
+  
+
      
      
 
